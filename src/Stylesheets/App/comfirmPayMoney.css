@@ -1,0 +1,53 @@
+.positionImg{
+    width:0.6rem;
+    height:0.95rem;
+}
+.timeImg{
+    width:0.85rem;
+    height:0.85rem;
+}
+.payImgSize{
+    width:1.5rem;
+    height:1.5rem;
+}
+.paymargin{
+    padding:0.5rem 0 0 0.5rem;
+}
+.lh25{
+    height:2.5rem;
+    line-height: 2.5rem;
+}
+.payAccount{
+    height:3.2rem;
+    padding:0.5rem 0;
+    display: flex;
+}
+.list-block .item-media+.item-inner{
+    margin-left:0;
+}
+.comfirmBtn{
+    height:2rem;
+    line-height:2rem;
+    margin-top:2.5rem;
+}
+.isConfirm{
+    display:none;
+}
+.isConfirm + label{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    border:1px solid #999;
+    border-radius: 50%;
+    width: 1rem;
+    height:1rem;
+    margin:auto;
+}
+.isConfirm:checked + label{
+    border-color: #ff5500;
+    background:url("../../Images/ovals.png") no-repeat;
+    background-size:80%;
+    background-position:center;
+}
