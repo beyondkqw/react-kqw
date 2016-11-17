@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/homePage.css';
 import '../../css/bootstrap.min.css';
+import ReactDOM from 'react-dom';
+import autoPlay from 'react-swipeable-views/lib/autoPlay';
+import SwipeableViews from 'react-swipeable-views';
 
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class Carousel extends Component {
+
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+          this.image = [{url:require('../../Images/bowel.png')},{url:require('../../Images/bowel.png')},{url:require('../../Images/bowel.png')}]
+        this.state = {
+
+        };
+      }
+
     render() {
         return (
-            <div id="myCarousel" className="carousel slide carouselHeight">
-                <ol className="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <div className="carousel-inner height_all">
-                    <div className="item active height_all">
-                        <img src={require("../../Images/airConditioning.png")}/>
-                    </div>
-                    <div className="item">
-                        <img src={require("../../Images/bowel.png")}/>
-                    </div>
-                    <div className="item">
-                        <img src={require("../../Images/phone.png")}/>
-                    </div>
-                </div>
-            </div>
+            <AutoPlaySwipeableViews
+                interval = {2000}
+            >
+                {
+                    this.image.map((el,index)=>{
+                        return(
+                            <img src = {el.url}/>
+                        )
+                    })
+                }
+            </AutoPlaySwipeableViews>
+
         );
     }
 }
