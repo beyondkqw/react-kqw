@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/comfirmPayMoney.css';
 
 export default class ReceivingTime extends Component {
@@ -28,9 +29,7 @@ export default class ReceivingTime extends Component {
                         <span className="di font14 color6 ml5 fl">只工作日送货(双休/节假日不送)</span>
                     </div>
                 </div>
-                <div className="plr">
-                    <button className="comfirmBtn border_ra color_white bkg_ff width_100">确定</button>
-                </div>
+                <CommonBtn />
             </div>
         );
     }

@@ -32,10 +32,13 @@
 }
 /*购物车*/
 .width_cart{
-    width:5.2rem;
+    width:30%;
+}
+.width_de{
+    width:10%;
 }
 .width_buy{
-    width:11.75rem;
+    width:60%;
     background-color:#ff5500;
 }
 .cartBtn{

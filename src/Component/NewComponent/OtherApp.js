@@ -16,13 +16,11 @@ export default class OtherApp extends Component {
                     {
                         router.map((el,index)=>{
                             return(
-                                <li>
-                                    <QuickRouter
-                                        routerName={el.name}
-                                        routerUrl={el.imgUrl}
-                                        routerPath={el.path}
-                                    />
-                                </li>
+                                <QuickRouter
+                                    routerName={el.name}
+                                    routerUrl={el.imgUrl}
+                                    routerPath={el.path}
+                                />
                             )
                         })
                     }

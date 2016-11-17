@@ -36,10 +36,12 @@ export default class ComfirmPayMoney extends Component {
                     </ul>
                 </div>
                 <div className="line"></div>
-                <div className="paymargin">
-                    <div className="di payImgSize mr"><img src={require('../../Images/store.png')} alt=""/></div>
-                    <span className="color6 font14">乐乐的小店</span>
-                </div>
+                <Link to="/chooseInfomation">
+                    <div className="paymargin">
+                        <div className="di payImgSize mr"><img src={require('../../Images/store.png')} alt=""/></div>
+                        <span className="color6 font14">乐乐的小店</span>
+                    </div>
+                </Link>
                 {
                     ItemDetail.map((el,index)=>{
                         return (
