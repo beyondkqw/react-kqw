@@ -83,16 +83,17 @@ export default class GoodsDescription extends Component {
 
                 <div className="height3 pf bottom0 width_100 plAll border_top">
                     <Link to="/shoppingCart">
-                        <div className="di height_all pr">
-                            <button className="cartBtn height_all border_ra width_cart bkg_color">
+                        <div className="di height_all pr fl width_cart">
+                            <button className="cartBtn width_100 height_all border_ra">
                                 <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
                                 <span className="di pa goodNum border_ra50 f12 colorff">5</span>
                             </button>
                         </div>
                     </Link>
-                    <div className="di height_all pr margin15">
-                        <button className="borderno width_buy height_all border_ra">
-                            <span className="font16 color_white">立即购买</span>
+                    <div className="width_de fl height_all"></div>
+                    <div className="di height_all pr fl width_buy border_ra">
+                        <button className="width_100 height_all color_white font16 color_white">
+                            立即购买
                         </button>
                     </div>
                 </div>

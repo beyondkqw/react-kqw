@@ -93,6 +93,9 @@ p{
 .plAll{
     padding:0.5rem;
 }
+.ChooseHeight{
+    padding:1rem 0.5rem;
+}
 .mr{
     margin-right:0.3rem;
 }
@@ -108,17 +111,35 @@ p{
 .mt{
     margin-top:0.2rem;
 }
+.mt1{
+    margin-top:0.1rem;
+}
 .mt5{
     margin-top:0.5rem;
 }
+.mt11{
+    margin-top:1.1rem;
+}
+.mt3{
+    margin-top:0.3rem;
+}
 .ml{
     margin-left:0.3rem;
+}
+.mt25{
+    margin-top:2.5rem;
 }
 .margin0{
     margin-left:0 !important;
 }
 .margin15{
     margin-left:0.75rem;
+}
+.mr20{
+    margin-left:1rem;
+}
+.mr15{
+    margin-left:1.5rem;
 }
 .ml5{
     margin-left:0.5rem;
@@ -180,6 +201,9 @@ p{
 .f15{
     font-size: 15px;
 }
+.f25{
+    font-size: 25px;
+}
 .flex1{
     flex:1;
 }
@@ -213,6 +237,9 @@ p{
 .color9{
     color:#999;
 }
+.color_yellow{
+   color: #ff5500 !important;
+}
 .font14{
     font-size:14px;
 }
@@ -234,6 +261,9 @@ p{
 }
 .bkg_gray{
     background-color:#f5f5f5;
+}
+.bkg_fadeff{
+    background-color: #fff5f0;
 }
 .bar{
     position:fixed !important;

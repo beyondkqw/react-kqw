@@ -19,7 +19,14 @@ import ShoppingCart from '../Component/ShoppingCarts/ShoppingCart';
 import ComfirmPayMoney from '../Component/ConfirmPayment/ComfirmPayMoney';
 import DeliveredInformation from '../Component/ConfirmPayment/DeliveredInformation';
 import ReceivingTime from '../Component/ConfirmPayment/ReceivingTime';
-import CloudCartoon from '../Component/CloudCartoon/CloudCartoon';
+import ChooseInfomation from '../Component/ConfirmPayment/ChooseInfomation';
+import ManageInformation from '../Component/ConfirmPayment/ManageInformation';
+import CloudCard from '../Component/CloudCard/CloudCard';
+import PaymentOther from '../Component/CloudCard/PaymentOther';
+import PaymentDetails from '../Component/CloudCard/PaymentDetails';
+import AlreadyUsed from '../Component/CloudCard/AlreadyUsed';
+import AlreadyUsedDetails from '../Component/CloudCard/AlreadyUsedDetails';
+import DiaryContainer from '../Component/CloudCard/DiaryContainer';
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -41,7 +48,14 @@ const RouteConfig = (
       <Route path="deliveredInformation" component={DeliveredInformation}/>
       <Route path="goodsDescription" component={GoodsDescription}/>
       <Route path="receivingTime" component={ReceivingTime}/>
-      <Route path="cloudCartoon" component={CloudCartoon}/>
+      <Route path="chooseInfomation" component={ChooseInfomation}/>
+      <Route path="manageInformation" component={ManageInformation}/>
+      <Route path="cloudCartoon" component={CloudCard}/>
+      <Route path="paymentOther" component={PaymentOther}/>
+      <Route path="paymentDetails" component={PaymentDetails}/>
+      <Route path="alreadyUsed" component={AlreadyUsed}/>
+      <Route path="alreadyUsedDetails" component={AlreadyUsedDetails}/>
+      <Route path="diaryContainer" component={DiaryContainer}/>
     </Route>
   </Router>
 );

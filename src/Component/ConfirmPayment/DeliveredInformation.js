@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/comfirmPayMoney.css';
 
 export default class DeliveredInformation extends Component {
@@ -8,14 +9,14 @@ export default class DeliveredInformation extends Component {
                 <div className="list-block m0">
                     <ul>
                         <li className="item-content pl border_bottom">
-                            <div className="item-media"><i class="icon icon-f7"></i></div>
+                            <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner font14">
                                 <div className="item-title color6">收货人</div>
                                 <div className="item-after color9"><input className="borderno tr " type="\" placeholder="收货人姓名"/></div>
                             </div>
                         </li>
                         <li className="item-content pl border_bottom">
-                            <div className="item-media"><i class="icon icon-f7"></i></div>
+                            <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner font14">
                                 <div className="item-title color6">联系电话</div>
                                 <div className="item-after color9"><input className="borderno tr" type="\" placeholder="电话号码"/></div>
@@ -44,9 +45,7 @@ export default class DeliveredInformation extends Component {
                         </li>
                     </ul>
                 </div>
-                <div className="plr">
-                    <button className="comfirmBtn border_ra color_white bkg_ff width_100">确定</button>
-                </div>
+                <CommonBtn />
             </div>
         );
     }

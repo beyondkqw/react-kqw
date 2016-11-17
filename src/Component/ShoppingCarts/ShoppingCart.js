@@ -7,7 +7,8 @@ import '../../Stylesheets/App/shoppingCarts.css';
 
 const ItemDetail = [
     {title:'拼接雪纺连衣裙小清收到回复奇偶is飞机哦添加',price:288,color:'红色',size:'36',imgUrl:require('../../Images/storeClothes.png')},
-    {title:'拼接驾驶的海外时间',price:289,color:'绿色色',size:'38',imgUrl:require('../../Images/storeShoes.png')}]
+    {title:'拼接驾驶的海外时间',price:289,color:'绿色',size:'38',imgUrl:require('../../Images/storeShoes.png')}]
+
 export default class ShoppingCart extends Component {
     render() {
         return (
@@ -25,13 +26,13 @@ export default class ShoppingCart extends Component {
                             return (
                                 <div className="plAll proPlay border_bottom">
                                 <CheckBox
-                                    index = {index}
+                                    index={index}
                                 />
                                 <ItemDetails
-                                    title = {el.title}
-                                    color = {el.color}
-                                    size = {el.size}
-                                    imgurl = {el.imgUrl}
+                                    title={el.title}
+                                    color={el.color}
+                                    size={el.size}
+                                    imgurl={el.imgUrl}
                                 />
                                 </div>
                             )
@@ -40,7 +41,7 @@ export default class ShoppingCart extends Component {
                 <div className="height5 width_100"></div>
                 <div className="pf bottomCount width_100 plr">
                     <span className="di check_radius pr fl">
-                        <input type="checkbox" id="checkAll"  className="di isCheck"/>
+                        <input type="checkbox" id="checkAll" className="di isCheck"/>
                         <label htmlFor="checkAll"></label>
                     </span>
                     <span className="di font14 color6 ml5 fl height_all lh25">全选</span>
@@ -52,7 +53,7 @@ export default class ShoppingCart extends Component {
                         <span className="di pa f10">不含运费</span>
                     </div>
                     <Link to="/comfirmPayMoney">
-                        <button className="fr settleAccount border_ra color_white">结算</button>
+                        <button className="fr mt5 settleAccount border_ra color_white">结算</button>
                     </Link>
                 </div>
                 <Footer />

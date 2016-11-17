@@ -14,8 +14,8 @@ export default class Cell_4 extends Component {
                     cellFour.map(el=>{
                         return (
                             <Cell_4children
-                                title = {el.title}
-                                color = {el.quality}
+                                title={el.title}
+                                color={el.quality}
                             />
                         )
                     })
