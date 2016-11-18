@@ -93,6 +93,12 @@ p{
 .plAll{
     padding:0.5rem;
 }
+.pl1{
+    padding:1rem;
+}
+.ptb1{
+    padding:1rem 0;
+}
 .ChooseHeight{
     padding:1rem 0.5rem;
 }
