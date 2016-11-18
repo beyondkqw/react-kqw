@@ -5,7 +5,7 @@ import StoreDetails from '../../Component/GoodsDetails/StoreDetails'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
 
-const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
+const storeDetail = [{title:'11拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
     {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
     {title:'拼接安山东跑外地偶尔奥苏废物',price:290,imgUrl:require('../../Images/clothesDetails.png')},
     {title:'拼接S佛我爱我如娃儿殴辱我耳机',price:291,imgUrl:require('../../Images/clothes1.png')}]
