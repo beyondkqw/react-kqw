@@ -27,6 +27,7 @@ import PaymentDetails from '../Component/CloudCard/PaymentDetails';
 import AlreadyUsed from '../Component/CloudCard/AlreadyUsed';
 import AlreadyUsedDetails from '../Component/CloudCard/AlreadyUsedDetails';
 import DiaryContainer from '../Component/CloudCard/DiaryContainer';
+import SearchPage from '../Component/GoodsDetails/SearchPage'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -56,6 +57,7 @@ const RouteConfig = (
       <Route path="alreadyUsed" component={AlreadyUsed}/>
       <Route path="alreadyUsedDetails" component={AlreadyUsedDetails}/>
       <Route path="diaryContainer" component={DiaryContainer}/>
+      <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
     </Route>
   </Router>
 );

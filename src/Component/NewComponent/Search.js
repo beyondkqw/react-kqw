@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/homePage.css';
+import {Link} from 'react-router';
 
 export default class Search extends Component {
 
@@ -29,6 +30,7 @@ export default class Search extends Component {
         }
     }*/
     render() {
+        const {onClick} = this.props
        /* let bColor = this.state.bg ? this.state.bg : 'transprent';
         console.log(this.state.bg);*/
         return (
@@ -37,7 +39,9 @@ export default class Search extends Component {
                     <div className="frc pr di">
                         <span className="searchicon pa"></span>
                         <input className="searcInput" placeholder="搜索宝贝" type="text"/>
-                        <button className="searchBtn">搜索</button>
+                        <Link to="/GoodsDetail/SearchPage"  >
+                            <button className="searchBtn" onClick={onClick}>搜索</button>
+                        </Link>
                     </div>
                 </div>
             </div>
