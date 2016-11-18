@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from '../../Component/NewComponent/Search'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails'
+import Carousel from '../NewComponent/Carousel'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
 
@@ -26,7 +27,7 @@ export default class Store extends Component {
                     </div>
                 </div>
                 <div className="carouselHeight">
-
+                    <Carousel />
                 </div>
                 <Tabscontrol>
                     <div name="最新上架">

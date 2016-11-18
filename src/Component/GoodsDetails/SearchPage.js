@@ -127,6 +127,8 @@ export default class SearchPage extends Component {
                         >
                             {  this.toScreen() }
                         </div>
+
+                        {/*切换显示方式*/}
                         <div name={<img src={require('../../Images/array.png')} className='arrayImg'/>}>
 
                         </div>

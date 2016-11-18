@@ -26,7 +26,7 @@ export default class Carousel extends Component {
                 {
                     this.image.map((el,index)=>{
                         return(
-                            <img src = {el.url}/>
+                            <img className="carouselImg" src = {el.url}/>
                         )
                     })
                 }

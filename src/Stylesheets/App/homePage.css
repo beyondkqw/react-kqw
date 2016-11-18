@@ -79,6 +79,10 @@
     border:1px solid #0074d9;
 }
 
+.carouselImg{
+    height:115px !important;
+    width:100%;
+}
 /*更多选择*/
 .oapp {
     height: 165px;
