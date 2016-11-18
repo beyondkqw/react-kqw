@@ -3,7 +3,7 @@ import Search from '../../Component/NewComponent/Search'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails'
 import '../../Stylesheets/App/goodsDetails.css';
-
+import {Link} from 'react-router';
 
 const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
     {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
@@ -11,10 +11,13 @@ const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好
     {title:'拼接S佛我爱我如娃儿殴辱我耳机',price:291,imgUrl:require('../../Images/clothes1.png')}]
 
 export default class Store extends Component {
+
+
     render() {
         return (
             <div className="containerNav bkg_gray">
-               <Search />
+               <Search
+               />
                 <div className="plAll storeDetail ">
                     <div className="fl mr"><img src={require('../../Images/store.png')} alt=""/></div>
                     <div className="color_white f12">

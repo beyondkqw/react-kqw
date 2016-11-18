@@ -30,6 +30,8 @@ import DiaryContainer from '../Component/CloudCard/DiaryContainer';
 import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
 import Partner from '../Component/PersonalCenter/Partner';
 import LevelPartner from '../Component/PersonalCenter/LevelPartner';
+import SearchPage from '../Component/GoodsDetails/SearchPage';
+
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -62,6 +64,7 @@ const RouteConfig = (
       <Route path="personalCenter" component={PersonalCenter}/>
       <Route path="partner" component={Partner}/>
       <Route path="levelPartner" component={LevelPartner}/>
+      <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
     </Route>
   </Router>
 );
