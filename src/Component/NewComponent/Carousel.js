@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 
-//just for test
+//just for test 2
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class Carousel extends Component {
