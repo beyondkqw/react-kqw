@@ -12,3 +12,8 @@ build
 # misc
 .DS_Store
 npm-debug.log
+
+#workspace 
+.idea/
+.idea/*
+*.iml

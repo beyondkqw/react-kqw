@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import '../../Stylesheets/App/cloudCard.css';
 
 
