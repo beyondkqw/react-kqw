@@ -31,7 +31,9 @@ import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
 import Partner from '../Component/PersonalCenter/Partner';
 import LevelPartner from '../Component/PersonalCenter/LevelPartner';
 import SearchPage from '../Component/GoodsDetails/SearchPage';
-
+import Login from '../Component/Login/Login';
+import Register from '../Component/Login/Register';
+import ForgetPwd from '../Component/Login/ForgetPwd'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -65,6 +67,9 @@ const RouteConfig = (
       <Route path="partner" component={Partner}/>
       <Route path="levelPartner" component={LevelPartner}/>
       <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
+      <Route path="Login/Login" component = {Login} />
+      <Route path="Login/Register" component = {Register} />
+      <Route path="Login/ForgetPwd" component = {ForgetPwd} />
     </Route>
   </Router>
 );

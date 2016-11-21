@@ -36,6 +36,7 @@ export default class Store extends Component {
                                 storeDetail.map((el,index)=>{
                                     return (
                                         <StoreDetails
+                                            key = {index}
                                             float = {index%2==0?'left':'right'}
                                             title = {el.title}
                                             price = {el.price}
