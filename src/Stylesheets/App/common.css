@@ -29,6 +29,9 @@ label{
 .oa{
     overflow: auto;
 }
+.oh{
+    overflow: hidden;
+}
 a:hover{
     text-decoration: none;
 }
@@ -168,6 +171,9 @@ p{
 .pl{
     padding-left:0.5rem !important;
 }
+.pl8{
+    padding-left:0.8rem;
+}
 .pr_right{
     padding-right:0.5rem;
 }
@@ -241,7 +247,7 @@ p{
     color:#fff;
 }
 .color9{
-    color:#999;
+    color:#999 !important;
 }
 .color_yellow{
    color: #ff5500 !important;

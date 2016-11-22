@@ -14,7 +14,7 @@ const personDetail = [
 const ItemList = [
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
     {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
-    {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:''},
+    {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'personalCenter/collect'},
     {name:'我的余额',imgUrl:require('../../Images/balance.png'),link:''},
     {name:'微夺宝',imgUrl:require('../../Images/micro.png'),link:''},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
@@ -29,8 +29,10 @@ export default class PersonalCenter extends Component {
                 <PersonalInformation />
                 <div className="h35 df color6 border_bottom">
                     <div className="flex1 tc">
+                        <Link to="personalCenter/setting">
                         <p className="font16 hl8">0</p>
                         <p className="f12 m_top">佣金</p>
+                        </Link>
                     </div>
                     <div className="flex1 tc">
                         <p className="font16 hl8">0</p>

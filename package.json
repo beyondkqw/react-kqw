@@ -27,8 +27,7 @@
     "react-router": "^2.8.1",
     "react-swipeable-views": "^0.8.0",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0",
-    "react-swipeable-views": "https://github.com/oliviertassinari/react-swipeable-views"
+    "redux-thunk": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

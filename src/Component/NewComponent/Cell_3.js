@@ -4,15 +4,6 @@ import RightImg from '../../Component/NewComponent/RightImg'
 import '../../Stylesheets/App/homePage.css';
 
 
-{/*[
-    {
-        componentType:'a',
-        sonComponentData:[
-            {imgUrl:require('../../Images/leftVoucher.png'),title:'aa',desc:'bbb'}
-        ]
-    }
-]*/}
-
 const imgUrl = [{imgUrl:require('../../Images/leftVoucher.png')},
     {imgUrl:require('../../Images/rightTop.png')},{imgUrl:require('../../Images/rightBottom.png')}]
 export default class VoucherCell extends Component {
