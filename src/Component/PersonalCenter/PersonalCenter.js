@@ -5,11 +5,11 @@ import PersonalInformation from '../../Component/PersonalCenter/PersonalInformat
 import '../../Stylesheets/App/personal.css';
 
 const personDetail = [
-    {name:'代付款',imgUrl:require('../../Images/modify.png'),num:0},
-    {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0},
-    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:3},
-    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0},
-    {name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0}
+    {name:'代付款',imgUrl:require('../../Images/modify.png'),num:0,link:''},
+    {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:''},
+    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:3,link:''},
+    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:''},
+    {name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'orderList'}
 ]
 const ItemList = [
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
@@ -51,17 +51,19 @@ export default class PersonalCenter extends Component {
                     {
                         personDetail.map(el=>{
                             return(
-                                <div className="flex1 tc pr">
-                                    <p>
-                                        <span className="di typeImg"><img src={el.imgUrl} alt=""/></span>
-                                        {
-                                          !el.num == 0?
-                                            <span className="di f12 promptNav colorff border_ra50 pa">{el.num}</span>
-                                          :null
-                                        }
-                                    </p>
-                                    <p className="f12 m_top">{el.name}</p>
-                                </div>
+                                <Link to={el.link} className="di width_third width_100">
+                                    <div className="flex1 tc pr">
+                                        <p>
+                                            <span className="di typeImg"><img src={el.imgUrl} alt=""/></span>
+                                            {
+                                              !el.num == 0?
+                                                <span className="di f12 promptNav colorff border_ra50 pa">{el.num}</span>
+                                              :null
+                                            }
+                                        </p>
+                                        <p className="f12 m_top color6">{el.name}</p>
+                                    </div>
+                                </Link>
                             )
                         })
                     }
