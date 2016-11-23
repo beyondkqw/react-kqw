@@ -35,11 +35,12 @@ import Setting from '../Component/PersonalCenter/Setting';
 import Savety from '../Component/PersonalCenter/Savety';
 import Feedback from '../Component/PersonalCenter/Feedback';
 import AboutDemo from '../Component/PersonalCenter/AboutDemo';
+import TabBar from '../Component/NewComponent/TabBar';
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={TabBar} />
       <Route path="search" component={Search}/>
       <Route path="carousel" component={Carousel}/>
       <Route path="otherApp" component={OtherApp}/>
