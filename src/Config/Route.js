@@ -33,7 +33,9 @@ import LevelPartner from '../Component/PersonalCenter/LevelPartner';
 import SearchPage from '../Component/GoodsDetails/SearchPage';
 import Login from '../Component/Login/Login';
 import Register from '../Component/Login/Register';
-import ForgetPwd from '../Component/Login/ForgetPwd'
+import ForgetPwd from '../Component/Login/ForgetPwd';
+import BindPhone from '../Component/Login/BindPhone';
+import PwdModify from '../Component/Login/PwdModify'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -70,6 +72,8 @@ const RouteConfig = (
       <Route path="Login/Login" component = {Login} />
       <Route path="Login/Register" component = {Register} />
       <Route path="Login/ForgetPwd" component = {ForgetPwd} />
+      <Route path="Setting/BindPhone" component = {BindPhone} />
+      <Route path="Setting/PwdModify" component = {PwdModify} />
     </Route>
   </Router>
 );
