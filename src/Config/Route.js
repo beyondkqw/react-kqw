@@ -26,6 +26,11 @@ import Partner from '../Component/PersonalCenter/Partner';
 import LevelPartner from '../Component/PersonalCenter/LevelPartner';
 import Collect from '../Component/PersonalCenter/Collect';
 import SearchPage from '../Component/GoodsDetails/SearchPage';
+import Login from '../Component/Login/Login';
+import Register from '../Component/Login/Register';
+import ForgetPwd from '../Component/Login/ForgetPwd';
+import BindPhone from '../Component/Login/BindPhone';
+import PwdModify from '../Component/Login/PwdModify'
 import Setting from '../Component/PersonalCenter/Setting';
 import Savety from '../Component/PersonalCenter/Savety';
 import Feedback from '../Component/PersonalCenter/Feedback';
@@ -57,6 +62,11 @@ const RouteConfig = (
       <Route path="partner" component={Partner}/>
       <Route path="levelPartner" component={LevelPartner}/>
       <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
+      <Route path="Login/Login" component = {Login} />
+      <Route path="Login/Register" component = {Register} />
+      <Route path="Login/ForgetPwd" component = {ForgetPwd} />
+      <Route path="Setting/BindPhone" component = {BindPhone} />
+      <Route path="Setting/PwdModify" component = {PwdModify} />
       <Route path="personalCenter/collect" component ={Collect} />
       <Route path="personalCenter/setting" component ={Setting} />
       <Route path="personalCenter/savety" component ={Savety} />

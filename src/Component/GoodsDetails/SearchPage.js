@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
 import Search from '../../Component/NewComponent/Search';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
-import StoreDetails from '../../Component/GoodsDetails/StoreDetails'
+import StoreDetails from '../../Component/GoodsDetails/StoreDetails';
+import StoreRow from '../../Component/GoodsDetails/StoreRow'
 
 const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
     {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
@@ -27,7 +28,8 @@ export default class SearchPage extends Component {
         this.state = {
             isChoose : 0,
             display_0 : false,
-            display_2 : false
+            display_2 : false,
+            showByColumn : false
         };
       }
 
@@ -87,26 +89,31 @@ export default class SearchPage extends Component {
 
     //tab切换
     onChange(index){
-        const {display_0,display_2} = this.state
+        const {display_0,display_2,showByColumn} = this.state
         //console.log('display',display_0)
         if(index==0){
             this.setState({display_0:!display_0,display_2:false})
         }else if(index==2){
             this.setState({display_2:!display_2,display_0:false})
+        }else if(index==3){
+            this.setState({showByColumn:!showByColumn,display_2:false,display_0:false})
         }else{
             this.setState({display_2:false,display_0:false})
         }
 
+
+
     }
 
     render(){
-        const {isChoose,display_0,display_2} = this.state
+        const {showByColumn,display_0,display_2} = this.state
         return(
             <div className="containerNav" >
                 <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
                     <Search />
                     {/*todo scroll滚动时置顶fixed*/}
                     <Tabscontrol
+                        index = {2}
                         onClick = {(index)=>this.onChange(index)}
                     >
                         {/*综合排序tag*/}
@@ -143,17 +150,24 @@ export default class SearchPage extends Component {
                 </div>
 
                 /*商品列表---最下层*/
-                <div className="goodListContainer">
+                <div className="goodListContainer" style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}>
                     <div className="imgContainer width_100">
                         {
                             storeDetail.map((el,index)=>{
                                 return (
-                                    <StoreDetails
-                                        float = {index%2==0?'left':'right'}
-                                        title = {el.title}
-                                        price = {el.price}
-                                        imgurl = {el.imgUrl}
-                                    />
+                                    showByColumn?
+                                        <StoreRow
+                                            title = {el.title}
+                                            price = {el.price}
+                                            imgurl = {el.imgUrl}
+                                        />
+                                        :
+                                        <StoreDetails
+                                            float = {index%2==0?'left':'right'}
+                                            title = {el.title}
+                                            price = {el.price}
+                                            imgurl = {el.imgUrl}
+                                        />
                                 )
                             })
                         }

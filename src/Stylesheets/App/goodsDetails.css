@@ -181,9 +181,9 @@
 }
 
 .goodListContainer{
+    width:100%;
     top:3.7rem;
     position:absolute;
-    background: rgb(245,245,245);
     z-index: 0;
 }
 
@@ -263,4 +263,37 @@
 .searchContainer .cover{
     height:100%;
     background: rgba(0,0,0,0.4);
+}
+
+/*横排显示*/
+.storeRowContainer{
+    height:100px;
+    width:100%;
+    display: flex;
+    background: #fff;
+    margin-bottom: 10px;
+    line-height: 14px;
+}
+
+.rightMoudle{
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:10px 10px 10px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #efefef;
+    margin-left: 10px;
+}
+
+.goodsTitle{
+    font-size : 14px;
+    color : #666;
+}
+
+.rightBottom{
+    color:#666;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
 }
