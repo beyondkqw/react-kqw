@@ -55,3 +55,92 @@
     margin-right:0;
     border-radius:0;
 }
+/*我的收藏*/
+.pt_collect{
+    height:4rem;
+    padding:0.75rem 0.5rem;
+}
+.store_img{
+    width:2.5rem;
+    height:2.5rem;
+}
+.mr45{
+    margin-top:0.15rem;
+    margin-left:3rem;
+    margin-right:4.5rem;
+}
+.cancel_collect{
+    top:1.25rem;
+    right:0.5rem;
+}
+.cancel_btn{
+    width:2.5rem;
+    height:1.25rem;
+    background-color: #e5e5e5;
+}
+.oh_height{
+    height:1rem;
+}
+/*模态层*/
+.modalNav{
+    top:0;
+    left:0;
+    bottom:0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 10;
+}
+.modal_body{
+    background-color: #fff;
+    z-index: 1050;
+    margin:50% 4rem 0;
+}
+.isCancel{
+    padding:0.5rem 0;
+}
+.chooseType{
+    height:2rem;
+    line-height:2rem;
+}
+.w50{
+    width:50%;
+}
+.scale{
+    animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);
+}
+@keyframes scale {
+    from {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+/*账号与安全*/
+.save_h2{
+    height:2rem;
+    line-height:2rem;
+}
+.listimg{
+    width: 1.3rem;
+    height: 1.3rem;
+}
+.contact{
+    padding:0.5rem 0.7rem;
+}
+/*关于聚朵云*/
+.navbanner {
+    width: 100%;
+    padding:1rem 0;
+    background: url("../../Images/storebk.png");
+    background-size: 100% 100%;
+}
+.imglogo {
+    width: 4rem;
+    height: 4rem;
+    margin:0 auto 0.8rem;
+}
+.aboutjdy {
+    margin: 1rem 0 0;
+}

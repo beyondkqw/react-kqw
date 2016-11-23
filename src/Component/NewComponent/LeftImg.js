@@ -5,7 +5,7 @@ export default class LeftImg extends Component {
     render() {
         const {imgPath} = this.props;
         return (
-            <a href="" className="di leftImg line_center">
+            <a className="di leftImg line_center">
                 <img src={imgPath} alt=""/>
             </a>
         );

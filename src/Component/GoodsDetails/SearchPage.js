@@ -58,7 +58,6 @@ export default class SearchPage extends Component {
                             )
                         })
                     }
-
                 </ul>
                 :null
         )
@@ -74,7 +73,7 @@ export default class SearchPage extends Component {
 
                     <div>
                         <input placeholder="最低价"/>
-                        <div className="line" />
+                        <div className="liner" />
                         <input placeholder="最高价"/>
                     </div>
 
@@ -112,7 +111,6 @@ export default class SearchPage extends Component {
             <div className="containerNav" >
                 <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
                     <Search />
-
                     {/*todo scroll滚动时置顶fixed*/}
                     <Tabscontrol
                         index = {2}
@@ -137,7 +135,6 @@ export default class SearchPage extends Component {
 
                         {/*切换显示方式*/}
                         <div name={<img src={require('../../Images/array.png')} className='arrayImg'/>}>
-
                         </div>
                     </Tabscontrol>
 

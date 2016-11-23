@@ -142,7 +142,6 @@
 /*轮播*/
 .carouselHeight{
     height:115px;
-    border:1px solid red;
 }
 .storePlayImg{
     height:9rem;
@@ -225,7 +224,7 @@
     align-items: center;
 }
 
-.line{
+.liner{
     display: inline-block;
     width:10px;
     height:1px;

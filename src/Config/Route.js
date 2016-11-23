@@ -6,12 +6,6 @@ import App from '../App';
 import Search from '../Component/NewComponent/Search';
 import Carousel from '../Component/NewComponent/Carousel';
 import OtherApp from '../Component/NewComponent/OtherApp';
-import ActiveTitle from '../Component/NewComponent/ActiveTitle';
-import Cell_3 from '../Component/NewComponent/Cell_3';
-import Cell_4 from '../Component/NewComponent/Cell_4';
-import Cell_6 from '../Component/NewComponent/Cell_6';
-import Cell_7 from '../Component/NewComponent/Cell_7';
-import SplitLine from '../Component/NewComponent/SplitLine';
 import Footer from '../Component/NewComponent/Footer';
 import GoodsDescription from '../Component/GoodsDetails/GoodsDescription';
 import Store from '../Component/GoodsDetails/Store';
@@ -30,12 +24,17 @@ import DiaryContainer from '../Component/CloudCard/DiaryContainer';
 import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
 import Partner from '../Component/PersonalCenter/Partner';
 import LevelPartner from '../Component/PersonalCenter/LevelPartner';
+import Collect from '../Component/PersonalCenter/Collect';
 import SearchPage from '../Component/GoodsDetails/SearchPage';
 import Login from '../Component/Login/Login';
 import Register from '../Component/Login/Register';
 import ForgetPwd from '../Component/Login/ForgetPwd';
 import BindPhone from '../Component/Login/BindPhone';
 import PwdModify from '../Component/Login/PwdModify'
+import Setting from '../Component/PersonalCenter/Setting';
+import Savety from '../Component/PersonalCenter/Savety';
+import Feedback from '../Component/PersonalCenter/Feedback';
+import AboutDemo from '../Component/PersonalCenter/AboutDemo';
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -44,12 +43,6 @@ const RouteConfig = (
       <Route path="search" component={Search}/>
       <Route path="carousel" component={Carousel}/>
       <Route path="otherApp" component={OtherApp}/>
-      <Route path="activeTitle" component={ActiveTitle}/>
-      <Route path="cell_3" component={Cell_3}/>
-      <Route path="cell_4" component={Cell_4}/>
-      <Route path="cell_6" component={Cell_7}/>
-      <Route path="cell_7" component={Cell_7}/>
-      <Route path="splitLine" component={SplitLine}/>
       <Route path="footer" component={Footer}/>
       <Route path="shoppingCart" component={ShoppingCart}/>
       <Route path="store" component={Store}/>
@@ -74,6 +67,11 @@ const RouteConfig = (
       <Route path="Login/ForgetPwd" component = {ForgetPwd} />
       <Route path="Setting/BindPhone" component = {BindPhone} />
       <Route path="Setting/PwdModify" component = {PwdModify} />
+      <Route path="personalCenter/collect" component ={Collect} />
+      <Route path="personalCenter/setting" component ={Setting} />
+      <Route path="personalCenter/savety" component ={Savety} />
+      <Route path="personalCenter/feedback" component ={Feedback} />
+      <Route path="personalCenter/aboutDemo" component ={AboutDemo} />
     </Route>
   </Router>
 );
