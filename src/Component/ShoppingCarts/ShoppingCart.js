@@ -63,14 +63,14 @@ export default class ShoppingCart extends Component {
     render() {
         return (
             <div className="containerNav bkg_color">
-                <div className="pr personStore plr bk_fff5f0">
+                {/*<div className="pr personStore plr bk_fff5f0">
                     <span className="di check_radius pr fl">
                         <input type="checkbox" id="isLink"  className="di isCheck" />
                         <label htmlFor="isLink"></label>
                     </span>
                     <span className="di font14 color6 ml5 fl">乐乐的小店</span>
                     <div className="rightArrow pa"><img src={require('../../Images/rightArrow.png')} alt=""/></div>
-                </div>
+                </div>*/}
                 {
                     ItemDetail.map((el,index)=>{
                             return (

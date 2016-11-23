@@ -81,7 +81,7 @@ export default class GoodsDescription extends Component {
                     </div>
                 </Tabscontrol>
 
-                <div className="height3 pf bottom0 width_100 plAll border_top">
+                <div className="height3 pf bottom0 width_100 plAll border_top bkg_color z_index">
                     <Link to="/shoppingCart">
                         <div className="di height_all pr fl width_cart">
                             <button className="cartBtn width_100 height_all border_ra">
