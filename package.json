@@ -27,7 +27,8 @@
     "react-router": "^2.8.1",
     "react-swipeable-views": "^0.8.0",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "react-menu-aim": "0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

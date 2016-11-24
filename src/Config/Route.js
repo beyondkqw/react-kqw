@@ -36,11 +36,13 @@ import Savety from '../Component/PersonalCenter/Savety';
 import Feedback from '../Component/PersonalCenter/Feedback';
 import AboutDemo from '../Component/PersonalCenter/AboutDemo';
 import OrderList from '../Component/Orders/OrderList';
+import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
+import BrowseRecord from '../Component/PersonalCenter/BrowseRecord'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={BrowseRecord} />
       <Route path="search" component={Search}/>
       <Route path="carousel" component={Carousel}/>
       <Route path="otherApp" component={OtherApp}/>
@@ -74,6 +76,8 @@ const RouteConfig = (
       <Route path="personalCenter/feedback" component ={Feedback} />
       <Route path="personalCenter/aboutDemo" component ={AboutDemo} />
       <Route path="orderList" component ={OrderList} />
+      <Route path="personalCenter/BrowseRecord" component ={BrowseRecord} />
+
     </Route>
   </Router>
 );

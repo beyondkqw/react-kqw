@@ -296,5 +296,14 @@ p{
     display: none;
 }
 
+.just-center{
+    justify-content: center;
+}
 
+.alignItem-center{
+    align-items: center;
+}
 
+.just-between{
+    justify-content: space-between;
+}

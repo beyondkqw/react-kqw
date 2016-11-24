@@ -29,7 +29,8 @@ export default class SearchPage extends Component {
             isChoose : 0,
             display_0 : false,
             display_2 : false,
-            showByColumn : false
+            showByColumn : false,
+            history : false
         };
       }
 
@@ -100,17 +101,18 @@ export default class SearchPage extends Component {
         }else{
             this.setState({display_2:false,display_0:false})
         }
-
-
-
     }
 
     render(){
-        const {showByColumn,display_0,display_2} = this.state
+        const {showByColumn,display_0,display_2,history} = this.state
         return(
             <div className="containerNav" >
                 <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
-                    <Search />
+                    <Search
+                        //onFocus = {()=>this.setState({history:true})}
+                        //onBlur = {()=>this.setState({history:false})}
+                        display = {this.state.history}
+                    />
                     {/*todo scroll滚动时置顶fixed*/}
                     <Tabscontrol
                         index = {2}
@@ -150,7 +152,9 @@ export default class SearchPage extends Component {
                 </div>
 
                 /*商品列表---最下层*/
-                <div className="goodListContainer" style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}>
+                <div
+                    onClick = {()=>this.setState({history:false})}
+                    className="goodListContainer" style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}>
                     <div className="imgContainer width_100">
                         {
                             storeDetail.map((el,index)=>{
@@ -173,6 +177,7 @@ export default class SearchPage extends Component {
                         }
                     </div>
                 </div>
+
             </div>
         )
     }

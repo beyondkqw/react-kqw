@@ -222,3 +222,30 @@
     height:40px;
     background: rgb(254,245,240);
  }
+
+/*历史记录*/
+.history{
+    width:100%;
+    padding:10px;
+    background:#fff;
+    top:44px;
+}
+
+.deletHistory{
+    width:16px;
+    height:16px;
+}
+
+.history-items{
+    padding:5px 15px;
+    border-radius: 5px;
+    background: #f5f5f5;
+    margin:10px 10px 0 0 ;
+}
+
+.historyContainer{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    overflow: hidden;
+}
