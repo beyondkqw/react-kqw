@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
+import {SMSCode,Register} from '../../Action/auth'
 
 const icon = [
     require('../../Images/login/phone.png'),
@@ -20,15 +21,29 @@ export default class Register extends Component {
           this._timer
         this.state = {
             codeWord : '',
-            disabled : false
+            disabled : false,
+            mobile : '',
+            smsCode : ''
         };
       }
 
+    //获取短信验证码
     async getCode(){
+        const {mobile} = this.state
+        console.log('mobile',mobile)
         clearInterval(this._timer)
         await this.setState({codeWord:60,disabled:true})
         this._timer = self.setInterval(()=>this.timer(),1000)
-       console.log('timer',this.state.codeWord)
+        console.log('timer',this.state.codeWord)
+        await SMSCode(mobile)
+        .then(res=>{
+            console.log('获取手机验证码成功',res)
+            this.setState({smsCode:res})
+        })
+        .catch(err=>{
+            console.log('err',err)
+        })
+
     }
 
     //获取短信验证码倒计时
@@ -44,13 +59,18 @@ export default class Register extends Component {
     render(){
         return(
             <div>
-
                 {/*手机号*/}
                 <div className='editorBox'>
                     <span className="editorImg">
                         <img src={icon[0]}/>
                     </span>
-                    <input maxLength="11" className="editorInput" placeholder="请输入手机号"/>
+                    <input
+                        ref = 'mobile'
+                        maxLength="11"
+                        className="editorInput"
+                        placeholder="请输入手机号"
+                        onChange={()=>{this.setState({mobile:this.refs.mobile.value})}}
+                    />
                 </div>
 
                 {/*设置密码*/}
