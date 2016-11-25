@@ -35,7 +35,16 @@ import Setting from '../Component/PersonalCenter/Setting';
 import Savety from '../Component/PersonalCenter/Savety';
 import Feedback from '../Component/PersonalCenter/Feedback';
 import AboutDemo from '../Component/PersonalCenter/AboutDemo';
+import CommisionGiving from '../Component/PersonalCenter/CommisionGiving';
 import OrderList from '../Component/Orders/OrderList';
+import ViewEvaluation from '../Component/Orders/ViewEvaluation';
+import PublishEvalute from '../Component/Orders/PublishEvalute';
+import ChaseRatings from '../Component/Orders/ChaseRatings';
+import ChoosePayment from '../Component/ConfirmPayment/ChoosePayment';
+import SurePayment from '../Component/ConfirmPayment/SurePayment';
+import NearbyShop from '../Component/PersonalCenter/NearbyShop';
+import PointGiving from '../Component/PersonalCenter/PointGiving';
+import BalanceGiving from '../Component/PersonalCenter/BalanceGiving';
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -74,6 +83,15 @@ const RouteConfig = (
       <Route path="personalCenter/feedback" component ={Feedback} />
       <Route path="personalCenter/aboutDemo" component ={AboutDemo} />
       <Route path="orderList" component ={OrderList} />
+      <Route path="orderList/viewEvaluation" component ={ViewEvaluation} />
+      <Route path="orderList/chaseRatings" component ={ChaseRatings} />
+      <Route path="orderList/publishEvalute" component ={PublishEvalute} />
+      <Route path="confirmPayment/choosePayment" component ={ChoosePayment} />
+      <Route path="confirmPayment/surePayment" component ={SurePayment} />
+      <Route path="personalCenter/nearbyShop" component ={NearbyShop} />
+      <Route path="personalCenter/commisionGiving" component ={CommisionGiving} />
+      <Route path="personalCenter/pointGiving" component ={PointGiving} />
+      <Route path="personalCenter/balanceGiving" component ={BalanceGiving} />
     </Route>
   </Router>
 );

@@ -5,7 +5,7 @@ import PersonalInformation from '../../Component/PersonalCenter/PersonalInformat
 import '../../Stylesheets/App/personal.css';
 
 const personDetail = [
-    {name:'代付款',imgUrl:require('../../Images/modify.png'),num:0,link:''},
+    {name:'待付款',imgUrl:require('../../Images/modify.png'),num:0,link:''},
     {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:''},
     {name:'待评价',imgUrl:require('../../Images/modify.png'),num:3,link:''},
     {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:''},
@@ -14,12 +14,12 @@ const personDetail = [
 const ItemList = [
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
     {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
-    {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'personalCenter/collect'},
+    {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
     {name:'我的余额',imgUrl:require('../../Images/balance.png'),link:''},
     {name:'微夺宝',imgUrl:require('../../Images/micro.png'),link:''},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
-    {name:'佣金转正',imgUrl:require('../../Images/commission.png'),link:''},
+    {name:'佣金转赠',imgUrl:require('../../Images/commission.png'),link:'/personalCenter/commisionGiving'},
     {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:''}
 ]
 export default class PersonalCenter extends Component {
