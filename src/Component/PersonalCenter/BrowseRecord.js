@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 import StoreRow from '../../Component/GoodsDetails/StoreRow'
+import {test} from '../../Action/auth'
 
 const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',record:288,imgUrl:require('../../Images/clothesDetails.png')},
     {title:'拼接驾驶的海外时间',record:289,imgUrl:require('../../Images/clothes1.png')},
@@ -19,7 +20,9 @@ export default class BrowseRecord extends Component {
 
     render(){
         return(
-            <div className="containerNav">
+            <div
+                onClick = {()=>test()}
+                className="containerNav">
                 {
                     storeDetail.map(el=>{
                         return(
