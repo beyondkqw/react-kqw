@@ -7,3 +7,6 @@ export const smsCode = 'sms/reg'
 
 //用户注册
 export const register = 'account/add'
+
+//用户登录
+export const  login = 'account/login'

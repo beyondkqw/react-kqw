@@ -52,3 +52,13 @@ export async function toRegister(accName,pwd,smsNo,code,memberName=''){
         console.warn(err);
     }
 }
+
+//用户登录
+export async function ToLogin(accName,pwd,imei,version,client){
+    try{
+        const res = await apiGet(URL.login,{accName,pwd,imei,version,client});
+        return res;
+    }catch (err){
+        console.warn(err);
+    }
+}
