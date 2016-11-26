@@ -60,11 +60,23 @@ async function request (urlKey,method,params = {},token = ''){
     //拼接地址
     url = ROOT_URL + url;
     //请求参数
+
+    let headers = {}
+    if(method==='POST'){
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    }else{
+        headers = null
+    }
+
     let options = {
         method: method,
+
+        headers,
         //headers: {
-        //    'Accept' :'application/json',
-        //    //'Content-Type': method === 'GET' ? 'application/json':'application/x-www-form-urlencoded',
+        //    //'Accept' :'application/json',
+        //    //'Content-Type': method === 'GET' ? null:'application/x-www-form-urlencoded',
         //    //'Access-Control-Allow-Origin':'*',
         //    //'Access-Control-Allow-Methods':'POST, GET, OPTIONS, DELETE',
         //    //'Access-Control-Max-Age':'3600',
@@ -101,6 +113,7 @@ async function request (urlKey,method,params = {},token = ''){
         for(let param in params){
             bodyString += (param+ '=' + encodeURIComponent(params[param])+ '&');
         }
+
         options = {...options,body:bodyString.substring(0,bodyString.length-1)};
         //打印请求内容
         console.warn(`POST ${url}: ${bodyString}`);
@@ -108,6 +121,7 @@ async function request (urlKey,method,params = {},token = ''){
 
 
     try {
+        console.log('URL',url)
         let response = await fetch(url,options);
         if(response.ok){
             console.log('收到了消息');
