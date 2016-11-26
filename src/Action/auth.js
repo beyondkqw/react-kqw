@@ -39,7 +39,8 @@ export async function SMSCode(mobile){
         const res = await apiGet(URL.smsCode,{mobile});
         return res;
     }catch (err){
-        console.warn(err);
+        console.warn('SMSCode',err);
+        throw err
     }
 }
 
@@ -49,6 +50,7 @@ export async function toRegister(accName,pwd,smsNo,code,memberName=''){
         const res = await apiPost(URL.register,{accName,pwd,smsNo,code,memberName,imei,version,client});
         return res;
     }catch (err){
-        console.warn(err);
+        console.warn('toRegister',err);
+        throw err
     }
 }
