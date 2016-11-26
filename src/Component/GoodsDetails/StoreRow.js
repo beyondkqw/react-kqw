@@ -32,7 +32,7 @@ export default class StoreRow extends Component {
                                     </div>
 
                                     <span className="deletHistory fr">
-                                        <img src = {require('../../Images/deteleName.png')}/>
+                                        <img src = {require('../../Images/detelename.png')}/>
                                     </span>
                                 </div>
                                 :

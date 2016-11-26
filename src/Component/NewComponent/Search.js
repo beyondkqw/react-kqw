@@ -99,7 +99,7 @@ export default class Search extends Component {
                         <div className="history pf">
                             <span>历史记录</span>
                             <span className="deletHistory fr">
-                                <img src = {require('../../Images/deteleName.png')}/>
+                                <img src = {require('../../Images/detelename.png')}/>
                             </span>
                             <div className="historyContainer">
                                 {

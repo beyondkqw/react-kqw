@@ -25,6 +25,7 @@ export default class GoodsPopup extends Component {
     handleChange() {
         this.setState({value:this.state.value});
     }
+
     render() {
         const {closePopUp} = this.props
         return (

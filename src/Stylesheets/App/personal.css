@@ -81,6 +81,9 @@
 .oh_height{
     height:1rem;
 }
+.distance_h{
+    height:1.2rem;
+}
 /*模态层*/
 .modalNav{
     top:0;

@@ -17,6 +17,7 @@ export default class GoodsDescription extends Component {
     popubAnimate(){
         this.setState({isShow:true});
     }
+
     render() {
         return (
             <section className="containerNav">

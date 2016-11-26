@@ -50,15 +50,16 @@ export default class TabBar extends Component {
 }
 
 const styles = {
-    onfocus:{
+    onblur:{
         display:'flex',
         flex:1,
         justifyContent:'center',
         alignItems:'center',
         color:'#666',
+        fontSize:14,
         height:40
     },
-    onblur:{
+    onfocus:{
         display:'flex',
         flex:1,
         backgroundColor:'#ffddcc',
@@ -69,7 +70,8 @@ const styles = {
         paddingTop:3,
         borderBottomWidth:3,
         borderBottomStyle:'solid',
-        borderBottomColor:'#ff5500'
+        borderBottomColor:'#ff5500',
+        fontSize:14
     }
 }
 

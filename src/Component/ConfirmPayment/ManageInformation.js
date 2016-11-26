@@ -22,7 +22,7 @@ export default class ManageInformation extends Component {
                                 <div className="f12 border_bottom lh20 plr color9">
                                     <div className="fl pr">
                                         <span className="di check_location pr mr5">
-                                            <input type="checkbox" id={'index'+index}  className="di isCheck"/>
+                                            <input type="radio" id={'index'+index} name="chooseLocation"  className="di isCheck"/>
                                             <label htmlFor={'index'+index}></label>
                                         </span>
                                         <span className="di mr15">默认地址</span>

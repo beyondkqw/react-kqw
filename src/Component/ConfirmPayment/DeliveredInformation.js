@@ -45,7 +45,9 @@ export default class DeliveredInformation extends Component {
                         </li>
                     </ul>
                 </div>
-                <CommonBtn />
+                <CommonBtn
+                    title={'确定'}
+                />
             </div>
         );
     }

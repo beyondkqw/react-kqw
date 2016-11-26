@@ -72,7 +72,6 @@ p{
     background-color:#fff !important;
 }
 .width_33{
-    width:33%;
     height:1px;
 }
 .td_lt{
@@ -92,6 +91,9 @@ p{
 }
 .plr{
     padding:0 0.5rem;
+}
+.ptb{
+    padding:0.5rem 0;
 }
 .plAll{
     padding:0.5rem;
@@ -125,6 +127,9 @@ p{
 }
 .mt5{
     margin-top:0.5rem;
+}
+.mt55{
+    margin-top:0.55rem;
 }
 .mt11{
     margin-top:1.1rem;
@@ -198,6 +203,9 @@ p{
 .width_34{
     width:34%;
 }
+.width50{
+    width:50%;
+}
 .f10{
     font-size: 10px;
 }
@@ -212,6 +220,9 @@ p{
 }
 .f15{
     font-size: 15px;
+}
+.f20{
+    font-size: 20px;
 }
 .f25{
     font-size: 25px;
