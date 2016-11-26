@@ -1,6 +1,7 @@
-export const BASIC_URL = 'https://ruby-china.org/api/v3'
+export const BASIC_URL = 'http://www.rfask.org/api/'
 export const TOPICS = 'TOPICS'
 export const TOPIC = 'TOPIC'
+export const TEST = 'TEST'
 
 const received = (type, json) => {
   switch (type) {
@@ -54,4 +55,20 @@ export const fetchTopic = id => dispatch => {
         dispatch(received(type, results))
       })
   })
+}
+
+export const fetchTest = id => dispatch => {
+  const type = 'TEST'
+  const results = {'topic': {}, 'replies': []};
+  fetch(`${BASIC_URL}/topics/${id}`)
+      .then(response => response.json())
+      .then((json) => {
+        results.topic = json.topic
+        fetch(`${BASIC_URL}/topics/${id}/replies`)
+            .then(response => response.json())
+            .then((json) => {
+              results.replies = json.replies
+              dispatch(received(type, results))
+            })
+      })
 }

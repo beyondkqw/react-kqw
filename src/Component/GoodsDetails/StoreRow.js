@@ -6,7 +6,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 
 export default class StoreRow extends Component {
     render() {
-        const {title,price,imgurl,Postage,payNum} = this.props
+        const {title,price,imgurl,Postage,payNum,record} = this.props
         return (
             <div className="storeRowContainer">
                 <div style={{width:100,height:100}}>
@@ -17,13 +17,31 @@ export default class StoreRow extends Component {
 
                     <div>
                         <div style={{height:18,marginBottom:5}}>
-                            <span className="colorff f12">￥</span>
+                            {
+                                price?<span className="colorff f12">￥</span>:null
+                            }
                             <span className="colorff font18">{price}</span>
                         </div>
-                        <div className="rightBottom">
-                            <span>{Postage?Postage+'元':'免邮费'}</span>
-                            <span style={{color:'#999'}}>{payNum?payNum:0}人付款</span>
-                        </div>
+
+                        {
+                            record?
+                                <div className="rightBottom">
+                                    <div>
+                                        <span className="colorff f12">￥</span>
+                                        <span className="colorff font18">{record}</span>
+                                    </div>
+
+                                    <span className="deletHistory fr">
+                                        <img src = {require('../../Images/detelename.png')}/>
+                                    </span>
+                                </div>
+                                :
+                                <div className="rightBottom">
+                                    <span>{Postage?Postage+'元':'免邮费'}</span>
+                                    <span style={{color:'#999'}}>{payNum?payNum:0}人付款</span>
+                                </div>
+                        }
+
                     </div>
                 </div>
             </div>

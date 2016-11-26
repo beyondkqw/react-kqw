@@ -45,11 +45,14 @@ import SurePayment from '../Component/ConfirmPayment/SurePayment';
 import NearbyShop from '../Component/PersonalCenter/NearbyShop';
 import PointGiving from '../Component/PersonalCenter/PointGiving';
 import BalanceGiving from '../Component/PersonalCenter/BalanceGiving';
+import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
+import BrowseRecord from '../Component/PersonalCenter/BrowseRecord'
+
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={BrowseRecord} />
       <Route path="search" component={Search}/>
       <Route path="carousel" component={Carousel}/>
       <Route path="otherApp" component={OtherApp}/>
@@ -92,6 +95,7 @@ const RouteConfig = (
       <Route path="personalCenter/commisionGiving" component ={CommisionGiving} />
       <Route path="personalCenter/pointGiving" component ={PointGiving} />
       <Route path="personalCenter/balanceGiving" component ={BalanceGiving} />
+      <Route path="personalCenter/BrowseRecord" component ={BrowseRecord} />
     </Route>
   </Router>
 );
