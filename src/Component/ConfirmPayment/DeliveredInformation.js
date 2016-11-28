@@ -60,6 +60,7 @@ export default class DeliveredInformation extends Component {
                                 <div className="item-title color6">联系电话</div>
                                 <div className="item-after color9">
                                     <input
+                                        maxLength="11"
                                         ref = 'mobile'
                                         className="borderno tr"
                                         type="\"

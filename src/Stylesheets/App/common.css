@@ -82,6 +82,7 @@ p{
 }
 .df{
     display:flex;
+    -webkit-display:flex;
 }
 .db{
     display:block;
@@ -229,6 +230,7 @@ p{
 }
 .flex1{
     flex:1;
+    -webkit-flex:1;
 }
 .border_top{
     border-top: 1px solid #e5e5e5;
@@ -312,12 +314,15 @@ p{
 
 .just-center{
     justify-content: center;
+    -webkit-justify-content: center;
 }
 
 .alignItem-center{
     align-items: center;
+    -webkit-align-items: center;
 }
 
 .just-between{
     justify-content: space-between;
+    -webkit-justify-content: space-between;
 }
