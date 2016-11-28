@@ -20,15 +20,18 @@ export default class Carousel extends Component {
         };
       }
 
+
+
     render() {
+        const {images} = this.props
         return (
             <AutoPlaySwipeableViews
                 interval = {2000}
             >
                 {
-                    this.image.map((el,index)=>{
+                    images&&images.map((el,index)=>{
                         return(
-                            <img className="carouselImg" src = {el.url}/>
+                            <img className="carouselImg" src = {el.picture_url}/>
                         )
                     })
                 }

@@ -55,6 +55,26 @@ export async function ToRegister(accName,pwd,smsNo,code,memberName=''){
     }
 }
 
+//首页banner
+export async function HomeBanner(type,page,count){
+    try{
+        const res = await apiGet(URL.homeBanner,{type,page,count});
+        return res;
+    }catch (err){
+        console.warn('HomeBanner',err);
+        throw err
+    }
+}
+
+//首页模块 （例如一元夺宝）
+export async function HomeMoudle(){
+    try{
+        const res = await apiGet(URL.homeMoudle,{});
+        return res;
+    }catch (err){
+    console.warn('homeMoudle',err);
+    throw err
+}
 //用户登录
 export async function ToLogin(accName,pwd){
     try{
