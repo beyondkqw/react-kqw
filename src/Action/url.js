@@ -17,8 +17,15 @@ export const homeMoudle = 'floor/homePage'
 //用户登录
 export const  login = 'account/login'
 
-//我的商品收藏列表
+//我的商品详情
 export const  detail = 'product/detail'
 
-//我的商品收藏列表
+//商品是否收藏
+export const  follow = 'auth/account/follow'
+
+//我的收藏列表
 export const  followList = 'auth/account/followList'
+
+//商品列表
+
+export const  productList = 'product/list'

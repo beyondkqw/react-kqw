@@ -1,6 +1,7 @@
 .bannerImg{
     width:100%;
-    height: auto;
+    height: 9rem;
+    border:1px solid red;
 }
 .goodDetails{
     height:2.2rem;
@@ -184,6 +185,7 @@
     width:100%;
     top:3.7rem;
     position:absolute;
+    bottom:0;
     z-index: 0;
 }
 

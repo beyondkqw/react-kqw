@@ -12,7 +12,7 @@ import URI from 'urijs';
 let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
-const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
 export function getUserInfo(){

@@ -6,34 +6,65 @@ import '../../Stylesheets/App/goodsDetails.css';
 import Search from '../../Component/NewComponent/Search';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails';
-import StoreRow from '../../Component/GoodsDetails/StoreRow'
-
-const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
-    {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接安山东跑外地偶尔奥苏废物',price:290,imgUrl:require('../../Images/clothesDetails.png')},
-    {title:'拼接S佛我爱我如娃儿殴辱我耳机',price:291,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
-]
+import StoreRow from '../../Component/GoodsDetails/StoreRow';
+import {ProductList} from '../../Action/auth';
 
 
 export default class SearchPage extends Component {
 
-    // 构造
+      // 构造
       constructor(props) {
         super(props);
         // 初始状态
-          this.compositor = ['默认排序','价格从低到高','价格从高到低']
+        this.compositor = ['默认排序','价格从低到高','价格从高到低']
         this.state = {
             isChoose : 0,
             display_0 : false,
             display_2 : false,
             showByColumn : false,
-            history : false
+            history : false,
+            orderName:'',
+            order:'',
+            goodsList:[]
         };
       }
+    async componentWillMount(){
 
+        await this.getOrder()
+    }
+    //排序的列表
+    async SelectSortOrder(index){
+        this.setState({isChoose:index})
+        await    this.ChooseOneorder(index)
+        console.log('this.state.order',this.state.order);
+        this.getOrder();
+        this.setState({display_0:false})
+    }
+
+    async getOrder(){
+        await ProductList('',this.state.order,this.state.orderName,'','')
+        .then(res=>{
+            this.setState({goodsList:res.resultList})
+        })
+        .catch(err=>{
+            console.warn('err',err)
+        })
+
+    }
+    //选择某种排序方式
+    ChooseOneorder(index){
+        this.setState({orderName:'p.CURRENT_PRICE'});
+        if(index === 0){
+            this.setState({order:''});
+            this.setState({orderName:''});
+        }else if(index === 1){
+            this.setState({order: 'asc'});
+        }else if(index === 2){
+            this.setState({order: 'desc'});
+        }else{
+            this.setState({order: ''});
+        }
+    }
     //选择排序方式
     chooseSortOrder(){
         const {display_0,isChoose} = this.state
@@ -45,7 +76,7 @@ export default class SearchPage extends Component {
                             return(
                                 <li
                                     key = {index}
-                                    onClick={()=>this.setState({isChoose:index})}
+                                    onClick={()=>this.SelectSortOrder(index)}
                                     style={{background:isChoose==index?'#fff5f0':'#fff'}}
                                 >
                                     <span style={{color:isChoose==index?'#ff5500':'#666'}}>{el}</span>
@@ -104,7 +135,7 @@ export default class SearchPage extends Component {
     }
 
     render(){
-        const {showByColumn,display_0,display_2,history} = this.state
+        const {showByColumn,display_0,display_2,history,goodsList} = this.state
         return(
             <div className="containerNav" >
                 <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
@@ -157,20 +188,20 @@ export default class SearchPage extends Component {
                     className="goodListContainer" style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}>
                     <div className="imgContainer width_100">
                         {
-                            storeDetail.map((el,index)=>{
+                            goodsList.map((el,index)=>{
                                 return (
                                     showByColumn?
                                         <StoreRow
-                                            title = {el.title}
-                                            price = {el.price}
-                                            imgurl = {el.imgUrl}
+                                            title = {el.NAME}
+                                            price = {el.CURRENT_PRICE}
+                                            imgurl = {el.IMAGE}
                                         />
                                         :
                                         <StoreDetails
                                             float = {index%2==0?'left':'right'}
-                                            title = {el.title}
-                                            price = {el.price}
-                                            imgurl = {el.imgUrl}
+                                            title = {el.NAME}
+                                            price = {el.CURRENT_PRICE}
+                                            imgurl = {el.IMAGE}
                                         />
                                 )
                             })
