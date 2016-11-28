@@ -12,6 +12,8 @@ import URI from 'urijs';
 let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
+
+//const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
 const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
@@ -85,8 +87,8 @@ async function request (urlKey,method,params = {},token = ''){
         //    //'Access-Control-Allow-Headers':'x-requested-with'
         //}
     };
-    console.log('获取到的token',getToken());
-    if(await getToken()){
+    console.log('获取到的token---',getToken());
+    if(await loadToken()){
         params.token = getToken();
         console.log('-00000000000000-',params)
     }

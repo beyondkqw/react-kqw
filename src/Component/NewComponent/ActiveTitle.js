@@ -13,7 +13,7 @@ export default class ActiveTitle extends Component {
                     <div className="di activeLogo pa">
                         <img className="pa" src={require("../../Images/headerLogo.png")} />
                     </div>
-                    <span className="di activeName">充值中心</span>
+                    <span className="di activeName">{title}</span>
                 </div>
                 <div className="width_33 di flex1"><img src={require("../../Images/right.png")}/></div>
             </div>

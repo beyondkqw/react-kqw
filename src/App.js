@@ -13,11 +13,7 @@ class App extends Component {
   }
 
     async componentWillMount() {
-        console.log('0.0.0.0')
-        await loadToken()
-
-        console.log('token',localStorage.getItem(KEY_TOKEN))
-        console.log('ssssssssss',getToken())
+        console.log('====嘟嘟噜====')
     }
   render() {
     let layout = ''

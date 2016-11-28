@@ -24,7 +24,8 @@ class Home extends Component {
         super(props);
         // 初始状态
         this.state = {
-            banner : []
+            banner : [],
+            moudle : []
         };
       }
 
@@ -34,8 +35,8 @@ class Home extends Component {
     }
 
     //首页banner
-    getHomeBanner(){
-        HomeBanner('BANNER',1,5)
+   async getHomeBanner(){
+       await HomeBanner('BANNER',1,5)
         .then(res=>{
             console.log('BANNER',res)
             this.setState({banner:res})
@@ -46,17 +47,20 @@ class Home extends Component {
     }
 
     //首页模块
-    getHomeMoudle(){
-        HomeMoudle()
+   async getHomeMoudle(){
+       await HomeMoudle()
         .then(res=>{
             console.log('首页模块',res)
+            this.setState({moudle:res})
         })
         .catch(err=>{
             console.warn('getHomeMoudle',err)
         })
     }
 
+
   render() {
+      const {moudle} = this.state
     return (
       <div className="containerNav bkg_color">
         <Search />
@@ -65,21 +69,65 @@ class Home extends Component {
         />
         <OtherApp />
 
-        <ActiveTitle />
-        <Cell_3 />
-        <SplitLine />
+          {
+              moudle.map(el=>{
+                 if(el.num==3){
+                     return(
+                         <div>
+                             <ActiveTitle
+                                title = {el.name}
+                             />
+                             <Cell_3
+                                 imgUrl = {el.cells}
+                             />
+                             <SplitLine />
+                         </div>
+                     )
+                 }else if(el.num==4){
+                     return(
+                         <div>
+                             <ActiveTitle
+                                 title = {el.name}
+                             />
+                             <Cell_4 />
+                             <SplitLine />
+                         </div>
+                     )
+                 }else if(el.num==5){
+                     return(
+                         <div>
+                             <ActiveTitle
+                                 title = {el.name}
+                             />
+                             <Cell_5 />
+                             <SplitLine />
+                         </div>
+                     )
+                 }else if(el.num==6){
+                     return(
+                         <div>
+                             <ActiveTitle
+                                 title = {el.name}
+                             />
+                             <Cell_6 />
+                             <SplitLine />
+                         </div>
+                     )
+                 }else if(el.num==7){
+                     return(
+                         <div>
+                             <ActiveTitle
+                                 title = {el.name}
+                             />
+                             <Cell_7 />
+                             <SplitLine />
+                         </div>
+                     )
+                 }
+              })
+          }
 
-        <ActiveTitle />
-        <Cell_4 />
-        <SplitLine />
 
-        <ActiveTitle />
-        <Cell_6 />
-        <SplitLine />
-
-        <ActiveTitle />
-        <Cell_7 />
-        <SplitLine />
 
         <div className="footerHidden"></div>
         <Footer />
