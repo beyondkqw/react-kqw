@@ -10,3 +10,9 @@ export const register = 'account/add'
 
 //用户登录
 export const  login = 'account/login'
+
+//我的商品收藏列表
+export const  detail = 'product/detail'
+
+//我的商品收藏列表
+export const  followList = 'auth/account/followList'

@@ -5,11 +5,20 @@ import * as actions from './Action'
 import Navbar from './Component/Navbar';
 //import Footer from './Component/Footer';
 import Promote from './Component/Promote';
-
+import {loadToken,getToken} from './Action/rpc'
+const KEY_TOKEN = 'accessToken';
 class App extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired
   }
+
+    async componentWillMount() {
+        console.log('0.0.0.0')
+        await loadToken()
+
+        console.log('token',localStorage.getItem(KEY_TOKEN))
+        console.log('ssssssssss',getToken())
+    }
   render() {
     let layout = ''
     const childrenWithProps = React.Children.map(this.props.children,

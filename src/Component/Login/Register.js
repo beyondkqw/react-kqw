@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SMSCode,toRegister} from '../../Action/auth'
+import {ErrorNum,ErrorPs} from '../../Action/rpc'
 
 const icon = [
     require('../../Images/login/phone.png'),
@@ -20,6 +21,7 @@ export default class Register extends Component {
         // 初始状态
         this.state = {
             codeWord : '',
+            Reminder:'',
             disabled : false,
             mobile : '',
             smsCode : '',
@@ -57,11 +59,30 @@ export default class Register extends Component {
             clearInterval(this._timer)
         }
     }
+    //判断登录名,密码是否正确
+    isTrue(value,parameter){
+        this.setState({Reminder:''})
+        if(parameter === 'phoneNum'){
+            if (!ErrorNum(value)) {
+                this.setState({Reminder:'手机号码有误,请重新填写'})
+                console.log('---------',this.state.Reminder);
+            }
+        }
+        if(parameter === 'pwd'){
+            if (!ErrorPs(value)) {
+                this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
+            }
+        }
+
+    }
 
     //注册
     async toSubmit(){
         const {mobile,pwd,smsCode,code,memberName='1'} = this.state
         console.log('aaa',mobile,pwd,smsCode,code,memberName)
+        if(memberName ==''||pwd == ''){
+            this.setState({Reminder:'登录名或密码不能为空'})
+        }
         await toRegister(mobile,pwd,smsCode,code,memberName)
         .then(res=>{
             console.log('注册成功',res)
@@ -85,6 +106,7 @@ export default class Register extends Component {
                         className="editorInput"
                         placeholder="请输入手机号"
                         onChange={()=>{this.setState({mobile:this.refs.mobile.value})}}
+                        onBlur = {()=>this.isTrue(this.state.mobile,'phoneNum')}
                     />
                 </div>
 
@@ -98,6 +120,7 @@ export default class Register extends Component {
                         className="editorInput"
                         placeholder="设置您的密码"
                         onChange = {()=>this.setState({pwd:this.refs.pwd.value})}
+                        onBlur = {()=>this.isTrue(this.state.pwd,'pwd')}
                     />
                 </div>
 
@@ -125,7 +148,9 @@ export default class Register extends Component {
                 <div className="agreement">
                     点击注册，代表您同意遵守聚朵云的<Link><span style={{color:'#ff5500'}}>《用户协议》</span></Link>
                 </div>
-
+                <div className="tc f12 color_red width_100 plAll">
+                    {this.state.Reminder}
+                </div>
                 <button
                     style={{marginTop:45}}
                     className="toLogin"

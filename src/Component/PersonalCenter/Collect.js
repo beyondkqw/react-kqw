@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
+import {FollowList} from '../../Action/auth';
+import {loadToken,getToken} from '../../Action/rpc'
 
 
 const ItemList = [{id:1,title:'皮草阁201d回家收电费和解散后圣诞节',price:2200,imgLink:require('../../Images/store.png')},
@@ -17,6 +19,13 @@ export default class Collect extends Component {
             isIndex:null
         };
       }
+
+    async componentWillMount() {
+        await loadToken()
+        console.log("---------------");
+        FollowList();
+    }
+
       //显示模态层
       isShow(id,index){
           console.log("id",id);

@@ -6,8 +6,8 @@ import * as URL from './url'
 
 import {apiGet,apiPost,saveToken,getToken,clearToken} from './rpc';
 
-const version = '1.0.0'
-const client = 'wx'
+export const version = '1.0.0'
+export const client = 'wx'
 
 
 //设置imei
@@ -28,7 +28,7 @@ if (!cookieImei) {
     cookieImei = localStorage.getItem('imei');
 }
 
-const imei = cookieImei
+export const imei = cookieImei
 
 
 /***********************************************/
@@ -45,9 +45,9 @@ export async function SMSCode(mobile){
 }
 
 //用户注册
-export async function toRegister(accName,pwd,smsNo,code,memberName=''){
+export async function ToRegister(accName,pwd,smsNo,code,memberName=''){
     try{
-        const res = await apiPost(URL.register,{accName,pwd,smsNo,code,memberName,imei,version,client});
+        const res = await apiPost(URL.register,{accName,pwd,smsNo,code,memberName});
         return res;
     }catch (err){
         console.warn('toRegister',err);
@@ -56,11 +56,34 @@ export async function toRegister(accName,pwd,smsNo,code,memberName=''){
 }
 
 //用户登录
-export async function ToLogin(accName,pwd,imei,version,client){
+export async function ToLogin(accName,pwd){
     try{
-        const res = await apiGet(URL.login,{accName,pwd,imei,version,client});
+        const res = await apiGet(URL.login,{accName,pwd});
         return res;
     }catch (err){
         console.warn(err);
+        throw err
+    }
+}
+
+//商品详情
+export async function Details(productId){
+    try{
+        const res = await apiGet(URL.detail,{productId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//我的商品列表
+export async function FollowList(){
+    try{
+        const res = await apiGet(URL.followList);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
     }
 }

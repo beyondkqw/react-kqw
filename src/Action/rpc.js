@@ -11,7 +11,7 @@ import URI from 'urijs';
 
 let token = '';
 let userInfo = {};
-
+import {imei,version,client} from './auth'
 const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
 
 
@@ -29,10 +29,7 @@ export async function clearUserInfo() {
     userInfo = null;
 }
 
-export function getToken() {
-    //console.log('getToken====>',token);
-    return token;
-}
+
 
 export function saveToken(_token) {
     console.log('saveToken====>',_token);
@@ -48,6 +45,11 @@ export async function loadToken() {
 export async function clearToken() {
     await localStorage.removeItem(KEY_TOKEN);
     token = null;
+}
+
+export function getToken() {
+    console.log('getToken====>',token);
+    return token;
 }
 
 async function request (urlKey,method,params = {},token = ''){
@@ -83,28 +85,30 @@ async function request (urlKey,method,params = {},token = ''){
         //    //'Access-Control-Allow-Headers':'x-requested-with'
         //}
     };
-    //console.log('获取到的token',getToken());
-    //if(getToken()){
-    //    params.token = getToken();
-    //}
-    //if (imei)
-    //{
-    //    params.imei =imei;
-    //}
-    //if (client)
-    //{
-    //    params.client =client;
-    //}
-    //if (version)
-    //{
-    //    params.version =version;
-    //}
+    console.log('获取到的token',getToken());
+    if(await getToken()){
+        params.token = getToken();
+        console.log('-00000000000000-',params)
+    }
+    if (imei)
+    {
+        params.imei =imei;
+    }
+    if (client)
+    {
+        params.client =client;
+    }
+    if (version)
+    {
+        params.version =version;
+    }
 
     //console.log('获取到的token后',params);
     //GET请求
     if (method === 'GET') {
         url = URI(url).query(params).toString();
 
+        console.log('params',params)
         console.warn(`GET ${url}`);
     }
     //POST / PUT请求
@@ -180,4 +184,22 @@ export async function apiGet(urlKey,params = {}){
 }
 export async function apiPost(urlKey,params = {}){
     return await request(urlKey,'POST',params,'');
+}
+
+// 验证手机号是否正确
+export function ErrorNum(value) {
+    if (!(/^((13[0-9])|(15[^4,\D])|(18[0-1,3-9]))\d{8}$/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//校验密码
+export function ErrorPs(value) {
+    if (!(/(?!^[0-9]+$)(?!^[A-Z]+$)(?!^[a-z]+$)(?!^[^A-z0-9]+$)^.{6,16}/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
 }
