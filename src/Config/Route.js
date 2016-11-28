@@ -52,7 +52,7 @@ import BrowseRecord from '../Component/PersonalCenter/BrowseRecord'
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Login} />
+      <IndexRoute component={Home} />
       <Route path="search" component={Search}/>
       <Route path="carousel" component={Carousel}/>
       <Route path="otherApp" component={OtherApp}/>
@@ -75,27 +75,27 @@ const RouteConfig = (
       <Route path="partner" component={Partner}/>
       <Route path="levelPartner" component={LevelPartner}/>
       <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
-      <Route path="Login/Login" component = {Login} />
-      <Route path="Login/Register" component = {Register} />
-      <Route path="Login/ForgetPwd" component = {ForgetPwd} />
-      <Route path="Setting/BindPhone" component = {BindPhone} />
-      <Route path="Setting/PwdModify" component = {PwdModify} />
-      <Route path="personalCenter/collect" component ={Collect} />
-      <Route path="personalCenter/setting" component ={Setting} />
-      <Route path="personalCenter/savety" component ={Savety} />
-      <Route path="personalCenter/feedback" component ={Feedback} />
-      <Route path="personalCenter/aboutDemo" component ={AboutDemo} />
-      <Route path="orderList" component ={OrderList} />
-      <Route path="orderList/viewEvaluation" component ={ViewEvaluation} />
-      <Route path="orderList/chaseRatings" component ={ChaseRatings} />
-      <Route path="orderList/publishEvalute" component ={PublishEvalute} />
-      <Route path="confirmPayment/choosePayment" component ={ChoosePayment} />
-      <Route path="confirmPayment/surePayment" component ={SurePayment} />
-      <Route path="personalCenter/nearbyShop" component ={NearbyShop} />
-      <Route path="personalCenter/commisionGiving" component ={CommisionGiving} />
-      <Route path="personalCenter/pointGiving" component ={PointGiving} />
-      <Route path="personalCenter/balanceGiving" component ={BalanceGiving} />
-      <Route path="personalCenter/BrowseRecord" component ={BrowseRecord} />
+      <Route path="Login/Login" component={Login} />
+      <Route path="Login/Register" component={Register} />
+      <Route path="Login/ForgetPwd" component={ForgetPwd} />
+      <Route path="Setting/BindPhone" component={BindPhone} />
+      <Route path="Setting/PwdModify" component={PwdModify} />
+      <Route path="personalCenter/collect" component={Collect} />
+      <Route path="personalCenter/setting" component={Setting} />
+      <Route path="personalCenter/savety" component={Savety} />
+      <Route path="personalCenter/feedback" component={Feedback} />
+      <Route path="personalCenter/aboutDemo" component={AboutDemo} />
+      <Route path="orderList" component={OrderList} />
+      <Route path="orderList/viewEvaluation" component={ViewEvaluation} />
+      <Route path="orderList/chaseRatings" component={ChaseRatings} />
+      <Route path="orderList/publishEvalute" component={PublishEvalute} />
+      <Route path="confirmPayment/choosePayment" component={ChoosePayment} />
+      <Route path="confirmPayment/surePayment" component={SurePayment} />
+      <Route path="personalCenter/nearbyShop" component={NearbyShop} />
+      <Route path="personalCenter/commisionGiving" component={CommisionGiving} />
+      <Route path="personalCenter/pointGiving" component={PointGiving} />
+      <Route path="personalCenter/balanceGiving" component={BalanceGiving} />
+      <Route path="personalCenter/BrowseRecord" component={BrowseRecord} />
     </Route>
   </Router>
 );

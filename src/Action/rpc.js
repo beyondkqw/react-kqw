@@ -121,7 +121,6 @@ async function request (urlKey,method,params = {},token = ''){
 
 
     try {
-        console.log('URL',url)
         let response = await fetch(url,options);
         if(response.ok){
             console.log('收到了消息');
