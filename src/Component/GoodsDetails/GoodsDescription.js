@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
 import '../../Stylesheets/App/goodsDetails.css';
+import {Details} from '../../Action/auth'
 
 export default class GoodsDescription extends Component {
     // 构造
@@ -11,13 +12,24 @@ export default class GoodsDescription extends Component {
         super(props);
         // 初始状态
         this.state = {
-            isShow : false
+            isShow : false,
+            isChecked:false
         };
     }
+    //弹出popup
     popubAnimate(){
         this.setState({isShow:true});
     }
+    //收藏
+    isFollow(){
+        this.setState({isChecked:!this.state.isChecked});
+        if(this.state.isChecked == true){
 
+        }
+    }
+    componentWillMount() {
+        Details(1);
+    }
     render() {
         return (
             <section className="containerNav">
@@ -26,11 +38,14 @@ export default class GoodsDescription extends Component {
                 </div>
                 <div className="width_100 goodDetails">
                     <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">拼接雪纺连衣裙拼接雪纺连衣裙拼接雪纺连衣裙拼接雪纺连衣裙</div>
-                    <div className="width_20 fl tc">
-                        <a>
-                            <span className="di collect_img"><img src={require('../../Images/collect.png')} alt=""/></span>
-                            <span className="f10 db color6">收藏</span>
-                        </a>
+                    <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
+                        <span className="di collect_img">
+                            {this.state.isChecked?
+                            <img src={require('../../Images/gou.png')} alt=""/>
+                            :<img src={require('../../Images/collect.png')} alt=""/>
+                            }
+                        </span>
+                        <span className="f10 db color6">收藏</span>
                     </div>
                 </div>
                 <div className="mtlr">

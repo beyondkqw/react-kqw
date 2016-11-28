@@ -15,4 +15,22 @@ export const homeBanner = 'notices/list'
 export const homeMoudle = 'floor/homePage'
 
 //用户登录
-export const  login = 'account/login'
+export const login = 'account/login'
+
+//我的商品收藏列表
+export const detail = 'product/detail'
+
+//我的商品收藏列表
+export const followList = 'auth/account/followList'
+
+//新增地址
+export const addAddress = 'auth/address/save'
+
+//编辑地址
+export const editAddress = 'auth/address/edit'
+
+//地址列表
+export const addressList = 'auth/address/list'
+
+//设置默认收货地址
+export const defaultAddress = 'auth/address/defaultAddress'

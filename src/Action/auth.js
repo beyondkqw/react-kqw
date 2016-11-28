@@ -6,8 +6,8 @@ import * as URL from './url'
 
 import {apiGet,apiPost,saveToken,getToken,clearToken} from './rpc';
 
-const version = '1.0.0'
-const client = 'wx'
+export const version = '1.0.0'
+export const client = 'wx'
 
 
 //设置imei
@@ -28,7 +28,7 @@ if (!cookieImei) {
     cookieImei = localStorage.getItem('imei');
 }
 
-const imei = cookieImei
+export const imei = cookieImei
 
 
 /***********************************************/
@@ -45,9 +45,9 @@ export async function SMSCode(mobile){
 }
 
 //用户注册
-export async function toRegister(accName,pwd,smsNo,code,memberName=''){
+export async function ToRegister(accName,pwd,smsNo,code,memberName=''){
     try{
-        const res = await apiPost(URL.register,{accName,pwd,smsNo,code,memberName,imei,version,client});
+        const res = await apiPost(URL.register,{accName,pwd,smsNo,code,memberName});
         return res;
     }catch (err){
         console.warn('toRegister',err);
@@ -78,13 +78,79 @@ export async function HomeMoudle(){
 }
 
 //用户登录
-export async function ToLogin(accName,pwd,imei,version,client) {
-    try {
-        const res = await apiGet(URL.login, {accName, pwd, imei, version, client});
+export async function ToLogin(accName,pwd){
+    try{
+        const res = await apiGet(URL.login,{accName,pwd});
         return res;
     } catch (err) {
         console.warn(err);
+        throw err
     }
 }
 
+//商品详情
+export async function Details(productId){
+    try{
+        const res = await apiGet(URL.detail,{productId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//我的商品列表
+export async function FollowList(){
+    try{
+        const res = await apiGet(URL.followList);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//新增地址
+export async function AddAddress(name,mobile,address,detail){
+    try{
+        const res = await apiPost(URL.addAddress,{name,mobile,address,detail});
+        return res;
+    }catch (err){
+        console.warn('AddAddress',err);
+        throw err
+    }
+}
+
+//编辑地址
+export async function EditAddress(name,mobile,address,detail,addressId){
+    try{
+        const res = await apiPost(URL.editAddress,{name,mobile,address,detail,addressId});
+        return res;
+    }catch (err){
+        console.warn('EditAddress',err);
+        throw err
+    }
+}
+
+//地址列表
+export async function AddressList(){
+    try{
+        const res = await apiGet(URL.addressList);
+        return res;
+    }catch (err){
+        console.warn('AddressList',err);
+        throw err
+    }
+}
+
+//设置默认地址
+export async function DefaultAddress(addressId){
+    try{
+        const res = await apiGet(URL.defaultAddress,{addressId});
+        return res;
+    }catch (err){
+        console.warn('DefaultAddress',err);
+        throw err
+    }
+}
 
