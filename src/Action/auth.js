@@ -72,15 +72,19 @@ export async function HomeMoudle(){
         const res = await apiGet(URL.homeMoudle,{});
         return res;
     }catch (err){
-    console.warn('homeMoudle',err);
-    throw err
+        console.warn('homeMoudle',err);
+        throw err
+    }
 }
+
 //用户登录
-export async function ToLogin(accName,pwd,imei,version,client){
-    try{
-        const res = await apiGet(URL.login,{accName,pwd,imei,version,client});
+export async function ToLogin(accName,pwd,imei,version,client) {
+    try {
+        const res = await apiGet(URL.login, {accName, pwd, imei, version, client});
         return res;
-    }catch (err){
+    } catch (err) {
         console.warn(err);
     }
 }
+
+
