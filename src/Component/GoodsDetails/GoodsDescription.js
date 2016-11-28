@@ -4,8 +4,12 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
 import '../../Stylesheets/App/goodsDetails.css';
-import {Details} from '../../Action/auth'
+import {Details,Follow} from '../../Action/auth'
+import autoPlay from 'react-swipeable-views/lib/autoPlay';
+import SwipeableViews from 'react-swipeable-views';
 
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class GoodsDescription extends Component {
     // 构造
     constructor(props) {
@@ -13,35 +17,83 @@ export default class GoodsDescription extends Component {
         // 初始状态
         this.state = {
             isShow : false,
-            isChecked:false
+            isChecked:false,
+            //商品详情
+            goodsDetails:[],
+            //是否收藏
+            status:null
         };
     }
     //弹出popup
     popubAnimate(){
         this.setState({isShow:true});
     }
-    //收藏
-    isFollow(){
-        this.setState({isChecked:!this.state.isChecked});
-        if(this.state.isChecked == true){
 
+    componentWillMount() {
+        this.getDetails()
+    }
+
+    //商品详情
+    async getDetails(){
+        await Details(1)
+            .then(res=>{
+                this.setState({goodsDetails:res});
+                console.log('goodsDetails',this.state.goodsDetails);
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
+
+    //是否收藏
+    async isFollow(){
+        await this.setState({isChecked:!this.state.isChecked});
+        //收藏
+        console.log('istrue',this.state.isChecked );
+        //收藏
+        if(this.state.isChecked === true){
+            this.setState({status:0});
+            this.getFollow(this.state.status)
+        //取消收藏
+        }else{
+            this.setState({status:1});
+            this.getFollow(this.state.status)
         }
     }
-    componentWillMount() {
-        Details(1);
+
+    async getFollow(status){
+        await Follow(1,status)
+            .then(res=>{
+                console.log(res);
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
     }
+
     render() {
+        const {goodsDetails} = this.state;
         return (
             <section className="containerNav">
                 <div className="bannerImg">
-                    <img src={require('../../Images/clothesDetails.png')}/>
+                    <AutoPlaySwipeableViews
+                        interval = {2000}
+                    >
+                        {
+                            goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
+                                return(
+                                    <img src = {el.IMAGE}/>
+                                )
+                            })
+                        }
+                    </AutoPlaySwipeableViews>
                 </div>
                 <div className="width_100 goodDetails">
-                    <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">拼接雪纺连衣裙拼接雪纺连衣裙拼接雪纺连衣裙拼接雪纺连衣裙</div>
+                    <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
                     <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
                         <span className="di collect_img">
                             {this.state.isChecked?
-                            <img src={require('../../Images/gou.png')} alt=""/>
+                            <img src={require('../../Images/alreadyFollow.png')} alt=""/>
                             :<img src={require('../../Images/collect.png')} alt=""/>
                             }
                         </span>
@@ -50,13 +102,13 @@ export default class GoodsDescription extends Component {
                 </div>
                 <div className="mtlr">
                     <div>
-                        <span className="colorff f12">￥</span><span className="colorff font18">258</span>
-                        <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>328</span></a>
+                        <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
+                        <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
                     </div>
                     <div className="f12">
                         <span className="colorff ">卖家包邮</span>
                         <div className="fr">
-                            <span>123</span>人付款
+                            <span>{goodsDetails.SALES}</span>人付款
                         </div>
                     </div>
                 </div>

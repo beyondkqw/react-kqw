@@ -67,15 +67,15 @@ export async function HomeBanner(type,page,count){
 }
 
 //首页模块 （例如一元夺宝）
-export async function HomeMoudle(){
-    try{
-        const res = await apiGet(URL.homeMoudle,{});
-        return res;
-    }catch (err){
-        console.warn('homeMoudle',err);
-        throw err
+export async function HomeMoudle() {
+        try {
+            const res = await apiGet(URL.homeMoudle, {});
+            return res;
+        } catch (err) {
+            console.warn('homeMoudle', err);
+            throw err
+        }
     }
-}
 
 //用户登录
 export async function ToLogin(accName,pwd){
@@ -86,27 +86,48 @@ export async function ToLogin(accName,pwd){
         console.warn(err);
         throw err
     }
-}
 
 //商品详情
-export async function Details(productId){
-    try{
-        const res = await apiGet(URL.detail,{productId});
-        return res;
-    }catch (err){
-        console.warn(err);
-        throw err
+    export async function Details(productId) {
+        try {
+            const res = await apiGet(URL.detail, {productId});
+            return res;
+        } catch (err) {
+            console.warn(err);
+            throw err
+        }
     }
-}
 
-//我的商品列表
-export async function FollowList(){
-    try{
-        const res = await apiGet(URL.followList);
-        return res;
-    }catch (err){
-        console.warn(err);
-        throw err
+//收藏/取消收藏
+    export async function Follow(productId,status) {
+        try {
+            const res = await apiGet(URL.follow,{productId,status});
+            return res;
+        } catch (err) {
+            console.warn(err);
+            throw err
+        }
+    }
+//我的收藏列表
+    export async function FollowList() {
+        try {
+            const res = await apiGet(URL.followList);
+            return res;
+        } catch (err) {
+            console.warn(err);
+            throw err
+        }
+    }
+
+//商品列表
+    export async function ProductList(name,order,orderName,minPrice,maxPrice) {
+        try {
+            const res = await apiGet(URL.productList,{name,order,orderName,minPrice,maxPrice});
+            return res;
+        } catch (err) {
+            console.warn(err);
+            throw err
+        }
     }
 }
 
