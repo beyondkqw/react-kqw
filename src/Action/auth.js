@@ -89,13 +89,13 @@ export async function ToLogin(accName,pwd) {
 }
 //商品详情
 export async function Details(productId) {
-    try {
-        const res = await apiGet(URL.detail, {productId});
-        return res;
-    } catch (err) {
-        console.warn(err);
-        throw err
-    }
+        try {
+            const res = await apiGet(URL.detail, {productId});
+            return res;
+        } catch (err) {
+            console.warn(err);
+            throw err
+        }
 }
 
 //收藏/取消收藏
