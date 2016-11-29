@@ -27,7 +27,7 @@ export default class GoodsPopup extends Component {
     }
 
     render() {
-        const {closePopUp} = this.props
+        const {closePopUp,attr,onClick} = this.props
         return (
                 <div className="popupContainer pf bottom0 z_index bkg_color width_100 border_top pr">
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
@@ -35,46 +35,33 @@ export default class GoodsPopup extends Component {
                         <span className="di productImg"><img src={require('../../Images/store.png')} alt=""/></span>
                         <span className="colorff f12 margin15">￥</span><span className="colorff font18">258</span>
                     </div>
-                    <div className="plAll border_top">
-                        <span className="font14 color6">颜色分类</span>
-                        <div>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseType"/><label htmlFor="chooseType">白色</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox" className="chooseColor" id="chooseType1"/><label htmlFor="chooseType1">红色</label>
-                            </span>
-                            <span className="di  width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseType2"/><label htmlFor="chooseType2">橙色</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseType3"/><label htmlFor="chooseType3">橙色</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseType4"/><label htmlFor="chooseType4">橙色</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseType5"/><label htmlFor="chooseType5">橙色</label>
-                            </span>
-                        </div>
-                    </div>
-                   <div className="plAll border_top">
-                        <span className="font14 color6">尺码大小</span>
-                        <div>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseSize"/><label htmlFor="chooseSize">XS</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox" className="chooseColor" id="chooseSize1"/><label htmlFor="chooseSize1">S</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseSize2"/><label htmlFor="chooseSize2">M</label>
-                            </span>
-                            <span className="di width_20">
-                                <input type="checkbox"  className="chooseColor" id="chooseSize3"/><label htmlFor="chooseSize3">L</label>
-                            </span>
-                        </div>
-                    </div>
+                    {
+                        attr&&attr.map((el,inx)=>{
+                            return(
+                                <div className="plAll border_top">
+                                    <span className="font14 color6">{el.NAME}</span>
+                                    <div>
+                                        {
+                                            el.DETAILS&&el.DETAILS.map((detail,index)=>{
+                                                return(
+                                                    <span
+                                                        onClick = {()=>onClick&&onClick(inx,detail.ID,el.IS_RADIO)}
+                                                        className="di width_20"
+                                                    >
+                                                        <input type="radio" name = {el.DESC} className="chooseColor" id={`${inx}`+'ATTR_ID'+`${index}`}/>
+                                                        <label htmlFor={`${inx}`+'ATTR_ID'+`${index}`}>{detail.VALUE}</label>
+                                                    </span>
+                                                )
+                                            })
+                                        }
+
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+
                     <div className="popupContainer bottom0 z_index bkg_color width_100 pr">
                         <div className="plAll border_top">
                             <span className="font14 color6">选择数量</span>

@@ -174,3 +174,13 @@ export async function DefaultAddress(addressId){
     }
 }
 
+//商品属性
+export async function ProductAttribute(productId){
+    try{
+        const res = await apiGet(URL.productAttribute,{productId});
+        return res;
+    }catch (err){
+        console.warn('ProductAttribute',err);
+        throw err
+    }
+}

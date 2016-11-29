@@ -8,7 +8,7 @@ import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails';
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import {ProductList} from '../../Action/auth';
-
+import {Link} from 'react-router'
 
 export default class SearchPage extends Component {
 
@@ -227,18 +227,22 @@ export default class SearchPage extends Component {
                             goodsList&&goodsList.map((el,index)=>{
                                 return (
                                     showByColumn?
-                                        <StoreRow
-                                            title = {el.NAME}
-                                            price = {el.CURRENT_PRICE}
-                                            imgurl = {el.IMAGE}
-                                        />
+                                        <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
+                                            <StoreRow
+                                                title = {el.NAME}
+                                                price = {el.CURRENT_PRICE}
+                                                imgurl = {el.IMAGE}
+                                            />
+                                        </Link>
                                         :
-                                        <StoreDetails
-                                            float = {index%2==0?'left':'right'}
-                                            title = {el.NAME}
-                                            price = {el.CURRENT_PRICE}
-                                            imgurl = {el.IMAGE}
-                                        />
+                                        <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
+                                            <StoreDetails
+                                                float = {index%2==0?'left':'right'}
+                                                title = {el.NAME}
+                                                price = {el.CURRENT_PRICE}
+                                                imgurl = {el.IMAGE}
+                                            />
+                                        </Link>
                                 )
                             })
                         }

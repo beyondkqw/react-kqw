@@ -17,7 +17,7 @@ export const homeMoudle = 'floor/homePage'
 //用户登录
 export const login = 'account/login'
 
-//我的商品详情
+//商品详情
 export const  detail = 'product/detail'
 
 //商品是否收藏
@@ -28,6 +28,9 @@ export const  followList = 'auth/account/followList'
 
 //商品列表
 export const  productList = 'product/list'
+
+//商品属性
+export const productAttribute = 'product/attribute'
 
 //新增地址
 export const addAddress = 'auth/address/save'

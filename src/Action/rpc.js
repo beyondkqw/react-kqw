@@ -90,7 +90,6 @@ async function request (urlKey,method,params = {},token = ''){
     console.log('获取到的token---',getToken());
     if(await loadToken()){
         params.token = getToken();
-        console.log('-00000000000000-',params)
     }
     if (imei)
     {
