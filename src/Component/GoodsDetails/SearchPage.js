@@ -33,6 +33,11 @@ export default class SearchPage extends Component {
     async componentWillMount(){
         await this.getOrder()
     }
+    //搜索
+    async SearchBtn(value){
+        console.log('value',value);
+        await this.getOrder(value,'','','','');
+    }
     //排序的列表
     async SelectSortOrder(index){
         this.setState({isChoose:index})
@@ -175,6 +180,7 @@ export default class SearchPage extends Component {
                     <Search
                         //onFocus = {()=>this.setState({history:true})}
                         //onBlur = {()=>this.setState({history:false})}
+                        onClick = {(value)=>this.SearchBtn(value)}
                         display = {this.state.history}
                     />
                     {/*todo scroll滚动时置顶fixed*/}

@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import Footer from '../../Component/NewComponent/Footer';
 import PersonalInformation from '../../Component/PersonalCenter/PersonalInformation';
+import OrderDetails from '../../Component/Orders/OrderDetails'
 import '../../Stylesheets/App/personal.css';
 
 const personDetail = [
-    {name:'待付款',imgUrl:require('../../Images/modify.png'),num:0,link:''},
-    {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:''},
-    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:3,link:''},
-    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:''},
-    {name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'orderList'}
+    {name:'待付款',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
+    {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
+    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:3,link:'/orderList'},
+    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
+    {name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}
 ]
 const ItemList = [
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
@@ -49,14 +50,14 @@ export default class PersonalCenter extends Component {
                 </div>
                 <div className="df border_top border_bottom ptb1">
                     {
-                        personDetail.map(el=>{
+                        personDetail.map((el,index)=>{
                             return(
-                                <Link to={el.link} className="di width_third width_100">
+                                <Link to={el.link} className="di width_third width_100" query={{index:index}}>
                                     <div className="flex1 tc pr">
                                         <p>
                                             <span className="di typeImg"><img src={el.imgUrl} alt=""/></span>
                                             {
-                                              !el.num == 0?
+                                              !(el.num === 0)?
                                                 <span className="di f12 promptNav colorff border_ra50 pa">{el.num}</span>
                                               :null
                                             }

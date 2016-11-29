@@ -1,42 +1,73 @@
 import React, { Component } from 'react';
 import TabBar from '../../Component/NewComponent/TabBar';
-import SplitLine from '../../Component/NewComponent/SplitLine'
 import OrderDetails from '../../Component/Orders/OrderDetails'
+import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
+import {GetOrderList} from '../../Action/auth';
 
 export default class OrderList extends Component {
 
     // 构造
-      constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {
-            index : 0,
-            isShow:0
-        };
-      }
+     constructor(props) {
+       super(props);
+       // 初始状态
+       this.state = {
+           index : 0,
+           isShow:0,
+           orderItems:[]
+       };
+     }
 
-    onChange(index){
-        this.setState({index:index})
-        this.setState({isShow:index})
+    componentWillMount(){
+        let indexValue = this.props.location.query.index
+        this.setState({index:indexValue?indexValue:0})
     }
 
+    async onChange(index){
+        this.setState({index:index})
+        await this.setState({isShow:index})
+        console.log('this.state.index',this.state.index === '1');
+            if(this.state.index === '0'){
+                this.getOrderList('0')
+            }else if(this.state.index === '1'){
+                this.getOrderList('1')
+            }else if(this.state.index === '2'){
+                this.getOrderList('2')
+            }else if(this.state.index === '3'){
+                this.getOrderList('3')
+            }else if(this.state.index === '4'){
+                this.getOrderList('4')
+            }else{
+                this.getOrderList('0')
+            }
+    }
+    //请求接口
+    async getOrderList(param){
+        await GetOrderList(param)
+            .then(res=>{
+                this.setState({orderItems:res.resultList})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+
+    }
     render() {
         return (
             <div className="containerNav">
                 <TabBar
+                     index = {this.state.index}
                      onClick = {index=>this.onChange(index)}
                      contents={['待付款','待收货','待评价','已评价','全部订单']}
                 />
                 <SplitLine />
                 {/*代付款*/}
                 { this.state.index == 0?
-                <div>
-                    <OrderDetails
-                        toPay = {true}
-                    />
-                    <SplitLine />
-                </div>
+                    <div>
+                        <OrderDetails
+                            toPay = {true}
+                        />
+                    </div>
                 :null
                 }
                 {/*待收货*/}
@@ -45,7 +76,6 @@ export default class OrderList extends Component {
                         <OrderDetails
                             makeSure={true}
                         />
-                        <SplitLine />
                     </div>
                     :null
                 }
@@ -55,7 +85,6 @@ export default class OrderList extends Component {
                         <OrderDetails
                            toRated = {true}
                         />
-                        <SplitLine />
                     </div>
                     :null
                 }
@@ -65,7 +94,6 @@ export default class OrderList extends Component {
                         <OrderDetails
                             alreadyRated = {true}
                         />
-                        <SplitLine />
                     </div>
                     :null
                 }
@@ -75,7 +103,6 @@ export default class OrderList extends Component {
                         <OrderDetails
                             allRated = {true}
                         />
-                        <SplitLine />
                     </div>
                     :null
                 }

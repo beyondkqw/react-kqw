@@ -102,6 +102,9 @@ p{
 .pl1{
     padding:1rem;
 }
+.pl3{
+    padding:0.3rem;
+}
 .ptb1{
     padding:1rem 0;
 }
@@ -125,6 +128,9 @@ p{
 }
 .mt1{
     margin-top:0.1rem;
+}
+.mt45{
+    margin-top:0.45rem;
 }
 .mt5{
     margin-top:0.5rem;
@@ -240,6 +246,9 @@ p{
 }
 .border_right{
     border-right: 1px solid #e5e5e5;
+}
+.border_all{
+    border:1px solid #ccc;
 }
 .tc{
     text-align:center;
