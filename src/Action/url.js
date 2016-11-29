@@ -44,3 +44,8 @@ export const addressList = 'auth/address/list'
 //设置默认收货地址
 export const defaultAddress = 'auth/address/defaultAddress'
 
+//订单列表
+export const orderList = 'order/auth/list'
+
+//订单详情
+export const orderDetail = 'order/detail'

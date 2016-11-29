@@ -9,7 +9,6 @@ import {apiGet,apiPost,saveToken,getToken,clearToken} from './rpc';
 export const version = '1.0.0'
 export const client = 'wx'
 
-
 //设置imei
 const createUUID = function () {
     function S4() {
@@ -87,6 +86,7 @@ export async function ToLogin(accName,pwd) {
         throw err
     }
 }
+
 //商品详情
 export async function Details(productId) {
         try {
@@ -108,6 +108,7 @@ export async function Follow(productId,status) {
         throw err
     }
 }
+
 //我的收藏列表
 export async function FollowList() {
     try {
@@ -120,15 +121,15 @@ export async function FollowList() {
 }
 
 //商品列表
-    export async function ProductList(name,order,orderName,minPrice,maxPrice) {
-        try {
-            const res = await apiGet(URL.productList,{name,order,orderName,minPrice,maxPrice});
-            return res;
-        } catch (err) {
-            console.warn(err);
-            throw err
-        }
+export async function ProductList(name,order,orderName,minPrice,maxPrice) {
+    try {
+        const res = await apiGet(URL.productList,{name,order,orderName,minPrice,maxPrice});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
     }
+}
 
 //新增地址
 export async function AddAddress(name,mobile,address,detail){
@@ -184,3 +185,26 @@ export async function ProductAttribute(productId){
         throw err
     }
 }
+
+//订单列表
+export async function GetOrderList(status){
+    try{
+        const res = await apiGet(URL.orderList,{status});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//订单详情
+export async function OrderDetail(orderNo){
+    try{
+        const res = await apiGet(URL.orderDetail,{orderNo});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+

@@ -66,18 +66,12 @@ export default class Search extends Component {
                                     this.setState({display:true})
                                     onFocus&&onFocus(this.state.display)
                                 }}
-
-
-                                //onBlur={()=>{
-                                //    //this.setState({display:false})
-                                //    onBlur&&onBlur(this.state.display)
-                                //}}
                             />
-                            <Link to="/GoodsDetail/SearchPage"  >
+                            <Link to="/GoodsDetail/SearchPage"  className="di height_all">
                                 <button
                                     className="searchBtn"
                                     onClick={()=>{
-                                        onClick&&onClick()
+                                        onClick&&onClick(this.refs.input.value)
                                         if(this.history.length<10){
                                             this.history.push(this.refs.input.value)
                                             this.setState({history:this.history,display:false})

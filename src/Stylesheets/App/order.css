@@ -63,3 +63,14 @@
     width:1rem;
     height:1rem;
 }
+/*订单详情*/
+.leftPoint{
+    width:0.6rem;
+    height:1rem;
+    margin:auto;
+}
+.rightPoint{
+    width:0.45rem;
+    height:0.8rem;
+    margin:auto;
+}
