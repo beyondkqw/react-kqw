@@ -45,7 +45,6 @@ export default class Search extends Component {
     async componentWillReceiveProps(newProps) {
         const {display} = this.props
         await this.setState({display:display})
-        console.log('newP',newProps)
     }
 
     render() {
@@ -56,11 +55,11 @@ export default class Search extends Component {
             <div>
                 <div id="search">
                     <div className="search pr">
-                        <div className="frc pr di">
-                            <span className="searchicon pa"></span>
+                        <div className="frc pr df">
+                            <span className="searchicon"></span>
                             <input
                                 ref = "input"
-                                className="searcInput"
+                                className="searcInput flex1"
                                 placeholder="搜索宝贝"
                                 type="text"
                                 onFocus={()=>{

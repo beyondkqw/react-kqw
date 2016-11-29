@@ -85,6 +85,7 @@ export default class PersonalCenter extends Component {
                         })
                     }
                 </div>
+                <div className="footerHidden"></div>
                 <Footer />
             </div>
         );

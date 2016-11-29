@@ -102,7 +102,7 @@ export default class Login extends Component {
                 <div className="tc f12 color_red width_100 plAll">
                     {this.state.Reminder}
                 </div>
-                <button className="toLogin"
+                <button className="toLogin tc"
                     onClick = {()=>this.toSubmit()}
                 >登 录</button>
 

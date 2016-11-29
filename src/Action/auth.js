@@ -78,46 +78,46 @@ export async function HomeMoudle() {
     }
 
 //用户登录
-export async function ToLogin(accName,pwd){
-    try{
-        const res = await apiGet(URL.login,{accName,pwd});
+export async function ToLogin(accName,pwd) {
+    try {
+        const res = await apiGet(URL.login, {accName, pwd});
         return res;
     } catch (err) {
         console.warn(err);
         throw err
     }
-
+}
 //商品详情
-    export async function Details(productId) {
-        try {
-            const res = await apiGet(URL.detail, {productId});
-            return res;
-        } catch (err) {
-            console.warn(err);
-            throw err
-        }
+export async function Details(productId) {
+    try {
+        const res = await apiGet(URL.detail, {productId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
     }
+}
 
 //收藏/取消收藏
-    export async function Follow(productId,status) {
-        try {
-            const res = await apiGet(URL.follow,{productId,status});
-            return res;
-        } catch (err) {
-            console.warn(err);
-            throw err
-        }
+export async function Follow(productId,status) {
+    try {
+        const res = await apiGet(URL.follow,{productId,status});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
     }
+}
 //我的收藏列表
-    export async function FollowList() {
-        try {
-            const res = await apiGet(URL.followList);
-            return res;
-        } catch (err) {
-            console.warn(err);
-            throw err
-        }
+export async function FollowList() {
+    try {
+        const res = await apiGet(URL.followList);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
     }
+}
 
 //商品列表
     export async function ProductList(name,order,orderName,minPrice,maxPrice) {
@@ -129,7 +129,6 @@ export async function ToLogin(accName,pwd){
             throw err
         }
     }
-}
 
 //新增地址
 export async function AddAddress(name,mobile,address,detail){

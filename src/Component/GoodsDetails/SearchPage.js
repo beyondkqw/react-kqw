@@ -25,24 +25,37 @@ export default class SearchPage extends Component {
             history : false,
             orderName:'',
             order:'',
-            goodsList:[]
+            goodsList:[],
+            minPrice:'',
+            maxPrice:''
         };
       }
     async componentWillMount(){
-
         await this.getOrder()
     }
     //排序的列表
     async SelectSortOrder(index){
         this.setState({isChoose:index})
         await    this.ChooseOneorder(index)
-        console.log('this.state.order',this.state.order);
-        this.getOrder();
+        this.getOrder('',this.state.order,this.state.orderName,'','');
         this.setState({display_0:false})
     }
-
-    async getOrder(){
-        await ProductList('',this.state.order,this.state.orderName,'','')
+    //设置价格区间
+    async comfirmPrice(){
+        await this.getOrder('','','',this.state.minPrice,this.state.maxPrice)
+        this.setState({display_2:false})
+    }
+    //销量优先
+    async SalesPreferred(){
+        await this.getOrder('','asc','p.SALES','','')
+    }
+    //上下排序
+    async upDownOrder(){
+        await this.getOrder('','','','','')
+    }
+    //请求列表接口
+    async getOrder(paramOne,paramTwo,paramThree,paramFour,paramFive){
+        await ProductList(paramOne,paramTwo,paramThree,paramFour,paramFive)
         .then(res=>{
             this.setState({goodsList:res.resultList})
         })
@@ -104,15 +117,31 @@ export default class SearchPage extends Component {
                     <p>价格范围选择</p>
 
                     <div>
-                        <input placeholder="最低价"/>
+                        <input placeholder="最低价"
+                           ref="minPrice"
+                           onChange={()=>this.setState({minPrice:this.refs.minPrice.value})}
+                        />
                         <div className="liner" />
-                        <input placeholder="最高价"/>
+                        <input placeholder="最高价"
+                           ref="maxPrice"
+                           onChange={()=>this.setState({maxPrice:this.refs.maxPrice.value})}
+                        />
                     </div>
 
                     <div>
-                        <input className="reset" type="button" value="重置"/>
+                        <input
+                            className="reset"
+                            type="button"
+                            value="重置"
+                            onClick={()=>{this.refs.minPrice.value = '',this.refs.maxPrice.value = ''}}
+                        />
                         <div className="blank" />
-                        <input className="makesure" type="button" value="确定"/>
+                        <input
+                            className="makesure"
+                            type="button"
+                            value="确定"
+                            onClick={()=>this.comfirmPrice()}
+                        />
                     </div>
                 </div>
                 :null
@@ -125,9 +154,13 @@ export default class SearchPage extends Component {
         //console.log('display',display_0)
         if(index==0){
             this.setState({display_0:!display_0,display_2:false})
+        }else if(index==1){
+            this.SalesPreferred()
+            this.setState({display_0:false,display_2:false})
         }else if(index==2){
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
+            this.upDownOrder()
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false})
         }else{
             this.setState({display_2:false,display_0:false})
@@ -157,7 +190,10 @@ export default class SearchPage extends Component {
                         </div>
 
                         {/*销量优先---tag*/}
-                        <div name="销量优先" ></div>
+                        <div name="销量优先"
+                            onClick={()=>this.SalesPreferred()}
+                        >
+                        </div>
 
                         {/*筛选tab*/}
                         <div
@@ -188,7 +224,7 @@ export default class SearchPage extends Component {
                     className="goodListContainer" style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}>
                     <div className="imgContainer width_100">
                         {
-                            goodsList.map((el,index)=>{
+                            goodsList&&goodsList.map((el,index)=>{
                                 return (
                                     showByColumn?
                                         <StoreRow
