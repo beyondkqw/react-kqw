@@ -6,6 +6,7 @@ export default class GoodsPopup extends Component {
     constructor(props) {
         super(props);
         // 初始状态
+        this.attrIds = []
         this.state = {
             value:1
         };
@@ -24,6 +25,22 @@ export default class GoodsPopup extends Component {
     }
     handleChange() {
         this.setState({value:this.state.value});
+    }
+
+    ensure(type){
+        this.attrIds = []
+        const {ensurePress} = this.props
+        //console.log('radio',document.getElementsByClassName('chooseColor'))
+        let radios = document.getElementsByClassName('chooseColor')
+        for(let i =0;i<radios.length;i++){
+            if(radios[i].checked){
+                this.attrIds.push(radios[i].value)
+            }
+        }
+
+        console.log('选中的属性id',this.attrIds)
+
+        ensurePress&&ensurePress(this.attrIds,this.state.value,type)
     }
 
     render() {
@@ -45,10 +62,17 @@ export default class GoodsPopup extends Component {
                                             el.DETAILS&&el.DETAILS.map((detail,index)=>{
                                                 return(
                                                     <span
-                                                        onClick = {()=>onClick&&onClick(inx,detail.ID,el.IS_RADIO)}
+                                                        onClick = {()=>this.ensure(2)}
                                                         className="di width_20"
                                                     >
-                                                        <input type="radio" name = {el.DESC} className="chooseColor" id={`${inx}`+'ATTR_ID'+`${index}`}/>
+                                                        <input
+                                                            //ref = {`${inx}`+'ATTR_ID'+`${index}`}
+                                                            type="radio"
+                                                            value = {detail.ID}
+                                                            name = {el.DESC}
+                                                            className="chooseColor"
+                                                            id={`${inx}`+'ATTR_ID'+`${index}`}
+                                                        />
                                                         <label htmlFor={`${inx}`+'ATTR_ID'+`${index}`}>{detail.VALUE}</label>
                                                     </span>
                                                 )
@@ -73,7 +97,12 @@ export default class GoodsPopup extends Component {
                         </div>
                     </div>
                     <div className="width_100 commit bkg_ff color_white">
-                        <button className="width_100 height_all">确定</button>
+                        <button
+                            className="width_100 height_all"
+                            onClick = {()=>{this.ensure(1)}}
+                        >
+                            确定
+                        </button>
                     </div>
                 </div>
         );

@@ -11,17 +11,20 @@ export default class CheckBox extends Component {
             isChecked : false
         };
       }
+
     //实时得到父组件的数据
     componentWillReceiveProps(newProps) {
-        console.log(newProps)
+        //console.log(newProps)
         this.setState({isChecked:newProps.selectAll==null?this.state.isChecked:newProps.selectAll})
     }
+
     //改变自身状态以及'全选'的状态
    async changeState(){
         const {onSelect} = this.props
         await this.setState({isChecked:!this.state.isChecked})
         onSelect&&onSelect(this.state.isChecked)
     }
+
     render() {
         const {selectAll,index} = this.props
         const {isChecked} = this.state

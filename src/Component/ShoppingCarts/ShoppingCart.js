@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import Footer from '../../Component/NewComponent/Footer';
 import ItemDetails from '../../Component/ShoppingCarts/ItemDetails';
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import '../../Stylesheets/App/shoppingCarts.css';
+import {ShopCarList,EditShopNum,DelShopCar,SettlementShopCar} from '../../Action/auth'
 
 const ItemDetail = [
     {id:0,title:'拼接雪纺连衣裙小清收到回复奇偶is飞机哦添加',price:288,color:'红色',size:'36',imgUrl:require('../../Images/storeClothes.png')},
@@ -19,50 +20,113 @@ export default class ShoppingCart extends Component {
         this.select = []
         this.state = {
             selectAll:false,
-            toRender:1
+            toRender:1,
+            shopCarList:[]
         };
       }
 
+    static contextTypes = {
+        router:PropTypes.object
+    }
 
+
+    componentWillMount() {
+        this.getShopCarList()
+        console.log('-----',this.context.router)
+    }
+
+    async getShopCarList(){
+       await ShopCarList(1)
+        .then(res=>{
+            const {resultList} = res
+            this.setState({shopCarList:resultList})
+            console.log('购物车列表',res)
+        })
+    }
+
+    componentDidUpdate(aa) {
+        //console.log('didUpdata',aa)
+        let a = document.getElementById('aa')
+        console.log('aaaa',a.scrollTop)
+    }
     //全选/反选
-    onChangeState(){
+    async onChangeState(){
+        this.isUseSelectAll = true
         this.setState({selectAll:!this.state.checked});
-        if(this.select.length<ItemDetail.length){
+        if(this.select.length<this.state.shopCarList.length){
             this.select = []
-            this.setState({selectAll:true})
-            ItemDetail.map(el=>{
-                this.select.push(el.id)
+            await this.setState({selectAll:true})
+            this.state.shopCarList.map(el=>{
+                this.select.push(el.CAR_ID)
             })
+            console.log('this.select',this.select)
         }else{
             this.setState({selectAll:false})
             this.select = []
         }
 
-        this.isUseSelectAll = true
-
+        console.log('------',this.state.shopCarList.length)
+        this.setState({toRender:1})
         console.log('selected',this.select)
     }
     //单选
-    getSelect(state,index){
+    getSelect(state,id){
+        this.isUseSelectAll = false
         console.log('state',state)
         if(state){
-            this.select.push(index)
+            this.select.push(id)
         }else{
             this.select = this.select.filter(el=>{
-                if(el==index){
+                if(el==id){
                     return false
                 }
                 return true
             })
         }
-        this.isUseSelectAll = false
         this.setState({toRender:1})
         console.log('selectIndex',this.select)
     }
 
+    async editShopNum(id,count){
+        if(count>0){
+            await EditShopNum(id,count)
+                .then(res=>{
+                    console.log('更新购物车成功',res)
+                })
+                .catch(err=>{
+                    console.warn('更新购物车失败',err)
+                })
+        }else{
+            if(confirm("确定删除商品？")){
+            await DelShopCar([id])
+                .then(res=>{
+                    console.log('删除成功',res)
+                    this.getShopCarList()
+                })
+            }else{
+                this.getShopCarList()
+            }
+        }
+
+    }
+
+    async toSubmit(){
+        if(this.select.length>0){
+            await SettlementShopCar(this.select)
+                .then(res=>{
+                    console.log('购物车结算成功')
+                    this.context.router.push('/comfirmPayMoney')
+                })
+        }else{
+            alert('请选择商品')
+        }
+       ///comfirmPayMoney
+    }
+
     render() {
+        const {shopCarList} = this.state
         return (
-            <div className="containerNav bkg_color">
+            <div id='aa'  className="containerNav bkg_color">
                 {/*<div className="pr personStore plr bk_fff5f0">
                     <span className="di check_radius pr fl">
                         <input type="checkbox" id="isLink"  className="di isCheck" />
@@ -72,19 +136,22 @@ export default class ShoppingCart extends Component {
                     <div className="rightArrow pa"><img src={require('../../Images/rightArrow.png')} alt=""/></div>
                 </div>*/}
                 {
-                    ItemDetail.map((el,index)=>{
+                    shopCarList.map((el,index)=>{
                             return (
                                 <div className="plAll proPlay border_bottom">
                                 <CheckBox
                                     selectAll = {this.isUseSelectAll?this.state.selectAll:null}
                                     index={index}
-                                    onSelect = {(state)=>this.getSelect(state,index)}
+                                    onSelect = {(state)=>this.getSelect(state,el.CAR_ID)}
                                 />
                                 <ItemDetails
-                                    title={el.title}
-                                    color={el.color}
-                                    size={el.size}
-                                    imgurl={el.imgUrl}
+                                    price={el.PRICE}
+                                    title={el.NAME}
+                                    attr={el.ATTR_DESC}
+                                    imgurl={el.IMAGE}
+                                    num={el.PRODUCT_NUM}
+                                    minus={value=>this.editShopNum(el.CAR_ID,value)}
+                                    add={value=>this.editShopNum(el.CAR_ID,value)}
                                 />
                                 </div>
                             )
@@ -95,7 +162,7 @@ export default class ShoppingCart extends Component {
                     <span className="di check_radius pr fl">
                         <input
                             type="checkbox" id="checkAll"
-                            checked={this.select.length==ItemDetail.length?true:false}
+                            checked={this.select.length==this.state.shopCarList.length?true:false}
                             onClick={()=>this.onChangeState()}
                             className="di isCheck"
                         />
@@ -109,9 +176,12 @@ export default class ShoppingCart extends Component {
                         </div>
                         <span className="di pa f10">不含运费</span>
                     </div>
-                    <Link to="/comfirmPayMoney">
-                        <button className="fr mt5 settleAccount border_ra color_white">结算</button>
-                    </Link>
+                    <button
+                        onClick={()=>this.toSubmit()}
+                        className="fr mt5 settleAccount border_ra color_white"
+                    >
+                        结算
+                    </button>
                 </div>
                 <Footer />
             </div>

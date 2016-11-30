@@ -4,7 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
 import '../../Stylesheets/App/goodsDetails.css';
-import {Details,Follow,ProductAttribute} from '../../Action/auth'
+import {Details,Follow,ProductAttribute,AddShopCar} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -12,9 +12,14 @@ import SwipeableViews from 'react-swipeable-views';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class GoodsDescription extends Component {
     // 构造
+
+
+
     constructor(props) {
         super(props);
         // 初始状态
+        this.count = ''
+        this.attrIds = []
         this.state = {
             isShow : false,
             isChecked:false,
@@ -85,13 +90,47 @@ export default class GoodsDescription extends Component {
                 console.warn('err',err)
             })
     }
+    //
+    ////获取商品属性ids
+    //getAttrIds(type,id,isRadio){
+    //    //console.log('ids',type,id,isRadio)
+    //    //if(type==0){
+    //    //
+    //    //}
+    //    this.state.attributeList.map((el,index)=>{
+    //        if(index==type){
+    //            if(this.goodIds.indexOf(id)==-1){
+    //                this.goodIds.push(id)
+    //            }else{
+    //                this.goodIds = this.goodIds.filter(el=>{
+    //                    if(el==id){
+    //                        return false
+    //                    }
+    //                    return true
+    //                })
+    //            }
+    //        }
+    //    })
+    //
+    //    console.log('goodIds',this.goodIds)
+    //}
 
-    //获取商品属性ids
-    getAttrIds(type,id,isRadio){
-        console.log('ids',type,id,isRadio)
-        //if(type==0){
-        //
-        //}
+    //加入购物车
+    async addShopCar(ids,count,type){
+        if(type==1){
+            if(ids.length<this.state.attributeList.length){
+                alert('请选择商品属性')
+            }else{
+                await AddShopCar(this.props.location.query.id,ids.join(','),count)
+                    .then(res=>{
+                        console.log('添加购物车成功',res)
+                        this.setState({isShow:false})
+                    })
+                    .catch(err=>{
+                        console.warn('添加购物车失败',err)
+                    })
+            }
+        }
     }
 
     render() {
@@ -179,14 +218,16 @@ export default class GoodsDescription extends Component {
                 </Tabscontrol>
 
                 <div className="height3 pf bottom0 width_100 plAll border_top bkg_color z_index">
-                    <Link to="/shoppingCart">
-                        <div className="di height_all pr fl width_cart">
-                            <button className="cartBtn width_100 height_all border_ra">
-                                <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
-                                <span className="di pa goodNum border_ra50 f12 colorff">5</span>
-                            </button>
-                        </div>
-                    </Link>
+
+                    <div
+                        onClick = {()=>this.setState({isShow:true})}
+                        className="di height_all pr fl width_cart"
+                    >
+                        <button className="cartBtn width_100 height_all border_ra">
+                            <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
+                            <span className="di pa goodNum border_ra50 f12 colorff">5</span>
+                        </button>
+                    </div>
                     <div className="width_de fl height_all"></div>
                     <div className="di height_all pr fl width_buy border_ra">
                         <button className="width_100 height_all color_white font16 color_white">
@@ -198,9 +239,10 @@ export default class GoodsDescription extends Component {
                 {/*选择商品属性*/}
                 {this.state.isShow?
                     <GoodsPopup
-                        onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
+                        //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
                         attr = {this.state.attributeList}
                         closePopUp = {()=>this.setState({isShow:false})}
+                        ensurePress = {(ids,count,type)=>this.addShopCar(ids,count,type)}
                     />
                 :null}
                 <div className="goodBottom width_100"></div>

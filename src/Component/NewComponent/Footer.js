@@ -15,7 +15,10 @@ export default class Footer extends Component {
                     <span className="icon"><img src={require("../../Images/search.png")}/></span>
                     <span className="tab-label">云综合体</span>
                 </Link>
-                <Link className="tab-item external">
+                <Link
+                    to="/shoppingCart"
+                    className="tab-item external"
+                >
                     <span className="icon"><img src={require("../../Images/search.png")}/></span>
                     <span className="tab-label">购物车</span>
                 </Link>
