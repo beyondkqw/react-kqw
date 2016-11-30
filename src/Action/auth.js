@@ -195,3 +195,14 @@ export async function OrderDetail(orderNo){
     }
 }
 
+//商品类型
+export async function CategoryList(parentId,type){
+    try{
+        const res = await apiGet(URL.categoryList,{parentId,type});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+

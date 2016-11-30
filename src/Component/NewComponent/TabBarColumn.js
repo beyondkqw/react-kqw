@@ -21,14 +21,15 @@ export default class TabBarColumn extends Component {
         await this.setState({index:index?index:0})
     }
 
-    onClick(index){
+    onClick(index,id,name){
         const {onClick} = this.props
         this.setState({index:index})
-        onClick&&onClick(index)
+        onClick&&onClick(index,id,name)
     }
 
     render(){
         const {contents,className} = this.props
+        console.log('contents',contents);
         return(
             <div className="leftContainer">
                 {
@@ -36,10 +37,10 @@ export default class TabBarColumn extends Component {
                         return(
                             <div
                                 className={"items"+' '+className}
-                                onClick={()=>this.onClick(index)}
+                                onClick={()=>this.onClick(index,el.id,el.name)}
                                 style={this.state.index==index?styles.onfocus:styles.onblur}
                             >
-                                {el}
+                                {el.name}
                             </div>
                         )
                     })

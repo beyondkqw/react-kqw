@@ -34,7 +34,9 @@ export default class PaymentDetails extends Component {
                         }
                     </ul>
                 </div>
-                <CommonBtn />
+                <CommonBtn
+                    title = {'确定'}
+                />
             </div>
         );
     }

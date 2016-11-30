@@ -27,7 +27,9 @@ export default class Setting extends Component {
                         })
                     }
                 </ul>
-                <CommonBtn />
+                <CommonBtn
+                    title = {'退出登录'}
+                />
             </div>
         );
     }

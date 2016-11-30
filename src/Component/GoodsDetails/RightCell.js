@@ -12,26 +12,26 @@ export default class GoodsCategory extends Component {
         super(props);
         // 初始状态
         this.state = {
-            list:['a','b','c','d']
+
         };
       }
 
     render(){
-        const {list} = this.state
+        const {rightValue,name} = this.props
         return(
             <div className="rightContainer color9">
-                <div className="right-title df alignItem-center">聚朵云</div>
+                <div className="right-title df alignItem-center">{name}</div>
                 <div className="r-content-container">
                     <div>云商城</div>
                     <div className="df items-cell" >
                         {
-                            list.map(el=>{
+                            rightValue.map(el=>{
                                 return(
                                     <div>
                                         <div className="right-img">
-                                            <img />
+                                            <img src={el.img}/>
                                         </div>
-                                        <div>啊啊啊</div>
+                                        <div>{el.name}</div>
                                     </div>
                                 )
                             })

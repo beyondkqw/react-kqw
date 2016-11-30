@@ -99,7 +99,7 @@ export default class Login extends Component {
                         onBlur = {()=>this.isTrue(this.state.pwd,'psword')}
                     />
                 </div>
-                <div className="tc f12 color_red width_100 plAll">
+                <div className="tc f12 color_red width_100 plr mtb loginHeight">
                     {this.state.Reminder}
                 </div>
                 <button className="toLogin tc"

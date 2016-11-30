@@ -57,13 +57,16 @@
     font-size: 14px;
 }
 
+.loginHeight{
+    height: 1.8rem;
+}
+
 .toLogin{
     width:80%;
     height:40px;
     line-height: 40px;
     background: #ff5500;
     margin-left: 10%;
-    margin-top: 25px;
     border-radius: 5px;
     color:#fff;
     font-size: 16px;
