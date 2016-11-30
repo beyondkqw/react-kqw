@@ -171,9 +171,9 @@
 .width_25{
     width:25%;
 }
-.hfour{
+/*.hfour{
     height:2.9rem;
-}
+}*/
 .cellFour div:nth-of-type(4){
     border:none;
 }

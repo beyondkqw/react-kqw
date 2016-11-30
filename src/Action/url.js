@@ -23,7 +23,7 @@ export const  detail = 'product/detail'
 //商品是否收藏
 export const  follow = 'auth/account/follow'
 
-//我的商品收藏列表
+//商品收藏列表
 export const  followList = 'auth/account/followList'
 
 //商品列表
@@ -64,3 +64,6 @@ export const delShopCar = 'auth/car/del'
 
 //购物车结算
 export const settlementShopCar = 'order/auth/generate'
+
+//商品类型
+export const categoryList = 'category/list'

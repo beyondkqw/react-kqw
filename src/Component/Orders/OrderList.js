@@ -24,18 +24,23 @@ export default class OrderList extends Component {
     }
 
     async onChange(index){
-        this.setState({index:index})
-        await this.setState({isShow:index})
-        console.log('this.state.index',this.state.index === '1');
-            if(this.state.index === '0'){
+        await this.setState({index:index})
+        this.setState({isShow:index})
+        console.log('this.state.index',this.state.index === 2);
+            if(this.state.index === 0){
+                console.log('-----------请求');
                 this.getOrderList('0')
-            }else if(this.state.index === '1'){
+            }else if(this.state.index === 1){
+                console.log('-----------请求1');
                 this.getOrderList('1')
-            }else if(this.state.index === '2'){
+            }else if(this.state.index === 2){
+                console.log('-----------请求2');
                 this.getOrderList('2')
-            }else if(this.state.index === '3'){
+            }else if(this.state.index === 3){
+                console.log('-----------请求3');
                 this.getOrderList('3')
-            }else if(this.state.index === '4'){
+            }else if(this.state.index === 4){
+                console.log('-----------请求4');
                 this.getOrderList('4')
             }else{
                 this.getOrderList('0')
@@ -46,6 +51,7 @@ export default class OrderList extends Component {
         await GetOrderList(param)
             .then(res=>{
                 this.setState({orderItems:res.resultList})
+                console.log('orderItems+++++++++',this.state.orderItems);
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -53,6 +59,7 @@ export default class OrderList extends Component {
 
     }
     render() {
+        const {orderItems} = this.state
         return (
             <div className="containerNav">
                 <TabBar
@@ -65,6 +72,7 @@ export default class OrderList extends Component {
                 { this.state.index == 0?
                     <div>
                         <OrderDetails
+                            orderDetails = {orderItems}
                             toPay = {true}
                         />
                     </div>
@@ -74,6 +82,7 @@ export default class OrderList extends Component {
                 { this.state.index == 1?
                     <div>
                         <OrderDetails
+                            orderDetails = {orderItems}
                             makeSure={true}
                         />
                     </div>
@@ -83,6 +92,7 @@ export default class OrderList extends Component {
                 { this.state.index == 2?
                     <div>
                         <OrderDetails
+                           orderDetails = {orderItems}
                            toRated = {true}
                         />
                     </div>
@@ -92,6 +102,7 @@ export default class OrderList extends Component {
                 { this.state.index == 3?
                     <div>
                         <OrderDetails
+                            orderDetails = {orderItems}
                             alreadyRated = {true}
                         />
                     </div>
@@ -101,6 +112,7 @@ export default class OrderList extends Component {
                 { this.state.index == 4?
                     <div>
                         <OrderDetails
+                            orderDetails = {orderItems}
                             allRated = {true}
                         />
                     </div>

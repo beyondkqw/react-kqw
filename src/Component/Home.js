@@ -89,21 +89,13 @@ class Home extends Component {
                              <ActiveTitle
                                  title = {el.name}
                              />
-                             <Cell_4 />
-                             <SplitLine />
-                         </div>
-                     )
-                 }else if(el.num==5){
-                     return(
-                         <div>
-                             <ActiveTitle
-                                 title = {el.name}
+                             <Cell_4
+                                 imgUrl = {el.cells}
                              />
-                             <Cell_5 />
                              <SplitLine />
                          </div>
                      )
-                 }else if(el.num==6){
+                 } else if(el.num==6){
                      return(
                          <div>
                              <ActiveTitle

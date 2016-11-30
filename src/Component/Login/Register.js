@@ -148,11 +148,10 @@ export default class Register extends Component {
                 <div className="agreement">
                     点击注册，代表您同意遵守聚朵云的<Link><span style={{color:'#ff5500'}}>《用户协议》</span></Link>
                 </div>
-                <div className="tc f12 color_red width_100 plAll">
+                <div className="tc f12 color_red width_100 plr mtb loginHeight">
                     {this.state.Reminder}
                 </div>
                 <button
-                    style={{marginTop:45}}
                     className="toLogin"
                     onClick = {()=>this.toSubmit()}
                 >注 册</button>

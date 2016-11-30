@@ -209,9 +209,19 @@ export async function OrderDetail(orderNo){
 }
 
 //加入购物车
-export async function AddShopCar(productId,attrIds,count){
+export async function AddShopCar(productId,attrIds,count) {
+    try {
+        const res = await apiGet(URL.addShopCar, {productId, attrIds, count});
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//商品类型
+export async function CategoryList(parentId,type){
     try{
-        const res = await apiGet(URL.addShopCar,{productId,attrIds,count});
+        const res = await apiGet(URL.categoryList,{parentId,type});
         return res;
     }catch (err){
         console.warn(err);

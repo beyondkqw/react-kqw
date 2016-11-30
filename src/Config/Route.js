@@ -49,6 +49,7 @@ import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
 import BrowseRecord from '../Component/PersonalCenter/BrowseRecord';
 import OrderFormDetails from '../Component/Orders/OrderFormDetails';
 
+
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
@@ -98,6 +99,7 @@ const RouteConfig = (
       <Route path="personalCenter/balanceGiving" component={BalanceGiving} />
       <Route path="personalCenter/BrowseRecord" component={BrowseRecord} />
       <Route path="orders/orderFormDetails" component={OrderFormDetails} />
+      <Route path="goodsDetails/goodsCategory" component={GoodsCategory} />
     </Route>
   </Router>
 );

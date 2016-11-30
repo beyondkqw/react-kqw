@@ -6,6 +6,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
 import TabBarColumn from '../../Component/NewComponent/TabBarColumn'
 import RightCell from './RightCell'
+import {CategoryList} from '../../Action/auth';
 
 export default class GoodsCategory extends Component {
 
@@ -15,40 +16,64 @@ export default class GoodsCategory extends Component {
         // 初始状态
 
         this.state = {
-            leftTags:[
-                '热门分类',
-                '热门分类',
-                '热门分类',
-                '热门分类',
-                '聚朵云卡通',
-                '云商城',
-                '全球购',
-                '云综合体',
-                '充值中心',
-                '一元夺宝',
-                '虚拟购物',
-                '旅行',
-                '社区超市',
-                '超实惠',
-                '特色好货',
-                '热门市场',
-                '聚朵云商家入驻',
-            ]
+            index:0,
+            id:0,
+            name:'',
+            rightTags:[],
+            leftTags:[],
+
         };
       }
 
+    async componentWillMount() {
+        await this.getGoodsCategory(0,0);
+        this.getChilrenCategory(this.state.id,0)
+    }
+
+    async getId(index,id,name){
+        await this.setState({id:id})
+        this.setState({name:name})
+        this.getChilrenCategory(this.state.id,0)
+    }
+
+    //查询父类型接口
+    async getGoodsCategory(paramOne,paramTwo){
+        await CategoryList(paramOne,paramTwo)
+            .then(res=>{
+                this.setState({leftTags:res.resultList})
+                //将父元素的第一个id,name传给子元素
+                this.setState({id:res.resultList[0].id})
+                this.setState({name:res.resultList[0].name})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
+    //子类型的接口
+    async getChilrenCategory(paramOne,paramTwo){
+        await CategoryList(paramOne,paramTwo)
+            .then(res=>{
+                this.setState({rightTags:res.resultList})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
 
 
     render(){
-        const {leftTags} = this.state
+        const {leftTags,rightTags,name} = this.state
         return(
             <div className="width_100 font14 color6 height_all fl cateContainer pf" style={{display:'flex'}}>
                 <TabBarColumn
                     className = {'f12'}
                     contents = {leftTags}
+                    onClick = {(index,id,name)=>this.getId(index,id,name)}
                 />
-
-                <RightCell />
+                <RightCell
+                    name = {name}
+                    rightValue = {rightTags}
+                />
             </div>
         )
     }
