@@ -29,6 +29,9 @@ export const  followList = 'auth/account/followList'
 //商品列表
 export const  productList = 'product/list'
 
+//商品属性
+export const productAttribute = 'product/attribute'
+
 //新增地址
 export const addAddress = 'auth/address/save'
 

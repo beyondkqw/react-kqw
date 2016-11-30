@@ -38,7 +38,7 @@ export default class ChooseInfomation extends Component {
     render() {
         const {addressList} = this.state
         return (
-            <div>
+            <div className="containerNav">
                 {
                     addressList.map((el,index)=>{
                         return (

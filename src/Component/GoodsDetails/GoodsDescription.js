@@ -4,7 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
 import '../../Stylesheets/App/goodsDetails.css';
-import {Details,Follow} from '../../Action/auth'
+import {Details,Follow,ProductAttribute} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -21,7 +21,8 @@ export default class GoodsDescription extends Component {
             //商品详情
             goodsDetails:[],
             //是否收藏
-            status:null
+            status:null,
+            attributeList : []
         };
     }
     //弹出popup
@@ -31,11 +32,25 @@ export default class GoodsDescription extends Component {
 
     componentWillMount() {
         this.getDetails()
+        this.getProductAttribute()
+    }
+
+    //商品属性
+    async getProductAttribute(){
+        await ProductAttribute(this.props.location.query.id)
+        .then(res=>{
+            console.log('商品属性',res)
+            this.setState({attributeList:res})
+        })
+        .catch(err=>{
+            console.warn('获取商品属性失败',err)
+        })
     }
 
     //商品详情
     async getDetails(){
-        await Details(1)
+        console.log('商品详情ID',this.props.location.query.id)
+        await Details(this.props.location.query.id)
             .then(res=>{
                 this.setState({goodsDetails:res});
                 console.log('goodsDetails',this.state.goodsDetails);
@@ -69,6 +84,14 @@ export default class GoodsDescription extends Component {
             .catch(err=>{
                 console.warn('err',err)
             })
+    }
+
+    //获取商品属性ids
+    getAttrIds(type,id,isRadio){
+        console.log('ids',type,id,isRadio)
+        //if(type==0){
+        //
+        //}
     }
 
     render() {
@@ -125,11 +148,17 @@ export default class GoodsDescription extends Component {
                                 </div>
                             </li>
                         </Link>
+                        {/*属性*/}
                         <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner margin0">
                                 <div className="item-title">
-                                    <span className="color6 font14">选择颜色，尺寸</span>
+                                    <span className="color6 font14">{this.state.attributeList.map((el,index)=>{
+                                        if(index<this.state.attributeList.length-1){
+                                            return `${el.NAME}`+ ','
+                                        }
+                                        return `${el.NAME}`
+                                    })}分类</span>
                                 </div>
                             </div>
                         </li>
@@ -165,8 +194,12 @@ export default class GoodsDescription extends Component {
                         </button>
                     </div>
                 </div>
+
+                {/*选择商品属性*/}
                 {this.state.isShow?
                     <GoodsPopup
+                        onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
+                        attr = {this.state.attributeList}
                         closePopUp = {()=>this.setState({isShow:false})}
                     />
                 :null}

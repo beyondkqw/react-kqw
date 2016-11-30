@@ -86,6 +86,7 @@ export async function ToLogin(accName,pwd) {
         throw err
     }
 }
+
 //商品详情
 export async function Details(productId) {
         try {
@@ -107,6 +108,7 @@ export async function Follow(productId,status) {
         throw err
     }
 }
+
 //我的收藏列表
 export async function FollowList() {
     try {
@@ -169,6 +171,17 @@ export async function DefaultAddress(addressId){
         return res;
     }catch (err){
         console.warn('DefaultAddress',err);
+        throw err
+    }
+}
+
+//商品属性
+export async function ProductAttribute(productId){
+    try{
+        const res = await apiGet(URL.productAttribute,{productId});
+        return res;
+    }catch (err){
+        console.warn('ProductAttribute',err);
         throw err
     }
 }

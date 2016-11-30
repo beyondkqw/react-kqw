@@ -84,7 +84,7 @@ export default class ManageInformation extends Component {
                                             <span className="di pa mt1">删除</span>
                                         </div>
 
-                                   <Link to = '/deliveredInformation'>
+                                   <Link to = '/deliveredInformation' query={el} >
                                             <div className="di mr20 width8">
                                                 <span className="di lh8 mr5">
                                                     <img src={require('../../Images/modify.png')} alt=""/>
