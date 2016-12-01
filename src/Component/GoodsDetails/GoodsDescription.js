@@ -33,7 +33,7 @@ export default class GoodsDescription extends Component {
     }
     //弹出popup
     popubAnimate(){
-        this.setState({isShow:true});
+        this.setState({isShow:true,type:''});
     }
 
     componentWillMount() {
@@ -273,6 +273,7 @@ export default class GoodsDescription extends Component {
                         attr = {this.state.attributeList}
                         closePopUp = {()=>this.setState({isShow:false})}
                         ensurePress = {(ids,count)=>this.addShopCar(ids,count)}
+                        isOnly = {this.state.type?true:false}
                     />
                 :null}
                 <div className="goodBottom width_100"></div>

@@ -45,7 +45,7 @@ export default class GoodsPopup extends Component {
     }
 
     render() {
-        const {closePopUp,attr,onClick} = this.props
+        const {closePopUp,attr,onClick,isOnly} = this.props
         return (
                 <div className="popupContainer pf bottom0 z_index bkg_color width_100 border_top pr">
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
@@ -94,18 +94,22 @@ export default class GoodsPopup extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="width_100 commit">
-                        <button className="width50 height_all color_pink color_yellow">加入购物车</button>
-                        <button className="width50 height_all bkg_ff color_white">立即购买</button>
-                    </div>
-                    <div className="width_100 commit bkg_ff color_white">
-                        <button
-                            className="width_100 height_all"
-                            onClick = {()=>{this.ensure(1)}}
-                        >
-                            确定
-                        </button>
-                    </div>
+                    {
+                        isOnly?
+                            <div className="width_100 commit bkg_ff color_white">
+                                <button
+                                    className="width_100 height_all"
+                                    onClick = {()=>{this.ensure(1)}}
+                                >
+                                    确定
+                                </button>
+                            </div>
+                            :
+                            <div className="width_100 commit">
+                                <button className="width50 height_all color_pink color_yellow">加入购物车</button>
+                                <button className="width50 height_all bkg_ff color_white">立即购买</button>
+                            </div>
+                    }
                 </div>
         )
     }
