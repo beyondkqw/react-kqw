@@ -273,4 +273,16 @@ export async function SettlementShopCar(carIds){
     }
 }
 
+//立即购买
+export async function OrderShopping(productId,attrIds,num){
+    try{
+        const res = await apiGet(URL.orderShopping,{productId,attrIds,num});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+
 

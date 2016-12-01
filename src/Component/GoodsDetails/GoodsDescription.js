@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
 import '../../Stylesheets/App/goodsDetails.css';
-import {Details,Follow,ProductAttribute,AddShopCar} from '../../Action/auth'
+import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -27,7 +27,8 @@ export default class GoodsDescription extends Component {
             goodsDetails:[],
             //是否收藏
             status:null,
-            attributeList : []
+            attributeList : [],
+            type:''
         };
     }
     //弹出popup
@@ -38,6 +39,10 @@ export default class GoodsDescription extends Component {
     componentWillMount() {
         this.getDetails()
         this.getProductAttribute()
+    }
+
+    static contextTypes = {
+        router:PropTypes.object
     }
 
     //商品属性
@@ -115,8 +120,9 @@ export default class GoodsDescription extends Component {
     //    console.log('goodIds',this.goodIds)
     //}
 
-    //加入购物车
-    async addShopCar(ids,count,type){
+    //加入购物车 type = 1 加入购物车  2 立即购买
+    async addShopCar(ids,count){
+        const {type} = this.state
         if(type==1){
             if(ids.length<this.state.attributeList.length){
                 alert('请选择商品属性')
@@ -131,6 +137,26 @@ export default class GoodsDescription extends Component {
                     })
             }
         }
+        if(type==2){
+            if(ids.length<this.state.attributeList.length){
+                alert('请选择商品属性')
+            }else{
+                await OrderShopping(this.props.location.query.id,ids.join(','),count)
+                    .then(res=>{
+                        console.log('立即付款成功',res)
+                        this.setState({isShow:false})
+                        // todo 传参
+                        this.context.router.push({pathname:'/comfirmPayMoney'})
+                    })
+                    .catch(err=>{
+                        console.warn('立即付款失败',err)
+                    })
+            }
+        }
+    }
+
+    async adShopCarOrToPay(type){
+       await this.setState({isShow:true,type:type})
     }
 
     render() {
@@ -219,8 +245,9 @@ export default class GoodsDescription extends Component {
 
                 <div className="height3 pf bottom0 width_100 plAll border_top bkg_color z_index">
 
+                    {/*购物车*/}
                     <div
-                        onClick = {()=>this.setState({isShow:true})}
+                        onClick = {()=>this.adShopCarOrToPay(1)}
                         className="di height_all pr fl width_cart"
                     >
                         <button className="cartBtn width_100 height_all border_ra">
@@ -229,7 +256,10 @@ export default class GoodsDescription extends Component {
                         </button>
                     </div>
                     <div className="width_de fl height_all"></div>
-                    <div className="di height_all pr fl width_buy border_ra">
+                    <div
+                        className="di height_all pr fl width_buy border_ra"
+                        onClick={()=>this.adShopCarOrToPay(2)}
+                    >
                         <button className="width_100 height_all color_white font16 color_white">
                             立即购买
                         </button>
@@ -242,7 +272,7 @@ export default class GoodsDescription extends Component {
                         //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
                         attr = {this.state.attributeList}
                         closePopUp = {()=>this.setState({isShow:false})}
-                        ensurePress = {(ids,count,type)=>this.addShopCar(ids,count,type)}
+                        ensurePress = {(ids,count)=>this.addShopCar(ids,count)}
                     />
                 :null}
                 <div className="goodBottom width_100"></div>

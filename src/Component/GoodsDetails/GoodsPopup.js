@@ -13,7 +13,7 @@ export default class GoodsPopup extends Component {
     }
     //数量减
     minusNum(){
-        if(this.state.value === 0){
+        if(this.state.value === 1){
 
         }else {
             this.setState({value:--this.state.value});
@@ -39,8 +39,9 @@ export default class GoodsPopup extends Component {
         }
 
         console.log('选中的属性id',this.attrIds)
-
-        ensurePress&&ensurePress(this.attrIds,this.state.value,type)
+        if(type==1){
+            ensurePress&&ensurePress(this.attrIds,this.state.value,type)
+        }
     }
 
     render() {
