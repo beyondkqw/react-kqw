@@ -230,6 +230,16 @@ export async function OrderDetail(orderNo){
     }
 }
 
+//加入购物车
+export async function AddShopCar(productId,attrIds,count) {
+    try {
+        const res = await apiGet(URL.addShopCar, {productId, attrIds, count});
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
 //商品类型
 export async function CategoryList(parentId,type){
     try{
@@ -252,10 +262,56 @@ export async function ConfirmReceived(orderNo){
     }
 }
 
+//购物车列表
+export async function ShopCarList(page){
+    try{
+        const res = await apiGet(URL.shopCarList,{page});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+
 //取消订单
 export async function CancelReceived(orderNo){
     try{
         const res = await apiGet(URL.cancelReceive,{orderNo});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//更新购物车数量
+export async function EditShopNum(carId,count){
+    try{
+        const res = await apiGet(URL.editShopNum,{carId,count});
+
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//删除购物车
+export async function DelShopCar(carIds){
+    try{
+        const res = await apiGet(URL.delShopCar,{carIds});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//删除购物车
+export async function SettlementShopCar(carIds){
+    try{
+        const res = await apiGet(URL.settlementShopCar,{carIds});
         return res;
     }catch (err){
         console.warn(err);

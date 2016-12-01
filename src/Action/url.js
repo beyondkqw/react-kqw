@@ -56,11 +56,28 @@ export const orderList = 'order/auth/list'
 //订单详情
 export const orderDetail = 'order/detail'
 
+//加入购物车
+export const addShopCar = 'auth/car/add'
+
+//购物车列表
+export const shopCarList = 'auth/car/list'
+
+//更新购物车数量
+export const editShopNum = 'auth/car/edit'
+
+//删除购物车
+export const delShopCar = 'auth/car/del'
+
+//购物车结算
+export const settlementShopCar = 'order/auth/generate'
+
 //商品类型
 export const categoryList = 'category/list'
+
 
 //确认收货
 export const confirmReceive = 'order/auth/receive'
 
 //取消订单
 export const cancelReceive = 'order/auth/cancel'
+
