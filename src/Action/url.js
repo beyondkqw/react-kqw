@@ -5,6 +5,12 @@
 //获取短信验证码
 export const smsCode = 'sms/reg'
 
+//获取忘记密码验证码
+export const forgetsCode = 'sms/default'
+
+//忘记密码
+export const updateLoginPwd = 'pwd/updateLoginPwd'
+
 //用户注册
 export const register = 'account/add'
 
@@ -52,3 +58,9 @@ export const orderDetail = 'order/detail'
 
 //商品类型
 export const categoryList = 'category/list'
+
+//确认收货
+export const confirmReceive = 'order/auth/receive'
+
+//取消订单
+export const cancelReceive = 'order/auth/cancel'

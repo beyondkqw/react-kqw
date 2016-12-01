@@ -60,8 +60,6 @@ export default class GoodsPopup extends Component {
                             )
                         })
                     }
-
-
                     <div className="popupContainer bottom0 z_index bkg_color width_100 pr">
                         <div className="plAll border_top">
                             <span className="font14 color6">选择数量</span>
@@ -72,8 +70,9 @@ export default class GoodsPopup extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="width_100 commit bkg_ff color_white">
-                        <button className="width_100 height_all">确定</button>
+                    <div className="width_100 commit">
+                        <button className="width50 height_all color_pink color_yellow">加入购物车</button>
+                        <button className="width50 height_all bkg_ff color_white">立即购买</button>
                     </div>
                 </div>
         );

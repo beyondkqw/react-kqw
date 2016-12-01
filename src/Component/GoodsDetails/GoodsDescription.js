@@ -183,7 +183,7 @@ export default class GoodsDescription extends Component {
                         <div className="di height_all pr fl width_cart">
                             <button className="cartBtn width_100 height_all border_ra">
                                 <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
-                                <span className="di pa goodNum border_ra50 f12 colorff">5</span>
+                                {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
                             </button>
                         </div>
                     </Link>
