@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
-import {SMSCode,toRegister} from '../../Action/auth'
+import {SMSCode,ToRegister} from '../../Action/auth'
 import {ErrorNum,ErrorPs} from '../../Action/rpc'
 
 const icon = [
@@ -82,8 +82,9 @@ export default class Register extends Component {
         console.log('aaa',mobile,pwd,smsCode,code,memberName)
         if(memberName ==''||pwd == ''){
             this.setState({Reminder:'登录名或密码不能为空'})
+            return
         }
-        await toRegister(mobile,pwd,smsCode,code,memberName)
+        await ToRegister(mobile,pwd,smsCode,code,memberName)
         .then(res=>{
             console.log('注册成功',res)
         })

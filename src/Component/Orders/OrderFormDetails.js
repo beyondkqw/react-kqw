@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
-import {OrderDetail} from '../../Action/auth';
+import {OrderDetail,ConfirmReceived} from '../../Action/auth';
 
 const orderList = [
     {title:'商品总价',price:'189.00',style:'f12',color:'color9'},
@@ -21,24 +21,46 @@ export default class OrderFormDetails extends Component {
       constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+            orderNo:'',
+            orderFormdDetails:[]
+            //confirmItem:[]
+        };
       }
-    componentWillMount(){
-        this.getOrderDetail();
+     componentWillMount(){
+        let orderNo = this.props.location.query.orderNo
+        this.setState({orderNo:orderNo})
+        this.getOrderDetail(orderNo);
     }
 
-    //接口
+    confirmClick(){
+        let orderNum = this.state.orderNo
+        this.getConfirmReceive(orderNum)
+    }
+
+    //订单详情
     async getOrderDetail(param){
         await OrderDetail(param)
+                .then(res=>{
+                    this.setState({orderFormdDetails:res})
+                })
+                .catch(err=>{
+                    console.warn('err',err)
+                })
+    }
+    //确认收货
+    async getConfirmReceive(param){
+        await ConfirmReceived(param)
             .then(res=>{
-                this.setState({orderItems:res.resultList})
+                //this.setState({confirmItem:res})
             })
             .catch(err=>{
-                console.warn('err',err)
+                console.warn('收获失败',err)
             })
-
     }
+
     render() {
+        const {orderFormdDetails} = this.state
         return (
             <div className="containerNav">
                 <div className="df plAll border_bottom">
@@ -52,14 +74,17 @@ export default class OrderFormDetails extends Component {
                 <div className="df plAll">
                     <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
-                        <div className="font14 color6"><span>收货人:</span><span>瑜伽</span><span className="di fr color6">5678912</span></div>
+                        <div className="font14 color6">
+                            <span>收货人:</span><span>{orderFormdDetails.name}</span>
+                            <span className="di fr color6">{orderFormdDetails.mobile}</span>
+                        </div>
                         <p className="f12 color9 mt3">收货地址:<span>广东深空间按调集的ASk就待见的几点开始设法会死人世纪东方</span></p>
                     </div>
                 </div>
                 <SplitLine />
                 <div className="paymargin">
                     <div className="di payImgSize mr"><img src={require('../../Images/store.png')} alt=""/></div>
-                    <span className="color6 font14">乐乐的小店</span>
+                    <span className="color6 font14">{orderFormdDetails.store_name}</span>
                 </div>
                 <div className="pr plAll df border_bottom">
                     <div className="order_img height_all">
@@ -115,7 +140,10 @@ export default class OrderFormDetails extends Component {
                     }
                 </div>
                 <div className="fr font14 plAll">
-                    <button className="bkg_ff border_ra color_white pl3">确认收货</button>
+                    <button
+                        className="bkg_ff border_ra color_white pl3"
+                        onClick = {()=>this.confirmClick()}
+                    >确认收货</button>
                 </div>
             </div>
         );

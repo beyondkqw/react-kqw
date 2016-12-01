@@ -43,6 +43,28 @@ export async function SMSCode(mobile){
     }
 }
 
+//获取忘记密码短信验证码
+export async function ForgetCode(mobile){
+    try{
+        const res = await apiGet(URL.forgetsCode,{mobile});
+        return res;
+    }catch (err){
+        console.warn('SMSCode',err);
+        throw err
+    }
+}
+
+//忘记密码
+export async function UpdateLoginPwd(accName,pwd,smsNo,code,memberName){
+    try{
+        const res = await apiPost(URL.updateLoginPwd,{accName,pwd,smsNo,code,memberName});
+        return res;
+    }catch (err){
+        console.warn('toRegister',err);
+        throw err
+    }
+}
+
 //用户注册
 export async function ToRegister(accName,pwd,smsNo,code,memberName=''){
     try{
@@ -229,6 +251,17 @@ export async function CategoryList(parentId,type){
     }
 }
 
+//确认收货
+export async function ConfirmReceived(orderNo){
+    try{
+        const res = await apiGet(URL.confirmReceive,{orderNo});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
 //购物车列表
 export async function ShopCarList(page){
     try{
@@ -240,10 +273,23 @@ export async function ShopCarList(page){
     }
 }
 
+
+//取消订单
+export async function CancelReceived(orderNo){
+    try{
+        const res = await apiGet(URL.cancelReceive,{orderNo});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
 //更新购物车数量
 export async function EditShopNum(carId,count){
     try{
         const res = await apiGet(URL.editShopNum,{carId,count});
+
         return res;
     }catch (err){
         console.warn(err);
@@ -283,6 +329,5 @@ export async function OrderShopping(productId,attrIds,num){
         throw err
     }
 }
-
 
 

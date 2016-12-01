@@ -50,7 +50,7 @@ export default class PersonalCenter extends Component {
                 </div>
                 <div className="df border_top border_bottom ptb1">
                     {
-                        personDetail.map((el,index)=>{
+                        personDetail&&personDetail.map((el,index)=>{
                             return(
                                 <Link to={el.link} className="di width_third width_100" query={{index:index}}>
                                     <div className="flex1 tc pr">
@@ -72,7 +72,7 @@ export default class PersonalCenter extends Component {
                 <div className="line"></div>
                 <div className="width_100 countDiv">
                     {
-                        ItemList.map(item=>{
+                        ItemList&&ItemList.map(item=>{
                             return(
                                 <Link to={item.link} className="di width_third width_100">
                                     <div className="separateRow tc di border_bottom border_right">

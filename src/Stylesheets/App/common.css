@@ -277,6 +277,9 @@ p{
 .color_yellow{
    color: #ff5500 !important;
 }
+.color_pink{
+    background-color:#ffddcc;
+}
 .font14{
     font-size:14px;
 }
