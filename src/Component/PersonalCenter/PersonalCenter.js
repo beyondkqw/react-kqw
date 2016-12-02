@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import Footer from '../../Component/NewComponent/Footer';
-import PersonalInformation from '../../Component/PersonalCenter/PersonalInformation';
+//import PersonalInformation from '../../Component/PersonalCenter/PersonalInformation';
 import OrderDetails from '../../Component/Orders/OrderDetails'
 import '../../Stylesheets/App/personal.css';
 
@@ -27,23 +27,33 @@ export default class PersonalCenter extends Component {
     render() {
         return (
             <div>
-                <PersonalInformation />
-                <div className="h35 df color6 border_bottom">
-                    <div className="flex1 tc">
-                        <Link to="personalCenter/setting">
-                        <p className="font16 hl8">0</p>
-                        <p className="f12 m_top">佣金</p>
-                        </Link>
+                <section className="pr pa_top tc bkg_fadeff">
+                    <div className="personLogo">
+                        <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
                     </div>
-                    <div className="flex1 tc">
-                        <p className="font16 hl8">0</p>
-                        <p className="f12 m_top">代金券</p>
+                    <span className="pa setUp font14 color9">设置</span>
+                    <div className="font14 color6" style={{marginTop:15}}>多云云的天堂</div>
+                    <div className="bak_img pr">
+                        <span className="di vipImg pa"><img src={require('../../Images/vip.png')} alt=""/></span>
+                        <span className="f12 color6">25878</span>
                     </div>
-                    <div className="flex1 tc">
-                        <p className="font16 hl8">0</p>
-                        <p className="f12 m_top">积分</p>
+                    <div className="h35 df color6 border_bottom">
+                        <div className="flex1 tc">
+                            <Link to="personalCenter/setting">
+                            <p className="font16 hl8">0</p>
+                            <p className="f12 m_top">佣金</p>
+                            </Link>
+                        </div>
+                        <div className="flex1 tc">
+                            <p className="font16 hl8">0</p>
+                            <p className="f12 m_top">代金券</p>
+                        </div>
+                        <div className="flex1 tc">
+                            <p className="font16 hl8">0</p>
+                            <p className="f12 m_top">积分</p>
+                        </div>
                     </div>
-                </div>
+                </section>
                 <div className="line"></div>
                 <div className="good_mr font14 color6">
                     我的订单

@@ -74,7 +74,6 @@ export const settlementShopCar = 'order/auth/generate'
 //商品类型
 export const categoryList = 'category/list'
 
-
 //确认收货
 export const confirmReceive = 'order/auth/receive'
 
