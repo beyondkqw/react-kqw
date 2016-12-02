@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
 import {OrderDetail,ConfirmReceived} from '../../Action/auth';
@@ -97,7 +98,9 @@ export default class OrderFormDetails extends Component {
                         <p className=""><span className="f12">￥</span><span className="f15">258</span></p>
                         <p className="td_lt color9"><span className="f12">￥</span><span className="f15">258</span></p>
                         <p className="color9 font14"><span>X</span><span>1</span></p>
-                        <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
+                        <Link to="/orders/applicationForAfterSales">
+                            <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
+                        </Link>
                     </div>
                 </div>
                 <div className="plAll border_bottom">

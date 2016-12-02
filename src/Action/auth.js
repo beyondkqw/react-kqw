@@ -55,9 +55,9 @@ export async function ForgetCode(mobile){
 }
 
 //忘记密码
-export async function UpdateLoginPwd(accName,pwd,smsNo,code,memberName){
+export async function UpdateLoginPwd(mobile,pwd,smsNo,code){
     try{
-        const res = await apiPost(URL.updateLoginPwd,{accName,pwd,smsNo,code,memberName});
+        const res = await apiPost(URL.updateLoginPwd,{mobile,pwd,smsNo,code});
         return res;
     }catch (err){
         console.warn('toRegister',err);

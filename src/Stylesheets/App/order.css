@@ -74,3 +74,13 @@
     height:0.8rem;
     margin:auto;
 }
+/*退货*/
+.saleTitle{
+    height:2rem;
+    line-height: 2rem;
+}
+.saleLi li{
+    padding-left:0.5rem;
+    height:2rem;
+    line-height:2rem;
+}

@@ -1,7 +1,7 @@
 /**
  * Created by asus on 2016/11/21.
  */
-import React, { Component } from 'react';
+import React, { Component,PropTypes} from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {ErrorNum,ErrorPs} from '../../Action/rpc'
@@ -40,6 +40,10 @@ export default class ForgetPwd extends Component {
             isTrue : false,
             isPwdTrue:false
         };
+    }
+
+    static contextTypes = {
+        router:PropTypes.object
     }
     //判断手机号是否正确
    async isNumTrue(value){
@@ -105,13 +109,15 @@ export default class ForgetPwd extends Component {
     }
 
     async confirmSubmit(){
-        const {mobile,newPwd,secPwd,smsCode,code,memberName='1'} = this.state
+        const {mobile,newPwd,secPwd,smsCode,code} = this.state
         if(newPwd !== secPwd){
             this.setState({Reminder:'两次密码不一致,请重新输入'})
             return
         }
-        await UpdateLoginPwd(mobile,newPwd,smsCode,code,memberName)
+        await UpdateLoginPwd(mobile,newPwd,smsCode,code)
             .then(res=>{
+                alert('找回密码成功,请重新登录')
+                this.context.router.push('/Login/Login')
                 console.log('找回密码成功',res)
             })
             .catch(err=>{
