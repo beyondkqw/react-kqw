@@ -330,4 +330,15 @@ export async function OrderShopping(productId,attrIds,num){
     }
 }
 
+//立即购买
+export async function ListByOrderNo(orderNos){
+    try{
+        const res = await apiGet(URL.listByOrderNo,{orderNos});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
 

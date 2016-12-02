@@ -3,9 +3,12 @@ import {Link} from 'react-router';
 import PaymoneyComponent from '../../Component/ConfirmPayment/PaymoneyComponent';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/comfirmPayMoney.css';
+import {ListByOrderNo} from '../../Action/auth'
 const ItemDetail = [
     {title:'拼接雪纺连衣裙小清收到回复奇偶is飞机哦添加',num:1,price:288,color:'红色',size:'36',imgUrl:require('../../Images/storeClothes.png')},
     {title:'拼接驾驶的海外时间',num:2,price:289,color:'绿色',size:'38',imgUrl:require('../../Images/storeShoes.png')}]
+
+
 export default class ComfirmPayMoney extends Component {
 
     componentWillMount() {
@@ -14,6 +17,21 @@ export default class ComfirmPayMoney extends Component {
 
     static contextTypes = {
         router:PropTypes.object
+    }
+
+    componentWillMount() {
+        this.getOrderInfor()
+    }
+
+   async getOrderInfor(){
+        console.log('orderId',this.props.location.query.orderId)
+        await ListByOrderNo(this.props.location.query.orderId)
+        .then(res=>{
+            console.log('订单资料',res)
+        })
+        .catch(err=>{
+            console.warn('getOrderInfor',err)
+        })
     }
 
     render() {

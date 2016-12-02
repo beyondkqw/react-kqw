@@ -115,7 +115,7 @@ export default class ShoppingCart extends Component {
             await SettlementShopCar(this.select)
                 .then(res=>{
                     console.log('购物车结算成功')
-                    this.context.router.push('/comfirmPayMoney')
+                    this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                 })
         }else{
             alert('请选择商品')

@@ -121,8 +121,9 @@ export default class GoodsDescription extends Component {
     //}
 
     //加入购物车 type = 1 加入购物车  2 立即购买
-    async addShopCar(ids,count){
-        const {type} = this.state
+    async addShopCar(ids,count,typeParam){
+        //const {type} = this.state
+        let type = typeParam?typeParam:this.state.type
         if(type==1){
             if(ids.length<this.state.attributeList.length){
                 alert('请选择商品属性')
@@ -146,7 +147,7 @@ export default class GoodsDescription extends Component {
                         console.log('立即付款成功',res)
                         this.setState({isShow:false})
                         // todo 传参
-                        this.context.router.push({pathname:'/comfirmPayMoney'})
+                        this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                     })
                     .catch(err=>{
                         console.warn('立即付款失败',err)
@@ -272,8 +273,9 @@ export default class GoodsDescription extends Component {
                         //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
                         attr = {this.state.attributeList}
                         closePopUp = {()=>this.setState({isShow:false})}
-                        ensurePress = {(ids,count)=>this.addShopCar(ids,count)}
+                        ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
                         isOnly = {this.state.type?true:false}
+                        //typeParam = {type=>{console.log('type',type)}}
                     />
                 :null}
                 <div className="goodBottom width_100"></div>

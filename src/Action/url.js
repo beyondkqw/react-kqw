@@ -83,3 +83,5 @@ export const confirmReceive = 'order/auth/receive'
 //取消订单
 export const cancelReceive = 'order/auth/cancel'
 
+//根据订单号查询订单
+export const listByOrderNo = 'order/auth/listByOrderNo'

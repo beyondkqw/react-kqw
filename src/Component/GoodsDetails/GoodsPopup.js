@@ -27,7 +27,7 @@ export default class GoodsPopup extends Component {
         this.setState({value:this.state.value});
     }
 
-    ensure(type){
+    ensure(type,typeParam){
         this.attrIds = []
         const {ensurePress} = this.props
         //console.log('radio',document.getElementsByClassName('chooseColor'))
@@ -40,12 +40,12 @@ export default class GoodsPopup extends Component {
 
         console.log('选中的属性id',this.attrIds)
         if(type==1){
-            ensurePress&&ensurePress(this.attrIds,this.state.value,type)
+            ensurePress&&ensurePress(this.attrIds,this.state.value,typeParam)
         }
     }
 
     render() {
-        const {closePopUp,attr,onClick,isOnly} = this.props
+        const {closePopUp,attr,onClick,isOnly,typeParam} = this.props
         return (
                 <div className="popupContainer pf bottom0 z_index bkg_color width_100 border_top pr">
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
@@ -106,8 +106,18 @@ export default class GoodsPopup extends Component {
                             </div>
                             :
                             <div className="width_100 commit">
-                                <button className="width50 height_all color_pink color_yellow">加入购物车</button>
-                                <button className="width50 height_all bkg_ff color_white">立即购买</button>
+                                <button
+                                    className="width50 height_all color_pink color_yellow"
+                                    onClick = {()=>this.ensure(1,1)}
+                                >
+                                    加入购物车
+                                </button>
+                                <button
+                                    className="width50 height_all bkg_ff color_white"
+                                    onClick = {()=>this.ensure(1,2)}
+                                >
+                                    立即购买
+                                </button>
                             </div>
                     }
                 </div>
