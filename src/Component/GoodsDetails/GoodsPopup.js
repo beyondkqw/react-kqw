@@ -13,7 +13,7 @@ export default class GoodsPopup extends Component {
     }
     //数量减
     minusNum(){
-        if(this.state.value === 0){
+        if(this.state.value === 1){
 
         }else {
             this.setState({value:--this.state.value});
@@ -39,12 +39,13 @@ export default class GoodsPopup extends Component {
         }
 
         console.log('选中的属性id',this.attrIds)
-
-        ensurePress&&ensurePress(this.attrIds,this.state.value,type)
+        if(type==1){
+            ensurePress&&ensurePress(this.attrIds,this.state.value,type)
+        }
     }
 
     render() {
-        const {closePopUp,attr,onClick} = this.props
+        const {closePopUp,attr,onClick,isOnly} = this.props
         return (
                 <div className="popupContainer pf bottom0 z_index bkg_color width_100 border_top pr">
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
@@ -93,18 +94,22 @@ export default class GoodsPopup extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="width_100 commit">
-                        <button className="width50 height_all color_pink color_yellow">加入购物车</button>
-                        <button className="width50 height_all bkg_ff color_white">立即购买</button>
-                    </div>
-                    <div className="width_100 commit bkg_ff color_white">
-                        <button
-                            className="width_100 height_all"
-                            onClick = {()=>{this.ensure(1)}}
-                        >
-                            确定
-                        </button>
-                    </div>
+                    {
+                        isOnly?
+                            <div className="width_100 commit bkg_ff color_white">
+                                <button
+                                    className="width_100 height_all"
+                                    onClick = {()=>{this.ensure(1)}}
+                                >
+                                    确定
+                                </button>
+                            </div>
+                            :
+                            <div className="width_100 commit">
+                                <button className="width50 height_all color_pink color_yellow">加入购物车</button>
+                                <button className="width50 height_all bkg_ff color_white">立即购买</button>
+                            </div>
+                    }
                 </div>
         )
     }
