@@ -74,20 +74,20 @@ export default class GoodsDescription extends Component {
     async isFollow(){
         await this.setState({isChecked:!this.state.isChecked});
         //收藏
-        console.log('istrue',this.state.isChecked );
+        console.log('istrue',this.state.isChecked== true);
         //收藏
-        if(this.state.isChecked === true){
-            this.setState({status:0});
+        if(this.state.isChecked){
+            await this.setState({status:0});
             this.getFollow(this.state.status)
         //取消收藏
         }else{
-            this.setState({status:1});
+            await this.setState({status:1});
             this.getFollow(this.state.status)
         }
     }
 
     async getFollow(status){
-        await Follow(1,status)
+        await Follow(this.props.location.query.id,status)
             .then(res=>{
                 console.log(res);
             })
@@ -181,9 +181,11 @@ export default class GoodsDescription extends Component {
                     <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
                     <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
                         <span className="di collect_img">
-                            {this.state.isChecked?
+                            {
+                                this.state.isChecked?
                             <img src={require('../../Images/alreadyFollow.png')} alt=""/>
-                            :<img src={require('../../Images/collect.png')} alt=""/>
+                            :
+                            <img src={require('../../Images/collect.png')} alt=""/>
                             }
                         </span>
                         <span className="f10 db color6">收藏</span>
