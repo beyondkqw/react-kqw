@@ -7,7 +7,7 @@ const clienteleDetail = [
     {name:'全部客户',num:1000,color:'#ff0000',link:''},
     {name:'一层客户',num:50,color:'#999',link:'/levelPartner'},
     {name:'二层客户',num:200,color:'#999',link:'/levelPartner'},
-    {name:'三层客户',num:70,color:'#999',link:'/levelPartner'},
+    {name:'三层客户',num:70,color:'#999',link:'/levelPartner'}
 ]
 export default class Partner extends Component {
     render() {

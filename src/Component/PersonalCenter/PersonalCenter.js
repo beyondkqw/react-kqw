@@ -17,7 +17,7 @@ const ItemList = [
     {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
     {name:'我的余额',imgUrl:require('../../Images/balance.png'),link:''},
-    {name:'微夺宝',imgUrl:require('../../Images/micro.png'),link:''},
+    {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:''},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
     {name:'佣金转赠',imgUrl:require('../../Images/commission.png'),link:'/personalCenter/commisionGiving'},
@@ -28,21 +28,25 @@ export default class PersonalCenter extends Component {
         return (
             <div>
                 <section className="pr pa_top tc bkg_fadeff">
-                    <div className="personLogo">
-                        <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
-                    </div>
-                    <span className="pa setUp font14 color9">设置</span>
+                    <Link to="personalCenter/userInfo">
+                        <div className="personLogo">
+                            <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
+                        </div>
+                    </Link>
+                    <Link to="/personalCenter/setting">
+                        <span className="pa setUp font14 color9">设置</span>
+                    </Link>
                     <div className="font14 color6" style={{marginTop:15}}>多云云的天堂</div>
                     <div className="bak_img pr">
-                        <span className="di vipImg pa"><img src={require('../../Images/vip.png')} alt=""/></span>
-                        <span className="f12 color6">25878</span>
+                        <Link to="/personalCenter/memberClub">
+                            <span className="di vipImg pa"><img src={require('../../Images/vip.png')} alt=""/></span>
+                            <span className="f12 color6">25878</span>
+                        </Link>
                     </div>
                     <div className="h35 df color6 border_bottom">
                         <div className="flex1 tc">
-                            <Link to="personalCenter/setting">
                             <p className="font16 hl8">0</p>
                             <p className="f12 m_top">佣金</p>
-                            </Link>
                         </div>
                         <div className="flex1 tc">
                             <p className="font16 hl8">0</p>

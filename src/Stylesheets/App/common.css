@@ -341,3 +341,6 @@ p{
     justify-content: space-between;
     -webkit-justify-content: space-between;
 }
+.list-block .item-content{
+    min-height:2.5rem;
+}

@@ -48,9 +48,9 @@ export default class OrderDetails extends Component {
                                                 <div className="order_img height_all">
                                                     <img src={item.productImage} alt=""/>
                                                 </div>
-                                                <div className="color6 flex1 font14 order_margin">
-                                                    <p className="oh orderShow db">{item.productName}</p>
-                                                    <p className="color6 oh_height mt5">
+                                                <div className="flex1 order_margin">
+                                                    <p className="oh color6 orderShow font14  db">{item.productName}</p>
+                                                    <p className="color9 f12 delete oh_height mt5">
                                                         <span>{item.attrDesc}</span>
                                                     </p>
                                                 </div>

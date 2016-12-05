@@ -5,7 +5,7 @@
     margin:auto;
 }
 .setUp{
-    top:5px;
+    top:15px;
     right:15px;
 }
 .bak_img{
@@ -131,18 +131,14 @@
 .w50{
     width:50%;
 }
+.width40{
+    width:40%;
+}
+.width20{
+    width:20%;
+}
 .scale{
     animation: scale both .4s cubic-bezier(0.4, 0, 0, 1.5);
-}
-@keyframes scale {
-    from {
-        opacity: 0;
-        transform: scale3d(.3, .3, .3);
-    }
-    to {
-        opacity: 1;
-        transform: scale3d(1, 1, 1);
-    }
 }
 /*账号与安全*/
 .save_h2{
@@ -171,3 +167,79 @@
 .aboutjdy {
     margin: 1rem 0 0;
 }
+/*个人资料*/
+.userHeight{
+    height:2.5rem;
+    line-height:2.5rem;
+}
+.headerImg{
+    width:2rem;
+    height:2rem;
+}
+/*会员俱乐部*/
+.club_height{
+    height:7.75rem;
+    padding:0.5rem 0 0.75rem 0.5rem;
+}
+.left_radio{
+    padding:0.15rem 0;
+    border-radius: 1rem 0 0 1rem;
+    width:3.1rem;
+    margin-top: 5px;
+}
+.memberImg{
+    height:1.5rem;
+    width:1.5rem;
+}
+.score{
+    background:url('../../Images/personRadio.png') no-repeat;
+    background-size:100% 100%;
+    background-position: center;
+    padding-top:1rem;
+    width:5rem;
+    height:5rem;
+    margin:auto;
+}
+.vip_img{
+    width:0.75rem;
+    height:0.75rem;
+}
+.vipBar{
+    height:7.5rem;
+    padding:2rem 0 0;
+}
+.cellSize{
+    width:1.5rem;
+    height:1.5rem;
+    line-height:1.5rem;
+}
+.bigSize{
+    width:3rem;
+    height:3rem;
+    line-height:3rem;
+    margin-top:-0.75rem;
+}
+.mrl25{
+    margin-left:1.25rem;
+}
+.cellHeight{
+    height:5px;
+    background-color:black;
+}
+.top0{
+    top:0;
+}
+.rule{
+    padding:0.5rem 0.75rem;
+}
+@keyframes scale {
+    from {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+

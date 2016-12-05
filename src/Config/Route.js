@@ -49,6 +49,10 @@ import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
 import BrowseRecord from '../Component/PersonalCenter/BrowseRecord';
 import OrderFormDetails from '../Component/Orders/OrderFormDetails';
 import ApplicationForAfterSales from '../Component/Orders/ApplicationForAfterSales';
+import UserInfo from '../Component/PersonalCenter/UserInfo';
+import MemberClub from '../Component/PersonalCenter/MemberClub';
+import MemberInfo from '../Component/PersonalCenter/MemberInfo';
+import MemberIntroduction from '../Component/PersonalCenter/MemberIntroduction';
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -101,6 +105,10 @@ const RouteConfig = (
       <Route path="orders/orderFormDetails" component={OrderFormDetails} />
       <Route path="goodsDetails/goodsCategory" component={GoodsCategory} />
       <Route path="orders/applicationForAfterSales" component={ApplicationForAfterSales} />
+      <Route path="personalCenter/userInfo" component={UserInfo} />
+      <Route path="personalCenter/memberClub" component={MemberClub} />
+      <Route path="personalCenter/memberInfo" component={MemberInfo} />
+      <Route path="personalCenter/memberIntroduction" component={MemberIntroduction} />
     </Route>
   </Router>
 );
