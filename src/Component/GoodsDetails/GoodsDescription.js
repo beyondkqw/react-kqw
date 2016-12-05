@@ -146,7 +146,6 @@ export default class GoodsDescription extends Component {
                     .then(res=>{
                         console.log('立即付款成功',res)
                         this.setState({isShow:false})
-                        // todo 传参
                         this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                     })
                     .catch(err=>{

@@ -49,6 +49,7 @@ import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
 import BrowseRecord from '../Component/PersonalCenter/BrowseRecord';
 import OrderFormDetails from '../Component/Orders/OrderFormDetails';
 import ApplicationForAfterSales from '../Component/Orders/ApplicationForAfterSales';
+import CountryRank from '../Component/PersonalCenter/CountryRank'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -101,6 +102,7 @@ const RouteConfig = (
       <Route path="orders/orderFormDetails" component={OrderFormDetails} />
       <Route path="goodsDetails/goodsCategory" component={GoodsCategory} />
       <Route path="orders/applicationForAfterSales" component={ApplicationForAfterSales} />
+      <Route path="personalCenter/countryRank" component={CountryRank} />
     </Route>
   </Router>
 );
