@@ -243,3 +243,45 @@
     }
 }
 
+
+/*全国排名*/
+.rankIcon{
+    height:15px;
+    width:20px;
+    line-height: 0;
+}
+.rankRow{
+    height:60px;
+    width:100%;
+    padding:0 10px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.vipIcon{
+    text-align: center;
+    height:20px;
+    width:20px;
+    border-radius: 50%;
+    background: #ff5500;
+    bottom:0;
+    right:-10px;
+    color: #fff;
+    font-size: 14px;
+}
+.rankNum{
+    height:20px;
+    width:20px;
+    border-radius: 50%;
+    background: #ffddcc;
+    color:#ff5500;
+}
+.rankHeader{
+    height:40px;
+    width:100%;
+    background: #ffddcc;
+}
+.rank-head-cell{
+    padding:0px 4px;
+    color:#ff5500;
+    border:1px solid #ff5500;
+    border-radius: 5px;
+}

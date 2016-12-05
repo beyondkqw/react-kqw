@@ -53,6 +53,8 @@ import UserInfo from '../Component/PersonalCenter/UserInfo';
 import MemberClub from '../Component/PersonalCenter/MemberClub';
 import MemberInfo from '../Component/PersonalCenter/MemberInfo';
 import MemberIntroduction from '../Component/PersonalCenter/MemberIntroduction';
+import CountryRank from '../Component/PersonalCenter/CountryRank'
+
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -109,6 +111,7 @@ const RouteConfig = (
       <Route path="personalCenter/memberClub" component={MemberClub} />
       <Route path="personalCenter/memberInfo" component={MemberInfo} />
       <Route path="personalCenter/memberIntroduction" component={MemberIntroduction} />
+      <Route path="personalCenter/countryRank" component={CountryRank} />
     </Route>
   </Router>
 );
