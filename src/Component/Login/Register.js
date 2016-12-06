@@ -34,17 +34,16 @@ export default class Register extends Component {
     //获取短信验证码
     async getCode(){
         const {mobile} = this.state
-        console.log('mobile',mobile)
         clearInterval(this._timer)
-        await this.setState({codeWord:60,disabled:true})
-        this._timer = self.setInterval(()=>this.timer(),1000)
-        console.log('timer',this.state.codeWord)
         await SMSCode(mobile)
         .then(res=>{
             console.log('获取手机验证码成功',res)
-            this.setState({smsCode:res})
+            this.setState({smsCode:res,codeWord:60,disabled:true})
+            //倒计时
+            this._timer = self.setInterval(()=>this.timer(),1000)
         })
         .catch(err=>{
+            this.setState({Reminder:err.message})
             console.log('err',err)
         })
 
@@ -89,6 +88,7 @@ export default class Register extends Component {
             console.log('注册成功',res)
         })
         .catch(err=>{
+            this.setState({Reminder:err.message})
             console.warn('err',err)
         })
     }

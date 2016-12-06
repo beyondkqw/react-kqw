@@ -57,6 +57,7 @@ export default class Login extends Component {
                 window.location.href = '/home'
             })
             .catch(err=>{
+                this.setState({Reminder:err.message})
                 console.warn('err',err)
             })
     }
