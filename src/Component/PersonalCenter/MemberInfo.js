@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import GivingList from '../../Component/CommonComponent/GivingList';
+import RankRow from './RankRow'
 import '../../Stylesheets/App/personal.css';
 
 const MemberList = [
@@ -15,6 +16,7 @@ export default class MemberInfo extends Component {
     render() {
         return (
             <div className="containerNav">
+                <RankRow  more={true} num={1} isShow={true}/>
                 <SplitLine />
                 <div className="clearAll" style={{height:'160'}}>
                     {

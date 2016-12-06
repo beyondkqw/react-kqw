@@ -10,11 +10,14 @@ const ItemDetail = [
 
 
 export default class ComfirmPayMoney extends Component {
-
-    componentWillMount() {
-        console.log('sssss',this.props.location.query)
-    }
-
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            PaymentDetails:[]
+        };
+      }
     static contextTypes = {
         router:PropTypes.object
     }
@@ -28,6 +31,7 @@ export default class ComfirmPayMoney extends Component {
         await ListByOrderNo(this.props.location.query.orderId)
         .then(res=>{
             console.log('订单资料',res)
+            this.setState({PaymentDetails:res})
         })
         .catch(err=>{
             console.warn('getOrderInfor',err)
@@ -35,6 +39,7 @@ export default class ComfirmPayMoney extends Component {
     }
 
     render() {
+        const {PaymentDetails} = this.state
         return (
             <div className="containerNav oa">
                 <div className="list-block m0">
@@ -64,25 +69,34 @@ export default class ComfirmPayMoney extends Component {
                     </ul>
                 </div>
                 <div className="line"></div>
-                <Link to="/chooseInfomation">
-                    <div className="paymargin">
-                        <div className="di payImgSize mr"><img src={require('../../Images/store.png')} alt=""/></div>
-                        <span className="color6 font14">乐乐的小店</span>
-                    </div>
-                </Link>
                 {
-                    ItemDetail.map((el,index)=>{
-                        return (
-                            <PaymoneyComponent
-                                title={el.title}
-                                num={el.num}
-                                color={el.color}
-                                size={el.size}
-                                imgurl={el.imgUrl}
-                            />
+                    PaymentDetails.map(item=>{
+                        return(
+                            <div>
+                                <Link to="/chooseInfomation">
+                                    <div className="paymargin">
+                                        <div className="di payImgSize mr"><img src={item.img} alt=""/></div>
+                                        <span className="color6 font14">{item.store_name}</span>
+                                    </div>
+                                </Link>
+                                {
+                                    item.orderDetails.map((el,index)=>{
+                                        return (
+                                            <PaymoneyComponent
+                                                title={el.productName}
+                                                num={el.num}
+                                                attr={el.attrDesc}
+                                                imgurl={el.productImage}
+                                                price={el.price}
+                                            />
+                                        )
+                                    })
+                                }
+                            </div>
                         )
                     })
                 }
+
                 <SplitLine />
                 <div className="plr lh25 border_bottom">
                     <span className="color6 font14">云卡通支付</span>

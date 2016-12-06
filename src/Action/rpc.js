@@ -164,6 +164,7 @@ async function request (urlKey,method,params = {},token = ''){
                 //    shadow: true,
                 //    animation: true,
                 //});
+                wechatAuth();
                 throw new Error('请先登录');
             }
             else{
@@ -184,6 +185,14 @@ export async function apiGet(urlKey,params = {}){
 }
 export async function apiPost(urlKey,params = {}){
     return await request(urlKey,'POST',params,'');
+}
+
+//自动授权登录
+export function wechatAuth() {
+    token = localStorage.getItem("tokenNum");
+    var newPath = ROOT_URL + "/wechat/baseCode";
+    var nowPath = window.location.href.split('?')[0];
+    location.href = newPath + "?callBackUrl=" + nowPath + "&token="+token +"&imei=" + imei;
 }
 
 // 验证手机号是否正确

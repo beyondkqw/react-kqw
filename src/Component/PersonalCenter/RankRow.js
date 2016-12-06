@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
-import {FollowList,Follow} from '../../Action/auth';
 
 const icon = [
     require('../../Images/person/first.png'),
@@ -15,7 +14,7 @@ const icon = [
 export default class RankRow extends Component {
 
     render(){
-        const {num,more,vip} = this.props
+        const {num,more,vip,isShow} = this.props
         return(
             <div className="rankRow flex flex-align-center flex-pack-justify">
                 <div className="flex flex-align-center">
@@ -50,11 +49,9 @@ export default class RankRow extends Component {
                         }
 
                     </div>
-
                     <span className="f12 color9">朵云云的天堂</span>
                 </div>
-
-                <span className="font14 color9">159999</span>
+                <span className="font14 color9">{isShow?'总分 : ':null}159999</span>
             </div>
 
         )
