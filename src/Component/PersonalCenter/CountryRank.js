@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 import {FollowList,Follow} from '../../Action/auth';
 import RankRow from './RankRow'
+//import $ from '../../js/jquery.min'
 
 const icon = [
     require('../../Images/person/first.png'),
@@ -13,9 +14,13 @@ const icon = [
 
 ]
 
+
 export default class CountryRank extends Component {
 
-    render(){
+
+
+
+        render(){
         return(
             <div>
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
