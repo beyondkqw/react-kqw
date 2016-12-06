@@ -175,7 +175,9 @@ export default class SearchPage extends Component {
     render(){
         const {showByColumn,display_0,display_2,history,goodsList} = this.state
         return(
-            <div className="containerNav" >
+            <div className="containerNav"
+                 style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}
+            >
                 <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
                     <Search
                         //onFocus = {()=>this.setState({history:true})}
@@ -227,7 +229,8 @@ export default class SearchPage extends Component {
                 /*商品列表---最下层*/
                 <div
                     onClick = {()=>this.setState({history:false})}
-                    className="goodListContainer" style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}>
+                    className="goodListContainer"
+                >
                     <div className="imgContainer width_100">
                         {
                             goodsList&&goodsList.map((el,index)=>{
