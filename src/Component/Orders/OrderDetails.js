@@ -80,18 +80,18 @@ export default class OrderDetails extends Component {
                                             toPay?
                                                 <div className="fr mt5">
                                                     <button
-                                                        className="border_ra mr20 color9 border_ccc"
+                                                        className="border_ra mr5 color9 border_ccc"
                                                         onClick = {()=>this.cancelOrder(el.order_no)}
                                                     >取消订单</button>
-                                                    <button className="bkg_ff mr20 border_ra color_white">付款</button>
+                                                    <button className="bkg_ff border_ra color_white">付款</button>
                                                 </div>
                                                 :null
                                         }
                                         {
                                             makeSure?
                                                 <div className="fr mt5">
-                                                    <button className="border_ra mr20 color9 border_ccc">查看物流</button>
-                                                    <button className="bkg_ff mr20 border_ra color_white">确定收货</button>
+                                                    <button className="border_ra mr5 color9 border_ccc">查看物流</button>
+                                                    <button className="bkg_ff border_ra color_white">确定收货</button>
                                                 </div>
                                                 :null
                                         }
@@ -99,7 +99,7 @@ export default class OrderDetails extends Component {
                                             toRated?
                                                 <div className="fr mt55">
                                                     <Link to="orderList/publishEvalute">
-                                                        <button className="bkg_ff mr20 border_ra color_white">评价</button>
+                                                        <button className="bkg_ff border_ra color_white">评价</button>
                                                     </Link>
                                                 </div>
                                                 :null
@@ -108,7 +108,7 @@ export default class OrderDetails extends Component {
                                             alreadyRated?
                                                 <div className="fr mt55">
                                                     <Link to="orderList/viewEvaluation">
-                                                        <button className="bkg_ff mr20 border_ra color_white">查看</button>
+                                                        <button className="bkg_ff border_ra color_white">查看</button>
                                                     </Link>
                                                 </div>
                                                 :null
@@ -116,8 +116,8 @@ export default class OrderDetails extends Component {
                                         {
                                             allRated?
                                                 <div className="fr mt5">
-                                                    <button className="border_ra mr20 color9 border_ccc">删除订单</button>
-                                                    <button className="border_ra mr20 color9 border_ccc">追加评价</button>
+                                                    <button className="border_ra mr5 color9 border_ccc">删除订单</button>
+                                                    <button className="border_ra mr5 color9 border_ccc">追加评价</button>
                                                     <button className="bkg_ff mr20 border_ra color_white">查看评价</button>
                                                 </div>
                                                 :null

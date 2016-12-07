@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
-import {FollowList,Follow} from '../../Action/auth';
+import {Link} from 'react-router';
 import RankRow from './RankRow'
 //import $ from '../../js/jquery.min'
 
@@ -24,18 +24,21 @@ export default class CountryRank extends Component {
         return(
             <div>
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
-                    <div className="rank-head-cell font14 mr10">
-                        我的排名:54名
-                    </div>
+                    <Link to='/personalCenter/memberInfo'>
+                        <div className="rank-head-cell font14 mr10">
+                            我的排名:54名
+                        </div>
+                    </Link>
+                    <Link to='/personalCenter/memberInfo'>
+                        <div className="rank-head-cell font14 mr10">
+                            我的总分:3444
+                        </div>
+                    </Link>
 
-                    <div className="rank-head-cell font14 mr10">
-                        我的总分:3444
-                    </div>
                 </div>
 
                 <RankRow num={1} vip={true}/>
                 <RankRow num={4} vip={true}/>
-                <RankRow vip={true}/>
             </div>
         )
     }

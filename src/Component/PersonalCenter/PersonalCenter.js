@@ -27,37 +27,37 @@ export default class PersonalCenter extends Component {
     render() {
         return (
             <div>
-                <section className="pr pa_top tc bkg_fadeff">
+                <section className="pr tc center_bkImg" style={{paddingTop: 10,paddingBottom: 15}}>
                     <Link to="personalCenter/userInfo">
                         <div className="personLogo">
                             <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
                         </div>
                     </Link>
                     <Link to="/personalCenter/setting">
-                        <span className="pa setUp font14 color9">设置</span>
+                        <span className="pa setUp font14 color_white">设置</span>
                     </Link>
-                    <div className="font14 color6" style={{marginTop:15}}>多云云的天堂</div>
+                    <div className="font14 color_white" style={{marginTop:15}}>多云云的天堂</div>
                     <div className="bak_img pr">
                         <Link to="/personalCenter/memberClub">
                             <span className="di vipImg pa"><img src={require('../../Images/vip.png')} alt=""/></span>
-                            <span className="f12 color6">25878</span>
+                            <span className="f12 color_yellow">25878</span>
                         </Link>
                     </div>
-                    <div className="h35 df color6 border_bottom">
-                        <div className="flex1 tc">
-                            <p className="font16 hl8">0</p>
-                            <p className="f12 m_top">佣金</p>
-                        </div>
-                        <div className="flex1 tc">
-                            <p className="font16 hl8">0</p>
-                            <p className="f12 m_top">代金券</p>
-                        </div>
-                        <div className="flex1 tc">
-                            <p className="font16 hl8">0</p>
-                            <p className="f12 m_top">积分</p>
-                        </div>
-                    </div>
                 </section>
+                <div className="h35 df color6 border_bottom">
+                    <div className="flex1 tc">
+                        <p className="font16 hl8">0</p>
+                        <p className="f12 m_top">佣金</p>
+                    </div>
+                    <div className="flex1 tc">
+                        <p className="font16 hl8">0</p>
+                        <p className="f12 m_top">代金券</p>
+                    </div>
+                    <div className="flex1 tc">
+                        <p className="font16 hl8">0</p>
+                        <p className="f12 m_top">积分</p>
+                    </div>
+                </div>
                 <div className="line"></div>
                 <div className="good_mr font14 color6">
                     我的订单
