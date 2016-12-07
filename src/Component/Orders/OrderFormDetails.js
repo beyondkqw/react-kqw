@@ -99,6 +99,7 @@ export default class OrderFormDetails extends Component {
                         <p className="td_lt color9"><span className="f12">￥</span><span className="f15">258</span></p>
                         <p className="color9 font14"><span>X</span><span>1</span></p>
                         <Link to="/orders/applicationForAfterSales">
+                            {/*退款中  退款成功*/}
                             <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
                         </Link>
                     </div>

@@ -397,3 +397,9 @@ p{
     -ms-flex-pack:justify;
     justify-content:flex-end;
 }
+
+.flex-wrap{
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}

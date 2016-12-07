@@ -42,7 +42,6 @@ import PublishEvalute from '../Component/Orders/PublishEvalute';
 import ChaseRatings from '../Component/Orders/ChaseRatings';
 import ChoosePayment from '../Component/ConfirmPayment/ChoosePayment';
 import SurePayment from '../Component/ConfirmPayment/SurePayment';
-import NearbyShop from '../Component/PersonalCenter/NearbyShop';
 import PointGiving from '../Component/PersonalCenter/PointGiving';
 import BalanceGiving from '../Component/PersonalCenter/BalanceGiving';
 import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
@@ -54,7 +53,8 @@ import MemberClub from '../Component/PersonalCenter/MemberClub';
 import MemberInfo from '../Component/PersonalCenter/MemberInfo';
 import MemberIntroduction from '../Component/PersonalCenter/MemberIntroduction';
 import CountryRank from '../Component/PersonalCenter/CountryRank'
-
+import LocationSearch from '../Component/NearbyShop/LocationSearch'
+import NearbyShop from '../Component/NearbyShop/NearbyShop'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -112,6 +112,8 @@ const RouteConfig = (
       <Route path="personalCenter/memberInfo" component={MemberInfo} />
       <Route path="personalCenter/memberIntroduction" component={MemberIntroduction} />
       <Route path="personalCenter/countryRank" component={CountryRank} />
+      <Route path="nearbyShop/locationSearch" component={LocationSearch} />
+      <Route path="nearbyShop/nearbyShop" component={NearbyShop} />
     </Route>
   </Router>
 );
