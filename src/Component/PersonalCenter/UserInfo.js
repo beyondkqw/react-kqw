@@ -11,7 +11,6 @@ const UserItem = [
 
 const PersonItem = [
     {name:'姓名',inforamation:'编辑'},
-    {name:'微信',inforamation:'编辑'},
     {name:'手机号',inforamation:'编辑'},
     {name:'邮箱',inforamation:'编辑'},
     {name:'地区',inforamation:'编辑'},
@@ -26,11 +25,11 @@ export default class UserInfo extends Component {
                 <SplitLine />
                 <div className="list-block m0">
                     <Link>
-                        <li className="item-content item-link pl" style={{minHeight:'60'}}>
+                        <li className="item-content item-link pl" style={{minHeight:60}}>
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner font14">
                                 <div className="item-title color6">聚朵云头像</div>
-                                <div className="item-after headerImg" style={{maxHeight:'40'}}>
+                                <div className="item-after headerImg" style={{maxHeight:40}}>
                                     <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
                                 </div>
                             </div>

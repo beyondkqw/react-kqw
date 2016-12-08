@@ -12,7 +12,7 @@ export default class Savety extends Component {
                         <Link>
                             <li className="item-content item-link border_bottom isConfirmSet">
                                 <div className="item-inner">
-                                    <div className="item-title height_all">
+                                    <div className="item-title">
                                         <span className="di listimg"><img src={require('../../Images/alipay.png')} alt=""/></span>
                                         <span className="di margin15 color6">我的银行卡</span>
                                     </div>

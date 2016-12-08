@@ -14,7 +14,7 @@ const icon = [
 export default class RankRow extends Component {
 
     render(){
-        const {num,more,vip,isShow} = this.props
+        const {num,more,vip,isShow,rightCursor} = this.props
         return(
             <div className="rankRow flex flex-align-center flex-pack-justify">
                 <div className="flex flex-align-center">
@@ -30,8 +30,6 @@ export default class RankRow extends Component {
                                 :null
 
                     }
-
-
 
                     <div className="pr" style={{marginRight:10,height:40,width:40,borderRadius:20,backgroundColor:'#000'}}>
                         <img className="border_ra50" src={icon[0]}/>
@@ -51,7 +49,11 @@ export default class RankRow extends Component {
                     </div>
                     <span className="f12 color9">朵云云的天堂</span>
                 </div>
-                <span className="font14 color9">{isShow?'总分 : ':null}159999</span>
+                {
+                    rightCursor?
+                        <span className="rightCursor pa"><img src={require("../../Images/rightArrow.png")} alt=""/></span>
+                        :<span className="font14 color9">{isShow?'总分 : ':null}159999</span>
+                }
             </div>
 
         )

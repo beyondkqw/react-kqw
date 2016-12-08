@@ -72,7 +72,6 @@ export default class Register extends Component {
                 this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
             }
         }
-
     }
 
     //注册

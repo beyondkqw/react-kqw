@@ -63,7 +63,9 @@ class Home extends Component {
       const {moudle} = this.state
     return (
       <div className="containerNav bkg_color">
-        <Search />
+        <div className="pf t0 width100" style={{zIndex:100}}>
+            <Search />
+        </div>
         <Carousel
             images = {this.state.banner}
         />

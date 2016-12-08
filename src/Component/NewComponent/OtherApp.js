@@ -13,7 +13,6 @@ const router = [
     {name:'分类',imgUrl:'background-color:#0074d9',path:'/goodsDetails/goodsCategory'}
 ]
 
-
 export default class OtherApp extends Component {
     render() {
         return (

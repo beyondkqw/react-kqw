@@ -16,24 +16,28 @@ export default class MemberIntroduction extends Component {
             <div className="containerNav">
                 <div className="vipBar">
                     <div className="pr">
-                        <div>
-                            <span className="di cellHeight width100"></span>
+                        <div className="di all_progressBar supplement cell-Height width100">
+                            <div className="progressBar pr supplement">
+                                <span className="di spotImg pa">
+                                <img src={require('../../Images/spot.png')} alt=""/>
+                            </span>
+                            </div>
                         </div>
-                        <div className="pa top0 width100 font14 color6">
+                        <div className="pa top0 width100 font14">
                             <div className="fl width40 tc">
-                                <span className="di  cellSize bkg_ff tc color_white border_ra50 z_index">V3</span>
-                                <p className="mt3">10000</p>
+                                <span className="di cellSize color_yellow color_pink tc  border_ra50 z_index">V3</span>
+                                <p className="mt3 color_white">10000</p>
                             </div>
                             <div className="fl width20 tc">
-                                <span className="di bigSize bkg_ff tc color_white border_ra50 z_index">V4</span>
-                                <div className="mt3">
+                                <span className="di bigSize color_yellow bkg_ff tc border_ra50 z_index">V4</span>
+                                <div className="mt3 color_white">
                                     <div>总分</div>
                                     <p>21000</p>
                                 </div>
                             </div>
                             <div className="fl width40 tc">
-                                <span className="di cellSize bkg_ff tc color_white border_ra50 z_index">V5</span>
-                                <p className="mt3">20000</p>
+                                <span className="di cellSize color_yellow color_pink tc border_ra50 z_index">V5</span>
+                                <p className="mt3 color_white">20000</p>
                             </div>
                         </div>
                     </div>
