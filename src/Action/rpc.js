@@ -13,8 +13,8 @@ let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
 
-const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-//const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
+//const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
 export function getUserInfo(){
@@ -211,4 +211,12 @@ export function ErrorPs(value) {
     } else {
         return true;
     }
+}
+// 获取地址栏请求参数
+export function GetQueryString(name) {
+    let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    console.log('reg==============>',reg);
+    let r = window.location.search.substr(1).match(reg);
+    console.log('r==============>',r);
+    if(r!=null)return  unescape(r[2]); return null;
 }

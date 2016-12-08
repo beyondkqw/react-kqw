@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
+import LiComponent from '../../Component/CommonComponent/LiComponent'
 import '../../Stylesheets/App/personal.css';
 
 const Itemlist =[{name:'账号与安全',link:'/personalCenter/savety'},
@@ -13,16 +14,10 @@ export default class Setting extends Component {
                     {
                         Itemlist.map((el,index)=>{
                             return(
-                                <Link to={el.link}>
-                                    <li className="item-content item-link pl  border_bottom">
-                                        <div className="item-media"><i className="icon icon-f7"></i></div>
-                                        <div className="item-inner margin0">
-                                            <div className="item-title color6 font14">
-                                                {el.name}
-                                            </div>
-                                        </div>
-                                    </li>
-                                </Link>
+                                <LiComponent
+                                   name = {el.name}
+                                   link = {el.link}
+                                />
                             )
                         })
                     }

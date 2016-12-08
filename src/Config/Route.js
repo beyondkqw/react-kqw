@@ -55,6 +55,11 @@ import MemberIntroduction from '../Component/PersonalCenter/MemberIntroduction';
 import CountryRank from '../Component/PersonalCenter/CountryRank'
 import LocationSearch from '../Component/NearbyShop/LocationSearch'
 import NearbyShop from '../Component/NearbyShop/NearbyShop'
+import MyCharges from '../Component/PersonalCenter/MyCharges'
+import AllIncome from '../Component/PersonalCenter/AllIncome'
+import Retailing from '../Component/PersonalCenter/Retailing'
+import RetailingDetails from '../Component/PersonalCenter/RetailingDetails'
+import TakenDetails from '../Component/PersonalCenter/TakenDetails'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -114,6 +119,11 @@ const RouteConfig = (
       <Route path="personalCenter/countryRank" component={CountryRank} />
       <Route path="nearbyShop/locationSearch" component={LocationSearch} />
       <Route path="nearbyShop/nearbyShop" component={NearbyShop} />
+      <Route path="personalCenter/myCharges" component={MyCharges} />
+      <Route path="personalCenter/allIncome" component={AllIncome} />
+      <Route path="personalCenter/retailing" component={Retailing} />
+      <Route path="personalCenter/retailingDetails" component={RetailingDetails} />
+      <Route path="personalCenter/takenDetails" component={TakenDetails} />
     </Route>
   </Router>
 );

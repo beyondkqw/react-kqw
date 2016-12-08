@@ -66,9 +66,9 @@ export async function UpdateLoginPwd(mobile,pwd,smsNo,code){
 }
 
 //用户注册
-export async function ToRegister(accName,pwd,smsNo,code,memberName=''){
+export async function ToRegister(accName,pwd,smsNo,code,recommendId,memberName=''){
     try{
-        const res = await apiPost(URL.register,{accName,pwd,smsNo,code,memberName});
+        const res = await apiPost(URL.register,{accName,pwd,smsNo,code,recommendId,memberName});
         return res;
     }catch (err){
         console.warn('toRegister',err);

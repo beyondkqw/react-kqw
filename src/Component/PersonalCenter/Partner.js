@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
+import LiItem from '../../Component/CommonComponent/LiItem'
 import PersonalInformation from '../../Component/PersonalCenter/PersonalInformation';
 import '../../Stylesheets/App/personal.css';
 
@@ -18,19 +19,13 @@ export default class Partner extends Component {
                         {
                             partner.map(el=>{
                                 return(
-                                    <Link to={el.link}>
-                                        <li
-                                            className ={ el.isShow?'item-link item-content border_bottom isConfirmSet':'item-content border_bottom isConfirmSet'}
-                                        >
-                                            <div className="item-inner">
-                                                <div className="item-title height_all">
-                                                    <span className="di listimg"><img src={el.imgUrl} alt=""/></span>
-                                                    <span className="di margin15 color6">{el.title}</span>
-                                                </div>
-                                                <div className="item-after color9 isSet">{el.name}</div>
-                                            </div>
-                                        </li>
-                                    </Link>
+                                    <LiItem
+                                        title={el.title}
+                                        link={el.link}
+                                        name={el.name}
+                                        imgUrl={el.imgUrl}
+                                        isShow={el.isShow}
+                                    />
                                 )
                             })
                         }

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SMSCode,ToRegister} from '../../Action/auth'
-import {ErrorNum,ErrorPs} from '../../Action/rpc'
+import {ErrorNum,ErrorPs,GetQueryString} from '../../Action/rpc'
 
 const icon = [
     require('../../Images/login/phone.png'),
@@ -20,6 +20,7 @@ export default class Register extends Component {
         super(props);
         // 初始状态
         this.state = {
+            recommendId:'',
             codeWord : '',
             Reminder:'',
             disabled : false,
@@ -31,6 +32,12 @@ export default class Register extends Component {
         };
       }
 
+    componentWillMount() {
+        //隐藏域
+        console.log('ahdiu=======>');
+        let recommend = GetQueryString('recommendId');
+        this.setState({recommendId:recommend})
+    }
     //获取短信验证码
     async getCode(){
         const {mobile} = this.state
@@ -46,7 +53,6 @@ export default class Register extends Component {
             this.setState({Reminder:err.message})
             console.log('err',err)
         })
-
     }
 
     //获取短信验证码倒计时
@@ -76,13 +82,13 @@ export default class Register extends Component {
 
     //注册
     async toSubmit(){
-        const {mobile,pwd,smsCode,code,memberName='1'} = this.state
-        console.log('aaa',mobile,pwd,smsCode,code,memberName)
+        const {mobile,pwd,smsCode,code,recommendId,memberName='1'} = this.state
+        console.log('aaa',mobile,pwd,smsCode,code,recommendId,memberName)
         if(memberName ==''||pwd == ''){
             this.setState({Reminder:'登录名或密码不能为空'})
             return
         }
-        await ToRegister(mobile,pwd,smsCode,code,memberName)
+        await ToRegister(mobile,pwd,smsCode,code,recommendId,memberName)
         .then(res=>{
             console.log('注册成功',res)
         })

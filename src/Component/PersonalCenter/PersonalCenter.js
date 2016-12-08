@@ -16,7 +16,7 @@ const ItemList = [
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
     {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
-    {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:''},
+    {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},
     {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:''},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},

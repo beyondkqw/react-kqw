@@ -96,6 +96,9 @@ p{
 .ptb{
     padding:0.5rem 0;
 }
+.pt7{
+    padding:0.7rem 0;
+}
 .plAll{
     padding:0.5rem;
 }
@@ -144,11 +147,17 @@ p{
 .mt3{
     margin-top:0.3rem;
 }
+.mt6{
+    margin-top:0.6rem;
+}
 .ml{
     margin-left:0.3rem;
 }
 .mt25{
     margin-top:2.5rem;
+}
+.mb1{
+    margin-bottom:1rem;
 }
 .t0{
     top:0;
@@ -200,6 +209,9 @@ p{
 }
 .pa_top{
     padding-top:0.5rem;
+}
+.pa_top1{
+    padding-top:1rem;
 }
 .right10{
     right:0.5rem;
@@ -270,6 +282,9 @@ p{
 }
 .border_ra50{
     border-radius: 50%;
+}
+.sexChange_br{
+    border-radius:0.25rem 0.25rem 0 0;
 }
 .color6{
     color: #666;
