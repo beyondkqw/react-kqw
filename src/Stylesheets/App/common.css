@@ -403,3 +403,9 @@ p{
     -ms-flex-wrap: wrap;
     flex-wrap: wrap
 }
+
+.flex-nowrap{
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap
+}

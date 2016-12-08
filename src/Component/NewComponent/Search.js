@@ -113,7 +113,12 @@ export default class Search extends Component {
                                 <img src={require('../../Images/common/location.png')}/>
                             </span>
 
-                            <span style={{color:'#ff5500',marginLeft:5,marginRight:5}}>{location}</span>
+                            <span
+                                className="_location"
+                                style={{color:'#ff5500',marginLeft:5,marginRight:5}}
+                            >
+                                {_location}
+                            </span>
 
                             <span style={{height:6.5,width:11,lineHeight:0}}>
                                 <img src={require('../../Images/common/down.png')}/>
