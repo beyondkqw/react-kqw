@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/personal.css';
+import {VipList} from '../../Action/auth'
 
 const ruleList=[
     {num:'1、',declaration:'推荐一人可得10分'},
@@ -11,6 +12,18 @@ const ruleList=[
     {num:'5、',declaration:'结构连上为分完的分佣金额贵平台所有'}
 ];
 export default class MemberIntroduction extends Component {
+
+    componentWillMount() {
+       this.getVipList()
+    }
+
+    async getVipList(){
+       await VipList()
+            .then(res=>{
+                console.log('VipList',res)
+            })
+    }
+
     render() {
         return (
             <div className="containerNav">

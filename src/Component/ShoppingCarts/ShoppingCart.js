@@ -11,12 +11,13 @@ const ItemDetail = [
     {id:1,title:'拼接驾驶的海外时间',price:289,color:'绿色',size:'38',imgUrl:require('../../Images/storeShoes.png')}]
 
 export default class ShoppingCart extends Component {
-      //是否使用全选按钮
-      isUseSelectAll = false
+
       // 构造
       constructor(props) {
         super(props);
         // 初始状态
+          //是否使用全选按钮
+          this.isUseSelectAll = false
         this.select = []
         this.state = {
             selectAll:false,

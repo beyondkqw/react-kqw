@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 
-export default class Savety extends Component {
+export default class AboutDemo extends Component {
     render() {
         return (
             <div>

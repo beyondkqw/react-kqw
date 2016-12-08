@@ -66,7 +66,7 @@ export default class Savety extends Component {
                                 </div>
                             </li>
                         </Link>
-                        <Link>
+                        <Link to = '/Setting/BindPhone'>
                             <li className="item-content border_bottom">
                                 <div className="item-inner">
                                     <div className="item-title">
