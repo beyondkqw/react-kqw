@@ -85,3 +85,18 @@ export const cancelReceive = 'order/auth/cancel'
 
 //根据订单号查询订单
 export const listByOrderNo = 'order/auth/listByOrderNo'
+
+//vip等级列表
+export const vipList = 'vip/list'
+
+//查看个人资料
+export const myInfo = 'auth/account/info'
+
+//绑定手机号
+export const bindPhone = 'auth/account/bindingAccName'
+
+//发送绑定手机号验证码
+export const bindSms = 'sms/auth/binding'
+
+//我的合伙人
+export const myPartner = 'auth/account/partner'

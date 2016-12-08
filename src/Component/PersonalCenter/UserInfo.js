@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/personal.css';
+import {MyInfo} from '../../Action/auth'
 
 const UserItem = [
     {name:'会员名',inforamation:'小燕子666',link:''},
@@ -18,6 +19,34 @@ const PersonItem = [
 ];
 
 export default class UserInfo extends Component {
+
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+
+        };
+      }
+
+    componentWillMount() {
+        this.getMyInfo()
+    }
+
+    async getMyInfo(){
+        await MyInfo()
+            .then(res=>{
+                console.log('个人资料',res)
+                this.setState({
+                    name : res.MEMBER_NAME,
+                    amount : res.NOW_AMOUNT,
+                    point : res.NOW_POINTS,
+                    lv : res.LV,
+                    vip_point : res.VIP_POINTS,
+                    headImg:res.IMAGE_URI
+                })
+            })
+    }
 
     render() {
         return (

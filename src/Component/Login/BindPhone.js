@@ -1,9 +1,11 @@
 /**
  * Created by asus on 2016/11/22.
  */
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
+import {ToBindPhone,BindSms} from '../../Action/auth'
+import {ErrorNum,ErrorPs} from '../../Action/rpc'
 
 export default class BindPhone extends Component {
 
@@ -15,14 +17,47 @@ export default class BindPhone extends Component {
             step : 1,
             codeWord : '',
             disabled : false,
+            smsCode : '',
+            Reminder : ''
         };
       }
 
+    componentWillMount() {
+        console.log('sss',this.context.router)
+    }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
     async getCode(){
         clearInterval(this._timer)
-        await this.setState({codeWord:60,disabled:true})
-        this._timer = self.setInterval(()=>this.timer(),1000)
-        console.log('timer',this.state.codeWord)
+        await BindSms(this.refs.mobile.value)
+        .then(res=>{
+            console.log('获取验证码成功',res)
+            this.setState({smsCode:res,codeWord:60,disabled:true})
+            //倒计时
+            this._timer = self.setInterval(()=>this.timer(),1000)
+        })
+        .catch(err=>{
+            this.setState({Reminder:err.message})
+        })
+        //console.log('timer',this.state.codeWord)
+    }
+
+    isTrue(value,parameter){
+        this.setState({Reminder:''})
+        if(parameter === 'phoneNum'){
+            if (!ErrorNum(value)) {
+                this.setState({Reminder:'手机号码有误,请重新填写'})
+                console.log('---------',this.state.Reminder);
+            }
+        }
+        if(parameter === 'pwd'){
+            if (!ErrorPs(value)) {
+                this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
+            }
+        }
     }
 
     //获取短信验证码倒计时
@@ -35,44 +70,86 @@ export default class BindPhone extends Component {
         }
     }
 
-    async changeShowPwd(index){
-        if(index==1){
-            await this.setState({isShowNewPwd:!this.state.isShowNewPwd,typeN:!this.state.typeN})
-        }else if(index==2){
-            await this.setState({isShowSecPwd:!this.state.isShowSecPwd,typeS:!this.state.typeS})
+    async toBind(){
+        if(this.refs.pwd.value==''){
+            this.setState({Reminder:'密码不能为空'})
+            return
+        }
+        if(this.refs.mobile.value==''){
+            this.setState({Reminder:'手机号不能为空'})
+            return
+        }
+        if(this.refs.code.value==''){
+            this.setState({Reminder:'验证码不能为空'})
+            return
         }
 
+        await ToBindPhone(this.refs.mobile.value,this.refs.pwd.value,this.state.smsCode,this.refs.code.value)
+        .then(res=>{
+            console.log('ToBindPhone',res)
+            clearInterval(this._timer)
+            this.context.router.go({pathname:'/personalCenter/savety'})
+        })
+        .catch(err=>{
+            this.setState({Reminder:err.message})
+        })
     }
+
 
     render(){
         return(
-            this.state.step==1?
                 <div>
                     <div className='editorBox_100'>
-                        <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 10}}>密码</span>
-                        <input style={{flex:1}} maxLength="11" className="editorInput" placeholder="请输入手机号"/>
+                        {/*<span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 10}}>密码</span>*/}
+                        <input
+                            ref = 'pwd'
+                            style={{flex:1}}
+                            maxLength="11"
+                            className="editorInput"
+                            placeholder="请输入密码"
+                            type="password"
+                        />
                     </div>
 
-                    <button style={{marginTop:30}} onClick={()=>this.setState({step:2})} className="toLogin">下一步</button>
-                </div>
-                :
-                <div>
+                    {/*<button style={{marginTop:30}} onClick={()=>this.setState({step:2})} className="toLogin">下一步</button>*/}
+
                     <div className='editorBox_100'>
-                        <input maxLength="11" className="editorInput" placeholder="请输入手机号"/>
+                        <input
+                            ref = 'mobile'
+                            maxLength="11"
+                            className="editorInput"
+                            placeholder="请输入手机号"
+                            onBlur = {()=>this.isTrue(this.refs.mobile.value,'phoneNum')}
+                        />
                     </div>
 
                     <div className='editorBox_100'>
 
-                        <input maxLength="6" className="editorInput" placeholder="请填写手机的验证码"/>
+                        <input
+                            ref = 'code'
+                            maxLength="6"
+                            className="editorInput"
+                            placeholder="请填写手机的验证码"
+                        />
                         <input
                             id="bindCode"
                             type="button"
                             disabled={this.state.disabled}
                             onClick={()=>this.getCode()}
-                            value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}/>
+                            value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}
+                        />
                     </div>
 
-                    <button style={{marginTop:30}}  className="toLogin">确 定</button>
+                    <div className="tc f12 color_red width_100 plr mtb loginHeight">
+                        {this.state.Reminder}
+                    </div>
+
+                    <button
+                        onClick = {()=>this.toBind()}
+                        className="toLogin"
+                    >
+                        确 定
+                    </button>
                 </div>
         )
     }

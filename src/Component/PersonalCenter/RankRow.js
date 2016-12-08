@@ -51,7 +51,7 @@ export default class RankRow extends Component {
                 </div>
                 {
                     rightCursor?
-                        <span className="rightCursor pa"><img src={require("../../Images/rightArrow.png")} alt=""/></span>
+                        <span className="rightCursor"><img src={require("../../Images/rightArrow.png")} alt=""/></span>
                         :<span className="font14 color9">{isShow?'总分 : ':null}159999</span>
                 }
             </div>

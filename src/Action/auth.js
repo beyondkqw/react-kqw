@@ -341,4 +341,58 @@ export async function ListByOrderNo(orderNos){
     }
 }
 
+//vip等级列表
+export async function VipList(){
+    try{
+        const res = await apiGet(URL.vipList);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//查看个人资料
+export async function MyInfo(){
+    try{
+        const res = await apiGet(URL.myInfo);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//绑定手机号
+export async function ToBindPhone(accName,pwd,smsNo,code){
+    try{
+        const res = await apiGet(URL.bindPhone,{accName,pwd,smsNo,code});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//发送绑定手机号验证码
+export async function BindSms(accName){
+    try{
+        const res = await apiGet(URL.bindSms,{accName});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//我的合伙人
+export async function MyPartner(){
+    try{
+        const res = await apiGet(URL.myPartner);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
 
