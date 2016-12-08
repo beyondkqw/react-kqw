@@ -368,3 +368,39 @@
     width:16px;
     height:16px;
 }
+
+.goodsParams{
+
+}
+
+.goodsParams-item{
+    height:40px;
+    width:100%;
+    border-bottom: 1px solid #f5f5f5;
+}
+.left-item{
+    display: inline-block;
+    width: 35%;
+    line-height:40px;
+    height:40px;
+    padding-left:10px
+}
+
+.remark-items{
+    width:100%;
+    padding:20px 10px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+.re-headImg{
+    height:30px;
+    width:30px;
+    border-radius: 50%;
+    background:yellow;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.remark-img{
+    width:27%;
+    background: yellow;
+}

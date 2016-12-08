@@ -159,6 +159,59 @@ export default class GoodsDescription extends Component {
        await this.setState({isShow:true,type:type})
     }
 
+    //商品参数
+    showGoodsParams(){
+        return(
+            <div className="goodsParams">
+                <div style={{height:10,backgroundColor:'#f5f5f5'}} />
+
+                {/*商品参数*/}
+                <div className="goodsParams-item font14">
+                    <span className="left-item color9">品牌</span>
+
+                    <span className="color6">xxx</span>
+                </div>
+                <div className="goodsParams-item font14">
+                    <span className="left-item color9">aaa品牌</span>
+
+                    <span className="color6">xxx</span>
+                </div>
+
+            </div>
+        )
+    }
+
+
+
+    showGoodsRemark(){
+        const imgHeight = document.body.scrollWidth
+        //console.log('imgHeight',imgHeight)
+        return(
+            <div className="remark" style={{backgroundColor:'#f5f5f5'}}>
+                <div className="remark-items f12 color9">
+                    <div className="re-headImg mr5">
+                        <img />
+                    </div>
+
+                    <span>朵云云的天堂</span>
+
+                    <p>2016-12-05 尺码：M</p>
+
+                    <div className="flex flex-wrap color6 font14 mt5">
+                        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿啊啊啊啊啊啊啊啊阿啊啊啊啊啊啊
+                    </div>
+
+                    {/*评论图片 最多3张*/}
+                    <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
+                        <img />
+                    </div>
+                </div>
+
+
+            </div>
+        )
+    }
+
     render() {
         const {goodsDetails} = this.state;
         return (
@@ -233,15 +286,17 @@ export default class GoodsDescription extends Component {
                 </div>
                 <SplitLine />
 
-                <Tabscontrol>
+                <Tabscontrol
+                    style={{backgroundColor:'#fff'}}
+                >
                     <div name="商品介绍">
                         我是第一帧
                     </div>
                     <div name="商品参数">
-                        我是第二帧
+                        {this.showGoodsParams()}
                     </div>
                     <div name="评论">
-                        我是第三帧
+                        {this.showGoodsRemark()}
                     </div>
                 </Tabscontrol>
 

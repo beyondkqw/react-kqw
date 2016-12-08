@@ -48,29 +48,31 @@ export default class Search extends Component {
     }
 
     render() {
-        const {onClick,onFocus,onBlur} = this.props
+        const {onClick,onFocus,style,location,_style,_location} = this.props
        /* let bColor = this.state.bg ? this.state.bg : 'transprent';
         console.log(this.state.bg);*/
         return (
-            <div>
-                <div id="search">
+            <div className="flex">
+                <div id="search" style={style}>
                     <div className="search pr">
-                        <div className="frc pr df">
+                        <div style={_style} className="frc pr df">
                             <span className="searchicon"></span>
                             <input
                                 ref = "input"
                                 className="searcInput flex1"
-                                placeholder="搜索宝贝"
+                                placeholder={location?'请输入地址':"搜索宝贝"}
                                 type="text"
                                 onFocus={()=>{
                                     this.setState({display:true})
                                     onFocus&&onFocus(this.state.display)
                                 }}
                             />
-                            <Link to="/GoodsDetail/SearchPage"  className="di height_all">
-                                <button
-                                    className="searchBtn"
-                                    onClick={()=>{
+
+                            {
+                                location?
+                                    <button
+                                        className="searchBtn"
+                                        onClick={()=>{
                                         onClick&&onClick(this.refs.input.value)
                                         if(this.history.length<10){
                                             this.history.push(this.refs.input.value)
@@ -81,11 +83,45 @@ export default class Search extends Component {
                                             this.setState({history:this.history})
                                         }
                                     }}
-                                >搜索</button>
-                            </Link>
+                                    >搜索</button>
+                                    :
+                                    <Link to="/GoodsDetail/SearchPage"  className="di height_all">
+                                        <button
+                                            className="searchBtn"
+                                            onClick={()=>{
+                                        onClick&&onClick(this.refs.input.value)
+                                        if(this.history.length<10){
+                                            this.history.push(this.refs.input.value)
+                                            this.setState({history:this.history,display:false})
+                                        }else{
+                                            this.history.shift()
+                                            this.history.push(this.refs.input.value)
+                                            this.setState({history:this.history})
+                                        }
+                                    }}
+                                        >搜索</button>
+                                    </Link>
+                            }
                         </div>
                     </div>
                 </div>
+
+                {
+                    _location?
+                        <div className="flex flex-align-center flex-pack-center mr5 f12">
+                            <span style={{height:12.5,width:8.5,lineHeight:0}}>
+                                <img src={require('../../Images/common/location.png')}/>
+                            </span>
+
+                            <span style={{color:'#ff5500',marginLeft:5,marginRight:5}}>{location}</span>
+
+                            <span style={{height:6.5,width:11,lineHeight:0}}>
+                                <img src={require('../../Images/common/down.png')}/>
+                            </span>
+                        </div>
+                        :null
+                }
+
 
                 {
                     this.state.display?

@@ -9,10 +9,9 @@ const router = [
     {name:'聚云廉',imgUrl:'background-color:#00d95a',path:'cloudCartoon'},
     {name:'旅行',imgUrl:'background-color:#0074d9',path:'cloudCartoon'},
     {name:'虚礼购物',imgUrl:'background-color:#0074d9'},
-    {name:'社区超市',imgUrl:'background-color:#0074d9',path:'/personalCenter/nearbyShop'},
+    {name:'附近店铺',imgUrl:'background-color:#0074d9',path:'/nearbyShop/locationSearch'},
     {name:'分类',imgUrl:'background-color:#0074d9',path:'/goodsDetails/goodsCategory'}
 ]
-
 
 export default class OtherApp extends Component {
     render() {
