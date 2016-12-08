@@ -23,7 +23,7 @@ import AlreadyUsedDetails from '../Component/CloudCard/AlreadyUsedDetails';
 import DiaryContainer from '../Component/CloudCard/DiaryContainer';
 import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
 import Partner from '../Component/PersonalCenter/Partner';
-import LevelPartner from '../Component/PersonalCenter/LevelPartner';
+import MyCustomer from '../Component/PersonalCenter/MyCustomer';
 import Collect from '../Component/PersonalCenter/Collect';
 import SearchPage from '../Component/GoodsDetails/SearchPage';
 import Login from '../Component/Login/Login';
@@ -81,7 +81,6 @@ const RouteConfig = (
       <Route path="diaryContainer" component={DiaryContainer}/>
       <Route path="personalCenter" component={PersonalCenter}/>
       <Route path="partner" component={Partner}/>
-      <Route path="levelPartner" component={LevelPartner}/>
       <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
       <Route path="Login/Login" component={Login} />
       <Route path="Login/Register" component={Register} />
@@ -100,6 +99,7 @@ const RouteConfig = (
       <Route path="confirmPayment/choosePayment" component={ChoosePayment} />
       <Route path="confirmPayment/surePayment" component={SurePayment} />
       <Route path="personalCenter/nearbyShop" component={NearbyShop} />
+      <Route path="personalCenter/myCustomer" component={MyCustomer} />
       <Route path="personalCenter/commisionGiving" component={CommisionGiving} />
       <Route path="personalCenter/pointGiving" component={PointGiving} />
       <Route path="personalCenter/balanceGiving" component={BalanceGiving} />

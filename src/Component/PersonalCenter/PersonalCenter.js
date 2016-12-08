@@ -9,14 +9,14 @@ const personDetail = [
     {name:'待付款',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
     {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
     {name:'待评价',imgUrl:require('../../Images/modify.png'),num:3,link:'/orderList'},
-    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
-    {name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}
+    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}
+    /*{name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}*/
 ]
 const ItemList = [
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
     {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
-    {name:'我的余额',imgUrl:require('../../Images/balance.png'),link:''},
+    {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:''},
     {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:''},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
@@ -59,8 +59,11 @@ export default class PersonalCenter extends Component {
                     </div>
                 </div>
                 <div className="line"></div>
-                <div className="good_mr font14 color6">
-                    我的订单
+                <div className="plAll">
+                    <span className="font14 color6">我的订单</span>
+                    <Link className="fr" to="/orderList" query={{index:4}}>
+                        <span className="f12 color9">全部订单</span>
+                    </Link>
                 </div>
                 <div className="df border_top border_bottom ptb1">
                     {
@@ -76,7 +79,7 @@ export default class PersonalCenter extends Component {
                                               :null
                                             }
                                         </p>
-                                        <p className="f12 m_top color6">{el.name}</p>
+                                        <p className="f12 m_top color9">{el.name}</p>
                                     </div>
                                 </Link>
                             )

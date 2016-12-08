@@ -12,7 +12,7 @@ export default class ItemDetails extends Component {
                 </div>
                 <div>
                     <span className="productShow db">{title}</span>
-                    <span>{attr}</span>
+                    <span className="color9">{attr}</span>
                 </div>
                 <div>
                     <span className="colorff f12">￥</span><span className="colorff font18">{price}</span>
