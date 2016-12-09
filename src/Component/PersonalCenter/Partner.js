@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import LiItem from '../../Component/CommonComponent/LiItem'
 import PersonalInformation from '../../Component/PersonalCenter/PersonalInformation';
 import '../../Stylesheets/App/personal.css';
 import {MyPartner} from '../../Action/auth'

@@ -14,8 +14,8 @@
     font-size:14px;
 }
 .deleteImg{
-    width:1rem;
-    height:1rem;
+    width:0.75rem;
+    height:0.75rem;
     line-height:0;
     margin:auto 5px auto 0;
 }
@@ -41,6 +41,18 @@
     background-color:transparent;
     float: left;
 }
+.searcInputOther::-webkit-input-placeholder { /* WebKit browsers */
+    color: #666;
+}
+.searcInputOther:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #666;
+}
+.searcInputOther::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #666;
+}
+.searcInputOther:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #666;
+}
 .searcInput::-webkit-input-placeholder { /* WebKit browsers */
     color: #ff5500;
 }
@@ -61,7 +73,6 @@
     border-bottom:none;
     border-left:1px solid #ffddcc;
     background-color: transparent;
-    color: #ff5500;
 }
 
 /*标题*/

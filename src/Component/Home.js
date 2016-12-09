@@ -64,7 +64,9 @@ class Home extends Component {
     return (
       <div className="containerNav bkg_color">
         <div className="pf t0 width100" style={{zIndex:100}}>
-            <Search />
+            <Search
+                style={{backgroundColor:'#ff5500'}}
+            />
         </div>
         <Carousel
             images = {this.state.banner}

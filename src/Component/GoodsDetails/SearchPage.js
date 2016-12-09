@@ -184,6 +184,7 @@ export default class SearchPage extends Component {
                         //onBlur = {()=>this.setState({history:false})}
                         onClick = {(value)=>this.SearchBtn(value)}
                         display = {this.state.history}
+                        style={{backgroundColor:'#ff5500'}}
                     />
                     {/*todo scroll滚动时置顶fixed*/}
                     <Tabscontrol
@@ -226,7 +227,7 @@ export default class SearchPage extends Component {
                     }
                 </div>
 
-                /*商品列表---最下层*/
+                {/*商品列表---最下层*/}
                 <div
                     onClick = {()=>this.setState({history:false})}
                     className="goodListContainer"

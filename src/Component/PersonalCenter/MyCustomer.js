@@ -36,7 +36,7 @@ export default class MyCustomer extends Component {
                 {
                     memberList.map(el=>{
                         return(
-                            <Link to="/personalCenter/userInfo">
+                            <Link to="/personalCenter/toWatchOtherInfo">
                                 <RankRow
                                     rightCursor={true}
                                     more={true}

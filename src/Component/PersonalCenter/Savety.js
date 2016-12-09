@@ -9,7 +9,7 @@ export default class Savety extends Component {
                 <div className="bkg_gray save_h2 pl8">账户</div>
                 <div className="list-block m0 font14">
                     <ul>
-                        <Link>
+                        <Link to='/personalCenter/myBankCark'>
                             <li className="item-content item-link border_bottom isConfirmSet">
                                 <div className="item-inner">
                                     <div className="item-title">

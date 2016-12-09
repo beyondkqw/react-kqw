@@ -48,7 +48,7 @@ export default class Search extends Component {
     }
 
     render() {
-        const {onClick,onFocus,style,location,_style,_location} = this.props
+        const {onClick,onFocus,style,location,_style,_location,toChange} = this.props
        /* let bColor = this.state.bg ? this.state.bg : 'transprent';
         console.log(this.state.bg);*/
         return (
@@ -57,11 +57,16 @@ export default class Search extends Component {
                     <div className="search pr">
                         <div style={_style} className="frc pr df">
                             <span className="searchicon">
-                                <img src={require('../../Images/search.png')} alt=""/>
+                                {
+                                    toChange?
+                                        <img src={require('../../Images/search_gray.png')} alt=""/>
+                                        :
+                                        <img src={require('../../Images/search.png')} alt=""/>
+                                }
                             </span>
                             <input
                                 ref = "input"
-                                className="searcInput flex1"
+                                className={toChange?"searcInputOther flex1":"searcInput flex1"}
                                 placeholder={location?'请输入地址':"搜索宝贝"}
                                 type="text"
                                 onFocus={()=>{
@@ -76,7 +81,7 @@ export default class Search extends Component {
                             {
                                 location?
                                     <button
-                                        className="searchBtn"
+                                        className={toChange?"searchBtn color6":"searchBtn color_yellow"}
                                         onClick={()=>{
                                         onClick&&onClick(this.refs.input.value)
                                         if(this.history.length<10){
@@ -92,7 +97,7 @@ export default class Search extends Component {
                                     :
                                     <Link to="/GoodsDetail/SearchPage"  className="di height_all">
                                         <button
-                                            className="searchBtn"
+                                            className={toChange?"searchBtn color6":"searchBtn color_yellow"}
                                             onClick={()=>{
                                         onClick&&onClick(this.refs.input.value)
                                         if(this.history.length<10){

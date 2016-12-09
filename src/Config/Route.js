@@ -61,6 +61,9 @@ import Retailing from '../Component/PersonalCenter/Retailing'
 import RetailingDetails from '../Component/PersonalCenter/RetailingDetails'
 import TakenDetails from '../Component/PersonalCenter/TakenDetails'
 import ConfirmGivenPerson from '../Component/PersonalCenter/ConfirmGivenPerson'
+import MyBankCark from '../Component/PersonalCenter/MyBankCark'
+import BankInformation from '../Component/PersonalCenter/BankInformation'
+import ToWatchOtherInfo from '../Component/PersonalCenter/ToWatchOtherInfo'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -126,6 +129,9 @@ const RouteConfig = (
       <Route path="personalCenter/retailingDetails" component={RetailingDetails} />
       <Route path="personalCenter/takenDetails" component={TakenDetails} />
       <Route path="personalCenter/confirmGivenPerson" component={ConfirmGivenPerson} />
+      <Route path="personalCenter/myBankCark" component={MyBankCark} />
+      <Route path="personalCenter/bankInformation" component={BankInformation} />
+      <Route path="personalCenter/toWatchOtherInfo" component={ToWatchOtherInfo} />
     </Route>
   </Router>
 );

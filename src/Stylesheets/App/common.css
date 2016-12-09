@@ -111,6 +111,9 @@ p{
 .ptb1{
     padding:0.2rem 0;
 }
+.pb1{
+    padding-bottom:1rem;
+}
 .ChooseHeight{
     padding:1rem 0.5rem;
 }
@@ -209,6 +212,9 @@ p{
 }
 .pa_top{
     padding-top:0.5rem;
+}
+.pa_left1{
+    padding-left:1rem;
 }
 .pa_top1{
     padding-top:1rem;

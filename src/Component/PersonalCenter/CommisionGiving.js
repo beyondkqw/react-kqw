@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import LiComponent from '../../Component/CommonComponent/LiComponent';
@@ -12,21 +12,48 @@ const ChagreList = [
     {title:'可用佣金',name:'12564',imgUrl:require('../../Images/myapply.png'),isShow:false,link:''}
 ]
 export default class CommisionGiving extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            getToChange:''
+        };
+      }
+    componentWillMount() {
+        this.setState({getToChange:this.props.location.query.toChange})
+    }
     render() {
         return (
             <div className="containerNav bkg_color">
                 <div className="list-block m0">
                     <ul>
-                        <Link to='/personalCenter/confirmGivenPerson'>
-                            <li className="item-content item-link pl  border_bottom">
-                                <div className="item-media"><i className="icon icon-f7"></i></div>
-                                <div className="item-inner margin0">
-                                    <div className="item-title color6 font14">
-                                        确定转赠人
-                                    </div>
-                                </div>
-                            </li>
-                        </Link>
+                        {
+                            this.state.getToChange?
+                                <Link to='/personalCenter/confirmGivenPerson'>
+                                    <li className ='item-link item-content border_bottom isConfirmSet'>
+                                        <div className="item-inner">
+                                            <div className="item-title height_all">
+                                                <span className="di headerImg">
+                                                    <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
+                                                </span>
+                                                <span className="di margin15 color9 font14">多云云的议案唐</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </Link>
+                                :
+                                <Link to='/personalCenter/confirmGivenPerson'>
+                                    <li className="item-content item-link pl  border_bottom">
+                                        <div className="item-media"><i className="icon icon-f7"></i></div>
+                                        <div className="item-inner margin0">
+                                            <div className="item-title color6 font14">
+                                                确定转赠人
+                                            </div>
+                                        </div>
+                                    </li>
+                                </Link>
+                        }
                     </ul>
                 </div>
                 <SplitLine />

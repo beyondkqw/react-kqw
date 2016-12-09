@@ -233,10 +233,6 @@
 .allIncome_Img{
     background: url('../../Images/allIncomeImg.png') no-repeat;
 }
-.supplement{
-    background-size:100% 100%;
-    background-position: center;
-}
 .cellSize{
     width:1.5rem;
     height:1.5rem;
@@ -279,6 +275,15 @@
 .incomeImg{
     width:3rem;
     height:3rem;
+}
+/*我的银行卡*/
+.BankHeight{
+    height:5.2rem;
+    background:url('../../Images/bankImg.png') no-repeat;
+    }
+.supplement{
+    background-size:100% 100%;
+    background-position: center;
 }
 @keyframes scale {
     from {
