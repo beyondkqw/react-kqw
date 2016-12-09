@@ -407,3 +407,36 @@ export async function TeamMembers(){
     }
 }
 
+//全国排名
+export async function CountryRankList(){
+    try{
+        const res = await apiGet(URL.countryRank);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//成员(俱乐部)信息
+export async function MemberInfo(){
+    try{
+        const res = await apiGet(URL.memberInfo);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//查看用户资料
+export async function UserInfo(accId){
+    try{
+        const res = await apiGet(URL.userInfo,{accId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+

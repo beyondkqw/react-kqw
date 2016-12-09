@@ -103,3 +103,12 @@ export const myPartner = 'auth/account/partner'
 
 //团队成员
 export const membersInfo = 'auth/account/teemList'
+
+//全国排名
+export const countryRank = 'accountInfo/accountList'
+
+//成员(俱乐部)信息
+export const memberInfo = 'auth/account/memberInfo'
+
+//查看用户资料
+export const userInfo = 'accountInfo/info'
