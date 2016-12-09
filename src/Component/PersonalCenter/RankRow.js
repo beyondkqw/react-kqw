@@ -5,16 +5,16 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 
 const icon = [
-    require('../../Images/person/first.png'),
+    require('../../Images/person/third.png'),
     require('../../Images/person/second.png'),
-    require('../../Images/person/third.png')
+    require('../../Images/person/first.png')
 
 ]
 
 export default class RankRow extends Component {
 
     render(){
-        const {num,more,vip,isShow,rightCursor,memberName,imgUrl,vipPoints} = this.props
+        const {num,more,vip,isShow,rightCursor,memberName,imgUrl,vipPoints,_vipPoints} = this.props
         return(
             <div className="rankRow flex flex-align-center flex-pack-justify">
                 <div className="flex flex-align-center">
@@ -22,7 +22,7 @@ export default class RankRow extends Component {
                     {
                         num<4?
                             <span className="rankIcon mr10">
-                                <img src={icon[0]}/>
+                                <img src={num==1?icon[0]:num==2?icon[1]:num==3?icon[2]:null}/>
                             </span>
                             :
                             num>0?
@@ -35,13 +35,13 @@ export default class RankRow extends Component {
                         <img className="border_ra50" src={imgUrl}/>
                         {
                             more?
-                                <div className="vipIcon pa"><span>V</span><span>{vipPoints}</span></div>
+                                <div className="vipIcon pa"><span>V</span><span className="f10">{vipPoints}</span></div>
                                 :null
                         }
                         {
                             vip?
                                 <span className="rankIcon pa " style={{top:-9,left:10}}>
-                                    <img src={icon[0]}/>
+                                    <img src={vip==1?icon[0]:vip==2?icon[1]:vip==3?icon[2]:null}/>
                                 </span>
                                 :null
                         }
@@ -52,7 +52,7 @@ export default class RankRow extends Component {
                 {
                     rightCursor?
                         <span className="rightCursor"><img src={require("../../Images/rightArrow.png")} alt=""/></span>
-                        :<span className="font14 color9">{isShow?'总分 : ':null}159999</span>
+                        :<span className="font14 color9">{isShow?'总分 : ':null}{_vipPoints}</span>
                 }
             </div>
 
