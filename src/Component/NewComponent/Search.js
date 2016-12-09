@@ -53,10 +53,12 @@ export default class Search extends Component {
         console.log(this.state.bg);*/
         return (
             <div className="flex">
-                <div id="search" style={style}>
+                <div id="searchNav" style={style}>
                     <div className="search pr">
                         <div style={_style} className="frc pr df">
-                            <span className="searchicon"></span>
+                            <span className="searchicon">
+                                <img src={require('../../Images/search.png')} alt=""/>
+                            </span>
                             <input
                                 ref = "input"
                                 className="searcInput flex1"
@@ -67,6 +69,9 @@ export default class Search extends Component {
                                     onFocus&&onFocus(this.state.display)
                                 }}
                             />
+                            <span className="di deleteImg">
+                                <img src={require('../../Images/delete.png')} alt=""/>
+                            </span>
 
                             {
                                 location?

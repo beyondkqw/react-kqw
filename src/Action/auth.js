@@ -396,3 +396,14 @@ export async function MyPartner(){
     }
 }
 
+//成员列表
+export async function TeamMembers(){
+    try{
+        const res = await apiGet(URL.membersInfo);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+

@@ -60,6 +60,7 @@ import AllIncome from '../Component/PersonalCenter/AllIncome'
 import Retailing from '../Component/PersonalCenter/Retailing'
 import RetailingDetails from '../Component/PersonalCenter/RetailingDetails'
 import TakenDetails from '../Component/PersonalCenter/TakenDetails'
+import ConfirmGivenPerson from '../Component/PersonalCenter/ConfirmGivenPerson'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -124,6 +125,7 @@ const RouteConfig = (
       <Route path="personalCenter/retailing" component={Retailing} />
       <Route path="personalCenter/retailingDetails" component={RetailingDetails} />
       <Route path="personalCenter/takenDetails" component={TakenDetails} />
+      <Route path="personalCenter/confirmGivenPerson" component={ConfirmGivenPerson} />
     </Route>
   </Router>
 );

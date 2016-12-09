@@ -13,8 +13,8 @@ let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
 
-//const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
+const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+//const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
 export function getUserInfo(){
@@ -203,7 +203,6 @@ export function ErrorNum(value) {
         return true;
     }
 }
-
 //校验密码
 export function ErrorPs(value) {
     if (!(/(?!^[0-9]+$)(?!^[A-Z]+$)(?!^[a-z]+$)(?!^[^A-z0-9]+$)^.{6,16}/.test(value))) {

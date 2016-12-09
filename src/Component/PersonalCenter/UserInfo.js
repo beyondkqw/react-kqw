@@ -33,7 +33,7 @@ export default class UserInfo extends Component {
                 })
             })
     }
-    
+
     render() {
         const {isShow} = this.state
         return (

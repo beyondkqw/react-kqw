@@ -100,3 +100,6 @@ export const bindSms = 'sms/auth/binding'
 
 //我的合伙人
 export const myPartner = 'auth/account/partner'
+
+//团队成员
+export const membersInfo = 'auth/account/teemList'
