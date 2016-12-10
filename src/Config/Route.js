@@ -64,6 +64,7 @@ import ConfirmGivenPerson from '../Component/PersonalCenter/ConfirmGivenPerson'
 import MyBankCark from '../Component/PersonalCenter/MyBankCark'
 import BankInformation from '../Component/PersonalCenter/BankInformation'
 import ToWatchOtherInfo from '../Component/PersonalCenter/ToWatchOtherInfo'
+import WithdrawCash from '../Component/PersonalCenter/WithdrawCash'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -132,6 +133,7 @@ const RouteConfig = (
       <Route path="personalCenter/myBankCark" component={MyBankCark} />
       <Route path="personalCenter/bankInformation" component={BankInformation} />
       <Route path="personalCenter/toWatchOtherInfo" component={ToWatchOtherInfo} />
+      <Route path="personalCenter/withdrawCash" component={WithdrawCash} />
     </Route>
   </Router>
 );

@@ -280,11 +280,37 @@
 .BankHeight{
     height:5.2rem;
     background:url('../../Images/bankImg.png') no-repeat;
-    }
+}
+/*确认提现modal*/
+.imcomeModal{
+    z-index: 1050;
+    background-color: #fff;
+}
+.hideModal{
+    width:1rem;
+    height:1rem;
+}
+.cashHeight{
+    height:3rem;
+    line-height:3rem;
+}
+.modal_input{
+    height:2.25rem;
+}
+.modal_input input{
+    background:url('../../Images/pwdInput.png') no-repeat;
+    background-size:100% 100%;
+    background-position: center;
+}
 .supplement{
     background-size:100% 100%;
     background-position: center;
 }
+.liInput{
+    height:2.75rem;
+    line-height:2.75rem;
+}
+
 @keyframes scale {
     from {
         opacity: 0;
@@ -338,4 +364,23 @@
     border:1px solid #ff5500;
     border-radius: 5px;
 }
+@media screen and (max-width: 414px){
+    .input_Spacing{
+        letter-spacing:2.4rem;
+        text-indent: 25px;
+    }
+}
+@media screen and (max-width: 375px){
+    .input_Spacing{
+        letter-spacing:2.3rem;
+        text-indent: 23px;
+    }
+}
+@media screen and (max-width: 320px){
+    .input_Spacing{
+        letter-spacing:1.8rem;
+        text-indent: 18px;
+    }
+}
+
 

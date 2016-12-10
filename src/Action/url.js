@@ -112,3 +112,9 @@ export const memberInfo = 'auth/account/memberInfo'
 
 //查看用户资料
 export const userInfo = 'accountInfo/info'
+
+//赠送佣金
+export const giveAmount = 'auth/account/giveAmount'
+
+//我的佣金记录
+export const giveAwayRecord = 'auth/account/giveAwayRecord'
