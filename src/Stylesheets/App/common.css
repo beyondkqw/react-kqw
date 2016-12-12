@@ -111,6 +111,9 @@ p{
 .ptb1{
     padding:0.2rem 0;
 }
+.ptlr{
+    padding:0 1.1rem;
+}
 .pb1{
     padding-bottom:1rem;
 }
@@ -236,6 +239,9 @@ p{
 }
 .width_34{
     width:34%;
+}
+.width_3333{
+    width:33.33%;
 }
 .width50{
     width:50%;

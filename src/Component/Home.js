@@ -33,7 +33,6 @@ class Home extends Component {
         this.getHomeBanner()
         this.getHomeMoudle()
     }
-
     //首页banner
    async getHomeBanner(){
        await HomeBanner('BANNER',1,5)

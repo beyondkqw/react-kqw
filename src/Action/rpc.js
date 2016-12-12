@@ -7,13 +7,14 @@ const KEY_TOKEN = 'accessToken';
 const KEY_USERINFO = 'accessUserInfo';
 
 import URI from 'urijs';
+import {WechatAuth} from './autoLogin';
 
 
 let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
 
-const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
 //const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
@@ -164,7 +165,7 @@ async function request (urlKey,method,params = {},token = ''){
                 //    shadow: true,
                 //    animation: true,
                 //});
-                wechatAuth();
+                WechatAuth()
                 throw new Error('请先登录');
             }
             else{
@@ -187,14 +188,6 @@ export async function apiPost(urlKey,params = {}){
     return await request(urlKey,'POST',params,'');
 }
 
-//自动授权登录
-export function wechatAuth() {
-    token = localStorage.getItem("tokenNum");
-    var newPath = ROOT_URL + "/wechat/baseCode";
-    var nowPath = window.location.href.split('?')[0];
-    location.href = newPath + "?callBackUrl=" + nowPath + "&token="+token +"&imei=" + imei;
-}
-
 // 验证手机号是否正确
 export function ErrorNum(value) {
     if (!(/^((13[0-9])|(15[^4,\D])|(18[0-1,3-9]))\d{8}$/.test(value))) {
@@ -214,8 +207,6 @@ export function ErrorPs(value) {
 // 获取地址栏请求参数
 export function GetQueryString(name) {
     let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    console.log('reg==============>',reg);
     let r = window.location.search.substr(1).match(reg);
-    console.log('r==============>',r);
     if(r!=null)return  unescape(r[2]); return null;
 }

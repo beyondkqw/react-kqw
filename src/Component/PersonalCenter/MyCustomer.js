@@ -36,13 +36,14 @@ export default class MyCustomer extends Component {
                 {
                     memberList.map(el=>{
                         return(
-                            <Link to="/personalCenter/toWatchOtherInfo">
+                            <Link to="/personalCenter/toWatchOtherInfo" query={{memberId:el.accId}}>
                                 <RankRow
                                     rightCursor={true}
                                     more={true}
                                     memberName = {el.memberName}
                                     imgUrl = {el.imageUri}
                                     vipPoints = {el.vipPoints?el.vipPoints:0}
+
                                 />
                             </Link>
                         )

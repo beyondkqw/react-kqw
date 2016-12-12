@@ -429,7 +429,7 @@ export async function MemberInfo(){
     }
 }
 
-//查看用户资料
+//查看用户资料:性别:0男1女
 export async function UserInfo(accId){
     try{
         const res = await apiGet(URL.userInfo,{accId});
@@ -444,6 +444,28 @@ export async function UserInfo(accId){
 export async function _OrderDetail(orderDetailId){
     try{
         const res = await apiGet(URL._orderDetail,{orderDetailId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//赠送佣金
+export async function GiveAmount(accId,amount){
+    try{
+        const res = await apiGet(URL.giveAmount,{accId,amount});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//我的佣金记录
+export async function GiveAwayRecord(accId,amount){
+    try{
+        const res = await apiGet(URL.giveAwayRecord,{accId,amount});
         return res;
     }catch (err){
         console.warn(err);

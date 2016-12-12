@@ -115,3 +115,9 @@ export const userInfo = 'accountInfo/info'
 
 //根据订单详情ID， 查询订单详情
 export const _orderDetail = 'order/orderdetail'
+
+//赠送佣金
+export const giveAmount = 'auth/account/giveAmount'
+
+//我的佣金记录
+export const giveAwayRecord = 'auth/account/giveAwayRecord'
