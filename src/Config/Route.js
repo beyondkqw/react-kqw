@@ -65,6 +65,9 @@ import MyBankCark from '../Component/PersonalCenter/MyBankCark'
 import BankInformation from '../Component/PersonalCenter/BankInformation'
 import ToWatchOtherInfo from '../Component/PersonalCenter/ToWatchOtherInfo'
 import WithdrawCash from '../Component/PersonalCenter/WithdrawCash'
+import JdyStock from '../Component/PersonalCenter/JdyStock'
+import StockDetail from '../Component/PersonalCenter/StockDetail'
+
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -134,6 +137,8 @@ const RouteConfig = (
       <Route path="personalCenter/bankInformation" component={BankInformation} />
       <Route path="personalCenter/toWatchOtherInfo" component={ToWatchOtherInfo} />
       <Route path="personalCenter/withdrawCash" component={WithdrawCash} />
+      <Route path="personalCenter/jdyStock" component={JdyStock} />
+      <Route path="personalCenter/stockDetail" component={StockDetail} />
     </Route>
   </Router>
 );

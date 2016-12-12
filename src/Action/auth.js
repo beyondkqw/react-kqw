@@ -440,6 +440,17 @@ export async function UserInfo(accId){
     }
 }
 
+//根据订单详情ID， 查询订单详情
+export async function _OrderDetail(orderDetailId){
+    try{
+        const res = await apiGet(URL._orderDetail,{orderDetailId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
 //赠送佣金
 export async function GiveAmount(accId,amount){
     try{

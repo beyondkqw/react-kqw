@@ -387,4 +387,10 @@
     }
 }
 
+/*聚朵云股权*/
+.stockBanner{
+    height:144px;
+    width:100%;
+    background:url('../../Images/common/background.png') no-repeat 100% center;
+}
 

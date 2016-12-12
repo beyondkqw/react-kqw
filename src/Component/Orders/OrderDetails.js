@@ -28,7 +28,7 @@ export default class OrderDetails extends Component {
     }
 
     render() {
-        const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated} = this.props
+        const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated,query} = this.props
         return (
             <div>
                 {
@@ -61,6 +61,17 @@ export default class OrderDetails extends Component {
                                                     </p>
                                                     <p className="color9 font14"><span>X</span><span>{item.num}</span></p>
                                                 </div>
+                                                {
+                                                    toRated?
+                                                        <div
+                                                            style={{bottom:0,right:0}}
+                                                            className="pa mt55">
+                                                            <Link to="orderList/publishEvalute" query={{id:item.id}}>
+                                                                <button className="bkg_ff border_ra color_white">评价</button>
+                                                            </Link>
+                                                        </div>
+                                                        :null
+                                                }
                                             </div>
                                         </div>
                                         )
@@ -95,15 +106,7 @@ export default class OrderDetails extends Component {
                                                 </div>
                                                 :null
                                         }
-                                        {
-                                            toRated?
-                                                <div className="fr mt55">
-                                                    <Link to="orderList/publishEvalute">
-                                                        <button className="bkg_ff border_ra color_white">评价</button>
-                                                    </Link>
-                                                </div>
-                                                :null
-                                        }
+
                                         {
                                             alreadyRated?
                                                 <div className="fr mt55">
