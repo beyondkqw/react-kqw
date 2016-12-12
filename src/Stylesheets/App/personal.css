@@ -289,6 +289,9 @@
 .hideModal{
     width:1rem;
     height:1rem;
+    line-height:0;
+    top:15px;
+    right:10px;
 }
 .cashHeight{
     height:3rem;
@@ -296,8 +299,9 @@
 }
 .modal_input{
     height:2.25rem;
+    line-height:2.25rem;
 }
-.modal_input input{
+.modal_input{
     background:url('../../Images/pwdInput.png') no-repeat;
     background-size:100% 100%;
     background-position: center;

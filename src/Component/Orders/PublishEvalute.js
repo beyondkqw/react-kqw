@@ -13,7 +13,13 @@ export default class PublishEvalute extends Component {
                         <img className="border_ra" src={require('../../Images/storeClothes.png')} alt=""/>
                     </div>
                     <div className="flex1 ml5 font14 color6 height3">
-                        <textarea className="height_all borderno" name="" id="" cols="30" rows="10"></textarea>
+                        <textarea
+                            className="height_all borderno"
+                            name=""
+                            placeholder="评价一下吧。。。"
+                            cols="30"
+                            rows="10"
+                        ></textarea>
                     </div>
                 </div>
                 <div className=" border_bottom">
@@ -23,7 +29,7 @@ export default class PublishEvalute extends Component {
                     </div>
                 </div>
                 <SplitLine/>
-                <div>
+                {/*<div>
                     <ul className="font14">
                         <li className="plr evalute_h border_bottom">
                             <div className="fl">
@@ -50,7 +56,7 @@ export default class PublishEvalute extends Component {
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div>*/}
                 <Link to="/orderList/chaseRatings">
                     <PublishComment />
                 </Link>

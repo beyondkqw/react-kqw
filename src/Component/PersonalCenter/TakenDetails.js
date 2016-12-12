@@ -30,7 +30,9 @@ export default class TakenDetails extends Component {
         return (
             <div>
                 <SplitLine />
-                <RetailingItem />
+                <RetailingItem
+                    isShowDate={true}
+                />
             </div>
         );
     }
