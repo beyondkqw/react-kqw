@@ -473,3 +473,14 @@ export async function GiveAwayRecord(accId,amount){
     }
 }
 
+//商品评价
+export async function Remark(orderNo,productId,storeId){
+    try{
+        const res = await apiGet(URL.remark,{orderNo,productId,storeId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+

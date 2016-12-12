@@ -121,3 +121,6 @@ export const giveAmount = 'auth/account/giveAmount'
 
 //我的佣金记录
 export const giveAwayRecord = 'auth/account/giveAwayRecord'
+
+//商品评价
+export const remark = 'comment/auth/save'
