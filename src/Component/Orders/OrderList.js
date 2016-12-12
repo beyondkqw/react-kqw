@@ -45,11 +45,13 @@ export default class OrderList extends Component {
         await GetOrderList(param)
             .then(res=>{
                 this.setState({orderItems:res.resultList})
+                console.log(param,res.resultList)
             })
             .catch(err=>{
                 console.warn('err',err)
             })
     }
+
     render() {
         const {orderItems} = this.state
         return (
@@ -86,6 +88,7 @@ export default class OrderList extends Component {
                         <OrderDetails
                            orderDetails = {orderItems}
                            toRated = {true}
+                           //query = {}
                         />
                     </div>
                     :null

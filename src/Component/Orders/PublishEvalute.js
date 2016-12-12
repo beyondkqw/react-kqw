@@ -3,8 +3,21 @@ import {Link} from 'react-router';
 import PublishComment from '../../Component/CommonComponent/PublishComment'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
+import {_OrderDetail} from '../../Action/auth'
 
 export default class PublishEvalute extends Component {
+
+    componentWillMount() {
+        this.getOrderDetail()
+    }
+
+    async getOrderDetail(){
+        await _OrderDetail(this.props.location.query.id)
+        .then(res=>{
+            console.log('ererer',res)
+        })
+    }
+
     render() {
         return (
             <div className="containerNav">

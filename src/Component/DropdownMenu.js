@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classname from 'classnames';
 import {Link} from 'react-router';
 
-export default class Home extends Component {
+export default class DropdownMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
