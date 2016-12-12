@@ -31,7 +31,7 @@ export default class Retailing extends Component {
             <div className="containerNav">
                 <Link to="/personalCenter/retailingDetails">
                     <RetailingItem
-
+                        isShowDate={true}
                     />
                 </Link>
             </div>

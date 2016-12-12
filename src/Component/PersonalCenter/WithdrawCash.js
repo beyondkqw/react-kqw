@@ -10,7 +10,7 @@ export default class WithdrawCash extends Component {
       constructor(props) {
         super(props);
         // 初始状态
-        this.pwdArray=[]
+        this.copyArray=[]
         this.state = {
             toShaowModal:false,
             pwd:'',
@@ -22,19 +22,22 @@ export default class WithdrawCash extends Component {
     }
     //输入密码
     async addNumToArray(num){
-        if(this.pwdArray.length < 6){
-            await this.pwdArray.push(num)
-            this.setState({pwd:this.pwdArray.join('')})
+        if(this.copyArray.length < 6){
+            await this.copyArray.push(num)
+            this.setState({pwdArray:this.copyArray})
+            console.log('this.state.pwdArray',this.copyArray)
+            //this.setState({pwd:this.pwdArray.join('')})
         }
 
     }
     //删除密码
     async deletePwd(){
-        await this.pwdArray.splice(this.pwdArray.length-1)
-        this.setState({pwd:this.pwdArray.join('')})
+        await this.copyArray.splice(this.copyArray.length-1)
+        this.setState({pwdArray:this.copyArray})
     }
     render() {
         const {toShaowModal,pwdArray,pwd} = this.state
+        console.log('pwdArray===========>',pwdArray)
         return (
             <div className="bkg_color">
                 <div className="list-block m0">
@@ -115,9 +118,9 @@ export default class WithdrawCash extends Component {
                     toShaowModal?
                         <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
                             <div className="imcomeModal pf bottom0 width100">
-                                <p className="tc width100 userHeight border_bottom">
+                                <p className="tc width100 userHeight border_bottom pr">
                                     <span className="font16">输入密码</span>
-                                    <span className="di hideModal fr mr5">
+                                    <span className="di hideModal pa">
                                         <img
                                             src={require('../../Images/delete.png')}
                                             alt=""
@@ -129,14 +132,22 @@ export default class WithdrawCash extends Component {
                                     <span>提现金额</span><span>200.00</span>
                                 </p>
                                 <div className="ptlr">
-                                    <div className="modal_input">
-                                        <input
+                                    <div className="modal_input border_ra">
+                                        {/*<input
                                             className="width100 height_all borderno supplement input_Spacing"
                                             type="text"
                                             maxLength="6"
                                             value={pwd}
                                             readOnly="readonly"
-                                        />
+                                        />*/}
+                                        {
+                                            pwdArray.map(el=>{
+                                                return(
+                                                    <div className="fl width16 height_all tc">{el}</div>
+                                                )
+                                            })
+                                        }
+
                                     </div>
                                 </div>
                                 <div className="ptlr mt5">
