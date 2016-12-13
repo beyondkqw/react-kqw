@@ -73,6 +73,7 @@ import Recharge from '../Component/PersonalCenter/Recharge'
 import RechargeNum from '../Component/PersonalCenter/RechargeNum'
 import MyAlipay from '../Component/PersonalCenter/MyAlipay'
 import CommissionCash from '../Component/PersonalCenter/CommissionCash'
+import BalanceCashRule from '../Component/PersonalCenter/BalanceCashRule'
 
 
 
@@ -152,6 +153,7 @@ const RouteConfig = (
       <Route path="totalDetails" component={TotalDetails} />
       <Route path="personalCenter/myAlipay" component={MyAlipay} />
       <Route path="personalCenter/commissionCash" component={CommissionCash} />
+      <Route path="personalCenter/balanceCashRule" component={BalanceCashRule} />
     </Route>
   </Router>
 );

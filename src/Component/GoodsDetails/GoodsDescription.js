@@ -4,7 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
 import '../../Stylesheets/App/goodsDetails.css';
-import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping} from '../../Action/auth'
+import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -28,7 +28,8 @@ export default class GoodsDescription extends Component {
             //是否收藏
             status:null,
             attributeList : [],
-            type:''
+            type:'',
+            remarkList:[]
         };
     }
     //弹出popup
@@ -39,10 +40,21 @@ export default class GoodsDescription extends Component {
     componentWillMount() {
         this.getDetails()
         this.getProductAttribute()
+        this.getRemarkList()
     }
 
     static contextTypes = {
         router:PropTypes.object
+    }
+
+    //获取评论列表
+    async getRemarkList(){
+        await RemarkList(this.props.location.query.id,1)
+        .then(res=>{
+            console.log('评论列表',res)
+            const {resultList} = res
+            this.setState({remarkList:resultList})
+        })
     }
 
     //商品属性
@@ -182,30 +194,47 @@ export default class GoodsDescription extends Component {
     }
 
 
-
+    //评价列表
     showGoodsRemark(){
+        const {remarkList} = this.state
         const imgHeight = document.body.scrollWidth
         //console.log('imgHeight',imgHeight)
         return(
             <div className="remark" style={{backgroundColor:'#f5f5f5'}}>
-                <div className="remark-items f12 color9">
-                    <div className="re-headImg mr5">
-                        <img />
-                    </div>
+                {
+                    remarkList.map((el,index)=>{
+                        return(
+                            <div
+                                className="remark-items f12 color9"
+                                key = {index}
+                            >
+                                <div className="re-headImg mr5">
+                                    <img
+                                        className="border_ra50"
+                                        src={el.IMAGE_URI}
+                                    />
+                                </div>
 
-                    <span>朵云云的天堂</span>
+                                <span>{el.MEMBER_NAME}</span>
 
-                    <p>2016-12-05 尺码：M</p>
+                                {/*<p>2016-12-05 尺码：M</p>*/}
 
-                    <div className="flex flex-wrap color6 font14 mt5">
-                        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿啊啊啊啊啊啊啊啊阿啊啊啊啊啊啊
-                    </div>
+                                <div className="flex flex-wrap color6 font14 mt5">
+                                    {el.COMMENT}
+                                </div>
 
-                    {/*评论图片 最多3张*/}
-                    <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
-                        <img />
-                    </div>
-                </div>
+                                {/*评论图片 最多3张    todo IMAGES转数组map*/}
+                                {
+
+                                }
+                                <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
+                                    <img />
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+
 
 
             </div>
@@ -223,7 +252,10 @@ export default class GoodsDescription extends Component {
                         {
                             goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
                                 return(
-                                    <img src = {el.IMAGE}/>
+                                    <img
+                                        src = {el.IMAGE}
+                                        key = {index}
+                                    />
                                 )
                             })
                         }
@@ -309,7 +341,7 @@ export default class GoodsDescription extends Component {
                     >
                         <button className="cartBtn width_100 height_all border_ra">
                             <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
-                            <span className="di pa goodNum border_ra50 f12 colorff">5</span>
+                            {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
                         </button>
                     </div>
                     <div className="width_de fl height_all"></div>

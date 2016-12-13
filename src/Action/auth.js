@@ -473,3 +473,25 @@ export async function GiveAwayRecord(accId,amount){
     }
 }
 
+//商品评价
+export async function Remark(orderNo,productId,comment,images){
+    try{
+        const res = await apiPost(URL.remark,{orderNo,productId,comment,images});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//商品评价
+export async function RemarkList(productId,page){
+    try{
+        const res = await apiGet(URL.remarkList,{productId,page});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+

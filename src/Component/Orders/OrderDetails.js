@@ -61,13 +61,23 @@ export default class OrderDetails extends Component {
                                                     </p>
                                                     <p className="color9 font14"><span>X</span><span>{item.num}</span></p>
                                                 </div>
+                                                {/*评论*/}
                                                 {
                                                     toRated?
                                                         <div
-                                                            style={{bottom:0,right:0}}
-                                                            className="pa mt55">
-                                                            <Link to="orderList/publishEvalute" query={{id:item.id}}>
-                                                                <button className="bkg_ff border_ra color_white">评价</button>
+                                                            style={{bottom:10,right:10}}
+                                                            className="pa mt55"
+                                                        >
+                                                            <Link
+                                                                to="orderList/publishEvalute"
+                                                                query={{
+                                                                    orderNo:item.orderNo,
+                                                                    image : item.productImage,
+                                                                    productId  :item.productId
+                                                                }}>
+                                                                <button
+                                                                    className="btn font14 bkg_ff border_ra color_white"
+                                                                >评价</button>
                                                             </Link>
                                                         </div>
                                                         :null
