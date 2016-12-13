@@ -19,7 +19,7 @@ export default class Savety extends Component {
                                 </div>
                             </li>
                         </Link>
-                        <Link>
+                        <Link to="/personalCenter/myAlipay">
                             <li className="item-content item-link border_bottom">
                                 <div className="item-inner">
                                     <div className="item-title">

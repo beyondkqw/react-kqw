@@ -16,11 +16,13 @@ import ReceivingTime from '../Component/ConfirmPayment/ReceivingTime';
 import ChooseInfomation from '../Component/ConfirmPayment/ChooseInfomation';
 import ManageInformation from '../Component/ConfirmPayment/ManageInformation';
 import CloudCard from '../Component/CloudCard/CloudCard';
-import PaymentOther from '../Component/CloudCard/PaymentOther';
-import PaymentDetails from '../Component/CloudCard/PaymentDetails';
+import PendPaymentDetails from '../Component/CloudCard/PendPaymentDetails';
+import RechargeDetails from '../Component/CloudCard/RechargeDetails';
+import DiaryContainer from '../Component/CloudCard/DiaryContainer';
+import PendingPayment from '../Component/CloudCard/PendingPayment';
 import AlreadyUsed from '../Component/CloudCard/AlreadyUsed';
 import AlreadyUsedDetails from '../Component/CloudCard/AlreadyUsedDetails';
-import DiaryContainer from '../Component/CloudCard/DiaryContainer';
+import TotalDetails from '../Component/CloudCard/TotalDetails';
 import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
 import Partner from '../Component/PersonalCenter/Partner';
 import MyCustomer from '../Component/PersonalCenter/MyCustomer';
@@ -67,6 +69,11 @@ import ToWatchOtherInfo from '../Component/PersonalCenter/ToWatchOtherInfo'
 import WithdrawCash from '../Component/PersonalCenter/WithdrawCash'
 import JdyStock from '../Component/PersonalCenter/JdyStock'
 import StockDetail from '../Component/PersonalCenter/StockDetail'
+import Recharge from '../Component/PersonalCenter/Recharge'
+import RechargeNum from '../Component/PersonalCenter/RechargeNum'
+import MyAlipay from '../Component/PersonalCenter/MyAlipay'
+import CommissionCash from '../Component/PersonalCenter/CommissionCash'
+
 
 
 const RouteConfig = (
@@ -87,10 +94,7 @@ const RouteConfig = (
       <Route path="chooseInfomation" component={ChooseInfomation}/>
       <Route path="manageInformation" component={ManageInformation}/>
       <Route path="cloudCartoon" component={CloudCard}/>
-      <Route path="paymentOther" component={PaymentOther}/>
-      <Route path="paymentDetails" component={PaymentDetails}/>
-      <Route path="alreadyUsed" component={AlreadyUsed}/>
-      <Route path="alreadyUsedDetails" component={AlreadyUsedDetails}/>
+      <Route path="pendPaymentDetails" component={PendPaymentDetails}/>
       <Route path="diaryContainer" component={DiaryContainer}/>
       <Route path="personalCenter" component={PersonalCenter}/>
       <Route path="partner" component={Partner}/>
@@ -139,6 +143,15 @@ const RouteConfig = (
       <Route path="personalCenter/withdrawCash" component={WithdrawCash} />
       <Route path="personalCenter/jdyStock" component={JdyStock} />
       <Route path="personalCenter/stockDetail" component={StockDetail} />
+      <Route path="personalCenter/recharge" component={Recharge} />
+      <Route path="personalCenter/rechargeNum" component={RechargeNum} />
+      <Route path="pendingPayment" component={PendingPayment} />
+      <Route path="rechargeDetails" component={RechargeDetails} />
+      <Route path="alreadyUsed" component={AlreadyUsed} />
+      <Route path="alreadyUsedDetails" component={AlreadyUsedDetails} />
+      <Route path="totalDetails" component={TotalDetails} />
+      <Route path="personalCenter/myAlipay" component={MyAlipay} />
+      <Route path="personalCenter/commissionCash" component={CommissionCash} />
     </Route>
   </Router>
 );

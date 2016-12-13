@@ -393,4 +393,22 @@
     width:100%;
     background:url('../../Images/common/background.png') no-repeat 100% center;
 }
+.checkedRead{
+    top:2px;
+}
+.toRead{
+    display:none;
+}
+.toRead + label{
+    border:1px solid #999;
+    border-radius: 4px;
+    width: 14px;
+    height:14px;
+}
+.toRead:checked + label{
+    background:url("../../Images/checkedRead.png") no-repeat;
+    background-size:98%;
+    background-position:center;
+}
+
 

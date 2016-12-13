@@ -15,7 +15,7 @@ let userInfo = {};
 import {imei,version,client} from './auth'
 
 export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-//const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
+//export const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
 export function getUserInfo(){

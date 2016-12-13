@@ -2,29 +2,30 @@ import React, { Component} from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
+import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import EnterPassword from '../../Component/CommonComponent/EnterPassword';
 import '../../Stylesheets/App/personal.css';
 
-export default class WithdrawCash extends Component {
+export default class Recharge extends Component {
     // 构造
-    constructor(props) {
+      constructor(props) {
         super(props);
         // 初始状态
-        this.copyArray=[]
+        this.monetList = [100,200,300,400,500,600]
         this.state = {
-            toShowModal:false
+            toShowNav:false,
+            showModal:false,
+            indexNum:''
         };
-    }
-    confirmIncome(){
-        this.setState({toShowModal:true})
-    }
+      }
+
     render() {
-        const {toShowModal} = this.state
+        const {toShowNav,indexNum,showModal} = this.state
         return (
             <div className="bkg_color">
                 <div className="list-block m0">
                     <ul>
-                        <Link to='/personalCenter/commissionCash'>
+                        <Link to='/personalCenter/rechargeNum'>
                             <li className="item-content item-link item-link pl  border_bottom">
                                 <div className="item-media">
                                     <span className="fl di headerImg">
@@ -34,7 +35,7 @@ export default class WithdrawCash extends Component {
                                 <div className="item-inner" style={{marginLeft:15}}>
                                     <div className="item-title-row">
                                         <div className="item-title font14 color6">多云云的天堂</div>
-                                        <div className="f12 color9">请选择提现账号</div>
+                                        <div className="f12 color9">请设置充值账号</div>
                                     </div>
                                 </div>
                             </li>
@@ -43,71 +44,103 @@ export default class WithdrawCash extends Component {
                 </div>
                 <SplitLine />
                 <div className="plAll">
-                    <p className="color6 font14">提现金额</p>
+                    <p className="font14">
+                        <span className="color6">充值金额</span>
+                        <span className="color9"> ( 选择或自定义金额 ) </span>
+                    </p>
                     <div className="mt5 mb1 f25 df">
                         <span className="flex-1">￥</span>
                         <input
                             className="borderno"
                             type="password"
                             placeholder="0.00"
-                            ref='pointAmount'
                         />
                     </div>
                 </div>
-                <div className="plAll border_top border_bottom f12">
-                    <span>最多可提取</span>
-                    <span className="di ml">￥</span><span>123</span>
+                {
+                    toShowNav?
+                        <div>
+                            <div className="plAll border_top border_bottom f12 color_yellow">
+                                <span>赠送充值币</span>
+                                <span>15</span>
+                            </div>
+                            <SplitLine />
+                        </div>
+                        :null
+                }
+                <div className="border_top">
+                    <ul className="font14 color6 width100">
+                        {
+                            this.monetList.map((el,index)=>{
+                                return(
+                                        <li
+                                            className={indexNum === index?
+                                            "userHeight tc di width_25 border_right border_bottom color_yellow"
+                                            :"userHeight tc di width_25 border_right border_bottom"
+                                            }
+                                            onClick={()=>this.setState({toShowNav:true,indexNum:index})}
+                                        >{el}<span>元</span></li>
+                                    )
+                            })
+                        }
+                    </ul>
                 </div>
                 <SplitLine />
                 <div className ="list-block m0 font14">
                     <ul>
-                        <li className ='item-content border_bottom isConfirmSet'>
+                        <li className ='item-content item-link border_bottom isConfirmSet'>
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
                                     <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
                                 </span>
-                                    <span className="di margin15 color6">总佣金</span>
+                                    <span className="di margin15 color6">省份</span>
                                 </div>
-                                <div className="item-after color9 isSet">421</div>
                             </div>
                         </li>
-                        <li className ='item-content border_bottom isConfirmSet'>
+                        <li className ='item-content item-link border_bottom isConfirmSet'>
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
                                     <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
                                 </span>
-                                    <span className="di margin15 color6">可提取佣金</span>
+                                    <span className="di margin15 color6">城市</span>
                                 </div>
-                                <div className="item-after color9 isSet">345</div>
                             </div>
                         </li>
-                        <li className ='item-content border_bottom isConfirmSet'>
+                        <li className ='item-content item-link border_bottom isConfirmSet'>
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
                                     <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
                                 </span>
-                                    <span className="di margin15 color6">已申请提现佣金</span>
+                                    <span className="di margin15 color6">区县</span>
                                 </div>
-                                <div className="item-after color9 isSet">345</div>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <CommonBtn
-                    title={'确认提现'}
-                    onClick={()=>this.confirmIncome()}
+                    title={'确认充值'}
+                    onClick={()=>this.setState({showModal:true})}
                 />
-                <p className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天</p>
-
-                {/*模态层*/}
+                <p className="f12 color6 tc mt5 pr">
+                    <span className="di checkedRead pa">
+                        <input
+                            type="checkbox" id="isRead"
+                            className="di toRead"
+                        />
+                        <label htmlFor="isRead"></label>
+                    </span>
+                    <span style={{marginLeft:20,marginRight:5}}>同意并接受聚朵云商综合体招商资质标准</span>
+                    <span className="di pa" style={{width:15,height:15,lineHeight:0}}><img src={require('../../Images/toRead.png')} alt=""/></span>
+                </p>
                 {
-                    toShowModal?
+                    showModal?
                         <EnterPassword />
-                        : null
+                        :null
                 }
+
             </div>
         );
     }

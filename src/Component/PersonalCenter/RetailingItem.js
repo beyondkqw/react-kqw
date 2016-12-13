@@ -10,8 +10,15 @@ export default class RetailingItem extends Component {
                     <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
                 </span>
                 <div className="fl" style={{marginLeft:15}}>
-                    <div className="font14 color6"><span>+</span><span>31.00</span></div>
-                    <p className="f12 color9 mt1">多云云的天堂佣金发放</p>
+                    <div className="font14 color6">
+                        {
+                            isShowDate?
+                                <span>+</span>
+                                :null
+                        }
+                        <span>中国银行</span>
+                    </div>
+                    <p className="f12 color9 mt1">尾号1234的卡</p>
                 </div>
                 {
                     isShowDate?

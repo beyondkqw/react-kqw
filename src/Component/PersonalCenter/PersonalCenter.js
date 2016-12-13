@@ -22,7 +22,7 @@ const ItemList = [
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
     {name:'佣金转赠',imgUrl:require('../../Images/commission.png'),link:'/personalCenter/commisionGiving'},
-    {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:''}
+    {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'}
 ]
 export default class PersonalCenter extends Component {
 

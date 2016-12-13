@@ -98,12 +98,11 @@ export default class ComfirmPayMoney extends Component {
                 }
 
                 <SplitLine />
-                <div className="plr lh25 border_bottom">
+                <div className="plr lh25 border_bottom clearAll">
                     <span className="color6 font14">云卡通支付</span>
                     <label htmlFor="" className="colorff fr font14">可优惠<span className="f12">￥</span><span className="font14">10</span></label>
                 </div>
-                <SplitLine />
-                <div className="plr lh25 border_bottom">
+                <div className="plr lh25 border_bottom clearAll">
                     <span className="color6 font14">商品金额</span>
                     <label htmlFor="" className="colorff fr"><span className="f12">￥</span><span className="font14">1235</span></label>
                 </div>
@@ -112,7 +111,17 @@ export default class ComfirmPayMoney extends Component {
                     <label htmlFor="" className="colorff fr"><span className="f12">￥</span><span className="font14">12</span></label>
                 </div>
                 <SplitLine />
-                <div className="lh25 plr mt11 border_top">
+                <section className="plr lh25">
+                    <div className="fl color6 font14">可用<span>30</span>积分抵用<span>3.00</span>元</div>
+                    <span className="di check_radius pr fr">
+                        <input
+                            type="checkbox" id="isChoose"
+                            className="di toChoose"
+                        />
+                        <label htmlFor="isChoose"></label>
+                    </span>
+                </section>
+                <div className="lh25 plr border_top">
                     <div className="fr">
                         <span className="font14">实付款 :</span>
                         <span className="colorff f12">￥</span>
