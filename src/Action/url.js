@@ -124,3 +124,6 @@ export const giveAwayRecord = 'auth/account/giveAwayRecord'
 
 //商品评价
 export const remark = 'comment/auth/save'
+
+//商品评价列表
+export const remarkList = 'comment/list'

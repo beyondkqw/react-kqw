@@ -67,6 +67,7 @@ import ToWatchOtherInfo from '../Component/PersonalCenter/ToWatchOtherInfo'
 import WithdrawCash from '../Component/PersonalCenter/WithdrawCash'
 import JdyStock from '../Component/PersonalCenter/JdyStock'
 import StockDetail from '../Component/PersonalCenter/StockDetail'
+import BalanceCashRule from '../Component/PersonalCenter/BalanceCashRule'
 
 
 const RouteConfig = (
@@ -139,6 +140,7 @@ const RouteConfig = (
       <Route path="personalCenter/withdrawCash" component={WithdrawCash} />
       <Route path="personalCenter/jdyStock" component={JdyStock} />
       <Route path="personalCenter/stockDetail" component={StockDetail} />
+      <Route path="personalCenter/balanceCashRule" component={BalanceCashRule} />
     </Route>
   </Router>
 );

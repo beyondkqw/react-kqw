@@ -394,3 +394,9 @@
     background:url('../../Images/common/background.png') no-repeat 100% center;
 }
 
+.rule-row{
+    word-break:break-all;
+    padding:10px 15px;
+    white-space:normal
+}
+
