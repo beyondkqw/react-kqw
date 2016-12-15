@@ -17,13 +17,12 @@
     right:0.5rem;
 }
 .order_pay{
-    height:4.3rem;
     padding:0.75rem 0.5rem 0.5rem 0;
 }
 .ispayOrCancle button{
     height:1.5rem;
     line-height:1.5rem;
-    width: 3.5rem;
+    padding:0 0.5rem;
 }
 .border_ccc{
     border:1px solid #ccc;

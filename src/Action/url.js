@@ -113,17 +113,35 @@ export const memberInfo = 'auth/account/memberInfo'
 //查看用户资料
 export const userInfo = 'accountInfo/info'
 
-//根据订单详情ID， 查询订单详情
+//根据订单详情ID, 查询订单详情
 export const _orderDetail = 'order/orderdetail'
 
 //赠送佣金
 export const giveAmount = 'auth/account/giveAmount'
 
 //我的佣金记录
-export const giveAwayRecord = 'auth/account/giveAwayRecord'
+export const giveAwayRecord = 'auth/account/commissionRecord'
 
 //商品评价
 export const remark = 'comment/auth/save'
 
 //商品评价列表
 export const remarkList = 'comment/list'
+
+//修改个人资料
+export const updateInfo = 'auth/account/updateInfo'
+
+//邀请注册二维码
+export const qrCode = 'captcha/auth/qrCode'
+
+//可用积分查询
+export const points = 'order/auth/points'
+
+//删除订单
+export const orderDel = 'order/auth/del'
+
+//银行卡列表
+export const bankList = 'bank/auth/list'
+
+//绑定银行卡
+export const bindBank = 'bank/auth/binding'

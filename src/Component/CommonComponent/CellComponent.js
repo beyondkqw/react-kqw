@@ -4,10 +4,10 @@ import '../../Stylesheets/App/cloudCard.css';
 
 export default class CellComponent extends Component {
     render() {
-        const {imgUrl,title,describing,link,className} = this.props
+        const {imgUrl,title,describing,link,className,accId} = this.props
         return (
             <div className={"fl width50  border_bottom height4"+' '+className}>
-                <Link to={link} className="color6">
+                <Link to={link} className="color6" query={{accId:accId}}>
                     <div className="mtl">
                         <div className="di fl">
                             <span className="di cloudImg"><img src={imgUrl} alt=""/></span>

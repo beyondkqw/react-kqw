@@ -14,25 +14,37 @@ export default class TakenDetails extends Component {
         };
     }
     componentWillMount() {
-        this.ToGetAwayRecordDetails()
+        const accId = this.props.location.query.accId
+        console.log('accId============>',accId)
+        this.ToGetAwayRecordDetails(accId)
     }
     //支出明细
     async ToGetAwayRecordDetails(){
-        await GiveAwayRecord()
+        await GiveAwayRecord(1)
             .then(res=>{
-                this.setState({payAmount:res})
+                this.setState({payAmount:res.resultList})
             })
             .catch(err=>{
                 console.warn('err',err)
             })
     }
     render() {
+        const {payAmount} = this.state
         return (
             <div>
                 <SplitLine />
-                <RetailingItem
-                    isShowDate={true}
-                />
+                {
+                    payAmount&&payAmount.map(el=>{
+                        return(
+                            <RetailingItem
+                                changeAmount = {el.change_amount}
+                                extraMsg = {el.extra_msg2}
+                                imgUrl = {el.image_uri}
+                                isShowDate={true}
+                            />
+                        )
+                    })
+                }
             </div>
         );
     }

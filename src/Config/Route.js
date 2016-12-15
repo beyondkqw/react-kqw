@@ -74,6 +74,7 @@ import RechargeNum from '../Component/PersonalCenter/RechargeNum'
 import MyAlipay from '../Component/PersonalCenter/MyAlipay'
 import CommissionCash from '../Component/PersonalCenter/CommissionCash'
 import BalanceCashRule from '../Component/PersonalCenter/BalanceCashRule'
+import ErweiCode from '../Component/PersonalCenter/ErweiCode'
 
 
 
@@ -154,6 +155,7 @@ const RouteConfig = (
       <Route path="personalCenter/myAlipay" component={MyAlipay} />
       <Route path="personalCenter/commissionCash" component={CommissionCash} />
       <Route path="personalCenter/balanceCashRule" component={BalanceCashRule} />
+      <Route path="personalCenter/erweiCode" component={ErweiCode} />
     </Route>
   </Router>
 );

@@ -48,7 +48,7 @@ export default class WithdrawCash extends Component {
                         <span className="flex-1">￥</span>
                         <input
                             className="borderno"
-                            type="password"
+                            type="text"
                             placeholder="0.00"
                             ref='pointAmount'
                         />
@@ -100,8 +100,13 @@ export default class WithdrawCash extends Component {
                     title={'确认提现'}
                     onClick={()=>this.confirmIncome()}
                 />
-                <p className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天</p>
-
+                <p className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
+                    <Link to="/personalCenter/balanceCashRule">
+                        <span className="di pa" style={{width:15,height:15,lineHeight:0,marginLeft:5}}>
+                            <img src={require('../../Images/toRead.png')} alt=""/>
+                        </span>
+                    </Link>
+                </p>
                 {/*模态层*/}
                 {
                     toShowModal?

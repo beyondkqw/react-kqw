@@ -13,10 +13,22 @@ const ChargesList = [
     {imgUrl:require('../../Images/diary.png'),title:'佣金转赠',describing:'把佣金转给好友',link:'/personalCenter/commisionGiving'}
 ];
 export default class MyCharges extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            accId:''
+        };
+      }
     componentWillMount() {
+        const accId = this.props.location.query.memberId
+        this.setState({accId:accId})
+        console.log('memberId',accId);
         //WechatAuth()
     }
     render() {
+        const {accId} = this.state
         return (
             <div className="containerNav">
                 <SplitLine />
@@ -41,6 +53,7 @@ export default class MyCharges extends Component {
                         title={'分销佣金'}
                         describing={'团队共赢'}
                         link={'/personalCenter/retailing'}
+                        accId = {accId}
                     />
                     <CellComponent
                         className={'border_right'}
@@ -48,6 +61,7 @@ export default class MyCharges extends Component {
                         title={'佣金提取明细'}
                         describing={'佣金提取记录'}
                         link={'/personalCenter/takenDetails'}
+                        accId = {accId}
                     />
                     <CellComponent
                         imgUrl={require('../../Images/diary.png')}

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import PaymoneyComponent from '../../Component/ConfirmPayment/PaymoneyComponent';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/comfirmPayMoney.css';
-import {ListByOrderNo} from '../../Action/auth'
+import {ListByOrderNo,Points} from '../../Action/auth'
 const ItemDetail = [
     {title:'拼接雪纺连衣裙小清收到回复奇偶is飞机哦添加',num:1,price:288,color:'红色',size:'36',imgUrl:require('../../Images/storeClothes.png')},
     {title:'拼接驾驶的海外时间',num:2,price:289,color:'绿色',size:'38',imgUrl:require('../../Images/storeShoes.png')}]
@@ -15,7 +15,9 @@ export default class ComfirmPayMoney extends Component {
         super(props);
         // 初始状态
         this.state = {
-            PaymentDetails:[]
+            PaymentDetails:[],
+            now_point:'',
+            touch_amount:''
         };
       }
     static contextTypes = {
@@ -24,6 +26,7 @@ export default class ComfirmPayMoney extends Component {
 
     componentWillMount() {
         this.getOrderInfor()
+        this.getPoints()
     }
 
    async getOrderInfor(){
@@ -37,9 +40,20 @@ export default class ComfirmPayMoney extends Component {
             console.warn('getOrderInfor',err)
         })
     }
+    //可用积分查询
+    async getPoints() {
+        await Points()
+            .then(res=>{
+                this.setState({now_point:res.NOW_POINTS,touch_amount:res.TOUCH_AMOUNT})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
+
 
     render() {
-        const {PaymentDetails} = this.state
+        const {PaymentDetails,now_point,touch_amount} = this.state
         return (
             <div className="containerNav oa">
                 <div className="list-block m0">
@@ -112,7 +126,7 @@ export default class ComfirmPayMoney extends Component {
                 </div>
                 <SplitLine />
                 <section className="plr lh25">
-                    <div className="fl color6 font14">可用<span>30</span>积分抵用<span>3.00</span>元</div>
+                    <div className="fl color6 font14">可用<span>{now_point}</span>积分抵用<span>{touch_amount}</span>元</div>
                     <span className="di check_radius pr fr">
                         <input
                             type="checkbox" id="isChoose"

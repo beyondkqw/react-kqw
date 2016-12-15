@@ -36,7 +36,8 @@ export default class PersonalCenter extends Component {
             point : 0,
             lv : 0,
             vip_point : 0,
-            headImg:''
+            headImg:'',
+            accId:''
         };
       }
 
@@ -54,15 +55,14 @@ export default class PersonalCenter extends Component {
                 point : res.NOW_POINTS,
                 lv : res.LV,
                 vip_point : res.VIP_POINTS,
-                headImg:res.IMAGE_URI
+                headImg:res.IMAGE_URI,
+                accId:res.ID
             })
         })
     }
 
     render() {
-
-        const {name,amount,point,lv,vip_point} = this.state
-
+        const {name,amount,point,lv,vip_point,accId} = this.state
         return (
             <div>
                 <section className="pr tc center_bkImg" style={{paddingTop: 10,paddingBottom: 15}}>
@@ -129,7 +129,7 @@ export default class PersonalCenter extends Component {
                     {
                         ItemList&&ItemList.map(item=>{
                             return(
-                                <Link to={item.link} className="di width_third width_100">
+                                <Link to={item.link} className="di width_third width_100" query={{memberId:accId}}>
                                     <div className="separateRow tc di border_bottom border_right">
                                         <p>
                                             <span className="di separateRowImg"><img src={item.imgUrl} alt=""/></span>

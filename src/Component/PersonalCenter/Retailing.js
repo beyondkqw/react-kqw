@@ -18,7 +18,7 @@ export default class Retailing extends Component {
     }
     //收入明细
     async ToGetAwayRecord(){
-        await GiveAwayRecord()
+        await GiveAwayRecord(0)
             .then(res=>{
                 this.setState({incomeAmount:res.resultList})
             })
@@ -27,13 +27,31 @@ export default class Retailing extends Component {
             })
     }
     render() {
+        const {incomeAmount}  = this.state
         return (
             <div className="containerNav">
-                <Link to="/personalCenter/retailingDetails">
-                    <RetailingItem
-                        isShowDate={true}
-                    />
-                </Link>
+                {
+                    incomeAmount&&incomeAmount.map(el=>{
+                        return(
+                            <Link
+                                to="/personalCenter/retailingDetails"
+                                query={{
+                                imgUrl:el.image_uri,
+                                memberName:el.member_name,
+                                amount:el.change_amount,
+                                msg:el.extra_msg2
+                                }}>
+                                <RetailingItem
+                                    changeAmount = {el.change_amount}
+                                    extraMsg = {el.extra_msg2}
+                                    imgUrl = {el.image_uri}
+                                    isShowDate={true}
+                                />
+                            </Link>
+                        )
+                    })
+                }
+
             </div>
         );
     }

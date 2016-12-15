@@ -165,7 +165,7 @@ async function request (urlKey,method,params = {},token = ''){
                 //    shadow: true,
                 //    animation: true,
                 //});
-                WechatAuth()
+                //WechatAuth()
                 throw new Error('请先登录');
             }
             else{
@@ -209,4 +209,13 @@ export function GetQueryString(name) {
     let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     let r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
+}
+
+//判断银行卡号是否正确
+export function BankNum(value) {
+    if (!(/^(\d{16}|\d{19})$/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
 }

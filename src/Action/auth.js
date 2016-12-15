@@ -463,9 +463,9 @@ export async function GiveAmount(accId,amount){
 }
 
 //我的佣金记录
-export async function GiveAwayRecord(accId,amount){
+export async function GiveAwayRecord(tranType){
     try{
-        const res = await apiGet(URL.giveAwayRecord,{accId,amount});
+        const res = await apiGet(URL.giveAwayRecord,{tranType});
         return res;
     }catch (err){
         console.warn(err);
@@ -488,6 +488,61 @@ export async function Remark(orderNo,productId,comment,images){
 export async function RemarkList(productId,page){
     try{
         const res = await apiGet(URL.remarkList,{productId,page});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//修改个人资料
+export async function UpdateInfo(memberName,realName,imageUri,area,address,sex){
+    try{
+        const res = await apiPost(URL.updateInfo,{memberName,realName,imageUri,area,address,sex});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//可用积分查询
+export async function Points(){
+    try{
+        const res = await apiGet(URL.points);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//删除订单
+export async function OrderDel(orderNo){
+    try{
+        const res = await apiGet(URL.orderDel,{orderNo});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//银行卡列表
+export async function BankList(){
+    try{
+        const res = await apiGet(URL.bankList);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//绑定银行卡
+export async function BandBank(bankName,name,bankCardNo,pro,city,area,branch,mobile){
+    try{
+        const res = await apiGet(URL.bindBank,{bankName,name,bankCardNo,pro,city,area,branch,mobile});
         return res;
     }catch (err){
         console.warn(err);

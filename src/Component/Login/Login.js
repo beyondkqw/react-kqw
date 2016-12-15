@@ -49,6 +49,7 @@ export default class Login extends Component {
         console.log('aaa',accName,pwd)
         if(accName ==''||pwd == ''){
             this.setState({Reminder:'登录名或密码不能为空'})
+            return
         }
         await ToLogin(accName,pwd)
             .then(res=>{

@@ -3,11 +3,11 @@ import '../../Stylesheets/App/personal.css';
 
 export default class RetailingItem extends Component {
     render() {
-        const {isShowDate} = this.props
+        const {isShowDate,changeAmount,extraMsg,imgUrl} = this.props
         return (
             <div className="height_charge plAll border_bottom">
                 <span className="fl di headerImg">
-                    <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
+                    <img className="border_ra50" src={imgUrl} alt=""/>
                 </span>
                 <div className="fl" style={{marginLeft:15}}>
                     <div className="font14 color6">
@@ -16,9 +16,9 @@ export default class RetailingItem extends Component {
                                 <span>+</span>
                                 :null
                         }
-                        <span>中国银行</span>
+                        <span>{changeAmount}</span>
                     </div>
-                    <p className="f12 color9 mt1">尾号1234的卡</p>
+                    <p className="f12 color9 mt1">{extraMsg}</p>
                 </div>
                 {
                     isShowDate?

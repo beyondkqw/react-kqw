@@ -12,6 +12,7 @@ export default class Collect extends Component {
             id:null,
             visible:false,
             isIndex:null,
+            isShowEmptyImg:false,
             ItemList:[]
         };
       }
@@ -25,6 +26,10 @@ export default class Collect extends Component {
     async getCollectList(){
         await FollowList()
             .then(res=>{
+                console.log('res.resultList == null',res.resultList == '')
+                if(res.resultList == ''){
+                    this.setState({isShowEmptyImg:true})
+                }
                 this.setState({ItemList:res.resultList});
             })
             .catch(err=>{
@@ -63,9 +68,20 @@ export default class Collect extends Component {
     }
 
     render() {
-        const {ItemList} = this.state
+        const {ItemList,isShowEmptyImg} = this.state
+        console.log('this.state.isShowEmptyImg',this.state.isShowEmptyImg)
         return (
             <div className="containerNav">
+                {
+                    isShowEmptyImg?
+                        <div className="pa tc" style={{top:0,left:0,right:0,bottom:0}}>
+                            <span className="di" style={{width:69,height:72,marginTop:120}}>
+                                <img src={require('../../Images/empty.png')} alt=""/>
+                            </span>
+                            <p className="font14 color9">收藏列表是空的哦~</p>
+                        </div>
+                        :null
+                }
                 {
                     ItemList.map((el,index)=>{
                         return(

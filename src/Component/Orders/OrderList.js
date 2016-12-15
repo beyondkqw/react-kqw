@@ -40,7 +40,7 @@ export default class OrderList extends Component {
                 this.getOrderList('0')
             }
     }
-    //请求接口
+    //订单列表
     async getOrderList(param){
         await GetOrderList(param)
             .then(res=>{
@@ -107,6 +107,7 @@ export default class OrderList extends Component {
                 { this.state.index == 4?
                     <div>
                         <OrderDetails
+                            againSend = {()=>this.getOrderList('5')}
                             orderDetails = {orderItems}
                             allRated = {true}
                         />

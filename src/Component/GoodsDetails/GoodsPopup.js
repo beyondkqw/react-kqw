@@ -64,7 +64,7 @@ export default class GoodsPopup extends Component {
                                                 return(
                                                     <span
                                                         onClick = {()=>this.ensure(2)}
-                                                        className="di width_20"
+                                                        className="di mr10"
                                                     >
                                                         <input
                                                             //ref = {`${inx}`+'ATTR_ID'+`${index}`}

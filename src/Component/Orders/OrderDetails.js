@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import '../../Stylesheets/App/order.css';
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import {CancelReceived} from '../../Action/auth';
+import Modal from '../../Component/CommonComponent/Modal'
+import {CancelReceived,OrderDel,GetOrderList} from '../../Action/auth';
 
 export default class OrderDetails extends Component {
     // 构造
@@ -10,23 +11,38 @@ export default class OrderDetails extends Component {
         super(props);
         // 初始状态
         this.state = {
-            //cancelItem:''
+            isCancel:false,
+            isDelete:false,
+            orderNo:'',
+            delNo:'',
+            cancelOrder:'取消订单'
         };
       }
-    cancelOrder(orderNo){
-        this.getCancelOrder(orderNo)
-    }
+
     //取消订单
-    async getCancelOrder(param){
-        await CancelReceived(param)
+    async cancelOrder(orderNo){
+        await CancelReceived(orderNo)
         .then(res=>{
-            //this.setState({cancelItem:res})
+            this.setState({isCancel:false})
+            this.setState({cancelOrder:'订单取消成功'})
+            //GetOrderList('0')
         })
         .catch(err=>{
             console.warn('取消订单失败',err)
         })
     }
-
+    //删除订单
+    async DeletdOrder(orderNo){
+        await OrderDel(orderNo)
+            .then(res=>{
+                this.setState({isDelete:false})
+                //重新请求列表接口
+                this.props.againSend()
+            })
+            .catch(err=>{
+                console.warn('删除订单失败',err)
+            })
+    }
     render() {
         const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated,query} = this.props
         return (
@@ -99,18 +115,18 @@ export default class OrderDetails extends Component {
                                     <div className="ispayOrCancle font14">
                                         {
                                             toPay?
-                                                <div className="fr mt5">
+                                                <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button
                                                         className="border_ra mr5 color9 border_ccc"
-                                                        onClick = {()=>this.cancelOrder(el.order_no)}
-                                                    >取消订单</button>
+                                                        onClick = {()=>this.setState({isCancel:true,orderNo:el.order_no})}
+                                                    >{this.state.cancelOrder}</button>
                                                     <button className="bkg_ff border_ra color_white">付款</button>
                                                 </div>
                                                 :null
                                         }
                                         {
                                             makeSure?
-                                                <div className="fr mt5">
+                                                <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button className="border_ra mr5 color9 border_ccc">查看物流</button>
                                                     <button className="bkg_ff border_ra color_white">确定收货</button>
                                                 </div>
@@ -119,7 +135,7 @@ export default class OrderDetails extends Component {
 
                                         {
                                             alreadyRated?
-                                                <div className="fr mt55">
+                                                <div className="mt55" style={{height: 30,textAlign:'right'}}>
                                                     <Link to="orderList/viewEvaluation">
                                                         <button className="bkg_ff border_ra color_white">查看</button>
                                                     </Link>
@@ -128,8 +144,11 @@ export default class OrderDetails extends Component {
                                         }
                                         {
                                             allRated?
-                                                <div className="fr mt5">
-                                                    <button className="border_ra mr5 color9 border_ccc">删除订单</button>
+                                                <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                    <button
+                                                        className="border_ra mr5 color9 border_ccc"
+                                                        onClick={()=>this.setState({isDelete:true,delNo:el.order_no})}
+                                                    >删除订单</button>
                                                     <button className="border_ra mr5 color9 border_ccc">追加评价</button>
                                                     <button className="bkg_ff mr20 border_ra color_white">查看评价</button>
                                                 </div>
@@ -141,6 +160,26 @@ export default class OrderDetails extends Component {
                             </div>
                         )
                     })
+                }
+                {/*取消订单*/}
+                {
+                    this.state.isCancel?
+                        <Modal
+                          title = {'确定取消订单?'}
+                          onClick = {()=>this.cancelOrder(this.state.orderNo)}
+                          toHideModal={()=>this.setState({isCancel:false})}
+                        />
+                        :null
+                }
+                {/*删除订单*/}
+                {
+                    this.state.isDelete?
+                        <Modal
+                            title = {'确定删除订单?'}
+                            onClick = {()=>this.DeletdOrder(this.state.delNo)}
+                            toHideModal={()=>this.setState({isDelete:false})}
+                        />
+                        :null
                 }
             </div>
         );
