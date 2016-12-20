@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import PublishComment from '../../Component/CommonComponent/PublishComment'
 import SplitLine from '../../Component/NewComponent/SplitLine'
@@ -15,6 +15,11 @@ export default class PublishEvalute extends Component {
             images:[]
         };
       }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
 
     componentWillMount() {
         //this.getOrderDetail()
@@ -33,7 +38,7 @@ export default class PublishEvalute extends Component {
         await Remark(orderNo,productId,this.refs.comment.value,this.state.images.join(','))
         .then(res=>{
             console.log('res')
-
+            //this.context.router.goBack()
         })
     }
 

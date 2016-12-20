@@ -4,6 +4,7 @@ import '../../Stylesheets/App/order.css';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import Modal from '../../Component/CommonComponent/Modal'
 import {CancelReceived,OrderDel,GetOrderList} from '../../Action/auth';
+import {config} from '../../Action/Const'
 
 export default class OrderDetails extends Component {
     // 构造
@@ -24,7 +25,8 @@ export default class OrderDetails extends Component {
         await CancelReceived(orderNo)
         .then(res=>{
             this.setState({isCancel:false})
-            this.setState({cancelOrder:'订单取消成功'})
+            this.props.debitPay()
+            //this.setState({cancelOrder:'订单取消成功'})
             //GetOrderList('0')
         })
         .catch(err=>{
@@ -57,7 +59,7 @@ export default class OrderDetails extends Component {
                                 </div>
                                 <Link to="/orders/orderFormDetails"  query={{orderNo:el.order_no}}>
                                 {
-                                    el.orderDetails&&el.orderDetails.map(item=>{
+                                    el.orderDetails&&el.orderDetails.map((item,index)=>{
                                     return(
                                         <div>
                                             <div className="order_height border_bottom pr plAll df">
@@ -117,10 +119,16 @@ export default class OrderDetails extends Component {
                                             toPay?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button
-                                                        className="border_ra mr5 color9 border_ccc"
-                                                        onClick = {()=>this.setState({isCancel:true,orderNo:el.order_no})}
-                                                    >{this.state.cancelOrder}</button>
-                                                    <button className="bkg_ff border_ra color_white">付款</button>
+                                                        className="border_ra color9 border_ccc"
+                                                        onClick = {()=>
+                                                        this.setState({isCancel:true,
+                                                        orderNo:el.order_no})}
+                                                    >{el.status == config.order_status_cancel?'已取消':'取消订单'}</button>
+                                                    {
+                                                        el.status == config.order_status_cancel?
+                                                            null:
+                                                            <button className="bkg_ff ml5 border_ra color_white">付款</button>
+                                                    }
                                                 </div>
                                                 :null
                                         }

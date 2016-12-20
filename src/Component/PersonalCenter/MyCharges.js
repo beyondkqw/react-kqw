@@ -3,7 +3,6 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CellComponent from '../../Component/CommonComponent/CellComponent';
 import '../../Stylesheets/App/personal.css';
-import {WechatAuth} from '../../Action/autoLogin'
 
 
 const ChargesList = [
@@ -18,23 +17,26 @@ export default class MyCharges extends Component {
         super(props);
         // 初始状态
         this.state = {
-            accId:''
+            accId:'',
+            Now_Amount:''
         };
       }
     componentWillMount() {
-        const accId = this.props.location.query.memberId
-        this.setState({accId:accId})
-        console.log('memberId',accId);
-        //WechatAuth()
+        const {memberId,now_amount} = this.props.location.query
+        this.setState({accId:memberId})
+        this.setState({Now_Amount:now_amount})
+        console.log('memberId',memberId);
+        console.log('now_amount',now_amount);
     }
     render() {
-        const {accId} = this.state
+        const {accId,Now_Amount} = this.state
+        console.log('============',Now_Amount)
         return (
             <div className="containerNav">
                 <SplitLine />
                 <div className="recharge border_bottom plr">
                     <div className="color_yellow fl height_all">
-                        <span className="f15">￥</span><span className="f25">5678</span>
+                        <span className="f15">￥</span><span className="f25">{Now_Amount}</span>
                     </div>
                     <Link to="/personalCenter/withdrawCash">
                         <button className="fr settleAccount border_ra color_white mt11">提取</button>
@@ -45,7 +47,7 @@ export default class MyCharges extends Component {
                         className={'border_right'}
                         imgUrl={require('../../Images/total.png')}
                         title={'总佣金收入'}
-                        describing={'1256.26'}
+                        describing={Now_Amount}
                         link={'/personalCenter/allIncome'}
                     />
                     <CellComponent

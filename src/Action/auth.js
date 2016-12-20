@@ -550,3 +550,37 @@ export async function BandBank(bankName,name,bankCardNo,pro,city,area,branch,mob
     }
 }
 
+//退款原因列表
+export async function NoticeList(type,count,page){
+    try{
+        const res = await apiGet(URL.noticeList,{type,count,page});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//申请退款
+export async function Refund(orderDetailId,applyAmount,reason,type,recStatus,desc){
+    try{
+        const res = await apiPost(URL.refund,{orderDetailId,applyAmount,reason,type,recStatus,desc});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//商品浏览记录
+export async function BrowseHistory(){
+    try{
+        const res = await apiGet(URL.browseRecord);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+

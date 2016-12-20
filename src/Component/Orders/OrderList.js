@@ -66,6 +66,7 @@ export default class OrderList extends Component {
                 { this.state.index == 0?
                     <div>
                         <OrderDetails
+                            debitPay = {()=>this.getOrderList('0')}
                             orderDetails = {orderItems}
                             toPay = {true}
                         />

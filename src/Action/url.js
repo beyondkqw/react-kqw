@@ -145,3 +145,12 @@ export const bankList = 'bank/auth/list'
 
 //绑定银行卡
 export const bindBank = 'bank/auth/binding'
+
+//退款原因列表
+export const noticeList = 'notices/list'
+
+//申请退款
+export const refund = 'order/auth/refund'
+
+//商品浏览记录
+export const browseRecord = 'product/auth/browseRecord'

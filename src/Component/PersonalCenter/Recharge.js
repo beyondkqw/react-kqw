@@ -78,7 +78,7 @@ export default class Recharge extends Component {
                                             "ptb tc di width_3333 border_right border_bottom color_yellow"
                                             :"ptb tc di width_3333 border_right border_bottom"
                                             }
-                                            onClick={()=>this.setState({toShowNav:true,indexNum:index})}
+                                            onClick={()=>this.setState({showModal:false,toShowNav:true,indexNum:index})}
                                         ><div>{el}<span>元</span></div>
                                             <p className="color9 f12">赠送<span>5</span>元充值币</p>
                                         </li>

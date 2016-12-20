@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import RankRow from './RankRow'
 import '../../Stylesheets/App/personal.css';
 import {TeamMembers} from '../../Action/auth';
@@ -12,7 +13,8 @@ export default class MyCustomer extends Component {
         super(props);
         // 初始状态
         this.state = {
-            memberList:[]
+            memberList:[],
+            isEmptyMember:false
         };
       }
     componentWillMount() {
@@ -22,6 +24,10 @@ export default class MyCustomer extends Component {
     async getMenbersList(){
         await TeamMembers()
             .then(res=>{
+                if(res.resultList == ''||res.resultList == null){
+                    this.setState({isEmptyMember:true})
+                    console.log('-----------+++++++++++++',this.state.isEmptyMember)
+                }
                 this.setState({memberList:res.resultList})
             })
             .catch(err=>{
@@ -29,11 +35,17 @@ export default class MyCustomer extends Component {
             })
     }
     render() {
-        const {memberList} = this.state
+        const {memberList,isEmptyMember} = this.state
         return (
             <div className="containerNav">
                 <SplitLine />
                 {
+                    isEmptyMember?
+                        <IsShowEmptyImg
+                            styleSheet = {{width:69,height:72,marginTop:120}}
+                            title={'客户列表是空的哦~'}
+                        />
+                        :
                     memberList.map(el=>{
                         return(
                             <Link to="/personalCenter/toWatchOtherInfo" query={{memberId:el.accId}}>
@@ -43,7 +55,6 @@ export default class MyCustomer extends Component {
                                     memberName = {el.memberName}
                                     imgUrl = {el.imageUri}
                                     vipPoints = {el.vipPoints?el.vipPoints:0}
-
                                 />
                             </Link>
                         )
