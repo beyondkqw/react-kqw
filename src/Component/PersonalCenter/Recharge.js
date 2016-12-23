@@ -66,6 +66,7 @@ export default class Recharge extends Component {
                                 <div className="plAll border_top border_bottom f12 color_yellow">
                                     <span>赠送充值币</span>
                                     <span>15</span>
+
                                 </div>
                                 <SplitLine />
                             </div>

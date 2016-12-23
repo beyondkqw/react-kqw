@@ -10,6 +10,8 @@ import Cell_6 from './NewComponent/Cell_6'
 import Cell_7 from './NewComponent/Cell_7'
 import SplitLine from './NewComponent/SplitLine'
 import {Link} from 'react-router';
+import {loadToken,saveToken,clearToken,GetQueryString} from '../Action/rpc'
+import {WechatAuth} from '../Action/autoLogin'
 import '../Stylesheets/App/sm.min.css'
 import '../Stylesheets/App/common.css'
 import '../Stylesheets/App/homePage.css';
@@ -30,9 +32,19 @@ class Home extends Component {
         };
       }
 
-    componentWillMount() {
+    async componentWillMount() {
+        /*const getToken =await loadToken();
+        console.log('getToken=========>hahah',getToken)
+
+        if(getToken == null || getToken == ''){
+            WechatAuth()
+            const token = GetQueryString('token')
+            //alert(token)
+            saveToken(token)
+        }*/
         this.getHomeBanner()
         this.getHomeMoudle()
+
     }
     //首页banner
    async getHomeBanner(){
@@ -60,7 +72,7 @@ class Home extends Component {
 
 
   render() {
-      const {moudle} = this.state
+    const {moudle} = this.state
     return (
       <div className="containerNav bkg_color">
           <div className="wrap">
@@ -136,6 +148,7 @@ class Home extends Component {
               </div>
           </div>
       </div>
+
 
 
     );

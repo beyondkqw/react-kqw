@@ -56,13 +56,14 @@ export default class PersonalCenter extends Component {
                 lv : res.LV,
                 vip_point : res.VIP_POINTS,
                 headImg:res.IMAGE_URI,
-                accId:res.ID
+                accId:res.ID,
+                now_amount:res.NOW_AMOUNT
             })
         })
     }
 
     render() {
-        const {name,amount,point,lv,vip_point,accId} = this.state
+        const {name,amount,point,lv,vip_point,accId,now_amount} = this.state
         return (
             <div className="containerNav">
                 <div className="wrap">
@@ -151,6 +152,7 @@ export default class PersonalCenter extends Component {
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }

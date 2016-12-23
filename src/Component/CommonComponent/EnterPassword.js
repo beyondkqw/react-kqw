@@ -63,7 +63,6 @@ export default class EnterPassword extends Component {
                                             )
                                         })
                                     }
-
                                 </div>
                             </div>
                             <div className="ptlr mt5">

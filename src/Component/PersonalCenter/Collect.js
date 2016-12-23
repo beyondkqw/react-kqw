@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import {FollowList,Follow} from '../../Action/auth';
 import {loadToken,getToken} from '../../Action/rpc'
 
@@ -29,6 +30,7 @@ export default class Collect extends Component {
                 console.log('res.resultList == null',res.resultList == '')
                 if(res.resultList == ''){
                     this.setState({isShowEmptyImg:true})
+                    return
                 }
                 this.setState({ItemList:res.resultList});
             })
@@ -69,7 +71,6 @@ export default class Collect extends Component {
 
     render() {
         const {ItemList,isShowEmptyImg} = this.state
-        console.log('this.state.isShowEmptyImg',this.state.isShowEmptyImg)
         return (
             <div className="containerNav">
                 <div className="wrap">
@@ -80,6 +81,7 @@ export default class Collect extends Component {
                                     <img src={require('../../Images/empty.png')} alt=""/>
                                 </span>
                                 <p className="font14 color9">收藏列表是空的哦~</p>
+
                             </div>
                             :null
                     }

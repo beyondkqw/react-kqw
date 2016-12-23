@@ -3,7 +3,6 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CellComponent from '../../Component/CommonComponent/CellComponent';
 import '../../Stylesheets/App/personal.css';
-import {WechatAuth} from '../../Action/autoLogin'
 
 
 const ChargesList = [
@@ -18,17 +17,20 @@ export default class MyCharges extends Component {
         super(props);
         // 初始状态
         this.state = {
-            accId:''
+            accId:'',
+            Now_Amount:''
         };
       }
     componentWillMount() {
-        const accId = this.props.location.query.memberId
-        this.setState({accId:accId})
-        console.log('memberId',accId);
-        //WechatAuth()
+        const {memberId,now_amount} = this.props.location.query
+        this.setState({accId:memberId})
+        this.setState({Now_Amount:now_amount})
+        console.log('memberId',memberId);
+        console.log('now_amount',now_amount);
     }
     render() {
-        const {accId} = this.state
+        const {accId,Now_Amount} = this.state
+        console.log('============',Now_Amount)
         return (
             <div className="containerNav">
                 <div className="wrap">
@@ -71,6 +73,7 @@ export default class MyCharges extends Component {
                             link={'/personalCenter/commisionGiving'}
                         />
                     </div>
+
                 </div>
             </div>
         );

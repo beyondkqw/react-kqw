@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import RankRow from './RankRow'
 import '../../Stylesheets/App/personal.css';
 import {TeamMembers} from '../../Action/auth';
@@ -12,7 +13,8 @@ export default class MyCustomer extends Component {
         super(props);
         // 初始状态
         this.state = {
-            memberList:[]
+            memberList:[],
+            isEmptyMember:false
         };
       }
     componentWillMount() {
@@ -22,6 +24,10 @@ export default class MyCustomer extends Component {
     async getMenbersList(){
         await TeamMembers()
             .then(res=>{
+                if(res.resultList == ''||res.resultList == null){
+                    this.setState({isEmptyMember:true})
+                    console.log('-----------+++++++++++++',this.state.isEmptyMember)
+                }
                 this.setState({memberList:res.resultList})
             })
             .catch(err=>{
@@ -29,7 +35,7 @@ export default class MyCustomer extends Component {
             })
     }
     render() {
-        const {memberList} = this.state
+        const {memberList,isEmptyMember} = this.state
         return (
             <div className="containerNav">
                 <div className="wrap">

@@ -20,6 +20,7 @@ export default class WithdrawCash extends Component {
     }
     render() {
         const {toShowModal} = this.state
+        console.log('toShowModal==========>',toShowModal)
         return (
             <div className="bkg_color containerNav">
                 <div className="wrap">

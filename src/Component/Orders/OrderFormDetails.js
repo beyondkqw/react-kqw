@@ -43,6 +43,7 @@ export default class OrderFormDetails extends Component {
     async getOrderDetail(param){
         await OrderDetail(param)
                 .then(res=>{
+                    console.log('res',res)
                     this.setState({orderFormdDetails:res})
                 })
                 .catch(err=>{
@@ -84,26 +85,32 @@ export default class OrderFormDetails extends Component {
                 </div>
                 <SplitLine />
                 <div className="paymargin">
-                    <div className="di payImgSize mr"><img src={require('../../Images/store.png')} alt=""/></div>
+                    <div className="di payImgSize mr"><img src={orderFormdDetails.img} alt=""/></div>
                     <span className="color6 font14">{orderFormdDetails.store_name}</span>
                 </div>
-                <div className="pr plAll df border_bottom">
-                    <div className="order_img height_all">
-                        <img src={require('../../Images/storeClothes.png')} alt=""/>
-                    </div>
-                    <div className="color6 flex1 font14 order_margin">
-                        <p className="oh orderShow db">李宁赤兔哈空间是的哈U盾手癌花时间都好似按对方</p>
-                    </div>
-                    <div className="pa order_price tr">
-                        <p className=""><span className="f12">￥</span><span className="f15">258</span></p>
-                        <p className="td_lt color9"><span className="f12">￥</span><span className="f15">258</span></p>
-                        <p className="color9 font14"><span>X</span><span>1</span></p>
-                        <Link to="/orders/applicationForAfterSales">
-                            {/*退款中  退款成功*/}
-                            <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
-                        </Link>
-                    </div>
-                </div>
+                {
+                    orderFormdDetails.orderDetails&&orderFormdDetails.orderDetails.map(el=>{
+                        return(
+                            <div className="pr plAll df border_bottom">
+                                <div className="order_img">
+                                    <img src={el.productImage} alt=""/>
+                                </div>
+                                <div className="color6 flex1 font14 order_margin">
+                                    <p className="oh orderShow db">{el.productName}</p>
+                                </div>
+                                <div className="pa order_price tr">
+                                    <p className=""><span className="f12">￥</span><span className="f15">{el.price}</span></p>
+                                    <p className="td_lt color9"><span className="f12">￥</span><span className="f15">258</span></p>
+                                    <p className="color9 font14"><span>X</span><span>{el.num}</span></p>
+                                    <Link to="/orders/applicationForAfterSales" query={{orderNo:el.orderNo}}>
+                                        {/*退款中  退款成功*/}
+                                        <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
                 <div className="plAll border_bottom">
                     {
                         orderList.map(el=>{

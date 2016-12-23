@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
@@ -29,7 +30,8 @@ export default class GoodsDescription extends Component {
             status:null,
             attributeList : [],
             type:'',
-            remarkList:[]
+            remarkList:[],
+            showEmptyImg:false
         };
     }
     //弹出popup
@@ -53,6 +55,10 @@ export default class GoodsDescription extends Component {
         .then(res=>{
             console.log('评论列表',res)
             const {resultList} = res
+            if(resultList == ''){
+                this.setState({showEmptyImg:true})
+                return
+            }
             this.setState({remarkList:resultList})
         })
     }
@@ -196,12 +202,19 @@ export default class GoodsDescription extends Component {
 
     //评价列表
     showGoodsRemark(){
-        const {remarkList} = this.state
+        const {remarkList,showEmptyImg} = this.state
+        console.log('showEmptyImg',showEmptyImg)
         const imgHeight = document.body.scrollWidth
         //console.log('imgHeight',imgHeight)
         return(
-            <div className="remark" style={{backgroundColor:'#f5f5f5'}}>
+            <div className="remark pr" style={{backgroundColor:'#f5f5f5'}}>
                 {
+                    showEmptyImg?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72}}
+                            title={'暂无评论哦~'}
+                        />
+                        :
                     remarkList.map((el,index)=>{
                         return(
                             <div
