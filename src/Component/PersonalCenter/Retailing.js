@@ -30,27 +30,29 @@ export default class Retailing extends Component {
         const {incomeAmount}  = this.state
         return (
             <div className="containerNav">
-                {
-                    incomeAmount&&incomeAmount.map(el=>{
-                        return(
-                            <Link
-                                to="/personalCenter/retailingDetails"
-                                query={{
-                                imgUrl:el.image_uri,
-                                memberName:el.member_name,
-                                amount:el.change_amount,
-                                msg:el.extra_msg2
-                                }}>
-                                <RetailingItem
-                                    changeAmount = {el.change_amount}
-                                    extraMsg = {el.extra_msg2}
-                                    imgUrl = {el.image_uri}
-                                    isShowDate={true}
-                                />
-                            </Link>
-                        )
-                    })
-                }
+                <div className="wrap">
+                    {
+                        incomeAmount&&incomeAmount.map(el=>{
+                            return(
+                                <Link
+                                    to="/personalCenter/retailingDetails"
+                                    query={{
+                                    imgUrl:el.image_uri,
+                                    memberName:el.member_name,
+                                    amount:el.change_amount,
+                                    msg:el.extra_msg2
+                                    }}>
+                                    <RetailingItem
+                                        changeAmount = {el.change_amount}
+                                        extraMsg = {el.extra_msg2}
+                                        imgUrl = {el.image_uri}
+                                        isShowDate={true}
+                                    />
+                                </Link>
+                            )
+                        })
+                    }
+                </div>
 
             </div>
         );

@@ -32,24 +32,25 @@ export default class MyCustomer extends Component {
         const {memberList} = this.state
         return (
             <div className="containerNav">
-                <SplitLine />
-                {
-                    memberList.map(el=>{
-                        return(
-                            <Link to="/personalCenter/toWatchOtherInfo" query={{memberId:el.accId}}>
-                                <RankRow
-                                    rightCursor={true}
-                                    more={true}
-                                    memberName = {el.memberName}
-                                    imgUrl = {el.imageUri}
-                                    vipPoints = {el.vipPoints?el.vipPoints:0}
+                <div className="wrap">
+                    <SplitLine />
+                    {
+                        memberList.map(el=>{
+                            return(
+                                <Link to="/personalCenter/toWatchOtherInfo" query={{memberId:el.accId}}>
+                                    <RankRow
+                                        rightCursor={true}
+                                        more={true}
+                                        memberName = {el.memberName}
+                                        imgUrl = {el.imageUri}
+                                        vipPoints = {el.vipPoints?el.vipPoints:0}
 
-                                />
-                            </Link>
-                        )
-                    })
-                }
-
+                                    />
+                                </Link>
+                            )
+                        })
+                    }
+                </div>
             </div>
         );
     }

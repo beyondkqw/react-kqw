@@ -46,25 +46,27 @@ export default class ConfirmGivenPerson extends Component {
         console.log('pointList')
         return (
             <div className="containerNav">
-                <Search
-                    toChange = {true}
-                    style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5'}}
-                />
-                <SplitLine />
-                <div className ="list-block m0 font14">
-                    {
-                        pointList.map(el=>{
-                            return(
-                                <LiItem
-                                    title={el.memberName}
-                                    imgUrl={el.imageUri}
-                                    name={''}
-                                    isShow={false}
-                                    onClick={()=>this.getInformation(el.accId,el.imageUri,el.memberName)}
-                                />
-                                )
-                        })
-                    }
+                <div className="wrap">
+                    <Search
+                        toChange = {true}
+                        style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5'}}
+                    />
+                    <SplitLine />
+                    <div className ="list-block m0 font14">
+                        {
+                            pointList.map(el=>{
+                                return(
+                                    <LiItem
+                                        title={el.memberName}
+                                        imgUrl={el.imageUri}
+                                        name={''}
+                                        isShow={false}
+                                        onClick={()=>this.getInformation(el.accId,el.imageUri,el.memberName)}
+                                    />
+                                    )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         );

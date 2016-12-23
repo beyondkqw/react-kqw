@@ -6,7 +6,9 @@ export default class TotalDetails extends Component {
     render() {
         return (
             <div className="containerNav allIncome_Img supplement">
-                <AllIncomeComponent />
+                <div className="wrap">
+                    <AllIncomeComponent />
+                </div>
             </div>
         );
     }

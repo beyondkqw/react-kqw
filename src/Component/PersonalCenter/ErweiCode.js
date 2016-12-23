@@ -23,19 +23,22 @@ export default class ErweiCode extends Component {
     render() {
         return (
             <div className="containerNav allIncome_Img supplement">
-                <div className="pa_top1 tc">
-                    <span className="di incomeImg">
-                        <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
-                    </span>
-                    <p className="f12 color9 mt5">小燕子的天堂</p>
-                </div>
-                <div className="width100 tc mt25">
-                    <span className="di erWeiCode">
-                        <img src={this.state.path} alt=""/>
-                    </span>
-                </div>
-                <div className="pf bottom0 tc userHeight bkg_ff width100 color_white font16">
-                    分享
+                <div className="wrap">
+                    <div className="pa_top1 tc">
+                        <span className="di incomeImg">
+                            <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
+                        </span>
+                        <p className="f12 color9 mt5">小燕子的天堂</p>
+                    </div>
+                    <div className="width100 tc mt25">
+                        <span className="di erWeiCode">
+                            <img src={this.state.path} alt=""/>
+                        </span>
+                    </div>
+                    <div className="footerHidden"></div>
+                    <div className="pf bottom0 tc userHeight bkg_ff wrap color_white font16">
+                        分享
+                    </div>
                 </div>
             </div>
         );

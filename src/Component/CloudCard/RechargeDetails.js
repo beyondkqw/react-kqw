@@ -6,9 +6,11 @@ export default class RechargeDetails extends Component {
     render() {
         return (
             <div className="containerNav">
-                <DetailsRow
-                    toShowBtn = {false}
-                />
+                <div className="wrap">
+                    <DetailsRow
+                        toShowBtn = {false}
+                    />
+                </div>
             </div>
         );
     }

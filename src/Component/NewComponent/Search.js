@@ -52,6 +52,7 @@ export default class Search extends Component {
        /* let bColor = this.state.bg ? this.state.bg : 'transprent';
         console.log(this.state.bg);*/
         return (
+
             <div className="flex">
                 <div id="searchNav" style={style}>
                     <div className="search pr">
@@ -140,7 +141,7 @@ export default class Search extends Component {
 
                 {
                     this.state.display?
-                        <div className="history pf">
+                        <div className="history pf wrap">
                             <span>历史记录</span>
                             <span className="deletHistory fr">
                                 <img src = {require('../../Images/detelename.png')}/>

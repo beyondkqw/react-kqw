@@ -47,7 +47,7 @@ export default class GoodsPopup extends Component {
     render() {
         const {closePopUp,attr,onClick,isOnly,typeParam} = this.props
         return (
-                <div className="popupContainer pf bottom0 z_index bkg_color width_100 border_top pr">
+                <div className="popupContainer pf bottom0 z_index bkg_color wrap border_top pr">
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
                     <div className="pm_img plAll">
                         <span className="di productImg"><img src={require('../../Images/store.png')} alt=""/></span>

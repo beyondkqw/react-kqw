@@ -32,6 +32,7 @@ export default class TabBar extends Component {
         const {contents} = this.props
         return(
             <div className="tabBarContainer">
+
                 {
                     contents&&contents.map((el,index)=>{
                         return(
@@ -44,6 +45,7 @@ export default class TabBar extends Component {
                         )
                     })
                 }
+
             </div>
         )
     }

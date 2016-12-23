@@ -9,6 +9,7 @@ import reducer from './Reducer'
 
 import './css/bootstrap.min.css';
 import './Stylesheets/Index.css';
+import './Stylesheets/Wrap.css'
 
 const middleware = [ thunk ]
 if (process.env.NODE_ENV !== 'production') {

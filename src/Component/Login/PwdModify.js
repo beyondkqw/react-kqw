@@ -19,6 +19,7 @@ export default class PwdModify extends Component {
 
     render(){
         return(
+            <div className="wrap">
                 <div>
                     <div className='editorBox_100'>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 24}}>旧密码</span>
@@ -57,6 +58,7 @@ export default class PwdModify extends Component {
 
                     <button style={{marginTop:30}} onClick={()=>this.setState({step:2})} className="toLogin">确 认</button>
                 </div>
+            </div>
         )
     }
 }

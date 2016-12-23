@@ -23,18 +23,19 @@ export default class BrowseRecord extends Component {
             <div
                 onClick = {()=>test()}
                 className="containerNav">
-                {
-                    storeDetail.map(el=>{
-                        return(
-                            <StoreRow
-                                title = {el.title}
-                                record = {el.record}
-                                imgurl = {el.imgUrl}
-                            />
-                        )
-                    })
-                }
-
+                <div className="wrap">
+                    {
+                        storeDetail.map(el=>{
+                            return(
+                                <StoreRow
+                                    title = {el.title}
+                                    record = {el.record}
+                                    imgurl = {el.imgUrl}
+                                />
+                            )
+                        })
+                    }
+                </div>
             </div>
         )
     }

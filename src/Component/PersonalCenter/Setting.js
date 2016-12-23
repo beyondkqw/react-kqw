@@ -9,23 +9,27 @@ const Itemlist =[{name:'账号与安全',link:'/personalCenter/savety'},
 export default class Setting extends Component {
     render() {
         return (
+        <div className="containerNav">
             <div className="list-block m0">
-                <ul>
-                    {
-                        Itemlist.map((el,index)=>{
-                            return(
-                                <LiComponent
-                                   name = {el.name}
-                                   link = {el.link}
-                                />
-                            )
-                        })
-                    }
-                </ul>
-                <CommonBtn
-                    title = {'退出登录'}
-                />
+                <div className="wrap">
+                    <ul>
+                        {
+                            Itemlist.map((el,index)=>{
+                                return(
+                                    <LiComponent
+                                       name = {el.name}
+                                       link = {el.link}
+                                    />
+                                )
+                            })
+                        }
+                    </ul>
+                    <CommonBtn
+                        title = {'退出登录'}
+                    />
+                </div>
             </div>
+        </div>
         );
     }
 }

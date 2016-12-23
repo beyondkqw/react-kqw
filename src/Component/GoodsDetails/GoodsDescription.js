@@ -245,128 +245,131 @@ export default class GoodsDescription extends Component {
         const {goodsDetails} = this.state;
         return (
             <section className="containerNav">
-                <div className="bannerImg">
-                    <AutoPlaySwipeableViews
-                        interval = {2000}
-                    >
-                        {
-                            goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
-                                return(
-                                    <img
-                                        src = {el.IMAGE}
-                                        key = {index}
-                                    />
-                                )
-                            })
-                        }
-                    </AutoPlaySwipeableViews>
-                </div>
-                <div className="width_100 goodDetails">
-                    <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
-                    <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
-                        <span className="di collect_img">
+                <div className="wrap">
+                    <div className="bannerImg">
+                        <AutoPlaySwipeableViews
+                            interval = {2000}
+                        >
                             {
-                                this.state.isChecked?
-                            <img src={require('../../Images/alreadyFollow.png')} alt=""/>
-                            :
-                            <img src={require('../../Images/collect.png')} alt=""/>
+                                goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
+                                    return(
+                                        <img
+                                            src = {el.IMAGE}
+                                            key = {index}
+                                        />
+                                    )
+                                })
                             }
-                        </span>
-                        <span className="f10 db color6">收藏</span>
+                        </AutoPlaySwipeableViews>
                     </div>
-                </div>
-                <div className="mtlr">
-                    <div>
-                        <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
-                        <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
-                    </div>
-                    <div className="f12">
-                        <span className="colorff ">卖家包邮</span>
-                        <div className="fr">
-                            <span>{goodsDetails.SALES}</span>人付款
+                    <div className="width_100 goodDetails">
+                        <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
+                        <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
+                            <span className="di collect_img">
+                                {
+                                    this.state.isChecked?
+                                <img src={require('../../Images/alreadyFollow.png')} alt=""/>
+                                :
+                                <img src={require('../../Images/collect.png')} alt=""/>
+                                }
+                            </span>
+                            <span className="f10 db color6">收藏</span>
                         </div>
                     </div>
-                </div>
-                <div className="list-block margin_tb">
-                    <ul>
-                        <Link to="/store">
-                            <li className="item-content item-link pl  border_bottom">
+                    <div className="mtlr">
+                        <div>
+                            <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
+                            <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
+                        </div>
+                        <div className="f12">
+                            <span className="colorff ">卖家包邮</span>
+                            <div className="fr">
+                                <span>{goodsDetails.SALES}</span>人付款
+                            </div>
+                        </div>
+                    </div>
+                    <div className="list-block margin_tb">
+                        <ul>
+                            <Link to="/store">
+                                <li className="item-content item-link pl  border_bottom">
+                                    <div className="item-media"><i className="icon icon-f7"></i></div>
+                                    <div className="item-inner margin0">
+                                        <div className="item-title">
+                                            <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                            <span className="color6 font14">挂花皮草阁</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </Link>
+                            {/*属性*/}
+                            <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
                                 <div className="item-media"><i className="icon icon-f7"></i></div>
                                 <div className="item-inner margin0">
                                     <div className="item-title">
-                                        <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                        <span className="color6 font14">挂花皮草阁</span>
+                                        <span className="color6 font14">{this.state.attributeList.map((el,index)=>{
+                                            if(index<this.state.attributeList.length-1){
+                                                return `${el.NAME}`+ ','
+                                            }
+                                            return `${el.NAME}`
+                                        })}分类</span>
                                     </div>
                                 </div>
                             </li>
-                        </Link>
-                        {/*属性*/}
-                        <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner margin0">
-                                <div className="item-title">
-                                    <span className="color6 font14">{this.state.attributeList.map((el,index)=>{
-                                        if(index<this.state.attributeList.length-1){
-                                            return `${el.NAME}`+ ','
-                                        }
-                                        return `${el.NAME}`
-                                    })}分类</span>
-                                </div>
+                        </ul>
+                    </div>
+                    <SplitLine />
+
+                    <Tabscontrol
+                        style={{backgroundColor:'#fff'}}
+                    >
+                        <div name="商品介绍">
+                            我是第一帧
+                        </div>
+                        <div name="商品参数">
+                            {this.showGoodsParams()}
+                        </div>
+                        <div name="评论">
+                            {this.showGoodsRemark()}
+                        </div>
+                    </Tabscontrol>
+                </div>
+
+
+                <div className="wrap">
+                    <div className="height3 pf bottom0  plAll border_top bkg_color z_index wrap">
+                            {/*购物车*/}
+                            <div
+                                onClick = {()=>this.adShopCarOrToPay(1)}
+                                className="di height_all pr fl width_cart"
+                            >
+                                <button className="cartBtn width_100 height_all border_ra">
+                                    <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
+                                    {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
+                                </button>
                             </div>
-                        </li>
-                    </ul>
+                            <div className="width_de fl height_all"></div>
+                            <div
+                                className="di height_all pr fl width_buy border_ra"
+                                onClick={()=>this.adShopCarOrToPay(2)}
+                            >
+                                <button className="width_100 height_all color_white font16 color_white">
+                                    立即购买
+                                </button>
+                            </div>
+                    </div>
+                    {/*选择商品属性*/}
+                    {this.state.isShow?
+                        <GoodsPopup
+                            //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
+                            attr = {this.state.attributeList}
+                            closePopUp = {()=>this.setState({isShow:false})}
+                            ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
+                            isOnly = {this.state.type?true:false}
+                            //typeParam = {type=>{console.log('type',type)}}
+                        />
+                    :null}
+                    <div className="goodBottom width_100"></div>
                 </div>
-                <SplitLine />
-
-                <Tabscontrol
-                    style={{backgroundColor:'#fff'}}
-                >
-                    <div name="商品介绍">
-                        我是第一帧
-                    </div>
-                    <div name="商品参数">
-                        {this.showGoodsParams()}
-                    </div>
-                    <div name="评论">
-                        {this.showGoodsRemark()}
-                    </div>
-                </Tabscontrol>
-
-                <div className="height3 pf bottom0 width_100 plAll border_top bkg_color z_index">
-
-                    {/*购物车*/}
-                    <div
-                        onClick = {()=>this.adShopCarOrToPay(1)}
-                        className="di height_all pr fl width_cart"
-                    >
-                        <button className="cartBtn width_100 height_all border_ra">
-                            <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
-                            {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
-                        </button>
-                    </div>
-                    <div className="width_de fl height_all"></div>
-                    <div
-                        className="di height_all pr fl width_buy border_ra"
-                        onClick={()=>this.adShopCarOrToPay(2)}
-                    >
-                        <button className="width_100 height_all color_white font16 color_white">
-                            立即购买
-                        </button>
-                    </div>
-                </div>
-
-                {/*选择商品属性*/}
-                {this.state.isShow?
-                    <GoodsPopup
-                        //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
-                        attr = {this.state.attributeList}
-                        closePopUp = {()=>this.setState({isShow:false})}
-                        ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
-                        isOnly = {this.state.type?true:false}
-                        //typeParam = {type=>{console.log('type',type)}}
-                    />
-                :null}
-                <div className="goodBottom width_100"></div>
             </section>
 
 

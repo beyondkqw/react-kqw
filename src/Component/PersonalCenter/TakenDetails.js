@@ -31,7 +31,7 @@ export default class TakenDetails extends Component {
     render() {
         const {payAmount} = this.state
         return (
-            <div>
+            <div className="wrap">
                 <SplitLine />
                 {
                     payAmount&&payAmount.map(el=>{

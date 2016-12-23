@@ -42,7 +42,7 @@ export default class Partner extends Component {
     render() {
         const {count,recommendName,recommendId} = this.state
         return (
-            <div>
+            <div className="wrap">
                 <div className ="list-block m0 font14">
                     <SplitLine />
                     <ul>

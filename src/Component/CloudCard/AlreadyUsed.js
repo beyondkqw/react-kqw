@@ -7,14 +7,16 @@ export default class AlreadyUsed extends Component {
     render() {
         return (
             <div>
-                <Link to="/alreadyUsedDetails">
+                <div className="wrap">
+                    <Link to="/alreadyUsedDetails">
+                        <RetailingItem
+                            isShowDate={true}
+                        />
+                    </Link>
                     <RetailingItem
                         isShowDate={true}
                     />
-                </Link>
-                <RetailingItem
-                    isShowDate={true}
-                />
+                </div>
             </div>
         );
     }
