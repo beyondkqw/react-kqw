@@ -29,13 +29,13 @@ export default class OrderList extends Component {
             if(this.state.index == 0){
                 this.getOrderList('0')
             }else if(this.state.index == 1){
-                this.getOrderList('1')
-            }else if(this.state.index == 2){
                 this.getOrderList('2')
-            }else if(this.state.index == 3){
+            }else if(this.state.index == 2){
                 this.getOrderList('3')
-            }else if(this.state.index == 4){
+            }else if(this.state.index == 3){
                 this.getOrderList('4')
+            }else if(this.state.index == 4){
+                this.getOrderList('')
             }else{
                 this.getOrderList('0')
             }
@@ -45,7 +45,6 @@ export default class OrderList extends Component {
         await GetOrderList(param)
             .then(res=>{
                 this.setState({orderItems:res.resultList})
-                console.log(param,res.resultList)
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -77,6 +76,7 @@ export default class OrderList extends Component {
                 { this.state.index == 1?
                     <div>
                         <OrderDetails
+                            Receipt = {()=>this.getOrderList('2')}
                             orderDetails = {orderItems}
                             makeSure={true}
                         />
@@ -108,7 +108,7 @@ export default class OrderList extends Component {
                 { this.state.index == 4?
                     <div>
                         <OrderDetails
-                            againSend = {()=>this.getOrderList('5')}
+                            againSend = {()=>this.getOrderList('')}
                             orderDetails = {orderItems}
                             allRated = {true}
                         />

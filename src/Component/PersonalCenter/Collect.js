@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/personal.css';
 import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import {FollowList,Follow} from '../../Action/auth';
@@ -18,6 +18,10 @@ export default class Collect extends Component {
         };
       }
 
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
     async componentWillMount() {
         await loadToken()
         this.getCollectList()
@@ -27,12 +31,12 @@ export default class Collect extends Component {
     async getCollectList(){
         await FollowList()
             .then(res=>{
-                console.log('res.resultList == null',res.resultList == '')
-                if(res.resultList == ''){
+                if(res.resultList == ''||res.resultList == null){
                     this.setState({isShowEmptyImg:true})
-                    return
+                }else{
+                    this.setState({isShowEmptyImg:false})
+                    this.setState({ItemList:res.resultList});
                 }
-                this.setState({ItemList:res.resultList});
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -68,9 +72,15 @@ export default class Collect extends Component {
                 console.warn('err',err)
             })
     }
+    //跳转到商品详情页
+    jumpLink(productId){
+        this.context.router.push({pathname:'/goodsDescription',
+            query:{id:productId}})
+    }
 
     render() {
         const {ItemList,isShowEmptyImg} = this.state
+        console.log('isShowEmptyImgi',isShowEmptyImg)
         return (
             <div className="containerNav">
                 {
@@ -80,9 +90,11 @@ export default class Collect extends Component {
                             title={'收藏列表是空的哦~'}
                         />
                         :
-                    ItemList.map((el,index)=>{
+                        ItemList&&ItemList.map((el,index)=>{
                         return(
-                            <div className="pt_collect border_bottom pr">
+                            <div className="pt_collect border_bottom pr"
+                                onClick={()=>this.jumpLink(el.PRODUCT_ID)}
+                            >
                                 <div className="store_img pa">
                                     <img className="border_ra" src={el.IMAGE} alt=""/>
                                 </div>
@@ -93,7 +105,7 @@ export default class Collect extends Component {
                                 </div>
                                 <div className="pa color6 cancel_collect">
                                     <button className="f12 cancel_btn border_ra"
-                                        onClick={()=>this.isShow(el.PRODUCT_ID,index)}
+                                            onClick={()=>this.isShow(el.PRODUCT_ID,index)}
                                     >取消</button>
                                 </div>
                             </div>

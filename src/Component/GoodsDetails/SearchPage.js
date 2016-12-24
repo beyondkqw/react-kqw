@@ -6,6 +6,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 import Search from '../../Component/NewComponent/Search';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails';
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import {ProductList} from '../../Action/auth';
 import {Link} from 'react-router'
@@ -31,7 +32,7 @@ export default class SearchPage extends Component {
         };
       }
     async componentWillMount(){
-        await this.getOrder()
+        await this.getOrder('','','','','')
     }
     //搜索
     async SearchBtn(value){
@@ -234,6 +235,12 @@ export default class SearchPage extends Component {
                 >
                     <div className="imgContainer width_100">
                         {
+                            goodsList == ''?
+                                <IsShowEmptyImg
+                                    styleSheet={{width:69,height:72,marginTop:120}}
+                                    title={'查询列表是空的哦~'}
+                                />
+                                :
                             goodsList&&goodsList.map((el,index)=>{
                                 return (
                                     showByColumn?

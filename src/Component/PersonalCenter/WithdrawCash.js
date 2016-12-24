@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import EnterPassword from '../../Component/CommonComponent/EnterPassword';
 import '../../Stylesheets/App/personal.css';
+import {Cash} from '../../Action/auth'
 
 export default class WithdrawCash extends Component {
     // 构造
@@ -12,34 +13,90 @@ export default class WithdrawCash extends Component {
         // 初始状态
         this.copyArray=[]
         this.state = {
-            toShowModal:false
+            toShowModal:false,
+            amount:'',
+            Reminder:'',
+            now_amount:0,
+            frozen:0,
+            allAmount:0
         };
     }
-    confirmIncome(){
-        this.setState({toShowModal:true})
+
+    componentWillMount() {
+        const {now_amount,frozen} = this.props.location.query
+        this.setState({now_amount:now_amount,frozen:frozen})
+        console.log('this.state.now_amount==========>',now_amount,frozen)
+        this.setState({allAmount:parseInt(now_amount)+parseInt(frozen)})
+
     }
+    confirmIncome(){
+        //this.setState({toShowModal:true})
+        const {bankcardId} = this.props.location.query
+        if(this.state.amount == ''){
+            alert('请输入提现金额')
+            return
+        }else if(bankcardId == ''){
+            alert('请选择所需银行卡')
+            return
+        }else{
+            this.getCash(bankcardId,this.state.amount)
+        }
+
+    }
+
+    async getCash(bankcardId,amount) {
+        await Cash(bankcardId,amount)
+            .then(res=> {
+
+            })
+            .catch(err=> {
+                this.setState({Reminder:err.message})
+            })
+    }
+
     render() {
-        const {toShowModal} = this.state
-        console.log('toShowModal==========>',toShowModal)
+        const {toShowModal,now_amount,frozen,allAmount} = this.state
+        const {toChange,bankname,bankcardNo} = this.props.location.query
         return (
             <div className="bkg_color">
                 <div className="list-block m0">
                     <ul>
-                        <Link to='/personalCenter/commissionCash'>
-                            <li className="item-content item-link item-link pl  border_bottom">
-                                <div className="item-media">
-                                    <span className="fl di headerImg">
-                                        <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
-                                    </span>
-                                </div>
-                                <div className="item-inner" style={{marginLeft:15}}>
-                                    <div className="item-title-row">
-                                        <div className="item-title font14 color6">多云云的天堂</div>
-                                        <div className="f12 color9">请选择提现账号</div>
-                                    </div>
-                                </div>
-                            </li>
-                        </Link>
+                        {
+                            toChange ?
+                                <Link to='/personalCenter/commissionCash'>
+                                    <li className="item-content item-link item-link pl  border_bottom">
+                                        <div className="item-media">
+                                            <span className="fl di headerImg">
+                                                <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
+                                                     alt=""/>
+                                            </span>
+                                        </div>
+                                        <div className="item-inner" style={{marginLeft:15}}>
+                                            <div className="item-title-row">
+                                                <div className="item-title font14 color6">{bankname}</div>
+                                                <div className="f12 color9">尾号{bankcardNo}的卡</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </Link>
+                                :
+                                <Link to='/personalCenter/commissionCash'>
+                                    <li className="item-content item-link item-link pl  border_bottom">
+                                        <div className="item-media">
+                                        <span className="fl di headerImg">
+                                            <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
+                                                 alt=""/>
+                                        </span>
+                                        </div>
+                                        <div className="item-inner" style={{marginLeft:15}}>
+                                            <div className="item-title-row">
+                                                <div className="item-title font14 color6">多云云的天堂</div>
+                                                <div className="f12 color9">请选择提现账号</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </Link>
+                        }
                     </ul>
                 </div>
                 <SplitLine />
@@ -52,12 +109,13 @@ export default class WithdrawCash extends Component {
                             type="text"
                             placeholder="0.00"
                             ref='pointAmount'
+                            onChange={()=>this.setState({amount:this.refs.pointAmount.value})}
                         />
                     </div>
                 </div>
                 <div className="plAll border_top border_bottom f12">
                     <span>最多可提取</span>
-                    <span className="di ml">￥</span><span>123</span>
+                    <span className="di ml">￥</span><span>{now_amount}</span>
                 </div>
                 <SplitLine />
                 <div className ="list-block m0 font14">
@@ -70,7 +128,7 @@ export default class WithdrawCash extends Component {
                                 </span>
                                     <span className="di margin15 color6">总佣金</span>
                                 </div>
-                                <div className="item-after color9 isSet">421</div>
+                                <div className="item-after color9 isSet">{allAmount}</div>
                             </div>
                         </li>
                         <li className ='item-content border_bottom isConfirmSet'>
@@ -81,7 +139,7 @@ export default class WithdrawCash extends Component {
                                 </span>
                                     <span className="di margin15 color6">可提取佣金</span>
                                 </div>
-                                <div className="item-after color9 isSet">345</div>
+                                <div className="item-after color9 isSet">{now_amount}</div>
                             </div>
                         </li>
                         <li className ='item-content border_bottom isConfirmSet'>
@@ -92,12 +150,16 @@ export default class WithdrawCash extends Component {
                                 </span>
                                     <span className="di margin15 color6">已申请提现佣金</span>
                                 </div>
-                                <div className="item-after color9 isSet">345</div>
+                                <div className="item-after color9 isSet">{frozen}</div>
                             </div>
                         </li>
                     </ul>
                 </div>
+                <div className="tc f12 color_red width_100 plr mtb loginHeight">
+                    {this.state.Reminder}
+                </div>
                 <CommonBtn
+                    style={{marginTop:0}}
                     title={'确认提现'}
                     onClick={()=>this.confirmIncome()}
                 />

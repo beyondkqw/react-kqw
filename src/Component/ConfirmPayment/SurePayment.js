@@ -1,8 +1,40 @@
 import React, { Component } from 'react';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/comfirmPayMoney.css';
+import {Process} from '../../Action/auth'
 
 export default class SurePayment extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+
+        };
+      }
+
+    //确认支付
+    confirmPayMoney(){
+        this.getProcess()
+    }
+
+    async getProcess(){
+        console.log('planReceiveTime==========>',this.props.location.query.planReceiveTime)
+        console.log('orderNosArray==========>',this.props.location.query.orderNos.split(','))
+        await Process(0,4,
+            JSON.stringify({
+                planReceiveTime:this.props.location.query.planReceiveTime,
+                payType:4,
+                orderNos:this.props.location.query.orderNos
+            })
+        )
+            .then(res=>{
+
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
     render() {
         return (
             <div className="containerNav">
@@ -12,6 +44,7 @@ export default class SurePayment extends Component {
                 </div>
                 <CommonBtn
                     title={'确认付款'}
+                    onClick={()=>this.confirmPayMoney()}
                 />
             </div>
         );

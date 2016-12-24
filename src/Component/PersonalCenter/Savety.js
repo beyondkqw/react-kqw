@@ -82,13 +82,15 @@ export default class Savety extends Component {
                 <div className="bkg_gray save_h2 pl8">安全</div>
                 <div className="list-block m0 font14">
                     <ul>
-                        <li className="item-content">
-                            <div className="item-inner">
-                                <div className="item-title">
-                                    <span className="di listimg"><img src={require('../../Images/password.png')} alt=""/></span>
-                                    <span className="di margin15">修改密码</span></div>
-                            </div>
-                        </li>
+                        <Link to="/Setting/PwdModify" query={{mobile:this.props.location.query.mobile}}>
+                            <li className="item-content">
+                                <div className="item-inner">
+                                    <div className="item-title">
+                                        <span className="di listimg"><img src={require('../../Images/password.png')} alt=""/></span>
+                                        <span className="di margin15 color6">修改密码</span></div>
+                                </div>
+                            </li>
+                        </Link>
                     </ul>
                 </div>
             </div>

@@ -243,9 +243,8 @@
     background-size:100% 100%;
     background-position: center;
     width:93px;
-    height:43px;
-    line-height:43px;
-    margin-top:-0.2rem;
+    height:65px;
+    line-height:60px;
 }
 .mrl25{
     margin-left:1.25rem;
@@ -300,11 +299,14 @@
 .modal_input{
     height:2.25rem;
     line-height:2.25rem;
-}
-.modal_input{
     background:url('../../Images/pwdInput.png') no-repeat;
     background-size:100% 100%;
     background-position: center;
+}
+.modal_input img{
+    top:0;
+    left:0;
+    bottom:0;
 }
 .supplement{
     background-size:100% 100%;

@@ -15,6 +15,8 @@ import {WechatAuth} from '../Action/autoLogin'
 import '../Stylesheets/App/sm.min.css'
 import '../Stylesheets/App/common.css'
 import {HomeBanner,HomeMoudle} from '../Action/auth'
+import {initWebsocket} from '../Action/Websocket'
+
 
 
 const fontUrl = [{title:'充值中心'},{title:'一元夺宝'},{title:'非常好货'},{title:'超实惠'},{title:'特色好货'}]
@@ -32,18 +34,17 @@ class Home extends Component {
       }
 
     async componentWillMount() {
-        /*const getToken =await loadToken();
+        initWebsocket()
+        const getToken =await loadToken();
         console.log('getToken=========>hahah',getToken)
 
         if(getToken == null || getToken == ''){
             WechatAuth()
             const token = GetQueryString('token')
-            //alert(token)
             saveToken(token)
-        }*/
+        }
         this.getHomeBanner()
         this.getHomeMoudle()
-
     }
     //首页banner
    async getHomeBanner(){

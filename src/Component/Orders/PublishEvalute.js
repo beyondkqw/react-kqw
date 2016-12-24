@@ -34,11 +34,10 @@ export default class PublishEvalute extends Component {
 
     async toRemark(){
         const {orderNo,productId} = this.props.location.query
-        console.log(orderNo,productId,this.refs.comment.value)
         await Remark(orderNo,productId,this.refs.comment.value,this.state.images.join(','))
         .then(res=>{
-            console.log('res')
-            //this.context.router.goBack()
+            alert('评论成功')
+            this.context.router.goBack()
         })
     }
 

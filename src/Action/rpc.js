@@ -15,6 +15,9 @@ let userInfo = {};
 import {imei,version,client} from './auth'
 
 export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+
+
+export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
 //export const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
 
@@ -226,4 +229,29 @@ export function GetQueryString(name)
     const reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     const r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
+}
+//日期转换
+export function changeTime(value){
+    let year = value.getFullYear();
+    let month = value.getMonth() + 1;
+    let date = value.getDate();
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (date < 10) {
+        date = "0" + date;
+    }
+    let hours = value.getHours();
+    let mins = value.getMinutes();
+    let second = value.getSeconds();
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (mins < 10) {
+        mins = "0" + mins;
+    }
+    if (second < 10) {
+        second = "0" + second;
+    }
+    return "" + year + month + date + hours + mins + second;
 }

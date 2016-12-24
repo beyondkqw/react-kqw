@@ -3,8 +3,9 @@ import {Link} from 'react-router';
 import Search from '../../Component/NewComponent/Search';
 import LiItem from '../../Component/CommonComponent/LiItem'
 import SplitLine from '../../Component/NewComponent/SplitLine'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/personal.css';
-import {TeamMembers} from '../../Action/auth'
+import {TeamMembers,CountryRankList} from '../../Action/auth'
 
 
 export default class ConfirmGivenPerson extends Component {
@@ -22,7 +23,7 @@ export default class ConfirmGivenPerson extends Component {
     }
 
     componentWillMount() {
-        this.getPointsList()
+        this.getPointsList('')
     }
     //获取转赠人
     getInformation(accId,imageUri,memberName){
@@ -31,14 +32,19 @@ export default class ConfirmGivenPerson extends Component {
     }
 
     //转赠人列表
-    async getPointsList(){
-        await TeamMembers()
+    async getPointsList(value){
+        await CountryRankList(value)
             .then(res=>{
                 this.setState({pointList:res.resultList})
             })
             .catch(err=>{
                 console.warn('err',err)
             })
+    }
+    //搜索转赠人列表
+    async searchPerson(value){
+        console.log('vakue',value)
+        await this.getPointsList(value)
     }
 
     render() {
@@ -47,12 +53,19 @@ export default class ConfirmGivenPerson extends Component {
         return (
             <div className="containerNav">
                 <Search
-                    toChange = {true}
-                    style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5'}}
+                    style={{backgroundColor:'#ff5500',borderBottom:'1px solid #e5e5e5'}}
+                    location = {true}
+                    onClick={(value)=>this.searchPerson(value)}
                 />
                 <SplitLine />
-                <div className ="list-block m0 font14">
+                <div className ="list-block m0 font14 pr">
                     {
+                        pointList == ''?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:120}}
+                                title={'查询列表是空的哦~'}
+                            />
+                            :
                         pointList.map(el=>{
                             return(
                                 <LiItem

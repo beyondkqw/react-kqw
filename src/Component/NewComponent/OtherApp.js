@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuickRouter from '../../Component/NewComponent/QuickRouter'
 import '../../Stylesheets/App/homePage.css';
+import {TagList} from '../../Action/auth'
 
 const router = [
     {name:'商学院',imgUrl:'background-color:#0074d9',path:'cloudCartoon'},
@@ -14,17 +15,39 @@ const router = [
 ]
 
 export default class OtherApp extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            tagItem:[]
+        };
+      }
+    componentWillMount() {
+        this.getTagList()
+    }
+    //首页导航栏
+    async getTagList(){
+        await TagList(1)
+            .then(res=>{
+                this.setState({tagItem:res.resultList})
+            })
+            .catch(err=>{
+                console.warn('getHomeMoudle',err)
+            })
+    }
     render() {
+        const {tagItem} = this.state
         return (
             <div className="oapp">
                 <ul>
                     {
-                        router.map((el,index)=>{
+                        tagItem&&tagItem.map((el,index)=>{
                             return(
                                 <QuickRouter
                                     routerName={el.name}
-                                    routerUrl={el.imgUrl}
-                                    routerPath={el.path}
+                                    routerUrl={el.img}
+                                    routerPath={el.link}
                                 />
                             )
                         })

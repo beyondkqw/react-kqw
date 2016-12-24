@@ -87,7 +87,7 @@ export const cancelReceive = 'order/auth/cancel'
 export const listByOrderNo = 'order/auth/listByOrderNo'
 
 //vip等级列表
-export const vipList = 'vip/list'
+export const vipList = 'vip/auth/list'
 
 //查看个人资料
 export const myInfo = 'auth/account/info'
@@ -154,3 +154,34 @@ export const refund = 'order/auth/refund'
 
 //商品浏览记录
 export const browseRecord = 'product/auth/browseRecord'
+
+//消费金额
+export const lvmemberInfo = 'accountInfo/memberInfo'
+
+//首页菜单导航
+export const tagList = 'tag/list'
+
+//清空浏览记录
+export const delBrowseRecord = 'product/auth/delBrowseRecord'
+
+//店铺详情
+export const storeDetails = 'store/detail'
+
+//重置密码验证码
+export const resetPwd = 'sms/auth/resetPwd'
+
+//修改密码
+export const resetLoginPwd = 'pwd/auth/resetLoginPwd'
+
+//删除地址
+export const delAddress = 'auth/address/del'
+
+//支付
+export const payment = 'auth/charge/process'
+
+//提现
+export const cash = 'transation/auth/cash'
+
+
+
+

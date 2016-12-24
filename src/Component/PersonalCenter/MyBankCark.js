@@ -16,7 +16,6 @@ export default class MyBankCark extends Component {
         this.getBankList()
     }
     async getBankList(){
-
         await BankList()
             .then(res=>{
                 this.setState({bankList:res})
@@ -27,11 +26,12 @@ export default class MyBankCark extends Component {
     }
     render() {
         const {bankList} = this.state
+        console.log('bankList=====>',bankList)
         return (
             <div className="containerNav">
                 <div className="ChooseHeight">
                     {
-                        bankList.map(el=>{
+                        bankList&&bankList.map(el=>{
                             return(
                                 <div className="BankHeight df supplement border_ra pa_top pa_left1 mt5">
                                     <span className="store_img"><img src={require('../../Images/bank.png')} alt=""/></span>
@@ -42,14 +42,13 @@ export default class MyBankCark extends Component {
                                             <span>****</span>
                                             <span className="di ml5">****</span>
                                             <span className="di ml5">****</span>
-                                            <span className="di ml5">{el.bankCardNo.substr(el.bankCardNo.length-4)}</span>
+                                            <span className="di ml5">{el.bankcardNo.substr(el.bankcardNo.length-4)}</span>
                                         </div>
                                     </div>
                                 </div>
                             )
                         })
                     }
-
                 </div>
                 <div className="footerHidden"></div>
                 <Link to="/personalCenter/bankInformation">

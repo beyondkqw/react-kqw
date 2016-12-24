@@ -14,10 +14,11 @@ export default class Setting extends Component {
                     {
                         Itemlist.map((el,index)=>{
                             return(
-                                <LiComponent
-                                   name = {el.name}
-                                   link = {el.link}
-                                />
+                                <Link to={el.link} query={{mobile:this.props.location.query.resetMobile}}>
+                                    <LiComponent
+                                       name = {el.name}
+                                    />
+                                </Link>
                             )
                         })
                     }

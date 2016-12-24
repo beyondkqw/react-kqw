@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import '../../Stylesheets/App/personal.css';
 import {GiveAwayRecord} from '../../Action/auth'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg';
 
 export default class Retailing extends Component {
     // 构造
@@ -10,7 +11,8 @@ export default class Retailing extends Component {
         super(props);
         // 初始状态
         this.state = {
-            incomeAmount:[]
+            incomeAmount:[],
+            toShow:false
         };
       }
     componentWillMount() {
@@ -20,6 +22,10 @@ export default class Retailing extends Component {
     async ToGetAwayRecord(){
         await GiveAwayRecord(0)
             .then(res=>{
+                if(res.resultList == ''){
+                    this.setState({toShow:true})
+                    return
+                }
                 this.setState({incomeAmount:res.resultList})
             })
             .catch(err=>{
@@ -27,10 +33,15 @@ export default class Retailing extends Component {
             })
     }
     render() {
-        const {incomeAmount}  = this.state
+        const {toShow,incomeAmount}  = this.state
         return (
             <div className="containerNav">
                 {
+                    toShow?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72,marginTop:120}}
+                            title="列表是空的哦~"
+                        />:
                     incomeAmount&&incomeAmount.map(el=>{
                         return(
                             <Link

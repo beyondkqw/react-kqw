@@ -42,7 +42,6 @@ export default class BindPhone extends Component {
         .catch(err=>{
             this.setState({Reminder:err.message})
         })
-        //console.log('timer',this.state.codeWord)
     }
 
     isTrue(value,parameter){
@@ -88,7 +87,7 @@ export default class BindPhone extends Component {
         .then(res=>{
             console.log('ToBindPhone',res)
             clearInterval(this._timer)
-            this.context.router.go({pathname:'/personalCenter/savety'})
+            this.context.router.goBack()
         })
         .catch(err=>{
             this.setState({Reminder:err.message})

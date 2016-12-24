@@ -51,7 +51,7 @@ export default class GoodsDescription extends Component {
 
     //获取评论列表
     async getRemarkList(){
-        await RemarkList(this.props.location.query.id,1)
+        await RemarkList(this.props.location.query.id,1,'')
         .then(res=>{
             console.log('评论列表',res)
             const {resultList} = res
@@ -230,9 +230,9 @@ export default class GoodsDescription extends Component {
 
                                 <span>{el.MEMBER_NAME}</span>
 
-                                {/*<p>2016-12-05 尺码：M</p>*/}
+                                <p>{el.CREATE_TIME}&nbsp;&nbsp;{el.PRODUCT_ATTR}</p>
 
-                                <div className="flex flex-wrap color6 font14 mt5">
+                                <div className="flex flex-wrap color6 font14">
                                     {el.COMMENT}
                                 </div>
 
@@ -247,9 +247,6 @@ export default class GoodsDescription extends Component {
                         )
                     })
                 }
-
-
-
             </div>
         )
     }
@@ -302,17 +299,21 @@ export default class GoodsDescription extends Component {
                 </div>
                 <div className="list-block margin_tb">
                     <ul>
-                        <Link to="/store">
-                            <li className="item-content item-link pl  border_bottom">
-                                <div className="item-media"><i className="icon icon-f7"></i></div>
-                                <div className="item-inner margin0">
-                                    <div className="item-title">
-                                        <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                        <span className="color6 font14">挂花皮草阁</span>
+                        {
+                            goodsDetails.STORE_ID == ''||goodsDetails.STORE_ID == null?
+                            null:
+                            <Link to="/store" query={{storeId:goodsDetails.STORE_ID}}>
+                                <li className="item-content item-link pl  border_bottom">
+                                    <div className="item-media"><i className="icon icon-f7"></i></div>
+                                    <div className="item-inner margin0">
+                                        <div className="item-title">
+                                            <span className="di store mr"><img src={goodsDetails.STORE_IMG} alt=""/></span>
+                                            <span className="color6 font14">{goodsDetails.STORE_NAME}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        </Link>
+                                </li>
+                            </Link>
+                        }
                         {/*属性*/}
                         <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
                             <div className="item-media"><i className="icon icon-f7"></i></div>

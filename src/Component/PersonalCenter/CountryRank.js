@@ -43,21 +43,36 @@ export default class CountryRank extends Component {
 
     render(){
         const {countryRank} = this.state
+        const {toShowTeam,teemCount,teemAmount} = this.props.location.query
         return(
             <div>
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
-                    <Link to='/personalCenter/memberInfo'>
-                        {/*
-                         <div className="rank-head-cell font14 mr10">
-                         我的排名:54名
-                         </div>
-                        */}
-                    </Link>
-                    <Link to='/personalCenter/memberInfo'>
-                        <div className="rank-head-cell font14 mr10">
-                            我的总分:{this.props.location.query.point}
-                        </div>
-                    </Link>
+                    {
+                        toShowTeam?
+                            <div>
+                                <div className="di rank-head-cell font14 mr10">
+                                    团队人数:{teemCount}名
+                                </div>
+                                <div className="di rank-head-cell font14 mr10">
+                                    团队消费:{teemAmount}
+                                </div>
+                            </div>
+                            :
+                            <div>
+                                <Link to='/personalCenter/memberInfo'>
+                                    {/*
+                                     <div className="rank-head-cell font14 mr10">
+                                     我的排名:54名
+                                     </div>
+                                     */}
+                                </Link>
+                                <Link to='/personalCenter/memberInfo'>
+                                    <div className="rank-head-cell font14 mr10">
+                                        我的总分:{this.props.location.query.point}
+                                    </div>
+                                </Link>
+                            </div>
+                    }
 
                 </div>
 

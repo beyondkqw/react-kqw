@@ -145,7 +145,7 @@ export async function FollowList() {
 //商品列表
 export async function ProductList(name,order,orderName,minPrice,maxPrice) {
     try {
-        const res = await apiGet(URL.productList,{name,order,orderName,minPrice,maxPrice});
+        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice});
         return res;
     } catch (err) {
         console.warn(err);
@@ -154,9 +154,9 @@ export async function ProductList(name,order,orderName,minPrice,maxPrice) {
 }
 
 //新增地址
-export async function AddAddress(name,mobile,address,detail){
+export async function AddAddress(name,mobile,address,detail,province,city,area){
     try{
-        const res = await apiPost(URL.addAddress,{name,mobile,address,detail});
+        const res = await apiPost(URL.addAddress,{name,mobile,address,detail,province,city,area});
         return res;
     }catch (err){
         console.warn('AddAddress',err);
@@ -408,9 +408,9 @@ export async function TeamMembers(){
 }
 
 //全国排名
-export async function CountryRankList(){
+export async function CountryRankList(memberName){
     try{
-        const res = await apiGet(URL.countryRank);
+        const res = await apiPost(URL.countryRank,{memberName});
         return res;
     }catch (err){
         console.warn(err);
@@ -485,9 +485,9 @@ export async function Remark(orderNo,productId,comment,images){
 }
 
 //商品评价
-export async function RemarkList(productId,page){
+export async function RemarkList(productId,page,orderNo){
     try{
-        const res = await apiGet(URL.remarkList,{productId,page});
+        const res = await apiGet(URL.remarkList,{productId,page,orderNo});
         return res;
     }catch (err){
         console.warn(err);
@@ -583,4 +583,113 @@ export async function BrowseHistory(){
     }
 }
 
+//消费金额
+export async function LvmemberInfo(accId){
+    try{
+        const res = await apiGet(URL.lvmemberInfo,{accId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//首页导航栏
+export async function TagList(type){
+    try{
+        const res = await apiGet(URL.tagList,{type});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//清空浏览记录
+export async function DelBrowseRecord(browseRecordId){
+    try{
+        const res = await apiGet(URL.delBrowseRecord,{browseRecordId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//店铺详情
+export async function StoreDetailItem(storeId){
+    try{
+        const res = await apiGet(URL.storeDetails,{storeId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//店铺商品列表
+export async function StorectList(name='',storeId='',order='',orderName='') {
+    try {
+        const res = await apiGet(URL.productList,{name,storeId,order,orderName});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//重置密码验证码
+export async function ResetPwd(mobile) {
+    try {
+        const res = await apiGet(URL.resetPwd,{mobile});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//修改密码
+export async function ResetLoginPwd(pwd,smsNo,code) {
+    try {
+        const res = await apiGet(URL.resetLoginPwd,{pwd,smsNo,code});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//删除地址
+export async function DelAddress(addressId) {
+    try {
+        const res = await apiGet(URL.delAddress,{addressId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//支付
+export async function Process(type,channel,successCallbackPara) {
+    try {
+        const res = await apiGet(URL.payment,{type,channel,successCallbackPara});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//确认提现
+export async function Cash(bankcardId,amount) {
+    try {
+        const res = await apiGet(URL.cash,{bankcardId,amount});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
 

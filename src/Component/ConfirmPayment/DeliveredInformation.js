@@ -40,9 +40,6 @@ export default class DeliveredInformation extends Component {
             this.refs.detail.value = query.detail?query.detail:''
             this.refs.mobile.value = query.mobile?query.mobile:''
         }
-
-        //console.log('type',this.state.type)
-        //console.log('77777',this.context.router)
     }
 
     static contextTypes = {
@@ -63,10 +60,10 @@ export default class DeliveredInformation extends Component {
                 console.warn('修改地址失败',err)
             })
         }else{
-            await AddAddress(name,mobile,address,detail)
+            await AddAddress(name,mobile,address,detail,'1234','34545','45')
                 .then(res=>{
                     console.log('添加地址成功',res)
-                    this.context.router.goBack()
+                    //this.context.router.goBack()
                 })
                 .catch(err=>{
                     console.warn('添加地址失败',err)

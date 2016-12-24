@@ -29,8 +29,6 @@ export default class Partner extends Component {
     getMyPartner(){
         MyPartner()
         .then(res=>{
-            console.log('-----',res)
-           //TEEM_MEMBER_COUNT RECOMMEND_NAME
             this.setState({
                 count:res.TEEM_MEMBER_COUNT,
                 recommendName:res.RECOMMEND_NAME,
@@ -46,10 +44,8 @@ export default class Partner extends Component {
                 <div className ="list-block m0 font14">
                     <SplitLine />
                     <ul>
-                        <Link to={'personalCenter/userInfo'}>
-                            <li
-                                className ={'item-content border_bottom isConfirmSet'}
-                            >
+                        <Link to='personalCenter/recommendPerson' query={{RecommendId:recommendId}}>
+                            <li className ='item-content border_bottom isConfirmSet'>
                                 <div className="item-inner">
                                     <div className="item-title height_all">
                                         <span className="di listimg"><img src={require('../../Images/myPatrner.png')} alt=""/></span>

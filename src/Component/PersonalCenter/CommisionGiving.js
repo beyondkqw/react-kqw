@@ -39,7 +39,7 @@ export default class CommisionGiving extends Component {
         }
         await GiveAmount(this.state.accId,amountNum)
             .then(res=>{
-                console.log('确认转赠成功')
+                alert('确认转赠成功')
             })
             .catch(err=>{
                 console.warn('err',err)

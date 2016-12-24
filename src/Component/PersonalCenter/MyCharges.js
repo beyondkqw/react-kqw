@@ -18,18 +18,20 @@ export default class MyCharges extends Component {
         // 初始状态
         this.state = {
             accId:'',
-            Now_Amount:''
+            Now_Amount:'',
+            frozen:''
         };
       }
     componentWillMount() {
-        const {memberId,now_amount} = this.props.location.query
+        const {memberId,now_amount,frozen} = this.props.location.query
         this.setState({accId:memberId})
         this.setState({Now_Amount:now_amount})
+        this.setState({frozen:frozen})
         console.log('memberId',memberId);
         console.log('now_amount',now_amount);
     }
     render() {
-        const {accId,Now_Amount} = this.state
+        const {accId,Now_Amount,frozen} = this.state
         console.log('============',Now_Amount)
         return (
             <div className="containerNav">
@@ -38,7 +40,7 @@ export default class MyCharges extends Component {
                     <div className="color_yellow fl height_all">
                         <span className="f15">￥</span><span className="f25">{Now_Amount}</span>
                     </div>
-                    <Link to="/personalCenter/withdrawCash">
+                    <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
                         <button className="fr settleAccount border_ra color_white mt11">提取</button>
                     </Link>
                 </div>

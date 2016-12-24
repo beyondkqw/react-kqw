@@ -21,13 +21,14 @@ export default class ErweiCode extends Component {
          this.setState({path:erweiCodePath})
     }
     render() {
+        const {image,memberName} = this.props.location.query
         return (
             <div className="containerNav allIncome_Img supplement">
                 <div className="pa_top1 tc">
                     <span className="di incomeImg">
-                        <img className="border_ra50" src={require('../../Images/headerImg.jpg')} alt=""/>
+                        <img className="border_ra50" src={image} alt=""/>
                     </span>
-                    <p className="f12 color9 mt5">小燕子的天堂</p>
+                    <p className="f12 color9 mt5">{memberName}</p>
                 </div>
                 <div className="width100 tc mt25">
                     <span className="di erWeiCode">

@@ -14,7 +14,6 @@ export default class StoreDetails extends Component {
                     <span className="colorff f12">￥</span><span className="colorff font18">{price}</span>
                 </div>
             </div>
-
         );
     }
 }

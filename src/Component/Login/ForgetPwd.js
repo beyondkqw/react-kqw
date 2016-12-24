@@ -56,7 +56,7 @@ export default class ForgetPwd extends Component {
 
     }
 
-    //判断手机号码是否正确
+    //判断密码是否正确
     async isPsdTrue(value){
         this.setState({Reminder:''})
         if (!ErrorPs(value)) {

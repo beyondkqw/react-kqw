@@ -67,14 +67,16 @@ export default class Search extends Component {
                             <input
                                 ref = "input"
                                 className={toChange?"searcInputOther flex1":"searcInput flex1"}
-                                placeholder={location?'请输入地址':"搜索宝贝"}
+                                placeholder={location?'请输入地址':"请输入搜索内容"}
                                 type="text"
                                 onFocus={()=>{
                                     this.setState({display:true})
                                     onFocus&&onFocus(this.state.display)
                                 }}
                             />
-                            <span className="di deleteImg">
+                            <span className="di deleteImg"
+                                  onClick={()=>{this.refs.input.value = ''}}
+                            >
                                 <img src={require('../../Images/delete.png')} alt=""/>
                             </span>
 
@@ -140,9 +142,11 @@ export default class Search extends Component {
 
                 {
                     this.state.display?
-                        <div className="history pf">
+                        <div className="history pf" style={{zIndex:100}}>
                             <span>历史记录</span>
-                            <span className="deletHistory fr">
+                            <span className="deletHistory fr"
+                                onClick={()=>this.setState({history:[]})}
+                            >
                                 <img src = {require('../../Images/detelename.png')}/>
                             </span>
                             <div className="historyContainer">

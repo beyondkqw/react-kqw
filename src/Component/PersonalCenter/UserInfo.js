@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {MyInfo,UpdateInfo} from '../../Action/auth'
+import {changeTime} from '../../Action/rpc'
 
 export default class UserInfo extends Component {
     // 构造
@@ -54,6 +55,11 @@ export default class UserInfo extends Component {
         router:PropTypes.object
     }
 
+    //上传图片
+    uploadPhoto(){
+        this.setState({imageUri:this.refs.imgUrl.value})
+    }
+
     render() {
         const {isShow,sex,memberName,realName,imageUri,area,address} = this.state
         return (
@@ -71,7 +77,7 @@ export default class UserInfo extends Component {
                                         type="file"
                                         style={{left:0,width:40,height:40,padding:0,opacity:0}}
                                         ref='imgUrl'
-                                        onChange={()=>this.setState({imageUri:this.refs.imgUrl.value})}
+                                        onChange={()=>this.uploadPhoto()}
                                     />
                                     <img className="border_ra50" src={imageUri} alt=""/>
                                 </div>
@@ -109,7 +115,7 @@ export default class UserInfo extends Component {
                                 <div className="item-after color9">{sex}</div>
                             </div>
                         </li>
-                        <Link to="/personalCenter/erweiCode">
+                        <Link to="/personalCenter/erweiCode" query={{image:imageUri,memberName:memberName}}>
                             <li className="item-content item-link pl border_bottom">
                                 <div className="item-media"><i className="icon icon-f7"></i></div>
                                 <div className="item-inner">

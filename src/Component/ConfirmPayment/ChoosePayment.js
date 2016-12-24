@@ -4,6 +4,7 @@ import '../../Stylesheets/App/comfirmPayMoney.css';
 
 export default class ChoosePayment extends Component {
     render() {
+        const {planReceiveTime,orderNos} = this.props.location.query
         return (
             <section>
                 <div className="plr evalute_h font14">
@@ -39,15 +40,22 @@ export default class ChoosePayment extends Component {
                                 </div>
                             </div>
                         </li>
-                        <li className="item-content item-link pl  border_bottom">
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner margin0 font14">
-                                <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                    <span className="color6">余额支付</span>
+                        <Link
+                            to="/confirmPayment/surePayment"
+                            query={{
+                            planReceiveTime:planReceiveTime,
+                            orderNos:orderNos,
+                            }}>
+                            <li className="item-content item-link pl  border_bottom">
+                                <div className="item-media"><i className="icon icon-f7"></i></div>
+                                <div className="item-inner margin0 font14">
+                                    <div className="item-title">
+                                        <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                        <span className="color6">余额支付</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </Link>
                     </ul>
                 </div>
                 <div className="plr evalute_h font14">

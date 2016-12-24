@@ -14,12 +14,13 @@ const personDetail = [
     /*{name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}*/
 ]
 const ItemList = [
-    {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},
+    /*{name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},*/
+    {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'/personalCenter/memberClub'},
     {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
     {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},
     {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:'/personalCenter/BrowseRecord'},
-    {name:'收货地址',imgUrl:require('../../Images/path.png'),link:''},
+    {name:'收货地址',imgUrl:require('../../Images/path.png'),link:'/chooseInfomation'},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
     {name:'佣金转赠',imgUrl:require('../../Images/commission.png'),link:'/personalCenter/commisionGiving'},
     {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'}
@@ -37,7 +38,8 @@ export default class PersonalCenter extends Component {
             lv : 0,
             vip_point : 0,
             headImg:'',
-            accId:''
+            accId:'',
+            mobile:''
         };
       }
 
@@ -57,13 +59,15 @@ export default class PersonalCenter extends Component {
                 vip_point : res.VIP_POINTS,
                 headImg:res.IMAGE_URI,
                 accId:res.ID,
-                now_amount:res.NOW_AMOUNT
+                now_amount:res.NOW_AMOUNT,
+                mobile:res.MOBILE,
+                frozen:res.FROZEN
             })
         })
     }
 
     render() {
-        const {name,amount,point,lv,vip_point,accId,now_amount} = this.state
+        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen} = this.state
         return (
             <div>
                 <section className="pr tc center_bkImg" style={{paddingTop: 10,paddingBottom: 15}}>
@@ -72,7 +76,7 @@ export default class PersonalCenter extends Component {
                             <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
                         </div>
                     </Link>
-                    <Link to="/personalCenter/setting">
+                    <Link to="/personalCenter/setting" query={{resetMobile:mobile}}>
                         <span className="pa setUp font14 color_white">设置</span>
                     </Link>
                     <div className="font14 color_white" style={{marginTop:15}}>{name}</div>
@@ -133,7 +137,7 @@ export default class PersonalCenter extends Component {
                                 <Link
                                     to={item.link}
                                     className="di width_third width_100"
-                                    query={{memberId:accId,now_amount:now_amount}}
+                                    query={{memberId:accId,now_amount:now_amount,frozen:frozen}}
                                 >
                                     <div className={index%3==0||index%3==1?
                                     "separateRow tc di border_bottom  border_right":

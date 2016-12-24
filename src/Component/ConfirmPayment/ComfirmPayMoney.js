@@ -14,10 +14,12 @@ export default class ComfirmPayMoney extends Component {
       constructor(props) {
         super(props);
         // 初始状态
+        this.orderNoArray=[]
         this.state = {
             PaymentDetails:[],
             now_point:'',
-            touch_amount:''
+            touch_amount:'',
+            timer:''
         };
       }
     static contextTypes = {
@@ -25,6 +27,8 @@ export default class ComfirmPayMoney extends Component {
     }
 
     componentWillMount() {
+        this.setState({timer:this.props.location.query.time})
+        console.log('timer=====>',this.props.location.query.time)
         this.getOrderInfor()
         this.getPoints()
     }
@@ -35,11 +39,17 @@ export default class ComfirmPayMoney extends Component {
         .then(res=>{
             console.log('订单资料',res)
             this.setState({PaymentDetails:res})
+            res.map(el=>{
+                this.orderNoArray.push(el.order_no)
+            })
+            console.log('this.orderNoArray======>',this.orderNoArray)
         })
         .catch(err=>{
             console.warn('getOrderInfor',err)
         })
     }
+
+
     //可用积分查询
     async getPoints() {
         await Points()
@@ -53,94 +63,130 @@ export default class ComfirmPayMoney extends Component {
 
 
     render() {
-        const {PaymentDetails,now_point,touch_amount} = this.state
+        const {PaymentDetails,now_point,touch_amount,timer} = this.state
         return (
             <div className="containerNav oa">
-                <div className="list-block m0">
-                    <ul>
-                        <Link to="/deliveredInformation">
-                            <li className="item-content item-link pl border_bottom">
-                                <div className="item-media"><i className="icon icon-f7"></i></div>
-                                <div className="item-inner margin0">
-                                    <div className="item-title">
-                                        <span className="di mr9 positionImg"><img src={require('../../Images/location.png')} alt=""/></span>
-                                        <span className="color6 font14">完善收货信息</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </Link>
-                        <Link to="/receivingTime">
-                            <li className="item-content item-link pl border_bottom">
-                                <div className="item-media"><i className="icon icon-f7"></i></div>
-                                <div className="item-inner margin0">
-                                    <div className="item-title">
-                                        <span className="di mr6 timeImg"><img src={require('../../Images/time.png')} alt=""/></span>
-                                        <span className="color6 font14">送货时间不限</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </Link>
-                    </ul>
-                </div>
-                <div className="line"></div>
                 {
                     PaymentDetails.map(item=>{
                         return(
                             <div>
-                                <Link to="/chooseInfomation">
-                                    <div className="paymargin">
-                                        <div className="di payImgSize mr"><img src={item.img} alt=""/></div>
-                                        <span className="color6 font14">{item.store_name}</span>
+                                <div className="list-block m0">
+                                    <ul>
+                                        <Link to='/deliveredInformation'>
+                                            <li className="item-content item-link item-link pl  border_bottom">
+                                                <div className="item-media">
+                                                    <span className="fl di positionImg" style={{lineHeight:0}}>
+                                                        <img src={require('../../Images/location.png')} alt=""/>
+                                                    </span>
+                                                </div>
+                                                <div className="item-inner" style={{marginLeft:15}}>
+                                                    {
+                                                        ((item.address == ''||item.address == null)&& (item.address_detail==''||item.address_detail==null))?
+                                                            <div className="item-title">
+                                                                <span className="color6 font14">完善收货信息</span>
+                                                            </div>:
+                                                            <div className="item-title-row">
+                                                                <div className="item-title font14 color6">{item.address?item.address:'' + item.address_detail}</div>
+                                                                <div className="f12 color9">
+                                                                    <span>{item.name}</span>
+                                                                    <span className="di margin15">{item.mobile}</span>
+                                                                </div>
+                                                            </div>
+                                                    }
+                                                </div>
+                                            </li>
+                                        </Link>
+                                        <Link to="/receivingTime" query={{orderId:this.props.location.query.orderId}}>
+                                            <li className="item-content item-link pl border_bottom">
+                                                <div className="item-media"><i className="icon icon-f7"></i></div>
+                                                <div className="item-inner margin0">
+                                                    <div className="item-title">
+                                                        <span className="di mr6 timeImg"><img src={require('../../Images/time.png')} alt=""/></span>
+                                                        {
+                                                            timer ==''||timer ==undefined ?
+                                                                <span className="color6 font14">送货时间不限</span>
+                                                                :
+                                                                <span className="color6 font14">{this.state.timer}</span>
+
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </Link>
+                                    </ul>
+                                </div>
+                                <div className="line"></div>
+                                <div>
+                                    <Link to="/chooseInfomation">
+                                        <div className="paymargin">
+                                            <div className="di payImgSize mr"><img src={item.img} alt=""/></div>
+                                            <span className="color6 font14">{item.store_name}</span>
+                                        </div>
+                                    </Link>
+                                    {
+                                        item.orderDetails.map((el,index)=>{
+                                            return (
+                                                <Link to="/goodsDescription" query={{id:el.productId}}>
+                                                    <PaymoneyComponent
+                                                        title={el.productName}
+                                                        num={el.num}
+                                                        attr={el.attrDesc}
+                                                        imgurl={el.productImage}
+                                                        price={el.price}
+                                                    />
+                                                </Link>
+                                            )
+                                        })
+                                    }
+                                    <div className="plr lh25 border_bottom clearAll">
+                                        <span className="color6 font14">商品金额</span>
+                                        <label htmlFor="" className="colorff fr">
+                                            <span className="f12">￥</span><span className="font14">{item.amount}</span>
+                                        </label>
                                     </div>
-                                </Link>
-                                {
-                                    item.orderDetails.map((el,index)=>{
-                                        return (
-                                            <PaymoneyComponent
-                                                title={el.productName}
-                                                num={el.num}
-                                                attr={el.attrDesc}
-                                                imgurl={el.productImage}
-                                                price={el.price}
-                                            />
-                                        )
-                                    })
-                                }
+                                    <div className="plr lh25 border_bottom clearAll">
+                                        <span className="color6 font14">运费</span>
+                                        <label htmlFor="" className="colorff fr">
+                                            <span className="f12">￥</span><span className="font14">{item.postage}</span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         )
                     })
                 }
-
-                <SplitLine />
-                <div className="plr lh25 border_bottom clearAll">
-                    <span className="color6 font14">云卡通支付</span>
-                    <label htmlFor="" className="colorff fr font14">可优惠<span className="f12">￥</span><span className="font14">10</span></label>
-                </div>
-                <div className="plr lh25 border_bottom clearAll">
-                    <span className="color6 font14">商品金额</span>
-                    <label htmlFor="" className="colorff fr"><span className="f12">￥</span><span className="font14">1235</span></label>
-                </div>
-                <div className="plr lh25 border_bottom clearAll">
-                    <span className="color6 font14">运费</span>
-                    <label htmlFor="" className="colorff fr"><span className="f12">￥</span><span className="font14">12</span></label>
-                </div>
                 <SplitLine />
                 <section className="plr lh25">
-                    <div className="fl color6 font14">可用<span>{now_point}</span>积分抵用<span>{touch_amount}</span>元</div>
-                    <span className="di check_radius pr fr">
-                        <input
-                            type="checkbox" id="isChoose"
-                            className="di toChoose"
-                        />
-                        <label htmlFor="isChoose"></label>
-                    </span>
+                    {
+                        now_point == 0?
+                            <div className="fl color6 font14">暂无积分可使用</div>
+                            :
+                            <div>
+                                <div className="fl color6 font14">可用
+                                    <span>{now_point}</span>积分抵用
+                                    <span>{touch_amount}</span>元</div>
+                                <span className="di check_radius pr fr">
+                                    <input
+                                        type="checkbox" id="isChoose"
+                                        className="di toChoose"
+                                    />
+                                    <label htmlFor="isChoose"></label>
+                                </span>
+                            </div>
+                    }
                 </section>
                 <div className="lh25 plr border_top">
                     <div className="fr">
                         <span className="font14">实付款 :</span>
                         <span className="colorff f12">￥</span>
                         <span className="colorff f15">1258</span>
-                        <Link to="/confirmPayment/choosePayment">
+                        <Link
+                            to="/confirmPayment/choosePayment"
+                            query={{
+                            planReceiveTime:'sdffe',
+                            orderNos:this.orderNoArray.join(','),
+                            }}>
                             <button className="settleAccount border_ra color_white margin15">支付</button>
                         </Link>
                     </div>

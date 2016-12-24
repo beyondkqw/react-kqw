@@ -6,12 +6,6 @@ import RankRow from './RankRow'
 import '../../Stylesheets/App/personal.css';
 import {MemberInfo} from '../../Action/auth'
 
-const MemberList = [
-    {imgUrl:require('../../Images/total.png'),title:'自己消费金额',describing:'5000.00',link:''},
-    {imgUrl:require('../../Images/payment.png'),title:'直推人数',describing:'54',link:'/paymentOther'},
-    {imgUrl:require('../../Images/used.png'),title:'团队人数',describing:'12',link:'/alreadyUsed'},
-    {imgUrl:require('../../Images/diary.png'),title:'团队消费金额',describing:'4658748',link:'/diaryContainer'}
-];
 export default class MemberClub extends Component {
 
     // 构造
@@ -46,16 +40,19 @@ export default class MemberClub extends Component {
                 <div className="club_height member_bkImg">
                     <div>
                         <span className="di memberImg mr">
-                            <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
+                            <img className="border_ra50" src={clubInfo.IMAGE_URI} alt=""/>
                         </span>
-                        <span className="f12 color_white">聚朵云的天堂</span>
-                        <Link to="/personalCenter/memberIntroduction">
+                        <span className="f12 color_white">{clubInfo.MEMBER_NAME}</span>
+                        <Link
+                            to="/personalCenter/memberIntroduction"
+                            query={{vipPoint:clubInfo.VIP_POINTS?clubInfo.VIP_POINTS:0}}
+                        >
                             <div className="left_radio fr f12 color_yellow tc ml">
                                 <span>V{clubInfo.LV}会员</span>
                             </div>
                         </Link>
                     </div>
-                    <Link to="/personalCenter/memberInfo">
+                    <Link to="/personalCenter/memberInfo" query={{accId:clubInfo.ID}}>
                         <div className="score color_white tc">
                             <div>
                                 <span className="di vip_img"><img src={require('../../Images/iconfont-vip.png')} alt=""/></span>
@@ -67,35 +64,46 @@ export default class MemberClub extends Component {
                 </div>
                 <SplitLine />
                 <div className="clearAll" style={{height:'160'}}>
-                    <CellComponent
-                        className={'border_right'}
-                        imgUrl={require('../../Images/total.png')}
-                        title='自己消费金额'
-                        describing={clubInfo.USE_AMOUNT}
-                        //link={el.link}
-                    />
-
-                    <CellComponent
-                        imgUrl={require('../../Images/payment.png')}
-                        title={'直推人数'}
-                        describing={clubInfo.DIRECT_PUSH_COUNT}
-                        link={'/paymentOther'}
-                    />
-
-                    <CellComponent
-                        className={'border_right'}
-                        imgUrl={require('../../Images/used.png')}
-                        title={'团队人数'}
-                        describing={clubInfo.TEEM_MEMBER_COUNT}
-                        link={'/alreadyUsed'}
-                    />
-
-                    <CellComponent
-                        imgUrl={require('../../Images/diary.png')}
-                        title={'团队消费金额'}
-                        describing={clubInfo.TEEM_MEMBER_AMOUNT}
-                        link={'/diaryContainer'}
-                    />
+                    <Link to="/personalCenter/teamAmount"
+                          query={{imgUrl:clubInfo.IMAGE_URI,memberName:clubInfo.MEMBER_NAME,amount:clubInfo.USE_AMOUNT}}>
+                        <CellComponent
+                            className={'border_right'}
+                            imgUrl={require('../../Images/total.png')}
+                            title='直推消费金额'
+                            describing={clubInfo.USE_AMOUNT}
+                            //link={el.link}
+                        />
+                    </Link>
+                    <Link
+                        to="/personalCenter/teamAmount"
+                        query={{imgUrl:clubInfo.IMAGE_URI,memberName:clubInfo.MEMBER_NAME,amount:clubInfo.DIRECT_PUSH_COUNT}}>
+                        <CellComponent
+                            imgUrl={require('../../Images/payment.png')}
+                            title={'直推人数'}
+                            describing={clubInfo.DIRECT_PUSH_COUNT}
+                            //link={'/paymentOther'}
+                        />
+                    </Link>
+                    <Link
+                        to="/personalCenter/countryRank"
+                        query={{toShowTeam:true,teemCount:clubInfo.TEEM_MEMBER_COUNT,teemAmount:clubInfo.TEEM_MEMBER_COUNT}}>
+                        <CellComponent
+                            className={'border_right'}
+                            imgUrl={require('../../Images/used.png')}
+                            title={'团队人数'}
+                            describing={clubInfo.TEEM_MEMBER_COUNT}
+                        />
+                    </Link>
+                    <Link
+                        to="/personalCenter/teamAmount"
+                        query={{imgUrl:clubInfo.IMAGE_URI,memberName:clubInfo.MEMBER_NAME,amount:clubInfo.TEEM_MEMBER_AMOUNT}}>
+                            <CellComponent
+                                imgUrl={require('../../Images/diary.png')}
+                                title={'团队消费金额'}
+                                describing={clubInfo.TEEM_MEMBER_AMOUNT}
+                                //link={'/personalCenter/teamAmount'}
+                            />
+                    </Link>
                 </div>
                 <SplitLine />
                 <div className="chooseType font14 plr border_bottom">

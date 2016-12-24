@@ -12,6 +12,18 @@ const ruleList=[
     {num:'5、',declaration:'结构连上为分完的分佣金额贵平台所有'}
 ];
 export default class MemberIntroduction extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            perlv:'',
+            minelv:'',
+            nextlv:'',
+            perGrade:'',
+            nextGrade:''
+        };
+      }
 
     componentWillMount() {
        this.getVipList()
@@ -20,11 +32,17 @@ export default class MemberIntroduction extends Component {
     async getVipList(){
        await VipList()
             .then(res=>{
-                console.log('VipList',res)
+                this.setState({perGrade:res[0].minGrade})
+                this.setState({perlv:res[0].lv})
+                this.setState({minelv:res[1].lv})
+                this.setState({nextlv:res[2].lv})
+                this.setState({nextGrade:res[2].minGrade})
             })
     }
 
     render() {
+        const {perlv,minelv,nextlv,perGrade,mineGrade,nextGrade} = this.state
+        const {vipPoint} = this.props.location.query
         return (
             <div className="containerNav">
                 <div className="vipBar">
@@ -37,20 +55,26 @@ export default class MemberIntroduction extends Component {
                             </div>
                         </div>
                         <div className="pa top0 width100 font14">
-                            <div className="fl width40 tc">
-                                <span className="di cellSize color_yellow color_pink tc  border_ra50 z_index">V3</span>
-                                <p className="mt3 color_white">10000</p>
+                            <div className="fl width_3333 tc">
+                                <div className="di cellSize color_yellow color_pink tc  border_ra50 z_index">
+                                    V<span>{perlv}</span>
+                                </div>
+                                <p className="mt3 color_white">{perGrade}</p>
                             </div>
-                            <div className="fl width20 tc">
-                                <span className="di bigSize color_yellow bkg_ff tc border_ra50 z_index">V4</span>
+                            <div className="fl width_3333 tc" style={{marginTop:-16}}>
+                                <div className="di bigSize color_yellow bkg_ff tc border_ra50 z_index">
+                                    V<span>{minelv}</span>
+                                </div>
                                 <div className="mt3 color_white">
                                     <div>总分</div>
-                                    <p>21000</p>
+                                    <p>{vipPoint}</p>
                                 </div>
                             </div>
-                            <div className="fl width40 tc">
-                                <span className="di cellSize color_yellow color_pink tc border_ra50 z_index">V5</span>
-                                <p className="mt3 color_white">20000</p>
+                            <div className="fl width_3333 tc">
+                                <div className="di cellSize color_yellow color_pink tc border_ra50 z_index">
+                                    V<span>{nextlv}</span>
+                                </div>
+                                <p className="mt3 color_white">{nextGrade}</p>
                             </div>
                         </div>
                     </div>

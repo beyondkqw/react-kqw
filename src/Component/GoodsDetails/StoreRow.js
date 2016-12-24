@@ -5,16 +5,19 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
 
 export default class StoreRow extends Component {
+
     render() {
-        const {title,price,imgurl,Postage,payNum,record} = this.props
+        const {title,price,imgurl,Postage,payNum,record,browseId,onClick,toDelete} = this.props
+
         return (
             <div className="storeRowContainer">
-                <div style={{width:100,height:100}}>
+                <div style={{width:100,height:100}}
+                     onClick={()=>onClick&&onClick()}
+                >
                     <img src={imgurl} />
                 </div>
                 <div className="rightMoudle">
                     <div className="goodsTitle">{title}</div>
-
                     <div>
                         <div style={{height:18,marginBottom:5}}>
                             {
@@ -31,7 +34,10 @@ export default class StoreRow extends Component {
                                         <span className="colorff font18">{record}</span>
                                     </div>
 
-                                    <span className="deletHistory fr">
+                                    <span
+                                        className="deletHistory fr"
+                                        onClick={()=>toDelete&&toDelete()}
+                                    >
                                         <img src = {require('../../Images/detelename.png')}/>
                                     </span>
                                 </div>

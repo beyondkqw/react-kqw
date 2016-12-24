@@ -3,6 +3,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import '../../Stylesheets/App/personal.css';
 import {GiveAwayRecord} from '../../Action/auth'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg';
 
 export default class TakenDetails extends Component {
     // 构造
@@ -10,7 +11,8 @@ export default class TakenDetails extends Component {
         super(props);
         // 初始状态
         this.state = {
-            payAmount:[]
+            payAmount:[],
+            showImg:false
         };
     }
     componentWillMount() {
@@ -22,6 +24,10 @@ export default class TakenDetails extends Component {
     async ToGetAwayRecordDetails(){
         await GiveAwayRecord(1)
             .then(res=>{
+                if(res.resultList == ''){
+                    this.setState({showImg:true})
+                    return
+                }
                 this.setState({payAmount:res.resultList})
             })
             .catch(err=>{
@@ -29,11 +35,17 @@ export default class TakenDetails extends Component {
             })
     }
     render() {
-        const {payAmount} = this.state
+        const {showImg,payAmount} = this.state
         return (
             <div>
                 <SplitLine />
                 {
+                    showImg?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72,marginTop:120}}
+                            title="列表是空的哦~"
+                        />
+                        :
                     payAmount&&payAmount.map(el=>{
                         return(
                             <RetailingItem

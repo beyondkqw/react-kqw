@@ -75,13 +75,16 @@ import MyAlipay from '../Component/PersonalCenter/MyAlipay'
 import CommissionCash from '../Component/PersonalCenter/CommissionCash'
 import BalanceCashRule from '../Component/PersonalCenter/BalanceCashRule'
 import ErweiCode from '../Component/PersonalCenter/ErweiCode'
+import TeamAmount from '../Component/PersonalCenter/TeamAmount'
+import ContactMe from '../Component/GoodsDetails/ContactMe'
+import RecommendPerson from '../Component/PersonalCenter/RecommendPerson'
 
 
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Login} />
+      <IndexRoute component={Home} />
       <Route path="home" component={Home}/>
       <Route path="search" component={Search}/>
       <Route path="carousel" component={Carousel}/>
@@ -156,6 +159,9 @@ const RouteConfig = (
       <Route path="personalCenter/commissionCash" component={CommissionCash} />
       <Route path="personalCenter/balanceCashRule" component={BalanceCashRule} />
       <Route path="personalCenter/erweiCode" component={ErweiCode} />
+      <Route path="personalCenter/teamAmount" component={TeamAmount} />
+      <Route path="contactMe" component={ContactMe} />
+      <Route path="personalCenter/recommendPerson" component={RecommendPerson} />
     </Route>
   </Router>
 );

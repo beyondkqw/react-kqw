@@ -55,7 +55,8 @@ export default class EnterPassword extends Component {
                                 <span>提现金额</span><span>200.00</span>
                             </p>
                             <div className="ptlr">
-                                <div className="modal_input border_ra">
+                                <div className="modal_input border_ra pr">
+                                    {/*<img className="pa" src={require('../../Images/pwdInput.png')} alt=""/>*/}
                                     {
                                         pwdArray.map(el=>{
                                             return(

@@ -3,7 +3,8 @@ import {Link} from 'react-router';
 import '../../Stylesheets/App/order.css';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import Modal from '../../Component/CommonComponent/Modal'
-import {CancelReceived,OrderDel,GetOrderList} from '../../Action/auth';
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import {CancelReceived,OrderDel,GetOrderList,ConfirmReceived} from '../../Action/auth';
 import {config} from '../../Action/Const'
 
 export default class OrderDetails extends Component {
@@ -45,11 +46,29 @@ export default class OrderDetails extends Component {
                 console.warn('删除订单失败',err)
             })
     }
+
+    //确认收货
+    async confirmHarvest(orderNo){
+        await ConfirmReceived(orderNo)
+            .then(res=>{
+                alert('收货成功')
+                this.props.Receipt()
+            })
+            .catch(err=>{
+                console.warn('收获失败',err)
+            })
+    }
     render() {
         const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated,query} = this.props
         return (
-            <div>
+            <div className="pr">
                 {
+                    orderDetails == '' ?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72,marginTop:120}}
+                            title={'列表是空的哦~'}
+                        />
+                        :
                     orderDetails&&orderDetails.map((el,index)=>{
                         return(
                             <div>
@@ -100,6 +119,22 @@ export default class OrderDetails extends Component {
                                                         </div>
                                                         :null
                                                 }
+                                                {
+                                                    alreadyRated?
+                                                        <div className="pa mt55" style={{bottom:10,right:10}}>
+                                                            <Link
+                                                                to="orderList/viewEvaluation"
+                                                                query={{
+                                                                    orderNo:item.orderNo,
+                                                                    image : item.productImage,
+                                                                    productId  :item.productId
+                                                                }}
+                                                            >
+                                                                <button className="btn font14 bkg_ff border_ra color_white">查看</button>
+                                                            </Link>
+                                                        </div>
+                                                        :null
+                                                }
                                             </div>
                                         </div>
                                         )
@@ -136,17 +171,10 @@ export default class OrderDetails extends Component {
                                             makeSure?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button className="border_ra mr5 color9 border_ccc">查看物流</button>
-                                                    <button className="bkg_ff border_ra color_white">确定收货</button>
-                                                </div>
-                                                :null
-                                        }
-
-                                        {
-                                            alreadyRated?
-                                                <div className="mt55" style={{height: 30,textAlign:'right'}}>
-                                                    <Link to="orderList/viewEvaluation">
-                                                        <button className="bkg_ff border_ra color_white">查看</button>
-                                                    </Link>
+                                                    <button
+                                                        className="bkg_ff border_ra color_white"
+                                                        onClick={()=>this.confirmHarvest(el.order_no)}
+                                                    >{el.status == config.order_status_receipt?'待评价':'确认收货'}</button>
                                                 </div>
                                                 :null
                                         }
@@ -154,11 +182,11 @@ export default class OrderDetails extends Component {
                                             allRated?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button
-                                                        className="border_ra mr5 color9 border_ccc"
+                                                        className="border_ra bkg_ff color_white"
                                                         onClick={()=>this.setState({isDelete:true,delNo:el.order_no})}
                                                     >删除订单</button>
-                                                    <button className="border_ra mr5 color9 border_ccc">追加评价</button>
-                                                    <button className="bkg_ff mr20 border_ra color_white">查看评价</button>
+                                                    {/*<button className="border_ra mr5 color9 border_ccc">追加评价</button>
+                                                    <button className="bkg_ff mr20 border_ra color_white">查看评价</button>*/}
                                                 </div>
                                                 :null
                                         }
