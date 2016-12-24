@@ -54,9 +54,11 @@ export default class MyBankCark extends Component {
                 <Link to="/personalCenter/bankInformation">
                     <div className="pf bottom0 tc userHeight bkg_ff width100 color_white font16">
                         添加
+=
                     </div>
-                </Link>
-            </div>
+                    </Link>
+                    <div className="footerHidden"></div>
+                </div>
         );
     }
 }

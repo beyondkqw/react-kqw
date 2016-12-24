@@ -14,6 +14,7 @@ import {loadToken,saveToken,clearToken,GetQueryString} from '../Action/rpc'
 import {WechatAuth} from '../Action/autoLogin'
 import '../Stylesheets/App/sm.min.css'
 import '../Stylesheets/App/common.css'
+import '../Stylesheets/App/homePage.css';
 import {HomeBanner,HomeMoudle} from '../Action/auth'
 import {initWebsocket} from '../Action/Websocket'
 
@@ -75,68 +76,82 @@ class Home extends Component {
     const {moudle} = this.state
     return (
       <div className="containerNav bkg_color">
-        <div className="pf t0 width100" style={{zIndex:100}}>
-            <Search
-                style={{backgroundColor:'#ff5500'}}
-            />
-        </div>
-        <Carousel
-            images = {this.state.banner}
-        />
-        <OtherApp />
+          <div className="wrap">
+              <div className="pf t0 wrap" style={{zIndex:100}}>
+                  <Search
+                      style={{backgroundColor:'#ff5500'}}
+                  />
+              </div>
+          </div>
+          <div className="wrap">
+              <div className="headerHidden"></div>
+              <Carousel
+                  images = {this.state.banner}
+              />
+              <OtherApp />
 
-          {
-              moudle.map(el=>{
-                 if(el.num==3){
-                     return(
-                         <div>
-                             <ActiveTitle
-                                title = {el.name}
-                             />
-                             <Cell_3
-                                 imgUrl = {el.cells}
-                             />
-                             <SplitLine />
-                         </div>
-                     )
-                 }else if(el.num==4){
-                     return(
-                         <div>
-                             <ActiveTitle
-                                 title = {el.name}
-                             />
-                             <Cell_4
-                                 imgUrl = {el.cells}
-                             />
-                             <SplitLine />
-                         </div>
-                     )
-                 } else if(el.num==6){
-                     return(
-                         <div>
-                             <ActiveTitle
-                                 title = {el.name}
-                             />
-                             <Cell_6 />
-                             <SplitLine />
-                         </div>
-                     )
-                 }else if(el.num==7){
-                     return(
-                         <div>
-                             <ActiveTitle
-                                 title = {el.name}
-                             />
-                             <Cell_7 />
-                             <SplitLine />
-                         </div>
-                     )
-                 }
-              })
-          }
-        <div className="footerHidden"></div>
-        <Footer />
+              {
+                  moudle.map(el=>{
+                      if(el.num==3){
+                          return(
+                              <div>
+                                  <ActiveTitle
+                                      title = {el.name}
+                                  />
+                                  <Cell_3
+                                      imgUrl = {el.cells}
+                                  />
+                                  <SplitLine />
+                              </div>
+                          )
+                      }else if(el.num==4){
+                          return(
+                              <div>
+                                  <ActiveTitle
+                                      title = {el.name}
+                                  />
+                                  <Cell_4
+                                      imgUrl = {el.cells}
+                                  />
+                                  <SplitLine />
+                              </div>
+                          )
+                      } else if(el.num==6){
+                          return(
+                              <div>
+                                  <ActiveTitle
+                                      title = {el.name}
+                                  />
+                                  <Cell_6 />
+                                  <SplitLine />
+                              </div>
+                          )
+                      }else if(el.num==7){
+                          return(
+                              <div>
+                                  <ActiveTitle
+                                      title = {el.name}
+                                  />
+                                  <Cell_7 />
+                                  <SplitLine />
+                              </div>
+                          )
+                      }
+                  })
+              }
+          </div>
+          <div className="footerHidden"></div>
+          <div className="wrap">
+              <div className="pf bottom0 wrap" style={{zIndex:100}}>
+                  <nav className="bar-tab bkg_color wrap">
+                      <Footer />
+                  </nav>
+              </div>
+          </div>
       </div>
+
+
+
     );
   }
 }

@@ -176,7 +176,7 @@ export default class WithdrawCash extends Component {
                         <EnterPassword />
                         : null
                 }
-            </div>
+                </div>
         );
     }
 }

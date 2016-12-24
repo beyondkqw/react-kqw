@@ -100,70 +100,72 @@ export default class Register extends Component {
 
     render(){
         return(
-            <div>
-                {/*手机号*/}
-                <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[0]}/>
-                    </span>
-                    <input
-                        ref = 'mobile'
-                        maxLength="11"
-                        className="editorInput"
-                        placeholder="请输入手机号"
-                        onChange={()=>{this.setState({mobile:this.refs.mobile.value})}}
-                        onBlur = {()=>this.isTrue(this.state.mobile,'phoneNum')}
-                    />
-                </div>
+            <div className="wrap">
+                <div>
+                    {/*手机号*/}
+                    <div className='editorBox'>
+                        <span className="editorImg">
+                            <img src={icon[0]}/>
+                        </span>
+                        <input
+                            ref = 'mobile'
+                            maxLength="11"
+                            className="editorInput"
+                            placeholder="请输入手机号"
+                            onChange={()=>{this.setState({mobile:this.refs.mobile.value})}}
+                            onBlur = {()=>this.isTrue(this.state.mobile,'phoneNum')}
+                        />
+                    </div>
 
-                {/*设置密码*/}
-                <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[1]}/>
-                    </span>
-                    <input
-                        ref = 'pwd'
-                        className="editorInput"
-                        placeholder="设置您的密码"
-                        onChange = {()=>this.setState({pwd:this.refs.pwd.value})}
-                        onBlur = {()=>this.isTrue(this.state.pwd,'pwd')}
-                    />
-                </div>
+                    {/*设置密码*/}
+                    <div className='editorBox'>
+                        <span className="editorImg">
+                            <img src={icon[1]}/>
+                        </span>
+                        <input
+                            ref = 'pwd'
+                            className="editorInput"
+                            placeholder="设置您的密码"
+                            onChange = {()=>this.setState({pwd:this.refs.pwd.value})}
+                            onBlur = {()=>this.isTrue(this.state.pwd,'pwd')}
+                        />
+                    </div>
 
-                {/*手机验证码*/}
-                <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[2]}/>
-                    </span>
-                    <input
-                        ref = 'code'
-                        maxLength="6"
-                        className="editorInput"
-                        placeholder="填写手机的验证码"
-                        onChange = {()=>this.setState({code:this.refs.code.value})}
-                    />
-                    <input
-                        id="code"
-                        type="button"
-                        disabled={this.state.disabled}
-                        onClick={()=>this.getCode()}
-                        value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}
-                    />
-                </div>
+                    {/*手机验证码*/}
+                    <div className='editorBox'>
+                        <span className="editorImg">
+                            <img src={icon[2]}/>
+                        </span>
+                        <input
+                            ref = 'code'
+                            maxLength="6"
+                            className="editorInput"
+                            placeholder="填写手机的验证码"
+                            onChange = {()=>this.setState({code:this.refs.code.value})}
+                        />
+                        <input
+                            id="code"
+                            type="button"
+                            disabled={this.state.disabled}
+                            onClick={()=>this.getCode()}
+                            value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}
+                        />
+                    </div>
 
-                <div className="agreement">
-                    点击注册，代表您同意遵守聚朵云的<Link><span style={{color:'#ff5500'}}>《用户协议》</span></Link>
-                </div>
-                <div className="tc f12 color_red width_100 plr mtb loginHeight">
-                    {this.state.Reminder}
-                </div>
-                <button
-                    className="toLogin"
-                    onClick = {()=>this.toSubmit()}
-                >注 册</button>
+                    <div className="agreement">
+                        点击注册，代表您同意遵守聚朵云的<Link><span style={{color:'#ff5500'}}>《用户协议》</span></Link>
+                    </div>
+                    <div className="tc f12 color_red width_100 plr mtb loginHeight">
+                        {this.state.Reminder}
+                    </div>
+                    <button
+                        className="toLogin"
+                        onClick = {()=>this.toSubmit()}
+                    >注 册</button>
 
-                <div className="backToLogin">
-                    <Link to = '/Login/Login' style={{fontSize:14,color:'#999'}}>已经有账号？登录</Link>
+                    <div className="backToLogin">
+                        <Link to = '/Login/Login' style={{fontSize:14,color:'#999'}}>已经有账号？登录</Link>
+                    </div>
                 </div>
             </div>
         )

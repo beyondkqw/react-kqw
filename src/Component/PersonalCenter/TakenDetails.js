@@ -37,7 +37,7 @@ export default class TakenDetails extends Component {
     render() {
         const {showImg,payAmount} = this.state
         return (
-            <div>
+            <div className="wrap">
                 <SplitLine />
                 {
                     showImg?

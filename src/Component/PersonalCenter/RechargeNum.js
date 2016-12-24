@@ -9,12 +9,14 @@ export default class RechargeNum extends Component {
     render() {
         return (
             <div className="bkg_color">
-                <RetailingItem
-                    isShowDate={false}
-                />
-                <RetailingItem
-                    isShowDate={false}
-                />
+                <div className="wrap">
+                    <RetailingItem
+                        isShowDate={false}
+                    />
+                    <RetailingItem
+                        isShowDate={false}
+                    />
+                </div>
             </div>
         );
     }

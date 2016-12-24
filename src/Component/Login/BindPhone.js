@@ -97,6 +97,7 @@ export default class BindPhone extends Component {
 
     render(){
         return(
+            <div className="wrap">
                 <div>
                     <div className='editorBox_100'>
                         {/*<span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 10}}>密码</span>*/}
@@ -150,6 +151,7 @@ export default class BindPhone extends Component {
                         确 定
                     </button>
                 </div>
+            </div>
         )
     }
 }

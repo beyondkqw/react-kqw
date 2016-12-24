@@ -82,6 +82,7 @@ export default class PwdModify extends Component {
 
     render(){
         return(
+            <div className="wrap">
                 <div>
                     <div className='editorBox_100' style={{justifyContent:'flex-start'}}>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 24}}>验证码</span>
@@ -135,6 +136,7 @@ export default class PwdModify extends Component {
                     </div>
                     <button className="toLogin" onClick={()=>this.confirmBtn()}>确 认</button>
                 </div>
+            </div>
         )
     }
 }

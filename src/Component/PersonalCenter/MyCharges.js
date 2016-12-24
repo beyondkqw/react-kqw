@@ -35,14 +35,16 @@ export default class MyCharges extends Component {
         console.log('============',Now_Amount)
         return (
             <div className="containerNav">
-                <SplitLine />
-                <div className="recharge border_bottom plr">
-                    <div className="color_yellow fl height_all">
-                        <span className="f15">￥</span><span className="f25">{Now_Amount}</span>
+                <div className="wrap">
+                    <SplitLine />
+                    <div className="recharge border_bottom plr">
+                        <div className="color_yellow fl height_all">
+                            <span className="f15">￥</span><span className="f25">5678</span>
+                        </div>
+                        <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
+                            <button className="fr settleAccount border_ra color_white mt11">提取</button>
+                        </Link>
                     </div>
-                    <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
-                        <button className="fr settleAccount border_ra color_white mt11">提取</button>
-                    </Link>
                 </div>
                 <div className="clearAll">
                     <CellComponent
@@ -73,6 +75,7 @@ export default class MyCharges extends Component {
                         describing={'把佣金转给好友'}
                         link={'/personalCenter/commisionGiving'}
                     />
+
                 </div>
             </div>
         );

@@ -117,7 +117,6 @@ export default class Store extends Component {
                     <div name="最高价"></div>
                     <div name="最低价"></div>
                 </Tabscontrol>
-
                 <div className="imgContainer width_100 pr" style={{marginTop:-25}}>
                     {
                         storeDetail == ''?
