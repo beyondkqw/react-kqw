@@ -6,28 +6,27 @@ import '../../Stylesheets/App/homePage.css';
 export default class Footer extends Component {
     render() {
         return (
-
-                    <div>
-                        <Link className="tab-item external">
-                            <span className="icon"><img src={require("../../Images/search.png")} /></span>
-                            <span className="tab-label">首页</span>
-                        </Link>
-                        <Link className="tab-item external" >
-                            <span className="icon"><img src={require("../../Images/search.png")}/></span>
-                            <span className="tab-label">云综合体</span>
-                        </Link>
-                        <Link
-                            to="/shoppingCart"
-                            className="tab-item external"
-                        >
-                            <span className="icon"><img src={require("../../Images/search.png")}/></span>
-                            <span className="tab-label">购物车</span>
-                        </Link>
-                        <Link to="personalCenter" className="tab-item external">
-                            <span className="icon"><img src={require("../../Images/search.png")}/></span>
-                            <span className="tab-label">个人中心</span>
-                        </Link>
-                    </div>
+            <div>
+                <Link className="tab-item external">
+                    <span className="icon"><img src={require("../../Images/search.png")} /></span>
+                    <span className="tab-label">首页</span>
+                </Link>
+                <Link className="tab-item external" >
+                    <span className="icon"><img src={require("../../Images/search.png")}/></span>
+                    <span className="tab-label">云综合体</span>
+                </Link>
+                <Link
+                    to="/shoppingCart"
+                    className="tab-item external"
+                >
+                    <span className="icon"><img src={require("../../Images/search.png")}/></span>
+                    <span className="tab-label">购物车</span>
+                </Link>
+                <Link to="personalCenter" className="tab-item external">
+                    <span className="icon"><img src={require("../../Images/search.png")}/></span>
+                    <span className="tab-label">个人中心</span>
+                </Link>
+            </div>
 
         );
     }

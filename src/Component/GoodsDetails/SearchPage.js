@@ -236,7 +236,6 @@ export default class SearchPage extends Component {
                     onClick = {()=>this.setState({history:false})}
                     className="goodListContainer"
                 >
-<<<<<<< HEAD
                     <div className="imgContainer width_100">
                         {
                             goodsList == ''?
@@ -267,37 +266,9 @@ export default class SearchPage extends Component {
                                 )
                             })
                         }
-=======
-                    <div className="wrap">
-                        <div className="imgContainer width_100">
-                            {
-                                goodsList&&goodsList.map((el,index)=>{
-                                    return (
-                                        showByColumn?
-                                            <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
-                                                <StoreRow
-                                                    title = {el.NAME}
-                                                    price = {el.CURRENT_PRICE}
-                                                    imgurl = {el.IMAGE}
-                                                />
-                                            </Link>
-                                            :
-                                            <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
-                                                <StoreDetails
-                                                    float = {index%2==0?'left':'right'}
-                                                    title = {el.NAME}
-                                                    price = {el.CURRENT_PRICE}
-                                                    imgurl = {el.IMAGE}
-                                                />
-                                            </Link>
-                                    )
-                                })
-                            }
-                        </div>
->>>>>>> 128256a0eed6092b2f2fbd51ab6d793371f4e8d9
+
                     </div>
                 </div>
-
             </div>
         )
     }
