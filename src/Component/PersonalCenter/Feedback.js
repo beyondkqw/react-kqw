@@ -25,7 +25,7 @@ export default class Feedback extends Component {
                                 <div className="item-after">4008-770-123</div>
                             </div>
                         </li>
-                        <li className="item-content border_bottom">
+                        <li className="item-content">
                             <div className="item-inner">
                                 <div >提交资料请发送邮箱至12154653466@qq.com</div>
                             </div>

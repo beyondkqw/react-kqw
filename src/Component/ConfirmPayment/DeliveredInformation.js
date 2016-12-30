@@ -16,7 +16,8 @@ export default class DeliveredInformation extends Component {
             street : '',
             detail : '',
             type : false,
-            id : ''
+            id : '',
+            showModal:false
         };
       }
 
@@ -72,6 +73,7 @@ export default class DeliveredInformation extends Component {
     }
 
     render() {
+        const {showModal} = this.state
         return (
             <div>
                 <div className="list-block m0">
@@ -117,29 +119,11 @@ export default class DeliveredInformation extends Component {
                                         className="borderno tr"
                                         type="\"
                                         placeholder="请选择"
-                                        onChange={()=>this.setState({address:this.refs.address.value})}
+                                        onClick={()=>this.setState({address:this.refs.address.value,showModal:true})}
                                     />
                                 </div>
                             </div>
                         </li>
-                        {/*
-                         <li className="item-content item-link pl border_bottom">
-                         <div className="item-media"><i className="icon icon-f7"></i></div>
-                         <div className="item-inner font14">
-                         <div className="item-title color6">街道</div>
-                         <div className="item-after color9">
-                         <input
-                         ref = 'street'
-                         className="borderno tr"
-                         type="\"
-                         placeholder="请选择所在区域"
-                         onChange = {()=>this.setState({street:this.refs.street.value})}
-                         />
-                         </div>
-                         </div>
-                         </li>
-                        */}
-
                         <li className="item-content pl border_bottom">
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner font14">
@@ -161,6 +145,51 @@ export default class DeliveredInformation extends Component {
                     onClick = {()=>this.submit()}
                     title={'确定'}
                 />
+                {
+                    showModal?
+                        <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
+                            <div className="width100" style={{zIndex:1050,backgroundColor:'#fff',position:'absolute',bottom:0}}>
+                                <div
+                                    className="flex flex-align-center flex-pack-justify color_white bkg_ff plr"
+                                    style={{height:45,flexDirection:'row'}}>
+                                    <div  onClick = {()=>this.setState({showModal:false})}>取消</div>
+                                    <div>确定</div>
+                                </div>
+                                <div style={{paddingLeft:40,paddingRight:40,height:200,overflow:'auto'}}>
+                                    <ul>
+                                        <li className='flex flex-align-center border_bottom'
+                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
+                                        >北京
+                                        </li>
+                                        <li className='flex flex-align-center border_bottom'
+                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}>上海
+                                        </li>
+                                        <li
+                                            className='flex flex-align-center border_bottom'
+                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
+                                        >天津</li>
+                                        <li
+                                            className='flex flex-align-center border_bottom'
+                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
+                                        >广州</li>
+                                        <li
+                                            className='flex flex-align-center border_bottom'
+                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
+                                        >云南</li>
+                                        <li
+                                            className='flex flex-align-center border_bottom'
+                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
+                                        >四川</li>
+                                        <li>天津</li>
+                                        <li>广州</li>
+                                        <li>云南</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        :null
+
+                }
             </div>
         );
     }

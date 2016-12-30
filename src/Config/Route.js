@@ -78,6 +78,21 @@ import ErweiCode from '../Component/PersonalCenter/ErweiCode'
 import TeamAmount from '../Component/PersonalCenter/TeamAmount'
 import ContactMe from '../Component/GoodsDetails/ContactMe'
 import RecommendPerson from '../Component/PersonalCenter/RecommendPerson'
+import SellerLogin from '../Component/SellerLogin/SellerLogin'
+import SellerForgetPwd from '../Component/SellerLogin/SellerForgetPwd'
+import SellerRegister from '../Component/SellerLogin/SellerRegister'
+import EntryStoreInformation from '../Component/SellerStore/EntryStoreInformation'
+import SellerSearchLocation from '../Component/SellerStore/SellerSearchLocation'
+import StoreNext from '../Component/SellerStore/StoreNext'
+import SellerStoreCenter from '../Component/SellerStore/SellerStoreCenter'
+import CustomerService from '../Component/SellerStore/CustomerService'
+import SellerOrderList from '../Component/SellerStore/SellerOrderList'
+import SellerErWeiCode from '../Component/SellerStore/SellerErWeiCode'
+import ToShip from '../Component/SellerStore/ToShip'
+import SearchOrder from '../Component/SellerStore/SearchOrder'
+import SellerSetting from '../Component/SellerStore/SellerSetting'
+import SellerMineCode from '../Component/SellerStore/SellerMineCode'
+import ToFund from '../Component/SellerStore/ToFund'
 
 
 
@@ -162,6 +177,20 @@ const RouteConfig = (
       <Route path="personalCenter/teamAmount" component={TeamAmount} />
       <Route path="contactMe" component={ContactMe} />
       <Route path="personalCenter/recommendPerson" component={RecommendPerson} />
+      <Route path="sellerLogin" component={SellerLogin} />
+      <Route path="sellerForgetPwd" component={SellerForgetPwd} />
+      <Route path="sellerRegister" component={SellerRegister} />
+      <Route path="entryStoreInformation" component={EntryStoreInformation} />
+      <Route path="sellerSearchLocation" component={SellerSearchLocation} />
+      <Route path="storeNext" component={StoreNext} />
+      <Route path="sellerStoreCenter" component={SellerStoreCenter} />
+      <Route path="customerService" component={CustomerService} />
+      <Route path="sellerOrderList" component={SellerOrderList} />
+      <Route path="sellerErWeiCode" component={SellerErWeiCode} />
+      <Route path="toShip" component={ToShip} />
+      <Route path="sellerSetting" component={SellerSetting} />
+      <Route path="sellerMineCode" component={SellerMineCode} />
+      <Route path="toFund" component={ToFund} />
     </Route>
   </Router>
 );

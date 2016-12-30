@@ -6,6 +6,7 @@ import '../../Stylesheets/App/personal.css';
 import {Link} from 'react-router';
 import RankRow from './RankRow'
 import {CountryRankList} from '../../Action/auth'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 //import $ from '../../js/jquery.min'
 
 const icon = [
@@ -45,16 +46,16 @@ export default class CountryRank extends Component {
         const {countryRank} = this.state
         const {toShowTeam,teemCount,teemAmount} = this.props.location.query
         return(
-            <div>
+            <div className="pr">
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
                     {
                         toShowTeam?
                             <div>
                                 <div className="di rank-head-cell font14 mr10">
-                                    团队人数:{teemCount}名
+                                    团队人数:{teemCount?teemCount:0}名
                                 </div>
                                 <div className="di rank-head-cell font14 mr10">
-                                    团队消费:{teemAmount}
+                                    团队消费:{teemAmount?teemAmount:0}
                                 </div>
                             </div>
                             :
@@ -77,7 +78,12 @@ export default class CountryRank extends Component {
                 </div>
 
                 {
-                    countryRank.map((el,index)=>{
+                    countryRank == ''?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72,marginTop:120}}
+                            title={'查询列表是空的哦~'}
+                        />:
+                    countryRank&&countryRank.map((el,index)=>{
                         return(
                             <RankRow
                                 _vipPoints={el.vipPoints}

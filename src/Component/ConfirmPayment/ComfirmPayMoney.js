@@ -19,18 +19,23 @@ export default class ComfirmPayMoney extends Component {
             PaymentDetails:[],
             now_point:'',
             touch_amount:'',
-            timer:''
+            timer:'',
+            itemAmount:[],
+            carriage:[],
+            summaryAmount:[],
+            summaryCarriage:[],
+            getAll:''
         };
       }
     static contextTypes = {
         router:PropTypes.object
     }
 
-    componentWillMount() {
+    async componentWillMount() {
+        await this.getOrderInfor()
         this.setState({timer:this.props.location.query.time})
-        console.log('timer=====>',this.props.location.query.time)
-        this.getOrderInfor()
         this.getPoints()
+        this.state.getAll = this.getSumAmount()
     }
 
    async getOrderInfor(){
@@ -41,8 +46,9 @@ export default class ComfirmPayMoney extends Component {
             this.setState({PaymentDetails:res})
             res.map(el=>{
                 this.orderNoArray.push(el.order_no)
+                this.state.itemAmount.push(el.amount)
+                this.state.carriage.push(el.postage)
             })
-            console.log('this.orderNoArray======>',this.orderNoArray)
         })
         .catch(err=>{
             console.warn('getOrderInfor',err)
@@ -61,13 +67,22 @@ export default class ComfirmPayMoney extends Component {
             })
     }
 
+    getSumAmount(){
+        this.state.itemAmount.map(el=>{
+            this.state.summaryAmount += el
+        })
+        this.state.carriage.map(el=>{
+            this.state.summaryCarriage += el
+        })
+        return (parseInt(this.state.summaryAmount)+parseInt(this.state.summaryCarriage))
+    }
 
     render() {
-        const {PaymentDetails,now_point,touch_amount,timer} = this.state
+        const {PaymentDetails,now_point,touch_amount,timer,getAll} = this.state
         return (
             <div className="containerNav oa">
                 {
-                    PaymentDetails.map(item=>{
+                    PaymentDetails&&PaymentDetails.map(item=>{
                         return(
                             <div>
                                 <div className="list-block m0">
@@ -180,11 +195,11 @@ export default class ComfirmPayMoney extends Component {
                     <div className="fr">
                         <span className="font14">实付款 :</span>
                         <span className="colorff f12">￥</span>
-                        <span className="colorff f15">1258</span>
+                        <span className="colorff f15">{getAll}</span>
                         <Link
                             to="/confirmPayment/choosePayment"
                             query={{
-                            planReceiveTime:'sdffe',
+                            planReceiveTime:timer,
                             orderNos:this.orderNoArray.join(','),
                             }}>
                             <button className="settleAccount border_ra color_white margin15">支付</button>

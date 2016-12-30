@@ -13,9 +13,6 @@ import SwipeableViews from 'react-swipeable-views';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class GoodsDescription extends Component {
     // 构造
-
-
-
     constructor(props) {
         super(props);
         // 初始状态
@@ -264,7 +261,7 @@ export default class GoodsDescription extends Component {
                                 return(
                                     <img
                                         src = {el.IMAGE}
-                                        key = {index}
+                                        //key = {index}
                                     />
                                 )
                             })

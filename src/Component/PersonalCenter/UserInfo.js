@@ -116,7 +116,7 @@ export default class UserInfo extends Component {
                             </div>
                         </li>
                         <Link to="/personalCenter/erweiCode" query={{image:imageUri,memberName:memberName}}>
-                            <li className="item-content item-link pl border_bottom">
+                            <li className="item-content item-link pl">
                                 <div className="item-media"><i className="icon icon-f7"></i></div>
                                 <div className="item-inner">
                                     <div className="item-title color6  font14">我的二维码名片</div>

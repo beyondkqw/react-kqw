@@ -165,6 +165,9 @@ p{
 .mb1{
     margin-bottom:1rem;
 }
+.mb50{
+    margin-bottom:50px;
+}
 .t0{
     top:0;
 }
@@ -267,9 +270,6 @@ p{
 .f20{
     font-size: 20px;
 }
-.f25{
-    font-size: 25px;
-}
 .flex1{
     flex:1;
     -webkit-flex:1;
@@ -362,6 +362,7 @@ p{
 .z_index{
     z-index:100;
 }
+
 .list-block .item-inner::after{
     display: none;
 }

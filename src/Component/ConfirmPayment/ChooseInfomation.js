@@ -54,16 +54,23 @@ export default class ChooseInfomation extends Component {
                         )
                     })
                 }
-                {
-                    addressList == '' ?
-                        null :
-                        <Link to="/manageInformation">
-                            <CommonBtn
-                                className='pf bottom0'
-                                title={'管理'}
-                            />
-                        </Link>
-                }
+                <div className="df pf width100" style={{bottom:40}}>
+                    <Link to="/deliveredInformation" className="flex1">
+                        <CommonBtn
+                            title={'添加地址'}
+                        />
+                    </Link>
+                    {
+                        addressList == ''?
+                            null:
+                            <Link to="/manageInformation" className="flex1">
+                                <CommonBtn
+                                    title={'管理'}
+                                />
+                            </Link>
+                    }
+
+                </div>
             </div>
         );
     }

@@ -16,14 +16,14 @@ const personDetail = [
 const ItemList = [
     /*{name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},*/
     {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'/personalCenter/memberClub'},
-    {name:'我的兑换',imgUrl:require('../../Images/change.png'),link:''},
+    {name:'会员中心',imgUrl:require('../../Images/change.png'),link:'/personalCenter/memberClub'},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
     {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},
     {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:'/personalCenter/BrowseRecord'},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:'/chooseInfomation'},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
-    {name:'佣金转赠',imgUrl:require('../../Images/commission.png'),link:'/personalCenter/commisionGiving'},
-    {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'}
+    {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
+    {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/personalCenter/jdyStock'}
 ]
 export default class PersonalCenter extends Component {
 
@@ -79,7 +79,7 @@ export default class PersonalCenter extends Component {
                     <Link to="/personalCenter/setting" query={{resetMobile:mobile}}>
                         <span className="pa setUp font14 color_white">设置</span>
                     </Link>
-                    <div className="font14 color_white" style={{marginTop:15}}>{name}</div>
+                    <div className="font14 color_white" style={{marginTop:10,height:15}}>{name}</div>
                     <div className="bak_img pr">
                         <Link to="/personalCenter/memberClub">
                             <span className="di vipImg pa"><img src={require('../../Images/vip.png')} alt=""/></span>

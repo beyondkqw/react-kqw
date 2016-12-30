@@ -64,6 +64,7 @@ export default class SearchPage extends Component {
         await ProductList(paramOne,paramTwo,paramThree,paramFour,paramFive)
         .then(res=>{
             this.setState({goodsList:res.resultList})
+            console.log('res.resultList=======>',res.resultList)
         })
         .catch(err=>{
             console.warn('err',err)

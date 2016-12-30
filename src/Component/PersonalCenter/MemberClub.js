@@ -65,22 +65,29 @@ export default class MemberClub extends Component {
                 <SplitLine />
                 <div className="clearAll" style={{height:'160'}}>
                     <Link to="/personalCenter/teamAmount"
-                          query={{imgUrl:clubInfo.IMAGE_URI,memberName:clubInfo.MEMBER_NAME,amount:clubInfo.USE_AMOUNT}}>
+                          query={{
+                          imgUrl:clubInfo.IMAGE_URI,
+                          memberName:clubInfo.MEMBER_NAME,
+                          amount:clubInfo.USE_AMOUNT,
+                          toChange:true
+                          }}
+                    >
                         <CellComponent
                             className={'border_right'}
                             imgUrl={require('../../Images/total.png')}
                             title='直推消费金额'
-                            describing={clubInfo.USE_AMOUNT}
+                            describing={clubInfo.USE_AMOUNT?clubInfo.USE_AMOUNT:0}
                             //link={el.link}
                         />
                     </Link>
                     <Link
                         to="/personalCenter/teamAmount"
-                        query={{imgUrl:clubInfo.IMAGE_URI,memberName:clubInfo.MEMBER_NAME,amount:clubInfo.DIRECT_PUSH_COUNT}}>
+                        query={{palyMoney:clubInfo.USE_AMOUNT,amount:clubInfo.DIRECT_PUSH_COUNT}}
+                        >
                         <CellComponent
                             imgUrl={require('../../Images/payment.png')}
                             title={'直推人数'}
-                            describing={clubInfo.DIRECT_PUSH_COUNT}
+                            describing={clubInfo.DIRECT_PUSH_COUNT?clubInfo.DIRECT_PUSH_COUNT:0}
                             //link={'/paymentOther'}
                         />
                     </Link>
@@ -91,16 +98,22 @@ export default class MemberClub extends Component {
                             className={'border_right'}
                             imgUrl={require('../../Images/used.png')}
                             title={'团队人数'}
-                            describing={clubInfo.TEEM_MEMBER_COUNT}
+                            describing={clubInfo.TEEM_MEMBER_COUNT?clubInfo.TEEM_MEMBER_COUNT:0}
                         />
                     </Link>
                     <Link
                         to="/personalCenter/teamAmount"
-                        query={{imgUrl:clubInfo.IMAGE_URI,memberName:clubInfo.MEMBER_NAME,amount:clubInfo.TEEM_MEMBER_AMOUNT}}>
+                        query={{
+                        imgUrl:clubInfo.IMAGE_URI,
+                        memberName:clubInfo.MEMBER_NAME,
+                        amount:clubInfo.TEEM_MEMBER_AMOUNT,
+                        toChange:true
+                        }}
+                    >
                             <CellComponent
                                 imgUrl={require('../../Images/diary.png')}
                                 title={'团队消费金额'}
-                                describing={clubInfo.TEEM_MEMBER_AMOUNT}
+                                describing={clubInfo.TEEM_MEMBER_AMOUNT?clubInfo.TEEM_MEMBER_AMOUNT:0}
                                 //link={'/personalCenter/teamAmount'}
                             />
                     </Link>
