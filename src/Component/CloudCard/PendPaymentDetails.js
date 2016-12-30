@@ -6,9 +6,11 @@ export default class PaymentDetails extends Component {
     render() {
         return (
             <div className="containerNav bkg_color">
-                <DetailsRow
-                    toShowBtn = {true}
-                />
+                <div className="wrap">
+                    <DetailsRow
+                        toShowBtn = {true}
+                    />
+                </div>
             </div>
         );
     }

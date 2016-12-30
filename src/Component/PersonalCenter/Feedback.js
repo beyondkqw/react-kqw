@@ -31,6 +31,7 @@ export default class Feedback extends Component {
                             </div>
                         </li>
                     </ul>
+
                 </div>
             </div>
         );

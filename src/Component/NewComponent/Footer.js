@@ -6,8 +6,9 @@ import '../../Stylesheets/App/homePage.css';
 export default class Footer extends Component {
     render() {
         return (
-            <nav className="bar bar-tab bkg_color">
+            <div className="bar bar-tab bkg_color">
                 <Link to="/home" className="tab-item external">
+
                     <span className="icon"><img src={require("../../Images/search.png")} /></span>
                     <span className="tab-label">首页</span>
                 </Link>
@@ -26,7 +27,9 @@ export default class Footer extends Component {
                     <span className="icon"><img src={require("../../Images/search.png")}/></span>
                     <span className="tab-label">个人中心</span>
                 </Link>
-            </nav>
+            </div>
+
+
         );
     }
 }

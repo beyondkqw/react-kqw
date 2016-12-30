@@ -108,29 +108,28 @@ export default class Collect extends Component {
                                             onClick={(e)=>this.isShow(el.PRODUCT_ID,index,e)}
                                     >取消</button>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
-                {/*模态层*/}
-                {this.state.visible?
-                    <div>
-                        <div className="modalNav pa width_100 height_all font14">
-                            <div className="modal_body border_ra scale">
-                                <p className="isCancel border_bottom tc">确定删除？</p>
-                                <div className="chooseType">
-                                    <button className="w50 border_right color_yellow"
-                                        onClick = {()=>this.isDetete()}
-                                    >确定</button>
-                                    <button className="w50"
-                                        onClick = {()=>this.isHidden()}
-                                    >取消</button>
+                            </div>)
+                        })
+                    }
+                    {/*模态层*/}
+                    {this.state.visible?
+                        <div>
+                            <div className="modalNav pa width_100 height_all font14">
+                                <div className="modal_body border_ra scale">
+                                    <p className="isCancel border_bottom tc">确定删除？</p>
+                                    <div className="chooseType">
+                                        <button className="w50 border_right color_yellow"
+                                            onClick = {()=>this.isDetete()}
+                                        >确定</button>
+                                        <button className="w50"
+                                            onClick = {()=>this.isHidden()}
+                                        >取消</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                :null}
-            </div>
+                    :null}
+                </div>
         );
     }
 }

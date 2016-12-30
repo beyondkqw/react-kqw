@@ -128,63 +128,71 @@ export default class ShoppingCart extends Component {
         const {shopCarList} = this.state
         return (
             <div id='aa'  className="containerNav bkg_color">
-                {/*<div className="pr personStore plr bk_fff5f0">
-                    <span className="di check_radius pr fl">
-                        <input type="checkbox" id="isLink"  className="di isCheck" />
-                        <label htmlFor="isLink"></label>
-                    </span>
-                    <span className="di font14 color6 ml5 fl">乐乐的小店</span>
-                    <div className="rightArrow pa"><img src={require('../../Images/rightArrow.png')} alt=""/></div>
-                </div>*/}
-                {
-                    shopCarList.map((el,index)=>{
-                            return (
-                                <div className="plAll proPlay border_bottom">
-                                <CheckBox
-                                    selectAll = {this.isUseSelectAll?this.state.selectAll:null}
-                                    index={index}
-                                    onSelect = {(state)=>this.getSelect(state,el.CAR_ID)}
-                                />
-                                <ItemDetails
-                                    price={el.PRICE}
-                                    title={el.NAME}
-                                    attr={el.ATTR_DESC}
-                                    imgurl={el.IMAGE}
-                                    num={el.PRODUCT_NUM}
-                                    minus={value=>this.editShopNum(el.CAR_ID,value)}
-                                    add={value=>this.editShopNum(el.CAR_ID,value)}
-                                />
-                                </div>
-                            )
-                    })
-               }
-                <div className="height5 width_100"></div>
-                <div className="pf bottomCount width_100 plr">
-                    <span className="di check_radius pr fl">
-                        <input
-                            type="checkbox" id="checkAll"
-                            checked={this.select.length==this.state.shopCarList.length?true:false}
-                            onClick={()=>this.onChangeState()}
-                            className="di isCheck"
-                        />
-                        <label htmlFor="checkAll"></label>
-                    </span>
-                    <span className="di font14 color6 ml5 fl height_all lh25">全选</span>
-                    <div className="di ml5 pr">
-                        <div className="mt2">
-                            <label className="f12">合计</label>
-                            <span className="colorff f12">￥</span><span className="colorff font18">258</span>
+                <div className="wrap">
+                    {/*<div className="pr personStore plr bk_fff5f0">
+                        <span className="di check_radius pr fl">
+                            <input type="checkbox" id="isLink"  className="di isCheck" />
+                            <label htmlFor="isLink"></label>
+                        </span>
+                        <span className="di font14 color6 ml5 fl">乐乐的小店</span>
+                        <div className="rightArrow pa"><img src={require('../../Images/rightArrow.png')} alt=""/></div>
+                    </div>*/}
+                    {
+                        shopCarList.map((el,index)=>{
+                                return (
+                                    <div className="plAll proPlay border_bottom">
+                                    <CheckBox
+                                        selectAll = {this.isUseSelectAll?this.state.selectAll:null}
+                                        index={index}
+                                        onSelect = {(state)=>this.getSelect(state,el.CAR_ID)}
+                                    />
+                                    <ItemDetails
+                                        price={el.PRICE}
+                                        title={el.NAME}
+                                        attr={el.ATTR_DESC}
+                                        imgurl={el.IMAGE}
+                                        num={el.PRODUCT_NUM}
+                                        minus={value=>this.editShopNum(el.CAR_ID,value)}
+                                        add={value=>this.editShopNum(el.CAR_ID,value)}
+                                    />
+                                    </div>
+                                )
+                        })
+                   }
+                    <div className="height5 wrap"></div>
+                    <div className="pf bottomCount wrap plr">
+                        <span className="di check_radius pr fl">
+                            <input
+                                type="checkbox" id="checkAll"
+                                checked={this.select.length==this.state.shopCarList.length?true:false}
+                                onClick={()=>this.onChangeState()}
+                                className="di isCheck"
+                            />
+                            <label htmlFor="checkAll"></label>
+                        </span>
+                        <span className="di font14 color6 ml5 fl height_all lh25">全选</span>
+                        <div className="di ml5 pr">
+                            <div className="mt2">
+                                <label className="f12">合计</label>
+                                <span className="colorff f12">￥</span><span className="colorff font18">258</span>
+                            </div>
+                            <span className="di pa f10">不含运费</span>
                         </div>
-                        <span className="di pa f10">不含运费</span>
+                        <button
+                            onClick={()=>this.toSubmit()}
+                            className="fr mt5 settleAccount border_ra color_white"
+                        >
+                            结算
+                        </button>
                     </div>
-                    <button
-                        onClick={()=>this.toSubmit()}
-                        className="fr mt5 settleAccount border_ra color_white"
-                    >
-                        结算
-                    </button>
                 </div>
-                <Footer />
+                <div className="wrap">
+                    <div className="pf bottom0 wrap" style={{zIndex:100}}>
+                        <nav className="bar-tab bkg_color wrap">
+                            <Footer />
+                        </nav>
+                    </div>
+                </div>
             </div>
         );
     }

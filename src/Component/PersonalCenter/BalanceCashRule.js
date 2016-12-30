@@ -10,15 +10,17 @@ export default class BalanceCashRule extends Component {
     render(){
         return(
             <div className="containerNav" >
-                <div style={{height:10,backgroundColor:'#f5f5f5'}}/>
-                <div className="rule-row width100 font14 color9">
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                </div>
-                <div className="rule-row width100 font14 color9">
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                </div>
-                <div className="rule-row width100 font14 color9">
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                <div className="wrap">
+                    <div style={{height:10,backgroundColor:'#f5f5f5'}}/>
+                    <div className="rule-row width100 font14 color9">
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    </div>
+                    <div className="rule-row width100 font14 color9">
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    </div>
+                    <div className="rule-row width100 font14 color9">
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    </div>
                 </div>
             </div>
         )

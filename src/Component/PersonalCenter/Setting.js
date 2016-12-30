@@ -9,6 +9,7 @@ const Itemlist =[{name:'账号与安全',link:'/personalCenter/savety'},
 export default class Setting extends Component {
     render() {
         return (
+        <div className="containerNav">
             <div className="list-block m0">
                 <ul>
                     {
@@ -27,6 +28,7 @@ export default class Setting extends Component {
                     title = {'退出登录'}
                 />
             </div>
+        </div>
         );
     }
 }

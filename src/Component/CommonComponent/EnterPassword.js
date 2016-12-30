@@ -39,8 +39,8 @@ export default class EnterPassword extends Component {
             toShowConter?
             <div className="bkg_color">
                 {/*模态层*/}
-                    <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
-                        <div className="imcomeModal pf bottom0 width100">
+                    <div className="modalNav pa wrap height_all font14" style={{zIndex:100}}>
+                        <div className="imcomeModal pf bottom0 wrap">
                             <p className="tc width100 userHeight border_bottom pr">
                                 <span className="font16">输入密码</span>
                         <span className="di hideModal pa">

@@ -65,19 +65,18 @@ export default class Login extends Component {
 
     render(){
         return(
-            <div>
+            <div className="wrap">
                 {/*
                  <header>
                  <h4>登录</h4>
                  </header>
                 */}
 
-
                 {/*账号密码输入编辑框*/}
-                <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[0]}/>
-                    </span>
+                <div className='editorBox form-group'>
+                            <span className="editorImg">
+                                <img src={icon[0]}/>
+                            </span>
                     <input
                         maxLength="11"
                         className="editorInput"
@@ -89,9 +88,9 @@ export default class Login extends Component {
                 </div>
 
                 <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[1]}/>
-                    </span>
+                            <span className="editorImg">
+                                <img src={icon[1]}/>
+                            </span>
                     <input
                         className="editorInput"
                         placeholder="请输入密码"
@@ -105,7 +104,7 @@ export default class Login extends Component {
                     {this.state.Reminder}
                 </div>
                 <button className="toLogin tc"
-                    onClick = {()=>this.toSubmit()}
+                        onClick = {()=>this.toSubmit()}
                 >登 录</button>
 
                 <div className="toRegister">

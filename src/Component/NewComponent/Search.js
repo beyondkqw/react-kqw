@@ -52,6 +52,7 @@ export default class Search extends Component {
        /* let bColor = this.state.bg ? this.state.bg : 'transprent';
         console.log(this.state.bg);*/
         return (
+
             <div className="flex">
                 <div id="searchNav" style={style}>
                     <div className="search pr">
