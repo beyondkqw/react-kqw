@@ -14,6 +14,7 @@ import {loadToken,saveToken,clearToken,GetQueryString} from '../Action/rpc'
 import {WechatAuth} from '../Action/autoLogin'
 import '../Stylesheets/App/sm.min.css'
 import '../Stylesheets/App/common.css'
+import '../Stylesheets/App/homePage.css';
 import {HomeBanner,HomeMoudle} from '../Action/auth'
 import {initWebsocket} from '../Action/Websocket'
 

@@ -54,7 +54,7 @@ export default class ConfirmGivenPerson extends Component {
             <div className="containerNav">
                 <Search
                     style={{backgroundColor:'#ff5500',borderBottom:'1px solid #e5e5e5'}}
-                    location = {true}
+                    location = {false}
                     onClick={(value)=>this.searchPerson(value)}
                 />
                 <SplitLine />

@@ -7,7 +7,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 export default class StoreRow extends Component {
 
     render() {
-        const {title,price,imgurl,Postage,payNum,record,browseId,onClick,toDelete} = this.props
+        const {title,price,imgurl,Postage,payNum,record,browseId,onClick,toDelete,assess} = this.props
 
         return (
             <div className="storeRowContainer">
@@ -42,9 +42,18 @@ export default class StoreRow extends Component {
                                     </span>
                                 </div>
                                 :
-                                <div className="rightBottom">
-                                    <span>{Postage?Postage+'元':'免邮费'}</span>
-                                    <span style={{color:'#999'}}>{payNum?payNum:0}人付款</span>
+                                <div>
+                                    {
+                                        assess?
+                                            <p className="color9 f12"><span>299</span>人评价</p>
+                                            :
+                                            <div className="rightBottom">
+                                                <span>{Postage?Postage+'元':'免邮费'}</span>
+                                                <span style={{color:'#999'}}>{payNum?payNum:0}人付款</span>
+                                            </div>
+                                    }
+
+
                                 </div>
                         }
 

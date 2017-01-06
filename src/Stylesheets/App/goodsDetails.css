@@ -165,13 +165,13 @@
 /*搜索tab icon*/
 .screenImg{
     width:10%;
-    height:10%;
+    height:auto !important;
     margin-right:2px;
 }
 
 .arrayImg{
     width:17%;
-    height:17%;
+    height:auto !important;
 }
 
 .searchContainer{

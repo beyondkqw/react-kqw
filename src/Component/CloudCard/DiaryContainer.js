@@ -7,14 +7,16 @@ export default class DiaryContainer extends Component {
     render() {
         return (
             <div>
-                <Link to="/rechargeDetails">
+                <div className="wrap">
+                    <Link to="/rechargeDetails">
+                        <RetailingItem
+                            isShowDate={true}
+                        />
+                    </Link>
                     <RetailingItem
                         isShowDate={true}
                     />
-                </Link>
-                <RetailingItem
-                    isShowDate={true}
-                />
+                </div>
             </div>
         );
     }

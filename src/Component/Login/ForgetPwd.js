@@ -134,102 +134,111 @@ export default class ForgetPwd extends Component {
     render(){
         return(
         this.state.step==1?
-            <div>
-                {/*手机号*/}
-                <div className='editorBox'>
+            <div className="wrap">
+                <div>
+                    {/*手机号*/}
+                    <div className='editorBox'>
                     <span className="editorImg">
                         <img src={icon[0]}/>
                     </span>
-                    <input
-                        key = '1'
-                        maxLength="11"
-                        className="editorInput"
-                        placeholder="请输入手机号"
-                        ref = "forgetNum"
-                        onChange={()=>this.setState({mobile:this.refs.forgetNum.value})}
-                        onBlur = {()=>this.isNumTrue(this.refs.forgetNum.value)}
-                    />
-                </div>
+                        <input
+                            key = '1'
+                            maxLength="11"
+                            className="editorInput"
+                            placeholder="请输入手机号"
+                            ref = "forgetNum"
+                            onChange={()=>this.setState({mobile:this.refs.forgetNum.value})}
+                            onBlur = {()=>this.isNumTrue(this.refs.forgetNum.value)}
+                        />
+                    </div>
 
-                {/*手机验证码*/}
-                <div className='editorBox'>
+                    {/*手机验证码*/}
+                    <div className='editorBox'>
                     <span className="editorImg">
                         <img src={icon[2]}/>
                     </span>
-                    <input
-                        key = '2'
-                        maxLength="6"
-                        className="editorInput"
-                        ref="code"
-                        placeholder="填写手机的验证码"
-                        onChange = {()=>this.setState({code:this.refs.code.value})}
-                    />
-                    <input
-                        id="code"
-                        type="button"
-                        disabled={this.state.disabled}
-                        onClick={()=>this.getCode()}
-                        value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}/>
+                        <input
+                            key = '2'
+                            maxLength="6"
+                            className="editorInput"
+                            ref="code"
+                            placeholder="填写手机的验证码"
+                            onChange = {()=>this.setState({code:this.refs.code.value})}
+                        />
+                        <input
+                            id="code"
+                            type="button"
+                            disabled={this.state.disabled}
+                            onClick={()=>this.getCode()}
+                            value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}/>
+                    </div>
+                    <div className="tc f12 color_red width_100 plr mtb loginHeight">
+                        {this.state.Reminder}
+                    </div>
+                    <button onClick={()=>{this.setState({step:2})}} className="toLogin">下一步</button>
                 </div>
-                <div className="tc f12 color_red width_100 plr mtb loginHeight">
-                    {this.state.Reminder}
-                </div>
-                <button onClick={()=>{this.setState({step:2})}} className="toLogin">下一步</button>
             </div>
-            :
-            <div>
-                {/*设置密码*/}
-                <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[1]}/>
-                    </span>
-                    <input
-                        key = '3'
-                        className="editorInput"
-                        placeholder="新密码"
-                        ref = "newPwd"
-                        type = {this.state.typeN?'password':'text'}
-                        value = {this.state.newPwd}
-                        onChange={()=>this.setState({newPwd:this.refs.newPwd.value})}
-                        onBlur = {()=>this.isPsdTrue(this.refs.newPwd.value)}
-                    />
-                    <span
-                        onClick = {()=>this.changeShowPwd(1)}
-                        style={{height:20,width:20}}
-                    >
-                        <img src = {this.state.isShowNewPwd?icon[3]:icon[4]}/>
-                    </span>
-                </div>
 
-                {/*设置密码*/}
-                <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[1]}/>
-                    </span>
-                    <input
-                        key = '4'
-                        className="editorInput"
-                        placeholder="确认密码"
-                        ref = "secPwd"
-                        value = {this.state.secPwd}
-                        type = {this.state.typeS?'password':'text'}
-                        onChange={()=>this.setState({secPwd:this.refs.secPwd.value})}
-                        onBlur = {()=>this.isPsdTrue(this.refs.secPwd.value)}
-                    />
-                    <span
-                        onClick = {()=>this.changeShowPwd(2)}
-                        style={{height:20,width:20}}
-                    >
-                        <img src = {this.state.isShowSecPwd?icon[3]:icon[4]}/>
-                    </span>
+            :
+            <div className="container">
+                <div className="row">
+                    <div className="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <div>
+                            {/*设置密码*/}
+                            <div className='editorBox'>
+                                <span className="editorImg">
+                                    <img src={icon[1]}/>
+                                </span>
+                                <input
+                                    key = '3'
+                                    className="editorInput"
+                                    placeholder="新密码"
+                                    ref = "newPwd"
+                                    type = {this.state.typeN?'password':'text'}
+                                    value = {this.state.newPwd}
+                                    onChange={()=>this.setState({newPwd:this.refs.newPwd.value})}
+                                    onBlur = {()=>this.isPsdTrue(this.refs.newPwd.value)}
+                                />
+                                <span
+                                    onClick = {()=>this.changeShowPwd(1)}
+                                    style={{height:20,width:20}}
+                                >
+                                    <img src = {this.state.isShowNewPwd?icon[3]:icon[4]}/>
+                                </span>
+                            </div>
+
+                            {/*设置密码*/}
+                            <div className='editorBox'>
+                                <span className="editorImg">
+                                    <img src={icon[1]}/>
+                                </span>
+                                <input
+                                    key = '4'
+                                    className="editorInput"
+                                    placeholder="确认密码"
+                                    ref = "secPwd"
+                                    value = {this.state.secPwd}
+                                    type = {this.state.typeS?'password':'text'}
+                                    onChange={()=>this.setState({secPwd:this.refs.secPwd.value})}
+                                    onBlur = {()=>this.isPsdTrue(this.refs.secPwd.value)}
+                                />
+                                <span
+                                    onClick = {()=>this.changeShowPwd(2)}
+                                    style={{height:20,width:20}}
+                                >
+                                    <img src = {this.state.isShowSecPwd?icon[3]:icon[4]}/>
+                                </span>
+                            </div>
+                            <div className="tc f12 color_red width_100 plr mtb loginHeight">
+                                {this.state.Reminder}
+                            </div>
+                            <button
+                                    className="toLogin"
+                                    onClick={()=>this.confirmSubmit()}
+                            >确 定</button>
+                        </div>
+                    </div>
                 </div>
-                <div className="tc f12 color_red width_100 plr mtb loginHeight">
-                    {this.state.Reminder}
-                </div>
-                <button
-                        className="toLogin"
-                        onClick={()=>this.confirmSubmit()}
-                >确 定</button>
             </div>
         )
     }

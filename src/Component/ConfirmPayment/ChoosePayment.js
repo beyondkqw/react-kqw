@@ -36,7 +36,7 @@ export default class ChoosePayment extends Component {
                             <div className="item-inner margin0 font14">
                                 <div className="item-title">
                                     <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                    <span className="color6">聚云朵J币</span>
+                                    <span className="color6">聚朵云币</span>
                                 </div>
                             </div>
                         </li>

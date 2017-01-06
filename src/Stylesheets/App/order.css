@@ -7,7 +7,8 @@
     height:5rem;
 }
 .orderShow{
-    height:1.9rem;
+    height:1.6rem;
+    line-height: 16px;
     word-break: break-all;
 }
 .order_margin{

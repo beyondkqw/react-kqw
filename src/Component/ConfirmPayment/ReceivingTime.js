@@ -47,11 +47,11 @@ export default class ReceivingTime extends Component {
                                 id="isCheckOne"
                                 name="chooseTime"
                                 className="di isConfirm"
-                                onClick={()=>this.setState({chooseTime:'只休息日/节假日送货(工作日不送'})}
+                                onClick={()=>this.setState({chooseTime:'只休息日/节假日送货(工作日不送)'})}
                             />
                             <label htmlFor="isCheckOne"></label>
                         </span>
-                        <span className="di font14 color6 ml5 fl">只休息日/节假日送货</span>
+                        <span className="di font14 color6 ml5 fl">只休息日/节假日送货(工作日不送)</span>
                     </div>
                     <div className="pr lh25 personStore plr border_bottom">
                         <span className="di check_radius pr fl">
@@ -60,11 +60,11 @@ export default class ReceivingTime extends Component {
                                 id="isCheckTwo"
                                 name="chooseTime"
                                 className="di isConfirm"
-                                onClick={()=>this.setState({chooseTime:'只工作日送货(双休/节假日不送)'})}
+                                onClick={()=>this.setState({chooseTime:'只工作日送货(节假日不送)'})}
                             />
                             <label htmlFor="isCheckTwo"></label>
                         </span>
-                        <span className="di font14 color6 ml5 fl">只工作日送货</span>
+                        <span className="di font14 color6 ml5 fl">只工作日送货(节假日不送)</span>
                     </div>
                 </div>
                 <CommonBtn

@@ -21,7 +21,7 @@
     background:url('../../Images/borderImg.png') no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    margin-top:8px;
+    margin-top:10px;
 }
 .vipImg{
     left:0;
@@ -118,7 +118,7 @@
 /*模态层*/
 .modalNav{
     top:0;
-    left:0;
+    /*left:0;*/
     bottom:0;
     background-color: rgba(0,0,0,0.4);
     z-index: 10;
@@ -182,6 +182,10 @@
 .headerImg{
     width:2rem;
     height:2rem;
+}
+.footerHidden{
+    height:3.5rem;
+    width:100%;
 }
 /*会员俱乐部*/
 .club_height{
@@ -405,7 +409,7 @@
 .stockBanner{
     height:144px;
     width:100%;
-    background:url('../../Images/common/background.png') no-repeat 100% center;
+    background:url('../../Images/common/background.png')  100% center;
 }
 .checkedRead{
     top:2px;

@@ -7,14 +7,16 @@ export default class PendingPayment extends Component {
     render() {
         return (
             <div>
-                <Link to="/pendPaymentDetails">
+                <div className="wrap">
+                    <Link to="/pendPaymentDetails">
+                        <RetailingItem
+                            isShowDate={true}
+                        />
+                    </Link>
                     <RetailingItem
                         isShowDate={true}
                     />
-                </Link>
-                <RetailingItem
-                    isShowDate={true}
-                />
+                </div>
             </div>
         );
     }

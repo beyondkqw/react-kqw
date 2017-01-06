@@ -43,10 +43,9 @@ export default class Collect extends Component {
             })
     }
     //显示模态层
-    isShow(id,index){
-        this.setState({id:id});
-        this.setState({visible:true});
-        this.setState({isIndex:index});
+    isShow(id,index,e){
+        e.stopPropagation()
+        this.setState({id:id,visible:true,isIndex:index});
     }
     //隐藏模态层
     isHidden(){
@@ -54,17 +53,18 @@ export default class Collect extends Component {
     }
     /*取消收藏*/
     async isDetete(){
-        let itemId = this.state.ItemList.PRODUCT_ID;
-        let index = this.state.isIndex;
-        await this.getCollect(1)
+        const productId = this.state.id;
+        //const index = this.state.isIndex;
+        await this.getCollect(productId)
         .then(()=>{
-            this.state.ItemList.splice(index,1);
+            //this.state.ItemList.splice(index,1);
+            this.getCollectList()
             this.setState({visible:false});
         })
     }
 
-    async getCollect(status){
-        await Follow(1,status)
+    async getCollect(productId){
+        await Follow(productId,1)
             .then(res=>{
                 console.log(res);
             })
@@ -105,32 +105,31 @@ export default class Collect extends Component {
                                 </div>
                                 <div className="pa color6 cancel_collect">
                                     <button className="f12 cancel_btn border_ra"
-                                            onClick={()=>this.isShow(el.PRODUCT_ID,index)}
+                                            onClick={(e)=>this.isShow(el.PRODUCT_ID,index,e)}
                                     >取消</button>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
-                {/*模态层*/}
-                {this.state.visible?
-                    <div>
-                        <div className="modalNav pa width_100 height_all font14">
-                            <div className="modal_body border_ra scale">
-                                <p className="isCancel border_bottom tc">确定删除？</p>
-                                <div className="chooseType">
-                                    <button className="w50 border_right color_yellow"
-                                        onClick = {()=>this.isDetete()}
-                                    >确定</button>
-                                    <button className="w50"
-                                        onClick = {()=>this.isHidden()}
-                                    >取消</button>
+                            </div>)
+                        })
+                    }
+                    {/*模态层*/}
+                    {this.state.visible?
+                        <div>
+                            <div className="modalNav pa width_100 height_all font14">
+                                <div className="modal_body border_ra scale">
+                                    <p className="isCancel border_bottom tc">确定删除？</p>
+                                    <div className="chooseType">
+                                        <button className="w50 border_right color_yellow"
+                                            onClick = {()=>this.isDetete()}
+                                        >确定</button>
+                                        <button className="w50"
+                                            onClick = {()=>this.isHidden()}
+                                        >取消</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                :null}
-            </div>
+                    :null}
+                </div>
         );
     }
 }

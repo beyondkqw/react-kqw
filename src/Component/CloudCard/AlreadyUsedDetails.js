@@ -6,9 +6,11 @@ export default class AlreadyUsedDetails extends Component {
     render() {
         return (
             <div className="containerNav bkg_color">
-                <DetailsRow
-                    toShowBtn = {false}
-                />
+                <div className="wrap">
+                    <DetailsRow
+                        toShowBtn = {false}
+                    />
+                </div>
             </div>
         );
     }
