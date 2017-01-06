@@ -46,19 +46,23 @@ export default class SearchPage extends Component {
         this.getOrder('',this.state.order,this.state.orderName,'','');
         this.setState({display_0:false})
     }
+
     //设置价格区间
     async comfirmPrice(){
         await this.getOrder('','','',this.state.minPrice,this.state.maxPrice)
         this.setState({display_2:false})
     }
+
     //销量优先
     async SalesPreferred(){
         await this.getOrder('','asc','p.SALES','','')
     }
+
     //上下排序
-    async upDownOrder(){
-        await this.getOrder('','','','','')
-    }
+    //async upDownOrder(){
+    //    await this.getOrder('','','','','')
+    //}
+
     //请求列表接口
     async getOrder(paramOne,paramTwo,paramThree,paramFour,paramFive){
         await ProductList(paramOne,paramTwo,paramThree,paramFour,paramFive)
@@ -166,7 +170,7 @@ export default class SearchPage extends Component {
         }else if(index==2){
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
-            this.upDownOrder()
+            //this.upDownOrder()
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false})
         }else{
             this.setState({display_2:false,display_0:false})
