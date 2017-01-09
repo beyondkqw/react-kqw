@@ -101,7 +101,7 @@ export default class GoodsDescription extends Component {
         }
     }
 
-    async getFollow(status){
+    async getFollow(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress){
         await Follow(this.props.location.query.id,status)
             .then(res=>{
                 console.log(res);
@@ -272,41 +272,24 @@ export default class GoodsDescription extends Component {
                     <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
                         <span className="di collect_img">
                             {
-                                goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
-                                    return(
-                                        <img
-                                            src = {el.IMAGE}
-                                            key = {index}
-                                        />
-                                    )
-                                })
+                                this.state.isChecked?
+                            <img src={require('../../Images/alreadyFollow.png')} alt=""/>
+                            :
+                            <img src={require('../../Images/collect.png')} alt=""/>
                             }
                         </span>
+                        <span className="f10 db color6">收藏</span>
                     </div>
-                    <div className="width_100 goodDetails">
-                        <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
-                        <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
-                            <span className="di collect_img">
-                                {
-                                    this.state.isChecked?
-                                <img src={require('../../Images/alreadyFollow.png')} alt=""/>
-                                :
-                                <img src={require('../../Images/collect.png')} alt=""/>
-                                }
-                            </span>
-                            <span className="f10 db color6">收藏</span>
-                        </div>
+                </div>
+                <div className="mtlr">
+                    <div>
+                        <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
+                        <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
                     </div>
-                    <div className="mtlr">
-                        <div>
-                            <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
-                            <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
-                        </div>
-                        <div className="f12">
-                            <span className="colorff ">卖家包邮</span>
-                            <div className="fr">
-                                <span>{goodsDetails.SALES}</span>人付款
-                            </div>
+                    <div className="f12">
+                        <span className="colorff ">卖家包邮</span>
+                        <div className="fr">
+                            <span>{goodsDetails.SALES}</span>人付款
                         </div>
                     </div>
                 </div>

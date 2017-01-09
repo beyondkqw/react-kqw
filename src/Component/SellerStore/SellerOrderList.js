@@ -3,7 +3,7 @@ import TabBar from '../../Component/NewComponent/TabBar';
 import SellerGoodDetails from '../../Component/SellerStore/SellerGoodDetails'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
-import {GetOrderList} from '../../Action/auth';
+import {GetSellerOrderList} from '../../Action/auth';
 
 export default class SellerOrderList extends Component {
 
@@ -19,10 +19,12 @@ export default class SellerOrderList extends Component {
     }
 
     componentWillMount(){
-        let indexValue = this.props.location.query.index
-        this.setState({index:indexValue?indexValue:0})
+       /* let indexValue = this.props.location.query.index
+        console.log('indexValue========>',indexValue)
+        this.setState({index:indexValue?indexValue:0})*/
     }
 
+    //点击切换状态
     async onChange(index){
         this.setState({index:index})
         await this.setState({isShow:index})
@@ -34,15 +36,13 @@ export default class SellerOrderList extends Component {
             this.getOrderList('3')
         }else if(this.state.index == 3){
             this.getOrderList('4')
-        }else if(this.state.index == 4){
-            this.getOrderList('')
         }else{
             this.getOrderList('0')
         }
     }
     //订单列表
     async getOrderList(param){
-        await GetOrderList(param)
+        await GetSellerOrderList(param)
             .then(res=>{
                 this.setState({orderItems:res.resultList})
             })
@@ -58,7 +58,7 @@ export default class SellerOrderList extends Component {
                 <TabBar
                     index = {this.state.index}
                     onClick = {index=>this.onChange(index)}
-                    contents={['待付款','待发货','退款中','已完成','评价管理']}
+                    contents={['待付款','待发货','退款中','已完成']}
                 />
                 <SplitLine />
                 {/*待付款*/}
@@ -66,7 +66,7 @@ export default class SellerOrderList extends Component {
                     <div>
                         <SellerGoodDetails
                             debitPay = {()=>this.getOrderList('0')}
-                            orderDetails = {orderItems}
+                            sellerOrderDetails = {orderItems}
                             toPay = {true}
                             isShowWhat = {true}
                         />
@@ -78,7 +78,7 @@ export default class SellerOrderList extends Component {
                     <div>
                         <SellerGoodDetails
                             Receipt = {()=>this.getOrderList('2')}
-                            orderDetails = {orderItems}
+                            sellerOrderDetails = {orderItems}
                             deliverGoods={true}
                             isShowWhat = {true}
                         />
@@ -89,7 +89,7 @@ export default class SellerOrderList extends Component {
                 { this.state.index == 2?
                     <div>
                         <SellerGoodDetails
-                            orderDetails = {orderItems}
+                            sellerOrderDetails = {orderItems}
                             Refund = {true}
                             isShowWhat = {true}
                             //query = {}
@@ -101,20 +101,9 @@ export default class SellerOrderList extends Component {
                 { this.state.index == 3?
                     <div>
                         <SellerGoodDetails
-                            orderDetails = {orderItems}
+                            sellerOrderDetails = {orderItems}
                             alreadyRated = {true}
                             isShowWhat = {true}
-                        />
-                    </div>
-                    :null
-                }
-                {/*评价管理*/}
-                { this.state.index == 4?
-                    <div>
-                        <SellerGoodDetails
-                            againSend = {()=>this.getOrderList('')}
-                            orderDetails = {orderItems}
-                            isShowWhat = {false}
                         />
                     </div>
                     :null

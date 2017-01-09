@@ -117,6 +117,9 @@ p{
 .pb1{
     padding-bottom:1rem;
 }
+.pa_reply{
+    padding:0.1rem 0.6rem;
+}
 .ChooseHeight{
     padding:1rem 0.5rem;
 }
@@ -285,6 +288,9 @@ p{
 }
 .border_all{
     border:1px solid #ccc;
+}
+.border_ye{
+    border:1px solid #ff5500;
 }
 .tc{
     text-align:center;

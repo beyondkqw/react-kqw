@@ -255,3 +255,44 @@ export function changeTime(value){
     }
     return "" + year + month + date + hours + mins + second;
 }
+//特殊字符
+export function ChinaChar(value){
+    if (!(/^[\u4e00-\u9fa5+$]/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+export function EnglishChar(value){
+    if (!(/^[a-zA-Z+$]/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function specialChar(value){
+    if ((new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#¥⋯⋯&*（）——|{}【】‘；：”“'。，、？]").test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//校验QQ号
+export function QQTest(value){
+    if (!(/^[1-9][0-9]{4,13}/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//校验微信号
+export function wechatTest(value){
+    if (!(/^[a-zA-Z\d_]{5,}$/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}

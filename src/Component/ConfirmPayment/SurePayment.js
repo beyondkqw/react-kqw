@@ -14,11 +14,7 @@ export default class SurePayment extends Component {
       }
 
     //确认支付
-    confirmPayMoney(){
-        this.getProcess()
-    }
-
-    async getProcess(){
+       async confirmPayMoney(){
         console.log('planReceiveTime==========>',this.props.location.query.planReceiveTime)
         console.log('orderNosArray==========>',this.props.location.query.orderNos.split(','))
         await Process(0,4,

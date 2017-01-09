@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import '../../Stylesheets/App/personal.css';
 import {BankList} from '../../Action/auth';
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 
 export default class MyBankCark extends Component {
     // 构造
@@ -31,6 +32,12 @@ export default class MyBankCark extends Component {
             <div className="containerNav">
                 <div className="ChooseHeight">
                     {
+                        bankList == ''|| bankList == null?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:50}}
+                                title={'银行卡列表为空哦~'}
+                            />
+                            :
                         bankList&&bankList.map(el=>{
                             return(
                                 <div className="BankHeight df supplement border_ra pa_top pa_left1 mt5">

@@ -83,7 +83,6 @@ import SellerForgetPwd from '../Component/SellerLogin/SellerForgetPwd'
 import SellerRegister from '../Component/SellerLogin/SellerRegister'
 import EntryStoreInformation from '../Component/SellerStore/EntryStoreInformation'
 import SellerSearchLocation from '../Component/SellerStore/SellerSearchLocation'
-import StoreNext from '../Component/SellerStore/StoreNext'
 import SellerStoreCenter from '../Component/SellerStore/SellerStoreCenter'
 import CustomerService from '../Component/SellerStore/CustomerService'
 import SellerOrderList from '../Component/SellerStore/SellerOrderList'
@@ -93,6 +92,27 @@ import SearchOrder from '../Component/SellerStore/SearchOrder'
 import SellerSetting from '../Component/SellerStore/SellerSetting'
 import SellerMineCode from '../Component/SellerStore/SellerMineCode'
 import ToFund from '../Component/SellerStore/ToFund'
+import EvaluationDetails from '../Component/SellerStore/EvaluationDetails'
+import ProductManagement from '../Component/SellerStore/ProductManagement'
+import OnSale from '../Component/SellerStore/OnSale'
+import SearchGoods from '../Component/SellerStore/SearchGoods'
+import OffTheShelf from '../Component/SellerStore/OffTheShelf'
+import SearchOffTheShelf from '../Component/SellerStore/SearchOffTheShelf'
+import MineOffDown from '../Component/SellerStore/MineOffDown'
+import SellerStoreSetting from '../Component/SellerStore/SellerStoreSetting'
+import SellerBankCard from '../Component/SellerStore/SellerBankCard'
+import SellerSavety from '../Component/SellerStore/SellerSavety'
+import SellerAddCard from '../Component/SellerStore/SellerAddCard'
+import SellerMyAlipy from '../Component/SellerStore/SellerMyAlipy'
+import SalesStatistics from '../Component/SellerStore/SalesStatistics'
+import SellerBindPhone from '../Component/SellerLogin/SellerBindPhone'
+import SellerPwdModify from '../Component/SellerLogin/SellerPwdModify'
+import StoreSubCommission from '../Component/SellerStore/StoreSubCommission'
+import SellerOrderDetails from '../Component/SellerStore/SellerOrderDetails'
+import RemarkManage from '../Component/SellerStore/RemarkManage'
+import ShopHome from '../Component/SellerStore/ShopHome'
+import SellerContactMe from '../Component/SellerStore/SellerContactMe'
+import SellerGoodsDec from '../Component/SellerStore/SellerGoodsDec'
 
 
 
@@ -182,7 +202,7 @@ const RouteConfig = (
       <Route path="sellerRegister" component={SellerRegister} />
       <Route path="entryStoreInformation" component={EntryStoreInformation} />
       <Route path="sellerSearchLocation" component={SellerSearchLocation} />
-      <Route path="storeNext" component={StoreNext} />
+      <Route path="remarkManage" component={RemarkManage} />
       <Route path="sellerStoreCenter" component={SellerStoreCenter} />
       <Route path="customerService" component={CustomerService} />
       <Route path="sellerOrderList" component={SellerOrderList} />
@@ -191,6 +211,27 @@ const RouteConfig = (
       <Route path="sellerSetting" component={SellerSetting} />
       <Route path="sellerMineCode" component={SellerMineCode} />
       <Route path="toFund" component={ToFund} />
+      <Route path="evaluationDetails" component={EvaluationDetails} />
+      <Route path="productManagement" component={ProductManagement} />
+      <Route path="onSale" component={OnSale} />
+      <Route path="searchOrder" component={SearchOrder} />
+      <Route path="searchGoods" component={SearchGoods} />
+      <Route path="offTheShelf" component={OffTheShelf} />
+      <Route path="searchOffTheShelf" component={SearchOffTheShelf} />
+      <Route path="mineOffDown" component={MineOffDown} />
+      <Route path="sellerStoreSetting" component={SellerStoreSetting} />
+      <Route path="sellerBankCard" component={SellerBankCard} />
+      <Route path="sellerSavety" component={SellerSavety} />
+      <Route path="sellerAddCard" component={SellerAddCard} />
+      <Route path="sellerMyAlipy" component={SellerMyAlipy} />
+      <Route path="salesStatistics" component={SalesStatistics} />
+      <Route path="sellerBindPhone" component={SellerBindPhone} />
+      <Route path="sellerPwdModify" component={SellerPwdModify} />
+      <Route path="storeSubCommission" component={StoreSubCommission} />
+      <Route path="sellerOrderDetails" component={SellerOrderDetails} />
+      <Route path="shopHome" component={ShopHome} />
+      <Route path="sellerContactMe" component={SellerContactMe} />
+      <Route path="sellerGoodsDec" component={SellerGoodsDec} />
     </Route>
   </Router>
 );

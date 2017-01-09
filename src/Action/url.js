@@ -74,7 +74,7 @@ export const settlementShopCar = 'order/auth/generate'
 //商品类型
 export const categoryList = 'category/list'
 
-//商品类型
+//立即购买
 export const orderShopping = 'order/auth/shopping'
 
 //确认收货
@@ -182,6 +182,39 @@ export const payment = 'auth/charge/process'
 //提现
 export const cash = 'transation/auth/cash'
 
+/*---------------卖家版---------------*/
+//注册
+export const sellerAdd = 'account/seller_add'
 
+//登录
+export const sellerLogin = 'account/seller_login'
 
+//录入店铺信息
+export const storeAdd = 'store/auth/add'
 
+//店铺详情
+export const storeDetail = 'store/detail'
+
+//修改店铺信息
+export const storeEdit = 'store/auth/edit'
+
+//修改店铺的分佣比例
+export const updatePerc = 'store/auth/updatePerc'
+
+//修改店铺联系方式
+export const contact = 'store/auth/contact'
+
+//卖家订单列表
+export const sellerList = 'order/auth/sellerList'
+
+//删除下架商品
+export const delOffShelf = 'product/auth/delOffShelf'
+
+//商品下架
+export const sellerOffShelf = 'product/auth/offShelf'
+
+//店铺月销售列表
+export const monthSale = 'store/auth/monthSale'
+
+//店铺日销售列表
+export const daySale = 'store/auth/daySale'

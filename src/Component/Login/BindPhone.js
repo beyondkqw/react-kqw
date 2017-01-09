@@ -32,6 +32,10 @@ export default class BindPhone extends Component {
 
     async getCode(){
         clearInterval(this._timer)
+        if (!ErrorNum(this.refs.mobile.value)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
         await BindSms(this.refs.mobile.value)
         .then(res=>{
             console.log('获取验证码成功',res)

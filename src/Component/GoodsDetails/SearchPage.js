@@ -69,7 +69,6 @@ export default class SearchPage extends Component {
         .catch(err=>{
             console.warn('err',err)
         })
-
     }
     //选择某种排序方式
     ChooseOneorder(index){
@@ -180,57 +179,55 @@ export default class SearchPage extends Component {
             <div className="containerNav"
                  style={{backgroundColor: showByColumn?'#fff':'rgb(245,245,245)'}}
             >
-                <div className="wrap">
-                <div className = 'searchContainer wrap' style={{height:display_0||display_2?null:75}}>
+                <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
+                    <Search
+                        //onFocus = {()=>this.setState({history:true})}
+                        //onBlur = {()=>this.setState({history:false})}
+                        onClick = {(value)=>this.SearchBtn(value)}
+                        display = {this.state.history}
+                        style={{backgroundColor:'#ff5500'}}
+                    />
+                    {/*todo scroll滚动时置顶fixed*/}
+                    <Tabscontrol
+                        index = {2}
+                        onClick = {(index)=>this.onChange(index)}
+                    >
+                        {/*综合排序tag*/}
+                        <div name="综合排序">
+                            {
+                                this.chooseSortOrder()
+                            }
+                        </div>
 
-                        <Search
-                            //onFocus = {()=>this.setState({history:true})}
-                            //onBlur = {()=>this.setState({history:false})}
-                            onClick = {(value)=>this.SearchBtn(value)}
-                            display = {this.state.history}
-                            style={{backgroundColor:'#ff5500'}}
-                        />
-                        {/*todo scroll滚动时置顶fixed*/}
-                        <Tabscontrol
-                            index = {2}
-                            onClick = {(index)=>this.onChange(index)}
+                        {/*销量优先---tag*/}
+                        <div name="销量优先"
+                            onClick={()=>this.SalesPreferred()}
                         >
-                            {/*综合排序tag*/}
-                            <div name="综合排序">
-                                {
-                                    this.chooseSortOrder()
-                                }
-                            </div>
+                        </div>
 
-                            {/*销量优先---tag*/}
-                            <div name="销量优先"
-                                onClick={()=>this.SalesPreferred()}
-                            >
-                            </div>
+                        {/*筛选tab*/}
+                        <div
+                            name={<span><img src={require('../../Images/screen.png')} className = 'screenImg'/>筛选</span> }
+                        >
+                            {  this.toScreen() }
+                        </div>
 
-                            {/*筛选tab*/}
+                        {/*切换显示方式*/}
+                        <div name={<img src={require('../../Images/array.png')} className='arrayImg'/>}>
+                        </div>
+                    </Tabscontrol>
+
+                    {/*modal遮罩层*/}
+                    {
+                        display_0||display_2?
                             <div
-                                name={<span><img src={require('../../Images/screen.png')} className = 'screenImg'/>筛选</span> }
-                            >
-                                {  this.toScreen() }
-                            </div>
-
-                            {/*切换显示方式*/}
-                            <div name={<img src={require('../../Images/array.png')} className='arrayImg'/>}>
-                            </div>
-                        </Tabscontrol>
-
-                        {/*modal遮罩层*/}
-                        {
-                            display_0||display_2?
-                                <div
-                                    className="cover"
-                                    onClick = {()=>this.setState({display_0:false,display_2:false})}
-                                ></div>
-                                :null
-                        }
-                    </div>
+                                className="cover"
+                                onClick = {()=>this.setState({display_0:false,display_2:false})}
+                            ></div>
+                            :null
+                    }
                 </div>
+
 
                 {/*商品列表---最下层*/}
                 <div

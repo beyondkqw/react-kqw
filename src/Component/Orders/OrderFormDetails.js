@@ -66,15 +66,9 @@ export default class OrderFormDetails extends Component {
         return (
             <div className="containerNav">
                 <div className="df plAll border_bottom">
-                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
-                    <div className="flex1 mtlr">
-                        <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
-                        <p className="f12 color9 mt3"><span>2016-11-21</span><span className="di ml">13:46:05</span></p>
+                    <div className="pr" style={{width:14,height:14,margin:'auto'}}>
+                        <img className="pa" src={require("../../Images/time.png")} alt=""/>
                     </div>
-                    <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
-                </div>
-                <div className="df plAll">
-                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <div className="font14 color6">
                             <span>收货人:</span><span>{orderFormdDetails.name}</span>
@@ -83,6 +77,15 @@ export default class OrderFormDetails extends Component {
                         <p className="f12 color9 mt3">收货地址:<span>广东深空间按调集的ASk就待见的几点开始设法会死人世纪东方</span></p>
                     </div>
                 </div>
+                <div className="df plAll">
+                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
+                    <div className="flex1 mtlr">
+                        <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
+                        <p className="f12 color9 mt3"><span>2016-11-21</span><span className="di ml">13:46:05</span></p>
+                    </div>
+                    <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
+                </div>
+
                 <SplitLine />
                 <div className="paymargin">
                     <div className="di payImgSize mr"><img src={orderFormdDetails.img} alt=""/></div>

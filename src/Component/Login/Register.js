@@ -42,7 +42,7 @@ export default class Register extends Component {
     async getCode(){
         const {mobile} = this.state
         clearInterval(this._timer)
-        await SMSCode(mobile)
+        await SMSCode(mobile,0)
         .then(res=>{
             console.log('获取手机验证码成功',res)
             this.setState({smsCode:res,codeWord:60,disabled:true})

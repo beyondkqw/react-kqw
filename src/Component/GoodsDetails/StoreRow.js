@@ -7,7 +7,8 @@ import '../../Stylesheets/App/goodsDetails.css';
 export default class StoreRow extends Component {
 
     render() {
-        const {title,price,imgurl,Postage,payNum,record,browseId,onClick,toDelete,assess} = this.props
+        const {title,price,imgurl,Postage,peopleRemark,
+            payNum,record,browseId,onClick,toDelete,assess,showBorderBottom} = this.props
 
         return (
             <div className="storeRowContainer">
@@ -16,14 +17,14 @@ export default class StoreRow extends Component {
                 >
                     <img src={imgurl} />
                 </div>
-                <div className="rightMoudle">
+                <div className={showBorderBottom?"rightMoudle":"rightMoudle border_bottom"}>
                     <div className="goodsTitle">{title}</div>
                     <div>
                         <div style={{height:18,marginBottom:5}}>
                             {
                                 price?<span className="colorff f12">￥</span>:null
                             }
-                            <span className="colorff font18">{price}</span>
+                            <span className="colorff font18">{price?price:0}</span>
                         </div>
 
                         {
@@ -31,7 +32,7 @@ export default class StoreRow extends Component {
                                 <div className="rightBottom">
                                     <div>
                                         <span className="colorff f12">￥</span>
-                                        <span className="colorff font18">{record}</span>
+                                        <span className="colorff font18">{record?record:0}</span>
                                     </div>
 
                                     <span
@@ -45,7 +46,7 @@ export default class StoreRow extends Component {
                                 <div>
                                     {
                                         assess?
-                                            <p className="color9 f12"><span>299</span>人评价</p>
+                                            <p className="color9 f12"><span>{peopleRemark?peopleRemark:0}</span>人评价</p>
                                             :
                                             <div className="rightBottom">
                                                 <span>{Postage?Postage+'元':'免邮费'}</span>
