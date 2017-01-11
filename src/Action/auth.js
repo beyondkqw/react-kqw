@@ -693,6 +693,28 @@ export async function Cash(bankcardId,amount) {
     }
 }
 
+//直推人列表
+export async function EecommendList() {
+    try {
+        const res = await apiGet(URL.recommendList);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//聚朵股权
+export async function EquityList() {
+    try {
+        const res = await apiGet(URL.equityList);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
 /*-----------卖家版-------------*/
 //注册
 export async function SellerToRegister(accName,pwd,smsNo,code,memberName,role){
@@ -830,6 +852,17 @@ export async function MonthSale() {
 export async function DaySale(month) {
     try {
         const res = await apiGet(URL.daySale,{month});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//去发货
+export async function Delivery(deliveryName,deliveryNo,orderNo) {
+    try {
+        const res = await apiPost(URL.delivery,{deliveryName,deliveryNo,orderNo});
         return res;
     } catch (err) {
         console.warn(err);

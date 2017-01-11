@@ -63,7 +63,7 @@ export default class MemberClub extends Component {
                     </Link>
                 </div>
                 <SplitLine />
-                <div className="clearAll" style={{height:'160'}}>
+                <div className="clearAll personal_h8">
                     <Link to="/personalCenter/teamAmount"
                           query={{
                           imgUrl:clubInfo.IMAGE_URI,

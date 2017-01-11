@@ -44,7 +44,6 @@ export default class SalesStatistics extends Component {
 
     //请求天的销售金额
     async getDayMoney(month,index){
-        console.log('index',index)
         await DaySale(month)
             .then(res=>{
                 this.setState({chooseIndex:index})
@@ -54,7 +53,6 @@ export default class SalesStatistics extends Component {
             .catch(err=>{
                 console.warn('err',err)
             })
-
     }
     render(){
         const {show,monthMoney,monthDay,chooseIndex} = this.state
@@ -92,7 +90,7 @@ export default class SalesStatistics extends Component {
                                                 <p>
                                                     <span>￥</span><span>{el.AMOUNT}</span>
                                                     {show && chooseIndex == index?
-                                                    <span className="di ml" style={{width:13,height:7,lineHeight:0}}>
+                                                        <span className="di ml" style={{width:13,height:7,lineHeight:0}}>
                                                             <img src={require("../../Images/bottomArrow.png")} alt=""/>
                                                         </span>
                                                         :
@@ -110,7 +108,6 @@ export default class SalesStatistics extends Component {
                                             show && chooseIndex == index?
                                                 <ul className="font14 salesList">
                                                     {
-                                                        chooseIndex == index ?
                                                         monthDay && monthDay.map(item=> {
                                                             return (
                                                                 <li className="df flex-pack-justify border_top flex-align-center color9">
@@ -119,7 +116,6 @@ export default class SalesStatistics extends Component {
                                                                 </li>
                                                             )
                                                         })
-                                                            :null
                                                     }
                                                 </ul>
                                                 :

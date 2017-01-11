@@ -162,7 +162,9 @@ export default class OrderDetails extends Component {
                                                     {
                                                         el.status == config.order_status_cancel?
                                                             null:
-                                                            <button className="bkg_ff ml5 border_ra color_white">付款</button>
+                                                            <Link to="comfirmPayMoney" query={{orderId:el.order_no}}>
+                                                                <button className="bkg_ff ml5 border_ra color_white">付款</button>
+                                                            </Link>
                                                     }
                                                 </div>
                                                 :null

@@ -85,22 +85,6 @@ export default class SellerGoodsDec extends Component {
             })
     }
 
-    //是否收藏
-    async isFollow(){
-        await this.setState({isChecked:!this.state.isChecked});
-        //收藏
-        console.log('istrue',this.state.isChecked== true);
-        //收藏
-        if(this.state.isChecked){
-            await this.setState({status:0});
-            this.getFollow(this.state.status)
-            //取消收藏
-        }else{
-            await this.setState({status:1});
-            this.getFollow(this.state.status)
-        }
-    }
-
     async getFollow(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress){
         await Follow(this.props.location.query.id,status)
             .then(res=>{
@@ -146,7 +130,7 @@ export default class SellerGoodsDec extends Component {
                     </div>
                     <div className="f12 df flex-pack-justify color9">
                         <span>卖家包邮</span>
-                        <div>赠<span>32</span>积分</div>
+                        {/*<div>赠<span>32</span>积分</div>*/}
                         <div className="fr">
                             <span>{goodsDetails.SALES}</span>人付款
                         </div>
@@ -185,10 +169,9 @@ export default class SellerGoodsDec extends Component {
                         </li>
                     </ul>
                 </div>
-                <SplitLine />
+                {/*<SplitLine />
 
-                <div className="wrap">
-                    {/*选择商品属性*/}
+                    {/!*选择商品属性*!/}
                     {this.state.isShow?
                         <GoodsPopup
                             //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
@@ -198,9 +181,8 @@ export default class SellerGoodsDec extends Component {
                             isOnly = {this.state.type?true:false}
                             //typeParam = {type=>{console.log('type',type)}}
                         />
-                        :null}
+                        :null}*/}
                     <div className="goodBottom width_100"></div>
-                </div>
             </section>
 
 

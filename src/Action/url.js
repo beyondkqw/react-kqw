@@ -182,6 +182,12 @@ export const payment = 'auth/charge/process'
 //提现
 export const cash = 'transation/auth/cash'
 
+//聚朵股权
+export const equityList = 'auth/account/equityList'
+
+//直推人列表
+export const recommendList = 'auth/account/recommendList'
+
 /*---------------卖家版---------------*/
 //注册
 export const sellerAdd = 'account/seller_add'
@@ -218,3 +224,6 @@ export const monthSale = 'store/auth/monthSale'
 
 //店铺日销售列表
 export const daySale = 'store/auth/daySale'
+
+//去发货
+export const delivery = 'order/auth/delivery'

@@ -78,6 +78,7 @@ import ErweiCode from '../Component/PersonalCenter/ErweiCode'
 import TeamAmount from '../Component/PersonalCenter/TeamAmount'
 import ContactMe from '../Component/GoodsDetails/ContactMe'
 import RecommendPerson from '../Component/PersonalCenter/RecommendPerson'
+import EquityDetails from '../Component/PersonalCenter/EquityDetails'
 import SellerLogin from '../Component/SellerLogin/SellerLogin'
 import SellerForgetPwd from '../Component/SellerLogin/SellerForgetPwd'
 import SellerRegister from '../Component/SellerLogin/SellerRegister'
@@ -232,6 +233,7 @@ const RouteConfig = (
       <Route path="shopHome" component={ShopHome} />
       <Route path="sellerContactMe" component={SellerContactMe} />
       <Route path="sellerGoodsDec" component={SellerGoodsDec} />
+      <Route path="equityDetails" component={EquityDetails} />
     </Route>
   </Router>
 );

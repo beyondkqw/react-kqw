@@ -32,6 +32,7 @@ export default class Store extends Component {
         this.getStoreDetails(this.storeId)
         this.getOrderList('',this.storeId,'p.create_time','')
     }
+
     //获取店铺详情
     async getStoreDetails(storeId){
         await  StoreDetailItem(storeId)
@@ -43,6 +44,7 @@ export default class Store extends Component {
                 console.warn('获取商品属性失败',err)
             })
     }
+
     //店铺导航切换
     //请求列表接口
     async getOrderList(paramOne,paramTwo,paramThree,paramFour){

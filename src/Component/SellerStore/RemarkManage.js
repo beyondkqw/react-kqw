@@ -44,7 +44,13 @@ export default class RemarkManage extends Component {
                         return(
                                 <Link
                                     to="/evaluationDetails"
-                                    query={{imgUrl:el.IMAGE,name:el.NAME,price:el.CURRENT_PRICE,comment:el.COMMENT_COUNT}}
+                                    query={{
+                                    imgUrl:el.IMAGE,
+                                    name:el.NAME,
+                                    price:el.CURRENT_PRICE,
+                                    comment:el.COMMENT_COUNT,
+                                    id:el.ID
+                                    }}
                                 >
                                     <StoreRow
                                         title = {el.NAME}

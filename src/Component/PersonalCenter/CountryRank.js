@@ -7,13 +7,11 @@ import {Link} from 'react-router';
 import RankRow from './RankRow'
 import {CountryRankList} from '../../Action/auth'
 import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
-//import $ from '../../js/jquery.min'
 
 const icon = [
     require('../../Images/person/first.png'),
     require('../../Images/person/second.png'),
     require('../../Images/person/third.png')
-
 ]
 
 
@@ -33,7 +31,7 @@ export default class CountryRank extends Component {
     }
 
     async getCountryRank(){
-        await CountryRankList()
+        await CountryRankList('')
         .then(res=>{
             console.log('CountryRankList',res)
             const {resultList} = res

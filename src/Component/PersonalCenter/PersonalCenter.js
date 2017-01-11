@@ -67,7 +67,7 @@ export default class PersonalCenter extends Component {
     }
 
     render() {
-        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen} = this.state
+        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg} = this.state
         return (
             <div>
                 <section className="pr tc center_bkImg" style={{paddingTop: 10,paddingBottom: 15}}>
@@ -142,13 +142,19 @@ export default class PersonalCenter extends Component {
                             return(
                                 <Link
                                     to={item.link}
-                                    className="di width_third width_100"
-                                    query={{memberId:accId,now_amount:now_amount,frozen:frozen}}
+                                    className="di width_third width_100 countLink"
+                                    query={{
+                                    memberId:accId,
+                                    now_amount:now_amount,
+                                    frozen:frozen,
+                                    name:name,
+                                    img:headImg
+                                    }}
                                 >
                                     <div className={index%3==0||index%3==1?
                                     "separateRow tc di border_bottom  border_right":
                                     "separateRow tc di border_bottom"}>
-                                        <p>
+                                        <p className="centerImg">
                                             <span className="di separateRowImg"><img src={item.imgUrl} alt=""/></span>
                                         </p>
                                         <p className="f12 m_top color9">{item.name}</p>

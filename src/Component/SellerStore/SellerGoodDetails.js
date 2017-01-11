@@ -89,7 +89,7 @@ export default class SellerGoodDetails extends Component {
                                         {
                                             deliverGoods?
                                                 <div className="paddingorder">
-                                                    <Link to="/toShip">
+                                                    <Link to="/toShip" query={{orderNo:el.order_no}}>
                                                         <div style={{height: 30,textAlign:'right'}}>
                                                             <button
                                                                 className="bkg_ff border_ra color_white"
@@ -118,13 +118,14 @@ export default class SellerGoodDetails extends Component {
                                 <SplitLine />
                                 {
                                     alreadyRated?
-                                        <Link to="/searchOrder">
-                                            <div
-                                                className="pf bottom0 width100 flex color_white flex-pack-center flex-align-center"
-                                                style={{height:50,backgroundColor:'#ff5500'}}>
-                                                搜索订单
-                                            </div>
-                                        </Link>
+                                            <Link to="/searchOrder">
+                                                <div style={{bottom:50,height:50}} className="pf width100"></div>
+                                                <div
+                                                    className="pf bottom0 width100 flex color_white flex-pack-center flex-align-center"
+                                                    style={{height:50,backgroundColor:'#ff5500'}}>
+                                                    搜索订单
+                                                </div>
+                                            </Link>
                                         :null
                                 }
                             </div>

@@ -54,7 +54,7 @@ export default class ConfirmGivenPerson extends Component {
             <div className="containerNav">
                 <Search
                     style={{backgroundColor:'#ff5500',borderBottom:'1px solid #e5e5e5'}}
-                    location = {false}
+                    location = {true}
                     onClick={(value)=>this.searchPerson(value)}
                 />
                 <SplitLine />
@@ -66,7 +66,7 @@ export default class ConfirmGivenPerson extends Component {
                                 title={'查询列表是空的哦~'}
                             />
                             :
-                        pointList.map(el=>{
+                            pointList&&pointList.map(el=>{
                             return(
                                 <LiItem
                                     title={el.memberName}

@@ -3,7 +3,7 @@ import '../../Stylesheets/App/personal.css';
 
 export default class RetailingItem extends Component {
     render() {
-        const {isShowDate,changeAmount,extraMsg,imgUrl} = this.props
+        const {isShowDate,changeAmount,extraMsg,imgUrl,ymd,time} = this.props
         return (
             <div className="height_charge plAll border_bottom">
                 <span className="fl di headerImg">
@@ -23,8 +23,8 @@ export default class RetailingItem extends Component {
                 {
                     isShowDate?
                         <div className="fr f12 color9">
-                            <div>2016-11-25</div>
-                            <p className="mt3">11:30</p>
+                            <div>{ymd}</div>
+                            <p className="mt3">{time}</p>
                         </div>
                         :null
                 }

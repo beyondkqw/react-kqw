@@ -2,7 +2,7 @@ import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import Search from '../../Component/NewComponent/Search';
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import {UpdatePerc} from '../../Action/auth'
+import {UpdatePerc,StoreDetailItem} from '../../Action/auth'
 
 export default class StoreSubCommission extends Component {
     // 构造
@@ -10,18 +10,25 @@ export default class StoreSubCommission extends Component {
         super(props);
         // 初始状态
         this.state = {
+            perc:''
         };
     }
     static contextTypes = {
         router:PropTypes.object
     }
 
+    componentWillMount() {
+        this.storeId = this.props.location.query.storeId
+        this.getStoreDetails(this.storeId)
+    }
+
     async getPerc(){
-        if(!this.refs.updatePerc.value){
-            alert("输入的分佣比例不能为空")
+        console.log('this.state.perc<100===>',(this.state.perc<100))
+        if(!this.state.perc && (this.state.perc<100)){
+            alert("请输入正确的分佣比例")
             return
         }
-        await UpdatePerc(this.refs.updatePerc.value)
+        await UpdatePerc(this.state.perc)
             .then(res=>{
                 this.context.router.push({pathname:'/sellerStoreCenter'})
             })
@@ -29,7 +36,21 @@ export default class StoreSubCommission extends Component {
                 this.setState({Reminder:err.message})
             })
     }
+
+
+    //获取默认的分佣比例
+    async getStoreDetails(storeId){
+        await  StoreDetailItem(storeId)
+            .then(res=>{
+                this.setState({perc:res.store.perc})
+            })
+            .catch(err=>{
+                console.warn('获取商品属性失败',err)
+            })
+    }
+
     render(){
+        console.log('this.state.perc',this.state.perc)
         return(
             <div className="containerNav">
                 <SplitLine />
@@ -39,8 +60,9 @@ export default class StoreSubCommission extends Component {
                             style={{width:80}}
                             className="borderno f25 tr color9"
                             type="text"
-                            placeholder="0.00"
+                            value={this.state.perc?this.state.perc:0}
                             ref='updatePerc'
+                            onChange = {()=>this.setState({perc:this.refs.updatePerc.value})}
                         />
                         <span className="f15">%</span>
                     </p>

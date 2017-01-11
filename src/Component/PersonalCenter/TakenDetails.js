@@ -17,12 +17,11 @@ export default class TakenDetails extends Component {
     }
     componentWillMount() {
         const accId = this.props.location.query.accId
-        console.log('accId============>',accId)
         this.ToGetAwayRecordDetails(accId)
     }
     //支出明细
     async ToGetAwayRecordDetails(){
-        await GiveAwayRecord(1)
+        await GiveAwayRecord(5)
             .then(res=>{
                 if(res.resultList == ''){
                     this.setState({showImg:true})

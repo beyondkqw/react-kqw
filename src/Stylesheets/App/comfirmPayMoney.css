@@ -45,7 +45,7 @@
 .comfirmBtn{
     height:2rem;
     line-height:2rem;
-    margin-top:2.5rem;
+    /*margin-top:2.5rem;*/
 }
 .isConfirm{
     display:none;

@@ -68,7 +68,7 @@ export default class Search extends Component {
                             <input
                                 ref = "input"
                                 className={toChange?"searcInputOther flex1":"searcInput flex1"}
-                                placeholder={location?'请输入地址':"请输入搜索内容"}
+                                placeholder={location?'请输入内容':"请输入搜索内容"}
                                 type="text"
                                 onFocus={()=>{
                                     this.setState({display:true})

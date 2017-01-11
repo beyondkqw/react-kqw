@@ -9,7 +9,6 @@ import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} fro
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 
-
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class GoodsDescription extends Component {
     // 构造
@@ -31,6 +30,7 @@ export default class GoodsDescription extends Component {
             showEmptyImg:false
         };
     }
+
     //弹出popup
     popubAnimate(){
         this.setState({isShow:true,type:''});
@@ -78,6 +78,9 @@ export default class GoodsDescription extends Component {
         await Details(this.props.location.query.id)
             .then(res=>{
                 this.setState({goodsDetails:res});
+                //判断当前商品是否收藏
+                const isFollow = res.IS_FOLLOW == 1?false:true
+                this.setState({isChecked:isFollow})
                 console.log('goodsDetails',this.state.goodsDetails);
             })
             .catch(err=>{
@@ -92,16 +95,16 @@ export default class GoodsDescription extends Component {
         console.log('istrue',this.state.isChecked== true);
         //收藏
         if(this.state.isChecked){
-            await this.setState({status:0});
-            this.getFollow(this.state.status)
+            //await this.setState({status:0});
+            this.getFollow(0)
         //取消收藏
         }else{
-            await this.setState({status:1});
-            this.getFollow(this.state.status)
+            //await this.setState({status:1});
+            this.getFollow(1)
         }
     }
 
-    async getFollow(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress){
+    async getFollow(status){
         await Follow(this.props.location.query.id,status)
             .then(res=>{
                 console.log(res);
@@ -174,14 +177,35 @@ export default class GoodsDescription extends Component {
        await this.setState({isShow:true,type:type})
     }
 
+    //商品介绍
+    commodityIntroduction(){
+        const detail = this.state.goodsDetails.DETAIL
+        const imgHeight = document.body.scrollWidth
+        return (
+            <div>
+                {
+                    detail&&detail.map(el=>{
+                        return(
+                            <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
+                               <img />
+                            </div>
+                            )
+                    })
+                }
+
+            </div>
+        )
+    }
+
     //商品参数
     showGoodsParams(){
+        const params = this.state.goodsDetails.PARAMS
         return(
             <div className="goodsParams">
                 <div style={{height:10,backgroundColor:'#f5f5f5'}} />
-
+                <div>{params}</div>
                 {/*商品参数*/}
-                <div className="goodsParams-item font14">
+                {/*<div className="goodsParams-item font14">
                     <span className="left-item color9">品牌</span>
 
                     <span className="color6">xxx</span>
@@ -190,7 +214,7 @@ export default class GoodsDescription extends Component {
                     <span className="left-item color9">aaa品牌</span>
 
                     <span className="color6">xxx</span>
-                </div>
+                </div>*/}
 
             </div>
         )
@@ -332,7 +356,7 @@ export default class GoodsDescription extends Component {
                     style={{backgroundColor:'#fff'}}
                 >
                     <div name="商品介绍">
-                        我是第一帧
+                        {this.commodityIntroduction()}
                     </div>
                     <div name="商品参数">
                         {this.showGoodsParams()}

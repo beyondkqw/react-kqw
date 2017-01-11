@@ -1,7 +1,5 @@
-/**
- * Created by asus on 2016/11/22.
- */
 import React, { Component } from 'react';
+import {StorectList} from '../../Action/auth'
 
 export default class SearchOrder extends Component {
     render() {

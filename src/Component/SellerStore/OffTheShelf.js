@@ -11,10 +11,6 @@ import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import Modal from '../../Component/CommonComponent/Modal'
 import {SellerProductList,SellerOffShelf} from '../../Action/auth';
 
-const itemList = [
-    {name:'或者豆腐丝收到货基地是可敬的',prace:235,num:'hisjuhdi',paymoney:2367,id:1},
-    {name:'dfghrugeyr',prace:2456,num:'ags',paymoney:255,id:2}
-]
 export default class OffTheShelf extends Component {
     // 构造
     constructor(props) {
@@ -78,7 +74,6 @@ export default class OffTheShelf extends Component {
             })
         }
         this.setState({toRender:1})
-        console.log('selectIndex',this.selectOffShelf)
     }
 
     //弹出模态层,判断所选数量
@@ -135,7 +130,6 @@ export default class OffTheShelf extends Component {
                                                     <span className="colorff font18">{el.CURRENT_PRICE?el.CURRENT_PRICE:0}</span>
                                                 </p>
                                                 <CheckBox
-                                                    selectAll = {this.isUseSelectAll?this.state.selectAll:null}
                                                     index={index}
                                                     onSelect = {(state)=>this.getSelect(state,el.ID)}
                                                 />
