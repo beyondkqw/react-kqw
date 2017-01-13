@@ -24,7 +24,7 @@ export default class SellerGoodDetails extends Component {
                     sellerOrderDetails&&sellerOrderDetails.map(el=>{
                         return(
                             <div>
-                                <Link to="/sellerOrderDetails">
+                                <Link to="/sellerOrderDetails" query={Refund?{toApply:true,orderNo:el.order_no}:{orderNo:el.order_no}}>
                                     {
                                         el.orderDetails&&el.orderDetails.map((item,index)=>{
                                             return(
@@ -56,7 +56,22 @@ export default class SellerGoodDetails extends Component {
                                                             </p>
                                                             <p className="color9 font14"><span>X</span><span>{item.num}</span></p>
                                                         </div>
+                                                        {/*{/!*退款*!/}
+                                                        {
+                                                            Refund?
+                                                                <div className=" pa mt55" style={{bottom:10,right:10}}>
+                                                                    <div >
+                                                                        <Link to="/toFund">
+                                                                            <button
+                                                                                className="btn font14 bkg_ff border_ra color_white"
+                                                                            >去退款</button>
+                                                                        </Link>
+                                                                    </div>
+                                                                </div>
+                                                                :null
+                                                        }*/}
                                                     </div>
+
                                                 </div>
                                             )
                                         })
@@ -99,20 +114,7 @@ export default class SellerGoodDetails extends Component {
                                                 </div>
                                                 :null
                                         }
-                                        {/*退款*/}
-                                        {
-                                            Refund?
-                                                <div className="paddingorder">
-                                                    <div style={{height: 30,textAlign:'right'}}>
-                                                        <Link to="/toFund">
-                                                            <button
-                                                                className="btn font14 bkg_ff border_ra color_white"
-                                                           >去退款</button>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                                :null
-                                        }
+
                                     </div>
                                 </div>
                                 <SplitLine />

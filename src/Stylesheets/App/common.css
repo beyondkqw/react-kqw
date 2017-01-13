@@ -99,6 +99,9 @@ p{
 .pt7{
     padding:0.7rem 0;
 }
+.replyPadding{
+    padding:1.4rem 0.5rem 0.5rem;
+}
 .plAll{
     padding:0.5rem;
 }
@@ -118,7 +121,7 @@ p{
     padding-bottom:1rem;
 }
 .pa_reply{
-    padding:0.1rem 0.6rem;
+    padding:0 0.4rem;
 }
 .ChooseHeight{
     padding:1rem 0.5rem;
@@ -212,6 +215,9 @@ p{
 }
 .pb{
     padding-bottom:0.3rem;
+}
+.pb10{
+    padding-bottom:0.5rem;
 }
 .pl{
     padding-left:0.5rem !important;
@@ -364,6 +370,10 @@ p{
 }
 .bar{
     position:fixed !important;
+}
+
+.paySuccess{
+    padding:0.3rem 1rem;
 }
 .clearAll{
     clear:both;

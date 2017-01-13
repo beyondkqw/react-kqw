@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import LiComponent from '../../Component/CommonComponent/LiComponent'
 import '../../Stylesheets/App/personal.css';
+import {Logout} from '../../Action/auth';
 
 const Itemlist =[
     {name:'个人资料',link:'/sellerSetting',imgurl:require('../../Images/common/information.png')},
@@ -11,6 +12,21 @@ const Itemlist =[
     {name:'关于聚朵云',link:'/personalCenter/aboutDemo',imgurl:require('../../Images/common/about.png')}
 ];
 export default class SellerStoreSetting extends Component {
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
+    async LoginOut(){
+        await Logout()
+            .then(res=>{
+                alert('退出成功')
+                this.context.router.push('/SellerLogin')
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
     render() {
         return (
             <div className="containerNav">
@@ -40,9 +56,12 @@ export default class SellerStoreSetting extends Component {
                             })
                         }
                     </ul>
-                    <CommonBtn
-                        title = {'退出'}
-                    />
+                    <div style={{marginTop:50}}>
+                        <CommonBtn
+                            title = {'退出'}
+                            onClick = {()=>this.LoginOut()}
+                        />
+                    </div>
                 </div>
             </div>
         );

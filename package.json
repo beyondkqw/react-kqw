@@ -31,7 +31,8 @@
     "reconnecting-websocket": "^3.0.3",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "urijs": "^1.18.1"
+    "urijs": "^1.18.1",
+    "wxjs": "0.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

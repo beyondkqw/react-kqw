@@ -20,7 +20,7 @@ export default class ComfirmPayMoney extends Component {
             carriage:[],
             summaryAmount:[],
             summaryCarriage:[],
-            getAll:''
+            getAll:0
         };
       }
     static contextTypes = {
@@ -136,7 +136,7 @@ export default class ComfirmPayMoney extends Component {
                                         </div>
                                     </Link>
                                     {
-                                        item.orderDetails.map((el,index)=>{
+                                        item.orderDetails&&item.orderDetails.map((el,index)=>{
                                             return (
                                                 <Link to="/goodsDescription" query={{id:el.productId}}>
                                                     <PaymoneyComponent

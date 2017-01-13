@@ -196,6 +196,7 @@ export default class SellerRegister extends Component {
                     <input
                         ref = 'code'
                         maxLength="6"
+                        style={{minWidth:100}}
                         className="editorInput"
                         placeholder="填写手机的验证码"
                         onChange = {()=>this.setState({code:this.refs.code.value})}

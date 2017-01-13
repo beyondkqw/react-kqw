@@ -76,7 +76,7 @@ export default class OrderDetails extends Component {
                                     <div className="di payImgSize mr"><img src={el.img} alt=""/></div>
                                     <span className="color6 font14">{el.store_name}</span>
                                 </div>
-                                <Link to="/orders/orderFormDetails"  query={{orderNo:el.order_no}}>
+                                <Link to="/orders/orderFormDetails"  query={{orderNo:el.order_no,isToPay:toPay,isMakeSure:makeSure}}>
                                 {
                                     el.orderDetails&&el.orderDetails.map((item,index)=>{
                                     return(
@@ -162,7 +162,7 @@ export default class OrderDetails extends Component {
                                                     {
                                                         el.status == config.order_status_cancel?
                                                             null:
-                                                            <Link to="comfirmPayMoney" query={{orderId:el.order_no}}>
+                                                            <Link to="/comfirmPayMoney" query={{orderId:el.order_no}}>
                                                                 <button className="bkg_ff ml5 border_ra color_white">付款</button>
                                                             </Link>
                                                     }

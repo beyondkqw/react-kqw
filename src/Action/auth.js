@@ -484,7 +484,7 @@ export async function Remark(orderNo,productId,comment,images){
     }
 }
 
-//商品评价
+//商品评价列表
 export async function RemarkList(productId,page,orderNo){
     try{
         const res = await apiGet(URL.remarkList,{productId,page,orderNo});
@@ -863,6 +863,28 @@ export async function DaySale(month) {
 export async function Delivery(deliveryName,deliveryNo,orderNo) {
     try {
         const res = await apiPost(URL.delivery,{deliveryName,deliveryNo,orderNo});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//回复评论
+export async function Reply(comment,parentId) {
+    try {
+        const res = await apiPost(URL.reply,{comment,parentId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//退出登录
+export async function Logout() {
+    try {
+        const res = await apiGet(URL.logout);
         return res;
     } catch (err) {
         console.warn(err);

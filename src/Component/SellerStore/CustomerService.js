@@ -194,7 +194,7 @@ export default class CustomerService extends Component {
                 <div className="tc f12 color_red width_100 plr mtb loginHeight">
                     {this.state.Reminder}
                 </div>
-                <div style={{marginTop:-50}}>
+                <div>
                     <CommonBtn
                         title = {'确定'}
                         onClick={()=>this.toEdit()}

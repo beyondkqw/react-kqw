@@ -38,9 +38,11 @@ export default class Setting extends Component {
                         })
                     }
                 </ul>
-                <CommonBtn
-                    title = {'退出登录'}
-                />
+                <div style={{marginTop:50}}>
+                    <CommonBtn
+                        title = {'退出登录'}
+                    />
+                </div>
             </div>
         </div>
         );

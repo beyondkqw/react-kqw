@@ -23,8 +23,8 @@ export default class StoreSubCommission extends Component {
     }
 
     async getPerc(){
-        console.log('this.state.perc<100===>',(this.state.perc<100))
-        if(!this.state.perc && (this.state.perc<100)){
+        console.log('this.state.perc<100===>',(this.state.perc>100))
+        if((this.state.perc>100) || !this.state.perc ){
             alert("请输入正确的分佣比例")
             return
         }

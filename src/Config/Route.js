@@ -114,6 +114,7 @@ import RemarkManage from '../Component/SellerStore/RemarkManage'
 import ShopHome from '../Component/SellerStore/ShopHome'
 import SellerContactMe from '../Component/SellerStore/SellerContactMe'
 import SellerGoodsDec from '../Component/SellerStore/SellerGoodsDec'
+import PaymentSuccess from '../Component/ConfirmPayment/PaymentSuccess'
 
 
 
@@ -234,6 +235,7 @@ const RouteConfig = (
       <Route path="sellerContactMe" component={SellerContactMe} />
       <Route path="sellerGoodsDec" component={SellerGoodsDec} />
       <Route path="equityDetails" component={EquityDetails} />
+      <Route path="paymentSuccess" component={PaymentSuccess} />
     </Route>
   </Router>
 );

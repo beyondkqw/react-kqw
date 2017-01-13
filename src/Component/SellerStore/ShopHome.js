@@ -87,28 +87,34 @@ export default class ShopHome extends Component {
                     location = {true}
                     onClick={(value)=>this.searchList(value)}
                 />
-                <div className="plAll storeDetail df" style={{justifyContent:'space-between'}}>
-                    <div className="df">
-                        <div className="mr" style={{height:40,width:40}}>
-                            <img src={storeDetails.img} alt=""/>
+                <div className="plr storeDetail df">
+                    <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
+                        <div className="df">
+                            <div className="mr" style={{height:40,width:40}}>
+                                <img src={storeDetails.img} alt=""/>
+                            </div>
+                            <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                                <p>来自{storeDetails.wechat}的分享</p>
+                            </div>
                         </div>
-                        <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
-                            <p>来自{storeDetails.wechat}的分享</p>
-                        </div>
+                        <Link
+                            to="/sellerContactMe"
+                            query={{wechat:storeDetails.wechat,mobile:storeDetails.mobile,qq:storeDetails.qq}}>
+                            <div style={{height:20,width:63.5,lineHeight:0,marginTop:18}}>
+                                <img src={require('../../Images/contactMe.png')} alt=""/>
+                            </div>
+                        </Link>
                     </div>
-                    <Link
-                        to="/sellerContactMe"
-                        query={{wechat:storeDetails.wechat,mobile:storeDetails.mobile,qq:storeDetails.qq}}>
-                        <div style={{height:20,width:63.5,lineHeight:0,marginTop:18}}>
-                            <img src={require('../../Images/contactMe.png')} alt=""/>
-                        </div>
-                    </Link>
+
                 </div>
-                <div className="carouselHeight">
+                <div>
+                    <img src={require('../../Images/split.png')} alt=""/>
+                </div>
+                {/*<div className="carouselHeight">
                     <Carousel
                         images = {storeBanner}
                     />
-                </div>
+                </div>*/}
                 <Tabscontrol
                     onClick={(index)=>this.onChangeTab(index)}
                 >

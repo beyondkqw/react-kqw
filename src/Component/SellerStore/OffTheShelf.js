@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
 import SplitLine from '../../Component/NewComponent/SplitLine';
-import ManageRow from '../../Component/SellerStore/ManageRow';
 import {Link} from 'react-router'
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'

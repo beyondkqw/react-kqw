@@ -70,7 +70,7 @@ export default class PersonalCenter extends Component {
         const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg} = this.state
         return (
             <div>
-                <section className="pr tc center_bkImg" style={{paddingTop: 10,paddingBottom: 15}}>
+                <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
                     <Link to="personalCenter/userInfo">
                         <div className="personLogo">
                             <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
@@ -92,21 +92,22 @@ export default class PersonalCenter extends Component {
                             <span className="f12 color_yellow">{vip_point?vip_point:0}</span>
                         </Link>
                     </div>
+                    <div className="h35 df color_white border_bottom">
+                        <div className="flex1 tc">
+                            <p className="font16 hl8">{amount}</p>
+                            <p className="f12 m_top">佣金</p>
+                        </div>
+                        <div className="flex1 tc">
+                            <p className="font16 hl8">0</p>
+                            <p className="f12 m_top">云卡通</p>
+                        </div>
+                        <div className="flex1 tc">
+                            <p className="font16 hl8">{point}</p>
+                            <p className="f12 m_top">积分</p>
+                        </div>
+                    </div>
                 </section>
-                <div className="h35 df color6 border_bottom">
-                    <div className="flex1 tc">
-                        <p className="font16 hl8">{amount}</p>
-                        <p className="f12 m_top">佣金</p>
-                    </div>
-                    <div className="flex1 tc">
-                        <p className="font16 hl8">0</p>
-                        <p className="f12 m_top">云卡通</p>
-                    </div>
-                    <div className="flex1 tc">
-                        <p className="font16 hl8">{point}</p>
-                        <p className="f12 m_top">积分</p>
-                    </div>
-                </div>
+
                 <div className="line"></div>
                 <div className="plAll">
                     <span className="font14 color6">我的订单</span>

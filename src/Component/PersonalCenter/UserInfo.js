@@ -186,10 +186,12 @@ export default class UserInfo extends Component {
                         </li>
                     </ul>
                 </div>
-                <CommonBtn
-                    title = {'确定'}
-                    onClick={()=>this.confirmSubmit()}
-                />
+                <div style={{marginTop:50}}>
+                    <CommonBtn
+                        title = {'确定'}
+                        onClick={()=>this.confirmSubmit()}
+                    />
+                </div>
                 {
                     isShow?
                         <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>

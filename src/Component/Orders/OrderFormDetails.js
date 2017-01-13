@@ -158,12 +158,29 @@ export default class OrderFormDetails extends Component {
                         })
                     }
                 </div>
-                {/*<div className="fr font14 plAll">
-                    <button
-                        className="bkg_ff border_ra color_white pl3"
-                        onClick = {()=>this.confirmClick()}
-                    >确认收货</button>
-                </div>*/}
+                {
+                    this.props.location.query.isToPay?
+                        <div className="fr font14 plAll">
+                            <Link to="/comfirmPayMoney" query={{orderId:this.props.location.query.orderNo}}>
+                                <button
+                                    className="bkg_ff border_ra color_white pl3"
+                                    onClick = {()=>this.confirmClick()}
+                                >支付</button>
+                            </Link>
+                        </div>
+                        :null
+                }
+                {
+                    this.props.location.query.isMakeSure?
+                        <div className="fr font14 plAll">
+                            <button
+                                className="bkg_ff border_ra color_white pl3"
+                                onClick = {()=>this.confirmClick()}
+                            >确认收货</button>
+                        </div>
+                        :null
+                }
+
             </div>
         );
     }

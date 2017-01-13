@@ -16,12 +16,13 @@ export default class ProductManagement extends Component {
                         describing={''}
                         link={'/remarkManage'}
                     />
-                    <CellComponent
-                        imgUrl={require('../../Images/payment.png')}
-                        title={'出售中的宝贝'}
-                        describing={'30件'}
-                        link={'/onSale'}
-                    />
+                    <Link to="/onSale" query={{storeId:this.props.location.query.storeId}}>
+                        <CellComponent
+                            imgUrl={require('../../Images/payment.png')}
+                            title={'出售中的宝贝'}
+                            describing={'30件'}
+                        />
+                    </Link>
                     <Link to="/mineOffDown" query={{storeId:this.props.location.query.storeId}}>
                         <CellComponent
                             className={'border_right'}

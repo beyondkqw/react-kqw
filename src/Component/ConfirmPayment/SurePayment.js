@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {Process} from '../../Action/auth'
@@ -13,6 +13,10 @@ export default class SurePayment extends Component {
         };
       }
 
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
     //确认支付
        async confirmPayMoney(){
         const playRecetiveTime = this.props.location.query.planReceiveTime
@@ -24,7 +28,7 @@ export default class SurePayment extends Component {
             })
         )
             .then(res=>{
-
+                this.context.router.push('/paymentSuccess')
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})

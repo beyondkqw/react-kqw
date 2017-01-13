@@ -136,10 +136,12 @@ export default class SellerSetting extends Component {
                     </div>
 
                 </div>
-                <CommonBtn
-                    title = {'确定'}
-                    onClick={()=>this.confirmEdit()}
-                />
+                <div style={{marginTop:50}}>
+                    <CommonBtn
+                        title = {'确定'}
+                        onClick={()=>this.confirmEdit()}
+                    />
+                </div>
             </div>
         );
     }

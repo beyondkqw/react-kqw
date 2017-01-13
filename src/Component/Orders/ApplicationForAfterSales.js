@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/order.css';
 import {GetOrderList,NoticeList,Refund} from '../../Action/auth';
 export default class ApplicationForAfterSales extends Component {
@@ -19,6 +19,10 @@ export default class ApplicationForAfterSales extends Component {
             applyAmount:'',
             refundDesc:''
         };
+    }
+
+    static contextTypes = {
+        router:PropTypes.object
     }
 
     async componentWillMount() {
@@ -46,7 +50,7 @@ export default class ApplicationForAfterSales extends Component {
         const {applyAmount,refundReason,type,recStatus,refundDesc} = this.state
         await Refund(orderDetailId,applyAmount,refundReason,type,recStatus,refundDesc)
             .then(res=>{
-                console.log('res',res)
+                this.context.router.goBack()
             })
             .catch(err=>{
                 console.warn('err',err)

@@ -227,3 +227,9 @@ export const daySale = 'store/auth/daySale'
 
 //去发货
 export const delivery = 'order/auth/delivery'
+
+//回复评论
+export const reply = 'comment/auth/reply'
+
+//退出登录
+export const logout = 'account/auth/logout'

@@ -13,31 +13,42 @@ import {Link} from 'react-router'
 import {StoreDetailItem,StorectList} from '../../Action/auth'
 
 export default class OnSale extends Component {
-    componentWillMount() {
+
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
         this.storeId = this.props.location.query.storeId
+        this.state = {
+            onSaleDetails:[]
+        };
+      }
+
+    componentWillMount() {
         this.getOrderList('',this.storeId,'p.create_time','')
     }
 
     onChangeTab(index){
         if(index == 0){
-            //最新上架
+            //上架时间
             this.getOrderList('',this.storeId,'desc','p.create_time')
         }else if(index == 1){
-            //人气排行
-            this.getOrderList('',this.storeId,'desc','p.CLICK_COUNT')
-        }else if(index == 2){
-            //最高价
+            //价格
             this.getOrderList('',this.storeId,'desc','p.CURRENT_PRICE')
+        }else if(index == 2){
+            //销售总量
+            this.getOrderList('',this.storeId,'desc','p.CLICK_COUNT')
         }else{
             this.getOrderList('',this.storeId,'desc','p.create_time')
         }
     }
 
     //请求列表接口
-    async getOrderList(paramOne,paramTwo,paramThree,paramFour){
-        await StorectList(paramOne,paramTwo,paramThree,paramFour)
+    async getOrderList(name,storeId,order,orderName){
+        await StorectList(name,storeId,order,orderName)
             .then(res=>{
-                this.setState({storeDetail:res.resultList})
+                console.log('res=========>',res.resultList)
+                this.setState({onSaleDetails:res.resultList})
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -46,6 +57,7 @@ export default class OnSale extends Component {
     }
 
     render(){
+        const {onSaleDetails} = this.state
         return(
             <div className="containerNav">
                 {/*todo scroll滚动时置顶fixed*/}
@@ -55,16 +67,26 @@ export default class OnSale extends Component {
                 >
                     <div name="上架时间"></div>
                     <div name="价格"></div>
-                    <div name="销售总量">
-                    </div>
+                    <div name="销售总量"></div>
                 </Tabscontrol>
                 <div style={{marginTop:-28}}>
                     <SplitLine />
                 </div>
                 {/*商品列表---最下层*/}
-                <div>
-                    <ManageRow />
-                </div>
+
+                    {
+                        onSaleDetails&&onSaleDetails.map(el=>{
+                            return(
+                                <div>
+                                    <ManageRow
+                                        name = {el.NAME}
+                                        price = {el.CURRENT_PRICE}
+                                        no = {el.GB_CODE}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
                 <div className="footerHidden"></div>
                 <div className="width_100 commit pf bottom0">
                     <Link to="/offTheShelf">
