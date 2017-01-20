@@ -73,8 +73,14 @@ export default class OnSale extends Component {
                     <SplitLine />
                 </div>
                 {/*商品列表---最下层*/}
-
+                <div className="pr">
                     {
+                        onSaleDetails == ''?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:120}}
+                                title={'查询列表是空的哦~'}
+                            />
+                            :
                         onSaleDetails&&onSaleDetails.map(el=>{
                             return(
                                 <div>
@@ -87,6 +93,7 @@ export default class OnSale extends Component {
                             )
                         })
                     }
+                </div>
                 <div className="footerHidden"></div>
                 <div className="width_100 commit pf bottom0">
                     <Link to="/offTheShelf">

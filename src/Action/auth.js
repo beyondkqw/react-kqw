@@ -209,9 +209,9 @@ export async function ProductAttribute(productId){
 }
 
 //订单列表
-export async function GetOrderList(status){
+export async function GetOrderList(status,type=0){
     try{
-        const res = await apiGet(URL.orderList,{status});
+        const res = await apiGet(URL.orderList,{status,type});
         return res;
     }catch (err){
         console.warn(err);
@@ -241,9 +241,9 @@ export async function AddShopCar(productId,attrIds,count) {
 }
 
 //商品类型
-export async function CategoryList(parentId,type){
+export async function CategoryList(parentId,type,storeId){
     try{
-        const res = await apiGet(URL.categoryList,{parentId,type});
+        const res = await apiGet(URL.categoryList,{parentId,type,storeId});
         return res;
     }catch (err){
         console.warn(err);
@@ -715,6 +715,38 @@ export async function EquityList() {
     }
 }
 
+//云综合体--店铺类型
+export async function StoreType() {
+    try {
+        const res = await apiGet(URL.storeType);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//云综合体--店铺列表
+export async function StoreList(type,name) {
+    try {
+        const res = await apiGet(URL.storeList,{type,name});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//云卡通订单生成
+export async function Generate(address,province,city,area,amount,chargeType){
+    try{
+        const res = await apiPost(URL.generate,{address,province,city,area,amount,chargeType});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
 /*-----------卖家版-------------*/
 //注册
 export async function SellerToRegister(accName,pwd,smsNo,code,memberName,role){
@@ -739,9 +771,9 @@ export async function SellerToLogin(accName,pwd) {
 }
 
 //录入店铺信息
-export async function EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress) {
+export async function EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type) {
     try {
-        const res = await apiPost(URL.storeAdd,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress});
+        const res = await apiPost(URL.storeAdd,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
         return res;
     } catch (err) {
         console.warn(err);
@@ -885,6 +917,16 @@ export async function Reply(comment,parentId) {
 export async function Logout() {
     try {
         const res = await apiGet(URL.logout);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+//支付
+export async function InitWxJsSDk(url) {
+    try {
+        const res = await apiGet(URL.wxJsSdk,{url});
         return res;
     } catch (err) {
         console.warn(err);

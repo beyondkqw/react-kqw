@@ -41,8 +41,8 @@ export default class OrderList extends Component {
             }
     }
     //订单列表
-    async getOrderList(param){
-        await GetOrderList(param)
+    async getOrderList(status){
+        await GetOrderList(status)
             .then(res=>{
                 this.setState({orderItems:res.resultList})
             })

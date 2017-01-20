@@ -17,7 +17,8 @@ export default class DeliveredInformation extends Component {
             detail : '',
             type : false,
             id : '',
-            showModal:false
+            showModal:false,
+            Reminder:''
         };
       }
 
@@ -50,6 +51,12 @@ export default class DeliveredInformation extends Component {
 
     async submit(){
         const {name,mobile,address,detail,type,id} = this.state
+        if(!name || !mobile  || !address  || !detail){
+            this.setState({Reminder:'所填数据不能为空。。。'})
+            return
+        }else{
+            this.setState({Reminder:''})
+        }
         console.log('新增地址',name,mobile,address,detail,id)
         if(type){
           await EditAddress(name,mobile,address,detail,id)
@@ -140,6 +147,9 @@ export default class DeliveredInformation extends Component {
                             </div>
                         </li>
                     </ul>
+                </div>
+                <div className="tc f12 color_red width_100 plr mtb loginHeight" style={{lineHeight:'36px'}}>
+                    {this.state.Reminder}
                 </div>
                 <CommonBtn
                     onClick = {()=>this.submit()}

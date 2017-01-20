@@ -11,14 +11,14 @@ export default class ProductManagement extends Component {
                 <div className="clearAll">
                     <CellComponent
                         className={'border_right'}
-                        imgUrl={require('../../Images/total.png')}
+                        imgUrl={require('../../Images/common/EvaluationManagement.png')}
                         title={'评价管理'}
                         describing={''}
                         link={'/remarkManage'}
                     />
                     <Link to="/onSale" query={{storeId:this.props.location.query.storeId}}>
                         <CellComponent
-                            imgUrl={require('../../Images/payment.png')}
+                            imgUrl={require('../../Images/common/saleGoods.png')}
                             title={'出售中的宝贝'}
                             describing={'30件'}
                         />
@@ -26,7 +26,7 @@ export default class ProductManagement extends Component {
                     <Link to="/mineOffDown" query={{storeId:this.props.location.query.storeId}}>
                         <CellComponent
                             className={'border_right'}
-                            imgUrl={require('../../Images/diary.png')}
+                            imgUrl={require('../../Images/common/offTheShelf.png')}
                             title={'自己下架宝贝'}
                             describing={'充值云卡通的记录'}
                         />

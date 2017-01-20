@@ -2,6 +2,7 @@ import React, { Component,PropTypes} from 'react';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/personal.css';
 import {BankList} from '../../Action/auth';
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 
 export default class CommissionCash extends Component {
     // 构造
@@ -37,6 +38,12 @@ export default class CommissionCash extends Component {
         return (
             <div className="bkg_color">
                 {
+                    myBankList == ''?
+                    <IsShowEmptyImg
+                        styleSheet={{width:69,height:72,marginTop:120}}
+                        title={'列表是空的哦~'}
+                    />
+                    :
                     myBankList&&myBankList.map(el=>{
                         return(
                             <div className="height_charge plAll border_bottom"

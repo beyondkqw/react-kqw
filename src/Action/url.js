@@ -188,6 +188,16 @@ export const equityList = 'auth/account/equityList'
 //直推人列表
 export const recommendList = 'auth/account/recommendList'
 
+//云综合体--店铺类型
+export const storeType = 'store/storeType'
+
+//云综合体--店铺列表
+export const storeList = 'store/list'
+
+//云卡通订单生成
+export const generate = 'yunCard/auth/generate'
+
+
 /*---------------卖家版---------------*/
 //注册
 export const sellerAdd = 'account/seller_add'
@@ -233,3 +243,6 @@ export const reply = 'comment/auth/reply'
 
 //退出登录
 export const logout = 'account/auth/logout'
+
+//微信Jssdk初始化
+export const wxJsSdk = 'support/sign'

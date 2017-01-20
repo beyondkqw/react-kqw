@@ -80,7 +80,7 @@ export default class WithdrawCash extends Component {
                 <div className="list-block m0">
                     <ul>
                         {
-                            toChange ?
+                            toChange?
                                 <Link to='/personalCenter/commissionCash'>
                                     <li className="item-content item-link item-link pl  border_bottom">
                                         <div className="item-media">

@@ -91,7 +91,7 @@ export default class SellerGoodDetails extends Component {
                                         {
                                             toPay?
                                                 <div className="paddingorder">
-                                                    <Link to="/sellerErWeiCode">
+                                                    <Link to="/sellerErWeiCode" query={{orderNos:el.order_no}}>
                                                         <div style={{height: 30,textAlign:'right'}}>
                                                             <button
                                                                 className="bkg_ff border_ra color_white"

@@ -4,6 +4,7 @@ import Footer from '../../Component/NewComponent/Footer';
 import ItemDetails from '../../Component/ShoppingCarts/ItemDetails';
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import '../../Stylesheets/App/shoppingCarts.css';
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 import {ShopCarList,EditShopNum,DelShopCar,SettlementShopCar} from '../../Action/auth'
 
 const ItemDetail = [
@@ -129,16 +130,14 @@ export default class ShoppingCart extends Component {
         return (
             <div id='aa'  className="containerNav bkg_color">
                 <div className="wrap">
-                    {/*<div className="pr personStore plr bk_fff5f0">
-                        <span className="di check_radius pr fl">
-                            <input type="checkbox" id="isLink"  className="di isCheck" />
-                            <label htmlFor="isLink"></label>
-                        </span>
-                        <span className="di font14 color6 ml5 fl">乐乐的小店</span>
-                        <div className="rightArrow pa"><img src={require('../../Images/rightArrow.png')} alt=""/></div>
-                    </div>*/}
                     {
-                        shopCarList.map((el,index)=>{
+                        shopCarList == ''?
+                           <IsShowEmptyImg
+                               styleSheet={{width:69,height:72,marginTop:120}}
+                               title={'列表是空的哦~'}
+                           />
+                            :
+                        shopCarList&&shopCarList.map((el,index)=>{
                                 return (
                                     <div className="plAll proPlay border_bottom">
                                     <CheckBox
@@ -189,7 +188,9 @@ export default class ShoppingCart extends Component {
                 <div className="wrap">
                     <div className="pf bottom0 wrap" style={{zIndex:100}}>
                         <nav className="bar-tab bkg_color wrap">
-                            <Footer />
+                            <Footer
+                                index = {2}
+                            />
                         </nav>
                     </div>
                 </div>

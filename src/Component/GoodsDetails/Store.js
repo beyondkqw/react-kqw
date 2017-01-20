@@ -84,19 +84,37 @@ export default class Store extends Component {
         const {storeDetails,storeBanner,storeDetail} = this.state
         return (
             <div className="containerNav bkg_gray">
-               <Search
-                    style={{backgroundColor:'#ff5500'}}
-                    location = {true}
-                    onClick={(value)=>this.searchList(value)}
-               />
+                <div className="flex">
+                    <div className="flex1">
+                        <Search
+                            style={{backgroundColor:'#ff5500'}}
+                            location = {true}
+                            onClick={(value)=>this.searchList(value)}
+                        />
+                    </div>
+                    <div
+                        className="flex tc bkg_ff flex-pack-center flex-align-center flex-v classify"
+                    >
+                        <Link to ='storeClassify' query={{storeId:this.props.location.query.storeId}}>
+                            <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
+                                <img src={require('../../Images/common/classification.png')} alt=""/>
+                            </span>
+                            <p className="f10 color_white">分类</p>
+                        </Link>
+                    </div>
+                </div>
+
                 <div className="plr storeDetail df" >
                     <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
                         <div className="df">
                             <div className="mr" style={{height:40,width:40}}>
                                 <img src={storeDetails.img} alt=""/>
                             </div>
-                            <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                            {/*<div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
                                 <p>来自{storeDetails.wechat}的分享</p>
+                            </div>*/}
+                            <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                                <p>{storeDetails.name}</p>
                             </div>
                         </div>
                         <Link

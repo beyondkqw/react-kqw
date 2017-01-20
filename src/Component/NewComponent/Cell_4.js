@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cell_4children from '../../Component/NewComponent/Cell_4children'
 import '../../Stylesheets/App/homePage.css';
+import {SCREEN_WIDTH} from '../../Action/rpc'
 
 
 /*const cellFour = [{title:'一元购全场',quality:{color:'#ff70dc'}},
@@ -10,7 +11,7 @@ export default class Cell_4 extends Component {
     render() {
         const {imgUrl} = this.props
         return (
-            <div className="cellFour width100 border_top border_bottom">
+            <div className="width100 border_top border_bottom" style={{height:SCREEN_WIDTH/3.45}}>
                 {
                     imgUrl.map(el=>{
                         return (

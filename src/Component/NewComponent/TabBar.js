@@ -19,7 +19,11 @@ export default class TabBar extends Component {
     async componentWillMount() {
         const {index} = this.props
         await this.setState({index:index?index:0})
-        this.onClick(index);
+        if(this.props.willdo){
+
+        }else{
+            this.onClick(index);
+        }
     }
 
     onClick(index){

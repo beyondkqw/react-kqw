@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import PublishComment from '../../Component/CommonComponent/PublishComment'
 import '../../Stylesheets/App/order.css';
 import {RemarkList} from '../../Action/auth'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 
 export default class ViewEvaluation extends Component {
     // 构造
@@ -28,6 +29,12 @@ export default class ViewEvaluation extends Component {
         return (
             <div className="containerNav">
                 {
+                    remarkItem == ''?
+                    <IsShowEmptyImg
+                        styleSheet={{width:69,height:72,marginTop:120}}
+                        title={'列表是空的哦~'}
+                    />
+                    :
                     remarkItem&&remarkItem.map(el=>{
                        return(
                            <div className="df plAll border_bottom">

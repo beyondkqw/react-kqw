@@ -6,7 +6,7 @@ import '../../Stylesheets/App/order.css';
 export default class PaymentSuccess extends Component {
 
     render() {
-        let SCREEN_WIDTH = window.screen.width
+        const SCREEN_WIDTH = window.screen.width
         console.log('SCREEN_WIDTH==========>',SCREEN_WIDTH)
         return (
             <div className="containerNav">

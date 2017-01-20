@@ -23,7 +23,7 @@ const ItemList = [
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:'/chooseInfomation'},
     {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
     {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
-    {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/personalCenter/jdyStock'}
+    {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/sellerLogin'}
 ]
 export default class PersonalCenter extends Component {
 
@@ -39,7 +39,8 @@ export default class PersonalCenter extends Component {
             vip_point : 0,
             headImg:'',
             accId:'',
-            mobile:''
+            mobile:'',
+            yunCard:''
         };
       }
 
@@ -61,19 +62,20 @@ export default class PersonalCenter extends Component {
                 accId:res.ID,
                 now_amount:res.NOW_AMOUNT,
                 mobile:res.MOBILE,
-                frozen:res.FROZEN
+                frozen:res.FROZEN,
+                yunCard:res.YUN_CARD_AMOUNT
             })
         })
     }
 
     render() {
-        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg} = this.state
+        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg,yunCard} = this.state
         return (
             <div>
                 <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
                     <Link to="personalCenter/userInfo">
                         <div className="personLogo">
-                            <img className="border_ra50" src={require('../../Images/store.png')} alt=""/>
+                            <img className="border_ra50" src={headImg} alt=""/>
                         </div>
                     </Link>
                     <div className="pa setUp">
@@ -98,7 +100,7 @@ export default class PersonalCenter extends Component {
                             <p className="f12 m_top">佣金</p>
                         </div>
                         <div className="flex1 tc">
-                            <p className="font16 hl8">0</p>
+                            <p className="font16 hl8">{yunCard}</p>
                             <p className="f12 m_top">云卡通</p>
                         </div>
                         <div className="flex1 tc">
@@ -166,7 +168,9 @@ export default class PersonalCenter extends Component {
                     }
                 </div>
                 <div className="footerHidden"></div>
-                <Footer />
+                <Footer
+                    index = {3}
+                />
             </div>
         );
     }

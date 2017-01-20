@@ -26,8 +26,8 @@ export default class GoodsCategory extends Component {
       }
 
     async componentWillMount() {
-        await this.getGoodsCategory(0,0);
-        this.getChilrenCategory(this.state.id,0)
+        await this.getGoodsCategory(0,0,'');
+        this.getChilrenCategory(this.state.id,0,'')
     }
 
     async getId(index,id,name){
@@ -37,23 +37,23 @@ export default class GoodsCategory extends Component {
     }
 
     //查询父类型接口
-    async getGoodsCategory(paramOne,paramTwo){
-        await CategoryList(paramOne,paramTwo)
+    async getGoodsCategory(parentId,type,storeId){
+        await CategoryList(parentId,type,storeId)
             .then(res=>{
-                this.setState({leftTags:res.resultList})
+                this.setState({leftTags:res})
                 //将父元素的第一个id,name传给子元素
-                this.setState({id:res.resultList[0].id})
-                this.setState({name:res.resultList[0].name})
+                this.setState({id:res[0].id})
+                this.setState({name:res[0].name})
             })
             .catch(err=>{
                 console.warn('err',err)
             })
     }
     //子类型的接口
-    async getChilrenCategory(paramOne,paramTwo){
-        await CategoryList(paramOne,paramTwo)
+    async getChilrenCategory(parentId,type,storeId){
+        await CategoryList(parentId,type,storeId)
             .then(res=>{
-                this.setState({rightTags:res.resultList})
+                this.setState({rightTags:res})
             })
             .catch(err=>{
                 console.warn('err',err)

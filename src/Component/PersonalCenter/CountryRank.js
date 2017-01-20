@@ -44,7 +44,7 @@ export default class CountryRank extends Component {
         const {countryRank} = this.state
         const {toShowTeam,teemCount,teemAmount} = this.props.location.query
         return(
-            <div className="pr">
+            <div className="containerNav">
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
                     {
                         toShowTeam?
@@ -74,26 +74,27 @@ export default class CountryRank extends Component {
                     }
 
                 </div>
-
-                {
-                    countryRank == ''?
-                        <IsShowEmptyImg
-                            styleSheet={{width:69,height:72,marginTop:120}}
-                            title={'查询列表是空的哦~'}
-                        />:
-                    countryRank&&countryRank.map((el,index)=>{
-                        return(
-                            <RankRow
-                                _vipPoints={el.vipPoints}
-                                imgUrl={el.imageUri}
-                                memberName={el.memberName}
-                                num={index+1}
-                                more={true}
-                                vipPoints={el.lv}
-                            />
-                        )
-                    })
-                }
+                <div className="pr">
+                    {
+                        countryRank == ''?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:120}}
+                                title={'查询列表是空的哦~'}
+                            />:
+                        countryRank&&countryRank.map((el,index)=>{
+                            return(
+                                <RankRow
+                                    _vipPoints={el.vipPoints}
+                                    imgUrl={el.imageUri}
+                                    memberName={el.memberName}
+                                    num={index+1}
+                                    more={true}
+                                    vipPoints={el.lv}
+                                />
+                            )
+                        })
+                    }
+                </div>
 
             </div>
         )

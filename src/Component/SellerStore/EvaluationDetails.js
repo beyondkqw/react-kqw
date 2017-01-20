@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
@@ -113,7 +112,7 @@ export default class EvaluationDetails extends Component {
                             <span className="pa close"
                                   onClick={()=>this.setState({showMsg:false})}
                             >
-                                <img src={require('../../Images/delete_white.png')} alt=""/>
+                                <img src={require('../../Images/deiete_yellow.png')} alt=""/>
                             </span>
                             <textarea
                                 name=""

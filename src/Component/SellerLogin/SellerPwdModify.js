@@ -101,7 +101,7 @@ export default class SellerPwdModify extends Component {
                             placeholder="填写验证码"
                         />
                         <input
-                            style={{position:'absolute',right:10}}
+                            style={{position:'absolute',right:10,top:12}}
                             id="code"
                             type="button"
                             disabled={this.state.disabled}

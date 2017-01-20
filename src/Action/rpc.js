@@ -8,6 +8,7 @@ const KEY_USERINFO = 'accessUserInfo';
 
 import URI from 'urijs';
 import {WechatAuth} from './autoLogin';
+import { EventEmitter } from 'fbemitter';
 
 
 let token = '';
@@ -15,11 +16,15 @@ let userInfo = {};
 import {imei,version,client} from './auth'
 
 export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-
-
 export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
 //export const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
+//获取屏幕宽度
+export const SCREEN_WIDTH = window.screen.width
+
+const RPC = new EventEmitter();
+const emit = RPC.emit.bind(RPC);
+export default RPC;
 
 export function getUserInfo(){
     console.log('getUserInfo===>',userInfo);
@@ -223,13 +228,6 @@ export function BankNum(value) {
     }
 }
 
-//获取地址栏的请求参数
-export function GetQueryString(name)
-{
-    const reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    const r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  unescape(r[2]); return null;
-}
 //日期转换
 export function changeTime(value){
     let year = value.getFullYear();
@@ -296,3 +294,5 @@ export function wechatTest(value){
         return true;
     }
 }
+
+

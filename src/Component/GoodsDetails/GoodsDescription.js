@@ -81,7 +81,6 @@ export default class GoodsDescription extends Component {
                 //判断当前商品是否收藏
                 const isFollow = res.IS_FOLLOW == 1?false:true
                 this.setState({isChecked:isFollow})
-                console.log('goodsDetails',this.state.goodsDetails);
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -339,7 +338,9 @@ export default class GoodsDescription extends Component {
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner margin0">
                                 <div className="item-title">
-                                    <span className="color6 font14">{this.state.attributeList.map((el,index)=>{
+                                    <span className="color6 font14">
+                                        {
+                                        this.state.attributeList.map((el,index)=>{
                                         if(index<this.state.attributeList.length-1){
                                             return `${el.NAME}`+ ','
                                         }

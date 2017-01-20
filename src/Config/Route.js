@@ -17,11 +17,9 @@ import ChooseInfomation from '../Component/ConfirmPayment/ChooseInfomation';
 import ManageInformation from '../Component/ConfirmPayment/ManageInformation';
 import CloudCard from '../Component/CloudCard/CloudCard';
 import PendPaymentDetails from '../Component/CloudCard/PendPaymentDetails';
-import RechargeDetails from '../Component/CloudCard/RechargeDetails';
 import DiaryContainer from '../Component/CloudCard/DiaryContainer';
 import PendingPayment from '../Component/CloudCard/PendingPayment';
 import AlreadyUsed from '../Component/CloudCard/AlreadyUsed';
-import AlreadyUsedDetails from '../Component/CloudCard/AlreadyUsedDetails';
 import TotalDetails from '../Component/CloudCard/TotalDetails';
 import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
 import Partner from '../Component/PersonalCenter/Partner';
@@ -115,6 +113,10 @@ import ShopHome from '../Component/SellerStore/ShopHome'
 import SellerContactMe from '../Component/SellerStore/SellerContactMe'
 import SellerGoodsDec from '../Component/SellerStore/SellerGoodsDec'
 import PaymentSuccess from '../Component/ConfirmPayment/PaymentSuccess'
+import StoreClassify from '../Component/GoodsDetails/StoreClassify'
+import CloudComplex from '../Component/GoodsDetails/CloudComplex'
+import RechargeWay from '../Component/PersonalCenter/RechargeWay'
+import StoreClassifyDetail from '../Component/GoodsDetails/StoreClassifyDetail'
 
 
 
@@ -188,9 +190,7 @@ const RouteConfig = (
       <Route path="personalCenter/recharge" component={Recharge} />
       <Route path="personalCenter/rechargeNum" component={RechargeNum} />
       <Route path="pendingPayment" component={PendingPayment} />
-      <Route path="rechargeDetails" component={RechargeDetails} />
       <Route path="alreadyUsed" component={AlreadyUsed} />
-      <Route path="alreadyUsedDetails" component={AlreadyUsedDetails} />
       <Route path="totalDetails" component={TotalDetails} />
       <Route path="personalCenter/myAlipay" component={MyAlipay} />
       <Route path="personalCenter/commissionCash" component={CommissionCash} />
@@ -236,6 +236,10 @@ const RouteConfig = (
       <Route path="sellerGoodsDec" component={SellerGoodsDec} />
       <Route path="equityDetails" component={EquityDetails} />
       <Route path="paymentSuccess" component={PaymentSuccess} />
+      <Route path="storeClassify" component={StoreClassify} />
+      <Route path="cloudComplex" component={CloudComplex} />
+      <Route path="rechargeWay" component={RechargeWay} />
+      <Route path="storeClassifyDetail" component={StoreClassifyDetail} />
     </Route>
   </Router>
 );

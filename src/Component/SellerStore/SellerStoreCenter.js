@@ -5,12 +5,12 @@ import '../../Stylesheets/App/personal.css';
 import {MyInfo} from '../../Action/auth'
 
 const ItemList = [
-    {name:'销售统计',imgUrl:require('../../Images/partner.png'),link:'/salesStatistics'},
-    {name:'订单管理',imgUrl:require('../../Images/change.png'),link:'/sellerOrderList'},
-    {name:'店铺首页',imgUrl:require('../../Images/enshirne.png'),link:'/shopHome'},
-    {name:'产品管理',imgUrl:require('../../Images/balance.png'),link:'/productManagement'},
-    {name:'客服设置',imgUrl:require('../../Images/micro.png'),link:'/customerService'},
-    {name:'分佣比例设置',imgUrl:require('../../Images/path.png'),link:'/storeSubCommission'}
+    {name:'销售统计',imgUrl:require('../../Images/common/SalesStatistics.png'),link:'/salesStatistics'},
+    {name:'订单管理',imgUrl:require('../../Images/common/OrderManagement.png'),link:'/sellerOrderList'},
+    {name:'店铺首页',imgUrl:require('../../Images/common/ShopHome.png'),link:'/shopHome'},
+    {name:'产品管理',imgUrl:require('../../Images/common/productManagement.png'),link:'/productManagement'},
+    {name:'客服设置',imgUrl:require('../../Images/common/CustomerService.png'),link:'/customerService'},
+    {name:'分佣比例设置',imgUrl:require('../../Images/common/SubCommission.png'),link:'/storeSubCommission'}
 ]
 export default class SellerStoreCenter extends Component {
 
