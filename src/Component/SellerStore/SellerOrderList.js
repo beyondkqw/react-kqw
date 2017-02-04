@@ -31,10 +31,13 @@ export default class SellerOrderList extends Component {
         if(this.state.index == 0){
             this.getOrderList('0')
         }else if(this.state.index == 1){
-            this.getOrderList('2')
+            this.getOrderList('1')
         }else if(this.state.index == 2){
-            this.getOrderList('3')
-        }else if(this.state.index == 3){
+            this.getOrderList('2')
+        }
+        else if(this.state.index == 3){
+            this.getOrderList('6')
+        }else if(this.state.index == 4){
             this.getOrderList('4')
         }else{
             this.getOrderList('0')
@@ -58,7 +61,7 @@ export default class SellerOrderList extends Component {
                 <TabBar
                     index = {this.state.index}
                     onClick = {index=>this.onChange(index)}
-                    contents={['待付款','待发货','退款中','已完成']}
+                    contents={['待付款','待发货','已发货','退款中','已完成']}
                 />
                 <SplitLine />
                 {/*待付款*/}
