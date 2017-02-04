@@ -33,9 +33,9 @@ export const imei = cookieImei
 /***********************************************/
 
 //获取短信验证码
-export async function SMSCode(mobile){
+export async function SMSCode(mobile,role){
     try{
-        const res = await apiGet(URL.smsCode,{mobile});
+        const res = await apiGet(URL.smsCode,{mobile,role});
         return res;
     }catch (err){
         console.warn('SMSCode',err);
@@ -55,9 +55,9 @@ export async function ForgetCode(mobile){
 }
 
 //忘记密码
-export async function UpdateLoginPwd(mobile,pwd,smsNo,code){
+export async function UpdateLoginPwd(mobile,pwd,smsNo,code,role){
     try{
-        const res = await apiPost(URL.updateLoginPwd,{mobile,pwd,smsNo,code});
+        const res = await apiPost(URL.updateLoginPwd,{mobile,pwd,smsNo,code,role});
         return res;
     }catch (err){
         console.warn('toRegister',err);
@@ -209,9 +209,9 @@ export async function ProductAttribute(productId){
 }
 
 //订单列表
-export async function GetOrderList(status){
+export async function GetOrderList(status,type=0){
     try{
-        const res = await apiGet(URL.orderList,{status});
+        const res = await apiGet(URL.orderList,{status,type});
         return res;
     }catch (err){
         console.warn(err);
@@ -241,9 +241,9 @@ export async function AddShopCar(productId,attrIds,count) {
 }
 
 //商品类型
-export async function CategoryList(parentId,type){
+export async function CategoryList(parentId,type,storeId){
     try{
-        const res = await apiGet(URL.categoryList,{parentId,type});
+        const res = await apiGet(URL.categoryList,{parentId,type,storeId});
         return res;
     }catch (err){
         console.warn(err);
@@ -330,7 +330,7 @@ export async function OrderShopping(productId,attrIds,num){
     }
 }
 
-//立即购买
+//根据订单号查询订单
 export async function ListByOrderNo(orderNos){
     try{
         const res = await apiGet(URL.listByOrderNo,{orderNos});
@@ -484,7 +484,7 @@ export async function Remark(orderNo,productId,comment,images){
     }
 }
 
-//商品评价
+//商品评价列表
 export async function RemarkList(productId,page,orderNo){
     try{
         const res = await apiGet(URL.remarkList,{productId,page,orderNo});
@@ -639,9 +639,9 @@ export async function StorectList(name='',storeId='',order='',orderName='') {
 }
 
 //重置密码验证码
-export async function ResetPwd(mobile) {
+export async function ResetPwd(mobile,role) {
     try {
-        const res = await apiGet(URL.resetPwd,{mobile});
+        const res = await apiGet(URL.resetPwd,{mobile,role});
         return res;
     } catch (err) {
         console.warn(err);
@@ -693,3 +693,243 @@ export async function Cash(bankcardId,amount) {
     }
 }
 
+//直推人列表
+export async function EecommendList() {
+    try {
+        const res = await apiGet(URL.recommendList);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//聚朵股权
+export async function EquityList() {
+    try {
+        const res = await apiGet(URL.equityList);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//云综合体--店铺类型
+export async function StoreType() {
+    try {
+        const res = await apiGet(URL.storeType);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//云综合体--店铺列表
+export async function StoreList(type,name) {
+    try {
+        const res = await apiGet(URL.storeList,{type,name});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//云卡通订单生成
+export async function Generate(address,province,city,area,amount,chargeType){
+    try{
+        const res = await apiPost(URL.generate,{address,province,city,area,amount,chargeType});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+/*-----------卖家版-------------*/
+//注册
+export async function SellerToRegister(accName,pwd,smsNo,code,memberName,role){
+    try{
+        const res = await apiPost(URL.sellerAdd,{accName,pwd,smsNo,code,memberName,role});
+        return res;
+    }catch (err){
+        console.warn('toRegister',err);
+        throw err
+    }
+}
+
+//登录
+export async function SellerToLogin(accName,pwd) {
+    try {
+        const res = await apiGet(URL.sellerLogin, {accName, pwd});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//录入店铺信息
+export async function EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type) {
+    try {
+        const res = await apiPost(URL.storeAdd,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//店铺详情
+export async function StoreDetail(storeId) {
+    try {
+        const res = await apiGet(URL.storeDetail,{storeId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//修改店铺信息
+export async function StoreEdit(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress) {
+    try {
+        const res = await apiPost(URL.storeEdit,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//修改店铺的分佣比例
+export async function UpdatePerc(perc){
+    try {
+        const res = await apiGet(URL.updatePerc,{perc});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//修改店铺的联系方式
+export async function StoreContact(qq,wechat,mobile){
+    try {
+        const res = await apiGet(URL.contact,{qq,wechat,mobile});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//订单列表
+export async function GetSellerOrderList(status){
+    try{
+        const res = await apiGet(URL.sellerList,{status});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//商品列表
+export async function SellerProductList(storeId,status) {
+    try {
+        const res = await apiGet(URL.productList,{storeId,status});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//删除下架商品
+export async function SellerDelOffShelf(productIds) {
+    try {
+        const res = await apiGet(URL.delOffShelf,{productIds});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//商品下架
+export async function SellerOffShelf(productIds) {
+    try {
+        const res = await apiGet(URL.sellerOffShelf,{productIds});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//店铺月销售列表
+export async function MonthSale() {
+    try {
+        const res = await apiGet(URL.monthSale);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//店铺日销售列表
+export async function DaySale(month) {
+    try {
+        const res = await apiGet(URL.daySale,{month});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//去发货
+export async function Delivery(deliveryName,deliveryNo,orderNo) {
+    try {
+        const res = await apiPost(URL.delivery,{deliveryName,deliveryNo,orderNo});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//回复评论
+export async function Reply(comment,parentId) {
+    try {
+        const res = await apiPost(URL.reply,{comment,parentId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//退出登录
+export async function Logout() {
+    try {
+        const res = await apiGet(URL.logout);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+//支付
+export async function InitWxJsSDk(url) {
+    try {
+        const res = await apiGet(URL.wxJsSdk,{url});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}

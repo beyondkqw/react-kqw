@@ -32,6 +32,7 @@ export default class MyCharges extends Component {
     }
     render() {
         const {accId,Now_Amount,frozen} = this.state
+        const {name,img} = this.props.location.query
         console.log('============',Now_Amount)
         return (
             <div className="containerNav">
@@ -39,7 +40,7 @@ export default class MyCharges extends Component {
                     <SplitLine />
                     <div className="recharge border_bottom plr">
                         <div className="color_yellow fl height_all">
-                            <span className="f15">￥</span><span className="f25">5678</span>
+                            <span className="f15">￥</span><span className="f25">{Now_Amount}</span>
                         </div>
                         <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
                             <button className="fr settleAccount border_ra color_white mt11">提取</button>
@@ -47,13 +48,14 @@ export default class MyCharges extends Component {
                     </div>
                 </div>
                 <div className="clearAll">
-                    <CellComponent
-                        className={'border_right'}
-                        imgUrl={require('../../Images/total.png')}
-                        title={'总佣金收入'}
-                        describing={Now_Amount}
-                        link={'/personalCenter/allIncome'}
-                    />
+                    <Link to="/personalCenter/allIncome">
+                        <CellComponent
+                            className={'border_right'}
+                            imgUrl={require('../../Images/total.png')}
+                            title={'总佣金收入'}
+                            describing={Now_Amount}
+                        />
+                    </Link>
                     <CellComponent
                         imgUrl={require('../../Images/payment.png')}
                         title={'分销佣金'}

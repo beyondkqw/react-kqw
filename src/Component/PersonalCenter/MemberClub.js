@@ -48,7 +48,7 @@ export default class MemberClub extends Component {
                             query={{vipPoint:clubInfo.VIP_POINTS?clubInfo.VIP_POINTS:0}}
                         >
                             <div className="left_radio fr f12 color_yellow tc ml">
-                                <span>V{clubInfo.LV}会员</span>
+                                <span>V{clubInfo.LV?clubInfo.LV:0}会员</span>
                             </div>
                         </Link>
                     </div>
@@ -63,7 +63,7 @@ export default class MemberClub extends Component {
                     </Link>
                 </div>
                 <SplitLine />
-                <div className="clearAll" style={{height:'160'}}>
+                <div className="clearAll personal_h8">
                     <Link to="/personalCenter/teamAmount"
                           query={{
                           imgUrl:clubInfo.IMAGE_URI,

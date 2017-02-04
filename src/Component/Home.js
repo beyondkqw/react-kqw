@@ -17,6 +17,7 @@ import '../Stylesheets/App/common.css'
 import '../Stylesheets/App/homePage.css';
 import {HomeBanner,HomeMoudle} from '../Action/auth'
 import {initWebsocket} from '../Action/Websocket'
+import {getLocation} from '../Action/wxUtil'
 
 
 
@@ -35,17 +36,24 @@ class Home extends Component {
       }
 
     async componentWillMount() {
-        initWebsocket()
-        const getToken =await loadToken();
-        console.log('getToken=========>hahah',getToken)
-
-        if(getToken == null || getToken == ''){
-            WechatAuth()
+        const getToken = await loadToken();
+        console.log('首页得到的token',getToken)
+        if(getToken == '' ||getToken == null ||getToken == 'null'){
+            await WechatAuth()
             const token = GetQueryString('token')
+            console.log('地址获取到的token=======>',token)
             saveToken(token)
+            initWebsocket()
+        }else{
+            console.log('地址获取到的token333333333=======>')
+            initWebsocket()
         }
         this.getHomeBanner()
         this.getHomeMoudle()
+
+        console.log("getLocation start ................");
+        getLocation()
+        console.log("getLocation end ................");
     }
     //首页banner
    async getHomeBanner(){
@@ -85,7 +93,6 @@ class Home extends Component {
             images = {this.state.banner}
         />
         <OtherApp />
-
           {
               moudle.map(el=>{
                  if(el.num==3){
@@ -118,7 +125,9 @@ class Home extends Component {
                              <ActiveTitle
                                  title = {el.name}
                              />
-                             <Cell_6 />
+                             <Cell_6
+                                 imgUrl = {el.cells}
+                             />
                              <SplitLine />
                          </div>
                      )
@@ -136,7 +145,9 @@ class Home extends Component {
               })
           }
         <div className="footerHidden"></div>
-        <Footer />
+        <Footer
+            index = {0}
+        />
       </div>
     );
   }

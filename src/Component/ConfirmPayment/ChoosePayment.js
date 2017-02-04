@@ -45,6 +45,7 @@ export default class ChoosePayment extends Component {
                             query={{
                             planReceiveTime:planReceiveTime,
                             orderNos:orderNos,
+                            wayOfPay:'balance'
                             }}>
                             <li className="item-content item-link pl  border_bottom">
                                 <div className="item-media"><i className="icon icon-f7"></i></div>
@@ -65,24 +66,43 @@ export default class ChoosePayment extends Component {
                 </div>
                 <div className="list-block m0">
                     <ul>
-                        <li className="item-content item-link pl  border_bottom">
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner margin0 font14">
-                                <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                    <span className="color6">支付宝支付</span>
+                        <Link
+                            to="/confirmPayment/surePayment"
+                            query={{
+                            planReceiveTime:planReceiveTime,
+                            orderNos:orderNos,
+                            wayOfPay:'Alipay'
+                            }}>
+                            <li className="item-content item-link pl  border_bottom">
+                                <div className="item-media"><i className="icon icon-f7"></i></div>
+                                <div className="item-inner margin0 font14">
+                                    <div className="item-title">
+                                        <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                        <span className="color6">支付宝支付</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li className="item-content item-link pl  border_bottom">
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner margin0 font14">
-                                <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                    <span className="color6">微信支付</span>
+                            </li>
+                        </Link>
+                        <Link
+                            to="/confirmPayment/surePayment"
+                            query={{
+                            planReceiveTime:planReceiveTime,
+                            orderNos:orderNos,
+                            wayOfPay:'wxpay'
+                            }}>
+                            <li
+                                className="item-content item-link pl  border_bottom"
+                            >
+                                <div className="item-media"><i className="icon icon-f7"></i></div>
+                                <div className="item-inner margin0 font14">
+                                    <div className="item-title">
+                                        <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                        <span className="color6"
+                                        >微信支付</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </Link>
                     </ul>
                 </div>
             </section>

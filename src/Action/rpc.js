@@ -8,6 +8,7 @@ const KEY_USERINFO = 'accessUserInfo';
 
 import URI from 'urijs';
 import {WechatAuth} from './autoLogin';
+import { EventEmitter } from 'fbemitter';
 
 
 let token = '';
@@ -15,11 +16,15 @@ let userInfo = {};
 import {imei,version,client} from './auth'
 
 export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-
-
 export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
 //export const ROOT_URL = 'http://jdy.viphk.ngrok.org/api/';
 
+//获取屏幕宽度
+export const SCREEN_WIDTH = window.screen.width
+
+const RPC = new EventEmitter();
+const emit = RPC.emit.bind(RPC);
+export default RPC;
 
 export function getUserInfo(){
     console.log('getUserInfo===>',userInfo);
@@ -223,13 +228,6 @@ export function BankNum(value) {
     }
 }
 
-//获取地址栏的请求参数
-export function GetQueryString(name)
-{
-    const reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    const r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  unescape(r[2]); return null;
-}
 //日期转换
 export function changeTime(value){
     let year = value.getFullYear();
@@ -255,3 +253,46 @@ export function changeTime(value){
     }
     return "" + year + month + date + hours + mins + second;
 }
+//特殊字符
+export function ChinaChar(value){
+    if (!(/^[\u4e00-\u9fa5+$]/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+export function EnglishChar(value){
+    if (!(/^[a-zA-Z+$]/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function specialChar(value){
+    if ((new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#¥⋯⋯&*（）——|{}【】‘；：”“'。，、？]").test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//校验QQ号
+export function QQTest(value){
+    if (!(/^[1-9][0-9]{4,13}/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//校验微信号
+export function wechatTest(value){
+    if (!(/^[a-zA-Z\d_]{5,}$/.test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+

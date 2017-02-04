@@ -35,7 +35,7 @@ export default class PwdModify extends Component {
 
     //获取验证码
     async getResetPwd(mobile){
-        await ResetPwd(mobile)
+        await ResetPwd(mobile,0)
             .then(res=>{
                 this.setState({smsCode:res})
             })
@@ -82,7 +82,6 @@ export default class PwdModify extends Component {
 
     render(){
         return(
-            <div className="wrap">
                 <div>
                     <div className='editorBox_100' style={{justifyContent:'flex-start'}}>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 24}}>验证码</span>
@@ -93,7 +92,7 @@ export default class PwdModify extends Component {
                             placeholder="填写验证码"
                         />
                         <input
-                            style={{position:'absolute',right:10}}
+                            style={{position:'absolute',right:10,top:10}}
                             id="code"
                             type="button"
                             disabled={this.state.disabled}
@@ -115,8 +114,6 @@ export default class PwdModify extends Component {
                             onBlur = {()=>this.isPsdTrue(this.refs.pwd.value)}
                         />
                     </div>
-
-
                     <div className='editorBox_100'>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 10}}>确认密码</span>
                         <input
@@ -136,7 +133,6 @@ export default class PwdModify extends Component {
                     </div>
                     <button className="toLogin" onClick={()=>this.confirmBtn()}>确 认</button>
                 </div>
-            </div>
         )
     }
 }

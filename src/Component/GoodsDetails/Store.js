@@ -32,6 +32,7 @@ export default class Store extends Component {
         this.getStoreDetails(this.storeId)
         this.getOrderList('',this.storeId,'p.create_time','')
     }
+
     //获取店铺详情
     async getStoreDetails(storeId){
         await  StoreDetailItem(storeId)
@@ -43,6 +44,7 @@ export default class Store extends Component {
                 console.warn('获取商品属性失败',err)
             })
     }
+
     //店铺导航切换
     //请求列表接口
     async getOrderList(paramOne,paramTwo,paramThree,paramFour){
@@ -82,33 +84,56 @@ export default class Store extends Component {
         const {storeDetails,storeBanner,storeDetail} = this.state
         return (
             <div className="containerNav bkg_gray">
-               <Search
-                    style={{backgroundColor:'#ff5500'}}
-                    location = {true}
-                    onClick={(value)=>this.searchList(value)}
-               />
-                <div className="plAll storeDetail df" style={{justifyContent:'space-between'}}>
-                    <div className="df">
-                        <div className="mr" style={{height:40,width:40}}>
-                            <img src={storeDetails.img} alt=""/>
-                        </div>
-                        <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
-                            <p>来自{storeDetails.wechat}的分享</p>
-                        </div>
+                <div className="flex">
+                    <div className="flex1">
+                        <Search
+                            style={{backgroundColor:'#ff5500'}}
+                            location = {true}
+                            onClick={(value)=>this.searchList(value)}
+                        />
                     </div>
-                    <Link
-                        to="/contactMe"
-                        query={{wechat:storeDetails.wechat,mobile:storeDetails.mobile,qq:storeDetails.qq}}>
-                        <div style={{height:20,width:63.5,lineHeight:0,marginTop:18}}>
-                            <img src={require('../../Images/contactMe.png')} alt=""/>
-                        </div>
-                    </Link>
+                    <div
+                        className="flex tc bkg_ff flex-pack-center flex-align-center flex-v classify"
+                    >
+                        <Link to ='storeClassify' query={{storeId:this.props.location.query.storeId}}>
+                            <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
+                                <img src={require('../../Images/common/classification.png')} alt=""/>
+                            </span>
+                            <p className="f10 color_white">分类</p>
+                        </Link>
+                    </div>
                 </div>
-                <div className="carouselHeight">
+
+                <div className="plr storeDetail df" >
+                    <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
+                        <div className="df">
+                            <div className="mr" style={{height:40,width:40}}>
+                                <img src={storeDetails.img} alt=""/>
+                            </div>
+                            {/*<div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                                <p>来自{storeDetails.wechat}的分享</p>
+                            </div>*/}
+                            <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                                <p>{storeDetails.name}</p>
+                            </div>
+                        </div>
+                        <Link
+                            to="/contactMe"
+                            query={{wechat:storeDetails.wechat,mobile:storeDetails.mobile,qq:storeDetails.qq}}>
+                            <div style={{height:20,width:63.5,lineHeight:0,marginTop:18}}>
+                                <img src={require('../../Images/contactMe.png')} alt=""/>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+                <div>
+                    <img src={require('../../Images/split.png')} alt=""/>
+                </div>
+                {/*<div className="carouselHeight">
                     <Carousel
                         images = {storeBanner}
                     />
-                </div>
+                </div>*/}
                 <Tabscontrol
                     onClick={(index)=>this.onChangeTab(index)}
                 >

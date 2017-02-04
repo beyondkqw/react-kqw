@@ -56,6 +56,8 @@ export default class Retailing extends Component {
                                     changeAmount = {el.change_amount}
                                     extraMsg = {el.extra_msg2}
                                     imgUrl = {el.image_uri}
+                                    ymd = {el.substr(0,10)}
+                                    time = {el.substr(11,5)}
                                     isShowDate={true}
                                 />
                             </Link>

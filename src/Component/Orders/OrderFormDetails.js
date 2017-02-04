@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes} from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
@@ -28,6 +28,11 @@ export default class OrderFormDetails extends Component {
             //confirmItem:[]
         };
       }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
      componentWillMount(){
         let orderNo = this.props.location.query.orderNo
         this.setState({orderNo:orderNo})
@@ -54,7 +59,7 @@ export default class OrderFormDetails extends Component {
     async getConfirmReceive(param){
         await ConfirmReceived(param)
             .then(res=>{
-                //this.setState({confirmItem:res})
+                //this.context.router.goBack()
             })
             .catch(err=>{
                 console.warn('收获失败',err)
@@ -66,23 +71,26 @@ export default class OrderFormDetails extends Component {
         return (
             <div className="containerNav">
                 <div className="df plAll border_bottom">
-                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
-                    <div className="flex1 mtlr">
-                        <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
-                        <p className="f12 color9 mt3"><span>2016-11-21</span><span className="di ml">13:46:05</span></p>
+                    <div className="pr" style={{width:14,height:14,margin:'auto'}}>
+                        <img className="pa" src={require("../../Images/time.png")} alt=""/>
                     </div>
-                    <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
-                </div>
-                <div className="df plAll">
-                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <div className="font14 color6">
                             <span>收货人:</span><span>{orderFormdDetails.name}</span>
                             <span className="di fr color6">{orderFormdDetails.mobile}</span>
                         </div>
-                        <p className="f12 color9 mt3">收货地址:<span>广东深空间按调集的ASk就待见的几点开始设法会死人世纪东方</span></p>
+                        <p className="f12 color9 mt3">收货地址:<span>{orderFormdDetails.address_detail}</span></p>
                     </div>
                 </div>
+                <div className="df plAll">
+                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
+                    <div className="flex1 mtlr">
+                        <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
+                        <p className="f12 color9 mt3"><span>{orderFormdDetails.real_receive_time}</span></p>
+                    </div>
+                    <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
+                </div>
+
                 <SplitLine />
                 <div className="paymargin">
                     <div className="di payImgSize mr"><img src={orderFormdDetails.img} alt=""/></div>
@@ -150,12 +158,29 @@ export default class OrderFormDetails extends Component {
                         })
                     }
                 </div>
-                <div className="fr font14 plAll">
-                    <button
-                        className="bkg_ff border_ra color_white pl3"
-                        onClick = {()=>this.confirmClick()}
-                    >确认收货</button>
-                </div>
+                {
+                    this.props.location.query.isToPay?
+                        <div className="fr font14 plAll">
+                            <Link to="/comfirmPayMoney" query={{orderId:this.props.location.query.orderNo}}>
+                                <button
+                                    className="bkg_ff border_ra color_white pl3"
+                                    onClick = {()=>this.confirmClick()}
+                                >支付</button>
+                            </Link>
+                        </div>
+                        :null
+                }
+                {
+                    this.props.location.query.isMakeSure?
+                        <div className="fr font14 plAll">
+                            <button
+                                className="bkg_ff border_ra color_white pl3"
+                                onClick = {()=>this.confirmClick()}
+                            >确认收货</button>
+                        </div>
+                        :null
+                }
+
             </div>
         );
     }

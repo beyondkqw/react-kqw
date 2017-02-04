@@ -29,10 +29,11 @@
     width: 1rem;
     height:1rem;
     margin:auto;
+    background-color:#fff;
 }
 .isCheck:checked + label{
     border-color: #ff5500;
-    background:url("../../Images/gou.png") no-repeat;
+    background:url("../../Images/gou.png") #fff no-repeat;
     background-size:100%;
     background-position:center;
 }

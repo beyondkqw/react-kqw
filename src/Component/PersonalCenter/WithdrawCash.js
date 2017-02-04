@@ -1,10 +1,10 @@
-import React, { Component} from 'react';
+import React, { Component,PropTypes} from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import EnterPassword from '../../Component/CommonComponent/EnterPassword';
 import '../../Stylesheets/App/personal.css';
-import {Cash} from '../../Action/auth'
+import {Cash,MyInfo} from '../../Action/auth'
 
 export default class WithdrawCash extends Component {
     // 构造
@@ -22,32 +22,50 @@ export default class WithdrawCash extends Component {
         };
     }
 
-    componentWillMount() {
-        const {now_amount,frozen} = this.props.location.query
-        this.setState({now_amount:now_amount,frozen:frozen})
-        console.log('this.state.now_amount==========>',now_amount,frozen)
-        this.setState({allAmount:parseInt(now_amount)+parseInt(frozen)})
-
+    static contextTypes = {
+        router:PropTypes.object
     }
+
+    async componentWillMount() {
+        await this.getMyInfo()
+        this.setState({allAmount:parseInt(this.state.now_amount)+parseInt(this.state.frozen)})
+    }
+
+    async getMyInfo(){
+        await MyInfo()
+            .then(res=>{
+                this.setState({
+                    now_amount : res.NOW_AMOUNT,
+                    frozen:res.FROZEN
+                })
+            })
+    }
+
+    //确认提现
     confirmIncome(){
         //this.setState({toShowModal:true})
         const {bankcardId} = this.props.location.query
-        if(this.state.amount == ''){
-            alert('请输入提现金额')
-            return
-        }else if(bankcardId == ''){
+        if(!bankcardId){
             alert('请选择所需银行卡')
             return
-        }else{
-            this.getCash(bankcardId,this.state.amount)
         }
+        if(!this.state.amount){
+            alert('请输入提现金额')
+            return
+        }
+        if(this.state.amount > this.state.now_amount){
+            alert('可提现金额不足')
+            return
+        }
+        this.getCash(bankcardId,this.state.amount)
 
     }
 
     async getCash(bankcardId,amount) {
         await Cash(bankcardId,amount)
             .then(res=> {
-
+                alert('提现成功')
+                //this.context.router.goBack()
             })
             .catch(err=> {
                 this.setState({Reminder:err.message})
@@ -62,7 +80,7 @@ export default class WithdrawCash extends Component {
                 <div className="list-block m0">
                     <ul>
                         {
-                            toChange ?
+                            toChange?
                                 <Link to='/personalCenter/commissionCash'>
                                     <li className="item-content item-link item-link pl  border_bottom">
                                         <div className="item-media">
@@ -158,11 +176,14 @@ export default class WithdrawCash extends Component {
                 <div className="tc f12 color_red width_100 plr mtb loginHeight">
                     {this.state.Reminder}
                 </div>
-                <CommonBtn
-                    style={{marginTop:0}}
-                    title={'确认提现'}
-                    onClick={()=>this.confirmIncome()}
-                />
+                <div className="plr">
+                    <button
+                        className="lh20 border_ra color_white bkg_ff width_100"
+                        onClick={()=>this.confirmIncome()}
+                    >
+                        确认提现
+                    </button>
+                </div>
                 <p className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
                     <Link to="/personalCenter/balanceCashRule">
                         <span className="di pa" style={{width:15,height:15,lineHeight:0,marginLeft:5}}>

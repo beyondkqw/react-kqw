@@ -1,6 +1,8 @@
 import {wsPath,loadToken} from './rpc'
 import {imei} from './auth';
 import WebSocket from 'reconnecting-websocket';
+import RPC from '../Action/rpc'
+import Subscribe from '../Component/NewComponent/Subscribe'
 var websocket_socket;
 var timer;
 var socket_state = {
@@ -19,7 +21,7 @@ const defaultOptions = {
 
 export  async  function initWebsocket(){
     const token = await loadToken();
-    console.log('token--------========>',token)
+    console.log('websocket  token--------========>',token)
     if(!websocket_socket) {
         if (token) {
             websocket_socket = new WebSocket(wsPath + "?"+"token="+token+ "&imei="+imei
@@ -31,21 +33,20 @@ export  async  function initWebsocket(){
             };
 
             websocket_socket.onmessage = function (e) {
-                console.log("onmessage",e);
+               console.log("onmessage",e);
                 console.log("data====", e.data);
-                /*var result = JSON.parse(e.data);
-                alert(e.data);
-                 alert(result);
-                console.log('onmessage',getBaseRequestParams());
-                if (result.command) {
+                var result = JSON.parse(e.data);
+               /* alert(e.data);
+                 alert(result);*/
+                console.log("result=====>",result)
+                if (result.cd) {
                     checkResult(result);
-                }else if(result.code && result.code == 777){
+                }/*else if(result.code && result.code == 777){
                     clearWebSocket();
                     localStorage.clear();
                     setForbidden();
                     alert("您的账号已在其他设备登录,请重新登录");
                     againSendLogin();
-                    /!* $("#againLogin").modal("show");*!/
                 }*/
             };
 
@@ -85,19 +86,20 @@ initWebsocket();
     }
 }*/
 
-/*function checkResult(result){
+function checkResult(result){
     //alert("checkResult:"+result.code);
     if (result.code == "1") {
-        $("#failSuccModal").modal("show");
-        return false;
+        /*$("#failSuccModal").modal("show");
+        return false;*/
     }
     else{
-        $("#delayModal").modal("hide");
+        RPC.emit('modal')
+        /*$("#delayModal").modal("hide");
         $("#paySuccModal").modal("show");
         localStorage.setItem("onmessageResult",JSON.stringify(result));
-        return true;
+        return true;*/
     }
-}*/
+}
 
 //处理文本支付
 /*function textHandler(data){

@@ -1,10 +1,35 @@
 import React, { Component } from 'react';
 import RankRow from './RankRow'
 import '../../Stylesheets/App/personal.css';
+import {EecommendList} from '../../Action/auth'
+import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
 
 export default class TeamAmount extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            Eecommend:[]
+        };
+      }
+
+    componentWillMount() {
+        this.getEecommendList()
+    }
+
+    async getEecommendList(){
+        await EecommendList()
+            .then(res=>{
+                this.setState({Eecommend:res.resultList})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
     render() {
         const {palyMoney,amount,memberName,imgUrl,toChange} = this.props.location.query
+        const {Eecommend} = this.state
         return (
                 toChange?
                     <div className="containerNav allIncome_Img supplement">
@@ -28,14 +53,27 @@ export default class TeamAmount extends Component {
                                 </div>
                             </div>
                         </div>
-                        <RankRow
-                            _vipPoints={123}
-                            imgUrl={'test'}
-                            memberName={'束带结发'}
-                            num={2}
-                            more={true}
-                            vipPoints={3}
-                        />
+                        {
+                            Eecommend == ''?
+                                <IsShowEmptyImg
+                                    styleSheet={{width:69,height:72,marginTop:20}}
+                                    title={'查询列表为空哦~'}
+                                />
+                                :
+                            Eecommend&&Eecommend.map((el,index)=>{
+                                return(
+                                    <RankRow
+                                        _vipPoints={el.vipPoints}
+                                        imgUrl={el.imageUri}
+                                        memberName={el.memberName}
+                                        num={index+1}
+                                        more={true}
+                                        vipPoints={el.lv}
+                                    />
+                                )
+                            })
+                        }
+
                     </div>
         );
     }

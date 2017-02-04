@@ -4,17 +4,42 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import PersonInformation from '../../Component/CommonComponent/PersonInformation';
 import CellComponent from '../../Component/CommonComponent/CellComponent';
 import '../../Stylesheets/App/cloudCard.css';
+import {MyInfo} from '../../Action/auth'
 
 
 export default class CloudCard extends Component {
+
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            yunCard:''
+        };
+      }
+
+    componentWillMount() {
+        this.getMyInfo()
+    }
+
+    async getMyInfo(){
+        await MyInfo()
+            .then(res=>{
+                console.log('个人资料',res)
+                this.setState({
+                    yunCard:res.YUN_CARD_AMOUNT
+                })
+            })
+    }
     render() {
+        const {yunCard} = this.state
         return (
             <div className="containerNav">
                 <div className="wrap">
                     <SplitLine />
                     <div className="recharge border_bottom plr">
                         <div className="color_yellow fl height_all">
-                            <span className="f15">￥</span><span className="f25">5678</span>
+                            <span className="f15">￥</span><span className="f25">{yunCard}</span>
                         </div>
                         <Link to="/personalCenter/recharge">
                             <button className="fr settleAccount border_ra color_white mt11">充值</button>
@@ -25,7 +50,7 @@ export default class CloudCard extends Component {
                             className={'border_right'}
                             imgUrl={require('../../Images/total.png')}
                             title={'总额'}
-                            describing={'1256.26'}
+                            describing={yunCard}
                             link={'/totalDetails'}
                         />
                         <CellComponent

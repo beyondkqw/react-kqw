@@ -12,7 +12,8 @@ export default class CommisionGiving extends Component {
         // 初始状态
         this.state = {
             accId:'',
-            MyInfo:[]
+            MyInfo:[],
+            Reminder:''
         };
       }
     componentWillMount() {
@@ -35,6 +36,14 @@ export default class CommisionGiving extends Component {
         //判断转赠的佣金是否超出
         if(amountNum > this.state.MyInfo.NOW_AMOUNT){
             alert('余额不足')
+            return
+        }
+        if(amountNum == ''){
+            this.setState({Reminder:'转赠的佣金不能为空'})
+            return
+        }
+        if(this.state.accId == ''){
+            this.setState({Reminder:'请选择转赠人'})
             return
         }
         await GiveAmount(this.state.accId,amountNum)
@@ -133,6 +142,9 @@ export default class CommisionGiving extends Component {
                                 <div className="item-after color9 isSet">{MyInfo.USE_POINTS}</div>
                             </div>
                         </li>
+                    </div>
+                    <div className="tc f12 color_red width_100 plr mtb loginHeight" style={{lineHeight:'36px'}}>
+                        {this.state.Reminder}
                     </div>
                     <CommonBtn
                         onClick={()=>this.confirmPonit()}

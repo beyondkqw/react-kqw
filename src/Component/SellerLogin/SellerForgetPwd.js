@@ -36,9 +36,7 @@ export default class SellerForgetPwd extends Component {
             isShowNewPwd:true,
             isShowSecPwd:true,
             typeN : false,
-            typeS : false,
-            isTrue : false,
-            isPwdTrue:false
+            typeS : false
         };
     }
 
@@ -48,33 +46,31 @@ export default class SellerForgetPwd extends Component {
     //判断手机号是否正确
     async isNumTrue(value){
         this.setState({Reminder:''})
-        if (!ErrorNum(value)) {
-            this.setState({Reminder:'手机号码有误,请重新填写'})
-        }else{
-            await this.setState({isTrue:true})
+        if(value){
+            if (!ErrorNum(value)) {
+                this.setState({Reminder:'手机号码有误,请重新填写'})
+            }
         }
-
     }
 
     //判断密码是否正确
     async isPsdTrue(value){
         this.setState({Reminder:''})
-        if (!ErrorPs(value)) {
-            this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
-        }else{
-            await this.setState({isPwdTrue:true})
+        if(value){
+            if (!ErrorPs(value)) {
+                this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
+            }
         }
-
     }
 
     async getCode(){
         clearInterval(this._timer)
-        let mobile = this.state.mobile
-        if(this.state.isTrue){
-            this.getForgetCode(mobile)
-        }else{
+        const mobile = this.state.mobile
+        if (!ErrorNum(mobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
             return
         }
+        this.getForgetCode(mobile)
         await this.setState({codeWord:60,disabled:true})
         this._timer = self.setInterval(()=>this.timer(),1000)
     }
@@ -110,14 +106,34 @@ export default class SellerForgetPwd extends Component {
 
     async confirmSubmit(){
         const {mobile,newPwd,secPwd,smsCode,code} = this.state
+        if(!mobile){
+            this.setState({Reminder:'手机号不能为空'})
+            return
+        }
+        if(!newPwd ||!secPwd ){
+            this.setState({Reminder:'密码不能为空'})
+            return
+        }
+        if(!code){
+            this.setState({Reminder:'验证码不能为空'})
+            return
+        }
         if(newPwd !== secPwd){
             this.setState({Reminder:'两次密码不一致,请重新输入'})
             return
         }
-        await UpdateLoginPwd(mobile,newPwd,smsCode,code)
+        if (!ErrorNum(mobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
+        if (!ErrorPs(newPwd)) {
+            this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
+            return
+        }
+        await UpdateLoginPwd(mobile,newPwd,smsCode,code,1)
             .then(res=>{
                 alert('找回密码成功,请重新登录')
-                this.context.router.push('/Login/Login')
+                this.context.router.goBack()
                 console.log('找回密码成功',res)
             })
             .catch(err=>{
@@ -126,7 +142,6 @@ export default class SellerForgetPwd extends Component {
     }
     render(){
         return(
-            this.state.step==1?
                 <div>
                     {/*手机号*/}
                     <div className='editorBox'>
@@ -138,9 +153,9 @@ export default class SellerForgetPwd extends Component {
                             maxLength="11"
                             className="editorInput"
                             placeholder="请输入手机号"
-                            ref = "forgetNum"
-                            onChange={()=>this.setState({mobile:this.refs.forgetNum.value})}
-                            onBlur = {()=>this.isNumTrue(this.refs.forgetNum.value)}
+                            ref = "phoneAmount"
+                            onChange={()=>this.setState({mobile:this.refs.phoneAmount.value})}
+                            onBlur = {()=>this.isNumTrue(this.refs.phoneAmount.value)}
                         />
                     </div>
 
@@ -164,13 +179,7 @@ export default class SellerForgetPwd extends Component {
                             onClick={()=>this.getCode()}
                             value={this.state.codeWord?this.state.codeWord+'秒':'点击获取验证码'}/>
                     </div>
-                    <div className="tc f12 color_red width_100 plr mtb loginHeight">
-                        {this.state.Reminder}
-                    </div>
-                    <button onClick={()=>{this.setState({step:2})}} className="toLogin">下一步</button>
-                </div>
-                :
-                <div>
+                    {/*<button onClick={()=>{this.setState({step:2})}} className="toLogin">下一步</button>*/}
                     {/*设置密码*/}
                     <div className='editorBox'>
                     <span className="editorImg">

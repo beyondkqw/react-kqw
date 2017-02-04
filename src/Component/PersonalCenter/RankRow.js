@@ -35,7 +35,7 @@ export default class RankRow extends Component {
                         <img className="border_ra50" src={imgUrl}/>
                         {
                             more?
-                                <div className="vipIcon pa"><span>V</span><span className="f10">{vipPoints}</span></div>
+                                <div className="vipIcon pa"><span>V</span><span className="f10">{vipPoints?vipPoints:0}</span></div>
                                 :null
                         }
                         {

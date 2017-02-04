@@ -47,24 +47,26 @@ export default class ForgetPwd extends Component {
     }
     //判断手机号是否正确
    async isNumTrue(value){
-        this.setState({Reminder:''})
-        if (!ErrorNum(value)) {
-            this.setState({Reminder:'手机号码有误,请重新填写'})
-        }else{
-           await this.setState({isTrue:true})
-        }
-
+       this.setState({Reminder:''})
+       if(value){
+           if (!ErrorNum(value)) {
+               this.setState({Reminder:'手机号码有误,请重新填写'})
+           }else{
+               await this.setState({isTrue:true})
+           }
+       }
     }
 
     //判断密码是否正确
     async isPsdTrue(value){
         this.setState({Reminder:''})
-        if (!ErrorPs(value)) {
-            this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
-        }else{
-            await this.setState({isPwdTrue:true})
+        if(value){
+            if (!ErrorPs(value)) {
+                this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
+            }else{
+                await this.setState({isPwdTrue:true})
+            }
         }
-
     }
 
     async getCode(){
@@ -110,11 +112,31 @@ export default class ForgetPwd extends Component {
 
     async confirmSubmit(){
         const {mobile,newPwd,secPwd,smsCode,code} = this.state
+        if(!mobile){
+            this.setState({Reminder:'手机号不能为空'})
+            return
+        }
+        if(!newPwd ||!secPwd ){
+            this.setState({Reminder:'密码不能为空'})
+            return
+        }
+        if(!code){
+            this.setState({Reminder:'验证码不能为空'})
+            return
+        }
         if(newPwd !== secPwd){
             this.setState({Reminder:'两次密码不一致,请重新输入'})
             return
         }
-        await UpdateLoginPwd(mobile,newPwd,smsCode,code)
+        if (!ErrorNum(mobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
+        if (!ErrorPs(newPwd)) {
+            this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
+            return
+        }
+        await UpdateLoginPwd(mobile,newPwd,smsCode,code,0)
             .then(res=>{
                 alert('找回密码成功,请重新登录')
                 this.context.router.push('/Login/Login')
