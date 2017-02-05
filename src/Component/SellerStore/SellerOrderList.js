@@ -88,8 +88,20 @@ export default class SellerOrderList extends Component {
                     </div>
                     :null
                 }
-                {/*退款中*/}
+                {/*已发货*/}
                 { this.state.index == 2?
+                    <div>
+                        <SellerGoodDetails
+                            Receipt = {()=>this.getOrderList('2')}
+                            sellerOrderDetails = {orderItems}
+                            //deliverGoods={true}
+                            isShowWhat = {true}
+                        />
+                    </div>
+                    :null
+                }
+                {/*退款中*/}
+                { this.state.index == 3?
                     <div>
                         <SellerGoodDetails
                             sellerOrderDetails = {orderItems}
@@ -101,7 +113,7 @@ export default class SellerOrderList extends Component {
                     :null
                 }
                 {/*已完成*/}
-                { this.state.index == 3?
+                { this.state.index == 4?
                     <div>
                         <SellerGoodDetails
                             sellerOrderDetails = {orderItems}
