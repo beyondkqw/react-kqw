@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router'
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import Modal from '../../Component/CommonComponent/Modal'
 import {StorectList,SellerOffShelf} from '../../Action/auth'
 

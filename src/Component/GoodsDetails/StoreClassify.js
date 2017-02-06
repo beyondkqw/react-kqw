@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {CategoryList} from '../../Action/auth'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {Link} from 'react-router';
 
 export default class StoreClassify extends Component {

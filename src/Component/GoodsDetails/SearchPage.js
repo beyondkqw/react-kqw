@@ -6,7 +6,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 import Search from '../../Component/NewComponent/Search';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import {ProductList} from '../../Action/auth';
 import {Link} from 'react-router'
@@ -46,19 +46,23 @@ export default class SearchPage extends Component {
         this.getOrder('',this.state.order,this.state.orderName,'','');
         this.setState({display_0:false})
     }
+
     //设置价格区间
     async comfirmPrice(){
         await this.getOrder('','','',this.state.minPrice,this.state.maxPrice)
         this.setState({display_2:false})
     }
+
     //销量优先
     async SalesPreferred(){
         await this.getOrder('','asc','p.SALES','','')
     }
+
     //上下排序
-    async upDownOrder(){
-        await this.getOrder('','','','','')
-    }
+    //async upDownOrder(){
+    //    await this.getOrder('','','','','')
+    //}
+
     //请求列表接口
     async getOrder(name,order,orderName,minPrice,maxPrice){
         await ProductList(name,order,orderName,minPrice,maxPrice)
@@ -166,7 +170,7 @@ export default class SearchPage extends Component {
         }else if(index==2){
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
-            this.upDownOrder()
+            //this.upDownOrder()
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false})
         }else{
             this.setState({display_2:false,display_0:false})

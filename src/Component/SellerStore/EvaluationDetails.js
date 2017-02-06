@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {RemarkList,Reply} from '../../Action/auth'
 
 export default class EvaluationDetails extends Component {

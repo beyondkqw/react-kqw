@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import GoodsPopup from '../../Component/GoodsDetails/GoodsPopup'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';

@@ -826,9 +826,9 @@ export async function StoreContact(qq,wechat,mobile){
 }
 
 //订单列表
-export async function GetSellerOrderList(status){
+export async function GetSellerOrderList(status,page=1){
     try{
-        const res = await apiGet(URL.sellerList,{status});
+        const res = await apiGet(URL.sellerList,{status,page});
         return res;
     }catch (err){
         console.warn(err);

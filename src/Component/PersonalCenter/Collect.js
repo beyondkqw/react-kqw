@@ -1,6 +1,6 @@
 import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/personal.css';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {FollowList,Follow} from '../../Action/auth';
 import {loadToken,getToken} from '../../Action/rpc'
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Search from '../../Component/NewComponent/Search'
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import Carousel from '../NewComponent/Carousel'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';

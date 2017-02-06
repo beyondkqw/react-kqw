@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import PublishComment from '../../Component/CommonComponent/PublishComment'
 import '../../Stylesheets/App/order.css';
 import {RemarkList} from '../../Action/auth'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 
 export default class ViewEvaluation extends Component {
     // 构造

@@ -2,7 +2,7 @@ import React, { Component,PropTypes} from 'react';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/personal.css';
 import {BankList} from '../../Action/auth';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 
 export default class CommissionCash extends Component {
     // 构造

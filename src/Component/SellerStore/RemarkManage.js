@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import '../../Stylesheets/App/order.css';
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {SellerProductList} from '../../Action/auth';
 
 export default class RemarkManage extends Component {

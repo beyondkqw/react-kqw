@@ -6,7 +6,7 @@ import '../../Stylesheets/App/personal.css';
 import {Link} from 'react-router';
 import RankRow from './RankRow'
 import {CountryRankList} from '../../Action/auth'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 
 const icon = [
     require('../../Images/person/first.png'),

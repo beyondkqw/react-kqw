@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import '../../Stylesheets/App/personal.css';
 import {GiveAwayRecord} from '../../Action/auth'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg';
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg';
 
 export default class Retailing extends Component {
     // 构造
