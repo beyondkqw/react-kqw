@@ -5,6 +5,7 @@ import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/login.css';
 import {ErrorPs} from '../../Action/rpc'
 import {ResetPwd,ResetLoginPwd} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerPwdModify extends Component {
 
@@ -91,6 +92,10 @@ export default class SellerPwdModify extends Component {
     render(){
         return(
             <div className="wrap">
+                <NavBar
+                    renderBack = {true}
+                    title = {'修改密码'}
+                />
                 <div>
                     <div className='editorBox_100' style={{justifyContent:'flex-start'}}>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 24}}>验证码</span>

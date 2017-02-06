@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import '../../Stylesheets/App/personal.css';
 import {BankList} from '../../Action/auth';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerBankCard extends Component {
     // 构造
@@ -30,6 +31,10 @@ export default class SellerBankCard extends Component {
         console.log('bankList=====>',sellerBankList)
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'我的银行卡'}
+                />
                 <div className="ChooseHeight">
                     {
                         sellerBankList == ''||sellerBankList == null?

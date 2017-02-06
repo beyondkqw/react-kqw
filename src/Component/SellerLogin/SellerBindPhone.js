@@ -6,6 +6,7 @@ import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {ToBindPhone,BindSms} from '../../Action/auth'
 import {ErrorNum,ErrorPs} from '../../Action/rpc'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class BindPhone extends Component {
 
@@ -111,6 +112,10 @@ export default class BindPhone extends Component {
     render(){
         return(
             <div className="wrap">
+                <NavBar
+                    renderBack = {true}
+                    title = {'设置手机号'}
+                />
                 <div>
                     <div className='editorBox_100'>
                         <input

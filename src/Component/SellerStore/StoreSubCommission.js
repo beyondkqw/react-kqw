@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import Search from '../../Component/NewComponent/Search';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import {UpdatePerc,StoreDetailItem} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class StoreSubCommission extends Component {
     // 构造
@@ -53,6 +54,10 @@ export default class StoreSubCommission extends Component {
         console.log('this.state.perc',this.state.perc)
         return(
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'设置分佣比例'}
+                />
                 <SplitLine />
                 <div className="flex flex-v flex-pack-center flex-align-center" style={{height:100}}>
                     <p>

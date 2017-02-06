@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {StoreDetail,StoreEdit} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerSetting extends Component {
     // 构造
@@ -58,6 +59,10 @@ export default class SellerSetting extends Component {
         const {storeImg,storeName,address,licenseImg,cardFace,cardBack} = this.state
         return (
             <div className="containerNav" style={{paddingBottom:30}}>
+                <NavBar
+                    renderBack = {true}
+                    title = {'个人资料'}
+                />
                 <SplitLine />
                 <div className="lh60 border_bottom plr font14 df flex-pack-justify flex-align-center">
                     <span className="color6">店铺头像</span>

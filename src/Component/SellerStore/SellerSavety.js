@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/personal.css';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 export default class SellerSavety extends Component {
     render() {
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'账号与安全'}
+                />
                 <SplitLine />
                 <div className="list-block m0 font14">
                     <ul>

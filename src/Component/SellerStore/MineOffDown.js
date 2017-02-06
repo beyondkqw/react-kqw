@@ -9,6 +9,8 @@ import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import Modal from '../../Component/CommonComponent/Modal'
 import {SellerProductList,SellerDelOffShelf} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
+
 
 const itemList = [
     {name:'或者豆腐丝收到货基地是可敬的',prace:235,num:'hisjuhdi',paymoney:2367,id:1},
@@ -105,6 +107,10 @@ export default class MineOffDown extends Component {
         const {sellerOffDownList} = this.state
         return(
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'下架商品'}
+                />
                 <SplitLine />
                 {
                     sellerOffDownList == ''?

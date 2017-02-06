@@ -4,6 +4,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import LiComponent from '../../Component/CommonComponent/LiComponent'
 import '../../Stylesheets/App/personal.css';
 import {Logout} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 const Itemlist =[
     {name:'个人资料',link:'/sellerSetting',imgurl:require('../../Images/common/information.png')},
@@ -30,6 +31,10 @@ export default class SellerStoreSetting extends Component {
     render() {
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'设置'}
+                />
                 <div>
                     <ul>
                         {

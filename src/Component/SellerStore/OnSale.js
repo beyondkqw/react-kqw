@@ -11,6 +11,8 @@ import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import ManageRow from '../../Component/SellerStore/ManageRow';
 import {Link} from 'react-router'
 import {StoreDetailItem,StorectList} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
+
 
 export default class OnSale extends Component {
 
@@ -61,6 +63,10 @@ export default class OnSale extends Component {
         return(
             <div className="containerNav">
                 {/*todo scroll滚动时置顶fixed*/}
+                <NavBar
+                    renderBack = {true}
+                    title = {'出售中的宝贝'}
+                />
                 <Tabscontrol
                     style={{height:40,lineHeight:'40px'}}
                     onClick={(index)=>this.onChangeTab(index)}

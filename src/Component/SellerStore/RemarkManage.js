@@ -4,6 +4,7 @@ import '../../Stylesheets/App/order.css';
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {SellerProductList} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class RemarkManage extends Component {
     // 构造
@@ -33,6 +34,10 @@ export default class RemarkManage extends Component {
         const {sellerGoodsList} = this.state
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'评价管理'}
+                />
                 {
                     sellerGoodsList == ''?
                         <IsShowEmptyImg

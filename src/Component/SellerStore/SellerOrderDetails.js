@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
 import {OrderDetail,ConfirmReceived} from '../../Action/auth';
 import {config} from '../../Action/Const'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 export default class SellerOrderDetails extends Component {
@@ -62,7 +63,11 @@ export default class SellerOrderDetails extends Component {
         const {sellerOrderDetails} = this.state
         return (
             <div className="containerNav">
-                {/* <div className="df plAll border_bottom">
+                <NavBar
+                    renderBack = {true}
+                    title = {'订单详情'}
+                />
+                <div className="df plAll border_bottom">
                     <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>

@@ -7,6 +7,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {Link} from 'react-router'
 import {MonthSale,DaySale} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SalesStatistics extends Component {
     // 构造
@@ -58,6 +59,11 @@ export default class SalesStatistics extends Component {
         const {show,monthMoney,monthDay,chooseIndex} = this.state
         return(
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'销售统计'}
+                />
+
                 <div className="color_white flex flex-v flex-align-center flex-pack-center salesAll" style={{height:110}}>
                     <p className="f25">{this.monryAccount}</p>
                     <p className="font14">总销售金额</p>

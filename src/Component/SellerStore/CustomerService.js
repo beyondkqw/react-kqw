@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import {StoreContact} from '../../Action/auth'
 import {ErrorNum,QQTest,wechatTest} from '../../Action/rpc'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class CustomerService extends Component {
 
@@ -87,6 +88,10 @@ export default class CustomerService extends Component {
     render() {
         return (
             <div>
+                <NavBar
+                    renderBack = {true}
+                    title = {'客服设置'}
+                />
                 <SplitLine />
                 <div
                     className="df width100 plr border_bottom flex-pack-justify flex-align-center"

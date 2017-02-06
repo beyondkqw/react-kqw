@@ -4,6 +4,7 @@ import SellerGoodDetails from '../../Component/SellerStore/SellerGoodDetails'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
 import {GetSellerOrderList} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerOrderList extends Component {
 
@@ -58,6 +59,10 @@ export default class SellerOrderList extends Component {
         const {orderItems} = this.state
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'订单'}
+                />
                 <TabBar
                     index = {this.state.index}
                     onClick = {index=>this.onChange(index)}
