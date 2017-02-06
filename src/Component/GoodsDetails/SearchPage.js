@@ -64,8 +64,8 @@ export default class SearchPage extends Component {
     //}
 
     //请求列表接口
-    async getOrder(paramOne,paramTwo,paramThree,paramFour,paramFive){
-        await ProductList(paramOne,paramTwo,paramThree,paramFour,paramFive)
+    async getOrder(name,order,orderName,minPrice,maxPrice){
+        await ProductList(name,order,orderName,minPrice,maxPrice)
         .then(res=>{
             this.setState({goodsList:res.resultList})
             console.log('res.resultList=======>',res.resultList)
