@@ -7,6 +7,7 @@ import Carousel from '../NewComponent/Carousel'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
 import {StoreDetailItem,StorectList} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
     {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
@@ -82,6 +83,10 @@ export default class ShopHome extends Component {
         const {storeDetails,storeBanner,storeDetail} = this.state
         return (
             <div className="containerNav bkg_gray">
+                <NavBar
+                    renderBack = {true}
+                    title = {'店铺'}
+                />
                 <Search
                     style={{backgroundColor:'#ff5500'}}
                     location = {true}

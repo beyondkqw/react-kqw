@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
 import {OrderDetail,ConfirmReceived} from '../../Action/auth';
 import {config} from '../../Action/Const'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 export default class SellerOrderDetails extends Component {
@@ -76,6 +77,10 @@ export default class SellerOrderDetails extends Component {
         const {sellerOrderDetails} = this.state
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'订单详情'}
+                />
                 <div className="df plAll border_bottom">
                     <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">

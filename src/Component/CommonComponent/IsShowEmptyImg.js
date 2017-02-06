@@ -5,7 +5,7 @@ export default class IsShowEmptyImg extends Component {
     render() {
         const {title,styleSheet} = this.props
         return (
-            <div className="pa tc" style={{top:0,left:0,right:0,bottom:0}}>
+            <div className="pa tc" style={{top:40,left:0,right:0,bottom:0}}>
                 <span className="di" style={styleSheet}>
                     <img src={require('../../Images/empty.png')} alt=""/>
                 </span>

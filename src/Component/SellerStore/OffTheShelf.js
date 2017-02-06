@@ -9,6 +9,7 @@ import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import Modal from '../../Component/CommonComponent/Modal'
 import {SellerProductList,SellerOffShelf} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class OffTheShelf extends Component {
     // 构造
@@ -103,6 +104,10 @@ export default class OffTheShelf extends Component {
         const {sellerOffDownList} = this.state
         return(
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'下架商品'}
+                />
                 <SplitLine />
                 {
                     sellerOffDownList == ''?

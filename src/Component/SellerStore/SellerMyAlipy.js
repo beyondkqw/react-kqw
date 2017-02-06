@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerMyAlipy extends Component {
     render() {
         return (
             <div className="containerNav pb1">
+                <NavBar
+                    renderBack = {true}
+                    title = {'我的支付宝'}
+                />
                 <div className="wrap">
                     <ul>
                         <li>

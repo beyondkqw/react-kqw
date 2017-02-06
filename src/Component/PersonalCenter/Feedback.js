@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class Feedback extends Component {
     render() {
         return (
             <div>
+                <NavBar
+                    renderBack = {true}
+                    title = {'帮助与反馈'}
+                />
                 <div className="bkg_gray contact font14">任何业务咨询、投诉建议等,欢迎通过以下方式与我们联系,工作日09:00-18:00</div>
                 <div className="list-block m0 font14">
                     <ul>
