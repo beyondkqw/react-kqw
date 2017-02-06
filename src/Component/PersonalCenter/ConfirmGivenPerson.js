@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import Search from '../../Component/NewComponent/Search';
 import LiItem from '../../Component/CommonComponent/LiItem'
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/personal.css';
 import {TeamMembers,CountryRankList} from '../../Action/auth'
 

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import '../../Stylesheets/App/order.css';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import Modal from '../../Component/CommonComponent/Modal'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {CancelReceived,OrderDel,GetOrderList,ConfirmReceived} from '../../Action/auth';
 import {config} from '../../Action/Const'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Search from '../../Component/NewComponent/Search'
 import TabBar from '../../Component/NewComponent/TabBar';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
 import {StoreType,StoreList} from '../../Action/auth'

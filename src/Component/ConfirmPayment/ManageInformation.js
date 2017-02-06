@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InformationComponent from '../../Component/ConfirmPayment/InformationComponent';
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import Modal from '../../Component/CommonComponent/Modal'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {AddressList,DefaultAddress,DelAddress} from '../../Action/auth';
 import {Link} from 'react-router';

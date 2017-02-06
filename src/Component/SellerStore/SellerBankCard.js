@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import '../../Stylesheets/App/personal.css';
 import {BankList} from '../../Action/auth';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 
 export default class SellerBankCard extends Component {
     // 构造

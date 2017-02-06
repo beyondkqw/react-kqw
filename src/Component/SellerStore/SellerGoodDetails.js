@@ -4,7 +4,7 @@ import '../../Stylesheets/App/order.css';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import Modal from '../../Component/CommonComponent/Modal'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {CancelReceived,OrderDel,GetOrderList,ConfirmReceived} from '../../Action/auth';
 import {config} from '../../Action/Const'
 
@@ -38,13 +38,13 @@ export default class SellerGoodDetails extends Component {
                                                             <p className="color9 f12 delete oh_height mt3">
                                                                 <span>{item.attrDesc}</span>
                                                             </p>
-                                                            <p className="color9 f12 delete oh_height mt1">
-                                                                货号 : <span>M-165486</span>
-                                                            </p>
+                                                            {/*<p className="color9 f12 delete oh_height mt1">
+                                                                货号 : <span>{item.orderNo}</span>
+                                                            </p>*/}
                                                             {
                                                                 alreadyRated?
                                                                     <p className="color9 f12 delete oh_height mt1">
-                                                                        买家昵称 : <span>呦呦切克闹</span>
+                                                                        买家昵称 : <span>{el.name}</span>
                                                                     </p>
                                                                     :null
                                                             }
@@ -82,7 +82,7 @@ export default class SellerGoodDetails extends Component {
                                         <div className="f12 width100 height1">
                                             <div className="fr">
                                                 <label>共<span>{el.num}</span>件商品</label>
-                                                <label className="ml5">合计<span>￥</span><span>{el.pay_amount}</span></label>
+                                                <label className="ml5">合计<span>￥</span><span>{el.amount}</span></label>
                                                 <label className="ml">(含运费 : ￥<span>0.00</span>)</label>
                                             </div>
                                         </div>

@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/sellerStore.css';
 import SplitLine from '../../Component/NewComponent/SplitLine';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {Link} from 'react-router'
 import {MonthSale,DaySale} from '../../Action/auth'
 
@@ -111,8 +111,8 @@ export default class SalesStatistics extends Component {
                                                         monthDay && monthDay.map(item=> {
                                                             return (
                                                                 <li className="df flex-pack-justify border_top flex-align-center color9">
-                                                                    <p>{item.AMOUNT}</p>
-                                                                    <p><span>￥</span><span>{item.CREATE_TIME}</span></p>
+                                                                    <p><span>￥</span>item.AMOUNT}</p>
+                                                                    <p><span>{item.CREATE_TIME}</span></p>
                                                                 </li>
                                                             )
                                                         })

@@ -4,7 +4,7 @@ import Footer from '../../Component/NewComponent/Footer';
 import ItemDetails from '../../Component/ShoppingCarts/ItemDetails';
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import '../../Stylesheets/App/shoppingCarts.css';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {ShopCarList,EditShopNum,DelShopCar,SettlementShopCar} from '../../Action/auth'
 
 const ItemDetail = [

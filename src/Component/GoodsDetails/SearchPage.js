@@ -6,7 +6,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 import Search from '../../Component/NewComponent/Search';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
 import StoreDetails from '../../Component/GoodsDetails/StoreDetails';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import {ProductList} from '../../Action/auth';
 import {Link} from 'react-router'

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RankRow from './RankRow'
 import '../../Stylesheets/App/personal.css';
 import {EecommendList} from '../../Action/auth'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 
 export default class TeamAmount extends Component {
     // 构造

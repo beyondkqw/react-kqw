@@ -3,7 +3,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import '../../Stylesheets/App/personal.css';
 import {GiveAwayRecord} from '../../Action/auth'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg';
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg';
 
 export default class TakenDetails extends Component {
     // 构造

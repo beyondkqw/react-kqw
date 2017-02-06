@@ -6,7 +6,7 @@ import '../../Stylesheets/App/personal.css';
 import StoreRow from '../../Component/GoodsDetails/StoreRow'
 import PublishComment from '../../Component/CommonComponent/PublishComment'
 import Modal from '../../Component/CommonComponent/Modal'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {BrowseHistory,DelBrowseRecord} from '../../Action/auth'
 
 const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',record:288,imgUrl:require('../../Images/clothesDetails.png')},

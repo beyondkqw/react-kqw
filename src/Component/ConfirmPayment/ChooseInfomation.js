@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import InformationComponent from '../../Component/ConfirmPayment/InformationComponent';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {AddressList} from '../../Action/auth'

@@ -6,7 +6,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import Search from '../../Component/NewComponent/Search';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import ManageRow from '../../Component/SellerStore/ManageRow';
 import {Link} from 'react-router'

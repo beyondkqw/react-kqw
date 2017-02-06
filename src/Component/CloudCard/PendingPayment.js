@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import '../../Stylesheets/App/cloudCard.css';
 import {GetOrderList} from '../../Action/auth';
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 
 export default class PendingPayment extends Component {
     // 构造

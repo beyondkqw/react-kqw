@@ -105,11 +105,11 @@ export default class SellerOrderDetails extends Component {
                                 <div className="color6 flex1 font14 order_margin">
                                     <p className="oh orderShow db">{el.productName}</p>
                                     <p className="db f12 color9 mt">{el.attrDesc}</p>
-                                    <p className="db f12 color9 mt">货号 : jaskd</p>
+                                    {/*<p className="db f12 color9 mt">货号 : {el.orderNo}</p>*/}
                                 </div>
                                 <div className="pa order_price tr">
                                     <p className=""><span className="f12">￥</span><span className="f15">{el.price}</span></p>
-                                    <p className="color9 font14"><span>X</span><span>123</span></p>
+                                    <p className="color9 font14"><span>X</span><span>{el.num}</span></p>
                                     {/*退款中  退款成功*/}
                                     {
                                         this.props.location.query.toApply && el.refundStatus !== null?
@@ -148,7 +148,7 @@ export default class SellerOrderDetails extends Component {
                         <span className="color6">实付款</span>
                         <div className="fr color_yellow">
                             <span>￥</span>
-                            <span>236</span>
+                            <span>{sellerOrderDetails.amount}</span>
                         </div>
                     </div>
                 </div>

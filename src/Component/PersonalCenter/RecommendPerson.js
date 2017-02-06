@@ -1,7 +1,7 @@
 import React, { Component,PropTypes} from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import IsShowEmptyImg from '../../Component/CommonComponent/IsShowEmptyImg'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/personal.css';
 import {UserInfo} from '../../Action/auth'
 
