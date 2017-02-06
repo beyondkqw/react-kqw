@@ -10,20 +10,6 @@ export default class SellerOrderDetails extends Component {
     // 构造
     constructor(props) {
         super(props);
-        // 初始状态
-
-        this.orderList = [
-            {title:'商品总价',price:'189.00',style:'f12',color:'color9'},
-            {title:'运费(快递)',price:'0.00',style:'f12',color:'color9'},
-            {title:'订单总价',price:'0.00',style:'font14',color:'color6'}
-        ]
-        this.orderDetails = [
-            {title:'订单编号',detail:this.props.location.query.orderNo},
-            {title:'聚朵云交易号',detail:'748'},
-            {title:'创建时间',detail:'2016-5-45 12:45:45'},
-            {title:'付款时间',detail:'2016-5-45 12:45:45'},
-            {title:'发货时间',detail:'2016-5-45 12:45:45'}
-        ];
         this.state = {
             orderNo:'',
             sellerOrderDetails:[]
@@ -76,14 +62,14 @@ export default class SellerOrderDetails extends Component {
         const {sellerOrderDetails} = this.state
         return (
             <div className="containerNav">
-                <div className="df plAll border_bottom">
+                {/* <div className="df plAll border_bottom">
                     <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
                         <p className="f12 color9 mt3"><span>2016-11-21</span><span className="di ml">13:46:05</span></p>
                     </div>
                     <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
-                </div>
+                </div>*/}
                 <div className="df plAll">
                     <div className="pr" style={{width:14,height:14,margin:'auto'}}><img className="pa" src={require("../../Images/time.png")} alt=""/></div>
                     <div className="flex1 mtlr">
@@ -129,19 +115,27 @@ export default class SellerOrderDetails extends Component {
                 }
 
                 <div className="plAll border_bottom">
-                    {
-                        this.orderList.map(el=>{
-                            return(
-                                <div className={el.style}>
-                                    <span className={el.color}>{el.title}</span>
-                                    <div className="fr color9">
-                                        <span>￥</span>
-                                        <span>{el.price}</span>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                    {/*<div className='f12'>
+                        <span className='color9'>商品总价</span>
+                        <div className="fr color9">
+                            <span>￥</span>
+                            <span>189</span>
+                        </div>
+                    </div>*/}
+                    <div className='f12'>
+                        <span className='color9'>运费(快递)</span>
+                        <div className="fr color9">
+                            <span>￥</span>
+                            <span>{sellerOrderDetails.postage}</span>
+                        </div>
+                    </div>
+                    <div className='f12'>
+                        <span className='color9'>订单总价</span>
+                        <div className="fr color9">
+                            <span>￥</span>
+                            <span>{sellerOrderDetails.amount}</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="plAll border_bottom font14">
                     <div>
@@ -154,18 +148,36 @@ export default class SellerOrderDetails extends Component {
                 </div>
                 <SplitLine />
                 <div className="plAll border_bottom f12 color9">
-                    {
-                        this.orderDetails.map(el=>{
-                            return(
-                                <div>
-                                    <span>{el.title}</span>
-                                    <div className="fr">
-                                        <span>{el.detail}</span>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                    <div>
+                        <span>订单编号</span>
+                        <div className="fr">
+                            <span>{this.props.location.query.orderNo}</span>
+                        </div>
+                    </div>
+                    {/*<div>
+                        <span>聚朵云交易号</span>
+                        <div className="fr">
+                            <span>c5546</span>
+                        </div>
+                    </div>*/}
+                    <div>
+                        <span>创建时时间</span>
+                        <div className="fr">
+                            <span>{sellerOrderDetails.create_time}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>付款时间</span>
+                        <div className="fr">
+                            <span>{sellerOrderDetails.pay_time}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>发货时间</span>
+                        <div className="fr">
+                            <span>{sellerOrderDetails.delivery_time}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

@@ -98,9 +98,7 @@ export default class SalesStatistics extends Component {
                                                             <img src={require("../../Images/rightArrow.png")} alt=""/>
                                                         </span>
                                                     }
-
                                                 </p>
-
                                             </div>
                                         </div>
 
@@ -111,7 +109,7 @@ export default class SalesStatistics extends Component {
                                                         monthDay && monthDay.map(item=> {
                                                             return (
                                                                 <li className="df flex-pack-justify border_top flex-align-center color9">
-                                                                    <p><span>￥</span>item.AMOUNT}</p>
+                                                                    <p><span>￥</span>{item.AMOUNT}</p>
                                                                     <p><span>{item.CREATE_TIME}</span></p>
                                                                 </li>
                                                             )
@@ -120,14 +118,12 @@ export default class SalesStatistics extends Component {
                                                 </ul>
                                                 :
                                                 null
-
                                         }
                                     </div>
                                     <SplitLine />
                                 </div>
 
                             )
-
                     })
                 }
             </div>
