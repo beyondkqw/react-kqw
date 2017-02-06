@@ -308,7 +308,7 @@ export async function DelShopCar(carIds){
     }
 }
 
-//删除购物车
+//购物车结算
 export async function SettlementShopCar(carIds){
     try{
         const res = await apiGet(URL.settlementShopCar,{carIds});
