@@ -10,7 +10,7 @@ export default class NavBar extends Component {
         const {title,renderBack} = this.props
         return (
             <div
-                style={{height:40,backgroundColor:'#ff5500'}}
+                style={{height:45,backgroundColor:'#ff5500'}}
                 className="width100  flex flex-align-center flex-pack-center"
             >
                 {
@@ -23,7 +23,7 @@ export default class NavBar extends Component {
                                 width:9,
                                 height:16,
                                 left:10,
-                                top:8,
+                                top:14,
                             }}
                         >
                             <img
