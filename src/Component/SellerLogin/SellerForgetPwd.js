@@ -6,6 +6,7 @@ import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {ErrorNum,ErrorPs} from '../../Action/rpc'
 import {ForgetCode,UpdateLoginPwd} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
     require('../../Images/login/phone.png'),
@@ -143,6 +144,10 @@ export default class SellerForgetPwd extends Component {
     render(){
         return(
                 <div>
+                    <NavBar
+                        renderBack = {true}
+                        title = {'忘记密码'}
+                    />
                     {/*手机号*/}
                     <div className='editorBox'>
                     <span className="editorImg">

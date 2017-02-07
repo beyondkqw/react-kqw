@@ -6,6 +6,7 @@ import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SellerToLogin,MyInfo} from '../../Action/auth'
 import {saveToken,ErrorNum,ErrorPs} from '../../Action/rpc'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
     require('../../Images/login/phone.png'),
@@ -85,6 +86,9 @@ export default class SellerLogin extends Component {
     render(){
         return(
             <div>
+                <NavBar
+                    title = {'登录'}
+                />
                 <div className='editorBox'>
                     <span className="editorImg">
                         <img src={icon[0]}/>

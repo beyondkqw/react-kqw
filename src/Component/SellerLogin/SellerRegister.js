@@ -6,6 +6,7 @@ import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SMSCode,SellerToRegister} from '../../Action/auth'
 import {ErrorNum,ErrorPs,GetQueryString,ChinaChar,EnglishChar,specialChar} from '../../Action/rpc'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
     require('../../Images/login/phone.png'),
@@ -144,6 +145,10 @@ export default class SellerRegister extends Component {
     render(){
         return(
             <div>
+                <NavBar
+                    renderBack = {true}
+                    title = {'注册商铺'}
+                />
                 {/*店铺，名称*/}
                 <div className='editorBox'>
                     <span className="editorImg">
