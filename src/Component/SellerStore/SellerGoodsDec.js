@@ -8,6 +8,7 @@ import '../../Stylesheets/App/goodsDetails.css';
 import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} from '../../Action/auth'
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -104,6 +105,10 @@ export default class SellerGoodsDec extends Component {
         const {goodsDetails} = this.state;
         return (
             <section className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'商品详情'}
+                />
                 <div className="bannerImg">
                     <AutoPlaySwipeableViews
                         interval = {2000}

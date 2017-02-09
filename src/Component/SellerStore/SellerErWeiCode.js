@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 import QRCode from 'qrcode.react';
 import {Process,MyInfo} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerErWeiCode extends Component {
     // 构造
@@ -43,6 +44,10 @@ export default class SellerErWeiCode extends Component {
         const {infoDetails,qzCode} = this.state
         return (
             <div className="containerNav allIncome_Img supplement">
+                <NavBar
+                    renderBack = {true}
+                    title = {'支付二维码'}
+                />
                 <div className="pa_top1 tc">
                     <span className="di incomeImg">
                         <img className="border_ra50" src={infoDetails.IMAGE_URI} alt=""/>
