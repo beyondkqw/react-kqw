@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import {StorectList} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SearchOrder extends Component {
     render() {
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'搜索订单'}
+                />
                 {/*<div style={{height:50}} className="flex flex-align-center flex-pack-justify border_bottom plr">
                     <span className="font14 color6">
                         商品ID

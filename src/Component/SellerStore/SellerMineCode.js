@@ -4,6 +4,7 @@ import {qrCode} from '../../Action/url'
 import wx from 'weixin-js-sdk';
 import {loadToken,ROOT_URL,initWxShare} from '../../Action/rpc'
 import {MyInfo,ErCode,imei,version,client,InitWxJsSDk} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerMineCode extends Component {
 
@@ -37,6 +38,10 @@ export default class SellerMineCode extends Component {
         const {storeDetails} = this.state
         return (
             <div className="containerNav allIncome_Img supplement">
+                <NavBar
+                    renderBack = {true}
+                    title = {'二维码名片'}
+                />
                 <div className="pa_top1 tc">
                     <span className="di incomeImg">
                         <img className="border_ra50" src={storeDetails.IMAGE_URI} alt=""/>

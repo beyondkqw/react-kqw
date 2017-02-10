@@ -40,6 +40,10 @@ export default class CustomerService extends Component {
                 return
             }
         }
+        if(!qqNum||!phoneNum||!wechatNum){
+            alert('请填写资料')
+            return
+        }
         await this.getEnterDetail(qqNum,wechatNum,phoneNum)
     }
 
@@ -47,6 +51,8 @@ export default class CustomerService extends Component {
     async getEnterDetail(qq,wechat,mobile){
         await StoreContact(qq,wechat,mobile)
             .then(res=>{
+                alert('修改成功')
+                window.history.go(-1)
                 console.log('修改成功')
             })
             .catch(err=>{

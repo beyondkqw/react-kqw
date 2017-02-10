@@ -3,6 +3,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {BandBank} from '../../Action/auth';
 import {ErrorNum,BankNum,ChinaChar,EnglishChar,specialChar} from '../../Action/rpc'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 export default class SellerAddCard extends Component {
@@ -73,6 +74,10 @@ export default class SellerAddCard extends Component {
     render() {
         return (
             <div className="containerNav pb1">
+                <NavBar
+                    renderBack = {true}
+                    title = {'添加银行卡'}
+                />
                 <div className="wrap">
                     <ul>
                         <li>

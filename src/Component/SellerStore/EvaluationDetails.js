@@ -3,6 +3,7 @@ import StoreRow from '../../Component/GoodsDetails/StoreRow';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {RemarkList,Reply} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class EvaluationDetails extends Component {
     // 构造
@@ -51,6 +52,10 @@ export default class EvaluationDetails extends Component {
         const {remarkList,showMsg,replayName} = this.state
         return (
             <div>
+                <NavBar
+                    renderBack = {true}
+                    title = {'商品评价'}
+                />
                 <div className="border_bottom pr">
                     <StoreRow
                         title = {name}
@@ -62,7 +67,7 @@ export default class EvaluationDetails extends Component {
                     />
                 </div>
                 <SplitLine />
-                <div className="pa oa width_100" style={{top:120,bottom:0}}>
+                <div className="pa oa width_100" style={{top:165,bottom:0}}>
                     {
                         remarkList == ''?
                            <IsShowEmptyImg

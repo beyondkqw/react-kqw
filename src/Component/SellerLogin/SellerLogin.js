@@ -24,8 +24,8 @@ export default class SellerLogin extends Component {
         // 初始状态
         this.state = {
             Reminder:'',
-            accName:'',
-            pwd:''
+            accName:'13608022531',
+            pwd:'asd123'
         };
     }
 
@@ -94,6 +94,7 @@ export default class SellerLogin extends Component {
                         <img src={icon[0]}/>
                     </span>
                     <input
+                        defaultValue={'13608022531'}
                         maxLength="11"
                         className="editorInput"
                         placeholder="请输入手机号"
@@ -108,6 +109,7 @@ export default class SellerLogin extends Component {
                         <img src={icon[1]}/>
                     </span>
                     <input
+                        defaultValue={'asd123'}
                         className="editorInput"
                         placeholder="请输入密码"
                         type="password"

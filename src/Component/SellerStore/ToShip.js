@@ -4,6 +4,7 @@
 import React, { Component,PropTypes } from 'react';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import {Delivery} from '../../Action/auth';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 const logisticalList = [
@@ -66,6 +67,10 @@ export default class ToShip extends Component {
         console.log('clickIndex=====>',clickIndex)
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'发货物流'}
+                />
                 <div style={{height:50}} className="flex flex-align-center border_bottom plr">
                     <span className="di mr10" style={{width:20,height:15,lineHeight:0}}>
                         <img src={require('../../Images/common/fahuo.png')} alt=""/>
