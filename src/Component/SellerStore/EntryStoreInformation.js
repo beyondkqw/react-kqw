@@ -95,10 +95,10 @@ export default class EntryStoreInformation extends Component {
     //上传图片
     fileChange (type,e){
         var client = new OSS.Wrapper({
-            region: 'oss-cn-shanghai',
+            region: 'oss-cn-shenzhen',
             accessKeyId: 'LTAIbrSAT1OgIEDo',
             accessKeySecret: 'rOI5hYbqCTy3B2sb6Zbt77Is9h34XS',
-            bucket: "shyt-image"
+            bucket: "jdy-images"
         });
 
         var file = e.target.files[0];

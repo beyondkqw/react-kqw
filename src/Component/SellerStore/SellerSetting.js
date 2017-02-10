@@ -5,6 +5,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {StoreDetail,StoreEdit} from '../../Action/auth'
 import NavBar from '../../Component/CommonComponent/NavBar'
+import UUID from 'uuid-js'
 
 export default class SellerSetting extends Component {
     // 构造
@@ -55,6 +56,45 @@ export default class SellerSetting extends Component {
             })
     }
 
+    //上传图片
+    fileChange (type,e){
+        var client = new OSS.Wrapper({
+            region: 'oss-cn-shenzhen',
+            accessKeyId: 'LTAIbrSAT1OgIEDo',
+            accessKeySecret: 'rOI5hYbqCTy3B2sb6Zbt77Is9h34XS',
+            bucket: "jdy-images"
+        });
+
+        var file = e.target.files[0];
+        var fileName = window.URL.createObjectURL(file)
+        var index1=file.name.lastIndexOf(".");
+        var index2=file.name.length;
+        var suffix=file.name.substring(index1,index2)
+        console.log(suffix)
+
+        var uuid4 = UUID.create().toString();
+        console.log(uuid4.toString());
+        var storeAs = 'sq/'+uuid4+''+suffix;
+        console.log(file.name + ' => ' + storeAs);
+        client.multipartUpload(storeAs, file).then((result)=> {
+            console.log(result.url);
+            switch (type){
+                case 1 : this.setState({storeImg:fileName})
+                    break;
+                case 2 : this.setState({licenseImg:fileName})
+                    break;
+                case 3 : this.setState({cardFace:fileName})
+                    break;
+                case 4 : this.setState({cardBack:fileName})
+                    break;
+                default : this.status = ''
+                    break;
+            }
+        }).catch(function (err) {
+            console.log(err);
+        })
+    }
+
     render() {
         const {storeImg,storeName,address,licenseImg,cardFace,cardBack} = this.state
         return (
@@ -70,7 +110,8 @@ export default class SellerSetting extends Component {
                         <input
                             type="file"
                             ref='storeHeaderImg'
-                            onChange={()=>this.state({storeImg:this.refs.storeHeaderImg.value})}
+                            onChange={(e)=>this.fileChange(1,e)}
+                            //onChange={()=>this.state({storeImg:this.refs.storeHeaderImg.value})}
                         />
                         <img className="border_ra50" src={storeImg} alt=""/>
                     </div>
@@ -114,7 +155,8 @@ export default class SellerSetting extends Component {
                             <input
                                type="file"
                                ref='licenseImg'
-                               onChange={()=>this.setState({licenseImg:this.refs.licenseImg.value})}
+                               onChange={(e)=>this.fileChange(2,e)}
+                               //onChange={()=>this.setState({licenseImg:this.refs.licenseImg.value})}
                             />
                             <img className="educationImg border_ra" src={licenseImg} />
                         </span>
@@ -127,14 +169,16 @@ export default class SellerSetting extends Component {
                             <input
                                type="file"
                                ref='cardFace'
-                               onChange={()=>this.setState({cardFace:this.refs.cardFace.value})}
+                               onChange={(e)=>this.fileChange(3,e)}
+                               //onChange={()=>this.setState({cardFace:this.refs.cardFace.value})}
                             />
                             <img className="educationImg border_ra" src={cardFace} />
                         </span>
                        <span className="di uploadCardImg ml5">
                             <input type="file"
                                ref='cardBack'
-                               onChange={()=>this.setState({cardBack:this.refs.cardBack.value})}
+                               onChange={(e)=>this.fileChange(4,e)}
+                               //onChange={()=>this.setState({cardBack:this.refs.cardBack.value})}
                             />
                             <img className="educationImg border_ra" src={cardBack} />
                         </span>
