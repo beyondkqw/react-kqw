@@ -117,6 +117,7 @@ import StoreClassify from '../Component/GoodsDetails/StoreClassify'
 import CloudComplex from '../Component/GoodsDetails/CloudComplex'
 import RechargeWay from '../Component/PersonalCenter/RechargeWay'
 import StoreClassifyDetail from '../Component/GoodsDetails/StoreClassifyDetail'
+import ShareQrCode from '../Component/PersonalCenter/ShareQrCode'
 
 
 
@@ -240,6 +241,7 @@ const RouteConfig = (
       <Route path="cloudComplex" component={CloudComplex} />
       <Route path="rechargeWay" component={RechargeWay} />
       <Route path="storeClassifyDetail" component={StoreClassifyDetail} />
+      <Route path="shareQrCode" component={ShareQrCode} />
     </Route>
   </Router>
 );

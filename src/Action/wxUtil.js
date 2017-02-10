@@ -19,12 +19,47 @@ function initWx(){
                 nonceStr: res.nonceStr, // 必填，生成签名的随机串
                 signature: res.signature,// 必填，签名，见附录1
                 jsApiList: ["openLocation","getLocation","chooseWXPay","onMenuShareTimeline","onMenuShareAppMessage",
-                    "chooseWXPay"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    "startRecord","stopRecord","uploadVoice","downloadVoice","playVoice","onVoicePlayEnd","pauseVoice","chooseWXPay"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         })
         .catch(err=>{
             console.warn('getHomeMoudle',err)
         });
+}
+
+//微信分享
+export async function initWxShare(title, link, imgUrl, desc, type, dataUrl, bizCode, bizType) {
+    await initWx();
+    wx.ready(()=> {
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: title, // 分享标题
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: ()=>{alert('分享到朋友圈成功')},
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+
+        //分享给朋友
+        wx.onMenuShareAppMessage({
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            type: type, // 分享类型,music、video或link，不填默认为link
+            dataUrl: dataUrl, // 如果type是music或video，则要提供数据链接，默认为空
+            success: ()=> {
+                // 用户确认分享后执行的回调函数
+                alert("分享到朋友成功");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
 }
 
 async function InitWxJsSDk(url) {

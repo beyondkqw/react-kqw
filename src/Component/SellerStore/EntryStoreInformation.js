@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import {EnterStoreInformation,StoreType} from '../../Action/auth'
 import '../../Stylesheets/App/sellerStore.css';
+import UUID from 'uuid-js'
 
 
 export default class EntryStoreInformation extends Component {
@@ -22,7 +23,11 @@ export default class EntryStoreInformation extends Component {
             cardBack:'',
             chooseType:false,
             StoreTypeItem:[],
-            id:''
+            id:'',
+            uploadStoreImg:require("../../Images/common/uploadImg.png"),
+            licenseImg:require("../../Images/uploadImg.png"),
+            cardFace:require("../../Images/uploadImg.png") ,
+            cardBack:require("../../Images/uploadImg.png")
         };
     }
     static contextTypes = {
@@ -87,8 +92,48 @@ export default class EntryStoreInformation extends Component {
         this.setState({chooseType:false})
     }
 
+    //上传图片
+    fileChange (type,e){
+        var client = new OSS.Wrapper({
+            region: 'oss-cn-shanghai',
+            accessKeyId: 'LTAIbrSAT1OgIEDo',
+            accessKeySecret: 'rOI5hYbqCTy3B2sb6Zbt77Is9h34XS',
+            bucket: "shyt-image"
+        });
+
+        var file = e.target.files[0];
+        var fileName = window.URL.createObjectURL(file)
+        var index1=file.name.lastIndexOf(".");
+        var index2=file.name.length;
+        var suffix=file.name.substring(index1,index2)
+        console.log(suffix)
+
+        var uuid4 = UUID.create().toString();
+        console.log(uuid4.toString());
+        var storeAs = 'sq/'+uuid4+''+suffix;
+        console.log(file.name + ' => ' + storeAs);
+        client.multipartUpload(storeAs, file).then((result)=> {
+            console.log(result.url);
+            switch (type){
+                case 1 : this.setState({uploadStoreImg:fileName})
+                    break;
+                case 2 : this.setState({licenseImg:fileName})
+                    break;
+                case 3 : this.setState({cardFace:fileName})
+                    break;
+                case 4 : this.setState({cardBack:fileName})
+                    break;
+                default : this.status = ''
+                    break;
+            }
+        }).catch(function (err) {
+            console.log(err);
+        })
+    }
+
+
     render(){
-        const {chooseType,StoreTypeItem} = this.state
+        const {chooseType,StoreTypeItem,uploadStoreImg,licenseImg,cardFace,cardBack} = this.state
         return(
             <div className="containerNav">
                 <div className="flex1">
@@ -97,9 +142,10 @@ export default class EntryStoreInformation extends Component {
                         <div className="pr storeHeaderImg">
                             <input type="file"
                                ref='imgUrl'
-                               onChange={()=>this.setState({uploadStoreImg:this.refs.imgUrl.value})}
+                               onChange={(e)=>this.fileChange(1,e)}
+                               //onChange={()=>this.setState({uploadStoreImg:this.refs.imgUrl.value})}
                             />
-                            <img className="" src={require("../../Images/common/uploadImg.png")} alt=""/>
+                            <img className="" src={uploadStoreImg} alt=""/>
                         </div>
                     </div>
                     <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
@@ -184,9 +230,10 @@ export default class EntryStoreInformation extends Component {
                             <span className="di uploadCardImg">
                                 <input type="file"
                                    ref='license'
-                                   onChange={()=>this.setState({licenseImg:this.refs.license.value})}
+                                   onChange={(e)=>this.fileChange(2,e)}
+                                   //onChange={()=>this.setState({licenseImg:this.refs.license.value})}
                                 />
-                                <img className="educationImg" src={require("../../Images/uploadImg.png")} />
+                                <img className="educationImg" src={licenseImg} />
                             </span>
                         </div>
                     </div>
@@ -204,16 +251,18 @@ export default class EntryStoreInformation extends Component {
                             <span className="di uploadCardImg">
                                 <input type="file"
                                    ref='cardFace'
-                                   onChange={()=>this.setState({cardFace:this.refs.cardFace.value})}
+                                   onChange={(e)=>this.fileChange(3,e)}
+                                   //onChange={()=>this.setState({cardFace:this.refs.cardFace.value})}
                                 />
-                                <img className="educationImg" src={require("../../Images/uploadImg.png")} />
+                                <img className="educationImg" src={cardFace} />
                             </span>
                             <span className="di uploadCardImg ml5">
                                 <input type="file"
                                    ref='cardBack'
-                                   onChange={()=>this.setState({cardBack:this.refs.cardBack.value})}
+                                   onChange={(e)=>this.fileChange(4,e)}
+                                   //onChange={()=>this.setState({cardBack:this.refs.cardBack.value})}
                                 />
-                                <img className="educationImg" src={require("../../Images/uploadImg.png")} />
+                                <img className="educationImg" src={cardBack} />
                             </span>
                         </div>
                     </div>
