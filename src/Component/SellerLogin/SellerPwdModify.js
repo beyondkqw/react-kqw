@@ -97,7 +97,7 @@ export default class SellerPwdModify extends Component {
                     title = {'修改密码'}
                 />
                 <div>
-                    <div className='editorBox_100' style={{justifyContent:'flex-start'}}>
+                    <div className='pr editorBox_100' style={{justifyContent:'flex-start'}}>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 24}}>验证码</span>
                         <input
                             ref = 'code'
