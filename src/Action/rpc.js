@@ -21,6 +21,7 @@ import {imei,version,client} from './auth'
 export const wsPath = "ws://jdy.tunnel.qydev.com/";
 //export const ROOT_URL = 'http://jdapi.tunnel.qydev.com/api/'
 export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/'
+
 //获取屏幕宽度
 export const SCREEN_WIDTH = window.screen.width
 
