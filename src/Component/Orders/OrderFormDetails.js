@@ -4,19 +4,6 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
 import {OrderDetail,ConfirmReceived} from '../../Action/auth';
 
-const orderList = [
-    {title:'商品总价',price:'189.00',style:'f12',color:'color9'},
-    {title:'运费(快递)',price:'0.00',style:'f12',color:'color9'},
-    {title:'积分抵扣',price:'0.00',style:'f12',color:'color9'},
-    {title:'订单总价',price:'0.00',style:'font14',color:'color6'}
-]
-const orderDetails = [
-    {title:'订单编号',detail:'65874'},
-    {title:'聚朵云交易号',detail:'748'},
-    {title:'创建时间',detail:'2016-5-45 12:45:45'},
-    {title:'付款时间',detail:'2016-5-45 12:45:45'},
-    {title:'发货时间',detail:'2016-5-45 12:45:45'}
-];
 export default class OrderFormDetails extends Component {
     // 构造
       constructor(props) {
@@ -82,14 +69,14 @@ export default class OrderFormDetails extends Component {
                         <p className="f12 color9 mt3">收货地址:<span>{orderFormdDetails.address_detail}</span></p>
                     </div>
                 </div>
-                <div className="df plAll">
+                {/*<div className="df plAll">
                     <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
                         <p className="f12 color9 mt3"><span>{orderFormdDetails.real_receive_time}</span></p>
                     </div>
                     <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
-                </div>
+                </div>*/}
 
                 <SplitLine />
                 <div className="paymargin">
@@ -120,43 +107,63 @@ export default class OrderFormDetails extends Component {
                     })
                 }
                 <div className="plAll border_bottom">
-                    {
-                        orderList.map(el=>{
-                            return(
-                            <div className={el.style}>
-                                <span className={el.color}>{el.title}</span>
-                                <div className="fr color9">
-                                    <span>￥</span>
-                                    <span>{el.price}</span>
-                                </div>
-                            </div>
-                            )
-                        })
-                    }
+                    <div className='f12'>
+                         <span className='color9'>商品总价</span>
+                         <div className="fr color9">
+                             <span>￥</span>
+                             <span>189</span>
+                         </div>
+                     </div>
+                    <div className='f12'>
+                        <span className='color9'>运费(快递)</span>
+                        <div className="fr color9">
+                            <span>￥</span>
+                            <span>{orderFormdDetails.postage}</span>
+                        </div>
+                    </div>
+                    <div className='f12'>
+                        <span className='color9'>订单总价</span>
+                        <div className="fr color9">
+                            <span>￥</span>
+                            <span>{orderFormdDetails.amount}</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="plAll border_bottom font14">
                     <div>
                         <span className="color6">实付款</span>
                         <div className="fr color_yellow">
                             <span>￥</span>
-                            <span>236</span>
+                            <span>{orderFormdDetails.amount}</span>
                         </div>
                     </div>
                 </div>
                 <SplitLine />
                 <div className="plAll border_bottom f12 color9">
-                    {
-                        orderDetails.map(el=>{
-                            return(
-                                <div>
-                                    <span>{el.title}</span>
-                                    <div className="fr">
-                                        <span>{el.detail}</span>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                    <div>
+                        <span>订单编号</span>
+                        <div className="fr">
+                            <span>{this.props.location.query.orderNo}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>创建时时间</span>
+                        <div className="fr">
+                            <span>{orderFormdDetails.create_time}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>付款时间</span>
+                        <div className="fr">
+                            <span>{orderFormdDetails.pay_time}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>发货时间</span>
+                        <div className="fr">
+                            <span>{orderFormdDetails.delivery_time}</span>
+                        </div>
+                    </div>
                 </div>
                 {
                     this.props.location.query.isToPay?

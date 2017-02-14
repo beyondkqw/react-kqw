@@ -53,7 +53,7 @@ export default class SurePayment extends Component {
        async confirmPayMoney(){
            switch(this.payStatus) {
                //余额支付
-               case 'balance' :this.getPayMoney(0,4);break;
+               case 'balance' :this.getPayMoney(this.props.location.query.type,4);break;
                //微信支付
                case 'wxpay' :this.wxPay();break;
                default:return '';break;
@@ -109,7 +109,7 @@ export default class SurePayment extends Component {
         //出现延迟加载
         //this.setState({showDelay:true})
 
-        await this.getPayMoney(0,1)
+        await this.getPayMoney(this.props.location.query.type,1)
          wx.ready(async()=> {
             await wx.chooseWXPay({
                  timestamp: this.state.wxParam.timeStamp, // 支付签名时间戳，
@@ -130,12 +130,13 @@ export default class SurePayment extends Component {
 
     render() {
         const {showDelay,isRepeat} = this.state
+        const {money,orderNos} = this.props.location.query
         return (
             <div className="containerNav">
                 <Subscribe target={RPC} eventName="modal" listener={this.changeModal} />
                 <div className="plAll tc bkg_fadeff">
-                    <p className="color9 font14">聚朵云-订单编号4453546458</p>
-                    <p className="mt5 color6 f20"><span>￥</span><span>258</span></p>
+                    <p className="color9 font14">聚朵云-订单编号{orderNos}</p>
+                    <p className="mt5 color6 f20"><span>￥</span><span>{money}</span></p>
                 </div>
                 <div className="tc f12 color_red width_100 plr mtb loginHeight" style={{lineHeight:'36px'}}>
                     {this.state.Reminder}

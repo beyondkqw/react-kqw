@@ -20,7 +20,7 @@ export default class PendingPayment extends Component {
     }
     //订单列表
     async getOrderList(){
-        await GetOrderList(0,1)
+        await GetOrderList(0,'')
             .then(res=>{
                 this.setState({pendPayList:res.resultList})
             })
@@ -33,18 +33,18 @@ export default class PendingPayment extends Component {
         const {pendPayList} = this.state
         return (
             <div>
-                <Link to="/pendPaymentDetails">
-                    {
-                        pendPayList ==''?
-                           <IsShowEmptyImg
-                               styleSheet={{width:69,height:72,marginTop:120}}
-                               title={'列表是空的哦~'}
-                           />
-                            :
-                        pendPayList&&pendPayList.map(el=>{
-                            return(
-                                el.orderDetails.map(item=>{
-                                    return(
+                {
+                    pendPayList ==''?
+                       <IsShowEmptyImg
+                           styleSheet={{width:69,height:72,marginTop:120}}
+                           title={'列表是空的哦~'}
+                       />
+                        :
+                    pendPayList&&pendPayList.map(el=>{
+                        return(
+                            el.orderDetails.map(item=>{
+                                return(
+                                    <Link to="/pendPaymentDetails" query = {{showBar:true,amount:item.price,time:el.create_time,orderNo:item.orderNo}}>
                                         <div style={{height:50}} className="df flex-pack-justify flex-align-center border_bottom plr">
                                             <div>
                                                 <div className="font14 color6">{item.productName}</div>
@@ -54,14 +54,12 @@ export default class PendingPayment extends Component {
                                                 <img src={require('../../Images/rightArrow.png')} alt=""/>
                                             </span>
                                         </div>
-                                    )
-                                })
-                            )
-                        })
-                    }
-
-                </Link>
-
+                                    </Link>
+                                )
+                            })
+                        )
+                    })
+                }
             </div>
         );
     }

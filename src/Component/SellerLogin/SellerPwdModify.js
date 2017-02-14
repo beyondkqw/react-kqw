@@ -18,8 +18,7 @@ export default class SellerPwdModify extends Component {
             smsCode:'',
             Reminder:'',
             pwd:'',
-            againPwd:'',
-            code:''
+            againPwd:''
         };
     }
 
@@ -55,8 +54,8 @@ export default class SellerPwdModify extends Component {
 
     //提交
     async confirmBtn(){
-        const {pwd,againPwd,smsCode,code} = this.state
-        if (!code) {
+        const {pwd,againPwd,smsCode} = this.state
+        if (!this.refs.code.value) {
             this.setState({Reminder:'验证码不能为空!'})
             return
         }
@@ -68,7 +67,7 @@ export default class SellerPwdModify extends Component {
             this.setState({Reminder:'两次密码不一致,请重新输入'})
             return
         }
-        await ResetLoginPwd(pwd,smsCode,code)
+        await ResetLoginPwd(pwd,smsCode,this.refs.code.value)
             .then(res=>{
                 alert('找回密码成功,请重新登录')
                 this.context.router.goBack()

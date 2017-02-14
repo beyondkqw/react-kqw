@@ -14,8 +14,7 @@ const personDetail = [
     /*{name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}*/
 ]
 const ItemList = [
-    /*{name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'partner'},*/
-    {name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'/personalCenter/memberClub'},
+    //{name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'/personalCenter/memberClub'},
     {name:'会员中心',imgUrl:require('../../Images/change.png'),link:'/personalCenter/memberClub'},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
     {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},

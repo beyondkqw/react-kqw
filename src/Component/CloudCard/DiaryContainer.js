@@ -22,11 +22,8 @@ export default class DiaryContainer extends Component {
     async ToGetAwayRecord(){
         await GiveAwayRecord(3)
             .then(res=>{
-                if(res.resultList == ''){
-                    this.setState({toShow:true})
-                    return
-                }
                 this.setState({rechareList:res.resultList})
+                console.log('获取到的数据==========>',this.state.rechareList)
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -48,17 +45,17 @@ export default class DiaryContainer extends Component {
                             <Link
                                 to="/pendPaymentDetails"
                                 query={{
-                                imgUrl:el.image_uri,
-                                memberName:el.member_name,
-                                amount:el.change_amount,
-                                msg:el.extra_msg2
+                                amount:el.channel_amount,
+                                msg:el.extra_msg2,
+                                time:el.create_time,
+                                showMsg:true
                                 }}>
                                 <RetailingItem
-                                    changeAmount = {el.change_amount}
+                                    changeAmount = {el.channel_amount}
                                     extraMsg = {el.extra_msg2}
                                     imgUrl = {el.image_uri}
-                                    ymd = {el.substr(0,10)}
-                                    time = {el.substr(11,5)}
+                                    ymd = {el.create_time.substr(0,10)}
+                                    time = {el.create_time.substring(el.create_time.length -5, el.create_time.length)}
                                     isShowDate={true}
                                 />
                             </Link>

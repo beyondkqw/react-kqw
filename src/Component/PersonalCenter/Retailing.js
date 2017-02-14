@@ -49,11 +49,11 @@ export default class Retailing extends Component {
                                 query={{
                                 imgUrl:el.image_uri,
                                 memberName:el.member_name,
-                                amount:el.change_amount,
+                                amount:el.channel_amount,
                                 msg:el.extra_msg2
                                 }}>
                                 <RetailingItem
-                                    changeAmount = {el.change_amount}
+                                    changeAmount = {el.channel_amount}
                                     extraMsg = {el.extra_msg2}
                                     imgUrl = {el.image_uri}
                                     ymd = {el.substr(0,10)}

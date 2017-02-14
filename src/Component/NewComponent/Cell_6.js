@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cell_4 from '../../Component/NewComponent/Cell_4'
+import {Link} from 'react-router';
 import '../../Stylesheets/App/homePage.css';
 import {SCREEN_WIDTH} from '../../Action/rpc'
 
@@ -13,14 +14,26 @@ export default class Cell_6 extends Component {
         return (
         <div>
             <div className="width_100 border_top border_bottom" style={{height : SCREEN_WIDTH/3.41}}>
-                <span className="di width_50" style={{height : SCREEN_WIDTH/3.41}}>
-                    <img src="" alt=""/>
-                </span>
-                <span className="di width_50" style={{height : SCREEN_WIDTH/3.41}}>
-                    <img src="" alt=""/>
-                </span>
+                <Link>
+                    <span className="di width_50" style={{height : SCREEN_WIDTH/3.41}}>
+                        <img src="" alt=""/>
+                    </span>
+                </Link>
+                <Link>
+                    <span className="di width_50" style={{height : SCREEN_WIDTH/3.41}}>
+                        <img src="" alt=""/>
+                    </span>
+                </Link>
             </div>
-            <Cell_4 />
+            <div className="width100 border_top border_bottom" style={{height:SCREEN_WIDTH/3.45}}>
+                <Link >
+                    <div className="width_25 height_all fl border_right" style={{height:SCREEN_WIDTH/3.45}}>
+                        <div className="pr width100 height_all">
+                            <img />
+                        </div>
+                    </div>
+                </Link>
+            </div>
         </div>
         );
     }

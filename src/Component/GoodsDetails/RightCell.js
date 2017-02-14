@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
 
-export default class GoodsCategory extends Component {
+export default class RightCell extends Component {
 
     // 构造
       constructor(props) {
@@ -22,7 +22,7 @@ export default class GoodsCategory extends Component {
             <div className="rightContainer color9">
                 <div className="right-title df alignItem-center">{name}</div>
                 <div className="r-content-container">
-                    <div>云商城</div>
+                    {/*<div>云商城</div>*/}
                     <div className="df items-cell" >
                         {
                             rightValue.map(el=>{

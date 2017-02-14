@@ -100,15 +100,14 @@ export default class WithdrawCash extends Component {
                                 :
                                 <Link to='/personalCenter/commissionCash'>
                                     <li className="item-content item-link item-link pl  border_bottom">
-                                        <div className="item-media">
-                                        <span className="fl di headerImg">
-                                            <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
-                                                 alt=""/>
-                                        </span>
-                                        </div>
+                                        {/*<div className="item-media">
+                                            <span className="fl di headerImg">
+                                                <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
+                                                     alt=""/>
+                                            </span>
+                                        </div>*/}
                                         <div className="item-inner" style={{marginLeft:15}}>
                                             <div className="item-title-row">
-                                                <div className="item-title font14 color6">多云云的天堂</div>
                                                 <div className="f12 color9">请选择提现账号</div>
                                             </div>
                                         </div>

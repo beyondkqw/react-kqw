@@ -22,10 +22,6 @@ export default class AlreadyUsed extends Component {
     async ToGetAwayRecord(){
         await GiveAwayRecord(4)
             .then(res=>{
-                if(res.resultList == ''){
-                    this.setState({toShow:true})
-                    return
-                }
                 this.setState({areadyUsedList:res.resultList})
             })
             .catch(err=>{
@@ -36,14 +32,36 @@ export default class AlreadyUsed extends Component {
         const {areadyUsedList} = this.state
         return (
             <div>
-                <Link to="/pendPaymentDetails">
-                    <RetailingItem
-                        isShowDate={true}
-                    />
-                </Link>
-                <RetailingItem
-                    isShowDate={true}
-                />
+                {
+                    areadyUsedList == ''?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72,marginTop:120}}
+                            title={'列表是空的哦~'}
+                        />
+                        :
+                    areadyUsedList&&areadyUsedList.map(el=>{
+                        return(
+                            <Link to="/pendPaymentDetails"
+                                  query={{
+                                amount:el.channel_amount,
+                                msg:el.extra_msg2,
+                                time:el.create_time,
+                                showMsg:true
+                                }}>
+                                <RetailingItem
+                                    changeAmount = {el.channel_amount}
+                                    extraMsg = {el.extra_msg2}
+                                    imgUrl = {el.image_uri}
+                                    ymd = {el.create_time.substr(0,10)}
+                                    time = {el.create_time.substring(el.create_time.length -5, el.create_time.length)}
+                                    isShowDate={true}
+                                />
+                            </Link>
+                        )
+                    })
+
+
+                }
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 import LeftImg from '../../Component/NewComponent/LeftImg'
 import RightImg from '../../Component/NewComponent/RightImg'
 import '../../Stylesheets/App/homePage.css';
@@ -11,22 +12,28 @@ export default class Cell_3 extends Component {
         const {imgUrl} = this.props
         return (
             <div className="width_100 border_top border_bottom" style={{height : SCREEN_WIDTH/2.3}}>
-                <div className="width_50 fl height_all border_right tc pr">
-                    <span className="di width_100" style={{height : SCREEN_WIDTH/2.3}}>
-                        <img src={imgUrl[0].img} alt=""/>
-                    </span>
-                </div>
+                <Link to={imgUrl[0]&&imgUrl[0].webUrl}>
+                    <div className="width_50 fl height_all border_right tc pr">
+                        <span className="di width_100" style={{height : SCREEN_WIDTH/2.3}}>
+                            <img src={imgUrl[0]&&imgUrl[0].img} alt=""/>
+                        </span>
+                    </div>
+                </Link>
                 <div className="width_50 fl height_all">
-                    <div>
-                        <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
-                            <img src={imgUrl[1].img} alt=""/>
-                        </span>
-                    </div>
-                    <div>
-                        <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
-                            <img src={imgUrl[2].img} alt=""/>
-                        </span>
-                    </div>
+                    <Link to={imgUrl[1]&&imgUrl[1].webUrl}>
+                        <div>
+                            <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
+                                <img src={imgUrl[1]&&imgUrl[1].img} alt=""/>
+                            </span>
+                        </div>
+                    </Link>
+                    <Link to={imgUrl[2]&&imgUrl[2].webUrl}>
+                        <div>
+                            <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
+                                <img src={imgUrl[2]&&imgUrl[2].img} alt=""/>
+                            </span>
+                        </div>
+                    </Link>
                 </div>
             </div>
         );

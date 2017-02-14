@@ -24,7 +24,7 @@ export default class StoreRow extends Component {
                             {
                                 price?<span className="colorff f12">￥</span>:null
                             }
-                            <span className="colorff font18">{price?price:0}</span>
+                            <span className="colorff font18">{price?price:''}</span>
                         </div>
 
                         {

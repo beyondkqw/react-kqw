@@ -27,22 +27,22 @@ export default class OrderList extends Component {
          this.setState({index:index})
         await this.setState({isShow:index})
             if(this.state.index == 0){
-                this.getOrderList('0')
+                this.getOrderList('0','')
             }else if(this.state.index == 1){
-                this.getOrderList('2')
+                this.getOrderList('1','')
             }else if(this.state.index == 2){
-                this.getOrderList('3')
+                this.getOrderList('2','')
             }else if(this.state.index == 3){
-                this.getOrderList('4')
+                this.getOrderList('4',0)
             }else if(this.state.index == 4){
-                this.getOrderList('')
+                this.getOrderList('','')
             }else{
-                this.getOrderList('0')
+                this.getOrderList('0','')
             }
     }
     //订单列表
-    async getOrderList(status){
-        await GetOrderList(status)
+    async getOrderList(status,isComment){
+        await GetOrderList(status,isComment)
             .then(res=>{
                 this.setState({orderItems:res.resultList})
             })
@@ -58,7 +58,7 @@ export default class OrderList extends Component {
                 <TabBar
                      index = {this.state.index}
                      onClick = {index=>this.onChange(index)}
-                     contents={['待付款','待收货','待评价','已评价','全部订单']}
+                     contents={['待付款','待发货','待收货','待评价','全部订单']}
                 />
                 <SplitLine />
                 {/*代付款*/}
@@ -72,8 +72,18 @@ export default class OrderList extends Component {
                     </div>
                 :null
                 }
-                {/*待收货*/}
+                {/*待发货*/}
                 { this.state.index == 1?
+                    <div>
+                        <OrderDetails
+                            orderDetails = {orderItems}
+                            alreadyRated = {true}
+                        />
+                    </div>
+                    :null
+                }
+                {/*待收货*/}
+                { this.state.index == 2?
                     <div>
                         <OrderDetails
                             Receipt = {()=>this.getOrderList('2')}
@@ -84,7 +94,7 @@ export default class OrderList extends Component {
                     :null
                 }
                 {/*待评价*/}
-                { this.state.index == 2?
+                { this.state.index == 3?
                     <div>
                         <OrderDetails
                            orderDetails = {orderItems}
@@ -94,69 +104,17 @@ export default class OrderList extends Component {
                     </div>
                     :null
                 }
-                {/*已评价*/}
-                { this.state.index == 3?
-                    <div>
-                        <OrderDetails
-                            orderDetails = {orderItems}
-                            alreadyRated = {true}
-                        />
-                    </div>
-                    :null
-                }
                 {/*全部订单*/}
                 { this.state.index == 4?
                     <div>
                         <OrderDetails
-                            againSend = {()=>this.getOrderList('')}
+                            againSend = {()=>this.getOrderList('5')}
                             orderDetails = {orderItems}
                             allRated = {true}
                         />
                     </div>
                     :null
-                    }
-                    {/*待收货*/}
-                    { this.state.index == 1?
-                        <div>
-                            <OrderDetails
-                                orderDetails = {orderItems}
-                                makeSure={true}
-                            />
-                        </div>
-                        :null
-                    }
-                    {/*待评价*/}
-                    { this.state.index == 2?
-                        <div>
-                            <OrderDetails
-                               orderDetails = {orderItems}
-                               toRated = {true}
-                               //query = {}
-                            />
-                        </div>
-                        :null
-                    }
-                    {/*已评价*/}
-                    { this.state.index == 3?
-                        <div>
-                            <OrderDetails
-                                orderDetails = {orderItems}
-                                alreadyRated = {true}
-                            />
-                        </div>
-                        :null
-                    }
-                    {/*全部订单*/}
-                    { this.state.index == 4?
-                        <div>
-                            <OrderDetails
-                                againSend = {()=>this.getOrderList('5')}
-                                orderDetails = {orderItems}
-                                allRated = {true}
-                            />
-                        </div>
-                        :null
-                    }
+                }
             </div>
         );
     }

@@ -197,6 +197,7 @@ export default class ComfirmPayMoney extends Component {
                             query={{
                             planReceiveTime:timer,
                             orderNos:this.orderNoArray.join(','),
+                            payMuchMoney :getAll
                             }}>
                             <button className="settleAccount border_ra color_white margin15">支付</button>
                         </Link>
