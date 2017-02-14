@@ -6,6 +6,8 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import {EnterStoreInformation,StoreType} from '../../Action/auth'
 import '../../Stylesheets/App/sellerStore.css';
+import NavBar from '../../Component/CommonComponent/NavBar'
+
 
 
 export default class EntryStoreInformation extends Component {
@@ -91,6 +93,10 @@ export default class EntryStoreInformation extends Component {
         const {chooseType,StoreTypeItem} = this.state
         return(
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'店铺资料'}
+                />
                 <div className="flex1">
                     <div className="lh60 border_bottom plr font14 df flex-pack-justify flex-align-center">
                         <span className="color6">店铺头像</span>
