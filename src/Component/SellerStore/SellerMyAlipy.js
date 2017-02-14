@@ -30,6 +30,9 @@ export default class SellerMyAlipy extends Component {
                             </div>
                         </li>
                     </ul>
+                    <div className="tc f12 color_red width_100 plr mtb loginHeight">
+                        哈哈
+                    </div>
                     <CommonBtn
                         title = {'确认'}
                     />
