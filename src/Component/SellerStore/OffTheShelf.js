@@ -101,7 +101,7 @@ export default class OffTheShelf extends Component {
         ///comfirmPayMoney
     }
     render(){
-        const {sellerOffDownList} = this.state
+        const {sellerOffDownList,selectAll} = this.state
         return(
             <div className="containerNav">
                 <NavBar
@@ -135,6 +135,7 @@ export default class OffTheShelf extends Component {
                                                 </p>
                                                 <CheckBox
                                                     index={index}
+                                                    selectAll = {this.isUseSelectAll?this.state.selectAll:null}
                                                     onSelect = {(state)=>this.getSelect(state,el.ID)}
                                                 />
                                             </div>

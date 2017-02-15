@@ -53,9 +53,9 @@ export default class SellerMineCode extends Component {
                         <img src={this.state.path} alt=""/>
                     </span>
                 </div>
-                <div className="pf bottom0 tc userHeight bkg_ff width100 color_white font16">
+                {/*<div className="pf bottom0 tc userHeight bkg_ff width100 color_white font16">
                     分享
-                </div>
+                </div>*/}
             </div>
         );
     }

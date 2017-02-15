@@ -123,7 +123,7 @@
 }
 .app_icon img{
     border-radius: 50%;
-    background-color: #00d95a;
+    /*background-color: #00d95a;*/
 }
 .oapp li:last-child:after {
     content: "";
@@ -252,7 +252,7 @@
     width:100%;
     padding:10px;
     background:#fff;
-    top:44px;
+    top:89px;
 }
 
 .deletHistory{

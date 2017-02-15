@@ -4,8 +4,9 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import EnterPassword from '../../Component/CommonComponent/EnterPassword';
+import Location from '../../Component/SellerStore/Location'
 import '../../Stylesheets/App/personal.css';
-import {Generate} from '../../Action/auth';
+import {Generate,HomeBanner} from '../../Action/auth';
 
 
 export default class Recharge extends Component {
@@ -13,12 +14,21 @@ export default class Recharge extends Component {
       constructor(props) {
         super(props);
         // 初始状态
-        this.monetList = [100,200,300,400,500,600]
+
         this.state = {
             toShowNav:false,
             showModal:false,
             indexNum:'',
-            Reminder:''
+            Reminder:'',
+            showMap:false,
+            provName:'',
+            cityName:'',
+            countysName:'',
+            provId:'',
+            cityId:'',
+            countyId:'',
+            priceList:[],
+            rechargeNum:''
         };
       }
 
@@ -26,17 +36,23 @@ export default class Recharge extends Component {
         router:PropTypes.object
     }
 
-    async getGenerate(address,province,city,area,amount,chargeType){
-        await Generate(address,province,city,area,amount,chargeType)
-            .then(res=>{
-                console.log('this.props.location.query.wayOfPay',this.props.location.query.wayOfPay)
-                this.context.router.push({pathname:'/confirmPayment/surePayment',
-                    query:{wayOfPay:this.props.location.query.wayOfPay,orderNos:res}})
+    componentWillMount() {
+        this.getHomeBanner()
+    }
+    //得到地址信息
+    getValue(provName,cityName,countysName,prov,city,county){
+        if(provName&&cityName&&countysName){
+            this.setState({
+                provName:provName,
+                cityName:cityName,
+                countysName:countysName,
+                showMap:false,
+                provId:prov,
+                cityId:city,
+                countyId:county,
             })
-            .catch(err=>{
-                this.setState({Reminder:err.message})
-                console.warn('err',err)
-            })
+        }
+
     }
 
     confirmOrder(){
@@ -55,12 +71,50 @@ export default class Recharge extends Component {
             this.setState({Reminder:''})
         }
 
-        this.getGenerate('深圳宝安','1000','1000','1000',this.refs.reChargeMoney.value,this.props.location.query.chargeType)
+        if(!this.state.provName || !this.state.cityName || !this.state.countysName){
+            this.setState({Reminder:'请选择所在地区'})
+            return
+        }else{
+            this.setState({Reminder:''})
+        }
+
+
+        this.getGenerate(this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,this.refs.reChargeMoney.value,this.props.location.query.chargeType)
     }
 
+
+    //获取充值列表
+    async getHomeBanner(){
+        await HomeBanner('RECHARGE',0,6)
+            .then(res=>{
+                this.setState({priceList:res})
+            })
+            .catch(err=>{
+                console.warn('BANNER',err)
+            })
+    }
+
+    async getGenerate(address,province,city,area,amount,chargeType){
+        await Generate(address,province,city,area,amount,chargeType)
+            .then(res=>{
+                this.context.router.push({pathname:'/confirmPayment/surePayment',
+                    query:{wayOfPay:this.props.location.query.wayOfPay,orderNos:res,money:this.refs.reChargeMoney.value,type:1}})
+            })
+            .catch(err=>{
+                this.setState({Reminder:err.message})
+                console.warn('err',err)
+            })
+    }
+
+    copyValue(index,value){
+        this.setState({toShowNav:true,indexNum:index,rechargeNum:value})
+        this.refs.reChargeMoney.value = value
+    }
+
+
     render() {
-        const {toShowNav,indexNum,showModal} = this.state
-        const {chargeType,chargeWay} = this.props.location.query
+        const {toShowNav,indexNum,showModal,priceList,showMap,provName,cityName,countysName} = this.state
+        const {chargeType,chargeWay,chooseImg} = this.props.location.query
         return (
             <div className="bkg_color containerNav">
                 <Link to="/rechargeWay">
@@ -68,8 +122,8 @@ export default class Recharge extends Component {
                         <div style={{height:50}}  className="df flex-align-center">
                             {
                                 chargeType?
-                                    <span className="fl di headerImg">
-                                        <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
+                                    <span className="fl di" style={{width:30,height:30}}>
+                                        <img className="border_ra50" src={chooseImg}
                                              alt=""/>
                                     </span>
                                     :
@@ -96,10 +150,11 @@ export default class Recharge extends Component {
                             type="text"
                             placeholder="0.00"
                             ref = 'reChargeMoney'
+                            onChange={()=>this.setState({rechargeNum:this.refs.reChargeMoney.value})}
                         />
                     </div>
                 </div>
-                {
+                {/*{
                     toShowNav?
                         <div>
                             <div className="plAll border_top border_bottom f12 color_yellow">
@@ -110,20 +165,19 @@ export default class Recharge extends Component {
                             <SplitLine />
                         </div>
                         :null
-                }
+                }*/}
                 <div className="border_top">
                     <ul className="font14 color6 width100">
                         {
-                            this.monetList.map((el,index)=>{
+                            priceList&&priceList.map((el,index)=>{
                                 return(
                                         <li
                                             className={indexNum === index?
                                             "ptb tc di width_3333 border_right border_bottom color_yellow"
                                             :"ptb tc di width_3333 border_right border_bottom"
                                             }
-                                            onClick={()=>this.setState({toShowNav:true,indexNum:index})}
-                                        ><div>{el}<span>元</span></div>
-                                            <p className="color9 f12">赠送<span>5</span>元充值币</p>
+                                            onClick={()=>this.copyValue(index,el.summary)}
+                                        ><div>{el.summary}<span>元</span></div>
                                         </li>
                                     )
                             })
@@ -131,42 +185,19 @@ export default class Recharge extends Component {
                     </ul>
                 </div>
                 <SplitLine />
-                <div className ="list-block m0 font14">
-                    <ul>
-                        <li className ='item-content item-link border_bottom isConfirmSet'>
-                            <div className="item-inner">
-                                <div className="item-title height_all">
-                                    <span className="di listimg">
-                                        <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
-                                    </span>
-                                    <span className="di margin15 color6">省份</span>
-                                </div>
-                                <div className="item-after color9">广东省</div>
-                            </div>
-                        </li>
-                        <li className ='item-content item-link border_bottom isConfirmSet'>
-                            <div className="item-inner">
-                                <div className="item-title height_all">
-                                    <span className="di listimg">
-                                        <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
-                                    </span>
-                                    <span className="di margin15 color6">城市</span>
-                                </div>
-                                <div className="item-after color9">深圳</div>
-                            </div>
-                        </li>
-                        <li className ='item-content item-link border_bottom isConfirmSet'>
-                            <div className="item-inner">
-                                <div className="item-title height_all">
-                                    <span className="di listimg">
-                                        <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
-                                    </span>
-                                    <span className="di margin15 color6">区县</span>
-                                </div>
-                                <div className="item-after color9">宝安区</div>
-                            </div>
-                        </li>
-                    </ul>
+                <div
+                    style={{flexDirection:'row',height:50}}
+                    className="df flex-pack-justify flex-align-center border_bottom plr font14"
+                    onClick = {()=>this.setState({showMap:true})}
+                >
+                    <span className="color6">所在地区</span>
+                    <div>
+                        <span className='color9'>{provName+cityName+countysName?provName+cityName+countysName:'请选择'}</span>
+                            <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:5}}>
+                                <img src={require('../../Images/rightArrow.png')} alt=""/>
+                            </span>
+                    </div>
+
                 </div>
                 <div className="tc f12 color_red width_100 plr mtb loginHeight" style={{lineHeight:'36px'}}>
                     {this.state.Reminder}
@@ -196,6 +227,29 @@ export default class Recharge extends Component {
                     showModal?
                         <EnterPassword />
                         :null
+                }
+                {
+                    showMap?
+                        <div className="locationModal pa width_100 font14 flex flex-v" style={{zIndex:100}}>
+                            <div
+                                className="shadowNav flex-1"
+                            >
+                            </div>
+                            <div className="bkg_color width_100">
+                                <Location
+                                    getInfomation = {(provName,cityName,countysName,prov,city,county)=>this.getValue(provName,cityName,countysName,prov,city,county)}
+                                    hiddenModal = {()=>this.setState({showMap:false})}
+                                    options= {{
+                                        prov:'110000',
+                                        city:'110100',
+                                        county:'110101',
+                                        defaultText:['省份','城市','区县']
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        :null
+
                 }
 
             </div>

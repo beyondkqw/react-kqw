@@ -9,7 +9,7 @@ export default class OtherApp extends Component {
                 <Link to={routerPath}>
                     <li>
                         <div className="app_icon">
-                            <img  style={{routerUrl}}/>
+                            <img  src={routerUrl}/>
                         </div>
                         <span>{routerName}</span>
                     </li>

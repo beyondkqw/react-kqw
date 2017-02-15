@@ -18,8 +18,6 @@ export default class SellerOrderDetails extends Component {
         };
     }
 
-
-
     componentWillMount(){
         let orderNo = this.props.location.query.orderNo
         this.setState({orderNo:orderNo})
@@ -67,7 +65,7 @@ export default class SellerOrderDetails extends Component {
                     renderBack = {true}
                     title = {'订单详情'}
                 />
-                <div className="df plAll border_bottom">
+                {/* <div className="df plAll border_bottom">
                     <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
