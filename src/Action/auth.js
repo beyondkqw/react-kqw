@@ -209,9 +209,9 @@ export async function ProductAttribute(productId){
 }
 
 //订单列表
-export async function GetOrderList(status,type=0){
+export async function GetOrderList(status,type=0,page){
     try{
-        const res = await apiGet(URL.orderList,{status,type});
+        const res = await apiGet(URL.orderList,{status,type,page});
         return res;
     }catch (err){
         console.warn(err);
