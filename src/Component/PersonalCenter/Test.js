@@ -60,7 +60,7 @@ export default class MsgListPage extends React.Component {
             bounce: true,
             // 展示滚动条
             scrollbars: true,
-            vScrollbar: false
+            vScrollbar: true
         };
         this.iScrollInstance = new iScroll('#ListOutsite', options);
         this.iScrollInstance.on('scroll', this.onScroll);
@@ -236,11 +236,19 @@ export default class MsgListPage extends React.Component {
                         <p>sdf</p>
                         <p>sdf</p>
                         <p>sdf</p>
+                        <p>sdf</p>     <p>sdf</p>
                         <p>sdf</p>
                         <p>sdf</p>
                         <p>sdf</p>
                         <p>sdf</p>
                         <p>sdf</p>
+                        <p>sdf</p>
+                        <p>sdf</p>
+                        <p>sdf</p>
+                        <p>sdf</p>
+                        <p>sdf</p>
+                        <p>sdf</p>
+
                         <p>sdf</p>
                         <p>sdf</p>
                         <p>sdf</p>
