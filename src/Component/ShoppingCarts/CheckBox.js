@@ -14,6 +14,7 @@ export default class CheckBox extends Component {
 
     //实时得到父组件的数据
     componentWillReceiveProps(newProps) {
+        console.log('newProps.selectAll============>',newProps.selectAll)
         this.setState({isChecked:newProps.selectAll==null?this.state.isChecked:newProps.selectAll})
     }
 

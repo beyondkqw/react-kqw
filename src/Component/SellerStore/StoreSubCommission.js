@@ -19,8 +19,8 @@ export default class StoreSubCommission extends Component {
     }
 
     componentWillMount() {
-        this.storeId = this.props.location.query.storeId
-        this.getStoreDetails(this.storeId)
+        const storeId = this.props.location.query.storeId
+        this.getStoreDetails(storeId)
     }
 
     async getPerc(){

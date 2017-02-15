@@ -16,57 +16,38 @@ export default class RechargeWay extends Component {
         router:PropTypes.object
     }
 
-    ChargeType(value,chooseWay,payStatus){
+    ChargeType(value,chooseWay,payStatus,img){
         this.context.router.push({pathname:'/personalCenter/recharge',
-            query:{chargeType:value,chargeWay:chooseWay,wayOfPay:payStatus}})
+            query:{chargeType:value,chargeWay:chooseWay,wayOfPay:payStatus,chooseImg:img}})
     }
 
     render() {
         const {planReceiveTime,orderNos} = this.props.location.query
         return (
             <section>
-                <div className="plr evalute_h font14">
-                    <div className="fl color9">
-                        订单金额
-                    </div>
-                    <div className="fr colorff">
-                        ￥<span>258</span>
-                    </div>
-                </div>
                 <div className="list-block m0">
                     <ul>
-                        <li
-                            className="item-content item-link pl  border_bottom"
-                            onClick = {()=>this.ChargeType(3,'云卡通支付','')}
-                        >
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner margin0 font14">
-                                <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
-                                    <span className="color6">云卡通支付</span>
-                                </div>
-                                <div className="fr colorff">
-                                    立减<span>10</span>元
-                                </div>
-                            </div>
-                        </li>
                         <li className="item-content item-link pl  border_bottom">
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner margin0 font14">
                                 <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                    <span className="di mr" style={{width:23,height:24}}>
+                                        <img src={require('../../Images/common/jdyb.png')} alt=""/>
+                                    </span>
                                     <span className="color6">聚朵云币</span>
                                 </div>
                             </div>
                         </li>
                         <li
                             className="item-content item-link pl  border_bottom"
-                            onClick = {()=>this.ChargeType(4,'余额支付','balance')}
+                            onClick = {()=>this.ChargeType(4,'余额支付','balance',require('../../Images/common/yjzf.png'))}
                         >
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner margin0 font14">
                                 <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                    <span className="di mr" style={{width:23,height:24}}>
+                                        <img src={require('../../Images/common/yjzf.png')} alt=""/>
+                                    </span>
                                     <span className="color6">余额支付</span>
                                 </div>
                             </div>
@@ -82,24 +63,28 @@ export default class RechargeWay extends Component {
                     <ul>
                         <li
                             className="item-content item-link pl  border_bottom"
-                            onClick = {()=>this.ChargeType(0,'支付宝支付','')}
+                            onClick = {()=>this.ChargeType(0,'支付宝支付','',require('../../Images/common/zfb.png'))}
                         >
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner margin0 font14">
                                 <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                    <span className="di mr"  style={{width:23,height:23}}>
+                                        <img src={require('../../Images/common/zfb.png')} alt=""/>
+                                    </span>
                                     <span className="color6">支付宝支付</span>
                                 </div>
                             </div>
                         </li>
                         <li
                             className="item-content item-link pl  border_bottom"
-                            onClick = {()=>this.ChargeType(1,'微信支付','wxpay')}
+                            onClick = {()=>this.ChargeType(1,'微信支付','wxpay',require('../../Images/common/wxPay.png'))}
                         >
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner margin0 font14">
                                 <div className="item-title">
-                                    <span className="di store mr"><img src={require('../../Images/store.png')} alt=""/></span>
+                                    <span className="di mr" style={{width:23,height:20}}>
+                                        <img src={require('../../Images/common/wxPay.png')} alt=""/>
+                                    </span>
                                     <span className="color6"
                                     >微信支付</span>
                                 </div>

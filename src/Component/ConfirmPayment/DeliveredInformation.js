@@ -2,7 +2,9 @@ import React, { Component,PropTypes } from 'react';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {AddAddress,EditAddress} from '../../Action/auth'
+import Location from '../../Component/SellerStore/Location'
 import {context} from 'react-router'
+
 export default class DeliveredInformation extends Component {
 
     // 构造
@@ -17,8 +19,14 @@ export default class DeliveredInformation extends Component {
             detail : '',
             type : false,
             id : '',
-            showModal:false,
-            Reminder:''
+            showMap:false,
+            Reminder:'',
+            provName:'',
+            cityName:'',
+            countysName:'',
+            provId:'',
+            cityId:'',
+            countyId:''
         };
       }
 
@@ -28,19 +36,19 @@ export default class DeliveredInformation extends Component {
         if(this.props.location.query){
             console.log('----*-*-*-*-')
             const query = this.props.location.query
-          await this.setState({
-                mobile:query.mobile,
-                address:query.address,
-                name:query.name,
-                detail:query.detail,
-                type:query.id?true:false,
-                id:query.id
+              await this.setState({
+                    mobile:query.mobile,
+                    address:query.address,
+                    name:query.name,
+                    detail:query.detail,
+                    type:query.id?true:false,
+                    id:query.id
 
-            })
-            this.refs.name.value = query.name?query.name:''
-            this.refs.address.value = query.address?query.address:''
-            this.refs.detail.value = query.detail?query.detail:''
-            this.refs.mobile.value = query.mobile?query.mobile:''
+                })
+                this.refs.name.value = query.name?query.name:''
+                //this.refs.address.value = query.address?query.address:''
+                this.refs.detail.value = query.detail?query.detail:''
+                this.refs.mobile.value = query.mobile?query.mobile:''
         }
     }
 
@@ -48,30 +56,47 @@ export default class DeliveredInformation extends Component {
         router:PropTypes.object
     }
 
+    //得到地址信息
+    getValue(provName,cityName,countysName,prov,city,county){
+        if(provName&&cityName&&countysName){
+            this.setState({
+                address:provName+cityName+countysName,
+                showMap:false,
+                provId:prov,
+                cityId:city,
+                countyId:county,
+            })
+        }
+
+    }
 
     async submit(){
-        const {name,mobile,address,detail,type,id} = this.state
+        const {name,mobile,address,detail,type,id,provId,cityId,countyId} = this.state
+        console.log('新增地址',address)
+        if (!ErrorNum(mobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
+
         if(!name || !mobile  || !address  || !detail){
             this.setState({Reminder:'所填数据不能为空。。。'})
             return
         }else{
             this.setState({Reminder:''})
         }
-        console.log('新增地址',name,mobile,address,detail,id)
+
         if(type){
           await EditAddress(name,mobile,address,detail,id)
             .then(res=>{
-                console.log('修改地址成功',res)
                 this.context.router.goBack()
             })
             .catch(err=>{
                 console.warn('修改地址失败',err)
             })
         }else{
-            await AddAddress(name,mobile,address,detail,'1234','34545','45')
+            await AddAddress(name,mobile,address,detail,provId,cityId,countyId)
                 .then(res=>{
-                    console.log('添加地址成功',res)
-                    //this.context.router.goBack()
+                    this.context.router.goBack()
                 })
                 .catch(err=>{
                     console.warn('添加地址失败',err)
@@ -80,7 +105,7 @@ export default class DeliveredInformation extends Component {
     }
 
     render() {
-        const {showModal} = this.state
+        const {showMap,address} = this.state
         return (
             <div>
                 <div className="list-block m0">
@@ -116,18 +141,15 @@ export default class DeliveredInformation extends Component {
                                 </div>
                             </div>
                         </li>
-                        <li className="item-content item-link pl border_bottom">
+                        <li
+                            className="item-content item-link pl border_bottom"
+                            onClick = {()=>this.setState({showMap:true})}
+                        >
                             <div className="item-media"><i className="icon icon-f7"></i></div>
                             <div className="item-inner font14">
                                 <div className="item-title color6">所在地区</div>
                                 <div className="item-after color9">
-                                    <input
-                                        ref = 'address'
-                                        className="borderno tr"
-                                        type="\"
-                                        placeholder="请选择"
-                                        onClick={()=>this.setState({address:this.refs.address.value,showModal:true})}
-                                    />
+                                    {address}
                                 </div>
                             </div>
                         </li>
@@ -156,50 +178,28 @@ export default class DeliveredInformation extends Component {
                     title={'确定'}
                 />
                 {
-                    showModal?
-                        <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
-                            <div className="width100" style={{zIndex:1050,backgroundColor:'#fff',position:'absolute',bottom:0}}>
-                                <div
-                                    className="flex flex-align-center flex-pack-justify color_white bkg_ff plr"
-                                    style={{height:45,flexDirection:'row'}}>
-                                    <div  onClick = {()=>this.setState({showModal:false})}>取消</div>
-                                    <div>确定</div>
-                                </div>
-                                <div style={{paddingLeft:40,paddingRight:40,height:200,overflow:'auto'}}>
-                                    <ul>
-                                        <li className='flex flex-align-center border_bottom'
-                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
-                                        >北京
-                                        </li>
-                                        <li className='flex flex-align-center border_bottom'
-                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}>上海
-                                        </li>
-                                        <li
-                                            className='flex flex-align-center border_bottom'
-                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
-                                        >天津</li>
-                                        <li
-                                            className='flex flex-align-center border_bottom'
-                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
-                                        >广州</li>
-                                        <li
-                                            className='flex flex-align-center border_bottom'
-                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
-                                        >云南</li>
-                                        <li
-                                            className='flex flex-align-center border_bottom'
-                                            style={{height:45,flexDirection:'row',justifyContent:'center'}}
-                                        >四川</li>
-                                        <li>天津</li>
-                                        <li>广州</li>
-                                        <li>云南</li>
-                                    </ul>
-                                </div>
+                    showMap?
+                        <div className="locationModal pa width_100 font14 flex flex-v" style={{zIndex:100}}>
+                            <div
+                                className="shadowNav flex-1"
+                            >
+                            </div>
+                            <div className="bkg_color width_100">
+                                <Location
+                                    getInfomation = {(provName,cityName,countysName,prov,city,county)=>this.getValue(provName,cityName,countysName,prov,city,county)}
+                                    hiddenModal = {()=>this.setState({showMap:false})}
+                                    options= {{
+                                        prov:'110000',
+                                        city:'110100',
+                                        county:'110101',
+                                        defaultText:['省份','城市','区县']
+                                    }}
+                                />
                             </div>
                         </div>
                         :null
-
                 }
+
             </div>
         );
     }

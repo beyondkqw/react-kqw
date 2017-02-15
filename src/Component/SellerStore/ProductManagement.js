@@ -25,7 +25,7 @@ export default class ProductManagement extends Component {
                         <CellComponent
                             imgUrl={require('../../Images/common/saleGoods.png')}
                             title={'出售中的宝贝'}
-                            describing={'30件'}
+                            //describing={'30件'}
                         />
                     </Link>
                     <Link to="/mineOffDown" query={{storeId:this.props.location.query.storeId}}>

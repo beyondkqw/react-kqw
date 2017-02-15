@@ -16,7 +16,7 @@ import '../Stylesheets/App/sm.min.css'
 import '../Stylesheets/App/common.css'
 import '../Stylesheets/App/homePage.css';
 import {HomeBanner,HomeMoudle} from '../Action/auth'
-import {initWebsocket} from '../Action/Websocket'
+//import {initWebsocket} from '../Action/Websocket'
 import {getLocation} from '../Action/wxUtil'
 
 
@@ -39,12 +39,12 @@ class Home extends Component {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
         if(getToken == '' ||getToken == null ||getToken == 'null'){
-            //await WechatAuth()
+            await WechatAuth()
             const token = GetQueryString('token')
             saveToken(token)
-            initWebsocket()
+            //initWebsocket()
         }else{
-            initWebsocket()
+            //initWebsocket()
         }
         this.getHomeBanner()
         this.getHomeMoudle()
@@ -90,8 +90,8 @@ class Home extends Component {
         />
         <OtherApp />
           {
-              moudle.map(el=>{
-                 if(el.num==3){
+              moudle&&moudle.map(el=>{
+                 if(el.num == 3){
                      return(
                          <div>
                              <ActiveTitle
@@ -103,7 +103,7 @@ class Home extends Component {
                              <SplitLine />
                          </div>
                      )
-                 }else if(el.num==4){
+                 }else if(el.num == 4){
                      return(
                          <div>
                              <ActiveTitle
@@ -115,7 +115,7 @@ class Home extends Component {
                              <SplitLine />
                          </div>
                      )
-                 } else if(el.num==6){
+                 } else if(el.num == 6){
                      return(
                          <div>
                              <ActiveTitle
@@ -127,7 +127,7 @@ class Home extends Component {
                              <SplitLine />
                          </div>
                      )
-                 }else if(el.num==7){
+                 }else if(el.num == 7){
                      return(
                          <div>
                              <ActiveTitle

@@ -200,6 +200,9 @@ export const generate = 'yunCard/auth/generate'
 //查看分享注册二维码
 export const accQrCode = 'captcha/accQrCode'
 
+//云卡通充值金额列表
+export const rechargeAmount = 'notices/rechargeAmount'
+
 
 /*---------------卖家版---------------*/
 //注册

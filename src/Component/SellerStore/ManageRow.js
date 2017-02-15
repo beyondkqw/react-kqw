@@ -35,7 +35,7 @@ export default class ManageRow extends Component {
                                 </div>
                                 <div>
                                     <div className="rightBottom" style={{color:'#999'}}>
-                                        <p><span>货号 : </span><span>{no}</span></p>
+                                        {/*<p><span>货号 : </span><span>{no}</span></p>*/}
                                         <p><span>{paymoneyNum?paymoneyNum:0}</span>人付款</p>
                                     </div>
                                 </div>

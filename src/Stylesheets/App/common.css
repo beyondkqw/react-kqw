@@ -191,6 +191,9 @@ p{
 .margin0{
     margin-left:0 !important;
 }
+.padd15{
+    padding:0 15px;
+}
 .margin15{
     margin-left:0.75rem;
 }
@@ -479,4 +482,24 @@ p{
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap
+}
+select {
+    border: solid 1px #e5e5e5;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+    padding-right: 14px;
+}
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+.shadowNav{
+    background-color: rgba(0,0,0,0.4);
+}
+.locationModal{
+    top:0;
+    bottom:0;
+    z-index: 10;
 }

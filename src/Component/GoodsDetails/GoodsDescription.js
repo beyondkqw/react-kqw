@@ -276,15 +276,19 @@ export default class GoodsDescription extends Component {
             <section className="containerNav">
                 <div className="bannerImg">
                     <AutoPlaySwipeableViews
+                        style={{height:'9rem'}}
                         interval = {2000}
                     >
                         {
                             goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
                                 return(
-                                    <img
-                                        src = {el.IMAGE}
-                                        //key = {index}
-                                    />
+                                    <div style={{width:'100%',height:'9rem'}}>
+                                        <img
+                                            src = {el.IMAGE}
+                                            //key = {index}
+                                        />
+                                    </div>
+
                                 )
                             })
                         }

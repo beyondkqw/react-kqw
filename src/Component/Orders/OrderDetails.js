@@ -119,7 +119,7 @@ export default class OrderDetails extends Component {
                                                         </div>
                                                         :null
                                                 }
-                                                {
+                                                {/*{
                                                     alreadyRated?
                                                         <div className="pa mt55" style={{bottom:10,right:10}}>
                                                             <Link
@@ -134,7 +134,7 @@ export default class OrderDetails extends Component {
                                                             </Link>
                                                         </div>
                                                         :null
-                                                }
+                                                }*/}
                                             </div>
                                         </div>
                                         )
@@ -145,7 +145,7 @@ export default class OrderDetails extends Component {
                                     <div className="f12 width100 height1">
                                         <div className="fr">
                                             <label>共<span>{el.num}</span>件商品</label>
-                                            <label className="ml5">合计<span>￥</span><span>{el.pay_amount}</span></label>
+                                            <label className="ml5">合计<span>￥</span><span>{el.amount}</span></label>
                                             <label className="ml">(含运费 : ￥<span>0.00</span>)</label>
                                         </div>
                                     </div>
@@ -187,8 +187,6 @@ export default class OrderDetails extends Component {
                                                         className="border_ra bkg_ff color_white"
                                                         onClick={()=>this.setState({isDelete:true,delNo:el.order_no})}
                                                     >删除订单</button>
-                                                    {/*<button className="border_ra mr5 color9 border_ccc">追加评价</button>
-                                                    <button className="bkg_ff mr20 border_ra color_white">查看评价</button>*/}
                                                 </div>
                                                 :null
                                         }

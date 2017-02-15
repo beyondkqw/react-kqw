@@ -17,6 +17,7 @@ export default class Cell_4 extends Component {
                         return (
                             <Cell_4children
                                 img={el.img}
+                                link = {el.webUrl}
                             />
                         )
                     })

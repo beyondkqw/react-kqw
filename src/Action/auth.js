@@ -90,7 +90,7 @@ export async function HomeBanner(type,page,count){
 //首页模块 （例如一元夺宝）
 export async function HomeMoudle() {
         try {
-            const res = await apiGet(URL.homeMoudle, {});
+            const res = await apiGet(URL.homeMoudle);
             return res;
         } catch (err) {
             console.warn('homeMoudle', err);
@@ -209,9 +209,9 @@ export async function ProductAttribute(productId){
 }
 
 //订单列表
-export async function GetOrderList(status,type=0,page){
+export async function GetOrderList(status,isComment,type=0,page){
     try{
-        const res = await apiGet(URL.orderList,{status,type,page});
+        const res = await apiGet(URL.orderList,{status,isComment,type,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -741,6 +741,17 @@ export async function StoreList(type,name) {
 export async function Generate(address,province,city,area,amount,chargeType){
     try{
         const res = await apiPost(URL.generate,{address,province,city,area,amount,chargeType});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//云卡通充值金额列表
+export async function RechargeAmount(){
+    try{
+        const res = await apiGet(URL.rechargeAmount);
         return res;
     }catch (err){
         console.warn(err);

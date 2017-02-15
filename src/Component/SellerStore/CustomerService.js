@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
-import {StoreContact} from '../../Action/auth'
+import {StoreContact,StoreDetailItem} from '../../Action/auth'
 import {ErrorNum,QQTest,wechatTest} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
@@ -13,9 +13,26 @@ export default class CustomerService extends Component {
         super(props);
         // 初始状态
         this.state = {
-            Reminder:''
+            Reminder:'',
+            qqNum:'',
+            weChat:'',
+            mobileNum:''
         };
       }
+
+    async componentWillMount() {
+        //获取默认的信息
+      await StoreDetailItem(this.props.location.query.storeId)
+        .then(res=>{
+            this.setState({qqNum:res.store.qq})
+            this.setState({weChat:res.store.wechat})
+            this.setState({mobileNum:res.store.mobile})
+        })
+        .catch(err=>{
+            console.warn('获取商品属性失败',err)
+        })
+    }
+
 
     async toEdit(){
         this.setState({Reminder:''})
@@ -92,6 +109,7 @@ export default class CustomerService extends Component {
         }
     }
     render() {
+        const {qqNum,weChat,mobileNum}  = this.state
         return (
             <div>
                 <NavBar
@@ -122,7 +140,9 @@ export default class CustomerService extends Component {
                             type="text"
                             placeholder="输入您的QQ号"
                             ref="qqNum"
+                            value={qqNum}
                             onBlur = {()=>this.isNumTrue(this.refs.qqNum.value,'qq')}
+                            onChange={()=>this.setState({qqNum:this.refs.qqNum.value})}
                         />
                     </div>
                 </div>
@@ -149,7 +169,9 @@ export default class CustomerService extends Component {
                             className="borderno tr"
                             placeholder="输入您的微信号"
                             ref="wechatNum"
+                            value = {weChat}
                             onBlur = {()=>this.isNumTrue(this.refs.wechatNum.value,'wechat')}
+                            onChange={()=>this.setState({weChat:this.refs.wechatNum.value})}
                         />
                     </div>
                 </div>
@@ -176,7 +198,9 @@ export default class CustomerService extends Component {
                             type="text"
                             placeholder="输入您的电话号码"
                             ref="phoneNum"
+                            value = {mobileNum}
                             onBlur = {()=>this.isNumTrue(this.refs.phoneNum.value,'phone')}
+                            onChange={()=>this.setState({mobileNum:this.refs.phoneNum.value})}
                         />
                     </div>
                 </div>

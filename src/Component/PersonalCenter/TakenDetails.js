@@ -48,7 +48,7 @@ export default class TakenDetails extends Component {
                     payAmount&&payAmount.map(el=>{
                         return(
                             <RetailingItem
-                                changeAmount = {el.change_amount}
+                                changeAmount = {el.channel_amount}
                                 extraMsg = {el.extra_msg2}
                                 imgUrl = {el.image_uri}
                                 isShowDate={true}
