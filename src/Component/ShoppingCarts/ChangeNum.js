@@ -10,34 +10,35 @@ export default class ChangeNum extends Component {
             value:1
         };
     }
-    //数量减
-   async minusNum(){
-        if(this.state.value === 0){
 
-        }else {
-          await this.setState({value:--this.state.value});
-        }
-       const {minus} = this.props
-       minus&&minus(this.state.value)
-    }
 
     componentWillMount() {
         const {num} = this.props
         this.setState({value:num?num:1})
     }
 
-    componentWillReceiveProps(newProps){
-        //console.log()
+   /* componentWillReceiveProps(newProps){
         this.setState({value:newProps.num})
+    }*/
+
+    //数量减
+    async changeNum(type){
+        const {del,minus} = this.props
+        const {value} = this.state
+        if(type){
+            await this.setState({value:++this.state.value});
+        }else{
+            if(value==1){
+                del&&del()
+            }
+            if(value>1){
+                await this.setState({value:--this.state.value});
+            }
+        }
+        minus&&minus(this.state.value,type)
     }
 
-    //数量加
-    async addNum(){
-        const {add} = this.props
-        await this.setState({value:++this.state.value});
 
-        add&&add(this.state.value)
-    }
     async handleChange() {
         await this.setState({value:this.state.value});
         //const {add} = this.props
@@ -46,9 +47,14 @@ export default class ChangeNum extends Component {
     render() {
         return (
             <div className="di border_ra cartCount tc">
-                <span className="di height_all bkg_e5 fl widthSpan" onClick={()=>this.minusNum()}>-</span>
-                <input readOnly="readonly" className="di height_all borderno tc widthChange" value={this.state.value} onChange={()=>this.handleChange()}/>
-                <span className="di height_all bkg_e5 fr widthSpan" onClick={()=>this.addNum()}>+</span>
+                <span className="di height_all bkg_e5 fl widthSpan" onClick={()=>this.changeNum(false)}>-</span>
+                <input
+                    readOnly="readonly"
+                    className="di height_all borderno tc widthChange"
+                    value={this.state.value}
+                    //onChange={()=>this.handleChange()}
+                />
+                <span className="di height_all bkg_e5 fr widthSpan" onClick={()=>this.changeNum(true)}>+</span>
             </div>
         );
     }

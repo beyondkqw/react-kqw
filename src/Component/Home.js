@@ -38,22 +38,23 @@ class Home extends Component {
     async componentWillMount() {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
-        if(getToken == '' ||getToken == null ||getToken == 'null'){
-            // await WechatAuth()
+        /*if(getToken == '' ||getToken == null ||getToken == 'null'){
+            await WechatAuth()
             const token = GetQueryString('token')
             saveToken(token)
             //initWebsocket()
         }else{
             //initWebsocket()
-        }
+        }*/
         this.getHomeBanner()
         this.getHomeMoudle()
 
         getLocation()
     }
+
     //首页banner
    async getHomeBanner(){
-       await HomeBanner('BANNER',1,5)
+       await HomeBanner('BANNER',0,5)
         .then(res=>{
             console.log('BANNER',res)
             this.setState({banner:res})
@@ -85,9 +86,12 @@ class Home extends Component {
                 style={{backgroundColor:'#ff5500'}}
             />
         </div>
-        <Carousel
-            images = {this.state.banner}
-        />
+        <div style={{marginTop:'2.2rem'}}>
+              <Carousel
+                  images = {this.state.banner}
+              />
+        </div>
+
         <OtherApp />
           {
               moudle&&moudle.map(el=>{

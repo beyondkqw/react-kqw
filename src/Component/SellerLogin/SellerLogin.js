@@ -35,7 +35,8 @@ export default class SellerLogin extends Component {
 
    async componentWillMount() {
       //await  clearToken()
-        let token = await loadToken(1)
+       //alert(window.location.href)
+       let token = await loadToken(1)
        let token_S = await loadToken()
         // if(token){
         //     this.context.router.replace({pathname:'/sellerStoreCenter'})
@@ -44,6 +45,11 @@ export default class SellerLogin extends Component {
         //console.log('token===>',getToken())
        console.log('token111',token_S)
         //console.log('token111===>',getToken())
+
+    }
+
+    componentDidMount() {
+
     }
 
     //判断登录名,密码是否正确
@@ -79,6 +85,8 @@ export default class SellerLogin extends Component {
             this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
             return
         }
+
+        //alert(localStorage.getItem('latitude'))
         await SellerToLogin(accName,pwd)
             .then(res=>{
                 saveToken(res,1)

@@ -72,10 +72,10 @@ export default class OrderDetails extends Component {
                     orderDetails&&orderDetails.map((el,index)=>{
                         return(
                             <div>
-                                <div className="paymargin">
+                                {/*<div className="paymargin">
                                     <div className="di payImgSize mr"><img src={el.img} alt=""/></div>
                                     <span className="color6 font14">{el.store_name}</span>
-                                </div>
+                                </div>*/}
                                 <Link to="/orders/orderFormDetails"  query={{orderNo:el.order_no,isToPay:toPay,isMakeSure:makeSure}}>
                                 {
                                     el.orderDetails&&el.orderDetails.map((item,index)=>{

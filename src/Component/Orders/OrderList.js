@@ -23,7 +23,7 @@ export default class OrderList extends Component {
             disabled:false,
             items: [],
             pullDownStatus: 3,
-            pullUpStatus: 0,
+            pullUpStatus: 0
         };
 
         this.page = 1;
@@ -101,12 +101,12 @@ export default class OrderList extends Component {
         }
         if (this.state.pullUpStatus == 2) {
             ++this.page;
-            await this.getList()
+            // await this.getList()
             this.setState({
                 pullUpStatus: 3
             });
-
         }
+
         /*$.ajax({
          url: '/msg-list',
          data: {page: this.page},
@@ -148,6 +148,9 @@ export default class OrderList extends Component {
 
     onTouchStart(ev) {
         this.isTouching = true;
+        this.setState({
+            display:'block'
+        })
     }
 
     onTouchMove(ev){
@@ -261,134 +264,75 @@ export default class OrderList extends Component {
         return (
             <div className="containerNav">
                 <TabBar
-                     index = {this.state.index}
-                     onClick = {index=>this.onChange(index)}
-                     contents={['待付款','待发货','待收货','待评价','全部订单']}
+                    index = {this.state.index}
+                    onClick = {index=>this.onChange(index)}
+                    contents={['待付款','待发货','待收货','待评价','全部订单']}
                 />
                 <SplitLine />
-                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
 
-                    <div id='ListOutsite' style={{height: window.innerHeight}}
+                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                    <div id='ListOutsite' style={{height: window.innerHeight-50}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
-                    >
+                         onTouchMove={this.onTouchMove}>
 
                         <ul id='ListInside'>
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-                {/*代付款*/}
-                { this.state.index == 0?
-                    <div>
-                        <OrderDetails
-                            debitPay = {()=>this.getOrderList('0')}
-                            orderDetails = {orderItems}
-                            toPay = {true}
-                        />
-                    </div>
-                :null
-                }
-                {/*待发货*/}
-                { this.state.index == 1?
-                    <div>
-                        <OrderDetails
-                            orderDetails = {orderItems}
-                            alreadyRated = {true}
-                        />
-                    </div>
-                    :null
-                }
-                {/*待收货*/}
-                { this.state.index == 2?
-                    <div>
-                        <OrderDetails
-                            Receipt = {()=>this.getOrderList('2')}
-                            orderDetails = {orderItems}
-                            makeSure={true}
-                        />
-                    </div>
-                    :null
-                }
-                {/*待评价*/}
-                { this.state.index == 3?
-                    <div>
-                        <OrderDetails
-                           orderDetails = {orderItems}
-                           toRated = {true}
-                           //query = {}
-                        />
-                    </div>
-                    :null
-                }
-                {/*全部订单*/}
-                { this.state.index == 4?
-                    <div>
-                        <OrderDetails
-                            againSend = {()=>this.getOrderList('5')}
-                            orderDetails = {orderItems}
-                            allRated = {true}
-                        />
-                    </div>
-                    :null
-                    }
-                    {/*待收货*/}
-                    { this.state.index == 1?
-                        <div>
-                            <OrderDetails
-                                orderDetails = {orderItems}
-                                makeSure={true}
-                            />
-                        </div>
-                        :null
-                    }
-                    {/*待评价*/}
-                    { this.state.index == 2?
-                        <div>
-                            <OrderDetails
-                               orderDetails = {orderItems}
-                               toRated = {true}
-                               //query = {}
-                            />
-                        </div>
-                        :null
-                    }
-                    {/*已评价*/}
-                    { this.state.index == 3?
-                        <div>
-                            <OrderDetails
-                                orderDetails = {orderItems}
-                                alreadyRated = {true}
-                            />
-                        </div>
-                        :null
-                    }
-                    {/*全部订单*/}
-                    { this.state.index == 4?
-                        <div>
-                            <OrderDetails
-                                againSend = {()=>this.getOrderList('5')}
-                                orderDetails = {orderItems}
-                                allRated = {true}
-                            />
-                        </div>
-                        :null
-                    }
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
-                            <p>sdf</p>
+
+                            {/*代付款*/}
+                            { this.state.index == 0?
+                                <div>
+                                    <OrderDetails
+                                        debitPay = {()=>this.getOrderList('0')}
+                                        orderDetails = {orderItems}
+                                        toPay = {true}
+                                    />
+                                </div>
+                            :null
+                            }
+                            {/*待发货*/}
+                            { this.state.index == 1?
+                                <div>
+                                    <OrderDetails
+                                        orderDetails = {orderItems}
+                                        alreadyRated = {true}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*待收货*/}
+                            { this.state.index == 2?
+                                <div>
+                                    <OrderDetails
+                                        Receipt = {()=>this.getOrderList('2')}
+                                        orderDetails = {orderItems}
+                                        makeSure={true}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*待评价*/}
+                            { this.state.index == 3?
+                                <div>
+                                    <OrderDetails
+                                       orderDetails = {orderItems}
+                                       toRated = {true}
+                                       //query = {}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*全部订单*/}
+                            { this.state.index == 4?
+                                <div>
+                                    <OrderDetails
+                                        againSend = {()=>this.getOrderList('5')}
+                                        orderDetails = {orderItems}
+                                        allRated = {true}
+                                    />
+                                </div>
+                                :null
+                                }
+                            <p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p><p>11</p>
                             <p ref="PullUp" id='PullUp'>{this.pullUpTips[this.state.pullUpStatus]}</p>
                         </ul>
                     </div>

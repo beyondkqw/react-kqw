@@ -252,3 +252,6 @@ export const logout = 'account/auth/logout'
 
 //微信Jssdk初始化
 export const wxJsSdk = 'support/sign'
+
+//绑定支付宝
+export const bindingAlipay = 'auth/account/bindingAlipay'

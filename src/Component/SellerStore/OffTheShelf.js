@@ -159,7 +159,7 @@ export default class OffTheShelf extends Component {
                             <button
                                 className="width50 height_all color_pink color_yellow"
                                 onClick={()=>this.showModal()}
-                            >清空宝贝</button>
+                            >下架宝贝</button>
                             <div className="df width50 height_all bkg_ff color_white flex-align-center flex-pack-center">
                                 <span className="di check_radius pr fl">
                                     <input

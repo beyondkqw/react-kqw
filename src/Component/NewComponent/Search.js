@@ -143,7 +143,7 @@ export default class Search extends Component {
 
                 {
                     this.state.display?
-                        <div className="history pf" style={{zIndex:100}}>
+                        <div className="history pf" style={{zIndex:100,top:44}}>
                             <span>历史记录</span>
                             <span className="deletHistory fr"
                                 onClick={()=>this.setState({history:[]})}
