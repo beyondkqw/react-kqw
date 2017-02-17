@@ -17,7 +17,16 @@ export default class ChoosePayment extends Component {
                 </div>
                 <div className="list-block m0">
                     <ul>
-                        <Link to="/confirmPayment/surePayment" query={{money:payMuchMoney}}>
+                        <Link
+                            to="/confirmPayment/surePayment"
+                            query={{
+                            planReceiveTime:planReceiveTime,
+                            orderNos:orderNos,
+                            wayOfPay:'cloudCartoon',
+                            money:payMuchMoney,
+                            type:0
+                            }}
+                        >
                             <li className="item-content item-link pl  border_bottom">
                                 <div className="item-media"><i className="icon icon-f7"></i></div>
                                 <div className="item-inner margin0 font14">
@@ -95,11 +104,11 @@ export default class ChoosePayment extends Component {
                         <Link
                             to="/confirmPayment/surePayment"
                             query={{
-                            planReceiveTime:planReceiveTime,
-                            orderNos:orderNos,
-                            wayOfPay:'wxpay',
-                            money:payMuchMoney
-                            }}>
+                                planReceiveTime:planReceiveTime,
+                                orderNos:orderNos,
+                                wayOfPay:'wxpay',
+                                money:payMuchMoney
+                                }}>
                             <li
                                 className="item-content item-link pl  border_bottom"
                             >

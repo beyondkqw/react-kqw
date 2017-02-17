@@ -4,7 +4,7 @@ import '../../Stylesheets/App/shoppingCarts.css';
 
 export default class ItemDetails extends Component {
     render() {
-        const {title,attr,price,imgurl,num,add,minus} = this.props
+        const {title,attr,price,imgurl,num,del,changeNum} = this.props
         return (
             <div className="f12 height_all">
                 <div className="di imgPlay fl mr5">
@@ -18,8 +18,8 @@ export default class ItemDetails extends Component {
                     <span className="colorff f12">￥</span><span className="colorff font18">{price}</span>
                 </div>
                 <ChangeNum
-                    minus = {value=>minus(value)}
-                    add = {value=>add(value)}
+                    minus = {(value,type)=>changeNum(value,type)}
+                    del = {value=>del(value)}
                     num = {num}
                 />
             </div>

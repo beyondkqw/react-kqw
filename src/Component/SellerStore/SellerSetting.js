@@ -5,6 +5,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {StoreDetail,StoreEdit} from '../../Action/auth'
 import NavBar from '../../Component/CommonComponent/NavBar'
+import Location from '../../Component/SellerStore/Location'
 import UUID from 'uuid-js'
 
 export default class SellerSetting extends Component {
@@ -18,12 +19,31 @@ export default class SellerSetting extends Component {
             address:'',
             licenseImg:'',
             cardFace:'',
-            cardBack:''
+            cardBack:'',
+            gpsAddress:'',
+            showMap:false,
+            Reminder:''
         };
       }
 
     componentWillMount() {
         this.getStoreDetail(this.props.location.query.storeId)
+    }
+
+    //得到地址信息
+    getValue(provName,cityName,countysName,prov,city,county){
+        if(provName&&cityName&&countysName){
+            this.setState({
+                provName:provName,
+                cityName:cityName,
+                address:provName+cityName+countysName,
+                showMap:false,
+                provId:prov,
+                cityId:city,
+                countyId:county,
+            })
+        }
+
     }
 
     async getStoreDetail(value){
@@ -35,19 +55,20 @@ export default class SellerSetting extends Component {
                 this.setState({licenseImg:res.store.license})
                 this.setState({cardFace:res.store.cardFace})
                 this.setState({cardBack:res.store.cardBack})
+                this.setState({gpsAddress:res.store.gpsAddress})
             })
             .catch(err=>{
                 console.warn('err',err)
             })
     }
 
-    confirmEdit(){
-        const {storeName,uploadStoreImg,licenseImg,cardFace,cardBack} = this.state
-        this.editInformation(storeName,uploadStoreImg,'深圳宝安','1001','1002','1003',licenseImg,cardFace,cardBack,'')
-    }
-
-    async editInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress){
-        await StoreEdit(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress)
+    async confirmEdit(){
+        const {storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack} = this.state
+        if(!storeName || !storeImg|| !address || !licenseImg || !cardFace || !cardBack){
+            this.setState({Reminder:'修改数据不能为空'})
+            return
+        }
+        await StoreEdit(storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack,'')
             .then(res=>{
                 this.context.router.push({pathname:'/storeSubCommission'})
             })
@@ -96,7 +117,7 @@ export default class SellerSetting extends Component {
     }
 
     render() {
-        const {storeImg,storeName,address,licenseImg,cardFace,cardBack} = this.state
+        const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap} = this.state
         return (
             <div className="containerNav" style={{paddingBottom:30}}>
                 <NavBar
@@ -125,14 +146,29 @@ export default class SellerSetting extends Component {
                                 className="borderno tr font14 color9"
                                 value={storeName}
                                 ref='storeName'
-                                onChange={()=>this.state({storeName:this.refs.storeName.value})}
+                                onChange={()=>this.setState({storeName:this.refs.storeName.value})}
                             />
                         </div>
                     </div>
-                    <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
+                    <div
+                        style={{flexDirection:'row',height:50}}
+                        className="df flex-pack-justify flex-align-center border_bottom plr font14"
+                        onClick = {()=>this.setState({showMap:true})}
+                    >
                         <span className="color6">店铺地址</span>
                         <div>
                             <span className="font14 color9">{address}</span>
+                            <span className="di ml5" style={{width:9,height:16,lineHeight:0}}>
+                                <img src={require('../../Images/rightArrow.png')} alt=""/>
+                            </span>
+                        </div>
+                    </div>
+                    <div
+                        style={{flexDirection:'row',height:50}}
+                        className="df flex-pack-justify flex-align-center border_bottom plr font14"
+                    >
+                        <span className="color6">定位店铺地址</span>
+                        <div>
                             <span className="di ml5" style={{width:9,height:16,lineHeight:0}}>
                                 <img src={require('../../Images/rightArrow.png')} alt=""/>
                             </span>
@@ -185,12 +221,37 @@ export default class SellerSetting extends Component {
                     </div>
 
                 </div>
-                <div style={{marginTop:50}}>
-                    <CommonBtn
-                        title = {'确定'}
-                        onClick={()=>this.confirmEdit()}
-                    />
+
+                <div className="tc f12 color_red width_100 loginHeight" style={{lineHeight:'1.8rem'}}>
+                    {this.state.Reminder}
                 </div>
+                <CommonBtn
+                    title = {'确定'}
+                    onClick={()=>this.confirmEdit()}
+                />
+
+                {
+                    showMap?
+                        <div className="locationModal pa width_100 font14 flex flex-v" style={{zIndex:100}}>
+                            <div
+                                className="shadowNav flex-1"
+                            >
+                            </div>
+                            <div className="bkg_color width_100">
+                                <Location
+                                    getInfomation = {(provName,cityName,countysName,prov,city,county)=>this.getValue(provName,cityName,countysName,prov,city,county)}
+                                    hiddenModal = {()=>this.setState({showMap:false})}
+                                    options= {{
+                                        prov:'110000',
+                                        city:'110100',
+                                        county:'110101',
+                                        defaultText:['省份','城市','区县']
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        :null
+                }
             </div>
         );
     }

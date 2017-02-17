@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/cloudCard.css';
 import Modal from '../../Component/CommonComponent/Modal'
+import {Link} from 'react-router';
 import {CancelReceived} from '../../Action/auth';
 
 export default class PaymentDetails extends Component {
@@ -90,11 +91,19 @@ export default class PaymentDetails extends Component {
                                 </button>
                             </div>
                             <div className="width_de fl height_all"></div>
-                            <div className="di height_all pr fl width_buy border_ra">
-                                <button className="width_100 height_all color_white">
-                                    立即购买
-                                </button>
-                            </div>
+                            <Link
+                                to="/confirmPayment/choosePayment"
+                                query={{
+                                    planReceiveTime:'送货时间不限',
+                                    orderNos:this.props.location.query.orderNo,
+                                    payMuchMoney :amount
+                                    }}>
+                                <div className="di height_all pr fl width_buy border_ra">
+                                    <button className="width_100 height_all color_white">
+                                        立即购买
+                                    </button>
+                                </div>
+                            </Link>
                         </div>
                         :null
                 }

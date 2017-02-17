@@ -934,10 +934,22 @@ export async function Logout() {
         throw err
     }
 }
+
 //支付
 export async function InitWxJsSDk(url) {
     try {
         const res = await apiGet(URL.wxJsSdk,{url});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//绑定银行卡
+export async function BindingAlipay(name,accNumber) {
+    try {
+        const res = await apiGet(URL.bindingAlipay,{name,accNumber});
         return res;
     } catch (err) {
         console.warn(err);

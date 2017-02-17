@@ -19,11 +19,14 @@ export default class ShoppingCart extends Component {
         // 初始状态
           //是否使用全选按钮
           this.isUseSelectAll = false
+          this.amount = 0
         this.select = []
+          this.selectNum = []
         this.state = {
             selectAll:false,
             toRender:1,
-            shopCarList:[]
+            shopCarList:[],
+            amount : 0 ,
         };
       }
 
@@ -34,7 +37,6 @@ export default class ShoppingCart extends Component {
 
     componentWillMount() {
         this.getShopCarList()
-        console.log('-----',this.context.router)
     }
 
     async getShopCarList(){
@@ -42,15 +44,28 @@ export default class ShoppingCart extends Component {
         .then(res=>{
             const {resultList} = res
             this.setState({shopCarList:resultList})
-            console.log('购物车列表',res)
         })
     }
 
     componentDidUpdate(aa) {
-        //console.log('didUpdata',aa)
         let a = document.getElementById('aa')
-        console.log('aaaa',a.scrollTop)
     }
+
+    //计算总价
+    countAmount() {
+        this.state.shopCarList.map(el=>{
+            let num = this.selectNum[el.CAR_ID]?this.selectNum[el.CAR_ID]:0
+            this.select.map(item=>{
+                if(el.CAR_ID==item){
+                    this.amount += el.PRICE*el.PRODUCT_NUM + el.PRICE*num
+                }
+            })
+        })
+        console.warn('this.amount',this.amount)
+        this.setState({amount:this.amount})
+        this.amount = 0
+    }
+
     //全选/反选
     async onChangeState(){
         this.isUseSelectAll = true
@@ -67,10 +82,11 @@ export default class ShoppingCart extends Component {
             this.select = []
         }
 
-        console.log('------',this.state.shopCarList.length)
+        this.countAmount()
         this.setState({toRender:1})
         console.log('selected',this.select)
     }
+
     //单选
     getSelect(state,id){
         this.isUseSelectAll = false
@@ -85,31 +101,37 @@ export default class ShoppingCart extends Component {
                 return true
             })
         }
+        this.countAmount()
         this.setState({toRender:1})
-        console.log('selectIndex',this.select)
     }
 
-    async editShopNum(id,count){
-        if(count>0){
-            await EditShopNum(id,count)
-                .then(res=>{
-                    console.log('更新购物车成功',res)
-                })
-                .catch(err=>{
-                    console.warn('更新购物车失败',err)
-                })
-        }else{
-            if(confirm("确定删除商品？")){
+    async editShopNum(id,count,type){
+        await EditShopNum(id,count)
+            .then(res=>{
+                let num = this.selectNum[id]?this.selectNum[id]:0
+                if(type){
+                    this.selectNum[id] = num + 1
+                }else{
+                    this.selectNum[id] = num -1
+                }
+                this.countAmount()
+            })
+            .catch(err=>{
+                console.warn('更新购物车失败',err)
+            })
+    }
+
+    //删除购物车
+    async Del(id){
+        if(confirm("确定删除商品？")){
             await DelShopCar([id])
                 .then(res=>{
-                    console.log('删除成功',res)
                     this.getShopCarList()
+                    this.countAmount()
                 })
-            }else{
-                this.getShopCarList()
-            }
+        }else{
+            this.getShopCarList()
         }
-
     }
 
     async toSubmit(){
@@ -122,11 +144,11 @@ export default class ShoppingCart extends Component {
         }else{
             alert('请选择商品')
         }
-       ///comfirmPayMoney
+       //comfirmPayMoney
     }
 
     render() {
-        const {shopCarList} = this.state
+        const {shopCarList,amount} = this.state
         return (
             <div id='aa'  className="containerNav bkg_color">
                 <div className="wrap">
@@ -151,8 +173,8 @@ export default class ShoppingCart extends Component {
                                         attr={el.ATTR_DESC}
                                         imgurl={el.IMAGE}
                                         num={el.PRODUCT_NUM}
-                                        minus={value=>this.editShopNum(el.CAR_ID,value)}
-                                        add={value=>this.editShopNum(el.CAR_ID,value)}
+                                        changeNum ={(value,type)=>this.editShopNum(el.CAR_ID,value,type)}
+                                        del={value=>this.Del(el.CAR_ID,value)}
                                     />
                                     </div>
                                 )
@@ -173,7 +195,7 @@ export default class ShoppingCart extends Component {
                         <div className="di ml5 pr">
                             <div className="mt2">
                                 <label className="f12">合计</label>
-                                <span className="colorff f12">￥</span><span className="colorff font18">258</span>
+                                <span className="colorff f12">￥</span><span className="colorff font18">{amount}</span>
                             </div>
                             <span className="di pa f10">不含运费</span>
                         </div>

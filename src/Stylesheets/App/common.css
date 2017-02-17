@@ -68,6 +68,7 @@ p{
 
 .pf {
     position: fixed;
+    -webkit-transform: translateZ(0);
 }
 .bkg_color{
     background-color:#fff !important;

@@ -138,7 +138,7 @@ const RouteConfig = (
       <Route path="receivingTime" component={ReceivingTime}/>
       <Route path="chooseInfomation" component={ChooseInfomation}/>
       <Route path="manageInformation" component={ManageInformation}/>
-      <Route path="cloudCartoon" component={CloudCard}/>
+      <Route path="/cloudCartoon" component={CloudCard}/>
       <Route path="pendPaymentDetails" component={PendPaymentDetails}/>
       <Route path="diaryContainer" component={DiaryContainer}/>
       <Route path="personalCenter" component={PersonalCenter}/>
