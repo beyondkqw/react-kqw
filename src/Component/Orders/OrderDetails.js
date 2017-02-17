@@ -9,7 +9,7 @@ import {config} from '../../Action/Const'
 
 export default class OrderDetails extends Component {
     // 构造
-      constructor(props) {
+    constructor(props) {
         super(props);
         // 初始状态
         this.state = {
@@ -19,20 +19,20 @@ export default class OrderDetails extends Component {
             delNo:'',
             cancelOrder:'取消订单'
         };
-      }
+    }
 
     //取消订单
     async cancelOrder(orderNo){
         await CancelReceived(orderNo)
-        .then(res=>{
-            this.setState({isCancel:false})
-            this.props.debitPay()
-            //this.setState({cancelOrder:'订单取消成功'})
-            //GetOrderList('0')
-        })
-        .catch(err=>{
-            console.warn('取消订单失败',err)
-        })
+            .then(res=>{
+                this.setState({isCancel:false});
+                this.props.debitPay()
+                //this.setState({cancelOrder:'订单取消成功'})
+                //GetOrderList('0')
+            })
+            .catch(err=>{
+                console.warn('取消订单失败',err)
+            })
     }
     //删除订单
     async DeletdOrder(orderNo){
@@ -59,7 +59,7 @@ export default class OrderDetails extends Component {
             })
     }
     render() {
-        const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated,query} = this.props
+        const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated,query,scrollTop} = this.props
         return (
             <div className="pr">
                 {
@@ -72,74 +72,74 @@ export default class OrderDetails extends Component {
                     orderDetails&&orderDetails.map((el,index)=>{
                         return(
                             <div>
-                                {/*<div className="paymargin">
+                                <div className="paymargin">
                                     <div className="di payImgSize mr"><img src={el.img} alt=""/></div>
                                     <span className="color6 font14">{el.store_name}</span>
-                                </div>*/}
+                                </div>
                                 <Link to="/orders/orderFormDetails"  query={{orderNo:el.order_no,isToPay:toPay,isMakeSure:makeSure}}>
-                                {
-                                    el.orderDetails&&el.orderDetails.map((item,index)=>{
-                                    return(
-                                        <div>
-                                            <div className="order_height border_bottom pr plAll df">
-                                                <div className="order_img height_all">
-                                                    <img src={item.productImage} alt=""/>
-                                                </div>
-                                                <div className="flex1 order_margin">
-                                                    <p className="oh color6 orderShow font14  db">{item.productName}</p>
-                                                    <p className="color9 f12 delete oh_height mt5">
-                                                        <span>{item.attrDesc}</span>
-                                                    </p>
-                                                </div>
-                                                <div className="pa order_price tr">
-                                                    <p className="color_yellow">
-                                                        <span className="f12">￥</span>
-                                                        <span className="f15">{item.price}</span>
-                                                    </p>
-                                                    <p className="color9 font14"><span>X</span><span>{item.num}</span></p>
-                                                </div>
-                                                {/*评论*/}
-                                                {
-                                                    toRated?
-                                                        <div
-                                                            style={{bottom:10,right:10}}
-                                                            className="pa mt55"
-                                                        >
-                                                            <Link
-                                                                to="orderList/publishEvalute"
-                                                                query={{
-                                                                    orderNo:item.orderNo,
-                                                                    image : item.productImage,
-                                                                    productId  :item.productId
-                                                                }}>
-                                                                <button
-                                                                    className="btn font14 bkg_ff border_ra color_white"
-                                                                >评价</button>
-                                                            </Link>
+                                    {
+                                        el.orderDetails&&el.orderDetails.map((item,index)=>{
+                                            return(
+                                                <div>
+                                                    <div className="order_height border_bottom pr plAll df">
+                                                        <div className="order_img height_all">
+                                                            <img src={item.productImage} alt=""/>
                                                         </div>
-                                                        :null
-                                                }
-                                                {/*{
-                                                    alreadyRated?
-                                                        <div className="pa mt55" style={{bottom:10,right:10}}>
-                                                            <Link
-                                                                to="orderList/viewEvaluation"
-                                                                query={{
-                                                                    orderNo:item.orderNo,
-                                                                    image : item.productImage,
-                                                                    productId  :item.productId
-                                                                }}
-                                                            >
-                                                                <button className="btn font14 bkg_ff border_ra color_white">查看</button>
-                                                            </Link>
+                                                        <div className="flex1 order_margin">
+                                                            <p className="oh color6 orderShow font14  db">{item.productName}</p>
+                                                            <p className="color9 f12 delete oh_height mt5">
+                                                                <span>{item.attrDesc}</span>
+                                                            </p>
                                                         </div>
-                                                        :null
-                                                }*/}
-                                            </div>
-                                        </div>
-                                        )
-                                    })
-                                }
+                                                        <div className="pa order_price tr">
+                                                            <p className="color_yellow">
+                                                                <span className="f12">￥</span>
+                                                                <span className="f15">{item.price}</span>
+                                                            </p>
+                                                            <p className="color9 font14"><span>X</span><span>{item.num}</span></p>
+                                                        </div>
+                                                        {/*评论*/}
+                                                        {
+                                                            toRated?
+                                                                <div
+                                                                    style={{bottom:10,right:10}}
+                                                                    className="pa mt55"
+                                                                >
+                                                                    <Link
+                                                                        to="orderList/publishEvalute"
+                                                                        query={{
+                                                                            orderNo:item.orderNo,
+                                                                            image : item.productImage,
+                                                                            productId  :item.productId
+                                                                        }}>
+                                                                        <button
+                                                                            className="btn font14 bkg_ff border_ra color_white"
+                                                                        >评价</button>
+                                                                    </Link>
+                                                                </div>
+                                                                :null
+                                                        }
+                                                        {/*{
+                                                         alreadyRated?
+                                                         <div className="pa mt55" style={{bottom:10,right:10}}>
+                                                         <Link
+                                                         to="orderList/viewEvaluation"
+                                                         query={{
+                                                         orderNo:item.orderNo,
+                                                         image : item.productImage,
+                                                         productId  :item.productId
+                                                         }}
+                                                         >
+                                                         <button className="btn font14 bkg_ff border_ra color_white">查看</button>
+                                                         </Link>
+                                                         </div>
+                                                         :null
+                                                         }*/}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </Link>
                                 <div className="order_pay">
                                     <div className="f12 width100 height1">
@@ -156,8 +156,8 @@ export default class OrderDetails extends Component {
                                                     <button
                                                         className="border_ra color9 border_ccc"
                                                         onClick = {()=>
-                                                        this.setState({isCancel:true,
-                                                        orderNo:el.order_no})}
+                                                            this.setState({isCancel:true,
+                                                                orderNo:el.order_no})}
                                                     >{el.status == config.order_status_cancel?'已取消':'取消订单'}</button>
                                                     {
                                                         el.status == config.order_status_cancel?
@@ -185,7 +185,9 @@ export default class OrderDetails extends Component {
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button
                                                         className="border_ra bkg_ff color_white"
-                                                        onClick={()=>this.setState({isDelete:true,delNo:el.order_no})}
+                                                        onClick={()=>{
+                                                            this.setState({isDelete:true,delNo:el.order_no});
+                                                        }}
                                                     >删除订单</button>
                                                 </div>
                                                 :null
@@ -201,9 +203,10 @@ export default class OrderDetails extends Component {
                 {
                     this.state.isCancel?
                         <Modal
-                          title = {'确定取消订单?'}
-                          onClick = {()=>this.cancelOrder(this.state.orderNo)}
-                          toHideModal={()=>this.setState({isCancel:false})}
+                            title = {'确定取消订单?'}
+                            scrollTop = {scrollTop}
+                            onClick = {()=>this.cancelOrder(this.state.orderNo)}
+                            toHideModal={()=>this.setState({isCancel:false})}
                         />
                         :null
                 }
@@ -212,6 +215,7 @@ export default class OrderDetails extends Component {
                     this.state.isDelete?
                         <Modal
                             title = {'确定删除订单?'}
+                            scrollTop = {scrollTop}
                             onClick = {()=>this.DeletdOrder(this.state.delNo)}
                             toHideModal={()=>this.setState({isDelete:false})}
                         />
