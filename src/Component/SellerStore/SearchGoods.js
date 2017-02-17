@@ -23,7 +23,7 @@ export default class SearchGoods extends Component {
         };
       }
     async searchInformation(){
-        await this.getOrderList(this.refs.searchValue.value,'','','')
+        await this.getOrderList(this.refs.searchValue.value,this.props.location.query.storeId,'','')
     }
     async getOrderList(name,id,order,orderName){
         await StorectList(name,id,order,orderName)

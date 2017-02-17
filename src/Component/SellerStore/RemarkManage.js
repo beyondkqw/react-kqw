@@ -21,7 +21,7 @@ export default class RemarkManage extends Component {
 
     //请求列表接口
     async getSellerOrder(){
-        await SellerProductList('','')
+        await SellerProductList(this.props.location.query.storeId,'')
             .then(res=>{
                 this.setState({sellerGoodsList:res.resultList})
             })

@@ -14,13 +14,16 @@ export default class ProductManagement extends Component {
                     title = {'产品管理'}
                 />
                 <div className="clearAll">
-                    <CellComponent
-                        className={'border_right'}
-                        imgUrl={require('../../Images/common/EvaluationManagement.png')}
-                        title={'评价管理'}
-                        describing={''}
-                        link={'/remarkManage'}
-                    />
+                    <Link to="/remarkManage" query={{storeId:this.props.location.query.storeId}}>
+                        <CellComponent
+
+                            className={'border_right'}
+                            imgUrl={require('../../Images/common/EvaluationManagement.png')}
+                            title={'评价管理'}
+                            describing={''}
+                            //link={'/remarkManage'}
+                        />
+                        </Link>
                     <Link to="/onSale" query={{storeId:this.props.location.query.storeId}}>
                         <CellComponent
                             imgUrl={require('../../Images/common/saleGoods.png')}

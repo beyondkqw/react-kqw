@@ -11,7 +11,7 @@ export default class NavBar extends Component {
         return (
             <div>
                 <div
-                    style={{height:45,backgroundColor:'#ff5500',top:0}}
+                    style={{height:45,backgroundColor:'#ff5500',top:0,zIndex:100}}
                     className="width100  flex flex-align-center flex-pack-center pf"
                 >
                     {

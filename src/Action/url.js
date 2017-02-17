@@ -255,3 +255,12 @@ export const wxJsSdk = 'support/sign'
 
 //绑定支付宝
 export const bindingAlipay = 'auth/account/bindingAlipay'
+
+//查询支付宝信息
+export const queryAlipay = 'auth/account/queryAlipay'
+
+//修改银行卡信息
+export const bankUpdate = 'bank/auth/update'
+
+//删除银行卡
+export const unBinding = 'bank/auth/unBinding'

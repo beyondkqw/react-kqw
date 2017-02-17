@@ -6,6 +6,7 @@ import '../../Stylesheets/App/order.css';
 import '../../Stylesheets/App/MsgListPage.css';
 import {GetOrderList} from '../../Action/auth';
 import iScroll from 'iscroll/build/iscroll-probe';
+import $ from 'jquery';
 
 export default class OrderList extends Component {
     componentWillMount(){

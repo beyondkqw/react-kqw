@@ -102,10 +102,10 @@ export default class OnSale extends Component {
                 </div>
                 <div className="footerHidden"></div>
                 <div className="width_100 commit pf bottom0">
-                    <Link to="/offTheShelf">
+                    <Link to="/offTheShelf" query={{storeId:this.props.location.query.storeId}}>
                         <button className="width50 height_all bkg_fadeff color_yellow">下架</button>
                     </Link>
-                    <Link to="/searchGoods">
+                    <Link to="/searchGoods" query={{storeId:this.props.location.query.storeId}}>
                         <button className="width50 height_all bkg_ff color_white">搜索宝贝</button>
                     </Link>
                 </div>

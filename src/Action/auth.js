@@ -956,3 +956,36 @@ export async function BindingAlipay(name,accNumber) {
         throw err
     }
 }
+
+//绑定银行卡
+export async function QueryAlipay() {
+    try {
+        const res = await apiGet(URL.queryAlipay);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//编辑银行卡信息
+export async function BankUpdate(bankId,bankName,name,bankCardNo,pro,city,area,branch,mobile) {
+    try {
+        const res = await apiGet(URL.bankUpdate,{bankId,bankName,name,bankCardNo,pro,city,area,branch,mobile});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//删除银行卡
+export async function UnBinding(bankId) {
+    try {
+        const res = await apiGet(URL.unBinding,{bankId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
