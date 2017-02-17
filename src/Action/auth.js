@@ -782,7 +782,7 @@ export async function SellerToLogin(accName,pwd) {
 }
 
 //录入店铺信息
-export async function EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type) {
+export async function EnterStoreInformation(name='',img='',address='',province='',city='',area='',license='',cardFace='',cardBack='',gpsAddress='',latitude='',longitude='',type='') {
     try {
         const res = await apiPost(URL.storeAdd,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
         return res;

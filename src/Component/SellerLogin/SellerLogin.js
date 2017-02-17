@@ -1,11 +1,11 @@
 /**
  * Created by asus on 2016/11/21.
  */
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SellerToLogin,MyInfo} from '../../Action/auth'
-import {saveToken,ErrorNum,ErrorPs} from '../../Action/rpc'
+import {saveToken,ErrorNum,ErrorPs,loadToken,getToken,clearToken} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
@@ -27,6 +27,29 @@ export default class SellerLogin extends Component {
             accName:'13608022531',
             pwd:'asd123'
         };
+    }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
+   async componentWillMount() {
+      //await  clearToken()
+       //alert(window.location.href)
+       let token = await loadToken(1)
+       let token_S = await loadToken()
+        // if(token){
+        //     this.context.router.replace({pathname:'/sellerStoreCenter'})
+        // }
+        console.log('token',token)
+        //console.log('token===>',getToken())
+       console.log('token111',token_S)
+        //console.log('token111===>',getToken())
+
+    }
+
+    componentDidMount() {
+
     }
 
     //判断登录名,密码是否正确
@@ -62,14 +85,16 @@ export default class SellerLogin extends Component {
             this.setState({Reminder:'密码格式错误，请输入6～16位字符，至少包含数字、大写字母、小写字母、符号中的两种!'})
             return
         }
+
+        //alert(localStorage.getItem('latitude'))
         await SellerToLogin(accName,pwd)
             .then(res=>{
-                saveToken(res)
+                saveToken(res,1)
                 this.getMyInfo()
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
-                console.warn('err',err)
+                alert('err',err)
             })
     }
     async getMyInfo(){

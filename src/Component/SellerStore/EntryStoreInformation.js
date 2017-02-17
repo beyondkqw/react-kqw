@@ -19,10 +19,10 @@ export default class EntryStoreInformation extends Component {
         // 初始状态
         this.state = {
             Reminder:'',
-            uploadStoreImg:'',
-            licenseImg:'',
-            cardFace:'',
-            cardBack:'',
+            // uploadStoreImg:'',
+            // licenseImg:'',
+            // cardFace:'',
+            // cardBack:'',
             chooseType:false,
             StoreTypeItem:[],
             id:'',
@@ -71,7 +71,11 @@ export default class EntryStoreInformation extends Component {
             this.setState({Reminder:''})
         }
 
-        this.getInformation(storeName,uploadStoreImg,this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,licenseImg,cardFace,cardBack,'定位地址','234.00','23.00',this.state.id)
+        const latitude = localStorage.getItem('latitude')
+        const longitude = localStorage.getItem('longitude')
+        const address = localStorage.getItem('address')
+
+        this.getInformation(storeName,uploadStoreImg,this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,licenseImg,cardFace,cardBack,address,latitude,longitude,this.state.id)
     }
 
     async getInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
