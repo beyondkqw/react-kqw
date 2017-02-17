@@ -15,10 +15,10 @@ let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
 
-//export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-//export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
-export const wsPath = "ws://"+'jdapi.tunnel.qydev.com'+"/api/socketServer";
-export const ROOT_URL = 'http://jdapi.tunnel.qydev.com/api/'
+export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
+// export const wsPath = "ws://"+'jdapi.tunnel.qydev.com'+"/api/socketServer";
+// export const ROOT_URL = 'http://jdapi.tunnel.qydev.com/api/'
 // export const wsPath = "ws://"+'juduotest.tunnel.qydev.com'+"/api/socketServer";
 // export const ROOT_URL = 'http://juduotest.tunnel.qydev.com/api/'
 

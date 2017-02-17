@@ -1,11 +1,11 @@
 /**
  * Created by asus on 2016/11/21.
  */
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SellerToLogin,MyInfo} from '../../Action/auth'
-import {saveToken,ErrorNum,ErrorPs} from '../../Action/rpc'
+import {saveToken,ErrorNum,ErrorPs,loadToken,getToken,clearToken} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
@@ -27,6 +27,23 @@ export default class SellerLogin extends Component {
             accName:'13608022531',
             pwd:'asd123'
         };
+    }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
+   async componentWillMount() {
+      //await  clearToken()
+        let token = await loadToken(1)
+       let token_S = await loadToken()
+        // if(token){
+        //     this.context.router.replace({pathname:'/sellerStoreCenter'})
+        // }
+        console.log('token',token)
+        //console.log('token===>',getToken())
+       console.log('token111',token_S)
+        //console.log('token111===>',getToken())
     }
 
     //判断登录名,密码是否正确
@@ -64,12 +81,12 @@ export default class SellerLogin extends Component {
         }
         await SellerToLogin(accName,pwd)
             .then(res=>{
-                saveToken(res)
+                saveToken(res,1)
                 this.getMyInfo()
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
-                console.warn('err',err)
+                alert('err',err)
             })
     }
     async getMyInfo(){
