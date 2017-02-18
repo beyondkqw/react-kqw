@@ -122,6 +122,9 @@ export const giveAmount = 'auth/account/giveAmount'
 //我的佣金记录
 export const giveAwayRecord = 'auth/account/commissionRecord'
 
+//提现记录
+export const cashRecord = 'transation/auth/cashRecord'
+
 //商品评价
 export const remark = 'comment/auth/save'
 
@@ -216,6 +219,9 @@ export const storeAdd = 'store/auth/add'
 
 //店铺详情
 export const storeDetail = 'store/detail'
+
+//我的店铺详情
+export const myStore = 'store/auth/myStore'
 
 //修改店铺信息
 export const storeEdit = 'store/auth/edit'

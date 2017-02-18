@@ -119,6 +119,10 @@ import RechargeWay from '../Component/PersonalCenter/RechargeWay'
 import StoreClassifyDetail from '../Component/GoodsDetails/StoreClassifyDetail'
 import ShareQrCode from '../Component/PersonalCenter/ShareQrCode'
 import SellerModifyCard from '../Component/SellerStore/SellerModifyCard'
+import SellerBalanceMan from '../Component/SellerStore/SellerBalanceMan'
+import BalanceTake from '../Component/SellerStore/BalanceTake'
+import SellerChooseType from '../Component/SellerStore/SellerChooseType'
+import SellerTakenDetails from '../Component/SellerStore/SellerTakenDetails'
 
 
 
@@ -244,6 +248,10 @@ const RouteConfig = (
       <Route path="storeClassifyDetail" component={StoreClassifyDetail} />
       <Route path="shareQrCode" component={ShareQrCode} />
       <Route path="sellerModifyCard" component={SellerModifyCard} />
+      <Route path="sellerBalanceMan" component={SellerBalanceMan} />
+      <Route path="balanceTake" component={BalanceTake} />
+      <Route path="sellerChooseType" component={SellerChooseType} />
+      <Route path="sellerTakenDetails" component={SellerTakenDetails} />
     </Route>
   </Router>
 );

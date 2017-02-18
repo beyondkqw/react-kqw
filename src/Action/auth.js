@@ -804,9 +804,9 @@ export async function StoreDetail(storeId) {
 }
 
 //修改店铺信息
-export async function StoreEdit(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress) {
+export async function StoreEdit(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type) {
     try {
-        const res = await apiPost(URL.storeEdit,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress});
+        const res = await apiPost(URL.storeEdit,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
         return res;
     } catch (err) {
         console.warn(err);
@@ -983,6 +983,28 @@ export async function BankUpdate(bankId,bankName,name,bankCardNo,pro,city,area,b
 export async function UnBinding(bankId) {
     try {
         const res = await apiGet(URL.unBinding,{bankId});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//我的店铺详情
+export async function MyStore() {
+    try {
+        const res = await apiGet(URL.myStore);
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//提现
+export async function CashRecord() {
+    try {
+        const res = await apiGet(URL.cashRecord);
         return res;
     } catch (err) {
         console.warn(err);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import OrderDetails from '../../Component/Orders/OrderDetails'
 import '../../Stylesheets/App/personal.css';
-import {MyInfo} from '../../Action/auth'
+import {MyStore} from '../../Action/auth'
 
 const ItemList = [
     {name:'销售统计',imgUrl:require('../../Images/common/SalesStatistics.png'),link:'/salesStatistics'},
@@ -10,7 +10,8 @@ const ItemList = [
     {name:'店铺首页',imgUrl:require('../../Images/common/ShopHome.png'),link:'/shopHome'},
     {name:'产品管理',imgUrl:require('../../Images/common/productManagement.png'),link:'/productManagement'},
     {name:'客服设置',imgUrl:require('../../Images/common/CustomerService.png'),link:'/customerService'},
-    {name:'分佣比例设置',imgUrl:require('../../Images/common/SubCommission.png'),link:'/storeSubCommission'}
+    {name:'分佣比例设置',imgUrl:require('../../Images/common/SubCommission.png'),link:'/storeSubCommission'},
+    {name:'资金管理',imgUrl:require('../../Images/common/balanceMan.png'),link:'/sellerBalanceMan'}
 ]
 export default class SellerStoreCenter extends Component {
 
@@ -24,13 +25,13 @@ export default class SellerStoreCenter extends Component {
     }
 
     componentWillMount() {
-        this.getMyInfo()
+        this.getMyStore()
     }
 
-    async getMyInfo(){
-        await MyInfo()
+    async getMyStore(){
+        await MyStore()
             .then(res=>{
-                this.setState({storeDetails:res})
+                this.setState({storeDetails:res.store})
             })
     }
 
@@ -39,22 +40,25 @@ export default class SellerStoreCenter extends Component {
         return (
             <div>
                 <section className="pr tc center_bkImg" style={{height:130,paddingTop:20}}>
-                    <Link to="/sellerSetting" query={{storeId:storeDetails.STORE_ID}}>
+                    <Link to="/sellerSetting" query={{storeId:storeDetails.id}}>
                         <div className="personLogo">
-                            <img className="border_ra50" src={storeDetails.IMAGE_URI} alt=""/>
+                            <img className="border_ra50" src={storeDetails.img} alt=""/>
                         </div>
                     </Link>
                     <div className="pa setUp">
                         <Link
                             to="/sellerStoreSetting"
-                            query={{mobile:storeDetails.MOBILE,storeId:storeDetails.STORE_ID}}>
+                            query={{mobile:storeDetails.mobile,storeId:storeDetails.id}}>
                             <span className="di" style={{width:15,height:15,lineHeight:0,marginRight:5}}>
                                 <img src={require('../../Images/common/shezhi.png')} alt=""/>
                             </span>
                             <span className="font14 color_white">设置</span>
                         </Link>
                     </div>
-                    <div className="font14 color_white" style={{marginTop:20,height:15}}>{storeDetails.MEMBER_NAME}</div>
+                    <div className="font14 color_white" style={{marginTop:20,height:15}}>{storeDetails.name}</div>
+                    <div className="font14 color_white" >
+                        
+                    </div>
                 </section>
                 <div className="line"></div>
                 <div className="width_100 countDiv">
@@ -64,7 +68,7 @@ export default class SellerStoreCenter extends Component {
                                 <Link
                                     to={item.link}
                                     className="di width_third width_100"
-                                    query={{storeId:storeDetails.STORE_ID}}
+                                    query={{storeId:storeDetails.id}}
                                 >
                                     <div className={index%3==0||index%3==1?
                                     "separateRow tc di border_bottom  border_right":

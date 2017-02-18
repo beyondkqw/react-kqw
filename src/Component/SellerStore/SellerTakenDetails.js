@@ -5,7 +5,7 @@ import '../../Stylesheets/App/personal.css';
 import {GiveAwayRecord,CashRecord} from '../../Action/auth'
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg';
 
-export default class TakenDetails extends Component {
+export default class SellerTakenDetails extends Component {
     // 构造
     constructor(props) {
         super(props);

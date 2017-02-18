@@ -5,6 +5,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {StoreDetail,StoreEdit} from '../../Action/auth'
 import NavBar from '../../Component/CommonComponent/NavBar'
+import DelayModal from '../../Component/CommonComponent/DelayModal'
 import Location from '../../Component/SellerStore/Location'
 import UUID from 'uuid-js'
 
@@ -22,12 +23,44 @@ export default class SellerSetting extends Component {
             cardBack:'',
             gpsAddress:'',
             showMap:false,
-            Reminder:''
+            Reminder:'',
+            GPSaddress:'',
+            latitude:'',
+            longitude:'',
+            type:'',
+            modalDelay:false
         };
       }
 
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
     componentWillMount() {
+        this.setState({GPSaddress:localStorage.getItem('address')})
+        this.setState({latitude:localStorage.getItem('latitude')})
+        this.setState({longitude:localStorage.getItem('longitude')})
+        console.log('获取的定位信息======>',localStorage.getItem('address')+localStorage.getItem('latitude')+localStorage.getItem('longitude'))
         this.getStoreDetail(this.props.location.query.storeId)
+    }
+
+    async getStoreDetail(value){
+        await StoreDetail(value)
+            .then(res=>{
+                this.setState({storeImg:res.store.img})
+                this.setState({storeName:res.store.name})
+                this.setState({address:res.store.address})
+                this.setState({type:res.store.type})
+                this.setState({licenseImg:res.store.license})
+                this.setState({cardFace:res.store.cardFace})
+                this.setState({cardBack:res.store.cardBack})
+                this.setState({provId:res.store.province})
+                this.setState({cityId:res.store.city})
+                this.setState({countyId:res.store.area})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
     }
 
     //得到地址信息
@@ -46,31 +79,15 @@ export default class SellerSetting extends Component {
 
     }
 
-    async getStoreDetail(value){
-        await StoreDetail(value)
-            .then(res=>{
-                this.setState({storeImg:res.store.img})
-                this.setState({storeName:res.store.name})
-                this.setState({address:res.store.address})
-                this.setState({licenseImg:res.store.license})
-                this.setState({cardFace:res.store.cardFace})
-                this.setState({cardBack:res.store.cardBack})
-                this.setState({gpsAddress:res.store.gpsAddress})
-            })
-            .catch(err=>{
-                console.warn('err',err)
-            })
-    }
-
     async confirmEdit(){
-        const {storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack} = this.state
+        const {storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack,GPSaddress,latitude,longitude,type} = this.state
         if(!storeName || !storeImg|| !address || !licenseImg || !cardFace || !cardBack){
             this.setState({Reminder:'修改数据不能为空'})
             return
         }
-        await StoreEdit(storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack,'')
+        await StoreEdit(storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack,GPSaddress,latitude,longitude,type)
             .then(res=>{
-                this.context.router.push({pathname:'/storeSubCommission'})
+                this.context.router.push({pathname:'/storeSubCommission',query:{storeId:this.props.location.query.storeId}})
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
@@ -87,18 +104,22 @@ export default class SellerSetting extends Component {
         });
 
         var file = e.target.files[0];
+        console.log('file=================>',file)
         var fileName = window.URL.createObjectURL(file)
         var index1=file.name.lastIndexOf(".");
         var index2=file.name.length;
         var suffix=file.name.substring(index1,index2)
-        console.log(suffix)
+        console.log('suffix==========>',suffix)
 
         var uuid4 = UUID.create().toString();
         console.log(uuid4.toString());
         var storeAs = 'sq/'+uuid4+''+suffix;
-        console.log(file.name + ' => ' + storeAs);
+        this.setState({modalDelay:true})
+
+        console.log(file.name + '=======================> ' + storeAs);
         client.multipartUpload(storeAs, file).then((result)=> {
-            console.log(result.url);
+            console.log('后台返回的地址----------------》',result.name);
+            this.setState({modalDelay:false})
             switch (type){
                 case 1 : this.setState({storeImg:fileName})
                     break;
@@ -122,7 +143,7 @@ export default class SellerSetting extends Component {
             <div className="containerNav" style={{paddingBottom:30}}>
                 <NavBar
                     renderBack = {true}
-                    title = {'个人资料'}
+                    title = {'店铺资料'}
                 />
                 <SplitLine />
                 <div className="lh60 border_bottom plr font14 df flex-pack-justify flex-align-center">
@@ -167,21 +188,19 @@ export default class SellerSetting extends Component {
                         style={{flexDirection:'row',height:50}}
                         className="df flex-pack-justify flex-align-center border_bottom plr font14"
                     >
-                        <span className="color6">定位店铺地址</span>
+                        <span className="color6">当前店铺地址</span>
                         <div>
-                            <span className="di ml5" style={{width:9,height:16,lineHeight:0}}>
-                                <img src={require('../../Images/rightArrow.png')} alt=""/>
-                            </span>
+
                         </div>
                     </div>
-                    <Link to="/sellerMineCode">
+                    {/* <Link to="/sellerMineCode">
                         <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
                             <span className="color6">我的二维码名片</span>
                             <span className="di qrCode">
                                 <img src={require('../../Images/QrCode.png')} alt=""/>
                             </span>
                         </div>
-                    </Link>
+                    </Link>*/}
                 </div>
                 <SplitLine />
                 <div className="df flex-pack-justify flex-pack-center flex-align-center plAll border_bottom">
@@ -229,7 +248,6 @@ export default class SellerSetting extends Component {
                     title = {'确定'}
                     onClick={()=>this.confirmEdit()}
                 />
-
                 {
                     showMap?
                         <div className="locationModal pa width_100 font14 flex flex-v" style={{zIndex:100}}>
@@ -251,6 +269,12 @@ export default class SellerSetting extends Component {
                             </div>
                         </div>
                         :null
+                }
+                {
+                    this.state.modalDelay?
+                        <DelayModal />
+                        :null
+
                 }
             </div>
         );

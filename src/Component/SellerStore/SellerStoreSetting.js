@@ -7,7 +7,7 @@ import {Logout} from '../../Action/auth';
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 const Itemlist =[
-    {name:'个人资料',link:'/sellerSetting',imgurl:require('../../Images/common/information.png')},
+    {name:'店铺资料',link:'/sellerSetting',imgurl:require('../../Images/common/information.png')},
     {name:'账户与安全',link:'/sellerSavety',imgurl:require('../../Images/common/account.png')},
     {name:'帮助与反馈',link:'/personalCenter/feedback',imgurl:require('../../Images/common/helpReturn.png')},
     {name:'关于聚朵云',link:'/personalCenter/aboutDemo',imgurl:require('../../Images/common/about.png')}

@@ -8,6 +8,7 @@ import {EnterStoreInformation,StoreType} from '../../Action/auth'
 import Location from '../../Component/SellerStore/Location'
 import '../../Stylesheets/App/sellerStore.css';
 import NavBar from '../../Component/CommonComponent/NavBar'
+import DelayModal from '../../Component/CommonComponent/DelayModal'
 import UUID from 'uuid-js'
 
 
@@ -19,6 +20,7 @@ export default class EntryStoreInformation extends Component {
         // 初始状态
         this.state = {
             Reminder:'',
+            modalDelay:false,
             // uploadStoreImg:'',
             // licenseImg:'',
             // cardFace:'',
@@ -37,7 +39,12 @@ export default class EntryStoreInformation extends Component {
             countysName:'',
             provId:'',
             cityId:'',
-            countyId:''
+            countyId:'',
+            gpsAddress:'',
+            uploadHeaderImg:'',
+            uploadLicenseImg:'',
+            uploadCardFaceImg:'',
+            uploadCardBackImg:''
         };
     }
     static contextTypes = {
@@ -46,10 +53,12 @@ export default class EntryStoreInformation extends Component {
 
     componentWillMount() {
         this.getStoreType()
+        const address = localStorage.getItem('address')
+        this.setState({gpsAddress:address})
     }
 
     confirmInformation(){
-        const {uploadStoreImg,licenseImg,cardFace,cardBack} = this.state
+        const {uploadStoreImg,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
         const storeName = this.refs.storeName.value
         //非空校验
         if(!uploadStoreImg){
@@ -75,12 +84,13 @@ export default class EntryStoreInformation extends Component {
         const longitude = localStorage.getItem('longitude')
         const address = localStorage.getItem('address')
 
-        this.getInformation(storeName,uploadStoreImg,this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,licenseImg,cardFace,cardBack,address,latitude,longitude,this.state.id)
+        this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,'定位地址','10.33','15.33',this.state.id)
     }
 
     async getInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
         await EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type)
             .then(res=>{
+                console.log()
                 this.context.router.push({pathname:'/storeSubCommission'})
             })
             .catch(err=>{
@@ -133,6 +143,7 @@ export default class EntryStoreInformation extends Component {
         });
 
         var file = e.target.files[0];
+        console.log('file=================>',file)
         var fileName = window.URL.createObjectURL(file)
         var index1=file.name.lastIndexOf(".");
         var index2=file.name.length;
@@ -142,17 +153,19 @@ export default class EntryStoreInformation extends Component {
         var uuid4 = UUID.create().toString();
         console.log(uuid4.toString());
         var storeAs = 'sq/'+uuid4+''+suffix;
-        console.log(file.name + ' => ' + storeAs);
+        this.setState({modalDelay:true})
+        console.log(file.name + ' ===============> ' + storeAs);
         client.multipartUpload(storeAs, file).then((result)=> {
             console.log(result.url);
+            this.setState({modalDelay:false})
             switch (type){
-                case 1 : this.setState({uploadStoreImg:fileName})
+                case 1 : this.setState({uploadStoreImg:fileName,uploadHeaderImg:storeAs})
                     break;
-                case 2 : this.setState({licenseImg:fileName})
+                case 2 : this.setState({licenseImg:fileName,uploadLicenseImg:storeAs})
                     break;
-                case 3 : this.setState({cardFace:fileName})
+                case 3 : this.setState({cardFace:fileName,uploadCardFaceImg:storeAs})
                     break;
-                case 4 : this.setState({cardBack:fileName})
+                case 4 : this.setState({cardBack:fileName,uploadCardBackImg:storeAs})
                     break;
                 default : this.status = ''
                     break;
@@ -164,7 +177,7 @@ export default class EntryStoreInformation extends Component {
 
 
     render(){
-        const {chooseType,StoreTypeItem,storeType,uploadStoreImg,licenseImg,cardFace,cardBack,showMap,provName,cityName,countysName} = this.state
+        const {gpsAddress,chooseType,StoreTypeItem,storeType,uploadStoreImg,licenseImg,cardFace,cardBack,showMap,provName,cityName,countysName} = this.state
         return(
             <div className="containerNav">
                 <NavBar
@@ -248,14 +261,15 @@ export default class EntryStoreInformation extends Component {
                                 <img src={require('../../Images/rightArrow.png')} alt=""/>
                             </span>
                         </div>
-
                     </div>
-                    {/*<ReactGeoLocation >example</ReactGeoLocation>*/}
                     <Link>
                         <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14">
-                            <span className="color6">定位店铺位置</span>
-                            <div style={{width:35,height:21,lineHeight:0}}>
+                            <span className="color6">当前店铺位置</span>
+                            {/*<div style={{width:35,height:21,lineHeight:0}}>
                                 <img src={require('../../Images/common/sellerLocation.png')} alt=""/>
+                            </div>*/}
+                            <div>
+                                {gpsAddress}
                             </div>
                         </div>
                     </Link>
@@ -341,6 +355,12 @@ export default class EntryStoreInformation extends Component {
                             </div>
                         </div>
                         :null
+                }
+                {
+                    this.state.modalDelay?
+                        <DelayModal />
+                        :null
+
                 }
             </div>
         )

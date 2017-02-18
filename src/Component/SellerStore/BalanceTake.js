@@ -7,7 +7,7 @@ import '../../Stylesheets/App/personal.css';
 import {Cash,MyInfo} from '../../Action/auth'
 import {CheckNum} from '../../Action/rpc'
 
-export default class WithdrawCash extends Component {
+export default class BalanceTake extends Component {
     // 构造
     constructor(props) {
         super(props);
@@ -51,7 +51,7 @@ export default class WithdrawCash extends Component {
             return
         }
         if(!this.state.amount || !CheckNum(this.state.amount)){
-            alert('请输入提现金额')
+            alert('请输入正整数的提现金额')
             return
         }
         if(this.state.amount > this.state.now_amount){
@@ -66,7 +66,7 @@ export default class WithdrawCash extends Component {
         await Cash(bankcardId,amount)
             .then(res=> {
                 alert('提现成功')
-                //this.context.router.goBack()
+                this.context.router.push({pathname:'/sellerBalanceMan'})
             })
             .catch(err=> {
                 this.setState({Reminder:err.message})
@@ -82,14 +82,14 @@ export default class WithdrawCash extends Component {
                     <ul>
                         {
                             toChange?
-                                <Link to='/personalCenter/commissionCash'>
+                                <Link to='/sellerChooseType'>
                                     <li className="item-content item-link item-link pl  border_bottom">
-                                        <div className="item-media">
+                                        {/*<div className="item-media">
                                             <span className="fl di headerImg">
                                                 <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
                                                      alt=""/>
                                             </span>
-                                        </div>
+                                        </div>*/}
                                         <div className="item-inner" style={{marginLeft:15}}>
                                             <div className="item-title-row">
                                                 <div className="item-title font14 color6">{bankname}</div>
@@ -99,14 +99,14 @@ export default class WithdrawCash extends Component {
                                     </li>
                                 </Link>
                                 :
-                                <Link to='/personalCenter/commissionCash'>
+                                <Link to='/sellerChooseType'>
                                     <li className="item-content item-link item-link pl  border_bottom">
                                         {/*<div className="item-media">
-                                            <span className="fl di headerImg">
-                                                <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
-                                                     alt=""/>
-                                            </span>
-                                        </div>*/}
+                                         <span className="fl di headerImg">
+                                         <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
+                                         alt=""/>
+                                         </span>
+                                         </div>*/}
                                         <div className="item-inner" style={{marginLeft:15}}>
                                             <div className="item-title-row">
                                                 <div className="f12 color9">请选择提现账号</div>
@@ -142,9 +142,9 @@ export default class WithdrawCash extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
-                                    <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/common/allAmount.png')} alt=""/>
                                 </span>
-                                    <span className="di margin15 color6">总佣金</span>
+                                    <span className="di margin15 color6">总余额</span>
                                 </div>
                                 <div className="item-after color9 isSet">{allAmount}</div>
                             </div>
@@ -153,9 +153,9 @@ export default class WithdrawCash extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
-                                    <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/common/takenImg.png')} alt=""/>
                                 </span>
-                                    <span className="di margin15 color6">可提取佣金</span>
+                                    <span className="di margin15 color6">可提取余额</span>
                                 </div>
                                 <div className="item-after color9 isSet">{now_amount}</div>
                             </div>
@@ -164,9 +164,9 @@ export default class WithdrawCash extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
-                                    <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/common/frozenImg.png')} alt=""/>
                                 </span>
-                                    <span className="di margin15 color6">已申请提现佣金</span>
+                                    <span className="di margin15 color6">冻结金额</span>
                                 </div>
                                 <div className="item-after color9 isSet">{frozen}</div>
                             </div>
@@ -197,7 +197,7 @@ export default class WithdrawCash extends Component {
                         <EnterPassword />
                         : null
                 }
-                </div>
+            </div>
         );
     }
 }

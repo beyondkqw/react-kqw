@@ -24,7 +24,7 @@ export default class RetailingItem extends Component {
                     isShowDate?
                         <div className="fr f12 color9">
                             <div>{ymd}</div>
-                            <p className="mt3">{time}</p>
+                            <p className="mt3" style={{float:'right'}}>{time}</p>
                         </div>
                         :null
                 }
