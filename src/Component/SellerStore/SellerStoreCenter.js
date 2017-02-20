@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import OrderDetails from '../../Component/Orders/OrderDetails'
 import '../../Stylesheets/App/personal.css';
-import {MyStore} from '../../Action/auth'
+import {MyStore,MyInfo} from '../../Action/auth'
 
 const ItemList = [
     {name:'销售统计',imgUrl:require('../../Images/common/SalesStatistics.png'),link:'/salesStatistics'},
@@ -20,12 +20,15 @@ export default class SellerStoreCenter extends Component {
         super(props);
         // 初始状态
         this.state = {
-            storeDetails:''
+            storeDetails:'',
+            Now_Amount:'',
+            frozen:''
         };
     }
 
     componentWillMount() {
         this.getMyStore()
+        this.getMyInfo()
     }
 
     async getMyStore(){
@@ -35,11 +38,21 @@ export default class SellerStoreCenter extends Component {
             })
     }
 
+    async getMyInfo(){
+        await MyInfo()
+            .then(res=>{
+                this.setState({
+                    Now_Amount : res.NOW_AMOUNT,
+                    frozen:res.FROZEN
+                })
+            })
+    }
+
     render() {
-        const {storeDetails} = this.state
+        const {storeDetails,Now_Amount,frozen} = this.state
         return (
             <div>
-                <section className="pr tc center_bkImg" style={{height:130,paddingTop:20}}>
+                <section className="pr tc center_bkImg" style={{height:170,paddingTop:20}}>
                     <Link to="/sellerSetting" query={{storeId:storeDetails.id}}>
                         <div className="personLogo">
                             <img className="border_ra50" src={storeDetails.img} alt=""/>
@@ -56,8 +69,15 @@ export default class SellerStoreCenter extends Component {
                         </Link>
                     </div>
                     <div className="font14 color_white" style={{marginTop:20,height:15}}>{storeDetails.name}</div>
-                    <div className="font14 color_white" >
-                        
+                    <div className="flex flex-pack-justify color_white" style={{margin:'10px 3.5rem 0'}}>
+                        <div className="flex flex-v">
+                            <span className="font16">{frozen}</span>
+                            <span className="font14">冻结金额</span>
+                        </div>
+                        <div className="flex flex-v">
+                            <span className="font16">{Now_Amount}</span>
+                            <span className="font14">可用余额</span>
+                        </div>
                     </div>
                 </section>
                 <div className="line"></div>
@@ -68,7 +88,7 @@ export default class SellerStoreCenter extends Component {
                                 <Link
                                     to={item.link}
                                     className="di width_third width_100"
-                                    query={{storeId:storeDetails.id}}
+                                    query={{storeId:storeDetails.id,Now_Amount:Now_Amount,frozen:frozen}}
                                 >
                                     <div className={index%3==0||index%3==1?
                                     "separateRow tc di border_bottom  border_right":

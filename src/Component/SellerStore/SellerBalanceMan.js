@@ -13,31 +13,8 @@ const ChargesList = [
     {imgUrl:require('../../Images/diary.png'),title:'佣金转赠',describing:'把佣金转给好友',link:'/personalCenter/commisionGiving'}
 ];
 export default class SellerBalanceMan extends Component {
-    // 构造
-    constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {
-            accId:'',
-            Now_Amount:'',
-            frozen:''
-        };
-    }
-    componentWillMount() {
-        this.getMyInfo()
-    }
-
-    async getMyInfo(){
-        await MyInfo()
-            .then(res=>{
-                this.setState({
-                    Now_Amount : res.NOW_AMOUNT,
-                    frozen:res.FROZEN
-                })
-            })
-    }
     render() {
-        const {accId,Now_Amount,frozen} = this.state
+        const {accId,Now_Amount,frozen} = this.props.location.query
         return (
             <div className="containerNav">
                 <SplitLine />

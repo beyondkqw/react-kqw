@@ -91,6 +91,7 @@ export default class Register extends Component {
         await ToRegister(mobile,pwd,smsCode,code,recommendId,memberName)
         .then(res=>{
             console.log('注册成功',res)
+            window.location.href = '/Login/Login'
         })
         .catch(err=>{
             this.setState({Reminder:err.message})

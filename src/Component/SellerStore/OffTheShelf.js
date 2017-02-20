@@ -90,9 +90,15 @@ export default class OffTheShelf extends Component {
         if(this.selectOffShelf.length>0){
             await SellerOffShelf(this.selectOffShelf)
                 .then(res=>{
+                    console.log('当前的数量=========>',this.selectOffShelf.length)
                     //alert('清空宝贝成功')
+                    this.selectOffShelf = []
+
+                    console.log('清空后的数组========>',this.selectOffShelf.length)
                     this.setState({isVisible:false})
                     this.getSellerOrder()
+                    //this.setState({selectAll:false});
+
                     //this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                 })
         }else{
