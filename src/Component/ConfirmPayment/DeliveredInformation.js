@@ -57,17 +57,43 @@ export default class DeliveredInformation extends Component {
     }
 
     //得到地址信息
-    getValue(provName,cityName,countysName,prov,city,county){
-        if(provName&&cityName&&countysName){
-            this.setState({
-                address:provName+cityName+countysName,
+    async getValue(provName,cityName,countysName,prov,city,county){
+        //改变默认值
+        if(prov == '110000' || prov =='120000' || prov =='310000' || prov =='500000'){
+            //改变初始化的内容
+            if((provName == ''|| provName == null) && (countysName != '' || countysName != null)&& countysName != undefined){
+                await this.setState({provName:'北京市',cityName:'',countysName:countysName,provId:'110000',cityId:'0',countyId:county,showMap:false})
+                this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
+                return
+            }
+            if(countysName == '' || countysName == null || countysName== undefined){
+                alert('请选择对应的城市和区县')
+                return
+            }
+            if((provName != ''|| provName != null) && (county != '' || county != null)){
+                await this.setState({provName:provName,cityName:'',countysName:countysName,provId:prov,cityId:'0',countyId:county,showMap:false})
+                this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
+                return
+            }
+
+        }else if(prov == '710000' || prov =='810000' || prov =='820000'){
+            await this.setState({provName:provName,cityName:'',countysName:'',provId:prov,cityId:'0',countyId:'0',showMap:false})
+            this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
+            return
+        }else if(prov != '' && city != '' && county != ''){
+            await this.setState({
+                provName:provName,
+                cityName:cityName,
+                countysName:countysName,
                 showMap:false,
                 provId:prov,
                 cityId:city,
                 countyId:county,
             })
+            this.setState({address:this.state.provName+this.state.cityName+this.state.countysName})
+        }else{
+            alert('地址请选择完整')
         }
-
     }
 
     async submit(){
@@ -191,7 +217,7 @@ export default class DeliveredInformation extends Component {
                                     options= {{
                                         prov:'110000',
                                         city:'110100',
-                                        county:'110101',
+                                        county:'0',
                                         defaultText:['省份','城市','区县']
                                     }}
                                 />

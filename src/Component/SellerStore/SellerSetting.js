@@ -64,19 +64,47 @@ export default class SellerSetting extends Component {
     }
 
     //得到地址信息
-    getValue(provName,cityName,countysName,prov,city,county){
-        if(provName&&cityName&&countysName){
-            this.setState({
-                provName:provName,
-                cityName:cityName,
-                address:provName+cityName+countysName,
-                showMap:false,
-                provId:prov,
-                cityId:city,
-                countyId:county,
-            })
-        }
+    async getValue(provName,cityName,countysName,prov,city,county){
+        //改变默认值
+        console.log('ajsvgd=========>',provName)
+        if(prov == '110000' || prov =='120000' || prov =='310000' || prov =='500000'){
+            //改变初始化的内容
+            if((provName == ''|| provName == null|| provName== undefined) && (countysName != '' || countysName != null)&& countysName != undefined){
+                console.log('进来了1')
+                await this.setState({provName:'北京市',cityName:'',countysName:countysName,provId:'110000',cityId:'0',countyId:county,showMap:false})
+                this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
+                return
+            }
+            if(countysName == '' || countysName == null || countysName== undefined){
+                alert('请选择对应的城市和区县')
+                return
+            }
+            if((provName != ''|| provName != null) && (county != '' || county != null)){
+                console.log('进来了2')
+                await this.setState({provName:provName,cityName:'',countysName:countysName,provId:prov,cityId:'0',countyId:county,showMap:false})
+                this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName+''})
+                return
+            }
 
+        }else if(prov == '710000' || prov =='810000' || prov =='820000'){
+            console.log('进来了3')
+            await this.setState({provName:provName,cityName:'',countysName:'',provId:prov,cityId:'0',countyId:'0',showMap:false})
+            this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
+            return
+        }else if(prov != '' && city != '' && county != ''){
+            await this.setState({
+                    provName:provName,
+                    cityName:cityName,
+                    countysName:countysName,
+                    showMap:false,
+                    provId:prov,
+                    cityId:city,
+                    countyId:county,
+                })
+            this.setState({address:this.state.provName+this.state.cityName+this.state.countysName})
+        }else{
+            alert('地址请选择完整')
+        }
     }
 
     async confirmEdit(){
@@ -104,21 +132,17 @@ export default class SellerSetting extends Component {
         });
 
         var file = e.target.files[0];
-        console.log('file=================>',file)
         var fileName = window.URL.createObjectURL(file)
         var index1=file.name.lastIndexOf(".");
         var index2=file.name.length;
         var suffix=file.name.substring(index1,index2)
-        console.log('suffix==========>',suffix)
 
         var uuid4 = UUID.create().toString();
         console.log(uuid4.toString());
         var storeAs = 'sq/'+uuid4+''+suffix;
         this.setState({modalDelay:true})
 
-        console.log(file.name + '=======================> ' + storeAs);
         client.multipartUpload(storeAs, file).then((result)=> {
-            console.log('后台返回的地址----------------》',result.name);
             this.setState({modalDelay:false})
             switch (type){
                 case 1 : this.setState({storeImg:fileName})
@@ -262,7 +286,7 @@ export default class SellerSetting extends Component {
                                     options= {{
                                         prov:'110000',
                                         city:'110100',
-                                        county:'110101',
+                                        county:'0',
                                         defaultText:['省份','城市','区县']
                                     }}
                                 />

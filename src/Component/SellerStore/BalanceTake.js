@@ -6,6 +6,7 @@ import EnterPassword from '../../Component/CommonComponent/EnterPassword';
 import '../../Stylesheets/App/personal.css';
 import {Cash,MyInfo} from '../../Action/auth'
 import {CheckNum} from '../../Action/rpc'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class BalanceTake extends Component {
     // 构造
@@ -78,6 +79,10 @@ export default class BalanceTake extends Component {
         const {toChange,bankname,bankcardNo} = this.props.location.query
         return (
             <div className="bkg_color">
+                <NavBar
+                    renderBack = {true}
+                    title = {'资金提取'}
+                />
                 <div className="list-block m0">
                     <ul>
                         {

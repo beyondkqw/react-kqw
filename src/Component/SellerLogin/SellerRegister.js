@@ -32,7 +32,8 @@ export default class SellerRegister extends Component {
             sellerPwd:'',
             storeName:'',
             name:'',
-            role:1
+            role:1,
+            show:false
         };
     }
     static contextTypes = {
@@ -125,11 +126,11 @@ export default class SellerRegister extends Component {
 
         //用户名
         if (!ChinaChar(storeName)&&!EnglishChar(storeName)) {
-            this.setState({Reminder:"店铺名只允许出现中英文,请修改"});
+            this.setState({Reminder:"用户名只允许出现中英文,请修改"});
             return false;
         }
         if(!specialChar(storeName)) {
-            this.setState({Reminder: "店铺名不能出现标点符号"});
+            this.setState({Reminder: "用户名不能出现标点符号"});
             return false
         }
         await SellerToRegister(sellerMobile,sellerPwd,smsCode,code,storeName,role)
@@ -147,7 +148,7 @@ export default class SellerRegister extends Component {
             <div>
                 <NavBar
                     renderBack = {true}
-                    title = {'注册商铺'}
+                    title = {'注册账号'}
                 />
                 {/*店铺，名称*/}
                 <div className='editorBox'>
@@ -158,7 +159,7 @@ export default class SellerRegister extends Component {
                         ref = 'storeName'
                         maxLength="11"
                         className="editorInput"
-                        placeholder="请输入店铺名称"
+                        placeholder="请输入用户名称"
                         onChange={()=>{this.setState({storeName:this.refs.storeName.value})}}
                         onBlur = {()=>this.toJudge(this.state.storeName)}
                     />
@@ -186,11 +187,25 @@ export default class SellerRegister extends Component {
                     </span>
                     <input
                         ref = 'sellerPwd'
+                        type = {this.state.show?'text':"password"}
                         className="editorInput"
                         placeholder="设置您的密码"
                         onChange = {()=>this.setState({sellerPwd:this.refs.sellerPwd.value})}
                         onBlur = {()=>this.isTrue(this.state.sellerPwd,'pwd')}
                     />
+                    <span
+                        className="di"
+                        style={{width:20,height:20,lineHeight:0}}
+                        onClick = {()=>this.setState({show:!this.state.show})}
+                    >
+                        {
+                            this.state.show?
+                                <img src={require('../../Images/login/hide.png')} alt=""/>
+                                :
+                                <img src={require('../../Images/login/show.png')} alt=""/>
+                        }
+
+                    </span>
                 </div>
 
                 {/*手机验证码*/}
@@ -227,7 +242,7 @@ export default class SellerRegister extends Component {
                 >注 册</button>
 
                 <div className="backToLogin">
-                    <Link to = '/sellerLogin' style={{fontSize:14,color:'#999'}}>已经有账号？登录</Link>
+                    <Link to = '/sellerLogin' style={{fontSize:14,color:'#999'}}>已经有账号？<span style={{color:'#ff5500'}}>登录</span></Link>
                 </div>
             </div>
         )

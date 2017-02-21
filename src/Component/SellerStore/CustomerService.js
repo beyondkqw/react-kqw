@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
+import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import {StoreContact,StoreDetailItem} from '../../Action/auth'
@@ -80,9 +81,7 @@ export default class CustomerService extends Component {
     //判断电话号码
     isNumTrue(value,param){
         if(value){
-            console.log('hahahaha=========>',param == 'qq')
             if(param == 'qq'){
-                console.log("qq")
                 if (!QQTest(value)) {
                     this.setState({Reminder:'QQ号码有误,请重新填写'})
                 }else{
@@ -90,7 +89,6 @@ export default class CustomerService extends Component {
                 }
             }
             if(param == 'wechat'){
-                console.log("wechat")
                 if (!wechatTest(value)) {
                     this.setState({Reminder:'微信号码有误,请重新填写'})
                 }else{
@@ -98,7 +96,6 @@ export default class CustomerService extends Component {
                 }
             }
             if(param == 'phone'){
-                console.log("phone")
                 if (!ErrorNum(value)) {
                     this.setState({Reminder:'手机号码有误,请重新填写'})
                 }else{
@@ -193,15 +190,17 @@ export default class CustomerService extends Component {
                         </div>
                     </div>
                     <div className="font16 color9">
-                        <input
-                            className="borderno tr"
-                            type="text"
-                            placeholder="输入您的电话号码"
-                            ref="phoneNum"
-                            value = {mobileNum}
-                            onBlur = {()=>this.isNumTrue(this.refs.phoneNum.value,'phone')}
-                            onChange={()=>this.setState({mobileNum:this.refs.phoneNum.value})}
-                        />
+                        <a href={`tel:${mobileNum}`}>
+                            <input
+                                className="borderno tr color9"
+                                type="text"
+                                placeholder="输入您的电话号码"
+                                ref="phoneNum"
+                                value = {mobileNum}
+                                onBlur = {()=>this.isNumTrue(this.refs.phoneNum.value,'phone')}
+                                onChange={()=>this.setState({mobileNum:this.refs.phoneNum.value})}
+                            />
+                        </a>
                     </div>
                 </div>
                 {/* <SplitLine />

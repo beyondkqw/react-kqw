@@ -19,6 +19,8 @@ export default class OffTheShelf extends Component {
         //是否使用全选按钮
         this.isUseSelectAll = false
         this.selectOffShelf = []
+        //indexArray
+        this.indexArray = []
         this.state = {
             selectAll:false,
             toRender:1,
@@ -61,10 +63,11 @@ export default class OffTheShelf extends Component {
     }
 
     //单选
-    async getSelect(state,id){
+    async getSelect(state,id,index){
         this.isUseSelectAll = false
         if(state){
             this.selectOffShelf.push(id)
+            this.indexArray.push(index)
         }else{
             this.selectOffShelf = this.selectOffShelf.filter(el=>{
                 if(el==id){
@@ -91,13 +94,13 @@ export default class OffTheShelf extends Component {
             await SellerOffShelf(this.selectOffShelf)
                 .then(res=>{
                     console.log('当前的数量=========>',this.selectOffShelf.length)
+                    console.log('当前的数量=========>',this.indexArray.length)
                     //alert('清空宝贝成功')
                     this.selectOffShelf = []
 
                     console.log('清空后的数组========>',this.selectOffShelf.length)
                     this.setState({isVisible:false})
                     this.getSellerOrder()
-                    //this.setState({selectAll:false});
 
                     //this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                 })
@@ -122,7 +125,7 @@ export default class OffTheShelf extends Component {
                             title={'查询列表为空哦~'}
                         />
                         :
-                    sellerOffDownList&&sellerOffDownList.map((el,index)=>{
+                    sellerOffDownList&&sellerOffDownList.map((el,inde)=>{
                         return(
                             <Link>
                                 <div className="storeRowContainer">
@@ -140,14 +143,14 @@ export default class OffTheShelf extends Component {
                                                     <span className="colorff font18">{el.CURRENT_PRICE?el.CURRENT_PRICE:0}</span>
                                                 </p>
                                                 <CheckBox
-                                                    index={index}
+                                                    index={this.indexArray[inde]}
                                                     selectAll = {this.isUseSelectAll?this.state.selectAll:null}
-                                                    onSelect = {(state)=>this.getSelect(state,el.ID)}
+                                                    onSelect = {(state)=>this.getSelect(state,el.ID,inde)}
                                                 />
                                             </div>
                                             <div>
                                                 <div className="rightBottom" style={{color:'#999'}}>
-                                                    <p><span>货号 : </span><span>asere</span></p>
+                                                    {/*<p><span>货号 : </span><span>asere</span></p>*/}
                                                     <p><span>25</span>人付款</p>
                                                 </div>
                                             </div>

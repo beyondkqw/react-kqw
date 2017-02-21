@@ -94,6 +94,7 @@ export default class OnSale extends Component {
                                         name = {el.NAME}
                                         price = {el.CURRENT_PRICE}
                                         no = {el.GB_CODE}
+                                        img = {el.IMAGE}
                                     />
                                 </div>
                             )

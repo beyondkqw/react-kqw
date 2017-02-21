@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import CellComponent from '../../Component/CommonComponent/CellComponent';
 import '../../Stylesheets/App/personal.css';
 import {MyInfo} from '../../Action/auth'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 
 const ChargesList = [
@@ -17,6 +18,10 @@ export default class SellerBalanceMan extends Component {
         const {accId,Now_Amount,frozen} = this.props.location.query
         return (
             <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'资金管理'}
+                />
                 <SplitLine />
                 <div className="recharge border_bottom plr">
                     <div className="color_yellow fl height_all">
@@ -35,14 +40,12 @@ export default class SellerBalanceMan extends Component {
                     </Link>
                 </div>
                 <div className="clearAll">
-                    <Link to="/personalCenter/allIncome">
-                        <CellComponent
-                            className={'border_right'}
-                            imgUrl={require('../../Images/total.png')}
-                            title={'全部余额'}
-                            describing={Now_Amount}
-                        />
-                    </Link>
+                    <CellComponent
+                        className={'border_right'}
+                        imgUrl={require('../../Images/total.png')}
+                        title={'全部余额'}
+                        describing={Now_Amount}
+                    />
                     <CellComponent
                         className={'border_right'}
                         imgUrl={require('../../Images/common/jilu.png')}

@@ -15,14 +15,14 @@ let token = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
 
-//export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-//export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
+export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
 // export const wsPath = "ws://"+'jdapi.tunnel.qydev.com'+"/api/socketServer";
 // export const ROOT_URL = 'http://jdapi.tunnel.qydev.com/api/'
 //export const wsPath = "ws://"+'juduotest.tunnel.qydev.com'+"/api/socketServer";
-export const wsPath = "ws://"+'jdy.juduoy.com'+"/api/socketServer";
+//export const wsPath = "ws://"+'jdy.juduoy.com'+"/api/socketServer";
  //export const ROOT_URL = 'http://juduotest.tunnel.qydev.com/api/'
- export const ROOT_URL = 'http://jdy.juduoy.com/api/'
+ //export const ROOT_URL = 'http://jdy.juduoy.com/api/'
 
 //获取屏幕宽度
 export const SCREEN_WIDTH = window.screen.width
@@ -103,7 +103,7 @@ async function request (urlKey,method,params = {},token = ''){
     };
     console.log('获取到的token---',getToken());
     if(await loadToken()){
-        params.token = getToken();
+        params.token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNjAifQ.dm1WJ8SwUPp_NWcNDkuOHax0QNPBH7GE6NZN94x5-bY';
     }
     if (imei)
     {

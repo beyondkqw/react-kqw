@@ -247,11 +247,11 @@ export default class OrderList extends Component {
             .then(res=>{
 
             if(res.resultList.length==0){
-            this.over = true;
-            this.iScrollInstance.refresh();
-            this.setState({
-                pullUpStatus: 4
-            });
+                this.over = true;
+                this.iScrollInstance.refresh();
+                this.setState({
+                    pullUpStatus: 4
+                });
         }else{
             this.dataList = this.dataList.concat(res.resultList);
             this.setState({orderItems:this.dataList});
@@ -265,97 +265,95 @@ export default class OrderList extends Component {
             display:(this.dataList.length==0)?'none':'block'
         })
     })
-    .catch(err=>{
-            console.warn('err',err)
-    })
+        .catch(err=>{
+                console.warn('err',err)
+        })
     }
 
     render() {
         const {orderItems,scrollTop} = this.state
         return (
             <div className="containerNav">
-            <TabBar
-        index = {this.state.index}
-        onClick = {index=>this.onChange(index)}
-        contents={['待付款','待发货','待收货','待评价','全部订单']}
-    />
-    <SplitLine />
+                <TabBar
+                    index = {this.state.index}
+                    onClick = {index=>this.onChange(index)}
+                    contents={['待付款','待发货','待收货','待评价','全部订单']}
+                />
+                <SplitLine />
+                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                    <div id='ListOutsite' style={{height: window.innerHeight-50}}
+                        onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
+                        onTouchMove={this.onTouchMove}>
 
-        <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-    <div id='ListOutsite' style={{height: window.innerHeight-50}}
-        onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
-        onTouchMove={this.onTouchMove}>
+                        <ul id='ListInside'>
+                                {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
 
-    <ul id='ListInside'>
-            {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-
-        {/*代付款*/}
-        { this.state.index == 0?
-            <div>
-                <OrderDetails
-                    debitPay = {()=>this.getOrderList('0')}
-                    orderDetails = {orderItems}
-                    toPay = {true}
-                    scrollTop = {scrollTop}
-                    />
+                            {/*代付款*/}
+                            { this.state.index == 0?
+                                <div>
+                                    <OrderDetails
+                                        debitPay = {()=>this.getOrderList('0')}
+                                        orderDetails = {orderItems}
+                                        toPay = {true}
+                                        scrollTop = {scrollTop}
+                                        />
+                                </div>
+                                :null
+                            }
+                            {/*待发货*/}
+                            { this.state.index == 1?
+                            <div>
+                                <OrderDetails
+                                    orderDetails = {orderItems}
+                                    scrollTop = {scrollTop}
+                                    alreadyRated = {true}
+                                        />
+                            </div>
+                                :null
+                            }
+                            {/*待收货*/}
+                            { this.state.index == 2?
+                            <div>
+                                <OrderDetails
+                                    Receipt = {()=>this.getOrderList('2')}
+                                    orderDetails = {orderItems}
+                                    scrollTop = {scrollTop}
+                                    makeSure={true}
+                                    />
+                            </div>
+                                :null
+                            }
+                            {/*待评价*/}
+                            { this.state.index == 3?
+                            <div>
+                                <OrderDetails
+                                    orderDetails = {orderItems}
+                                    scrollTop = {scrollTop}
+                                    toRated = {true}
+                                    //query = {}
+                                    />
+                            </div>
+                                :null
+                            }
+                            {/*全部订单*/}
+                            { this.state.index == 4?
+                            <div>
+                                <OrderDetails
+                                    againSend = {()=>this.getOrderList('5')}
+                                    orderDetails = {orderItems}
+                                    scrollTop = {scrollTop}
+                                    allRated = {true}
+                                />
+                            </div>
+                                :null
+                            }
+                            <p ref="PullUp" id='PullUp'
+                                style={{display:this.state.display}}
+                            >{this.pullUpTips[this.state.pullUpStatus]}</p>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        :null
-        }
-        {/*待发货*/}
-        { this.state.index == 1?
-        <div>
-        <OrderDetails
-            orderDetails = {orderItems}
-            scrollTop = {scrollTop}
-            alreadyRated = {true}
-                />
-                </div>
-        :null
-        }
-        {/*待收货*/}
-        { this.state.index == 2?
-        <div>
-        <OrderDetails
-            Receipt = {()=>this.getOrderList('2')}
-            orderDetails = {orderItems}
-            scrollTop = {scrollTop}
-            makeSure={true}
-                />
-                </div>
-        :null
-        }
-        {/*待评价*/}
-        { this.state.index == 3?
-        <div>
-        <OrderDetails
-            orderDetails = {orderItems}
-            scrollTop = {scrollTop}
-            toRated = {true}
-                //query = {}
-                />
-                </div>
-        :null
-        }
-        {/*全部订单*/}
-        { this.state.index == 4?
-        <div>
-        <OrderDetails
-            againSend = {()=>this.getOrderList('5')}
-            orderDetails = {orderItems}
-            scrollTop = {scrollTop}
-            allRated = {true}
-                />
-                </div>
-        :null
-        }
-    <p ref="PullUp" id='PullUp'
-        style={{display:this.state.display}}
-    >{this.pullUpTips[this.state.pullUpStatus]}</p>
-        </ul>
-        </div>
-
-        </div>
-        </div>
     );
     }
 }
