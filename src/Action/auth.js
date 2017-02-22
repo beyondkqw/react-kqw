@@ -143,9 +143,9 @@ export async function FollowList() {
 }
 
 //商品列表
-export async function ProductList(name,order,orderName,minPrice,maxPrice) {
+export async function ProductList(name,order,orderName,minPrice,maxPrice,page=1) {
     try {
-        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice});
+        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -628,9 +628,9 @@ export async function StoreDetailItem(storeId){
 }
 
 //店铺商品列表
-export async function StorectList(name='',storeId='',order='',orderName='') {
+export async function StorectList(name='',storeId='',order='',orderName='',page=1) {
     try {
-        const res = await apiGet(URL.productList,{name,storeId,order,orderName});
+        const res = await apiGet(URL.productList,{name,storeId,order,orderName,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -727,9 +727,9 @@ export async function StoreType() {
 }
 
 //云综合体--店铺列表
-export async function StoreList(type,name) {
+export async function StoreList(type,name,page) {
     try {
-        const res = await apiGet(URL.storeList,{type,name});
+        const res = await apiGet(URL.storeList,{type,name,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -848,9 +848,9 @@ export async function GetSellerOrderList(status,page=1){
 }
 
 //商品列表
-export async function SellerProductList(storeId,status) {
+export async function SellerProductList(storeId,status,page) {
     try {
-        const res = await apiGet(URL.productList,{storeId,status});
+        const res = await apiGet(URL.productList,{storeId,status,page});
         return res;
     } catch (err) {
         console.warn(err);

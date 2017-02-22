@@ -70,7 +70,7 @@ export default class PersonalCenter extends Component {
     render() {
         const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg,yunCard} = this.state
         return (
-            <div>
+            <div className="containerNav">
                 <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
                     <Link to="personalCenter/userInfo">
                         <div className="personLogo">

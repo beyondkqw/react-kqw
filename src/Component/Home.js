@@ -38,7 +38,7 @@ class Home extends Component {
     async componentWillMount() {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
-        /*if(getToken == '' ||getToken == null ||getToken == 'null'){
+    /*    if(getToken == '' ||getToken == null ||getToken == 'null'){
             await WechatAuth()
             const token = GetQueryString('token')
             saveToken(token)
