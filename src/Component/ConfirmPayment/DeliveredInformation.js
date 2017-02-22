@@ -3,6 +3,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {AddAddress,EditAddress} from '../../Action/auth'
 import Location from '../../Component/SellerStore/Location'
+import {ErrorNum} from '../../Action/rpc'
 import {context} from 'react-router'
 
 export default class DeliveredInformation extends Component {

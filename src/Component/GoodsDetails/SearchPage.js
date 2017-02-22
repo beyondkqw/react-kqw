@@ -31,12 +31,11 @@ export default class SearchPage extends Component {
             maxPrice:''
         };
       }
-    async componentWillMount(){
-        await this.getOrder('','','','','')
+     async componentWillMount(){
+         await this.setState({goodsList:JSON.parse(this.props.location.query.goodsList)})
     }
     //搜索
     async SearchBtn(value){
-        console.log('value',value);
         await this.getOrder(value,'','','','');
     }
     //排序的列表
@@ -68,7 +67,6 @@ export default class SearchPage extends Component {
         await ProductList(name,order,orderName,minPrice,maxPrice)
         .then(res=>{
             this.setState({goodsList:res.resultList})
-            console.log('res.resultList=======>',res.resultList)
         })
         .catch(err=>{
             console.warn('err',err)
@@ -161,7 +159,6 @@ export default class SearchPage extends Component {
     //tab切换
     onChange(index){
         const {display_0,display_2,showByColumn} = this.state
-        //console.log('display',display_0)
         if(index==0){
             this.setState({display_0:!display_0,display_2:false})
         }else if(index==1){
@@ -170,7 +167,6 @@ export default class SearchPage extends Component {
         }else if(index==2){
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
-            //this.upDownOrder()
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false})
         }else{
             this.setState({display_2:false,display_0:false})

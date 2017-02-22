@@ -90,7 +90,6 @@ export default class EntryStoreInformation extends Component {
     async getInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
         await EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type)
             .then(res=>{
-                console.log()
                 this.context.router.push({pathname:'/storeSubCommission'})
             })
             .catch(err=>{

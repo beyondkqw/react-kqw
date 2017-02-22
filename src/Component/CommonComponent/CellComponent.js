@@ -20,7 +20,6 @@ export default class CellComponent extends Component {
                                 </span>
                                 :null
                             }
-
                             <p className="f12 color9" style={{marginTop:5}}>{describing}</p>
                         </div>
                     </div>

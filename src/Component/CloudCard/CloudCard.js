@@ -51,7 +51,7 @@ export default class CloudCard extends Component {
                             imgUrl={require('../../Images/total.png')}
                             title={'总额'}
                             describing={yunCard}
-                            link={'/totalDetails'}
+                            //link={'/totalDetails'}
                         />
                         <CellComponent
                             imgUrl={require('../../Images/payment.png')}

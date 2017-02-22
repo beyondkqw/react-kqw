@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import Search from './NewComponent/Search'
 import Carousel from './NewComponent/Carousel'
 import Footer from './NewComponent/Footer'
@@ -15,7 +15,7 @@ import {WechatAuth} from '../Action/autoLogin'
 import '../Stylesheets/App/sm.min.css'
 import '../Stylesheets/App/common.css'
 import '../Stylesheets/App/homePage.css';
-import {HomeBanner,HomeMoudle} from '../Action/auth'
+import {HomeBanner,HomeMoudle,ProductList} from '../Action/auth'
 //import {initWebsocket} from '../Action/Websocket'
 import {getLocation} from '../Action/wxUtil'
 
@@ -31,21 +31,26 @@ class Home extends Component {
         // 初始状态
         this.state = {
             banner : [],
-            moudle : []
+            moudle : [],
+            goodsList:[]
         };
       }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
 
     async componentWillMount() {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
-        /*if(getToken == '' ||getToken == null ||getToken == 'null'){
+        if(getToken == '' ||getToken == null ||getToken == 'null'){
             await WechatAuth()
             const token = GetQueryString('token')
             saveToken(token)
             //initWebsocket()
         }else{
             //initWebsocket()
-        }*/
+        }
         this.getHomeBanner()
         this.getHomeMoudle()
 
@@ -76,6 +81,23 @@ class Home extends Component {
         })
     }
 
+    //搜索
+    async SearchBtn(value){
+        console.log('value',value);
+        await this.getOrder(value,'','','','');
+    }
+
+    //请求列表接口
+    async getOrder(name,order,orderName,minPrice,maxPrice){
+        await ProductList(name,order,orderName,minPrice,maxPrice)
+            .then(res=>{
+                this.setState({goodsList:res.resultList})
+                this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{goodsList:JSON.stringify(res.resultList)}})
+            })
+            .catch(err=>{
+                console.warn('err',err)
+            })
+    }
 
   render() {
     const {moudle} = this.state
@@ -83,7 +105,10 @@ class Home extends Component {
       <div className="containerNav bkg_color">
         <div className="pf t0 width100" style={{zIndex:100}}>
             <Search
+                onClick = {(value)=>this.SearchBtn(value)}
+                display = {this.state.history}
                 style={{backgroundColor:'#ff5500'}}
+                location = {true}
             />
         </div>
         <div style={{marginTop:'2.2rem'}}>
@@ -137,7 +162,9 @@ class Home extends Component {
                              <ActiveTitle
                                  title = {el.name}
                              />
-                             <Cell_7 />
+                             <Cell_7
+                                 imgUrl = {el.cells}
+                             />
                              <SplitLine />
                          </div>
                      )

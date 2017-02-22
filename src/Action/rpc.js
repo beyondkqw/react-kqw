@@ -103,7 +103,7 @@ async function request (urlKey,method,params = {},token = ''){
     };
     console.log('获取到的token---',getToken());
     if(await loadToken()){
-        params.token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNjAifQ.dm1WJ8SwUPp_NWcNDkuOHax0QNPBH7GE6NZN94x5-bY';
+        params.token = getToken();
     }
     if (imei)
     {
@@ -212,7 +212,7 @@ export function CheckNum(value) {
 
 // 验证手机号是否正确
 export function ErrorNum(value) {
-    if (!(/^((13[0-9])|(15[^4,\D])|(18[0-1,3-9]))\d{8}$/.test(value))) {
+    if (!(/^((13[0-9])|(15[^4,\D])|(17[0-9])|(18[0-1,3-9]))\d{8}$/.test(value))) {
         return false;
     } else {
         return true;

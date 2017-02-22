@@ -19,8 +19,6 @@ export default class OffTheShelf extends Component {
         //是否使用全选按钮
         this.isUseSelectAll = false
         this.selectOffShelf = []
-        //indexArray
-        this.indexArray = []
         this.state = {
             selectAll:false,
             toRender:1,
@@ -67,7 +65,6 @@ export default class OffTheShelf extends Component {
         this.isUseSelectAll = false
         if(state){
             this.selectOffShelf.push(id)
-            this.indexArray.push(index)
         }else{
             this.selectOffShelf = this.selectOffShelf.filter(el=>{
                 if(el==id){
@@ -93,14 +90,13 @@ export default class OffTheShelf extends Component {
         if(this.selectOffShelf.length>0){
             await SellerOffShelf(this.selectOffShelf)
                 .then(res=>{
-                    console.log('当前的数量=========>',this.selectOffShelf.length)
-                    console.log('当前的数量=========>',this.indexArray.length)
+                    console.log('当前的数量index=========>',this.indexArray.length)
                     //alert('清空宝贝成功')
                     this.selectOffShelf = []
 
-                    console.log('清空后的数组========>',this.selectOffShelf.length)
                     this.setState({isVisible:false})
-                    this.getSellerOrder()
+                    window.location.reload()
+                    //this.getSellerOrder()
 
                     //this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                 })
@@ -143,9 +139,9 @@ export default class OffTheShelf extends Component {
                                                     <span className="colorff font18">{el.CURRENT_PRICE?el.CURRENT_PRICE:0}</span>
                                                 </p>
                                                 <CheckBox
-                                                    index={this.indexArray[inde]}
+                                                    index={index}
                                                     selectAll = {this.isUseSelectAll?this.state.selectAll:null}
-                                                    onSelect = {(state)=>this.getSelect(state,el.ID,inde)}
+                                                    onSelect = {(state)=>this.getSelect(state,el.ID)}
                                                 />
                                             </div>
                                             <div>

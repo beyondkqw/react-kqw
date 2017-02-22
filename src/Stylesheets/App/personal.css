@@ -223,10 +223,10 @@
     width:2rem;
     height:2rem;
 }
-.footerHidden{
-    height:3.5rem;
+/*.footerHidden{
+    height:2.5rem;
     width:100%;
-}
+}*/
 /*会员俱乐部*/
 .club_height{
     height:7.75rem;
@@ -275,7 +275,7 @@
     background:url('../../Images/line.png') no-repeat;
 }
 .allIncome_Img{
-    background: url('../../Images/allIncomeImg.png') no-repeat;
+    background: url('../../Images/common/erCode.png') no-repeat;
 }
 .cellSize{
     width:1.5rem;

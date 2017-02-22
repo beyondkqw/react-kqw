@@ -113,7 +113,7 @@ export default class UserInfo extends Component {
                                 <div className="item-after color9">{sex}</div>
                             </div>
                         </li>
-                        <Link to="/personalCenter/erweiCode" query={{image:imageUri,memberName:memberName}}>
+                        <Link to="/personalCenter/erweiCode">
                             <li className="item-content item-link pl">
                                 <div className="item-media"><i className="icon icon-f7"></i></div>
                                 <div className="item-inner">

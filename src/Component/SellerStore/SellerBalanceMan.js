@@ -33,7 +33,7 @@ export default class SellerBalanceMan extends Component {
                 </div>
                 <div className="recharge border_bottom plr">
                     <div className="fl color9 height_all">
-                        <span className="f15">￥</span><span className="f25">{Now_Amount}</span>
+                        <span className="f15">￥</span><span className="f25">{frozen}</span>
                     </div>
                     <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
                         <button className="fr f15 settleAccount border_ra color_white mt11" style={{backgroundColor:'#999'}}>冻结金额</button>
