@@ -287,6 +287,7 @@ export default class OnSale extends Component {
                     renderBack = {true}
                     title = {'出售中的宝贝'}
                 />
+
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-95}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}

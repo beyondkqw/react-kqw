@@ -280,7 +280,6 @@ export default class OrderList extends Component {
                     contents={['待付款','待发货','待收货','待评价','全部订单']}
                 />
                 <SplitLine />
-
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-50}}
                         onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}

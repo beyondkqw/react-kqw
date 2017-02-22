@@ -143,9 +143,9 @@ export async function FollowList() {
 }
 
 //商品列表
-export async function ProductList(name,order,orderName,minPrice,maxPrice,page=1) {
+export async function ProductList(name='',order='',orderName='',minPrice='',maxPrice='',page=1,type=0) {
     try {
-        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice,page});
+        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice,page,type});
         return res;
     } catch (err) {
         console.warn(err);
@@ -837,7 +837,7 @@ export async function StoreContact(qq,wechat,mobile){
 }
 
 //订单列表
-export async function GetSellerOrderList(status,page=1){
+export async function GetSellerOrderList(status,page){
     try{
         const res = await apiGet(URL.sellerList,{status,page});
         return res;

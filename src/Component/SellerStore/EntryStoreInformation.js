@@ -90,7 +90,6 @@ export default class EntryStoreInformation extends Component {
     async getInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
         await EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type)
             .then(res=>{
-                console.log()
                 this.context.router.push({pathname:'/storeSubCommission'})
             })
             .catch(err=>{
@@ -119,7 +118,26 @@ export default class EntryStoreInformation extends Component {
 
     //得到地址信息
     getValue(provName,cityName,countysName,prov,city,county){
-        if(provName&&cityName&&countysName){
+        //改变默认值
+        if(prov == '110000' || prov =='120000' || prov =='310000' || prov =='500000'){
+            //改变初始化的内容
+            if((provName == ''|| provName == null) && (countysName != '' || countysName != null)&& countysName != undefined){
+                this.setState({provName:'北京市',cityName:'',countysName:countysName,provId:'110000',cityId:'0',countyId:county,showMap:false})
+                return
+            }
+            if(countysName == '' || countysName == null || countysName== undefined){
+                alert('请选择对应的城市和区县')
+                return
+            }
+            if((provName != ''|| provName != null) && (county != '' || county != null)){
+                this.setState({provName:provName,cityName:'',countysName:countysName,provId:prov,cityId:'0',countyId:county,showMap:false})
+                return
+            }
+
+        }else if(prov == '710000' || prov =='810000' || prov =='820000'){
+            this.setState({provName:provName,cityName:'',countysName:'',provId:prov,cityId:'0',countyId:'0',showMap:false})
+            return
+        }else if(prov != '' && city != '' && county != ''){
             this.setState({
                 provName:provName,
                 cityName:cityName,
@@ -129,6 +147,8 @@ export default class EntryStoreInformation extends Component {
                 cityId:city,
                 countyId:county,
             })
+        }else{
+            alert('地址请选择完整')
         }
 
     }
@@ -256,8 +276,8 @@ export default class EntryStoreInformation extends Component {
                     >
                         <span className="color6">店铺地址</span>
                         <div>
-                            <span>{provName+cityName+countysName?provName+cityName+countysName:''}</span>
-                            <span className="di color9" style={{width:9,height:16,lineHeight:0}}>
+                            <span className="color9">{provName+cityName+countysName?provName+cityName+countysName:''}</span>
+                            <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
                                 <img src={require('../../Images/rightArrow.png')} alt=""/>
                             </span>
                         </div>
@@ -348,7 +368,7 @@ export default class EntryStoreInformation extends Component {
                                     options= {{
                                         prov:'110000',
                                         city:'110100',
-                                        county:'110101',
+                                        county:'0',
                                         defaultText:['省份','城市','区县']
                                     }}
                                 />

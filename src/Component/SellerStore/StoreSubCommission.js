@@ -43,7 +43,7 @@ export default class StoreSubCommission extends Component {
     async getStoreDetails(storeId){
         await  StoreDetailItem(storeId)
             .then(res=>{
-                this.setState({perc:res.store.perc})
+                this.setState({perc:res.store.perc?res.store.perc:0})
             })
             .catch(err=>{
                 console.warn('获取商品属性失败',err)
@@ -62,16 +62,16 @@ export default class StoreSubCommission extends Component {
                 <div className="flex flex-v flex-pack-center flex-align-center" style={{height:100}}>
                     <p>
                         <input
-                            style={{width:80}}
-                            className="borderno f25 tr color9"
+                            style={{width:70,borderBottom:'1px solid #e5e5e5'}}
+                            className="borderno f25 color9 tc"
                             type="text"
-                            value={this.state.perc?this.state.perc:0}
+                            value={this.state.perc}
                             ref='updatePerc'
                             onChange = {()=>this.setState({perc:this.refs.updatePerc.value})}
                         />
                         <span className="f15">%</span>
                     </p>
-                    <span className="font14 color6">佣金比例设置</span>
+                    <span style={{marginTop:5}} className="di font14 color6">佣金比例设置</span>
                 </div>
                 <SplitLine />
                 <div className="pl1 color6 mb50">

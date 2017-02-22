@@ -271,7 +271,6 @@ export default class CloudComplex extends Component {
         this.over = false;
         this.page = 1;
         this.setState({
-            index:index,
             orderItems:[],
             display:'none'
         });

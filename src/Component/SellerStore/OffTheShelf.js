@@ -262,7 +262,7 @@ export default class OffTheShelf extends Component {
     }
 
     //单选
-    async getSelect(state,id){
+    async getSelect(state,id,index){
         this.isUseSelectAll = false
         if(state){
             this.selectOffShelf.push(id)
@@ -291,11 +291,10 @@ export default class OffTheShelf extends Component {
         if(this.selectOffShelf.length>0){
             await SellerOffShelf(this.selectOffShelf)
                 .then(res=>{
-                    console.log('当前的数量=========>',this.selectOffShelf.length)
+                    console.log('当前的数量index=========>',this.indexArray.length)
                     //alert('清空宝贝成功')
                     this.selectOffShelf = []
 
-                    console.log('清空后的数组========>',this.selectOffShelf.length)
                     this.setState({isVisible:false})
                     this.page=1;
                     this.over=false;
@@ -303,7 +302,8 @@ export default class OffTheShelf extends Component {
                     this.setState({sellerOffDownList:this.dataList});
                     this.getSellerOrder(1)
                     //this.setState({selectAll:false});
-
+                    // window.location.reload()
+                    //this.getSellerOrder()
                     //this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                 })
         }else{
@@ -359,7 +359,7 @@ export default class OffTheShelf extends Component {
                                             </div>
                                             <div>
                                                 <div className="rightBottom" style={{color:'#999'}}>
-                                                    <p><span>货号 : </span><span>asere</span></p>
+                                                    {/*<p><span>货号 : </span><span>asere</span></p>*/}
                                                     <p><span>25</span>人付款</p>
                                                 </div>
                                             </div>

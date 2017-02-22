@@ -101,15 +101,15 @@ export default class Location extends Component {
                 >确定</span>
             </div>
             <div className="J_area_selector flex padd15" style={{marginBottom:30,marginTop:20}}>
-                <select class="J_area_prov" id="selectProvName"  style={{height:30,width:'33.3%'}} name={options.defaultName[0]} value={this.state.prov} onChange={this.selectProv}>
+                <select className="J_area_prov" id="selectProvName"  style={{height:30,width:'33.3%'}} name={options.defaultName[0]} value={this.state.prov} onChange={this.selectProv}>
                     <option>{options.defaultText[0]}</option>
                     {provs}
                 </select>
-                <select class="J_area_city" id="selectCityName" style={{height:30,width:'33.3%'}} name={options.defaultName[1]} value={this.state.city} onChange={this.selectCity}>
+                <select className="J_area_city" id="selectCityName" style={{height:30,width:'33.3%'}} name={options.defaultName[1]} value={this.state.city} onChange={this.selectCity}>
                     <option value="">{options.defaultText[1]}</option>
                     {citys}
                 </select>
-                <select class="J_area_county" id="selectcountysName" style={{height:30,width:'33.3%'}} name={options.defaultName[2]} value={this.state.county} onChange={this.selectCounty}>
+                <select className="J_area_county" id="selectcountysName" style={{height:30,width:'33.3%'}} name={options.defaultName[2]} value={this.state.county} onChange={this.selectCounty}>
                     <option value="">{options.defaultText[2]}</option>
                     {countys}
                 </select>

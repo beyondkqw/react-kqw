@@ -43,23 +43,17 @@ export default class ErweiCode extends Component {
     }
 
     render() {
-        const {image,memberName} = this.props.location.query
         return (
             <div className="containerNav allIncome_Img supplement">
-                <div className="pa_top1 tc">
-                    <span className="di incomeImg">
-                        <img className="border_ra50" src={image} alt=""/>
-                    </span>
-                    <p className="f12 color9 mt5">{memberName}</p>
+                <div className="tc" style={{marginTop:50}}>
+                    <span className="di" style={{height:'7.7rem',width:'14.3rem'}}><img src={require('../../Images/common/erCodeText.png')} alt=""/></span>
                 </div>
                 <div className="width100 tc mt25">
                     <span className="di erWeiCode">
                         <img src={this.state.path} alt=""/>
                     </span>
                 </div>
-                {/* <div className="pf bottom0 tc userHeight bkg_ff width100 color_white font16">
-                    分享
-                </div>*/}
+                <p className="f15 color_white tc" style={{marginTop:15}}>扫一扫，加入我</p>
             </div>
         );
     }

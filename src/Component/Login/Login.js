@@ -74,9 +74,9 @@ export default class Login extends Component {
 
                 {/*账号密码输入编辑框*/}
                 <div className='editorBox form-group'>
-                            <span className="editorImg">
-                                <img src={icon[0]}/>
-                            </span>
+                    <span className="editorImg">
+                        <img src={icon[0]}/>
+                    </span>
                     <input
                         maxLength="11"
                         className="editorInput"

@@ -207,8 +207,8 @@ export default class GoodsDescription extends Component {
         this.setState({isShow:true,type:''});
     }
 
-    componentWillMount() {
-        this.getDetails()
+    async componentWillMount() {
+        await this.getDetails()
         this.getProductAttribute()
         this.getRemarkList(1)
     }
@@ -367,20 +367,11 @@ export default class GoodsDescription extends Component {
 
     //商品介绍
     commodityIntroduction(){
-        const detail = this.state.goodsDetails.DETAIL
-        const imgHeight = document.body.scrollWidth
+        const detail = this.state.goodsDetails.CONTENT_URL_WEB
+        console.log('detail========>',detail)
         return (
             <div>
-                {
-                    detail&&detail.map(el=>{
-                        return(
-                            <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
-                               <img />
-                            </div>
-                            )
-                    })
-                }
-
+                <iframe src={detail} style={{border:'none'}}></iframe>
             </div>
         )
     }
@@ -391,19 +382,7 @@ export default class GoodsDescription extends Component {
         return(
             <div className="goodsParams">
                 <div style={{height:10,backgroundColor:'#f5f5f5'}} />
-                <div>{params}</div>
-                {/*商品参数*/}
-                {/*<div className="goodsParams-item font14">
-                    <span className="left-item color9">品牌</span>
-
-                    <span className="color6">xxx</span>
-                </div>
-                <div className="goodsParams-item font14">
-                    <span className="left-item color9">aaa品牌</span>
-
-                    <span className="color6">xxx</span>
-                </div>*/}
-
+                <div className="tc">{params}</div>
             </div>
         )
     }
@@ -414,7 +393,6 @@ export default class GoodsDescription extends Component {
         const {remarkList,showEmptyImg} = this.state
         console.log('showEmptyImg',showEmptyImg)
         const imgHeight = document.body.scrollWidth
-        //console.log('imgHeight',imgHeight)
         return(
             <div className="remark pr" style={{backgroundColor:'#f5f5f5'}}>
            {/*     <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
@@ -452,13 +430,28 @@ export default class GoodsDescription extends Component {
                                                 {el.COMMENT}
                                             </div>
 
+
                                             {/*评论图片 最多3张    todo IMAGES转数组map*/}
                                             {
 
                                             }
-                                            <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
-                                                <img />
+                                            <div className="flex">
+                                                {
+
+                                                    el.IMAGES && el.IMAGES.length>0&&el.IMAGES[0]!=''?
+                                                        el.IMAGES.map(item=>{
+                                                            return(
+                                                                <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100,marginRight:10}} >
+                                                                    <img  src={item}/>
+                                                                </div>
+                                                            )
+                                                        })
+                                                        :null
+                                                }
                                             </div>
+                                           {/* <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
+                                                <img />
+                                            </div>*/}
                                         </div>
                                     )
                                 })
@@ -469,7 +462,8 @@ export default class GoodsDescription extends Component {
                         </ul>
                     </div>
                 </div>*/}
-            </div>
+           </div>
+
         )
     }
     render() {
@@ -484,10 +478,10 @@ export default class GoodsDescription extends Component {
                         {
                             goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
                                 return(
-                                    <div style={{width:'100%',height:'9rem'}}>
+                                    <div style={{width:'100%',height:'9rem',textAlign:'center'}}>
                                         <img
+                                            style={{width:'70%'}}
                                             src = {el.IMAGE}
-                                            //key = {index}
                                         />
                                     </div>
 
@@ -570,47 +564,42 @@ export default class GoodsDescription extends Component {
                     </div>
                     <div name="评论">
                         {this.showGoodsRemark()}
-
                     </div>
-                    <SplitLine />
                 </Tabscontrol>
 
-
-                <div className="wrap">
-                    <div className="height3 pf bottom0  plAll border_top bkg_color z_index wrap">
-                            {/*购物车*/}
-                            <div
-                                onClick = {()=>this.adShopCarOrToPay(1)}
-                                className="di height_all pr fl width_cart"
-                            >
-                                <button className="cartBtn width_100 height_all border_ra">
-                                    <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
-                                    {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
-                                </button>
-                            </div>
-                            <div className="width_de fl height_all"></div>
-                            <div
-                                className="di height_all pr fl width_buy border_ra"
-                                onClick={()=>this.adShopCarOrToPay(2)}
-                            >
-                                <button className="width_100 height_all color_white font16 color_white">
-                                    立即购买
-                                </button>
-                            </div>
-                    </div>
-                    {/*选择商品属性*/}
-                    {this.state.isShow?
-                        <GoodsPopup
-                            //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
-                            attr = {this.state.attributeList}
-                            closePopUp = {()=>this.setState({isShow:false})}
-                            ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
-                            isOnly = {this.state.type?true:false}
-                            //typeParam = {type=>{console.log('type',type)}}
-                        />
-                    :null}
-                    <div className="goodBottom width_100"></div>
+                <div className="height3 pf bottom0  plAll border_top bkg_color z_index wrap">
+                        {/*购物车*/}
+                        <div
+                            onClick = {()=>this.adShopCarOrToPay(1)}
+                            className="di height_all pr fl width_cart"
+                        >
+                            <button className="cartBtn width_100 height_all border_ra">
+                                <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
+                                {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
+                            </button>
+                        </div>
+                        <div className="width_de fl height_all"></div>
+                        <div
+                            className="di height_all pr fl width_buy border_ra"
+                            onClick={()=>this.adShopCarOrToPay(2)}
+                        >
+                            <button className="width_100 height_all color_white font16 color_white">
+                                立即购买
+                            </button>
+                        </div>
                 </div>
+                {/*选择商品属性*/}
+                {this.state.isShow?
+                    <GoodsPopup
+                        //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
+                        attr = {this.state.attributeList}
+                        closePopUp = {()=>this.setState({isShow:false})}
+                        ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
+                        isOnly = {this.state.type?true:false}
+                        //typeParam = {type=>{console.log('type',type)}}
+                    />
+                :null}
+                <div className="goodBottom width_100"></div>
             </section>
 
 

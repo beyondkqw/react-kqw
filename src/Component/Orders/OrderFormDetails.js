@@ -66,7 +66,7 @@ export default class OrderFormDetails extends Component {
                             <span>收货人:</span><span>{orderFormdDetails.name}</span>
                             <span className="di fr color6">{orderFormdDetails.mobile}</span>
                         </div>
-                        <p className="f12 color9 mt3">收货地址:<span>{orderFormdDetails.address_detail}</span></p>
+                        <p className="f12 color9 mt3">收货地址:<span>{orderFormdDetails.address+orderFormdDetails.address_detail}</span></p>
                     </div>
                 </div>
                 {/*<div className="df plAll">

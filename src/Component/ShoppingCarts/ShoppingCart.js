@@ -307,9 +307,15 @@ export default class ShoppingCart extends Component {
             .then(res=>{
                 let num = this.selectNum[id]?this.selectNum[id]:0
                 if(type){
+                    this.selectDel[id] = false
                     this.selectNum[id] = num + 1
                 }else{
-                    this.selectNum[id] = num -1
+                    console.warn('count',count)
+                    if(count>0){
+                        if(!this.selectDel[id]){
+                            this.selectNum[id] = num -1
+                        }
+                    }
                 }
                 this.countAmount()
             })
@@ -341,7 +347,6 @@ export default class ShoppingCart extends Component {
         }else{
             alert('请选择商品')
         }
-       //comfirmPayMoney
     }
 
     render() {

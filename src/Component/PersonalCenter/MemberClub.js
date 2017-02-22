@@ -63,7 +63,7 @@ export default class MemberClub extends Component {
                     </Link>
                 </div>
                 <SplitLine />
-                <div className="clearAll personal_h8">
+                {/*<div className="clearAll personal_h8">
                     <Link to="/personalCenter/teamAmount"
                           query={{
                           imgUrl:clubInfo.IMAGE_URI,
@@ -117,7 +117,7 @@ export default class MemberClub extends Component {
                                 //link={'/personalCenter/teamAmount'}
                             />
                     </Link>
-                </div>
+                </div>*/}
                 <SplitLine />
                 <div className="chooseType font14 plr border_bottom">
                     <span className="color6">全国等级排名</span>

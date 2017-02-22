@@ -4,6 +4,7 @@ import RetailingItem from '../../Component/PersonalCenter/RetailingItem';
 import '../../Stylesheets/App/personal.css';
 import {GiveAwayRecord,CashRecord} from '../../Action/auth'
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg';
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerTakenDetails extends Component {
     // 构造
@@ -36,7 +37,11 @@ export default class SellerTakenDetails extends Component {
     render() {
         const {showImg,payAmount} = this.state
         return (
-            <div className="wrap">
+            <div className="containerNav">
+                <NavBar
+                    renderBack = {true}
+                    title = {'收支明细'}
+                />
                 <SplitLine />
                 {
                     showImg?

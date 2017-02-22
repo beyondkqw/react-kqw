@@ -114,6 +114,8 @@ export default class SearchPage extends Component {
         return true;
     }
 
+
+
     onTouchStart=(ev)=>{
         this.isTouching = true;
     }
@@ -198,7 +200,6 @@ export default class SearchPage extends Component {
     }
 
     async fetchItems(isRefresh) {
-
         if (isRefresh) {
             this.page = 1;
         }
@@ -210,6 +211,9 @@ export default class SearchPage extends Component {
                 this.getOrder('','asc','p.SALES','','',this.page)
             }else if(index==2){
                 this.getOrder('','','',this.state.minPrice,this.state.maxPrice,this.page)
+            }else if(index==3){
+                //this.upDownOrder()
+                this.iScrollInstance.refresh();
             }
         }
 
@@ -225,15 +229,7 @@ export default class SearchPage extends Component {
     }
     //排序的列表
     async SelectSortOrder(index){
-        this.dataList=[];
-        this.over = false;
-        this.page = 1;
-        await this.setState({
-            goodsList:[],
-            display:'none'
-        });
-        this.iScrollInstance.refresh();
-        this.iScrollInstance.y=0;
+        this.page=1;
         this.setState({isChoose:index})
         await    this.ChooseOneorder(index)
         this.getOrder('',this.state.order,this.state.orderName,'','');
@@ -249,8 +245,6 @@ export default class SearchPage extends Component {
             goodsList:[],
             display:'none'
         });
-        this.iScrollInstance.refresh();
-        this.iScrollInstance.y=0;
         await this.getOrder('','','',this.state.minPrice,this.state.maxPrice)
         this.setState({display_2:false})
     }
@@ -264,8 +258,6 @@ export default class SearchPage extends Component {
             goodsList:[],
             display:'none'
         });
-        this.iScrollInstance.refresh();
-        this.iScrollInstance.y=0;
         await this.getOrder('','asc','p.SALES','','')
     }
 
@@ -395,7 +387,7 @@ export default class SearchPage extends Component {
     }
 
     //tab切换
-    async onChange(index){
+    onChange(index){
         if(index!=3){
             this.setState({index:index})
         }
@@ -410,25 +402,7 @@ export default class SearchPage extends Component {
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false});
-            this.iScrollInstance.refresh();
-            // this.iScrollInstance.y=0;
-            this.dataList=[];
-            this.over = false;
-            this.page = 1;
-            this.setState({
-                goodsList:[],
-                display:'none'
-            });
-            this.onPullUp();
-            const index = this.state.index;
-            if(index==0){
-                this.getOrder('',this.state.order,this.state.orderName,'','',this.page);
-            }else if(index==1){
-                this.getOrder('','asc','p.SALES','','',this.page)
-            }else if(index==2){
-                this.getOrder('','','',this.state.minPrice,this.state.maxPrice,this.page)
-            }
-
+            this.fetchItems(true)
         }else{
             this.setState({display_2:false,display_0:false})
         }
