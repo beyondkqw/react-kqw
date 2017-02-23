@@ -371,7 +371,7 @@ export default class GoodsDescription extends Component {
         console.log('detail========>',detail)
         return (
             <div>
-                <iframe src={detail} style={{border:'none'}}></iframe>
+                <iframe src={detail} style={{border:'none',height:'100%'}}></iframe>
             </div>
         )
     }

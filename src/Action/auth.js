@@ -132,9 +132,9 @@ export async function Follow(productId,status) {
 }
 
 //我的收藏列表
-export async function FollowList() {
+export async function FollowList(page) {
     try {
-        const res = await apiGet(URL.followList);
+        const res = await apiGet(URL.followList,{page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -408,9 +408,9 @@ export async function TeamMembers(){
 }
 
 //全国排名
-export async function CountryRankList(memberName){
+export async function CountryRankList(memberName,page){
     try{
-        const res = await apiPost(URL.countryRank,{memberName});
+        const res = await apiPost(URL.countryRank,{memberName,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -463,9 +463,9 @@ export async function GiveAmount(accId,amount){
 }
 
 //我的佣金记录
-export async function GiveAwayRecord(tranType){
+export async function GiveAwayRecord(tranType,page){
     try{
-        const res = await apiGet(URL.giveAwayRecord,{tranType});
+        const res = await apiGet(URL.giveAwayRecord,{tranType,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -705,9 +705,9 @@ export async function EecommendList() {
 }
 
 //聚朵股权
-export async function EquityList() {
+export async function EquityList(page) {
     try {
-        const res = await apiGet(URL.equityList);
+        const res = await apiGet(URL.equityList,{page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -1002,9 +1002,9 @@ export async function MyStore() {
 }
 
 //提现
-export async function CashRecord() {
+export async function CashRecord(accId,page) {
     try {
-        const res = await apiGet(URL.cashRecord);
+        const res = await apiGet(URL.cashRecord,{accId,page});
         return res;
     } catch (err) {
         console.warn(err);
