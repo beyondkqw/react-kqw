@@ -70,7 +70,7 @@ export default class ComfirmPayMoney extends Component {
         this.state.carriage.map(el=>{
             this.state.summaryCarriage += el
         })
-        return (this.state.summaryAmount+this.state.summaryCarriage)
+        return parseFloat(this.state.summaryAmount)+parseFloat(this.state.summaryCarriage)
     }
 
     render() {

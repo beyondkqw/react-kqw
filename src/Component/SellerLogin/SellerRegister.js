@@ -135,7 +135,7 @@ export default class SellerRegister extends Component {
         }
         await SellerToRegister(sellerMobile,sellerPwd,smsCode,code,storeName,role)
             .then(res=>{
-                this.context.router.goBack()
+                this.context.router.push({pathname:'/sellerLogin'})
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})

@@ -8,9 +8,9 @@ import {MyInfo} from '../../Action/auth'
 
 const personDetail = [
     {name:'待付款',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
+    {name:'待发货',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
     {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
-    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
-    {name:'已评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}
+    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}
     /*{name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}*/
 ]
 const ItemList = [

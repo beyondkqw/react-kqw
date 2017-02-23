@@ -22,7 +22,6 @@ export default class CheckBox extends Component {
    async changeState(){
         const {onSelect} = this.props
         await this.setState({isChecked:!this.state.isChecked})
-       console.log('this.state.isChecked====>',this.state.isChecked)
         onSelect&&onSelect(this.state.isChecked)
     }
 

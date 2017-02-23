@@ -85,7 +85,7 @@ export default class ShoppingCart extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -248,20 +248,7 @@ export default class ShoppingCart extends Component {
         let a = document.getElementById('aa')
     }*/
 
-    //计算总价
-    countAmount() {
-        this.state.shopCarList.map(el=>{
-            let num = this.selectNum[el.CAR_ID]?this.selectNum[el.CAR_ID]:0
-            this.select.map(item=>{
-                if(el.CAR_ID==item){
-                    this.amount += el.PRICE*el.PRODUCT_NUM + el.PRICE*num
-                }
-            })
-        })
-        console.warn('this.amount',this.amount)
-        this.setState({amount:this.amount})
-        this.amount = 0
-    }
+
 
     //全选/反选
     async onChangeState(){
@@ -310,7 +297,7 @@ export default class ShoppingCart extends Component {
                     this.selectDel[id] = false
                     this.selectNum[id] = num + 1
                 }else{
-                    console.warn('count',count)
+                    console.log('count',count)
                     if(count>0){
                         if(!this.selectDel[id]){
                             this.selectNum[id] = num -1
@@ -324,8 +311,27 @@ export default class ShoppingCart extends Component {
             })
     }
 
+    //计算总价
+    countAmount() {
+        this.state.shopCarList.map(el=>{
+            let num = this.selectNum[el.CAR_ID]?this.selectNum[el.CAR_ID]:0
+            this.select.map(item=>{
+                if(el.CAR_ID==item){
+                    this.amount += el.PRICE*el.PRODUCT_NUM + el.PRICE*num
+                }
+                console.log('el.PRICE*el.PRODUCT_NUM===>',(el.PRICE)*(el.PRODUCT_NUM))
+                console.log('el.PRICE*num===>',el.PRICE*num)
+                console.log('this.amount===>',el.PRICE*el.PRODUCT_NUM + el.PRICE*num)
+            })
+        })
+        console.log('this.amount============>',this.amount)
+        this.setState({amount:this.amount})
+        this.amount = 0
+    }
+
     //删除购物车
     async Del(id){
+        this.selectDel[id] = true
         if(confirm("确定删除商品？")){
             await DelShopCar([id])
                 .then(res=>{

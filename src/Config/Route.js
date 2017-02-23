@@ -123,6 +123,7 @@ import SellerBalanceMan from '../Component/SellerStore/SellerBalanceMan'
 import BalanceTake from '../Component/SellerStore/BalanceTake'
 import SellerChooseType from '../Component/SellerStore/SellerChooseType'
 import SellerTakenDetails from '../Component/SellerStore/SellerTakenDetails'
+import ToWebView from '../Component/GoodsDetails/ToWebView'
 
 
 
@@ -252,6 +253,7 @@ const RouteConfig = (
       <Route path="balanceTake" component={BalanceTake} />
       <Route path="sellerChooseType" component={SellerChooseType} />
       <Route path="sellerTakenDetails" component={SellerTakenDetails} />
+      <Route path="toWebView" component={ToWebView} />
     </Route>
   </Router>
 );

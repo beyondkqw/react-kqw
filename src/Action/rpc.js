@@ -28,7 +28,6 @@ export const wsPath = "ws://"+'jdy.juduoy.com'+"/api/socketServer";
 // export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/'
 
 
-
 //获取屏幕宽度
 export const SCREEN_WIDTH = window.screen.width
 

@@ -35,7 +35,7 @@ export default class TabBar extends Component {
     render(){
         const {contents} = this.props
         return(
-            <div className="tabBarContainer">
+            <div className="tabBarContainer" style={{width:'100%'}}>
 
                 {
                     contents&&contents.map((el,index)=>{

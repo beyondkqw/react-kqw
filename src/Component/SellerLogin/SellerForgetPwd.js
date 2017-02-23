@@ -165,10 +165,10 @@ export default class SellerForgetPwd extends Component {
                     </div>
 
                     {/*手机验证码*/}
-                    <div className='editorBox'>
-                    <span className="editorImg">
-                        <img src={icon[2]}/>
-                    </span>
+                    <div className='editorBox psdInput'>
+                        <span className="editorImg">
+                            <img src={icon[2]}/>
+                        </span>
                         <input
                             key = '2'
                             maxLength="6"

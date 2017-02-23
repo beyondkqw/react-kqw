@@ -69,7 +69,12 @@ p{
 
 .pf {
     position: fixed;
+    -webkit-overflow-scrolling:touch;
+    transform: translate3d(0,0,0);
     -webkit-transform: translateZ(0);
+}
+.touchMove{
+    -webkit-overflow-scrolling:touch;
 }
 .bkg_color{
     background-color:#fff !important;

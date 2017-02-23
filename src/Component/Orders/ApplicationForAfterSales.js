@@ -47,8 +47,9 @@ export default class ApplicationForAfterSales extends Component {
     //申请退款
     async confirmRefund(){
         const orderDetailId = this.props.location.query.orderNo
+        //const {applyAmount,refundReason,type,recStatus,refundDesc} = this.state
         const {applyAmount,refundReason,type,recStatus,refundDesc} = this.state
-        await Refund(orderDetailId,applyAmount,refundReason,type,recStatus,refundDesc)
+        await Refund(orderDetailId,refundReason,refundDesc)
             .then(res=>{
                 this.context.router.goBack()
             })
@@ -62,7 +63,7 @@ export default class ApplicationForAfterSales extends Component {
         return (
             <div className="containerNav bkg_gray">
                 <div className="plr">
-                    <div className="df ml saleTitle">
+                    {/*<div className="df ml saleTitle">
                         <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                         <div className="flex1 ml">
                             <p className="font14 color6">退款类型</p>
@@ -143,7 +144,7 @@ export default class ApplicationForAfterSales extends Component {
                                 </div>
                             </div>
                             :null
-                    }
+                    }*/}
 
                     <div className="df ml saleTitle">
                         <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
@@ -160,7 +161,7 @@ export default class ApplicationForAfterSales extends Component {
                         </div>
                         <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
                     </div>
-                    <div className="df ml saleTitle">
+                    {/* <div className="df ml saleTitle">
                         <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                         <div className="flex1 ml">
                             <p>
@@ -177,7 +178,7 @@ export default class ApplicationForAfterSales extends Component {
                             ref="refundMoney"
                             onChange={()=>this.setState({applyAmount:this.refs.refundMoney.value})}
                         />
-                    </div>
+                    </div>*/}
                     <div className="df ml saleTitle">
                         <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                         <div className="flex1 ml">

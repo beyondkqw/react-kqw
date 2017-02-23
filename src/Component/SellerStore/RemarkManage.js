@@ -68,7 +68,7 @@ export default class RemarkManage extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -210,14 +210,16 @@ export default class RemarkManage extends Component {
                     this.setState({
                         pullUpStatus: 4
                     });
+                }else{
+                    this.setState({
+                        pullUpStatus: 3
+                    });
                 }
                 this.dataList = this.dataList.concat(res.resultList);
                 this.setState({sellerGoodsList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
                 this.iScrollInstance.refresh();
                 this.page++;
-                this.setState({
-                    pullUpStatus: 3
-                });
+
             })
             .catch(err=>{
                 console.warn('err',err)

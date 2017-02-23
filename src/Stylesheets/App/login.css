@@ -167,7 +167,7 @@
 }
 
 @media screen and (max-width : 320px){
-    .editorBox input{
+    .psdInput input{
         max-width:6rem;
     }
 }

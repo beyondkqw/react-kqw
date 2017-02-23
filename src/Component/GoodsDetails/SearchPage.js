@@ -15,8 +15,8 @@ import $ from 'jquery';
 
 export default class SearchPage extends Component {
 
-      // 构造
-      constructor(props) {
+    // 构造
+    constructor(props) {
         super(props);
         // 初始状态
         this.compositor = ['默认排序','价格从低到高','价格从高到低']
@@ -84,7 +84,7 @@ export default class SearchPage extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -356,13 +356,13 @@ export default class SearchPage extends Component {
 
                     <div>
                         <input placeholder="最低价"
-                           ref="minPrice"
-                           onChange={()=>this.setState({minPrice:this.refs.minPrice.value})}
+                               ref="minPrice"
+                               onChange={()=>this.setState({minPrice:this.refs.minPrice.value})}
                         />
                         <div className="liner" />
                         <input placeholder="最高价"
-                           ref="maxPrice"
-                           onChange={()=>this.setState({maxPrice:this.refs.maxPrice.value})}
+                               ref="maxPrice"
+                               onChange={()=>this.setState({maxPrice:this.refs.maxPrice.value})}
                         />
                     </div>
 
@@ -387,7 +387,7 @@ export default class SearchPage extends Component {
     }
 
     //tab切换
-    onChange(index){
+    async onChange(index){
         if(index!=3){
             this.setState({index:index})
         }
@@ -402,7 +402,9 @@ export default class SearchPage extends Component {
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false});
-            this.fetchItems(true)
+            await this.fetchItems(true)
+            this.iScrollInstance.refresh();
+            this.iScrollInstance.y=0;
         }else{
             this.setState({display_2:false,display_0:false})
         }
@@ -436,7 +438,7 @@ export default class SearchPage extends Component {
 
                         {/*销量优先---tag*/}
                         <div name="销量优先"
-                            onClick={()=>this.SalesPreferred()}
+                             onClick={()=>this.SalesPreferred()}
                         >
                         </div>
 
@@ -467,7 +469,6 @@ export default class SearchPage extends Component {
                     <div id='ListOutsite' style={{height: window.innerHeight-73,marginTop:73}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
-
                         <ul id='ListInside'>
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
                             <div className="imgContainer width_100">
@@ -509,46 +510,6 @@ export default class SearchPage extends Component {
                         </ul>
                     </div>
                 </div>
-
-                {/*商品列表---最下层*/}
-                {/*<div
-                    onClick = {()=>this.setState({history:false})}
-                    className="goodListContainer"
-                >
-                    <div className="imgContainer width_100">
-                        {
-                            goodsList == ''?
-                                <IsShowEmptyImg
-                                    styleSheet={{width:69,height:72,marginTop:120}}
-                                    title={'查询列表是空的哦~'}
-                                />
-                                :
-                            goodsList&&goodsList.map((el,index)=>{
-                                return (
-                                    showByColumn?
-                                        <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
-                                            <StoreRow
-                                                title = {el.NAME}
-                                                price = {el.CURRENT_PRICE}
-                                                imgurl = {el.IMAGE}
-                                            />
-                                        </Link>
-                                        :
-                                        <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
-                                            <StoreDetails
-                                                float = {index%2==0?'left':'right'}
-                                                title = {el.NAME}
-                                                price = {el.CURRENT_PRICE}
-                                                imgurl = {el.IMAGE}
-                                            />
-                                        </Link>
-                                )
-                            })
-                        }
-                        <div style={{clear:'both'}}></div>
-
-                    </div>
-                </div>*/}
             </div>
         )
     }

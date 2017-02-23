@@ -81,7 +81,7 @@ export default class GoodsDescription extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -368,10 +368,9 @@ export default class GoodsDescription extends Component {
     //商品介绍
     commodityIntroduction(){
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
-        console.log('detail========>',detail)
         return (
             <div>
-                <iframe src={detail} style={{border:'none',height:'100%'}}></iframe>
+                <iframe src={detail} style={{border:'none',width:'100%'}}></iframe>
             </div>
         )
     }
@@ -469,7 +468,7 @@ export default class GoodsDescription extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section className="containerNav">
+            <section style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
                 <div className="bannerImg">
                     <AutoPlaySwipeableViews
                         style={{height:'9rem'}}
@@ -596,6 +595,7 @@ export default class GoodsDescription extends Component {
                         closePopUp = {()=>this.setState({isShow:false})}
                         ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
                         isOnly = {this.state.type?true:false}
+                        price = {goodsDetails.CURRENT_PRICE}
                         //typeParam = {type=>{console.log('type',type)}}
                     />
                 :null}
