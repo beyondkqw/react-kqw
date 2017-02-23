@@ -143,9 +143,9 @@ export async function FollowList() {
 }
 
 //商品列表
-export async function ProductList(name,order,orderName,minPrice,maxPrice) {
+export async function ProductList(name,order,orderName,minPrice,maxPrice,page,type=0) {
     try {
-        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice});
+        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice,page,type});
         return res;
     } catch (err) {
         console.warn(err);
@@ -562,9 +562,9 @@ export async function NoticeList(type,count,page){
 }
 
 //申请退款
-export async function Refund(orderDetailId,applyAmount,reason,type,recStatus,desc){
+export async function Refund(orderDetailId,reason,desc){
     try{
-        const res = await apiPost(URL.refund,{orderDetailId,applyAmount,reason,type,recStatus,desc});
+        const res = await apiPost(URL.refund,{orderDetailId,reason,desc});
         return res;
     }catch (err){
         console.warn(err);
@@ -782,9 +782,9 @@ export async function SellerToLogin(accName,pwd) {
 }
 
 //录入店铺信息
-export async function EnterStoreInformation(name='',img='',address='',province='',city='',area='',license='',cardFace='',cardBack='',gpsAddress='',latitude='',longitude='',type='') {
+export async function EnterStoreInformation(name='',img='',address='',addressDetail='',locType,province='',city='',area='',license='',cardFace='',cardBack='',gpsAddress='',latitude='',longitude='',type='') {
     try {
-        const res = await apiPost(URL.storeAdd,{name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
+        const res = await apiPost(URL.storeAdd,{name,img,address,addressDetail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
         return res;
     } catch (err) {
         console.warn(err);

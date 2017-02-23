@@ -45,14 +45,14 @@ export default class GoodsPopup extends Component {
     }
 
     render() {
-        const {closePopUp,attr,onClick,isOnly,typeParam} = this.props
+        const {closePopUp,attr,onClick,isOnly,typeParam,price} = this.props
         return (
             <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
                 <div className="popupContainer pf bottom0 z_index bkg_color wrap border_top pr" style={{zIndex:1050}}>
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
                     <div className="pm_img plAll">
                         <span className="di productImg"><img src={require('../../Images/store.png')} alt=""/></span>
-                        <span className="colorff f12 margin15">￥</span><span className="colorff font18">258</span>
+                        <span className="colorff f12 margin15">￥</span><span className="colorff font18">{price}</span>
                     </div>
                     {
                         attr&&attr.map((el,inx)=>{

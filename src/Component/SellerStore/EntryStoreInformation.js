@@ -21,10 +21,6 @@ export default class EntryStoreInformation extends Component {
         this.state = {
             Reminder:'',
             modalDelay:false,
-            // uploadStoreImg:'',
-            // licenseImg:'',
-            // cardFace:'',
-            // cardBack:'',
             chooseType:false,
             StoreTypeItem:[],
             id:'',
@@ -44,7 +40,10 @@ export default class EntryStoreInformation extends Component {
             uploadHeaderImg:'',
             uploadLicenseImg:'',
             uploadCardFaceImg:'',
-            uploadCardBackImg:''
+            uploadCardBackImg:'',
+            detail:'',
+            checkChoose:'',
+            locType:0
         };
     }
     static contextTypes = {
@@ -55,65 +54,6 @@ export default class EntryStoreInformation extends Component {
         this.getStoreType()
         const address = localStorage.getItem('address')
         this.setState({gpsAddress:address})
-    }
-
-    confirmInformation(){
-        const {uploadStoreImg,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
-        const storeName = this.refs.storeName.value
-        //非空校验
-        if(!uploadStoreImg){
-            this.setState({Reminder:'上传的头像不能为空'})
-            return
-        }else if(!storeName){
-            this.setState({Reminder:'店铺名不能为空'})
-            return
-        }else if(!licenseImg){
-            this.setState({Reminder:'上传的营业执照不能为空'})
-            return
-        }else if(!cardFace||!cardBack){
-            this.setState({Reminder:'上传的身份证照片不能为空'})
-            return
-        }else if(this.state.id == ''){
-            this.setState({Reminder:'请点击选择店铺类型'})
-            return
-        }else{
-            this.setState({Reminder:''})
-        }
-
-        const latitude = localStorage.getItem('latitude')
-        const longitude = localStorage.getItem('longitude')
-        const address = localStorage.getItem('address')
-
-        this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,'定位地址','10.33','15.33',this.state.id)
-    }
-
-    async getInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
-        await EnterStoreInformation(name,img,address,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type)
-            .then(res=>{
-                this.context.router.push({pathname:'/storeSubCommission'})
-            })
-            .catch(err=>{
-                this.setState({Reminder:err.message})
-            })
-    }
-
-    //获取店铺类型
-    async getStoreType(){
-        await  StoreType()
-            .then(res=>{
-                res.map(item=>{
-                    this.setState({StoreTypeItem:res})
-                })
-            })
-            .catch(err=>{
-                console.warn('获取商品属性失败',err)
-            })
-    }
-
-    getType(id,name){
-        this.setState({id:id})
-        this.setState({chooseType:false})
-        this.setState({storeType:name})
     }
 
     //得到地址信息
@@ -153,6 +93,87 @@ export default class EntryStoreInformation extends Component {
 
     }
 
+    async confirmInformation(){
+        console.log('this.state.checkChoose======>',this.state.checkChoose)
+        //判断选择位置的类型
+        if(!this.state.checkChoose){
+            alert('请选择地址的类型')
+            return
+        }else{
+            if(this.state.checkChoose == 'type'){
+                if(this.state.detail == '' || this.state.detail == null ){
+                    alert('请填写详细地址信息')
+                    return
+                }
+                await this.setState({locType:2})
+            }else{
+                await this.setState({locType:1})
+            }
+        }
+        const {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
+        const storeName = this.refs.storeName.value
+        const {checkChoose,checkGps,locType} = this.state
+        //非空校验
+        if(!uploadHeaderImg){
+            this.setState({Reminder:'上传的头像不能为空'})
+            return
+        }else if(!storeName){
+            this.setState({Reminder:'店铺名不能为空'})
+            return
+        }else if(!uploadLicenseImg){
+            this.setState({Reminder:'上传的营业执照不能为空'})
+            return
+        }else if(!uploadCardFaceImg||!uploadCardBackImg){
+            this.setState({Reminder:'上传的身份证照片不能为空'})
+            return
+        }else if(this.state.id == ''){
+            this.setState({Reminder:'请点击选择店铺类型'})
+            return
+        }else if(this.state.provName == ''){
+            this.setState({Reminder:'请选择店铺地址'})
+            return
+        }else{
+            this.setState({Reminder:''})
+        }
+
+        const latitude = localStorage.getItem('latitude')
+        const longitude = localStorage.getItem('longitude')
+        const address = localStorage.getItem('address')
+
+        this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,'定位地址','10.33','15.33',this.state.id)
+    }
+
+    async getInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
+        await EnterStoreInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type)
+            .then(res=>{
+                this.context.router.push({pathname:'/storeSubCommission'})
+            })
+            .catch(err=>{
+                this.setState({Reminder:err.message})
+            })
+    }
+
+    //获取店铺类型
+    async getStoreType(){
+        await  StoreType()
+            .then(res=>{
+                res.map(item=>{
+                    this.setState({StoreTypeItem:res})
+                })
+            })
+            .catch(err=>{
+                console.warn('获取商品属性失败',err)
+            })
+    }
+
+    getType(id,name){
+        this.setState({id:id})
+        this.setState({chooseType:false})
+        this.setState({storeType:name})
+    }
+
+
+
     //上传图片
     fileChange (type,e){
         var client = new OSS.Wrapper({
@@ -163,7 +184,6 @@ export default class EntryStoreInformation extends Component {
         });
 
         var file = e.target.files[0];
-        console.log('file=================>',file)
         var fileName = window.URL.createObjectURL(file)
         var index1=file.name.lastIndexOf(".");
         var index2=file.name.length;
@@ -174,7 +194,6 @@ export default class EntryStoreInformation extends Component {
         console.log(uuid4.toString());
         var storeAs = 'sq/'+uuid4+''+suffix;
         this.setState({modalDelay:true})
-        console.log(file.name + ' ===============> ' + storeAs);
         client.multipartUpload(storeAs, file).then((result)=> {
             console.log(result.url);
             this.setState({modalDelay:false})
@@ -220,7 +239,7 @@ export default class EntryStoreInformation extends Component {
                         <span className="color6">店铺名称</span>
                         <div>
                             <input
-                                className="tr borderno"
+                                className="tr borderno color9"
                                 placeholder="输入您的店铺名称"
                                 ref="storeName"
                             />
@@ -282,17 +301,58 @@ export default class EntryStoreInformation extends Component {
                             </span>
                         </div>
                     </div>
-                    <Link>
-                        <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14">
-                            <span className="color6">当前店铺位置</span>
-                            {/*<div style={{width:35,height:21,lineHeight:0}}>
-                                <img src={require('../../Images/common/sellerLocation.png')} alt=""/>
-                            </div>*/}
-                            <div>
-                                {gpsAddress}
-                            </div>
+                    <div
+                        style={{flexDirection:'row',height:50}}
+                        className="df flex-pack-justify flex-align-center border_bottom plr font14"
+                    >
+                        <span className="color6">详细信息</span>
+                        <div>
+                            <input
+                                ref = 'address_Detais'
+                                className="borderno tr color9"
+                                type="\"
+                                placeholder="请填写详细信息"
+                                onChange={()=>this.setState({detail:this.refs.address_Detais.value})}
+                            />
                         </div>
-                    </Link>
+                    </div>
+                    <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14 border_bottom">
+                        <span className="color6">当前店铺位置</span>
+                        {/*<div style={{width:35,height:21,lineHeight:0}}>
+                            <img src={require('../../Images/common/sellerLocation.png')} alt=""/>
+                        </div>*/}
+                        <div>
+                            {gpsAddress}
+                        </div>
+                    </div>
+                    <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14  border_bottom">
+                        <div className="pr lh25">
+                            <span className="di check_radius pr fl">
+                                <input
+                                    type="radio"
+                                    id="isCheck"
+                                    name="chooseTime"
+                                    className="di isConfirm"
+                                    onClick={()=>this.setState({checkChoose:'type'})}
+                                />
+                                <label htmlFor="isCheck"></label>
+                            </span>
+                            <span className="di font14 color6 ml5 fl">自己所选的地址</span>
+                        </div>
+                        <div className="pr lh25">
+                            <span className="di check_radius pr fl">
+                                <input
+                                    type="radio"
+                                    id="isGps"
+                                    name="chooseTime"
+                                    className="di isConfirm"
+                                    onClick={()=>this.setState({checkChoose:'type1'})}
+                                />
+                                <label htmlFor="isGps"></label>
+                            </span>
+                            <span className="di font14 color6 ml5 fl">定位地址</span>
+                        </div>
+                    </div>
                     <SplitLine />
                     <div className="upload">
                         <div className="font14">

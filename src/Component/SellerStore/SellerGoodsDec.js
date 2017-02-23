@@ -104,7 +104,7 @@ export default class SellerGoodsDec extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section className="containerNav">
+            <section style={{position:'absolute',top:0,bottom:0,overflow:'auto'}}>
                 <NavBar
                     renderBack = {true}
                     title = {'商品详情'}

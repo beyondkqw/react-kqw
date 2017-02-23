@@ -61,7 +61,7 @@ export default class OffTheShelf extends Component {
     }
 
     //单选
-    async getSelect(state,id,index){
+    async getSelect(state,id){
         this.isUseSelectAll = false
         if(state){
             this.selectOffShelf.push(id)
@@ -90,7 +90,6 @@ export default class OffTheShelf extends Component {
         if(this.selectOffShelf.length>0){
             await SellerOffShelf(this.selectOffShelf)
                 .then(res=>{
-                    console.log('当前的数量index=========>',this.indexArray.length)
                     //alert('清空宝贝成功')
                     this.selectOffShelf = []
 
@@ -121,7 +120,7 @@ export default class OffTheShelf extends Component {
                             title={'查询列表为空哦~'}
                         />
                         :
-                    sellerOffDownList&&sellerOffDownList.map((el,inde)=>{
+                    sellerOffDownList&&sellerOffDownList.map((el,index)=>{
                         return(
                             <Link>
                                 <div className="storeRowContainer">

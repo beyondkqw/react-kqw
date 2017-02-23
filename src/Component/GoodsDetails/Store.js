@@ -83,8 +83,8 @@ export default class Store extends Component {
     render() {
         const {storeDetails,storeBanner,storeDetail} = this.state
         return (
-            <div className="containerNav bkg_gray">
-                <div className="flex">
+            <div className="bkg_gray touchMove" style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
+                <div className="flex pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0,right:0}}>
                     <div className="flex1">
                         <Search
                             style={{backgroundColor:'#ff5500'}}
@@ -104,7 +104,7 @@ export default class Store extends Component {
                     </div>
                 </div>
 
-                <div className="plr storeDetail df" >
+                <div className="plr storeDetail df"  style={{marginTop:'2.2rem'}}>
                     <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
                         <div className="df">
                             <div className="mr" style={{height:40,width:40}}>

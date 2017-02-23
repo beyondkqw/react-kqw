@@ -43,14 +43,14 @@ class Home extends Component {
     async componentWillMount() {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
-        if(getToken == '' ||getToken == null ||getToken == 'null'){
+        /*if(getToken == '' ||getToken == null ||getToken == 'null'){
             await WechatAuth()
             const token = GetQueryString('token')
             saveToken(token)
             //initWebsocket()
         }else{
             //initWebsocket()
-        }
+        }*/
         this.getHomeBanner()
         this.getHomeMoudle()
 
@@ -83,27 +83,14 @@ class Home extends Component {
 
     //搜索
     async SearchBtn(value){
-        console.log('value',value);
-        await this.getOrder(value,'','','','');
-    }
-
-    //请求列表接口
-    async getOrder(name,order,orderName,minPrice,maxPrice){
-        await ProductList(name,order,orderName,minPrice,maxPrice)
-            .then(res=>{
-                this.setState({goodsList:res.resultList})
-                this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{goodsList:JSON.stringify(res.resultList)}})
-            })
-            .catch(err=>{
-                console.warn('err',err)
-            })
+        this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{value:value}})
     }
 
   render() {
     const {moudle} = this.state
     return (
-      <div className="containerNav bkg_color">
-        <div className="pf t0 width100" style={{zIndex:100}}>
+      <div className="bkg_color" style={{position:'absolute',top:0,bottom:0,overflow:'auto'}}>
+        <div className="pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0,right:0}}>
             <Search
                 onClick = {(value)=>this.SearchBtn(value)}
                 display = {this.state.history}

@@ -58,7 +58,7 @@ export default class SellerOrderList extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            //probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -277,7 +277,7 @@ export default class SellerOrderList extends Component {
                 />
                 <SplitLine />
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                    <div id='ListOutsite' style={{height: window.innerHeight-50}}
+                    <div id='ListOutsite' style={{height: window.innerHeight-95}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
 
@@ -341,6 +341,9 @@ export default class SellerOrderList extends Component {
                     </div>
                     :null
                 }
+                            <p ref="PullUp" id='PullUp'
+                               style={{display:this.state.display}}
+                            >{this.pullUpTips[this.state.pullUpStatus]}</p>
                         </ul>
                     </div>
 

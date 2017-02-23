@@ -1,39 +1,50 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import LeftImg from '../../Component/NewComponent/LeftImg'
 import RightImg from '../../Component/NewComponent/RightImg'
 import '../../Stylesheets/App/homePage.css';
 import {SCREEN_WIDTH} from '../../Action/rpc'
 
-//const imgUrl = [{imgUrl:require('../../Images/leftVoucher.png')},
-//    {imgUrl:require('../../Images/rightTop.png')},{imgUrl:require('../../Images/rightBottom.png')}]
 export default class Cell_3 extends Component {
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
+    onPress (cell) {
+        if(cell===undefined){
+            return
+        }
+        if(cell.linkType==0){
+            this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{type:cell.tagId}})
+        }else if(cell.linkType==1){
+            this.context.router.push({pathname:'/goodsDescription',query:{id:cell.productId}})
+        }else if(cell.linkType==2) {
+            this.context.router.push({pathname: '/toWebView', query: {url: cell.webUrl}})
+        }
+    }
     render() {
         const {imgUrl} = this.props
         return (
             <div className="width_100 border_top border_bottom" style={{height : SCREEN_WIDTH/2.3}}>
-                <Link to={imgUrl[0]&&imgUrl[0].webUrl}>
-                    <div className="width_50 fl height_all border_right tc pr">
-                        <span className="di width_100" style={{height : SCREEN_WIDTH/2.3}}>
-                            <img src={imgUrl[0]&&imgUrl[0].img} alt=""/>
+                <div
+                    className="width_50 fl height_all border_right tc pr flex flex-align-center"
+                    onClick = {()=>this.onPress(imgUrl&&imgUrl[0])}
+                >
+                    <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
+                        <img src={imgUrl[0]&&imgUrl[0].img} alt=""/>
+                    </span>
+                </div>
+                <div className="width_50 fl height_all tc">
+                    <div className="border_bottom" onClick = {()=>this.onPress(imgUrl&&imgUrl[1])}>
+                        <span className="di width50" style={{height : SCREEN_WIDTH/4.68}}>
+                            <img src={imgUrl[1]&&imgUrl[1].img} alt=""/>
                         </span>
                     </div>
-                </Link>
-                <div className="width_50 fl height_all">
-                    <Link to={imgUrl[1]&&imgUrl[1].webUrl}>
-                        <div>
-                            <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
-                                <img src={imgUrl[1]&&imgUrl[1].img} alt=""/>
-                            </span>
-                        </div>
-                    </Link>
-                    <Link to={imgUrl[2]&&imgUrl[2].webUrl}>
-                        <div>
-                            <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
-                                <img src={imgUrl[2]&&imgUrl[2].img} alt=""/>
-                            </span>
-                        </div>
-                    </Link>
+                    <div onClick = {()=>this.onPress(imgUrl&&imgUrl[2])}>
+                        <span className="di width50" style={{height : SCREEN_WIDTH/4.68}}>
+                            <img src={imgUrl[2]&&imgUrl[2].img} alt=""/>
+                        </span>
+                    </div>
                 </div>
             </div>
         );

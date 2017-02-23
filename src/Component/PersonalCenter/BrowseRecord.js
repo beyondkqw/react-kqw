@@ -81,7 +81,6 @@ export default class BrowseRecord extends Component {
     }
     //跳转链接
     jumpToLink(productId){
-        console.log('--------页面跳转')
         this.context.router.push({pathname:'/goodsDescription',
             query:{id:productId}})
     }
@@ -89,27 +88,30 @@ export default class BrowseRecord extends Component {
     render(){
         const {historyList,historyImgShow} = this.state
         return(
-            <div className="containerNav">
-                {
-                    historyImgShow?
-                        <IsShowEmptyImg
-                            styleSheet={{width:69,height:72,marginTop:120}}
-                            title={'浏览记录列表是空的哦~'}
-                        />
-                        :
-                    historyList&&historyList.map(el=>{
-                        return(
-                            <StoreRow
-                                title = {el.NAME}
-                                record = {el.CURRENT_PRICE}
-                                imgurl = {el.IMAGE}
-                                //browseId = {el.BROWSE_ID}
-                                toDelete = {()=>this.setState({isDelete:true,browseId:el.BROWSE_ID})}
-                                onClick={()=>this.jumpToLink(el.PRODUCT_ID)}
+            <div style={{position: 'absolute',top: 0,bottom: 0,left: 0,height: '100%',width: '100%'}}>
+                <div className="touchMove" style={{position:'absolute',top:0,right:0,left:0,bottom:'2.5rem',overflow:'auto'}}>
+                    {
+                        historyImgShow?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:120}}
+                                title={'浏览记录列表是空的哦~'}
                             />
-                        )
-                    })
-                }
+                            :
+                        historyList&&historyList.map(el=>{
+                            return(
+                                <StoreRow
+                                    title = {el.NAME}
+                                    record = {el.CURRENT_PRICE}
+                                    imgurl = {el.IMAGE}
+                                    //browseId = {el.BROWSE_ID}
+                                    toDelete = {()=>this.setState({isDelete:true,browseId:el.BROWSE_ID})}
+                                    onClick={()=>this.jumpToLink(el.PRODUCT_ID)}
+                                />
+                            )
+                        })
+                    }
+                </div>
+
                 {
                     historyImgShow?
                     null

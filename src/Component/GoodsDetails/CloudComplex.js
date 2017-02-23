@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from '../../Component/NewComponent/Search'
 import TabBar from '../../Component/NewComponent/TabBar';
+import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import '../../Stylesheets/App/goodsDetails.css';
 import {Link} from 'react-router';
@@ -70,8 +71,8 @@ export default class CloudComplex extends Component {
     render() {
         const {storeDetail} = this.state
         return (
-            <div className="containerNav">
-                <div className="flex">
+            <div style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
+                <div className="flex pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
                     <div className="flex1">
                         <Search
                             style={{backgroundColor:'#ff5500'}}
@@ -80,13 +81,28 @@ export default class CloudComplex extends Component {
                         />
                     </div>
                 </div>
-                <TabBar
-                    willdo = {true}
-                    index = {0}
-                    onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
-                    contents={this.StoreTypeItem}
-                />
-                <div className="pr" style={{marginBottom:54}}>
+                {/*<div style={{marginTop:'2.2rem'}}>
+                    <TabBar
+                        willdo = {true}
+                        index = {0}
+                        onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
+                        contents={this.StoreTypeItem}
+                    />
+                </div>*/}
+                <div style={{marginTop:'2.2rem'}}>
+                    <Tabscontrol
+                        onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
+                    >
+                        {
+                            this.StoreTypeItem&&this.StoreTypeItem.map(el=>{
+                                return (
+                                    <div name={el}></div>
+                                )
+                            })
+                        }
+                    </Tabscontrol>
+                </div>
+                <div className="pr" style={{marginBottom:54,marginTop:'-25'}}>
                 {
                     storeDetail == ''?
                         <IsShowEmptyImg

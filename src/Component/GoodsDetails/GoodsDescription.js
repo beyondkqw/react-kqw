@@ -179,10 +179,9 @@ export default class GoodsDescription extends Component {
     //商品介绍
     commodityIntroduction(){
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
-        console.log('detail========>',detail)
         return (
             <div>
-                <iframe src={detail} style={{border:'none'}}></iframe>
+                <iframe src={detail} style={{border:'none',width:'100%'}}></iframe>
             </div>
         )
     }
@@ -259,7 +258,7 @@ export default class GoodsDescription extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section className="containerNav">
+            <section style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
                 <div className="bannerImg">
                     <AutoPlaySwipeableViews
                         style={{height:'9rem'}}
@@ -386,6 +385,7 @@ export default class GoodsDescription extends Component {
                         closePopUp = {()=>this.setState({isShow:false})}
                         ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}
                         isOnly = {this.state.type?true:false}
+                        price = {goodsDetails.CURRENT_PRICE}
                         //typeParam = {type=>{console.log('type',type)}}
                     />
                 :null}
