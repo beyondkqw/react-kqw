@@ -25,10 +25,18 @@ export default class SellerSetting extends Component {
             showMap:false,
             Reminder:'',
             GPSaddress:'',
+            uploadHeaderImg:'',
+            uploadLicenseImg:'',
+            uploadCardFaceImg:'',
+            uploadCardBackImg:'',
             latitude:'',
             longitude:'',
             type:'',
-            modalDelay:false
+            modalDelay:false,
+            detail:'',
+            checkChoose:'',
+            locType:0,
+            Mosaic:'http://jdy-images.oss-cn-shenzhen.aliyuncs.com/'
         };
       }
 
@@ -47,13 +55,13 @@ export default class SellerSetting extends Component {
     async getStoreDetail(value){
         await StoreDetail(value)
             .then(res=>{
-                this.setState({storeImg:res.store.img})
+                this.setState({storeImg:res.store.img,uploadHeaderImg:res.store.img})
                 this.setState({storeName:res.store.name})
                 this.setState({address:res.store.address})
                 this.setState({type:res.store.type})
-                this.setState({licenseImg:res.store.license})
-                this.setState({cardFace:res.store.cardFace})
-                this.setState({cardBack:res.store.cardBack})
+                this.setState({licenseImg:res.store.license,uploadLicenseImg:res.store.license})
+                this.setState({cardFace:res.store.cardFace,uploadCardFaceImg:res.store.cardFace})
+                this.setState({cardBack:res.store.cardBack,uploadCardBackImg:res.store.cardBack})
                 this.setState({provId:res.store.province})
                 this.setState({cityId:res.store.city})
                 this.setState({countyId:res.store.area})
@@ -66,11 +74,9 @@ export default class SellerSetting extends Component {
     //得到地址信息
     async getValue(provName,cityName,countysName,prov,city,county){
         //改变默认值
-        console.log('ajsvgd=========>',provName)
         if(prov == '110000' || prov =='120000' || prov =='310000' || prov =='500000'){
             //改变初始化的内容
             if((provName == ''|| provName == null|| provName== undefined) && (countysName != '' || countysName != null)&& countysName != undefined){
-                console.log('进来了1')
                 await this.setState({provName:'北京市',cityName:'',countysName:countysName,provId:'110000',cityId:'0',countyId:county,showMap:false})
                 this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
                 return
@@ -80,14 +86,12 @@ export default class SellerSetting extends Component {
                 return
             }
             if((provName != ''|| provName != null) && (county != '' || county != null)){
-                console.log('进来了2')
                 await this.setState({provName:provName,cityName:'',countysName:countysName,provId:prov,cityId:'0',countyId:county,showMap:false})
                 this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName+''})
                 return
             }
 
         }else if(prov == '710000' || prov =='810000' || prov =='820000'){
-            console.log('进来了3')
             await this.setState({provName:provName,cityName:'',countysName:'',provId:prov,cityId:'0',countyId:'0',showMap:false})
             this.setState({address:this.state.provName+''+this.state.cityName+this.state.countysName})
             return
@@ -99,7 +103,7 @@ export default class SellerSetting extends Component {
                     showMap:false,
                     provId:prov,
                     cityId:city,
-                    countyId:county,
+                    countyId:county
                 })
             this.setState({address:this.state.provName+this.state.cityName+this.state.countysName})
         }else{
@@ -108,12 +112,34 @@ export default class SellerSetting extends Component {
     }
 
     async confirmEdit(){
-        const {storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack,GPSaddress,latitude,longitude,type} = this.state
-        if(!storeName || !storeImg|| !address || !licenseImg || !cardFace || !cardBack){
+        if(!this.state.checkChoose){
+            alert('请选择地址的类型')
+            return
+        }else{
+            if(this.state.checkChoose == 'type'){
+                if(this.state.detail == '' || this.state.detail == null ){
+                    alert('请填写详细地址信息')
+                    return
+                }
+                await this.setState({locType:2})
+            }else{
+                await this.setState({locType:1})
+            }
+        }
+        let {storeName,detail,uploadHeaderImg,address,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,GPSaddress,latitude,longitude,type} = this.state
+
+        uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
+        uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
+        uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
+        uploadCardBackImg = this.state.Mosaic + uploadCardBackImg;
+
+        const {checkChoose,locType} = this.state
+        if(!storeName || !uploadHeaderImg || !address || !uploadLicenseImg || !uploadCardFaceImg || !uploadCardBackImg){
             this.setState({Reminder:'修改数据不能为空'})
             return
         }
-        await StoreEdit(storeName,storeImg,address,provId,cityId,countyId,licenseImg,cardFace,cardBack,GPSaddress,latitude,longitude,type)
+
+        await StoreEdit(storeName,uploadHeaderImg,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,'宝安区','10.55','22.00',type)
             .then(res=>{
                 this.context.router.push({pathname:'/storeSubCommission',query:{storeId:this.props.location.query.storeId}})
             })
@@ -145,13 +171,13 @@ export default class SellerSetting extends Component {
         client.multipartUpload(storeAs, file).then((result)=> {
             this.setState({modalDelay:false})
             switch (type){
-                case 1 : this.setState({storeImg:fileName})
+                case 1 : this.setState({storeImg:fileName,uploadHeaderImg:storeAs})
                     break;
-                case 2 : this.setState({licenseImg:fileName})
+                case 2 : this.setState({licenseImg:fileName,uploadLicenseImg:storeAs})
                     break;
-                case 3 : this.setState({cardFace:fileName})
+                case 3 : this.setState({cardFace:fileName,uploadCardFaceImg:storeAs})
                     break;
-                case 4 : this.setState({cardBack:fileName})
+                case 4 : this.setState({cardBack:fileName,uploadCardBackImg:storeAs})
                     break;
                 default : this.status = ''
                     break;
@@ -208,6 +234,30 @@ export default class SellerSetting extends Component {
                             </span>
                         </div>
                     </div>
+
+                    {/* <Link to="/sellerMineCode">
+                        <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
+                            <span className="color6">我的二维码名片</span>
+                            <span className="di qrCode">
+                                <img src={require('../../Images/QrCode.png')} alt=""/>
+                            </span>
+                        </div>
+                    </Link>*/}
+                    <div
+                        style={{flexDirection:'row',height:50}}
+                        className="df flex-pack-justify flex-align-center border_bottom plr font14"
+                    >
+                        <span className="color6">详细信息</span>
+                        <div>
+                            <input
+                                ref = 'address_Detais'
+                                className="borderno tr color9"
+                                type="\"
+                                placeholder="请填写详细信息"
+                                onChange={()=>this.setState({detail:this.refs.address_Detais.value})}
+                            />
+                        </div>
+                    </div>
                     <div
                         style={{flexDirection:'row',height:50}}
                         className="df flex-pack-justify flex-align-center border_bottom plr font14"
@@ -217,14 +267,34 @@ export default class SellerSetting extends Component {
 
                         </div>
                     </div>
-                    {/* <Link to="/sellerMineCode">
-                        <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
-                            <span className="color6">我的二维码名片</span>
-                            <span className="di qrCode">
-                                <img src={require('../../Images/QrCode.png')} alt=""/>
+                    <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14  border_bottom">
+                        <div className="pr lh25">
+                            <span className="di check_radius pr fl">
+                                <input
+                                    type="radio"
+                                    id="isCheck"
+                                    name="chooseTime"
+                                    className="di isConfirm"
+                                    onClick={()=>this.setState({checkChoose:'type'})}
+                                />
+                                <label htmlFor="isCheck"></label>
                             </span>
+                            <span className="di font14 color6 ml5 fl">自己所选的地址</span>
                         </div>
-                    </Link>*/}
+                        <div className="pr lh25">
+                            <span className="di check_radius pr fl">
+                                <input
+                                    type="radio"
+                                    id="isGps"
+                                    name="chooseTime"
+                                    className="di isConfirm"
+                                    onClick={()=>this.setState({checkChoose:'type1'})}
+                                />
+                                <label htmlFor="isGps"></label>
+                            </span>
+                            <span className="di font14 color6 ml5 fl">定位地址</span>
+                        </div>
+                    </div>
                 </div>
                 <SplitLine />
                 <div className="df flex-pack-justify flex-pack-center flex-align-center plAll border_bottom">

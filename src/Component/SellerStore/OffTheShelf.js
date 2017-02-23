@@ -182,7 +182,7 @@ export default class OffTheShelf extends Component {
                 {/*模态层*/}
                 {this.state.isVisible?
                     <Modal
-                        title = {'确定要清空所选宝贝？'}
+                        title = {'确定要下架所选宝贝？'}
                         onClick = {()=>this.DelOrderList()}
                         toHideModal = {()=>this.setState({isVisible:false})}
                     />
