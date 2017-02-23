@@ -111,6 +111,7 @@ export default class EntryStoreInformation extends Component {
             }
         }
         let {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
+
         uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
         uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
         uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
