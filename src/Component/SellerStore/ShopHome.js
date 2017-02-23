@@ -252,14 +252,15 @@ export default class ShopHome extends Component {
                     this.setState({
                         pullUpStatus: 4
                     });
+                }else{
+                    this.setState({
+                        pullUpStatus: 3
+                    });
                 }
                 this.dataList = this.dataList.concat(res.resultList);
                 this.setState({storeDetail:this.dataList,display:(this.dataList.length==0)?'none':'block'});
                 this.iScrollInstance.refresh();
                 this.page++;
-                this.setState({
-                    pullUpStatus: 3
-                });
             })
             .catch(err=>{
                 console.warn('err',err)

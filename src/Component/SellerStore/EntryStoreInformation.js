@@ -43,7 +43,8 @@ export default class EntryStoreInformation extends Component {
             uploadCardBackImg:'',
             detail:'',
             checkChoose:'',
-            locType:0
+            locType:0,
+            Mosaic:'http://jdy-images.oss-cn-shenzhen.aliyuncs.com/'
         };
     }
     static contextTypes = {
@@ -94,7 +95,6 @@ export default class EntryStoreInformation extends Component {
     }
 
     async confirmInformation(){
-        console.log('this.state.checkChoose======>',this.state.checkChoose)
         //判断选择位置的类型
         if(!this.state.checkChoose){
             alert('请选择地址的类型')
@@ -110,9 +110,14 @@ export default class EntryStoreInformation extends Component {
                 await this.setState({locType:1})
             }
         }
-        const {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
+        let {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
+        uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
+        uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
+        uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
+        uploadCardBackImg = this.state.Mosaic + uploadCardBackImg;
+
         const storeName = this.refs.storeName.value
-        const {checkChoose,checkGps,locType} = this.state
+        const {checkChoose,locType} = this.state
         //非空校验
         if(!uploadHeaderImg){
             this.setState({Reminder:'上传的头像不能为空'})
@@ -230,7 +235,6 @@ export default class EntryStoreInformation extends Component {
                             <input type="file"
                                ref='imgUrl'
                                onChange={(e)=>this.fileChange(1,e)}
-                               //onChange={()=>this.setState({uploadStoreImg:this.refs.imgUrl.value})}
                             />
                             <img className="" src={uploadStoreImg} alt=""/>
                         </div>
@@ -368,7 +372,6 @@ export default class EntryStoreInformation extends Component {
                                 <input type="file"
                                    ref='license'
                                    onChange={(e)=>this.fileChange(2,e)}
-                                   //onChange={()=>this.setState({licenseImg:this.refs.license.value})}
                                 />
                                 <img className="educationImg" src={licenseImg} />
                             </span>
@@ -389,7 +392,6 @@ export default class EntryStoreInformation extends Component {
                                 <input type="file"
                                    ref='cardFace'
                                    onChange={(e)=>this.fileChange(3,e)}
-                                   //onChange={()=>this.setState({cardFace:this.refs.cardFace.value})}
                                 />
                                 <img className="educationImg" src={cardFace} />
                             </span>
@@ -397,7 +399,6 @@ export default class EntryStoreInformation extends Component {
                                 <input type="file"
                                    ref='cardBack'
                                    onChange={(e)=>this.fileChange(4,e)}
-                                   //onChange={()=>this.setState({cardBack:this.refs.cardBack.value})}
                                 />
                                 <img className="educationImg" src={cardBack} />
                             </span>
