@@ -110,7 +110,7 @@ export default class EntryStoreInformation extends Component {
                 await this.setState({locType:1})
             }
         }
-        const {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
+        let {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
         uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
         uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
         uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
@@ -145,7 +145,7 @@ export default class EntryStoreInformation extends Component {
         const longitude = localStorage.getItem('longitude')
         const address = localStorage.getItem('address')
 
-        this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,'定位地址','10.33','15.33',this.state.id)
+        this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,address,latitude,longitude,this.state.id)
     }
 
     async getInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){

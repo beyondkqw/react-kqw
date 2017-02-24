@@ -36,7 +36,11 @@ export default class SellerSetting extends Component {
             detail:'',
             checkChoose:'',
             locType:0,
-            Mosaic:'http://jdy-images.oss-cn-shenzhen.aliyuncs.com/'
+            Mosaic:'http://jdy-images.oss-cn-shenzhen.aliyuncs.com/',
+            isUploadHeader:false,
+            isUploadLicense:false,
+            isUploadFace:false,
+            isUploadBack:false,
         };
       }
 
@@ -128,10 +132,10 @@ export default class SellerSetting extends Component {
         }
         let {storeName,detail,uploadHeaderImg,address,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,GPSaddress,latitude,longitude,type} = this.state
 
-        uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
-        uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
-        uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
-        uploadCardBackImg = this.state.Mosaic + uploadCardBackImg;
+        uploadHeaderImg =this.state.isUploadHeader?(this.state.Mosaic + uploadHeaderImg):uploadHeaderImg;
+        uploadLicenseImg = this.state.isUploadLicense?(this.state.Mosaic + uploadLicenseImg):uploadLicenseImg;
+        uploadCardFaceImg =this.state.isUploadFace?(this.state.Mosaic + uploadCardFaceImg):uploadCardFaceImg;
+        uploadCardBackImg =this.state.isUploadBack?(this.state.Mosaic + uploadCardBackImg):uploadCardBackImg;
 
         const {checkChoose,locType} = this.state
         if(!storeName || !uploadHeaderImg || !address || !uploadLicenseImg || !uploadCardFaceImg || !uploadCardBackImg){
@@ -139,9 +143,10 @@ export default class SellerSetting extends Component {
             return
         }
 
-        await StoreEdit(storeName,uploadHeaderImg,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,'宝安区','10.55','22.00',type)
+        await StoreEdit(storeName,uploadHeaderImg,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,GPSaddress,latitude,longitude,type)
             .then(res=>{
-                this.context.router.push({pathname:'/storeSubCommission',query:{storeId:this.props.location.query.storeId}})
+                // this.context.router.push({pathname:'/storeSubCommission',query:{storeId:this.props.location.query.storeId}})
+                this.context.router.goBack()
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
@@ -171,13 +176,13 @@ export default class SellerSetting extends Component {
         client.multipartUpload(storeAs, file).then((result)=> {
             this.setState({modalDelay:false})
             switch (type){
-                case 1 : this.setState({storeImg:fileName,uploadHeaderImg:storeAs})
+                case 1 : this.setState({storeImg:fileName,uploadHeaderImg:storeAs,isUploadHeader:true})
                     break;
-                case 2 : this.setState({licenseImg:fileName,uploadLicenseImg:storeAs})
+                case 2 : this.setState({licenseImg:fileName,uploadLicenseImg:storeAs,isUploadLicense:true})
                     break;
-                case 3 : this.setState({cardFace:fileName,uploadCardFaceImg:storeAs})
+                case 3 : this.setState({cardFace:fileName,uploadCardFaceImg:storeAs,isUploadFace:true})
                     break;
-                case 4 : this.setState({cardBack:fileName,uploadCardBackImg:storeAs})
+                case 4 : this.setState({cardBack:fileName,uploadCardBackImg:storeAs,isUploadBack:true})
                     break;
                 default : this.status = ''
                     break;
@@ -188,7 +193,7 @@ export default class SellerSetting extends Component {
     }
 
     render() {
-        const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap} = this.state
+        const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap,GPSaddress} = this.state
         return (
             <div className="containerNav" style={{paddingBottom:30}}>
                 <NavBar
@@ -264,7 +269,7 @@ export default class SellerSetting extends Component {
                     >
                         <span className="color6">当前店铺地址</span>
                         <div>
-
+                            {GPSaddress}
                         </div>
                     </div>
                     <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14  border_bottom">
