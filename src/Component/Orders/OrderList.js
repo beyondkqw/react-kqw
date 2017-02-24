@@ -22,7 +22,7 @@ export default class OrderList extends Component {
             agentList:[],
             list: [],
             disabled:false,
-            display:'none',
+            display:'block',
             items: [],
             pullDownStatus: 3,
             pullUpStatus: 0,
@@ -72,7 +72,7 @@ export default class OrderList extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -156,7 +156,9 @@ export default class OrderList extends Component {
         if (this.isTouching) {
             if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY - 5) {
                 this.state.pullUpStatus != 1 && this.setState({pullUpStatus: 1});
-            } else {
+            }else if(this.iScrollInstance.y==0){
+                this.setState({pullUpStatus: 4});
+            }else {
                 this.state.pullUpStatus != 0 && this.setState({pullUpStatus: 0});
             }
         }
@@ -185,9 +187,6 @@ export default class OrderList extends Component {
         console.log("onScrollEnd" + this.state.pullDownStatus);
 
         let pullDown = $(this.refs.PullDown);
-        this.setState({
-            display:(this.iScrollInstance.y==0)?'none':'block'
-        })
         // 滑动结束后，停在刷新区域
         if (this.iScrollInstance.y > -1 * pullDown.height()) {
             if (this.state.pullDownStatus <= 1) {   // 没有发起刷新,那么弹回去
@@ -245,29 +244,32 @@ export default class OrderList extends Component {
         }
         await GetOrderList(status,isComment,type,page)
             .then(res=>{
-
-            if(res.resultList.length==0){
-                this.over = true;
+                if(this.page==Math.ceil(res.total/res.pageSize)){
+                    this.over=true;
+                    this.setState({
+                        pullUpStatus: 4
+                    });
+                }else{
+                    this.setState({
+                        pullUpStatus: 3
+                    });
+                }
+                this.dataList = this.dataList.concat(res.resultList);
+                this.setState({orderItems:this.dataList,display:(this.dataList.length==0)?'none':'block'});
                 this.iScrollInstance.refresh();
-                this.setState({
-                    pullUpStatus: 4
-                });
-        }else{
-            this.dataList = this.dataList.concat(res.resultList);
-            this.setState({orderItems:this.dataList});
-            this.iScrollInstance.refresh();
-            this.page++
-            this.setState({
-                pullUpStatus: 1
-            });
-        }
-        this.setState({
-            display:(this.dataList.length==0)?'none':'block'
+                this.page++;
+
         })
-    })
         .catch(err=>{
                 console.warn('err',err)
         })
+    }
+    sure(order){
+        this.over=false;
+        this.page=1;
+        this.dataList=[];
+        this.setState({orderItems:this.dataList});
+        this.getOrderList(order,'',0,1)
     }
 
     render() {
@@ -286,66 +288,66 @@ export default class OrderList extends Component {
                         onTouchMove={this.onTouchMove}>
 
                         <ul id='ListInside'>
-                                {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
+                            {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
 
                             {/*代付款*/}
                             { this.state.index == 0?
                                 <div>
                                     <OrderDetails
-                                        debitPay = {()=>this.getOrderList('0')}
+                                        debitPay = {()=>this.sure('0')}
                                         orderDetails = {orderItems}
                                         toPay = {true}
                                         scrollTop = {scrollTop}
                                         />
                                 </div>
-                                :null
+                            :null
                             }
                             {/*待发货*/}
                             { this.state.index == 1?
-                            <div>
-                                <OrderDetails
-                                    orderDetails = {orderItems}
-                                    scrollTop = {scrollTop}
-                                    alreadyRated = {true}
+                                <div>
+                                    <OrderDetails
+                                        orderDetails = {orderItems}
+                                        scrollTop = {scrollTop}
+                                        alreadyRated = {true}
                                         />
-                            </div>
-                                :null
+                                </div>
+                            :null
                             }
                             {/*待收货*/}
                             { this.state.index == 2?
-                            <div>
-                                <OrderDetails
-                                    Receipt = {()=>this.getOrderList('2')}
-                                    orderDetails = {orderItems}
-                                    scrollTop = {scrollTop}
-                                    makeSure={true}
+                                <div>
+                                    <OrderDetails
+                                        Receipt = {()=>this.sure('2')}
+                                        orderDetails = {orderItems}
+                                        scrollTop = {scrollTop}
+                                        makeSure={true}
                                     />
-                            </div>
-                                :null
+                                </div>
+                            :null
                             }
                             {/*待评价*/}
                             { this.state.index == 3?
-                            <div>
-                                <OrderDetails
-                                    orderDetails = {orderItems}
-                                    scrollTop = {scrollTop}
-                                    toRated = {true}
-                                    //query = {}
+                                <div>
+                                    <OrderDetails
+                                        orderDetails = {orderItems}
+                                        scrollTop = {scrollTop}
+                                        toRated = {true}
+                                        //query = {}
                                     />
-                            </div>
-                                :null
+                                </div>
+                            :null
                             }
                             {/*全部订单*/}
                             { this.state.index == 4?
-                            <div>
-                                <OrderDetails
-                                    againSend = {()=>this.getOrderList('5')}
-                                    orderDetails = {orderItems}
-                                    scrollTop = {scrollTop}
-                                    allRated = {true}
-                                />
-                            </div>
-                                :null
+                                <div>
+                                    <OrderDetails
+                                        againSend = {()=>this.sure('5')}
+                                        orderDetails = {orderItems}
+                                        scrollTop = {scrollTop}
+                                        allRated = {true}
+                                    />
+                                </div>
+                            :null
                             }
                             <p ref="PullUp" id='PullUp'
                                 style={{display:this.state.display}}

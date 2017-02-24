@@ -16,7 +16,15 @@ export default class SellerOrderList extends Component {
         this.state = {
             index : 0,
             isShow:0,
-            orderItems:[]
+            orderItems:[],
+            agentList:[],
+            list: [],
+            disabled:false,
+            display:'block',
+            items: [],
+            pullDownStatus: 3,
+            pullUpStatus: 0,
+            scrollTop:0
         };
         this.page = 1;
         this.over = false;
@@ -42,11 +50,13 @@ export default class SellerOrderList extends Component {
         };
 
         this.isTouching = false;
+
         this.onScroll = this.onScroll.bind(this);
         this.onScrollEnd = this.onScrollEnd.bind(this);
 
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
+
     }
 
     componentDidMount() {
@@ -187,13 +197,145 @@ export default class SellerOrderList extends Component {
                 this.fetchItems(false);
             }
         }
-
     }
 
     componentWillMount(){
        /* let indexValue = this.props.location.query.index
         console.log('indexValue========>',indexValue)
         this.setState({index:indexValue?indexValue:0})*/
+    }
+
+    componentDidMount() {
+        const options = {
+            // 默认iscroll会拦截元素的默认事件处理函数，我们需要响应onClick，因此要配置
+            preventDefault: false,
+            // 禁止缩放
+            zoom: false,
+            // 支持鼠标事件，因为我开发是PC鼠标模拟的
+            mouseWheel: true,
+            // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
+            probeType: 3,
+            // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
+            bounce: true,
+            // 展示滚动条
+            scrollbars: true,
+            vScrollbar: false,
+            fadeScrollbars:true
+        };
+        this.iScrollInstance = new iScroll('#ListOutsite', options);
+        this.iScrollInstance.on('scroll', this.onScroll);
+        this.iScrollInstance.on('scrollEnd', this.onScrollEnd);
+
+        this.fetchItems(true);
+
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // 列表发生了变化, 那么应该在componentDidUpdate时调用iscroll进行refresh
+        this.itemsChanged = nextState.items !== this.state.items;
+        return true;
+    }
+
+    componentDidUpdate() {
+        // 仅当列表发生了变更，才调用iscroll的refresh重新计算滚动条信息
+        if (this.itemsChanged) {
+            this.iScrollInstance.refresh();
+        }
+        return true;
+    }
+
+
+    async fetchItems(isRefresh) {
+        if (isRefresh) {
+            this.page = 1;
+        }
+        if (this.state.pullUpStatus == 2) {
+            const index = this.state.index;
+            await this.getOrderList(index,this.page)
+        }
+
+    }
+
+    onTouchStart(ev) {
+        this.isTouching = true;
+    }
+
+    onTouchMove=(ev)=>{
+        ev.preventDefault();
+        this.setState({
+            scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
+        })
+    }
+
+    onTouchEnd(ev) {
+        this.isTouching = false;
+    }
+
+    onPullDown() {
+        // 手势
+        if (this.isTouching) {
+            if (this.iScrollInstance.y > 5) {
+                this.state.pullDownStatus != 2 && this.setState({pullDownStatus: 2});
+            } else {
+                this.state.pullDownStatus != 1 && this.setState({pullDownStatus: 1});
+            }
+        }
+    }
+
+    onPullUp() {
+        // 手势
+        if (this.isTouching) {
+            if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY - 5) {
+                this.state.pullUpStatus != 1 && this.setState({pullUpStatus: 1});
+            }else if(this.iScrollInstance.y==0){
+                this.setState({pullUpStatus: 4});
+            }else {
+                this.state.pullUpStatus != 0 && this.setState({pullUpStatus: 0});
+            }
+        }
+    }
+
+    onScroll() {
+        let pullDown = $(this.refs.PullDown);
+
+        // 上拉区域
+        if (this.iScrollInstance.y > -1 * pullDown.height()) {
+            this.onPullDown();
+        } else {
+            this.state.pullDownStatus != 0 && this.setState({pullDownStatus: 0});
+        }
+
+        // 下拉区域
+        if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY + 5) {
+            this.onPullUp();
+        }
+        this.setState({
+            scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
+        })
+    }
+
+    onScrollEnd() {
+        console.log("onScrollEnd" + this.state.pullDownStatus);
+
+        let pullDown = $(this.refs.PullDown);
+        // 滑动结束后，停在刷新区域
+        if (this.iScrollInstance.y > -1 * pullDown.height()) {
+            if (this.state.pullDownStatus <= 1) {   // 没有发起刷新,那么弹回去
+                this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 200);
+            } else if (this.state.pullDownStatus == 2) { // 发起了刷新,那么更新状态
+                this.setState({pullDownStatus: 3});
+                // this.fetchItems(true);
+            }
+        }
+
+        // 滑动结束后，停在加载区域
+        if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY) {
+            if (this.state.pullUpStatus == 1) { // 发起了加载，那么更新状态
+                this.setState({pullUpStatus: 2});
+                this.fetchItems(false);
+            }
+        }
+
     }
 
     //点击切换状态
@@ -206,19 +348,16 @@ export default class SellerOrderList extends Component {
             orderItems:[],
             display:'none'
         });
-        console.log('调用此方法了=================>')
         this.setState({index:index})
         await this.setState({isShow:index})
         if(this.state.index == 0){
             this.getOrderList('0',1)
         }else if(this.state.index == 1){
-            console.log('1+++++++++++++++')
             this.getOrderList('1',1)
         }else if(this.state.index == 2){
             this.getOrderList('2',1)
         }
         else if(this.state.index == 3){
-            console.log('2+++++++++++++++')
             this.getOrderList('6',1)
         }else if(this.state.index == 4){
             this.getOrderList('4',1)
@@ -229,7 +368,6 @@ export default class SellerOrderList extends Component {
     //订单列表
     async getOrderList(param,page){
         if(this.over){
-            console.log('拦截了=================>')
             this.setState({
                 pullUpStatus: 4
             });
@@ -237,25 +375,20 @@ export default class SellerOrderList extends Component {
         }
         await GetSellerOrderList(param,page)
             .then(res=>{
-                console.log('调用成功')
-                if(res.resultList.length==0){
-                    this.over = true;
-                    this.iScrollInstance.refresh();
+                if(this.page==Math.ceil(res.total/res.pageSize)){
+                    this.over=true;
                     this.setState({
                         pullUpStatus: 4
                     });
-                }else{
-                    this.dataList = this.dataList.concat(res.resultList);
-                    this.setState({orderItems:this.dataList});
-                    this.iScrollInstance.refresh();
-                    this.page++
-                    this.setState({
-                        pullUpStatus: 1
-                    });
                 }
+                this.dataList = this.dataList.concat(res.resultList);
+                this.setState({orderItems:this.dataList,display:(this.dataList.length==0)?'none':'block'});
+                this.iScrollInstance.refresh();
+                this.page++;
                 this.setState({
-                    display:(this.dataList.length==0)?'none':'block'
-                })
+                    pullUpStatus: 3
+                });
+
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -276,71 +409,74 @@ export default class SellerOrderList extends Component {
                     contents={['待付款','待发货','已发货','退款中','已完成']}
                 />
                 <SplitLine />
+
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-95}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
 
                         <ul id='ListInside'>
-                {/*待付款*/}
-                { this.state.index == 0?
-                    <div>
-                        <SellerGoodDetails
-                            debitPay = {()=>this.getOrderList('0')}
-                            sellerOrderDetails = {orderItems}
-                            toPay = {true}
-                            isShowWhat = {true}
-                        />
-                    </div>
-                    :null
-                }
-                {/*待发货*/}
-                { this.state.index == 1?
-                    <div>
-                        <SellerGoodDetails
-                            Receipt = {()=>this.getOrderList('2')}
-                            sellerOrderDetails = {orderItems}
-                            deliverGoods={true}
-                            isShowWhat = {true}
-                        />
-                    </div>
-                    :null
-                }
-                {/*已发货*/}
-                { this.state.index == 2?
-                    <div>
-                        <SellerGoodDetails
-                            Receipt = {()=>this.getOrderList('2')}
-                            sellerOrderDetails = {orderItems}
-                            //deliverGoods={true}
-                            isShowWhat = {true}
-                        />
-                    </div>
-                    :null
-                }
-                {/*退款中*/}
-                { this.state.index == 3?
-                    <div>
-                        <SellerGoodDetails
-                            sellerOrderDetails = {orderItems}
-                            Refund = {true}
-                            isShowWhat = {true}
-                            //query = {}
-                        />
-                    </div>
-                    :null
-                }
-                {/*已完成*/}
-                { this.state.index == 4?
-                    <div>
-                        <SellerGoodDetails
-                            sellerOrderDetails = {orderItems}
-                            alreadyRated = {true}
-                            isShowWhat = {true}
-                        />
-                    </div>
-                    :null
-                }
+                            {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
+
+                            {/*待付款*/}
+                            { this.state.index == 0?
+                                <div>
+                                    <SellerGoodDetails
+                                        debitPay = {()=>this.getOrderList('0')}
+                                        sellerOrderDetails = {orderItems}
+                                        toPay = {true}
+                                        isShowWhat = {true}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*待发货*/}
+                            { this.state.index == 1?
+                                <div>
+                                    <SellerGoodDetails
+                                        Receipt = {()=>this.getOrderList('2')}
+                                        sellerOrderDetails = {orderItems}
+                                        deliverGoods={true}
+                                        isShowWhat = {true}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*已发货*/}
+                            { this.state.index == 2?
+                                <div>
+                                    <SellerGoodDetails
+                                        Receipt = {()=>this.getOrderList('2')}
+                                        sellerOrderDetails = {orderItems}
+                                        //deliverGoods={true}
+                                        isShowWhat = {true}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*退款中*/}
+                            { this.state.index == 3?
+                                <div>
+                                    <SellerGoodDetails
+                                        sellerOrderDetails = {orderItems}
+                                        Refund = {true}
+                                        isShowWhat = {true}
+                                        //query = {}
+                                    />
+                                </div>
+                                :null
+                            }
+                            {/*已完成*/}
+                            { this.state.index == 4?
+                                <div>
+                                    <SellerGoodDetails
+                                        sellerOrderDetails = {orderItems}
+                                        alreadyRated = {true}
+                                        isShowWhat = {true}
+                                    />
+                                </div>
+                                :null
+                            }
                             <p ref="PullUp" id='PullUp'
                                style={{display:this.state.display}}
                             >{this.pullUpTips[this.state.pullUpStatus]}</p>

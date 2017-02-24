@@ -43,37 +43,37 @@ export default class SearchPage extends Component {
             pullUpStatus: 0,
             scrollTop:0
         };
-        this.page = 1;
-        this.over = false;
-        this.dataList=[];
-        this.itemsChanged = false;
+          this.page = 1;
+          this.over = false;
+          this.dataList=[];
+          this.itemsChanged = false;
 
-        this.pullDownTips = {
-            // 下拉状态
-            0: '下拉发起刷新',
-            1: '继续下拉刷新',
-            2: '松手即可刷新',
-            3: '正在刷新',
-            4: '刷新成功',
-        };
+          this.pullDownTips = {
+              // 下拉状态
+              0: '下拉发起刷新',
+              1: '继续下拉刷新',
+              2: '松手即可刷新',
+              3: '正在刷新',
+              4: '刷新成功',
+          };
 
-        this.pullUpTips = {
-            // 上拉状态
-            0: '上拉发起加载',
-            1: '松手即可加载',
-            2: '正在加载',
-            3: '加载成功',
-            4: '没有更多数据了'
-        };
+          this.pullUpTips = {
+              // 上拉状态
+              0: '上拉发起加载',
+              1: '松手即可加载',
+              2: '正在加载',
+              3: '加载成功',
+              4: '没有更多数据了'
+          };
 
-        this.isTouching = false;
+          this.isTouching = false;
 
-        this.onScroll = this.onScroll.bind(this);
-        this.onScrollEnd = this.onScrollEnd.bind(this);
+          this.onScroll = this.onScroll.bind(this);
+          this.onScrollEnd = this.onScrollEnd.bind(this);
 
-        this.onTouchStart = this.onTouchStart.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-    }
+          this.onTouchStart = this.onTouchStart.bind(this);
+          this.onTouchEnd = this.onTouchEnd.bind(this);
+      }
 
     componentDidMount() {
         const options = {
@@ -84,7 +84,7 @@ export default class SearchPage extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -275,25 +275,25 @@ export default class SearchPage extends Component {
             return
         }
         await ProductList(name,order,orderName,minPrice,maxPrice,page)
-            .then(res=>{
-                if(this.page==Math.ceil(res.total/res.pageSize)){
-                    this.over=true;
-                    this.setState({
-                        pullUpStatus: 4
-                    });
-                }
-                this.dataList = this.dataList.concat(res.resultList);
-                this.setState({goodsList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
-                this.iScrollInstance.refresh();
-                this.page++;
+        .then(res=>{
+            if(this.page==Math.ceil(res.total/res.pageSize)){
+                this.over=true;
                 this.setState({
-                    pullUpStatus: 3
+                    pullUpStatus: 4
                 });
-                console.log('res.resultList=======>',res.resultList)
-            })
-            .catch(err=>{
-                console.warn('err',err)
-            })
+            }
+            this.dataList = this.dataList.concat(res.resultList);
+            this.setState({goodsList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
+            this.iScrollInstance.refresh();
+            this.page++;
+            this.setState({
+                pullUpStatus: 3
+            });
+            console.log('res.resultList=======>',res.resultList)
+        })
+        .catch(err=>{
+            console.warn('err',err)
+        })
     }
     //选择某种排序方式
     ChooseOneorder(index){
@@ -387,7 +387,7 @@ export default class SearchPage extends Component {
     }
 
     //tab切换
-    onChange(index){
+    async onChange(index){
         if(index!=3){
             this.setState({index:index})
         }
@@ -402,7 +402,9 @@ export default class SearchPage extends Component {
             this.setState({display_2:!display_2,display_0:false})
         }else if(index==3){
             this.setState({showByColumn:!showByColumn,display_2:false,display_0:false});
-            this.fetchItems(true)
+            await this.fetchItems(true)
+            this.iScrollInstance.refresh();
+            this.iScrollInstance.y=0;
         }else{
             this.setState({display_2:false,display_0:false})
         }
@@ -467,7 +469,6 @@ export default class SearchPage extends Component {
                     <div id='ListOutsite' style={{height: window.innerHeight-73,marginTop:73}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
-
                         <ul id='ListInside'>
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
                             <div className="imgContainer width_100">
@@ -509,46 +510,6 @@ export default class SearchPage extends Component {
                         </ul>
                     </div>
                 </div>
-
-                {/*商品列表---最下层*/}
-                {/*<div
-                 onClick = {()=>this.setState({history:false})}
-                 className="goodListContainer"
-                 >
-                 <div className="imgContainer width_100">
-                 {
-                 goodsList == ''?
-                 <IsShowEmptyImg
-                 styleSheet={{width:69,height:72,marginTop:120}}
-                 title={'查询列表是空的哦~'}
-                 />
-                 :
-                 goodsList&&goodsList.map((el,index)=>{
-                 return (
-                 showByColumn?
-                 <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
-                 <StoreRow
-                 title = {el.NAME}
-                 price = {el.CURRENT_PRICE}
-                 imgurl = {el.IMAGE}
-                 />
-                 </Link>
-                 :
-                 <Link to = {'/goodsDescription/'} query = {{id:el.ID}}>
-                 <StoreDetails
-                 float = {index%2==0?'left':'right'}
-                 title = {el.NAME}
-                 price = {el.CURRENT_PRICE}
-                 imgurl = {el.IMAGE}
-                 />
-                 </Link>
-                 )
-                 })
-                 }
-                 <div style={{clear:'both'}}></div>
-
-                 </div>
-                 </div>*/}
             </div>
         )
     }

@@ -132,9 +132,9 @@ export async function Follow(productId,status) {
 }
 
 //我的收藏列表
-export async function FollowList() {
+export async function FollowList(page) {
     try {
-        const res = await apiGet(URL.followList);
+        const res = await apiGet(URL.followList,{page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -143,7 +143,7 @@ export async function FollowList() {
 }
 
 //商品列表
-export async function ProductList(name,order,orderName,minPrice,maxPrice,page,type=0) {
+export async function ProductList(name,order,orderName,minPrice,maxPrice,page=1,type=0) {
     try {
         const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice,page,type});
         return res;
@@ -408,9 +408,9 @@ export async function TeamMembers(){
 }
 
 //全国排名
-export async function CountryRankList(memberName){
+export async function CountryRankList(memberName,page){
     try{
-        const res = await apiPost(URL.countryRank,{memberName});
+        const res = await apiPost(URL.countryRank,{memberName,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -463,9 +463,9 @@ export async function GiveAmount(accId,amount){
 }
 
 //我的佣金记录
-export async function GiveAwayRecord(tranType){
+export async function GiveAwayRecord(tranType,page){
     try{
-        const res = await apiGet(URL.giveAwayRecord,{tranType});
+        const res = await apiGet(URL.giveAwayRecord,{tranType,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -628,9 +628,9 @@ export async function StoreDetailItem(storeId){
 }
 
 //店铺商品列表
-export async function StorectList(name='',storeId='',order='',orderName='') {
+export async function StorectList(name='',storeId='',order='',orderName='',page=1) {
     try {
-        const res = await apiGet(URL.productList,{name,storeId,order,orderName});
+        const res = await apiGet(URL.productList,{name,storeId,order,orderName,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -705,9 +705,9 @@ export async function EecommendList() {
 }
 
 //聚朵股权
-export async function EquityList() {
+export async function EquityList(page) {
     try {
-        const res = await apiGet(URL.equityList);
+        const res = await apiGet(URL.equityList,{page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -727,9 +727,9 @@ export async function StoreType() {
 }
 
 //云综合体--店铺列表
-export async function StoreList(type,name) {
+export async function StoreList(type,name,page) {
     try {
-        const res = await apiGet(URL.storeList,{type,name});
+        const res = await apiGet(URL.storeList,{type,name,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -848,9 +848,9 @@ export async function GetSellerOrderList(status,page){
 }
 
 //商品列表
-export async function SellerProductList(storeId,status) {
+export async function SellerProductList(storeId,status,page) {
     try {
-        const res = await apiGet(URL.productList,{storeId,status});
+        const res = await apiGet(URL.productList,{storeId,status,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -1002,9 +1002,9 @@ export async function MyStore() {
 }
 
 //提现
-export async function CashRecord() {
+export async function CashRecord(accId,page) {
     try {
-        const res = await apiGet(URL.cashRecord);
+        const res = await apiGet(URL.cashRecord,{accId,page});
         return res;
     } catch (err) {
         console.warn(err);
