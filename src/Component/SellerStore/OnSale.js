@@ -287,25 +287,21 @@ export default class OnSale extends Component {
                     renderBack = {true}
                     title = {'出售中的宝贝'}
                 />
+                <Tabscontrol
+                    style={{height:40,lineHeight:'40px'}}
+                    onClick={(index)=>this.onChangeTab(index)}
+                >
+                    <div name="上架时间"></div>
+                    <div name="价格"></div>
+                    <div name="销售总量"></div>
+                </Tabscontrol>
 
-                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                    <div id='ListOutsite' style={{height: window.innerHeight-95}}
+                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden',marginTop:'-28'}}>
+                    <div id='ListOutsite' style={{height: window.innerHeight-135}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
-
                         <ul id='ListInside'>
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-                            <Tabscontrol
-                                style={{height:40,lineHeight:'40px'}}
-                                onClick={(index)=>this.onChangeTab(index)}
-                            >
-                                <div name="上架时间"></div>
-                                <div name="价格"></div>
-                                <div name="销售总量"></div>
-                            </Tabscontrol>
-                            <div style={{marginTop:-28}}>
-                                <SplitLine />
-                            </div>
                             {/*商品列表---最下层*/}
                             <div className="pr">
                                 {

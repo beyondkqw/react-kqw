@@ -303,18 +303,18 @@ export default class ShopHome extends Component {
                     renderBack = {true}
                     title = {'店铺'}
                 />
+                <Search
+                    style={{backgroundColor:'#ff5500'}}
+                    location = {true}
+                    onClick={(value)=>this.searchList(value)}
+                />
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                    <div id='ListOutsite' style={{height: window.innerHeight-50}}
+                    <div id='ListOutsite' style={{height: window.innerHeight-94}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
-
                         <ul id='ListInside'>
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-                            <Search
-                                style={{backgroundColor:'#ff5500'}}
-                                location = {true}
-                                onClick={(value)=>this.searchList(value)}
-                            />
+
                             <div className="plr storeDetail df">
                                 <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
                                     <div className="df">
