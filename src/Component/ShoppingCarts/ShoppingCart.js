@@ -20,6 +20,7 @@ export default class ShoppingCart extends Component {
             super(props);
             // 初始状态
             //是否使用全选按钮
+          this.selectDel=[],
             this.isUseSelectAll = false
             this.amount = 0
             this.select = []
@@ -228,14 +229,16 @@ export default class ShoppingCart extends Component {
                 this.setState({
                     pullUpStatus: 4
                 });
+            }else{
+                this.setState({
+                    pullUpStatus: 3
+                });
             }
             this.dataList = this.dataList.concat(res.resultList);
             this.setState({shopCarList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
             this.iScrollInstance.refresh();
             this.page++;
-            this.setState({
-                pullUpStatus: 3
-            });
+
            /* this.setState({
                 display:(this.dataList.length==0)?'none':'block'
             })*/

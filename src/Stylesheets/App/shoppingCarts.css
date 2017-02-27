@@ -32,7 +32,7 @@
     background-color:#fff;
 }
 .isCheck:checked + label{
-    border-color: #ff5500;
+    border-color: #ff0000;
     background:url("../../Images/gou.png") #fff no-repeat;
     background-size:100%;
     background-position:center;
@@ -87,7 +87,7 @@
     height:1.5rem;
     line-height:1.5rem;
     width: 3.5rem;
-    background-color: #ff5500;
+    background-color: #ff0000;
 }
 .mt2{
     margin-top:0.2rem;

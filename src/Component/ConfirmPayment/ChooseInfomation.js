@@ -21,6 +21,14 @@ export default class ChooseInfomation extends Component {
         this.getAddressList()
     }
 
+    choosePath(value){
+        if(this.props.location.query.path){
+            RPC.emit('choosePath',value,this.props.location.query.orderNo)
+            this.context.router.push({pathname:'/comfirmPayMoney',query:{address:value.address,detail:value.detail,name:value.name,mobile:value.mobile,orderId:this.props.location.query.orderNo}});
+        }
+
+    }
+
     async getAddressList(){
        await AddressList()
         .then(res=>{
@@ -50,6 +58,7 @@ export default class ChooseInfomation extends Component {
                                 name={el.name}
                                 phone={el.mobile}
                                 path={el.address?el.address:''+el.detail?el.detail:''}
+                                onClick = {()=>this.choosePath(el)}
                             />
                         )
                     })

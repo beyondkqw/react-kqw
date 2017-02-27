@@ -20,7 +20,9 @@ export default class ComfirmPayMoney extends Component {
             carriage:[],
             summaryAmount:[],
             summaryCarriage:[],
-            getAll:0
+            getAll:0,
+            checked:false
+
         };
       }
     static contextTypes = {
@@ -32,6 +34,10 @@ export default class ComfirmPayMoney extends Component {
         this.setState({timer:this.props.location.query.time})
         this.getPoints()
         this.state.getAll = this.getSumAmount()
+        const {address,detail,name,mobile} = this.props.location.query
+        if(address && detail && name && mobile){
+            this.changeAddress();
+        }
     }
 
    async getOrderInfor(){
@@ -71,6 +77,13 @@ export default class ComfirmPayMoney extends Component {
             this.state.summaryCarriage += el
         })
         return parseFloat(this.state.summaryAmount)+parseFloat(this.state.summaryCarriage)
+    }
+
+    changeAddress=(value)=>{
+        const {address,detail,name,mobile} = this.props.location.query
+        this.setState({address:address+detail})
+        this.setState({name:name})
+        this.setState({mobile:mobile})
     }
 
     render() {
@@ -181,6 +194,9 @@ export default class ComfirmPayMoney extends Component {
                                     <input
                                         type="checkbox" id="isChoose"
                                         className="di toChoose"
+                                        onClick={()=>{this.setState({
+                                            checked:!this.state.checked
+                                        })}}
                                     />
                                     <label htmlFor="isChoose"></label>
                                 </span>
@@ -191,13 +207,13 @@ export default class ComfirmPayMoney extends Component {
                     <div className="fr">
                         <span className="font14">实付款 :</span>
                         <span className="colorff f12">￥</span>
-                        <span className="colorff f15">{getAll}</span>
+                        <span className="colorff f15">{(this.state.checked)?((getAll-touch_amount>0)?(getAll-touch_amount):0):getAll}</span>
                         <Link
                             to="/confirmPayment/choosePayment"
                             query={{
                             planReceiveTime:timer,
                             orderNos:this.orderNoArray.join(','),
-                            payMuchMoney :getAll
+                            payMuchMoney :(this.state.checked)?((getAll-touch_amount>0)?(getAll-touch_amount):0):getAll
                             }}>
                             <button className="settleAccount border_ra color_white margin15">支付</button>
                         </Link>

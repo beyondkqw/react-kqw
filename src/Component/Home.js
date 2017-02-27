@@ -43,15 +43,14 @@ class Home extends Component {
     async componentWillMount() {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
-       /* if(getToken == '' ||getToken == null ||getToken == 'null'){
-
+        if(getToken == '' ||getToken == null ||getToken == 'null'){
             await WechatAuth()
             const token = GetQueryString('token')
             saveToken(token)
             //initWebsocket()
         }else{
             //initWebsocket()
-        }*/
+        }
         this.getHomeBanner()
         this.getHomeMoudle()
 
@@ -95,7 +94,7 @@ class Home extends Component {
             <Search
                 onClick = {(value)=>this.SearchBtn(value)}
                 display = {this.state.history}
-                style={{backgroundColor:'#ff5500'}}
+                style={{backgroundColor:'#ff0000'}}
                 location = {true}
             />
         </div>

@@ -9,6 +9,7 @@ import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} fro
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 import iScroll from 'iscroll/build/iscroll-probe';
+import {SCREEN_HEIGHT} from '../../Action/rpc'
 import $ from 'jquery';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -38,7 +39,8 @@ export default class GoodsDescription extends Component {
             items: [],
             pullDownStatus: 3,
             pullUpStatus: 0,
-            scrollTop:0
+            scrollTop:0,
+            height:''
         };
         this.page = 1;
         this.over = false;
@@ -226,39 +228,39 @@ export default class GoodsDescription extends Component {
             return
         }
         await RemarkList(this.props.location.query.id,page,'')
-        .then(res=>{
-            if(res.resultList.length==0){
-                this.over = true;
-                this.iScrollInstance.refresh();
+            .then(res=>{
+                if(res.resultList.length==0){
+                    this.over = true;
+                    this.iScrollInstance.refresh();
+                    this.setState({
+                        pullUpStatus: 4,
+                        showEmptyImg:true
+                    });
+                }else{
+                    this.dataList = this.dataList.concat(res.resultList);
+                    this.setState({remarkList:this.dataList});
+                    this.iScrollInstance.refresh();
+                    this.page++
+                    this.setState({
+                        pullUpStatus: 1
+                    });
+                }
                 this.setState({
-                    pullUpStatus: 4,
-                    showEmptyImg:true
-                });
-            }else{
-                this.dataList = this.dataList.concat(res.resultList);
-                this.setState({remarkList:this.dataList});
-                this.iScrollInstance.refresh();
-                this.page++
-                this.setState({
-                    pullUpStatus: 1
-                });
-            }
-            this.setState({
-                display:(this.dataList.length==0)?'none':'block'
+                    display:(this.dataList.length==0)?'none':'block'
+                })
             })
-        })
     }
 
     //商品属性
     async getProductAttribute(){
         await ProductAttribute(this.props.location.query.id)
-        .then(res=>{
-            console.log('商品属性',res)
-            this.setState({attributeList:res})
-        })
-        .catch(err=>{
-            console.warn('获取商品属性失败',err)
-        })
+            .then(res=>{
+                console.log('商品属性',res)
+                this.setState({attributeList:res})
+            })
+            .catch(err=>{
+                console.warn('获取商品属性失败',err)
+            })
     }
 
     //商品详情
@@ -285,7 +287,7 @@ export default class GoodsDescription extends Component {
         if(this.state.isChecked){
             //await this.setState({status:0});
             this.getFollow(0)
-        //取消收藏
+            //取消收藏
         }else{
             //await this.setState({status:1});
             this.getFollow(1)
@@ -362,15 +364,32 @@ export default class GoodsDescription extends Component {
     }
 
     async adShopCarOrToPay(type){
-       await this.setState({isShow:true,type:type})
+        await this.setState({isShow:true,type:type})
+    }
+
+    changeFrameHeight(value){
+        console.log('进来了=========》')
+        const ifm= document.getElementById("myiframe");
+        var iframeHeight = ifr.document.body.scrollHeight+ 'px';
+        alert(iframeHeight);
+        document.getElementById("myiframe").style.height = iframeHeight;
+        /*const m = /\#(\d+)$/.exec(value)
+         console.warn('detail',value)
+         if (m && m[1]){
+         this.setState({height: (m[1] | 0) + 24});
+         }
+         console.log('-----------url',value)
+         console.log('--------------------',this.state.height)*/
+        //ifm.height=document.documentElement.clientHeight;
     }
 
     //商品介绍
     commodityIntroduction(){
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
+
         return (
-            <div>
-                <iframe src={detail} style={{border:'none',width:'100%'}}></iframe>
+            <div className="pr">
+                <iframe src={detail}  id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:'300'}}></iframe>
             </div>
         )
     }
@@ -394,74 +413,68 @@ export default class GoodsDescription extends Component {
         const imgHeight = document.body.scrollWidth
         return(
             <div className="remark pr" style={{backgroundColor:'#f5f5f5'}}>
-           {/*     <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                    <div id='ListOutsite' style={{height: window.innerHeight-50}}
-                         onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
-                         onTouchMove={this.onTouchMove}>
+                {/*     <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                 <div id='ListOutsite' style={{height: window.innerHeight-50}}
+                 onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
+                 onTouchMove={this.onTouchMove}>
 
-                        <ul id='ListInside'>*/}
-                            {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-                            {
-                                showEmptyImg?
-                                    <IsShowEmptyImg
-                                        styleSheet={{width:69,height:72}}
-                                        title={'暂无评论哦~'}
-                                    />
-                                    :
-                                remarkList.map((el,index)=>{
-                                    return(
-                                        <div
-                                            className="remark-items f12 color9"
-                                            key = {index}
-                                        >
-                                            <div className="re-headImg mr5">
-                                                <img
-                                                    className="border_ra50"
-                                                    src={el.IMAGE_URI}
-                                                />
-                                            </div>
+                 <ul id='ListInside'>*/}
+                {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
+                {
+                    showEmptyImg?
+                        <IsShowEmptyImg
+                            styleSheet={{width:69,height:72}}
+                            title={'暂无评论哦~'}
+                        />
+                        :
+                        remarkList.map((el,index)=>{
+                            return(
+                                <div
+                                    className="remark-items f12 color9"
+                                    key = {index}
+                                >
+                                    <div className="re-headImg mr5">
+                                        <img
+                                            className="border_ra50"
+                                            src={el.IMAGE_URI}
+                                        />
+                                    </div>
 
-                                            <span>{el.MEMBER_NAME}</span>
+                                    <span>{el.MEMBER_NAME}</span>
 
-                                            <p>{el.CREATE_TIME}&nbsp;&nbsp;{el.PRODUCT_ATTR}</p>
+                                    <p>{el.CREATE_TIME}&nbsp;&nbsp;{el.PRODUCT_ATTR}</p>
 
-                                            <div className="flex flex-wrap color6 font14">
-                                                {el.COMMENT}
-                                            </div>
+                                    <div className="flex flex-wrap color6 font14">
+                                        {el.COMMENT}
+                                    </div>
+                                    <div className="flex">
+                                        {
 
-
-                                            {/*评论图片 最多3张    todo IMAGES转数组map*/}
-                                            {
-
-                                            }
-                                            <div className="flex">
-                                                {
-
-                                                    el.IMAGES && el.IMAGES.length>0&&el.IMAGES[0]!=''?
-                                                        el.IMAGES.map(item=>{
-                                                            return(
-                                                                <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100,marginRight:10}} >
-                                                                    <img  src={item}/>
-                                                                </div>
-                                                            )
-                                                        })
-                                                        :null
-                                                }
-                                            </div>
-                                           {/* <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
-                                                <img />
-                                            </div>*/}
-                                        </div>
-                                    )
-                                })
-                            }
-                 {/*           <p ref="PullUp" id='PullUp'
-                               style={{display:this.state.display}}
-                            >{this.pullUpTips[this.state.pullUpStatus]}</p>
-                        </ul>
-                    </div>
-                </div>*/}
-           </div>
+                                            el.IMAGES && el.IMAGES.length>0&&el.IMAGES[0]!=''?
+                                                el.IMAGES.map(item=>{
+                                                    return(
+                                                        <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100,marginRight:10}} >
+                                                            <img  src={item}/>
+                                                        </div>
+                                                    )
+                                                })
+                                                :null
+                                        }
+                                    </div>
+                                    {/* <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
+                                     <img />
+                                     </div>*/}
+                                </div>
+                            )
+                        })
+                }
+                {/*           <p ref="PullUp" id='PullUp'
+                 style={{display:this.state.display}}
+                 >{this.pullUpTips[this.state.pullUpStatus]}</p>
+                 </ul>
+                 </div>
+                 </div>*/}
+            </div>
 
         )
     }
@@ -495,9 +508,9 @@ export default class GoodsDescription extends Component {
                         <span className="di collect_img">
                             {
                                 this.state.isChecked?
-                            <img src={require('../../Images/alreadyFollow.png')} alt=""/>
-                            :
-                            <img src={require('../../Images/collect.png')} alt=""/>
+                                    <img src={require('../../Images/alreadyFollow.png')} alt=""/>
+                                    :
+                                    <img src={require('../../Images/collect.png')} alt=""/>
                             }
                         </span>
                         <span className="f10 db color6">收藏</span>
@@ -519,18 +532,18 @@ export default class GoodsDescription extends Component {
                     <ul>
                         {
                             goodsDetails.STORE_ID == ''||goodsDetails.STORE_ID == null?
-                            null:
-                            <Link to="/store" query={{storeId:goodsDetails.STORE_ID}}>
-                                <li className="item-content item-link pl  border_bottom">
-                                    <div className="item-media"><i className="icon icon-f7"></i></div>
-                                    <div className="item-inner margin0">
-                                        <div className="item-title">
-                                            <span className="di store mr"><img src={goodsDetails.STORE_IMG} alt=""/></span>
-                                            <span className="color6 font14">{goodsDetails.STORE_NAME}</span>
+                                null:
+                                <Link to="/store" query={{storeId:goodsDetails.STORE_ID}}>
+                                    <li className="item-content item-link pl  border_bottom">
+                                        <div className="item-media"><i className="icon icon-f7"></i></div>
+                                        <div className="item-inner margin0">
+                                            <div className="item-title">
+                                                <span className="di store mr"><img src={goodsDetails.STORE_IMG} alt=""/></span>
+                                                <span className="color6 font14">{goodsDetails.STORE_NAME}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </Link>
+                                    </li>
+                                </Link>
                         }
                         {/*属性*/}
                         <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
@@ -539,12 +552,12 @@ export default class GoodsDescription extends Component {
                                 <div className="item-title">
                                     <span className="color6 font14">
                                         {
-                                        this.state.attributeList.map((el,index)=>{
-                                        if(index<this.state.attributeList.length-1){
-                                            return `${el.NAME}`+ ','
-                                        }
-                                        return `${el.NAME}`
-                                    })}分类</span>
+                                            this.state.attributeList.map((el,index)=>{
+                                                if(index<this.state.attributeList.length-1){
+                                                    return `${el.NAME}`+ ','
+                                                }
+                                                return `${el.NAME}`
+                                            })}分类</span>
                                 </div>
                             </div>
                         </li>
@@ -567,25 +580,25 @@ export default class GoodsDescription extends Component {
                 </Tabscontrol>
 
                 <div className="height3 pf bottom0  plAll border_top bkg_color z_index wrap">
-                        {/*购物车*/}
-                        <div
-                            onClick = {()=>this.adShopCarOrToPay(1)}
-                            className="di height_all pr fl width_cart"
-                        >
-                            <button className="cartBtn width_100 height_all border_ra">
-                                <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
-                                {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
-                            </button>
-                        </div>
-                        <div className="width_de fl height_all"></div>
-                        <div
-                            className="di height_all pr fl width_buy border_ra"
-                            onClick={()=>this.adShopCarOrToPay(2)}
-                        >
-                            <button className="width_100 height_all color_white font16 color_white">
-                                立即购买
-                            </button>
-                        </div>
+                    {/*购物车*/}
+                    <div
+                        onClick = {()=>this.adShopCarOrToPay(1)}
+                        className="di height_all pr fl width_cart"
+                    >
+                        <button className="cartBtn width_100 height_all border_ra">
+                            <span className="di cartImg"><img src={require('../../Images/cart.png')} alt=""/></span>
+                            {/*<span className="di pa goodNum border_ra50 f12 colorff">5</span>*/}
+                        </button>
+                    </div>
+                    <div className="width_de fl height_all"></div>
+                    <div
+                        className="di height_all pr fl width_buy border_ra"
+                        onClick={()=>this.adShopCarOrToPay(2)}
+                    >
+                        <button className="width_100 height_all color_white font16 color_white">
+                            立即购买
+                        </button>
+                    </div>
                 </div>
                 {/*选择商品属性*/}
                 {this.state.isShow?
@@ -598,7 +611,7 @@ export default class GoodsDescription extends Component {
                         price = {goodsDetails.CURRENT_PRICE}
                         //typeParam = {type=>{console.log('type',type)}}
                     />
-                :null}
+                    :null}
                 <div className="goodBottom width_100"></div>
             </section>
 

@@ -298,7 +298,7 @@ export default class Store extends Component {
                             <div className="flex">
                                 <div className="flex1">
                                     <Search
-                                        style={{backgroundColor:'#ff5500'}}
+                                        style={{backgroundColor:'#ff0000'}}
                                         location = {true}
                                         onClick={(value)=>this.searchList(value)}
                                     />

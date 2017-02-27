@@ -30,7 +30,31 @@ export default class OtherApp extends Component {
         return (
             <div className="oapp">
                 <ul>
-                    {
+                    <li>
+                        <div className="app_icon">
+                            <img  src={require('../../Images/fresh.png')}/>
+                        </div>
+                        <span>生鲜</span>
+                    </li>
+                    <li>
+                        <div className="app_icon">
+                            <img  src={require('../../Images/fruit.png')}/>
+                        </div>
+                        <span>蔬果</span>
+                    </li>
+                    <li>
+                        <div className="app_icon">
+                            <img  src={require('../../Images/egg.png')}/>
+                        </div>
+                        <span>禽蛋</span>
+                    </li>
+                    <li>
+                        <div className="app_icon">
+                            <img  src={require('../../Images/meat.png')}/>
+                        </div>
+                        <span>肉类</span>
+                    </li>
+                    {/*{
                         tagItem&&tagItem.map((el,index)=>{
                             return(
                                 <QuickRouter
@@ -40,7 +64,7 @@ export default class OtherApp extends Component {
                                 />
                             )
                         })
-                    }
+                    }*/}
 
                 </ul>
             </div>

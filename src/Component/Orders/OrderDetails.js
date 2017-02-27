@@ -59,7 +59,7 @@ export default class OrderDetails extends Component {
             })
     }
     render() {
-        const {orderDetails,toPay,makeSure,toRated,alreadyRated,allRated,query,scrollTop} = this.props
+        const {orderDetails,toPay,toReceipt,makeSure,toRated,alreadyRated,allRated,query,scrollTop} = this.props
         return (
             <div className="pr">
                 {
@@ -119,22 +119,6 @@ export default class OrderDetails extends Component {
                                                                 </div>
                                                                 :null
                                                         }
-                                                        {/*{
-                                                         alreadyRated?
-                                                         <div className="pa mt55" style={{bottom:10,right:10}}>
-                                                         <Link
-                                                         to="orderList/viewEvaluation"
-                                                         query={{
-                                                         orderNo:item.orderNo,
-                                                         image : item.productImage,
-                                                         productId  :item.productId
-                                                         }}
-                                                         >
-                                                         <button className="btn font14 bkg_ff border_ra color_white">查看</button>
-                                                         </Link>
-                                                         </div>
-                                                         :null
-                                                         }*/}
                                                     </div>
                                                 </div>
                                             )
@@ -150,6 +134,18 @@ export default class OrderDetails extends Component {
                                         </div>
                                     </div>
                                     <div className="ispayOrCancle font14">
+                                        {
+                                            toReceipt?
+                                                <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                    <button
+                                                        className="border_ra color9 border_ccc"
+                                                        onClick = {()=>
+                                                            this.setState({isCancel:true,
+                                                                orderNo:el.order_no})}
+                                                    >{el.status == config.order_status_cancel?'已开发票':'开发票'}</button>
+                                                </div>
+                                                :null
+                                        }
                                         {
                                             toPay?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>

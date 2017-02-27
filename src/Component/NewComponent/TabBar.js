@@ -72,12 +72,12 @@ const styles = {
         backgroundColor:'#ffddcc',
         justifyContent:'center',
         alignItems:'center',
-        color:'#ff5500',
+        color:'#ff0000',
         height:40,
         paddingTop:3,
         borderBottomWidth:3,
         borderBottomStyle:'solid',
-        borderBottomColor:'#ff5500',
+        borderBottomColor:'#ff0000',
         fontSize:14
     }
 }

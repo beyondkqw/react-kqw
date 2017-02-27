@@ -14,15 +14,17 @@ const personDetail = [
     /*{name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}*/
 ]
 const ItemList = [
-    //{name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'/personalCenter/memberClub'},
-    {name:'会员中心',imgUrl:require('../../Images/change.png'),link:'/personalCenter/memberClub'},
-    {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
-    {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},
+    // {name:'我的合伙人',imgUrl:require('../../Images/team.png'),link:'/personalCenter/myTeam'},
+    // {name:'我的团队',imgUrl:require('../../Images/team.png'),link:'/personalCenter/myTeam'},
+    {name:'开发票',imgUrl:require('../../Images/invoice.png'),link:'/personalCenter/WriteReceipt'},
+    {name:'营销中心',imgUrl:require('../../Images/change.png'),link:'/personalCenter/memberClub'},
+    {name:'联系客服',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
+    //{name:'我的钱包',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},
     {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:'/personalCenter/BrowseRecord'},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:'/chooseInfomation'},
-    {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
-    {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
-    {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/sellerLogin'}
+    // {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
+    // {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
+    // {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/sellerLogin'}
 ]
 export default class PersonalCenter extends Component {
 
@@ -72,17 +74,25 @@ export default class PersonalCenter extends Component {
         return (
             <div className="containerNav">
                 <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
-                    <Link to="personalCenter/userInfo">
-                        <div className="personLogo">
-                            <img className="border_ra50" src={headImg} alt=""/>
-                        </div>
-                    </Link>
                     <div className="pa setUp">
                         <Link to="/personalCenter/setting" query={{resetMobile:mobile}}>
                             <span className="di" style={{width:15,height:15,lineHeight:0,marginRight:5}}>
                                 <img src={require('../../Images/common/shezhi.png')} alt=""/>
                             </span>
                             <span className="font14 color_white">设置</span>
+                        </Link>
+                    </div>
+                    <Link to="personalCenter/userInfo">
+                        <div className="personLogo">
+                            <img className="border_ra50" src={headImg} alt=""/>
+                        </div>
+                    </Link>
+                    <div className="pa notice">
+                        <Link to="/personalCenter/notice">
+                            <span className="di" style={{width:15,height:15,lineHeight:0,marginRight:5}}>
+                                <img src={require('../../Images/common/shezhi.png')} alt=""/>
+                            </span>
+                            <span className="font14 color_white">消息</span>
                         </Link>
                     </div>
 
@@ -96,12 +106,14 @@ export default class PersonalCenter extends Component {
                     <div className="h35 df color_white border_bottom">
                         <div className="flex1 tc">
                             <p className="font16 hl8">{amount}</p>
-                            <p className="f12 m_top">佣金</p>
+                            <p className="f12 m_top">余额</p>
                         </div>
-                        <div className="flex1 tc">
-                            <p className="font16 hl8">{yunCard}</p>
-                            <p className="f12 m_top">云卡通</p>
-                        </div>
+                        <Link to="/personalCenter/coupon">
+                            <div className="flex1 tc colorfff">
+                                <p className="font16 hl8">{yunCard}</p>
+                                <p className="f12 m_top">优惠券</p>
+                            </div>
+                        </Link>
                         <div className="flex1 tc">
                             <p className="font16 hl8">{point}</p>
                             <p className="f12 m_top">积分</p>

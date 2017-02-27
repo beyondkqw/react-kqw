@@ -63,7 +63,7 @@
     margin:auto;
 }
 .isConfirm:checked + label{
-    border-color: #ff5500;
+    border-color: #ff0000;
     background:url("../../Images/ovals.png") no-repeat;
     background-size:80%;
     background-position:center;
@@ -80,7 +80,7 @@
     height:1rem;
 }
 .toChoose:checked + label{
-    border-color: #ff5500;
+    border-color: #ff0000;
     background:url("../../Images/gou.png") no-repeat;
     background-size:100%;
     background-position:center;

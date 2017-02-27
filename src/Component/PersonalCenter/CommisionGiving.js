@@ -113,7 +113,7 @@ export default class CommisionGiving extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                     <span className="di listimg">
-                                        <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                        <img className="border_ra50" src={require('../../Images/cumulative.png')} alt=""/>
                                     </span>
                                     <span className="di margin15 color6">累计转赠佣金</span>
                                 </div>
@@ -124,7 +124,7 @@ export default class CommisionGiving extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                     <span className="di listimg">
-                                        <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                        <img className="border_ra50" src={require('../../Images/existing.png')} alt=""/>
                                     </span>
                                     <span className="di margin15 color6">现有佣金</span>
                                 </div>
@@ -135,7 +135,7 @@ export default class CommisionGiving extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                     <span className="di listimg">
-                                        <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                        <img className="border_ra50" src={require('../../Images/available.png')} alt=""/>
                                     </span>
                                     <span className="di margin15 color6">可用佣金</span>
                                 </div>

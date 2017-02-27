@@ -330,7 +330,7 @@ export default class SearchPage extends Component {
                                     onClick={()=>this.SelectSortOrder(index)}
                                     style={{background:isChoose==index?'#fff5f0':'#fff'}}
                                 >
-                                    <span style={{color:isChoose==index?'#ff5500':'#666'}}>{el}</span>
+                                    <span style={{color:isChoose==index?'#ff0000':'#666'}}>{el}</span>
                                     {
                                         isChoose==index?
                                             <img src={require('../../Images/choose.png')} />
@@ -422,7 +422,7 @@ export default class SearchPage extends Component {
                         //onBlur = {()=>this.setState({history:false})}
                         onClick = {(value)=>this.SearchBtn(value)}
                         display = {this.state.history}
-                        style={{backgroundColor:'#ff5500'}}
+                        style={{backgroundColor:'#ff0000'}}
                     />
                     {/*todo scroll滚动时置顶fixed*/}
                     <Tabscontrol

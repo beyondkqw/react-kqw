@@ -285,7 +285,7 @@ export default class CloudComplex extends Component {
                 <div className="flex pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
                     <div className="flex1">
                         <Search
-                            style={{backgroundColor:'#ff5500'}}
+                            style={{backgroundColor:'#ff0000'}}
                             location = {true}
                             onClick={(value)=>this.searchStore(value)}
                         />

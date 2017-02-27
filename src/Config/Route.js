@@ -49,6 +49,10 @@ import BrowseRecord from '../Component/PersonalCenter/BrowseRecord';
 import OrderFormDetails from '../Component/Orders/OrderFormDetails';
 import ApplicationForAfterSales from '../Component/Orders/ApplicationForAfterSales';
 import UserInfo from '../Component/PersonalCenter/UserInfo';
+import Notice from '../Component/PersonalCenter/Notice';
+import Coupon from '../Component/PersonalCenter/Coupon';
+import Receipt from '../Component/PersonalCenter/Receipt';
+import WriteReceipt from '../Component/PersonalCenter/WriteReceipt';
 import MemberClub from '../Component/PersonalCenter/MemberClub';
 import MemberInfo from '../Component/PersonalCenter/MemberInfo';
 import MemberIntroduction from '../Component/PersonalCenter/MemberIntroduction';
@@ -124,6 +128,8 @@ import BalanceTake from '../Component/SellerStore/BalanceTake'
 import SellerChooseType from '../Component/SellerStore/SellerChooseType'
 import SellerTakenDetails from '../Component/SellerStore/SellerTakenDetails'
 import ToWebView from '../Component/GoodsDetails/ToWebView'
+import MyTeam from '../Component/PersonalCenter/MyTeam';
+import ExchangeRecord from '../Component/PersonalCenter/ExchangeRecord'
 
 
 
@@ -176,6 +182,10 @@ const RouteConfig = (
       <Route path="goodsDetails/goodsCategory" component={GoodsCategory} />
       <Route path="orders/applicationForAfterSales" component={ApplicationForAfterSales} />
       <Route path="personalCenter/userInfo" component={UserInfo} />
+      <Route path="personalCenter/notice" component={Notice} />
+      <Route path="personalCenter/coupon" component={Coupon} />
+      <Route path="personalCenter/receipt" component={Receipt} />
+      <Route path="personalCenter/writeReceipt" component={WriteReceipt} />
       <Route path="personalCenter/memberClub" component={MemberClub} />
       <Route path="personalCenter/memberInfo" component={MemberInfo} />
       <Route path="personalCenter/memberIntroduction" component={MemberIntroduction} />
@@ -254,6 +264,8 @@ const RouteConfig = (
       <Route path="sellerChooseType" component={SellerChooseType} />
       <Route path="sellerTakenDetails" component={SellerTakenDetails} />
       <Route path="toWebView" component={ToWebView} />
+      <Route path="personalCenter/myTeam" component={MyTeam} />
+      <Route path="personalCenter/exchangeRecord" component={ExchangeRecord} />
     </Route>
   </Router>
 );

@@ -1011,3 +1011,14 @@ export async function CashRecord(accId,page) {
         throw err
     }
 }
+
+//获取团队成员列表
+export async function TeamList(page) {
+    try {
+        const res = await apiGet(URL.teamList,{page});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}

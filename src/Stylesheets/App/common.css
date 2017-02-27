@@ -287,6 +287,9 @@ p{
 .f12{
     font-size: 12px;
 }
+.f14{
+    font-size: 14px;
+}
 .f25{
     font-size: 25px;
 }
@@ -316,7 +319,7 @@ p{
     border:1px solid #ccc;
 }
 .border_ye{
-    border:1px solid #ff5500;
+    border:1px solid #ff0000;
 }
 .tc{
     text-align:center;
@@ -346,7 +349,7 @@ p{
     color:#999 !important;
 }
 .color_yellow{
-   color: #ff5500 !important;
+   color: #ff0000 !important;
 }
 .color_pink{
     background-color:#ffddcc;
@@ -374,7 +377,7 @@ p{
     background-color: #f5f5f5;
 }
 .bkg_ff{
-    background-color:#ff5500;
+    background-color:#ff0000;
 }
 .bkg_gray{
     background-color:#f5f5f5;

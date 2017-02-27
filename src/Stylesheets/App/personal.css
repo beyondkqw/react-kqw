@@ -11,6 +11,10 @@
 }
 .setUp{
     top:15px;
+    left:15px;
+}
+.notice{
+    top:15px;
     right:15px;
 }
 .bak_img{
@@ -73,11 +77,35 @@
     width:1.5rem;
     height:1.5rem;
 }
+.countDiv .countLink:nth-of-type(1) .separateRow .centerImg span{
+    height:1.15rem;
+    width:1.2rem;
+}
+.countDiv .countLink:nth-of-type(2) .separateRow .centerImg span{
+    height:1.15rem;
+    width:1.2rem;
+}
+.countDiv .countLink:nth-of-type(3) .separateRow .centerImg span{
+    height:1rem;
+    width:1.15rem;
+}
+/*.countDiv .countLink:nth-of-type(4) .separateRow .centerImg span{
+    height:1.15rem;
+    width:1.15rem;
+}*/
+.countDiv .countLink:nth-of-type(4) .separateRow .centerImg span{
+    height:1.2rem;
+    width:0.8rem;
+}
+.countDiv .countLink:nth-of-type(5) .separateRow .centerImg span{
+    height:1.3rem;
+    width:1rem;
+}
 /*.countDiv .countLink:nth-of-type(1) .separateRow .centerImg span{
     height:1.2rem;
     width:1.9rem;
 }*/
-.countDiv .countLink:nth-of-type(1) .separateRow .centerImg span{
+/*.countDiv .countLink:nth-of-type(1) .separateRow .centerImg span{
     height:1.15rem;
     width:1.2rem;
 }
@@ -108,7 +136,7 @@
 .countDiv .countLink:nth-of-type(8) .separateRow .centerImg span{
     height:0.95rem;
     width:1.05rem;
-}
+}*/
 
 .countDiv div:nth-of-type(3n){
     border-right:none;
@@ -402,7 +430,7 @@
     height:20px;
     width:20px;
     border-radius: 50%;
-    background: #ff5500;
+    background: #ff0000;
     bottom:0;
     right:-10px;
     color: #fff;
@@ -413,7 +441,7 @@
     width:20px;
     border-radius: 50%;
     background: #ffddcc;
-    color:#ff5500;
+    color:#ff0000;
 }
 .rankHeader{
     height:40px;
@@ -422,8 +450,8 @@
 }
 .rank-head-cell{
     padding:0px 4px;
-    color:#ff5500;
-    border:1px solid #ff5500;
+    color:#ff0000;
+    border:1px solid #ff0000;
     border-radius: 5px;
 }
 @media screen and (max-width: 414px){
@@ -473,4 +501,26 @@
     padding:10px 15px;
     white-space:normal
 }
-
+.color_add{
+    color:#1fd11b;
+}
+.color_reduce{
+    color:#f00
+}
+.color_a{
+    color:#aaa;
+}
+.tip{
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width:100px;height:20px;
+    text-align:center;
+    font-size:12px;
+    line-height:20px;
+    top:10px;
+    right:-30px;
+    overflow: hidden;
+}

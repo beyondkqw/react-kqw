@@ -129,7 +129,7 @@ export default class OrderList extends Component {
         this.isTouching = true;
     }
 
-    onTouchMove(ev){
+    onTouchMove=(ev)=>{
         ev.preventDefault();
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0

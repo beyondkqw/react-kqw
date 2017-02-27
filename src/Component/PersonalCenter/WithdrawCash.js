@@ -142,7 +142,7 @@ export default class WithdrawCash extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
-                                    <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/cumulative.png')} alt=""/>
                                 </span>
                                     <span className="di margin15 color6">总佣金</span>
                                 </div>
@@ -153,7 +153,7 @@ export default class WithdrawCash extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
-                                    <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/existing.png')} alt=""/>
                                 </span>
                                     <span className="di margin15 color6">可提取佣金</span>
                                 </div>
@@ -164,7 +164,7 @@ export default class WithdrawCash extends Component {
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                 <span className="di listimg">
-                                    <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/available.png')} alt=""/>
                                 </span>
                                     <span className="di margin15 color6">已申请提现佣金</span>
                                 </div>
