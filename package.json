@@ -23,6 +23,7 @@
     "react-addons-create-fragment": "^15.3.2",
     "react-addons-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-frame-component": "^1.0.1",
     "react-geo-location": "0.0.0",
     "react-md-editor": "^0.2.2",
     "react-menu-aim": "0.1.1",

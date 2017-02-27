@@ -141,9 +141,9 @@ export default class EntryStoreInformation extends Component {
             this.setState({Reminder:''})
         }
 
-        const latitude = localStorage.getItem('latitude')
-        const longitude = localStorage.getItem('longitude')
-        const address = localStorage.getItem('address')
+        const latitude = sessionStorage.getItem('latitude')
+        const longitude = sessionStorage.getItem('longitude')
+        const address = sessionStorage.getItem('address')
 
         this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,address,latitude,longitude,this.state.id)
     }
@@ -417,7 +417,7 @@ export default class EntryStoreInformation extends Component {
                 </div>
                 {
                     showMap?
-                        <div className="locationModal pa width_100 font14 flex flex-v" style={{zIndex:100}}>
+                        <div className="locationModal pf width_100 font14 flex flex-v" style={{zIndex:100}}>
                             <div
                                 className="shadowNav flex-1"
                             >

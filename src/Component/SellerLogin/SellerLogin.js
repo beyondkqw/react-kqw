@@ -103,7 +103,12 @@ export default class SellerLogin extends Component {
                 if(res.STORE_ID == ''|| res.STORE_ID == null){
                     window.location.href = '/entryStoreInformation'
                 }else{
-                    window.location.href = '/sellerStoreCenter'
+                    if(res.STORE_STATUS = false){
+                        this.setState({Reminder:'店铺正在审核中'})
+                        return
+                    }else{
+                        window.location.href = '/sellerStoreCenter'
+                    }
                 }
             })
     }

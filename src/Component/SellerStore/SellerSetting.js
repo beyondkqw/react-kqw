@@ -49,10 +49,9 @@ export default class SellerSetting extends Component {
     }
 
     componentWillMount() {
-        this.setState({GPSaddress:localStorage.getItem('address')})
-        this.setState({latitude:localStorage.getItem('latitude')})
-        this.setState({longitude:localStorage.getItem('longitude')})
-        console.log('获取的定位信息======>',localStorage.getItem('address')+localStorage.getItem('latitude')+localStorage.getItem('longitude'))
+        this.setState({GPSaddress:sessionStorage.getItem('gpsAddress')})
+        this.setState({latitude:sessionStorage.getItem('latitude')})
+        this.setState({longitude:sessionStorage.getItem('longitude')})
         this.getStoreDetail(this.props.location.query.storeId)
     }
 
@@ -195,7 +194,7 @@ export default class SellerSetting extends Component {
     render() {
         const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap,GPSaddress} = this.state
         return (
-            <div className="containerNav" style={{paddingBottom:30}}>
+            <div className="containerNav">
                 <NavBar
                     renderBack = {true}
                     title = {'店铺资料'}
@@ -343,13 +342,16 @@ export default class SellerSetting extends Component {
                 <div className="tc f12 color_red width_100 loginHeight" style={{lineHeight:'1.8rem'}}>
                     {this.state.Reminder}
                 </div>
-                <CommonBtn
-                    title = {'确定'}
-                    onClick={()=>this.confirmEdit()}
-                />
+                <div style={{marginBottom:20}}>
+                    <CommonBtn
+                        title = {'确定'}
+                        onClick={()=>this.confirmEdit()}
+                    />
+                </div>
+
                 {
                     showMap?
-                        <div className="locationModal pa width_100 font14 flex flex-v" style={{zIndex:100}}>
+                        <div className="locationModal pf width_100 font14 flex flex-v" style={{zIndex:100}}>
                             <div
                                 className="shadowNav flex-1"
                             >

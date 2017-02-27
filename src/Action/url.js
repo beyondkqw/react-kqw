@@ -271,5 +271,7 @@ export const bankUpdate = 'bank/auth/update'
 //删除银行卡
 export const unBinding = 'bank/auth/unBinding'
 
+
 //团队成员
 export const teamList = 'team/list'
+

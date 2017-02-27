@@ -8,6 +8,7 @@ export default class InformationComponent extends Component {
             <div>
                 <div className="ChooseHeight font14 border_bottom"
                      onClick = {onClick}
+
                 >
                     <div className="color6">
                         <span>{name}</span>

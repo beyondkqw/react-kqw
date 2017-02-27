@@ -20,8 +20,9 @@ import {imei,version,client} from './auth'
 export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";*/
  //export const wsPath = "ws://"+'jdapi.tunnel.qydev.com'+"/api/socketServer";
 // export const ROOT_URL = 'http://jdapi.tunnel.qydev.com/api/'
-
+//  export const ROOT_URL = 'http://juduotest.tunnel.qydev.com/api/'
 // export const wsPath = "ws://"+'juduotest.tunnel.qydev.com'+"/api/socketServer";
+
 // export const wsPath = "ws://"+'jdy.juduoy.com'+"/api/socketServer";
 //export const wsPath = "ws://"+'meiye.tunnel.qydev.com'+"/api/socketServer";
 //  export const ROOT_URL = 'http://juduotest.tunnel.qydev.com/api/'
@@ -31,8 +32,10 @@ export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";*/
  export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/'
 
 
+
 //获取屏幕宽度
 export const SCREEN_WIDTH = window.screen.width
+export const SCREEN_HEIGHT = window.screen.height
 
 const RPC = new EventEmitter();
 const emit = RPC.emit.bind(RPC);

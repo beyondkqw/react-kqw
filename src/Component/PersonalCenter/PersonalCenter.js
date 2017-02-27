@@ -25,6 +25,7 @@ const ItemList = [
     // {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
     // {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
     // {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/sellerLogin'}
+
 ]
 export default class PersonalCenter extends Component {
 
@@ -72,7 +73,7 @@ export default class PersonalCenter extends Component {
     render() {
         const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg,yunCard} = this.state
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
                     <div className="pa setUp">
                         <Link to="/personalCenter/setting" query={{resetMobile:mobile}}>

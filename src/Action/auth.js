@@ -837,9 +837,9 @@ export async function StoreContact(qq,wechat,mobile){
 }
 
 //订单列表
-export async function GetSellerOrderList(status,page){
+export async function GetSellerOrderList(status,is_refund=0,page){
     try{
-        const res = await apiGet(URL.sellerList,{status,page});
+        const res = await apiGet(URL.sellerList,{status,is_refund,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -1012,10 +1012,12 @@ export async function CashRecord(accId,page) {
     }
 }
 
+
 //获取团队成员列表
 export async function TeamList(page) {
     try {
         const res = await apiGet(URL.teamList,{page});
+
         return res;
     } catch (err) {
         console.warn(err);

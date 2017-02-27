@@ -383,6 +383,22 @@ export default class GoodsDescription extends Component {
         //ifm.height=document.documentElement.clientHeight;
     }
 
+    changeFrameHeight(value){
+        console.log('进来了=========》')
+        const ifm= document.getElementById("myiframe");
+        var iframeHeight = ifr.document.body.scrollHeight+ 'px';
+        alert(iframeHeight);
+        document.getElementById("myiframe").style.height = iframeHeight;
+        /*const m = /\#(\d+)$/.exec(value)
+        console.warn('detail',value)
+        if (m && m[1]){
+            this.setState({height: (m[1] | 0) + 24});
+        }
+        console.log('-----------url',value)
+        console.log('--------------------',this.state.height)*/
+        //ifm.height=document.documentElement.clientHeight;
+    }
+
     //商品介绍
     commodityIntroduction(){
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
@@ -449,6 +465,7 @@ export default class GoodsDescription extends Component {
                                     </div>
                                     <div className="flex">
                                         {
+
 
                                             el.IMAGES && el.IMAGES.length>0&&el.IMAGES[0]!=''?
                                                 el.IMAGES.map(item=>{
