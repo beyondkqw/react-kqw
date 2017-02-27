@@ -43,19 +43,21 @@ class Home extends Component {
     async componentWillMount() {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
-       /* if(getToken == '' ||getToken == null ||getToken == 'null'){
-
+        console.log('hahahahahhaa ',getToken == '' ||getToken == null ||getToken == 'null')
+        if(getToken == '' ||getToken == null ||getToken == 'null'){
+            console.log('-----+++++++++++-->',token)
             await WechatAuth()
             const token = GetQueryString('token')
+            console.log('得到的token--------+++++++++++-->',token)
             saveToken(token)
             //initWebsocket()
         }else{
             //initWebsocket()
-        }*/
+        }
         this.getHomeBanner()
         this.getHomeMoudle()
 
-        getLocation()
+        //getLocation()
     }
 
     //首页banner

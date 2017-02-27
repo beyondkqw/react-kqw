@@ -53,7 +53,7 @@ export default class StoreSubCommission extends Component {
     render(){
         console.log('this.state.perc',this.state.perc)
         return(
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 <NavBar
                     renderBack = {true}
                     title = {'设置分佣比例'}

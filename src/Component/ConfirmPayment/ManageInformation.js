@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import InformationComponent from '../../Component/ConfirmPayment/InformationComponent';
 import CheckBox from '../../Component/ShoppingCarts/CheckBox';
 import Modal from '../../Component/CommonComponent/Modal'
@@ -21,6 +21,10 @@ export default class ManageInformation extends Component {
         };
     }
 
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
     componentWillMount() {
         this.getAddressList()
     }
@@ -28,6 +32,9 @@ export default class ManageInformation extends Component {
     setDefaultAddress(id){
         DefaultAddress(id)
         .then(res=>{
+            if(this.props.location.query.choosePath){
+                this.context.router.push({pathname:'/comfirmPayMoney'})
+            }
             this.getAddressList()
             console.log('设置默认地址成功',res)
         })

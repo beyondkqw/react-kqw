@@ -349,29 +349,29 @@ export default class SellerOrderList extends Component {
         this.setState({index:index})
         await this.setState({isShow:index})
         if(this.state.index == 0){
-            this.getOrderList('0',1)
+            this.getOrderList('0',0,1)
         }else if(this.state.index == 1){
-            this.getOrderList('1',1)
+            this.getOrderList('1',0,1)
         }else if(this.state.index == 2){
-            this.getOrderList('2',1)
+            this.getOrderList('2',0,1)
         }
         else if(this.state.index == 3){
-            this.getOrderList('6',1)
+            this.getOrderList('6',1,1)
         }else if(this.state.index == 4){
-            this.getOrderList('4',1)
+            this.getOrderList('4','',1)
         }else{
-            this.getOrderList('0',1)
+            this.getOrderList('0',0,1)
         }
     }
     //订单列表
-    async getOrderList(param,page){
+    async getOrderList(param,refund,page){
         if(this.over){
             this.setState({
                 pullUpStatus: 4
             });
             return
         }
-        await GetSellerOrderList(param,page)
+        await GetSellerOrderList(param,refund,page)
             .then(res=>{
                 if(this.page==Math.ceil(res.total/res.pageSize)){
                     this.over=true;

@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import InformationComponent from '../../Component/ConfirmPayment/InformationComponent';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {AddressList} from '../../Action/auth'
+import RPC from '../../Action/rpc'
+import Subscribe from '../../Component/NewComponent/Subscribe'
 
 export default class ChooseInfomation extends Component {
 
@@ -16,6 +18,9 @@ export default class ChooseInfomation extends Component {
             addressList : []
         };
       }
+    static contextTypes = {
+        router:PropTypes.object
+    }
 
     componentWillMount() {
         this.getAddressList()
@@ -32,10 +37,17 @@ export default class ChooseInfomation extends Component {
         })
     }
 
+    choosePath(value){
+        if(this.props.location.query.path){
+            RPC.emit('choosePath',value,this.props.location.query.orderNo)
+            this.context.router.push({pathname:'/comfirmPayMoney',query:{address:value.address,detail:value.detail,name:value.name,mobile:value.mobile,orderId:this.props.location.query.orderNo}});
+        }
+
+    }
     render() {
         const {addressList} = this.state
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 {
                     addressList == ''?
                         <IsShowEmptyImg
@@ -50,6 +62,7 @@ export default class ChooseInfomation extends Component {
                                 name={el.name}
                                 phone={el.mobile}
                                 path={el.address?el.address:''+el.detail?el.detail:''}
+                                onClick = {()=>this.choosePath(el)}
                             />
                         )
                     })
@@ -63,7 +76,7 @@ export default class ChooseInfomation extends Component {
                     {
                         addressList == ''?
                             null:
-                            <Link to="/manageInformation" className="flex1">
+                            <Link to="/manageInformation" query={{choosePath:this.props.location.query.path}} className="flex1">
                                 <CommonBtn
                                     title={'管理'}
                                 />

@@ -4,6 +4,8 @@ import PaymoneyComponent from '../../Component/ConfirmPayment/PaymoneyComponent'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/comfirmPayMoney.css';
 import {ListByOrderNo,Points} from '../../Action/auth'
+import RPC from '../../Action/rpc'
+import Subscribe from '../../Component/NewComponent/Subscribe'
 
 export default class ComfirmPayMoney extends Component {
     // 构造
@@ -20,7 +22,10 @@ export default class ComfirmPayMoney extends Component {
             carriage:[],
             summaryAmount:[],
             summaryCarriage:[],
-            getAll:0
+            getAll:0,
+            address:'',
+            name:'',
+            mobile:''
         };
       }
     static contextTypes = {
@@ -32,6 +37,10 @@ export default class ComfirmPayMoney extends Component {
         this.setState({timer:this.props.location.query.time})
         this.getPoints()
         this.state.getAll = this.getSumAmount()
+        const {address,detail,name,mobile} = this.props.location.query
+        if(address && detail && name && mobile){
+            this.changeAddress();
+        }
     }
 
    async getOrderInfor(){
@@ -40,6 +49,10 @@ export default class ComfirmPayMoney extends Component {
         .then(res=>{
             console.log('订单资料',res)
             this.setState({PaymentDetails:res})
+            this.setState({address:res[0].address +res[0].address_detail})
+            this.setState({name:res[0].name})
+            this.setState({mobile:res[0].mobile})
+            console.log(this.state.address+this.state.name+this.state.mobile)
             res.map(el=>{
                 this.orderNoArray.push(el.order_no)
                 this.state.itemAmount.push(el.amount)
@@ -73,17 +86,42 @@ export default class ComfirmPayMoney extends Component {
         return parseFloat(this.state.summaryAmount)+parseFloat(this.state.summaryCarriage)
     }
 
+    changeAddress=(value)=>{
+        const {address,detail,name,mobile} = this.props.location.query
+        this.setState({address:address+detail})
+        this.setState({name:name})
+        this.setState({mobile:mobile})
+    }
+
+    toChooseWay(){
+        const {address,name,mobile,timer,getAll} = this.state
+        if(!address || !name || !mobile){
+            alert('请选择地址')
+            return
+        }else{
+            this.context.router.push({pathname:'/confirmPayment/choosePayment',
+                query:{
+                planReceiveTime:timer,
+                orderNos:this.orderNoArray.join(','),
+                payMuchMoney :getAll
+                }
+            })
+        }
+
+    }
+
     render() {
-        const {PaymentDetails,now_point,touch_amount,timer,getAll} = this.state
+        const {PaymentDetails,now_point,touch_amount,timer,getAll,address,name,mobile} = this.state
         return (
             <div className="containerNav oa">
+                <Subscribe target={RPC} eventName="choosePath" listener={()=>this.changeAddress()} />
                 {
                     PaymentDetails&&PaymentDetails.map(item=>{
                         return(
                             <div>
                                 <div className="list-block m0">
                                     <ul>
-                                        <Link to='/deliveredInformation'>
+                                        <Link to='/chooseInfomation' query={{path:true,orderNo:item.order_no}}>
                                             <li className="item-content item-link item-link pl  border_bottom">
                                                 <div className="item-media">
                                                     <span className="fl di positionImg" style={{lineHeight:0}}>
@@ -92,15 +130,16 @@ export default class ComfirmPayMoney extends Component {
                                                 </div>
                                                 <div className="item-inner" style={{marginLeft:15}}>
                                                     {
-                                                        ((item.address == ''||item.address == null)&& (item.address_detail==''||item.address_detail==null))?
+                                                        ((address == ''||address == null)&& (address ==''||address == null))?
+
                                                             <div className="item-title">
                                                                 <span className="color6 font14">完善收货信息</span>
                                                             </div>:
                                                             <div className="item-title-row">
-                                                                <div className="item-title font14 color6">{item.address?item.address:'' + item.address_detail}</div>
+                                                                <div className="item-title font14 color6">{address}</div>
                                                                 <div className="f12 color9">
-                                                                    <span>{item.name}</span>
-                                                                    <span className="di margin15">{item.mobile}</span>
+                                                                    <span>{name}</span>
+                                                                    <span className="di margin15">{mobile}</span>
                                                                 </div>
                                                             </div>
                                                     }
@@ -192,15 +231,10 @@ export default class ComfirmPayMoney extends Component {
                         <span className="font14">实付款 :</span>
                         <span className="colorff f12">￥</span>
                         <span className="colorff f15">{getAll}</span>
-                        <Link
-                            to="/confirmPayment/choosePayment"
-                            query={{
-                            planReceiveTime:timer,
-                            orderNos:this.orderNoArray.join(','),
-                            payMuchMoney :getAll
-                            }}>
-                            <button className="settleAccount border_ra color_white margin15">支付</button>
-                        </Link>
+                        <button
+                            className="settleAccount border_ra color_white margin15"
+                            onClick = {()=>this.toChooseWay()}
+                        >支付</button>
                     </div>
                 </div>
             </div>

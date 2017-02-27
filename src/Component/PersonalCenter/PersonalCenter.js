@@ -15,14 +15,14 @@ const personDetail = [
 ]
 const ItemList = [
     //{name:'我的合伙人',imgUrl:require('../../Images/partner.png'),link:'/personalCenter/memberClub'},
-    {name:'会员中心',imgUrl:require('../../Images/change.png'),link:'/personalCenter/memberClub'},
+    //{name:'会员中心',imgUrl:require('../../Images/change.png'),link:'/personalCenter/memberClub'},
     {name:'我的收藏',imgUrl:require('../../Images/enshirne.png'),link:'/personalCenter/collect'},
     {name:'我的佣金',imgUrl:require('../../Images/balance.png'),link:'/personalCenter/myCharges'},
     {name:'我的足迹',imgUrl:require('../../Images/micro.png'),link:'/personalCenter/BrowseRecord'},
     {name:'收货地址',imgUrl:require('../../Images/path.png'),link:'/chooseInfomation'},
-    {name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
-    {name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
-    {name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/sellerLogin'}
+    //{name:'同步微信资料',imgUrl:require('../../Images/wxinfo.png'),link:''},
+    //{name:'聚朵股权',imgUrl:require('../../Images/stock.png'),link:'/personalCenter/jdyStock'},
+    //{name:'期待更多',imgUrl:require('../../Images/expectmore.png'),link:'/sellerLogin'}
 ]
 export default class PersonalCenter extends Component {
 
@@ -70,7 +70,7 @@ export default class PersonalCenter extends Component {
     render() {
         const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg,yunCard} = this.state
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
                     <Link to="personalCenter/userInfo">
                         <div className="personLogo">

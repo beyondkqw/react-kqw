@@ -270,3 +270,6 @@ export const bankUpdate = 'bank/auth/update'
 
 //删除银行卡
 export const unBinding = 'bank/auth/unBinding'
+
+//卖家确认退款
+export const auditRefund = 'order/auth/auditRefund'

@@ -34,6 +34,7 @@ export default class OrderDetails extends Component {
                 console.warn('取消订单失败',err)
             })
     }
+
     //删除订单
     async DeletdOrder(orderNo){
         await OrderDel(orderNo)

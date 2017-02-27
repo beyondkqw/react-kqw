@@ -837,9 +837,9 @@ export async function StoreContact(qq,wechat,mobile){
 }
 
 //订单列表
-export async function GetSellerOrderList(status,page){
+export async function GetSellerOrderList(status,is_refund=0,page){
     try{
-        const res = await apiGet(URL.sellerList,{status,page});
+        const res = await apiGet(URL.sellerList,{status,is_refund,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -1005,6 +1005,17 @@ export async function MyStore() {
 export async function CashRecord(accId,page) {
     try {
         const res = await apiGet(URL.cashRecord,{accId,page});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//卖家同意退款
+export async function AuditRefund(refundAmount,orderDetailId) {
+    try {
+        const res = await apiGet(URL.auditRefund,{refundAmount,orderDetailId});
         return res;
     } catch (err) {
         console.warn(err);

@@ -9,6 +9,7 @@ import {Details,Follow,ProductAttribute,AddShopCar,OrderShopping,RemarkList} fro
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 import iScroll from 'iscroll/build/iscroll-probe';
+import {SCREEN_HEIGHT} from '../../Action/rpc'
 import $ from 'jquery';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -38,7 +39,8 @@ export default class GoodsDescription extends Component {
             items: [],
             pullDownStatus: 3,
             pullUpStatus: 0,
-            scrollTop:0
+            scrollTop:0,
+            height:''
         };
         this.page = 1;
         this.over = false;
@@ -365,12 +367,29 @@ export default class GoodsDescription extends Component {
        await this.setState({isShow:true,type:type})
     }
 
+    changeFrameHeight(value){
+        console.log('进来了=========》')
+        const ifm= document.getElementById("myiframe");
+        var iframeHeight = ifr.document.body.scrollHeight+ 'px';
+        alert(iframeHeight);
+        document.getElementById("myiframe").style.height = iframeHeight;
+        /*const m = /\#(\d+)$/.exec(value)
+        console.warn('detail',value)
+        if (m && m[1]){
+            this.setState({height: (m[1] | 0) + 24});
+        }
+        console.log('-----------url',value)
+        console.log('--------------------',this.state.height)*/
+        //ifm.height=document.documentElement.clientHeight;
+    }
+
     //商品介绍
     commodityIntroduction(){
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
+
         return (
-            <div>
-                <iframe src={detail} style={{border:'none',width:'100%'}}></iframe>
+            <div className="pr">
+                <iframe src={detail}  id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:'300'}}></iframe>
             </div>
         )
     }
@@ -428,12 +447,6 @@ export default class GoodsDescription extends Component {
                                             <div className="flex flex-wrap color6 font14">
                                                 {el.COMMENT}
                                             </div>
-
-
-                                            {/*评论图片 最多3张    todo IMAGES转数组map*/}
-                                            {
-
-                                            }
                                             <div className="flex">
                                                 {
 
