@@ -184,13 +184,13 @@ export default class WithdrawCash extends Component {
                         确认提现
                     </button>
                 </div>
-                <div className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
-                    <Link to="/personalCenter/balanceCashRule">
+                <Link to="/cashRule" query={{type:4}}>
+                    <div className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
                         <span className="di pa" style={{width:15,height:15,lineHeight:0,marginLeft:5}}>
                             <img src={require('../../Images/toRead.png')} alt=""/>
                         </span>
-                    </Link>
-                </div>
+                    </div>
+                </Link>
                 {/*模态层*/}
                 {
                     toShowModal?

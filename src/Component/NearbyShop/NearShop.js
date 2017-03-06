@@ -6,6 +6,7 @@ import Search from '../../Component/NewComponent/Search';
 import '../../Stylesheets/App/homePage.css';
 import '../../Stylesheets/App/MsgListPage.css';
 import {_NearByShop,AmapNearby} from '../../Action/auth'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import {Link} from 'react-router';
 
 const type = ['','','','','','','','']
@@ -19,7 +20,19 @@ export default class NearShop extends Component {
             latitude:'',
             longitude:'',
             address:'',
-            shopList:''
+            shopList:'',
+            index : 0,
+            isShow:0,
+            orderItems:[],
+            agentList:[],
+            list: [],
+            disabled:false,
+            display:'block',
+            items: [],
+            pullDownStatus: 3,
+            pullUpStatus: 0,
+            scrollTop:0,
+            status:''
         };
       }
 
@@ -37,9 +50,24 @@ export default class NearShop extends Component {
 
     async getShopList(){
         const {latitude,longitude,address} = this.state
-        await _NearByShop(latitude,longitude,address)
+        await _NearByShop(latitude,longitude,address,this.page,'')
             .then(res=>{
-                this.setState({shopList:res})
+                this.setState({shopList:res.datas})
+                this.setState({status:res.status})
+                if(this.page==Math.ceil(res.total/res.pageSize)){
+                    this.over=true;
+                    this.setState({
+                        pullUpStatus: 4
+                    });
+                }else{
+                    this.setState({
+                        pullUpStatus: 3
+                    });
+                }
+                this.dataList = this.dataList.concat(res.resultList);
+                this.setState({shopList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
+                this.iScrollInstance.refresh();
+                this.page++;
             })
             .catch(err=>{
                 console.warn('_NearByShop',err)
@@ -47,29 +75,39 @@ export default class NearShop extends Component {
     }
 
     //搜索高德附近店铺
-    /*getNearbyShop(value){
+    async getNearbyShop(value){
         if(this.over){
             return
         }
-        const {latitude,longitude} = this.state
-        AmapNearby('6d68610961e69ad429d0f1613d08674f','58ad33b77bbf195ae874e289',1,value?value:'',longitude,latitude)
+        const {latitude,longitude,address} = this.state
+        await _NearByShop(latitude,longitude,address,this.page,value)
             .then(res=>{
-                const {datas} = res
-                if(datas.length==0){
-                    this.over = true
+                this.setState({shopList:res.datas})
+                this.setState({status:res.status})
+                if(this.page==Math.ceil(res.total/res.pageSize)){
+                    this.over=true;
+                    this.setState({
+                        pullUpStatus: 4
+                    });
                 }else{
-                    this.dataList = this.dataList.concat(datas)
-                    this.setState({shopList:this.dataList})
+                    this.setState({
+                        pullUpStatus: 3
+                    });
                 }
-                console.warn('定位测试',this.dataList)
+                this.dataList = this.dataList.concat(res.resultList);
+                this.setState({shopList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
+                this.iScrollInstance.refresh();
+                this.page++;
             })
             .catch(err=>{
                 console.warn('定位测试---',err)
             })
     }
-*/
+
+
+
     render(){
-        const {shopList} = this.state
+        const {shopList,status} = this.state
         return(
             <div>
                 <Search
@@ -77,10 +115,46 @@ export default class NearShop extends Component {
                     style = {{backgroundColor:'#ff5500',paddingLeft:10,paddingRight:10}}
                     onClick = {(value)=>this.getNearbyShop(value)}
                 />
-                <div className="bkg_color overScroll" style={{position:'absolute',top:'2.2rem',bottom:0,overflow:'auto'}}>
-                    <div className="flex flex-align-center" style={{padding:'5px 10px'}}>
-                        <span className="di" style={{width:19,height:23,marginRight:10,lineHeight:0}}><img src={require('../../Images/path.png')} alt=""/></span>
-                        <div className="font14 color9">{this.state.address?this.state.address:'暂未定位到当前地址'}</div>
+                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                    <div id='ListOutsite' style={{height: window.innerHeight-44}}
+                         onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
+                         onTouchMove={this.onTouchMove}>
+
+                        <ul id='ListInside'>
+                            {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
+                            <div className="flex flex-align-center" style={{padding:'5px 10px'}}>
+                                <span className="di" style={{width:19,height:23,marginRight:10,lineHeight:0}}><img src={require('../../Images/path.png')} alt=""/></span>
+                                <div className="font14 color9">{this.state.address?this.state.address:'暂未定位到当前地址'}</div>
+                            </div>
+                            {
+                                (this.state.status ===  0 || this.state.shopList.length == 0)?
+                                    <IsShowEmptyImg
+                                        styleSheet={{width:69,height:72,marginTop:120}}
+                                        title={'查询列表是空的哦~'}
+                                    />:
+                                shopList&&shopList.map(el=>{
+                                    return(
+                                        <Link to="/store" query={{storeId:el.storeId}}>
+                                            <div className="_order_height border_bottom pr plAll df">
+                                                <div className="_order_img height_all">
+                                                    <img src={el.img} alt=""/>
+                                                </div>
+                                                <div className="flex1 font14 _order_margin">
+                                                    <p className="color6 db">{el._name}</p>
+                                                    <div className="color9 distance_h mt3 pr">
+                                                        <span className="di positionImg mr"><img src={require('../../Images/location.png')} alt=""/></span>
+                                                        <span className="pa bottom0">据您{Math.round(el._distance)}米</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    )
+                                })
+                            }
+                            <p ref="PullUp" id='PullUp'
+                               style={{display:this.state.display}}
+                            >{this.pullUpTips[this.state.pullUpStatus]}</p>
+                        </ul>
                     </div>
                     {
                         shopList&&shopList.map(el=>{

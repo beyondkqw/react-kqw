@@ -69,6 +69,14 @@
     overflow-y: hidden;
     overflow-x: auto;
 }
+
+.yunTab{
+    height:1.5rem;
+    line-height:1.5rem;
+    background-color: #fff5f0;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
 .active{
     color:#ff5500;
     background-color: #ffddcc;

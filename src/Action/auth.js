@@ -143,9 +143,9 @@ export async function FollowList(page) {
 }
 
 //商品列表
-export async function ProductList(name,order,orderName,minPrice,maxPrice,page=1,type=0) {
+export async function ProductList(name,order,orderName,minPrice,maxPrice,page=1,type=0,isTag,tagId) {
     try {
-        const res = await apiPost(URL.productList,{name,order,orderName,minPrice,maxPrice,page,type});
+        const res = await apiPost(isTag?URL.listByTag:URL.productList,isTag?{name,order,orderName,minPrice,maxPrice,page,type,tagId}:{name,order,orderName,minPrice,maxPrice,page,type});
         return res;
     } catch (err) {
         console.warn(err);
@@ -1024,9 +1024,9 @@ export async function AuditRefund(refundAmount,orderDetailId,status = 1) {
 }
 
 //附近的店铺
-export async function _NearByShop(latitude='',longitude='',address='') {
+export async function _NearByShop(latitude='',longitude='',address='',page,name='') {
     try {
-        const res = await apiPost(URL.nearByShop,{latitude,longitude,address});
+        const res = await apiPost(URL.nearByShop,{latitude,longitude,address,page,name});
         return res;
     } catch (err) {
         console.warn(err);
@@ -1049,6 +1049,28 @@ export async function SetAddress(orderNos,addressId){
 export async function AmapNearby(key,tableid,page,keywords,center,radius=5000,filter,limit=10) {
     try {
         const res = await apiGet('http://yuntuapi.amap.com/datasearch/around', {key,tableid,page,keywords,center,radius,limit},true);
+        return res;
+    } catch (err) {
+        console.warn('NoticeView', err);
+        throw err
+    }
+}
+
+//各种协议
+export async function NoticeView(type,count=10,page=0) {
+    try {
+        const res = await apiGet(URL.noticeView, {type,count,page});
+        return res;
+    } catch (err) {
+        console.warn('NoticeView', err);
+        throw err
+    }
+}
+
+//转赠开关
+export async function GiveOnOff() {
+    try {
+        const res = await apiGet(URL.giveOnOff, {});
         return res;
     } catch (err) {
         console.warn('NoticeView', err);

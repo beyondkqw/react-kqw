@@ -298,10 +298,10 @@ export default class ShopHome extends Component {
         const {storeDetails,storeBanner,storeDetail} = this.state
         return (
             <div className="containerNav bkg_gray">
-                <NavBar
+                {/*<NavBar
                     renderBack = {true}
                     title = {'店铺'}
-                />
+                />*/}
                 <Search
                     style={{backgroundColor:'#ff5500'}}
                     location = {true}

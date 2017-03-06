@@ -59,7 +59,6 @@ class Home extends Component {
     async getHomeBanner(){
         await HomeBanner('BANNER',0,5)
             .then(res=>{
-                console.log('BANNER',res)
                 this.setState({banner:res})
             })
             .catch(err=>{
@@ -102,7 +101,6 @@ class Home extends Component {
                             images = {this.state.banner}
                         />
                     </div>
-
                     <OtherApp />
                     {
                         moudle&&moudle.map(el=>{
@@ -110,6 +108,7 @@ class Home extends Component {
                                 return(
                                     <div>
                                         <ActiveTitle
+                                            img = {el.img}
                                             title = {el.name}
                                         />
                                         <Cell_3
@@ -122,6 +121,7 @@ class Home extends Component {
                                 return(
                                     <div>
                                         <ActiveTitle
+                                            img = {el.img}
                                             title = {el.name}
                                         />
                                         <Cell_4
@@ -134,6 +134,7 @@ class Home extends Component {
                                 return(
                                     <div>
                                         <ActiveTitle
+                                            img = {el.img}
                                             title = {el.name}
                                         />
                                         <Cell_6
@@ -146,6 +147,7 @@ class Home extends Component {
                                 return(
                                     <div>
                                         <ActiveTitle
+                                            img = {el.img}
                                             title = {el.name}
                                         />
                                         <Cell_7

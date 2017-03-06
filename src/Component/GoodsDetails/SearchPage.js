@@ -278,7 +278,8 @@ export default class SearchPage extends Component {
             });
             return
         }
-        await ProductList(name,order,orderName,minPrice,maxPrice,page,type)
+
+        await ProductList(name,order,orderName,minPrice,maxPrice,page,type,this.props.location.query.isTag,this.props.location.query.tagId)
         .then(res=>{
             if(this.page==Math.ceil(res.total/res.pageSize)){
                 this.over=true;
@@ -293,7 +294,6 @@ export default class SearchPage extends Component {
             this.setState({
                 pullUpStatus: 3
             });
-            console.log('res.resultList=======>',res.resultList)
         })
         .catch(err=>{
             console.warn('err',err)
@@ -357,7 +357,6 @@ export default class SearchPage extends Component {
             display_2?
                 <div className="screen">
                     <p>价格范围选择</p>
-
                     <div>
                         <input placeholder="最低价"
                                ref="minPrice"
@@ -396,7 +395,6 @@ export default class SearchPage extends Component {
             this.setState({index:index})
         }
         const {display_0,display_2,showByColumn} = this.state
-        //console.log('display',display_0)
         if(index==0){
             this.setState({display_0:!display_0,display_2:false})
         }else if(index==1){

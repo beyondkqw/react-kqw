@@ -3,14 +3,8 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CellComponent from '../../Component/CommonComponent/CellComponent';
 import '../../Stylesheets/App/personal.css';
+import {GiveOnOff} from '../../Action/auth'
 
-
-const ChargesList = [
-    {imgUrl:require('../../Images/total.png'),title:'总佣金收入',describing:'1256.26',link:'/personalCenter/allIncome'},
-    {imgUrl:require('../../Images/payment.png'),title:'分销佣金',describing:'团队共赢',link:'/personalCenter/retailing'},
-    {imgUrl:require('../../Images/used.png'),title:'佣金提取明细',describing:'佣金提取记录',link:'/personalCenter/takenDetails'},
-    {imgUrl:require('../../Images/diary.png'),title:'佣金转赠',describing:'把佣金转给好友',link:'/personalCenter/commisionGiving'}
-];
 export default class MyCharges extends Component {
     // 构造
       constructor(props) {
@@ -19,7 +13,8 @@ export default class MyCharges extends Component {
         this.state = {
             accId:'',
             Now_Amount:'',
-            frozen:''
+            frozen:'',
+            GiveOnOff:''
         };
       }
     componentWillMount() {
@@ -27,8 +22,18 @@ export default class MyCharges extends Component {
         this.setState({accId:memberId})
         this.setState({Now_Amount:now_amount})
         this.setState({frozen:frozen})
-        console.log('memberId',memberId);
-        console.log('now_amount',now_amount);
+        //转赠开关
+        this.judgeGiveOnOff()
+    }
+
+    judgeGiveOnOff(){
+        GiveOnOff()
+            .then(res=>{
+                this.setState({GiveOnOff:res})
+            })
+            .catch(err=>{
+                console.warn('GiveOnOff err',err)
+            })
     }
     render() {
         const {accId,Now_Amount,frozen} = this.state
@@ -70,12 +75,17 @@ export default class MyCharges extends Component {
                         link={'/personalCenter/takenDetails'}
                         accId = {accId}
                     />
-                    <CellComponent
-                        imgUrl={require('../../Images/diary.png')}
-                        title={'佣金转赠'}
-                        describing={'把佣金转给好友'}
-                        link={'/personalCenter/commisionGiving'}
-                    />
+                    {
+                        this.state.GiveOnOff?
+                            <CellComponent
+                                imgUrl={require('../../Images/diary.png')}
+                                title={'佣金转赠'}
+                                describing={'把佣金转给好友'}
+                                link={'/personalCenter/commisionGiving'}
+                            />
+                            :null
+                    }
+
 
                 </div>
             </div>

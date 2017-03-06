@@ -178,7 +178,7 @@ export default class OrderFormDetails extends Component {
                                     <p className="color9 font14"><span>X</span><span>{el.num}</span></p>
                                     <Link to="/orders/applicationForAfterSales" query={{orderNo:el.id}}>
                                         {
-                                            this.props.location.query.index != 0?
+                                            this.props.location.query.index != 0 && this.props.location.query.index != 4?
                                                 <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
                                                 :null
                                         }
@@ -217,7 +217,7 @@ export default class OrderFormDetails extends Component {
                         <span className="color6">实付款</span>
                         <div className="fr color_yellow">
                             <span>￥</span>
-                            <span>{orderFormdDetails.amount}</span>
+                            <span>{orderFormdDetails.amount+orderFormdDetails.postage}</span>
                         </div>
                     </div>
                 </div>
@@ -242,9 +242,9 @@ export default class OrderFormDetails extends Component {
                         </div>
                     </div>
                     <div>
-                        <span>发货状态</span>
+                        <span>发货时间</span>
                         <div className="fr">
-                            <span>{this.props.location.query.index==1?'未发货':orderFormdDetails.delivery_time?orderFormdDetails.delivery_time:'未发货'}</span>
+                            <span>{this.props.location.query.index==1?'未发货':(orderFormdDetails.delivery_time)?(orderFormdDetails.delivery_time)+'小时之内发货':'未发货'}</span>
                         </div>
                     </div>
                 </div>

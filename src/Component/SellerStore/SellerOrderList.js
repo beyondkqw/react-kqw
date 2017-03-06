@@ -258,9 +258,7 @@ export default class SellerOrderList extends Component {
                 this.setState({orderItems:this.dataList,display:(this.dataList.length==0)?'none':'block'});
                 this.iScrollInstance.refresh();
                 this.page++;
-
-
-            })
+             })
             .catch(err=>{
                 console.warn('err',err)
             })

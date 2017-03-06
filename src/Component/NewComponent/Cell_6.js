@@ -14,7 +14,7 @@ export default class Cell_6 extends Component {
             return
         }
         if(cell.linkType==0){
-            this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{type:cell.tagId}})
+            this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{tagId:cell.tagId,isTag:true}})
         }else if(cell.linkType==1){
             this.context.router.push({pathname:'/goodsDescription',query:{id:cell.productId}})
         }else if(cell.linkType==2) {

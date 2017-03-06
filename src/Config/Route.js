@@ -425,12 +425,6 @@ const CommissionCash = (nextState, cb) => {
   },'CommissionCash')
 }
 
-const BalanceCashRule = (nextState, cb) => {
-  require.ensure([], require => {
-    cb(null, require('../Component/PersonalCenter/BalanceCashRule').default)
-  },'BalanceCashRule')
-}
-
 const ErweiCode = (nextState, cb) => {
   require.ensure([], require => {
     cb(null, require('../Component/PersonalCenter/ErweiCode').default)
@@ -756,6 +750,12 @@ const CommonSoon = (nextState, cb) => {
   },'CommonSoon')
 }
 
+const CashRule = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Login/CashRule').default)
+  },'CashRule')
+}
+
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" getComponent={App}>
@@ -829,7 +829,6 @@ const RouteConfig = (
       <Route path="totalDetails" getComponent={TotalDetails} />
       <Route path="personalCenter/myAlipay" getComponent={MyAlipay} />
       <Route path="personalCenter/commissionCash" getComponent={CommissionCash} />
-      <Route path="personalCenter/balanceCashRule" getComponent={BalanceCashRule} />
       <Route path="personalCenter/erweiCode" getComponent={ErweiCode} />
       <Route path="personalCenter/teamAmount" getComponent={TeamAmount} />
       <Route path="contactMe" getComponent={ContactMe} />
@@ -884,6 +883,7 @@ const RouteConfig = (
       <Route path="toWebView" getComponent={ToWebView} />
       <Route path="chooseCity" getComponent={ChooseCity} />
       <Route path="commonSoon" getComponent={CommonSoon} />
+      <Route path="cashRule" getComponent={CashRule} />
     </Route>
   </Router>
 );

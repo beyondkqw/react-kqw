@@ -296,7 +296,8 @@ export default class CloudComplex extends Component {
                     <div style={{marginTop:'2.2rem',width:'100%'}}>
                         <Tabscontrol
                             onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
-                            num = {this.StoreTypeItem.length}
+                            isSlide = {true}
+                            length = {this.StoreTypeItem.length}
                         >
                             {
                                 this.StoreTypeItem&&this.StoreTypeItem.map(el=>{

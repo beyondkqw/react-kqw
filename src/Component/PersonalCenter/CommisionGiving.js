@@ -151,6 +151,13 @@ export default class CommisionGiving extends Component {
                         onClick={()=>this.confirmPonit()}
                         title={'确认转赠'}
                     />
+                    <Link to="/cashRule" query={{type:2}}>
+                        <div className="f12 color6 tc mt5">余额转赠时间为产品<span className="color_yellow">确认收货后30</span>天
+                            <span className="di pa" style={{width:15,height:15,lineHeight:0,marginLeft:5}}>
+                                <img src={require('../../Images/toRead.png')} alt=""/>
+                            </span>
+                        </div>
+                    </Link>
                 </div>
             </div>
         );
