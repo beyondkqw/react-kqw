@@ -129,6 +129,7 @@ export default class MineOffDown extends Component {
 
     onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })

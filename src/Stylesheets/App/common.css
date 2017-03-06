@@ -36,6 +36,10 @@ p{
 .overScroll{
     -webkit-overflow-scrolling: touch;
 }
+.ScrollContainer{
+    -webkit-transform:translate3d(0,0,0);
+    overflow:hidden
+}
 .oa{
     overflow: auto;
 }

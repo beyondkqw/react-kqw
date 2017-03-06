@@ -111,6 +111,7 @@ export default class CloudComplex extends Component {
 
     onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
@@ -291,26 +292,11 @@ export default class CloudComplex extends Component {
                                 onClick={(value)=>this.searchStore(value)}
                             />
                         </div>
-                        {/*<div
-                            className="flex tc bkg_ff flex-pack-center flex-align-center flex-v classify"
-                        >
-                            <Link to ='/chooseCity'>
-                                <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
-                                    <img src={require('../../Images/common/classification.png')} alt=""/>
-                                </span>
-                                <div className="f10 color_white">城市</div>
-                            </Link>
-                        </div>*/}
                     </div>
-                    {/*<TabBar
-                        willdo = {true}
-                        index = {0}
-                        onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
-                        contents={this.StoreTypeItem}
-                    />*/}
-                    <div style={{marginTop:'2.2rem'}}>
+                    <div style={{marginTop:'2.2rem',width:'100%'}}>
                         <Tabscontrol
                             onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
+                            num = {this.StoreTypeItem.length}
                         >
                             {
                                 this.StoreTypeItem&&this.StoreTypeItem.map(el=>{

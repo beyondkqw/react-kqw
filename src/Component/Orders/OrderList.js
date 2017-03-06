@@ -109,7 +109,8 @@ export default class OrderList extends Component {
         }
         if (this.state.pullUpStatus == 2) {
             const index = this.state.index;
-            await this.getOrderList(index,'',0,this.page)
+            let Index = (index==4)?'':index
+            await this.getOrderList(Index,'',0,this.page)
         }
 
     }
@@ -125,18 +126,19 @@ export default class OrderList extends Component {
         this.context.router.goForward();
     }
 
-    onTouchStart(ev) {
+    onTouchStart(ev){
         this.isTouching = true;
     }
 
-    onTouchMove(ev){
+    onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
     }
 
-    onTouchEnd(ev) {
+    onTouchEnd(ev){
         this.isTouching = false;
     }
 
@@ -164,7 +166,7 @@ export default class OrderList extends Component {
         }
     }
 
-    onScroll() {
+    onScroll=()=> {
         let pullDown = $(this.refs.PullDown);
 
         // 上拉区域
@@ -178,6 +180,7 @@ export default class OrderList extends Component {
         if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY + 5) {
             this.onPullUp();
         }
+        console.log('滚动中----------------')
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
@@ -185,6 +188,10 @@ export default class OrderList extends Component {
 
     onScrollEnd() {
         console.log("onScrollEnd" + this.state.pullDownStatus);
+
+        this.setState({
+            scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
+        })
 
         let pullDown = $(this.refs.PullDown);
         // 滑动结束后，停在刷新区域
@@ -280,7 +287,7 @@ export default class OrderList extends Component {
                     contents={['待付款','待发货','待收货','待评价','全部订单']}
                 />
                 <SplitLine />
-                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                <div id='ScrollContainer' className="ScrollContainer">
                     <div id='ListOutsite' style={{height: window.innerHeight-50}}
                         onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                         onTouchMove={this.onTouchMove}>
