@@ -75,7 +75,7 @@ export default class Login extends Component {
 
     render(){
         return(
-            <div className="wrap">
+            <div className="containerNav" style={{height:'100%'}}>
                 {/*
                  <header>
                  <h4>登录</h4>

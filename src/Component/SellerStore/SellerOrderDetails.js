@@ -121,7 +121,7 @@ export default class SellerOrderDetails extends Component {
                         <span className='color9'>运费(快递)</span>
                         <div className="fr color9">
                             <span>￥</span>
-                            <span>{sellerOrderDetails.postage}</span>
+                            <span>{parseFloat(sellerOrderDetails.postage).toFixed(2)}</span>
                         </div>
                     </div>
                     <div className='f12'>

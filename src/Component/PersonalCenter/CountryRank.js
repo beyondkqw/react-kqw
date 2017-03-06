@@ -191,10 +191,8 @@ export default class CountryRank extends Component {
 
         // 滑动结束后，停在加载区域
         if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY) {
-            if (this.state.pullUpStatus == 1) { // 发起了加载，那么更新状态
-                this.setState({pullUpStatus: 2});
-                this.fetchItems(false);
-            }
+            this.setState({pullUpStatus: 2});
+            this.fetchItems(false);
         }
 
     }
