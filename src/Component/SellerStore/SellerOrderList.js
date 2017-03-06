@@ -105,6 +105,7 @@ export default class SellerOrderList extends Component {
 
     onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
@@ -191,9 +192,9 @@ export default class SellerOrderList extends Component {
         if (this.state.pullUpStatus == 2) {
             const index = this.state.index;
             if (index == 3) {
-                this.getOrderList('6', this.page)
+                this.getOrderList('6','',this.page)
             }
-            await this.getOrderList(index, this.page)
+            await this.getOrderList(index,'',this.page)
         }
 
     }
@@ -230,6 +231,7 @@ export default class SellerOrderList extends Component {
         }else{
             this.getOrderList('0','',1)
         }
+        this.iScrollInstance.refresh();
     }
 
     //订单列表
@@ -256,8 +258,7 @@ export default class SellerOrderList extends Component {
                 this.setState({orderItems:this.dataList,display:(this.dataList.length==0)?'none':'block'});
                 this.iScrollInstance.refresh();
                 this.page++;
-
-            })
+             })
             .catch(err=>{
                 console.warn('err',err)
             })

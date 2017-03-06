@@ -129,6 +129,7 @@ export default class ShoppingCart extends Component {
 
     onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
@@ -222,14 +223,16 @@ export default class ShoppingCart extends Component {
                 this.setState({
                     pullUpStatus: 4
                 });
+            }else{
+                this.setState({
+                    pullUpStatus: 3
+                });
             }
             this.dataList = this.dataList.concat(res.resultList);
             this.setState({shopCarList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
             this.iScrollInstance.refresh();
             this.page++;
-            this.setState({
-                pullUpStatus: 3
-            });
+
            /* this.setState({
                 display:(this.dataList.length==0)?'none':'block'
             })*/

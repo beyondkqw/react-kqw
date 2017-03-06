@@ -156,7 +156,7 @@ export default class ForgetPwd extends Component {
     render(){
         return(
         this.state.step==1?
-            <div className="wrap">
+            <div className="containerNav" style={{height:'100%'}}>
                 <div>
                     {/*手机号*/}
                     <div className='editorBox'>

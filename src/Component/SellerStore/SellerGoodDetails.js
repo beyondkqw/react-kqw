@@ -123,7 +123,7 @@ export default class SellerGoodDetails extends Component {
                                             <div className="fr">
                                                 <label>共<span>{el.num}</span>件商品</label>
                                                 <label className="ml5">合计<span>￥</span><span>{el.amount}</span></label>
-                                                <label className="ml">(含运费 : ￥<span>0.00</span>)</label>
+                                                <label className="ml">(含运费 : ￥<span>{parseFloat(el.postage).toFixed(2)}</span>)</label>
                                             </div>
                                         </div>
                                     </div>

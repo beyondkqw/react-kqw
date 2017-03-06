@@ -104,8 +104,8 @@ export default class Register extends Component {
 
     render(){
         return(
-            <div className="wrap">
-                <div>
+            <div>
+                <div className="containerNav" style={{height:'100%'}}>
                     {/*手机号*/}
                     <div className='editorBox'>
                         <span className="editorImg">

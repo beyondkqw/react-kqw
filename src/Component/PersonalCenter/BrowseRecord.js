@@ -138,6 +138,7 @@ export default class BrowseRecord extends Component {
 
     onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
@@ -265,14 +266,16 @@ export default class BrowseRecord extends Component {
                         this.setState({
                             pullUpStatus: 4,
                         });
+                    }else{
+                        this.setState({
+                            pullUpStatus: 3
+                        });
                     }
                     this.dataList = this.dataList.concat(res.resultList);
                     this.setState({historyList:this.dataList,display:(this.dataList.length==0)?'none':'block',historyImgShow:false});
                     this.iScrollInstance.refresh();
                     this.page++;
-                    this.setState({
-                        pullUpStatus: 3
-                    });
+
                     if(this.dataList.length==0){
                         this.setState({historyImgShow:true})
                     }else{

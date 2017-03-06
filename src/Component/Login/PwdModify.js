@@ -82,7 +82,7 @@ export default class PwdModify extends Component {
 
     render(){
         return(
-                <div>
+                <div className="containerNav" style={{height:'100%'}}>
                     <div className='editorBox_100' style={{justifyContent:'flex-start'}}>
                         <span style={{fontSize:14,color:'#666',marginLeft: 20,marginRight: 24}}>验证码</span>
                         <input

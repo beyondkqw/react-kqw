@@ -122,6 +122,7 @@ export default class SearchPage extends Component {
 
     onTouchMove=(ev)=>{
         ev.preventDefault();
+        document.getElementById('#ListInside').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
@@ -498,6 +499,7 @@ export default class SearchPage extends Component {
                                                         title = {el.NAME}
                                                         price = {el.CURRENT_PRICE}
                                                         imgurl = {el.IMAGE}
+                                                        sales = {el.SALES}
                                                     />
                                                 </Link>
                                         )
