@@ -27,7 +27,7 @@ export default class Carousel extends Component {
                 {
                     images&&images.map((el,index)=>{
                         return(
-                            <Link to={el.URL?el.URL:null}>
+                            <Link to='/toWebView' query={{url:el.URL}}>
                                 <img className="carouselImg" src = {el.picture_url}/>
                             </Link>
                         )

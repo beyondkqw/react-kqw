@@ -35,6 +35,9 @@ export const  followList = 'auth/account/followList'
 //商品列表
 export const  productList = 'product/list'
 
+//根据tagid查询商品列表
+export const  listByTag = 'product/listByTag'
+
 //商品属性
 export const productAttribute = 'product/attribute'
 
@@ -279,3 +282,9 @@ export const auditRefund = 'order/auth/auditRefund'
 
 //附近的店铺
 export const nearByShop = 'store/nearby'
+
+//各种协议
+export const noticeView = 'notices/list'
+
+//转赠开关
+export const giveOnOff = 'support/giveOnOff'

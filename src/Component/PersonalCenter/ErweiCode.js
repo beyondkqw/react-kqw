@@ -17,7 +17,6 @@ export default class ErweiCode extends Component {
       }
      async componentWillMount() {
          const token = await loadToken()
-         console.log('Token====>',token)
          const erweiCodePath = ROOT_URL+qrCode +'?'
              +'token='+token+'&client='+'wx'+'&imei='+imei+'&version='+version+'&width=180&height=180'
          this.setState({path:erweiCodePath})

@@ -5,7 +5,7 @@ import NavBar from '../../Component/CommonComponent/NavBar'
 export default class SearchOrder extends Component {
     render() {
         return (
-            <div className="containerNav">
+            <div>
                 <NavBar
                     renderBack = {true}
                     title = {'搜索订单'}

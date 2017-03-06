@@ -156,8 +156,8 @@ export default class OrderDetails extends Component {
                                     <div className="f12 width100 height1">
                                         <div className="fr">
                                             <label>共<span>{el.num}</span>件商品</label>
-                                            <label className="ml5">合计<span>￥</span><span>{el.amount}</span></label>
-                                            <label className="ml">(含运费 : ￥<span>0.00</span>)</label>
+                                            <label className="ml5">合计<span>￥</span><span>{el.amount+el.postage}</span></label>
+                                            <label className="ml">(含运费 : ￥<span>{el.postage}</span>)</label>
                                         </div>
                                     </div>
                                     <div className="ispayOrCancle font14">
@@ -192,7 +192,7 @@ export default class OrderDetails extends Component {
                                                 :null
                                         }
                                         {
-                                            allRated?
+                                            allRated && (el.status == 4 || el.status == 7)?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button
                                                         className="border_ra bkg_ff color_white"

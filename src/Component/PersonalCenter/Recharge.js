@@ -239,8 +239,8 @@ export default class Recharge extends Component {
                         />
                         <label htmlFor="isRead"></label>
                     </span>
-                    <span style={{marginLeft:20,marginRight:5}}>同意并接受聚朵云商综合体招商资质标准</span>
-                    <Link to="/personalCenter/balanceCashRule">
+                    <Link to="/cashRule" query={{type:1}}>
+                        <span style={{marginLeft:20,marginRight:5}} className="color9">同意并接受聚朵云商综合体招商资质标准</span>
                         <span className="di pa" style={{width:15,height:15,lineHeight:0}}>
                             <img src={require('../../Images/toRead.png')} alt=""/>
                         </span>

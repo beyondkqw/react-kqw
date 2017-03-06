@@ -27,12 +27,14 @@ export default class RightCell extends Component {
                         {
                             rightValue.map(el=>{
                                 return(
-                                    <div>
-                                        <div className="right-img">
-                                            <img src={el.img}/>
+                                    <Link to="/GoodsDetail/SearchPage" query={{type:el.id}}>
+                                        <div>
+                                            <div className="right-img">
+                                                <img src={el.img}/>
+                                            </div>
+                                            <div className="color9">{el.name}</div>
                                         </div>
-                                        <div>{el.name}</div>
-                                    </div>
+                                    </Link>
                                 )
                             })
                         }

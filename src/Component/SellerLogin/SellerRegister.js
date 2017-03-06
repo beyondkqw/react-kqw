@@ -5,7 +5,7 @@ import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SMSCode,SellerToRegister} from '../../Action/auth'
-import {ErrorNum,ErrorPs,GetQueryString,ChinaChar,EnglishChar,specialChar} from '../../Action/rpc'
+import {saveSellerToken,ErrorNum,ErrorPs,GetQueryString,ChinaChar,EnglishChar,specialChar} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
@@ -139,7 +139,8 @@ export default class SellerRegister extends Component {
         }
         await SellerToRegister(sellerMobile,sellerPwd,smsCode,code,storeName,role)
             .then(res=>{
-                alert('注册成功')
+                localStorage.setItem('role','seller')
+                saveSellerToken(res)
                 this.context.router.push({pathname:'/entryStoreInformation'})
             })
             .catch(err=>{
@@ -236,7 +237,10 @@ export default class SellerRegister extends Component {
                 </div>
 
                 <div className="agreement">
-                    点击注册，代表您同意遵守聚朵云的<Link><span style={{color:'#ff5500'}}>《用户协议》</span></Link>
+                    点击注册，代表您同意遵守聚朵云的
+                    <Link to="/cashRule" query={{type:3}}>
+                        <span style={{color:'#ff5500'}}>《用户协议》</span>
+                    </Link>
                 </div>
                 <div className="tc f12 color_red width_100 plr mtb loginHeight">
                     {this.state.Reminder}

@@ -217,7 +217,7 @@ export default class ComfirmPayMoney extends Component {
                     })
                 }
                 <SplitLine />
-                <section className="plr lh25">
+                {/*<section className="plr lh25">
                     {
                         now_point == 0?
                             <div className="fl color6 font14">暂无积分可使用</div>
@@ -236,12 +236,13 @@ export default class ComfirmPayMoney extends Component {
                                 </span>
                             </div>
                     }
-                </section>
+                </section>*/}
                 <div className="lh25 plr border_top">
                     <div className="fr">
                         <span className="font14">实付款 :</span>
                         <span className="colorff f12">￥</span>
-                        <span className="colorff f15">{(this.state.checked)?((getAll-touch_amount>0)?(getAll-touch_amount):0):getAll}</span>
+                        {/*<span className="colorff f15">{(this.state.checked)?((getAll-touch_amount>0)?(getAll-touch_amount):0):getAll}</span>*/}
+                        <span className="colorff f15">{getAll}</span>
                         <button
                             className="settleAccount border_ra color_white margin15"
                             onClick = {()=>this.toChooseWay()}

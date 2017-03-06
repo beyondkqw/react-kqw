@@ -178,10 +178,8 @@ export default class SellerOrderList extends Component {
 
         // 滑动结束后，停在加载区域
         if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY) {
-            if (this.state.pullUpStatus == 1) { // 发起了加载，那么更新状态
-                this.setState({pullUpStatus: 2});
-                this.fetchItems(false);
-            }
+            this.setState({pullUpStatus: 2});
+            this.fetchItems(false);
         }
 
     }
@@ -249,14 +247,15 @@ export default class SellerOrderList extends Component {
                     this.setState({
                         pullUpStatus: 4
                     });
+                }else{
+                    this.setState({
+                        pullUpStatus: 3
+                    });
                 }
                 this.dataList = this.dataList.concat(res.resultList);
                 this.setState({orderItems:this.dataList,display:(this.dataList.length==0)?'none':'block'});
                 this.iScrollInstance.refresh();
                 this.page++;
-                this.setState({
-                    pullUpStatus: 3
-                });
 
             })
             .catch(err=>{

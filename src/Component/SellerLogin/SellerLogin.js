@@ -87,7 +87,6 @@ export default class SellerLogin extends Component {
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
-                alert('err',err)
             })
     }
 
