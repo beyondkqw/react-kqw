@@ -51,13 +51,17 @@ export default class CommissionCash extends Component {
                                  this.confirmBankCard(el.bankName,el.bankcardNo.substr(el.bankcardNo.length-4),el.id)}
                             >
                                 <span className="fl di headerImg">
-                                    <img className="border_ra50" src={''} alt=""/>
+                                    <img className="border_ra50" src={require('../../Images/common/bankImg.png')} alt=""/>
                                 </span>
                                 <div className="fl" style={{marginLeft:15}}>
                                     <div className="font14 color6">
-                                        <span>{el.bankName}</span>
+                                        <span>{el.bankcardNo}</span>
                                     </div>
-                                    <p className="f12 color9 mt1">尾号{el.bankcardNo.substr(el.bankcardNo.length-4)}的卡</p>
+                                    {/*<p className="f12 color9 mt1">尾号{el.bankcardNo.substr(el.bankcardNo.length-4)}的卡</p>*/}
+                                    <p className="f12 color9 mt1">{el.branch}</p>
+                                </div>
+                                <div className="fr" style={{marginTop:7}}>
+                                    <span className="font14 color9">{el.bankName}</span>
                                 </div>
                             </div>
                         )

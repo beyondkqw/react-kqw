@@ -224,10 +224,12 @@ export default class BrowseRecord extends Component {
 
     //删除单条浏览记录
     async deleteItem(){
-        console.log('browseId=========>',this.state.browseId)
         await DelBrowseRecord(this.state.browseId)
             .then(res=>{
                 this.setState({isDelete:false})
+                this.over = false
+                this.dataList = []
+                this.page = 1
                 this.getBrowseHistory()
             })
             .catch(err=>{
@@ -240,6 +242,9 @@ export default class BrowseRecord extends Component {
         await DelBrowseRecord('')
             .then(res=>{
                 this.setState({delAll:false})
+                this.over = false
+                this.dataList = []
+                this.page = 1
                 this.getBrowseHistory()
             })
             .catch(err=>{

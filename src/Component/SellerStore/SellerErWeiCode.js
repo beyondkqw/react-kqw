@@ -43,7 +43,7 @@ export default class SellerErWeiCode extends Component {
     render() {
         const {infoDetails,qzCode} = this.state
         return (
-            <div className="containerNav allIncome_Img supplement">
+            <div className="containerNav allIncome_Img supplement" style={{height:'100%'}}>
                 <NavBar
                     renderBack = {true}
                     title = {'支付二维码'}

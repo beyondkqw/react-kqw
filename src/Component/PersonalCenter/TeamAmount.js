@@ -56,7 +56,7 @@ export default class TeamAmount extends Component {
                         {
                             Eecommend == ''?
                                 <IsShowEmptyImg
-                                    styleSheet={{width:69,height:72,marginTop:20}}
+                                    styleSheet={{width:69,height:72,marginTop:120}}
                                     title={'查询列表为空哦~'}
                                 />
                                 :

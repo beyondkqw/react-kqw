@@ -220,13 +220,18 @@ export default class SearchPage extends Component {
     }
 
     async componentWillMount(){
-        await this.getOrder('','','','','')
+        await this.getOrder((this.props.location.query.value?this.props.location.query.value:''),'','','','',1,(this.props.location.query.type?this.props.location.query.type:0));
     }
+
     //搜索
     async SearchBtn(value){
-        console.log('value',value);
+        //const name = this.props.location.query.value?this.props.location.query.value:''
+        this.over = false;
+        this.page = 1
+        this.dataList = []
         await this.getOrder(value,'','','','');
     }
+
     //排序的列表
     async SelectSortOrder(index){
         this.page=1;
@@ -267,14 +272,14 @@ export default class SearchPage extends Component {
     //}
 
     //请求列表接口
-    async getOrder(name,order,orderName,minPrice,maxPrice,page){
+    async getOrder(name,order,orderName,minPrice,maxPrice,page,type){
         if(this.over){
             this.setState({
                 pullUpStatus: 4
             });
             return
         }
-        await ProductList(name,order,orderName,minPrice,maxPrice,page)
+        await ProductList(name,order,orderName,minPrice,maxPrice,page,type)
         .then(res=>{
             if(this.page==Math.ceil(res.total/res.pageSize)){
                 this.over=true;
@@ -418,8 +423,7 @@ export default class SearchPage extends Component {
             >
                 <div className = 'searchContainer' style={{height:display_0||display_2?null:75}}>
                     <Search
-                        //onFocus = {()=>this.setState({history:true})}
-                        //onBlur = {()=>this.setState({history:false})}
+                        location = {true}
                         onClick = {(value)=>this.SearchBtn(value)}
                         display = {this.state.history}
                         style={{backgroundColor:'#ff5500'}}
@@ -487,6 +491,8 @@ export default class SearchPage extends Component {
                                                         title = {el.NAME}
                                                         price = {el.CURRENT_PRICE}
                                                         imgurl = {el.IMAGE}
+                                                        sales = {el.SALES}
+
                                                     />
                                                 </Link>
                                                 :

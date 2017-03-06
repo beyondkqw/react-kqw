@@ -39,10 +39,10 @@ export default class MemberInfo extends Component {
                 <RankRow
                     more={true}
                     num={1}
-                    isShow={true}
                     vipPoints={memberInfo.LV}
                     imgUrl={memberInfo.IMAGE_URI}
                     _vipPoints = {memberInfo.VIP_POINTS}
+                    memberName = {memberInfo.MEMBER_NAME}
                 />
                 <SplitLine />
                 <div className="clearAll" style={{height:'160'}}>
@@ -55,7 +55,7 @@ export default class MemberInfo extends Component {
                     <div className="height_charge border_bottom plAll font14">
                         <div className="fl lh2 color6">直推人数</div>
                         <div className="fr lh2 f12 color9 tr">
-                            <span>{memberInfo.DIRECT_PUSH_COUNT?memberInfo.DIRECT_PUSH_COUNT:0}</span>
+                            <span>{memberInfo.DIRECT_PUSH_COUNT?memberInfo.DIRECT_PUSH_COUNT:0}人</span>
                         </div>
                     </div>
                     <div className="height_charge border_bottom plAll font14">
@@ -67,7 +67,7 @@ export default class MemberInfo extends Component {
                     <div className="height_charge border_bottom plAll font14">
                         <div className="fl lh2 color6">团队人数</div>
                         <div className="fr lh2 f12 color9 tr">
-                            <span>{memberInfo.TEEM_MEMBER_COUNT?memberInfo.TEEM_MEMBER_COUNT:0}</span>
+                            <span>{memberInfo.TEEM_MEMBER_COUNT?memberInfo.TEEM_MEMBER_COUNT:0}人</span>
                         </div>
                     </div>
                     <div className="height_charge border_bottom plAll font14">

@@ -3,10 +3,11 @@ import {Link} from 'react-router';
 import InformationComponent from '../../Component/ConfirmPayment/InformationComponent';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
+import '../../Stylesheets/App/common.css';
 import '../../Stylesheets/App/comfirmPayMoney.css';
-import {AddressList} from '../../Action/auth'
-import RPC from '../../Action/rpc'
-import Subscribe from '../../Component/NewComponent/Subscribe'
+import {AddressList,SetAddress} from '../../Action/auth'
+//import RPC from '../../Action/rpc'
+//import Subscribe from '../../Component/NewComponent/Subscribe'
 
 export default class ChooseInfomation extends Component {
 
@@ -15,7 +16,8 @@ export default class ChooseInfomation extends Component {
         super(props);
         // 初始状态
         this.state = {
-            addressList : []
+            addressList : [],
+            render:''
         };
       }
     static contextTypes = {
@@ -37,13 +39,56 @@ export default class ChooseInfomation extends Component {
         })
     }
 
-    choosePath(value){
+    async choosePath(value){
+        //直接购买
         if(this.props.location.query.path){
-            RPC.emit('choosePath',value,this.props.location.query.orderNo)
-            this.context.router.push({pathname:'/comfirmPayMoney',query:{address:value.address,detail:value.detail,name:value.name,mobile:value.mobile,orderId:this.props.location.query.orderNo}});
+            //RPC.emit('choosePath',value,this.props.location.query.orderNo)
+            await this.SetAddressOrder(this.props.location.query.orderArrays,value.id)
+
+            sessionStorage.setItem('getAddress',value.address)
+            sessionStorage.setItem('getDetail',value.detail)
+            sessionStorage.setItem('getName',value.name)
+            sessionStorage.setItem('getMobile',value.mobile)
+
+            this.context.router.push({pathname:'/comfirmPayMoney',
+                query:{
+                    orderId:this.props.location.query.orderNo,
+                    isRedirectCh:true
+                }});
+
+        }
+        //订单进来的
+        if(this.props.location.query.orderPath){
+            await this.SetAddressOrder(this.props.location.query.orderId,value.id)
+
+            sessionStorage.setItem('getOrderAddress',value.address)
+            sessionStorage.setItem('getOrderDetail',value.detail)
+            sessionStorage.setItem('getOrderName',value.name)
+            sessionStorage.setItem('getOrderMobile',value.mobile)
+            this.context.router.push({pathname:'/orders/orderFormDetails',
+                query:{
+                    orderId:this.props.location.query.orderId,
+                    index:this.props.location.query.index,
+                    isToPay:this.props.location.query.isToPay,
+                    isOrder:true
+                }});
+
         }
 
     }
+
+    async SetAddressOrder(orderNos,addressId){
+        await SetAddress(orderNos,addressId)
+            .then(res=>{
+                const {resultList} = res
+                this.setState({addressList:resultList})
+            })
+            .catch(err=>{
+                console.warn('获取地址列表错误',err)
+            })
+    }
+
+
     render() {
         const {addressList} = this.state
         return (
@@ -61,13 +106,13 @@ export default class ChooseInfomation extends Component {
                             <InformationComponent
                                 name={el.name}
                                 phone={el.mobile}
-                                path={el.address?el.address:''+el.detail?el.detail:''}
+                                path={(el.address?el.address:'')+(el.detail?el.detail:'')}
                                 onClick = {()=>this.choosePath(el)}
                             />
                         )
                     })
                 }
-                <div className="df pf width100" style={{bottom:40}}>
+                <div className="df pf width_100" style={{bottom:40}}>
                     <Link to="/deliveredInformation" className="flex1">
                         <CommonBtn
                             title={'添加地址'}

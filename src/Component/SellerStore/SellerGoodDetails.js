@@ -14,15 +14,24 @@ export default class SellerGoodDetails extends Component {
         // 初始状态
         this.state = {
             isVisible:false,
-            orderNo:'',
+            orderId:'',
             refundAmount:''
         };
       }
 
-    async agreeAuditRefund(orderNo,amount){
-        await AuditRefund(orderNo,amount)
+    async agreeRefund(e,orderId,amount){
+
+        //阻止默认事件
+        e.preventDefault()
+        await this.setState({isVisible:true,orderId:orderId,refundAmount:amount})
+    }
+
+    async agreeAuditRefund(amount,orderId){
+        await AuditRefund(amount,orderId)
             .then(res=>{
+                this.setState({isVisible:false})
                 alert('同意退款成功')
+                window.location.reload()
             })
             .catch(err=>{
                 console.warn('删除订单失败',err)
@@ -30,7 +39,7 @@ export default class SellerGoodDetails extends Component {
     }
 
     render() {
-        const {sellerOrderDetails,toPay,deliverGoods,Refund,alreadyRated,evaluationManagement,isShowWhat} = this.props
+        const {sellerOrderDetails,toPay,deliverGoods,Refund,alreadyRated,evaluationManagement,isShowWhat,scrollTop} = this.props
         return (
             <div className="pr">
                 {
@@ -80,16 +89,29 @@ export default class SellerGoodDetails extends Component {
                                                             Refund?
                                                                 <div className=" pa mt55" style={{bottom:10,right:10}}>
                                                                     <div >
-                                                                        <button
-                                                                            className="btn font14 bkg_ff border_ra color_white"
-                                                                            onClick = {()=>this.setState({isVisible:true,orderNo:item.order_no,refundAmount:item.amount})}
-                                                                        >同意</button>
+                                                                        {
+                                                                            item.refundStatus == 0?
+                                                                                <span
+                                                                                    className="di font14 bkg_ff border_ra color_white"
+                                                                                    style={{padding:'2px 5px'}}
+                                                                                    onClick = {(e)=>this.agreeRefund(e,item.id,item.price)}
+                                                                                >同意</span>
+                                                                                :null
+                                                                        }
+                                                                        {
+                                                                            item.refundStatus == 1?
+                                                                                <span
+                                                                                    className="di font14 border_ra color9 border_all"
+                                                                                    style={{padding:'2px 5px'}}
+                                                                                >处理中</span>
+                                                                                :null
+                                                                        }
+
                                                                     </div>
                                                                 </div>
                                                                 :null
                                                         }
                                                     </div>
-
                                                 </div>
                                             )
                                         })
@@ -136,7 +158,7 @@ export default class SellerGoodDetails extends Component {
                                     </div>
                                 </div>
                                 <SplitLine />
-                                {
+                                {/*{
                                     alreadyRated?
                                             <Link to="/searchOrder">
                                                 <div style={{bottom:50,height:50}} className="pf width100"></div>
@@ -147,15 +169,17 @@ export default class SellerGoodDetails extends Component {
                                                 </div>
                                             </Link>
                                         :null
-                                }
+                                }*/}
                             </div>
                         )
                     })
                 }
-                {this.state.isVisible?
+                {
+                    this.state.isVisible?
                     <Modal
                         title = {'确定同意退款？'}
-                        onClick = {()=>this.AuditRefund(this.state.orderNo,this.state.refundAmount)}
+                        scrollTop = {scrollTop}
+                        onClick = {()=>this.agreeAuditRefund(this.state.refundAmount,this.state.orderId)}
                         toHideModal = {()=>this.setState({isVisible:false})}
                     />
                     :null

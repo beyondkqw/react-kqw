@@ -8,7 +8,7 @@ export default class StoreRow extends Component {
 
     render() {
         const {title,price,imgurl,Postage,peopleRemark,
-            payNum,record,browseId,onClick,toDelete,assess,showBorderBottom} = this.props
+            payNum,record,browseId,onClick,toDelete,assess,showBorderBottom,sales} = this.props
 
         return (
             <div className="storeRowContainer">
@@ -50,7 +50,7 @@ export default class StoreRow extends Component {
                                             :
                                             <div className="rightBottom">
                                                 <span>{Postage?Postage+'元':'免邮费'}</span>
-                                                <span style={{color:'#999'}}>{payNum?payNum:0}人付款</span>
+                                                <span style={{color:'#999'}}>售出{sales?sales:0}份</span>
                                             </div>
                                     }
 

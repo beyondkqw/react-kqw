@@ -43,9 +43,8 @@
     margin-left:0;
 }
 .comfirmBtn{
-    height:2rem;
-    line-height:2rem;
-    /*margin-top:2.5rem;*/
+    height:40px;
+    line-height:40px;
 }
 .isConfirm{
     display:none;

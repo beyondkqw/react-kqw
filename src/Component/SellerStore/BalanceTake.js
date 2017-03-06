@@ -126,7 +126,7 @@ export default class BalanceTake extends Component {
                 <div className="plAll">
                     <p className="color6 font14">提现金额</p>
                     <div className="mt5 mb1 f25 df">
-                        <span className="flex-1">￥</span>
+                        <span>￥</span>
                         <input
                             className="borderno"
                             type="text"
@@ -189,13 +189,13 @@ export default class BalanceTake extends Component {
                         确认提现
                     </button>
                 </div>
-                <p className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
+                <div className="f12 color6 tc mt5" style={{marginBottom:10}}>余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
                     <Link to="/personalCenter/balanceCashRule">
                         <span className="di pa" style={{width:15,height:15,lineHeight:0,marginLeft:5}}>
                             <img src={require('../../Images/toRead.png')} alt=""/>
                         </span>
                     </Link>
-                </p>
+                </div>
                 {/*模态层*/}
                 {
                     toShowModal?

@@ -5,7 +5,7 @@ import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/login.css';
 import {Link} from 'react-router';
 import {SellerToLogin,MyInfo} from '../../Action/auth'
-import {saveToken,ErrorNum,ErrorPs,loadToken,getToken,clearToken} from '../../Action/rpc'
+import {saveSellerToken,ErrorNum,ErrorPs,loadSellerToken,getSellerToken,clearSellerToken} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 const icon = [
@@ -24,8 +24,8 @@ export default class SellerLogin extends Component {
         // 初始状态
         this.state = {
             Reminder:'',
-            accName:'13608022531',
-            pwd:'asd123'
+            accName:'',
+            pwd:''
         };
     }
 
@@ -33,23 +33,12 @@ export default class SellerLogin extends Component {
         router:PropTypes.object
     }
 
-   async componentWillMount() {
-      //await  clearToken()
-       //alert(window.location.href)
-       let token = await loadToken(1)
-       let token_S = await loadToken()
-        // if(token){
-        //     this.context.router.replace({pathname:'/sellerStoreCenter'})
-        // }
-        console.log('token',token)
-        //console.log('token===>',getToken())
-       console.log('token111',token_S)
-        //console.log('token111===>',getToken())
-
-    }
-
-    componentDidMount() {
-
+  async componentWillMount() {
+       let token = await loadSellerToken()
+      if(sessionStorage.getItem('loginName') != '' && sessionStorage.getItem('loginPsd') != ''){
+          this.setState({accName:sessionStorage.getItem('loginName')})
+          this.setState({pwd:sessionStorage.getItem('loginPsd')})
+      }
     }
 
     //判断登录名,密码是否正确
@@ -86,17 +75,22 @@ export default class SellerLogin extends Component {
             return
         }
 
-        //alert(localStorage.getItem('latitude'))
         await SellerToLogin(accName,pwd)
-            .then(res=>{
-                saveToken(res,1)
+            .then(async res=>{
+                //卖家登录
+                localStorage.setItem('role','seller')
+                await saveSellerToken(res)
                 this.getMyInfo()
+                //存储信息
+                sessionStorage.setItem('loginName',accName)
+                sessionStorage.setItem('loginPsd',pwd)
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
                 alert('err',err)
             })
     }
+
     async getMyInfo(){
         await MyInfo()
             .then(res=>{
@@ -124,7 +118,7 @@ export default class SellerLogin extends Component {
                         <img src={icon[0]}/>
                     </span>
                     <input
-                        defaultValue={'13608022531'}
+                        value={this.state.accName}
                         maxLength="11"
                         className="editorInput"
                         placeholder="请输入手机号"
@@ -139,7 +133,7 @@ export default class SellerLogin extends Component {
                         <img src={icon[1]}/>
                     </span>
                     <input
-                        defaultValue={'asd123'}
+                        value={this.state.pwd}
                         className="editorInput"
                         placeholder="请输入密码"
                         type="password"

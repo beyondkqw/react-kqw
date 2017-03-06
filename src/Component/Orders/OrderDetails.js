@@ -41,6 +41,7 @@ export default class OrderDetails extends Component {
             .then(res=>{
                 this.setState({isDelete:false})
                 //重新请求列表接口
+
                 this.props.againSend()
             })
             .catch(err=>{
@@ -77,7 +78,16 @@ export default class OrderDetails extends Component {
                                     <div className="di payImgSize mr"><img src={el.img} alt=""/></div>
                                     <span className="color6 font14">{el.store_name}</span>
                                 </div>
-                                <Link to="/orders/orderFormDetails"  query={{orderNo:el.order_no,isToPay:toPay,isMakeSure:makeSure}}>
+                                <Link
+                                    to="/orders/orderFormDetails"
+                                    query={{
+                                    orderId:el.order_no,
+                                    isToPay:toPay,
+                                    isMakeSure:makeSure,
+                                    index:this.props.orderIndex
+                                    }}
+
+                                >
                                     {
                                         el.orderDetails&&el.orderDetails.map((item,index)=>{
                                             return(
@@ -173,7 +183,7 @@ export default class OrderDetails extends Component {
                                         {
                                             makeSure?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
-                                                    <button className="border_ra mr5 color9 border_ccc">查看物流</button>
+                                                    {/*<button className="border_ra mr5 color9 border_ccc">查看物流</button>*/}
                                                     <button
                                                         className="bkg_ff border_ra color_white"
                                                         onClick={()=>this.confirmHarvest(el.order_no)}

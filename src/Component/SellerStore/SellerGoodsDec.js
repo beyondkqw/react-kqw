@@ -260,7 +260,6 @@ export default class SellerGoodsDec extends Component {
     async getProductAttribute(){
         await ProductAttribute(this.props.location.query.id)
             .then(res=>{
-                console.log('商品属性',res)
                 this.setState({attributeList:res})
             })
             .catch(err=>{
@@ -299,7 +298,7 @@ export default class SellerGoodsDec extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section style={{position:'absolute',top:0,bottom:0,overflow:'auto'}}>
+            <section style={{position:'absolute',top:0,bottom:0,overflow:'auto',right:0,left:0}}>
                 <NavBar
                     renderBack = {true}
                     title = {'商品详情'}

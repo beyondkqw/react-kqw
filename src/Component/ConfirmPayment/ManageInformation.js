@@ -84,7 +84,7 @@ export default class ManageInformation extends Component {
                                 <InformationComponent
                                     name={el.name}
                                     phone={el.mobile}
-                                    path={el.address?el.address:''+el.detail?el.detail:''}
+                                    path={(el.address?el.address:'')+(el.detail?el.detail:'')}
                                 />
                                 <div className="f12 border_bottom lh20 plr color9">
                                     <div className="fl pr">
@@ -105,14 +105,14 @@ export default class ManageInformation extends Component {
                                         <div className="di width8"
                                             onClick={()=>this.setState({delAddress:true,addressId:el.id})}
                                         >
-                                            <span className="di lh8 mr5">
+                                            <span className="di lh8" style={{marginRight:5}}>
                                                 <img src={require('../../Images/detelename.png')} alt=""/>
                                             </span>
                                             <span className="di pa mt1">删除</span>
                                         </div>
                                         <Link to = '/deliveredInformation' query={el} >
                                             <div className="di mr20 width8">
-                                                <span className="di lh8 mr5">
+                                                <span className="di lh8" style={{marginRight:5}}>
                                                     <img src={require('../../Images/modify.png')} alt=""/>
                                                 </span>
                                                 <span className="di pa mt1 color9">编辑</span>
@@ -127,7 +127,7 @@ export default class ManageInformation extends Component {
                 {
                     this.state.delAddress?
                         <Modal
-                            title = {'确定删除浏览记录?'}
+                            title = {'确定删除该地址?'}
                             onClick = {()=>this.DeleteAddress()}
                             toHideModal={()=>this.setState({delAddress:false})}
                         />

@@ -11,7 +11,12 @@ export default class OrderFormDetails extends Component {
         // 初始状态
         this.state = {
             orderNo:'',
-            orderFormdDetails:[]
+            orderFormdDetails:[],
+            timer:'',
+            address:'',
+            mobile:'',
+            name:'',
+            detail:''
             //confirmItem:[]
         };
       }
@@ -21,7 +26,7 @@ export default class OrderFormDetails extends Component {
     }
 
      componentWillMount(){
-        let orderNo = this.props.location.query.orderNo
+        let orderNo = this.props.location.query.orderId
         this.setState({orderNo:orderNo})
         this.getOrderDetail(orderNo);
     }
@@ -35,8 +40,31 @@ export default class OrderFormDetails extends Component {
     async getOrderDetail(param){
         await OrderDetail(param)
                 .then(res=>{
-                    console.log('res',res)
                     this.setState({orderFormdDetails:res})
+                    this.setState({timer:res.plan_receive_time})
+                    this.setState({address:res.address})
+                    this.setState({detail:res.address_detail})
+                    this.setState({mobile:res.mobile})
+                    this.setState({name:res.name})
+
+                    //地址从sessionStorage里面去拿
+                    if(this.props.location.query.isOrder){
+                        this.setState({address:sessionStorage.getItem('getOrderAddress')?sessionStorage.getItem('getOrderAddress'):''})
+                        this.setState({datail:sessionStorage.getItem('getOrderDetail')?sessionStorage.getItem('getOrderDetail'):''})
+                        this.setState({name:sessionStorage.getItem('getOrderName')?sessionStorage.getItem('getOrderName'):''})
+                        this.setState({mobile:sessionStorage.getItem('getOrderMobile')?sessionStorage.getItem('getOrderMobile'):''})
+                        sessionStorage.removeItem("getOrderAddress")
+                        sessionStorage.removeItem("getOrderDetail")
+                        sessionStorage.removeItem("getOrderName")
+                        sessionStorage.removeItem("getOrderMobile")
+                    }
+
+                    if(this.props.location.query.isOrderTime){
+                        //时间从sessionStorage里面去拿
+                        this.setState({timer:sessionStorage.getItem('orderTime')})
+                        sessionStorage.removeItem("getOrderMobile")
+                    }
+
                 })
                 .catch(err=>{
                     console.warn('err',err)
@@ -46,38 +74,89 @@ export default class OrderFormDetails extends Component {
     async getConfirmReceive(param){
         await ConfirmReceived(param)
             .then(res=>{
-                //this.context.router.goBack()
+                this.context.router.goBack()
             })
             .catch(err=>{
                 console.warn('收获失败',err)
             })
     }
 
+    //支付
+    toPay(){
+        if(!this.state.address){
+            alert('请选择地址')
+            return
+        }
+        this.context.router.push({pathname:'/confirmPayment/choosePayment',
+            query:{
+                orderNos:this.props.location.query.orderId,
+                payMuchMoney:this.state.orderFormdDetails.amount,
+                planReceiveTime:this.state.timer
+            }});
+    }
+
     render() {
-        const {orderFormdDetails} = this.state
+        const {orderFormdDetails,timer,address,detail,mobile,name} = this.state
         return (
             <div className="containerNav">
-                <div className="df plAll border_bottom">
-                    <div className="pr" style={{width:14,height:14,margin:'auto'}}>
-                        <img className="pa" src={require("../../Images/time.png")} alt=""/>
-                    </div>
-                    <div className="flex1 mtlr">
-                        <div className="font14 color6">
-                            <span>收货人:</span><span>{orderFormdDetails.name}</span>
-                            <span className="di fr color6">{orderFormdDetails.mobile}</span>
+                <Link
+                    to={this.props.location.query.index == 0?'/chooseInfomation':null}
+                    query = {{
+                    orderPath:true,
+                    orderId:this.props.location.query.orderId,
+                    index:this.props.location.query.index,
+                    isToPay:this.props.location.query.isToPay
+                    }}
+                >
+                    <div className="flex flex1 flex-pack-justify flex-align-center border_bottom" style={{padding:'5px 10px'}}>
+                        <div className="flex flex1 flex-align-center">
+                            <span className="fl di positionImg" style={{lineHeight:0,marginRight:15}}>
+                                <img src={require('../../Images/location.png')} alt=""/>
+                            </span>
+                            {
+                                address == null || address == ''?
+                                    <div style={{height:35}}>
+                                        <span className="color6 font14">完善收货地址</span>
+                                    </div>
+                                    :
+                                <div className="flex1 mtlr">
+                                    <div className="flex flex-pack-justify font14 color6">
+                                        <div><span>收货人:</span><span>{name}</span></div>
+                                        <span className="di fr color6">{mobile}</span>
+                                    </div>
+                                    <p className="f12 color9 mt3">收货地址:<span>{(address?address:'')+(detail?detail:'')}</span></p>
+                                </div>
+                            }
                         </div>
-                        <p className="f12 color9 mt3">收货地址:<span>{orderFormdDetails.address+orderFormdDetails.address_detail}</span></p>
+                        <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
+                            <img src={require('../../Images/rightArrow.png')} alt=""/>
+                        </span>
                     </div>
-                </div>
-                {/*<div className="df plAll">
-                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
-                    <div className="flex1 mtlr">
-                        <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
-                        <p className="f12 color9 mt3"><span>{orderFormdDetails.real_receive_time}</span></p>
+                </Link>
+                <Link
+                    to="/receivingTime"
+                    query={{
+                    orderId:this.props.location.query.orderId,
+                    orderPayMoney:true,
+                    index:this.props.location.query.index,
+                    isToPay:this.props.location.query.isToPay
+                    }}
+                >
+                    <div className="flex flex-pack-justify flex-align-center border_bottom" style={{height:50,padding:'5px 10px'}}>
+                        <div className="flex flex-align-center">
+                            <span className="di mr6 timeImg" style={{lineHeight:0}}><img src={require('../../Images/time.png')} alt=""/></span>
+                            {
+                                timer ==''||timer ==undefined ?
+                                    <span className="color6 font14">送货时间不限</span>
+                                    :
+                                    <span className="color6 font14">{this.state.timer}</span>
+                            }
+                        </div>
+                       <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
+                            <img src={require('../../Images/rightArrow.png')} alt=""/>
+                        </span>
                     </div>
-                    <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
-                </div>*/}
-
+                </Link>
                 <SplitLine />
                 <div className="paymargin">
                     <div className="di payImgSize mr"><img src={orderFormdDetails.img} alt=""/></div>
@@ -97,9 +176,13 @@ export default class OrderFormDetails extends Component {
                                     <p className=""><span className="f12">￥</span><span className="f15">{el.price}</span></p>
                                     <p className="td_lt color9"><span className="f12">￥</span><span className="f15">258</span></p>
                                     <p className="color9 font14"><span>X</span><span>{el.num}</span></p>
-                                    <Link to="/orders/applicationForAfterSales" query={{orderNo:el.orderNo}}>
-                                        {/*退款中  退款成功*/}
-                                        <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
+                                    <Link to="/orders/applicationForAfterSales" query={{orderNo:el.id}}>
+                                        {
+                                            this.props.location.query.index != 0?
+                                                <button className="plr border_ra color9 font14 border_all mt45">申请售后</button>
+                                                :null
+                                        }
+
                                     </Link>
                                 </div>
                             </div>
@@ -111,7 +194,7 @@ export default class OrderFormDetails extends Component {
                          <span className='color9'>商品总价</span>
                          <div className="fr color9">
                              <span>￥</span>
-                             <span>189</span>
+                             <span>{orderFormdDetails.amount}</span>
                          </div>
                      </div>
                     <div className='f12'>
@@ -143,11 +226,11 @@ export default class OrderFormDetails extends Component {
                     <div>
                         <span>订单编号</span>
                         <div className="fr">
-                            <span>{this.props.location.query.orderNo}</span>
+                            <span>{this.props.location.query.orderId}</span>
                         </div>
                     </div>
                     <div>
-                        <span>创建时时间</span>
+                        <span>创建时间</span>
                         <div className="fr">
                             <span>{orderFormdDetails.create_time}</span>
                         </div>
@@ -155,25 +238,24 @@ export default class OrderFormDetails extends Component {
                     <div>
                         <span>付款时间</span>
                         <div className="fr">
-                            <span>{orderFormdDetails.pay_time}</span>
+                            <span>{orderFormdDetails.pay_time?orderFormdDetails.pay_time:'未付款'}</span>
                         </div>
                     </div>
                     <div>
-                        <span>发货时间</span>
+                        <span>发货状态</span>
                         <div className="fr">
-                            <span>{orderFormdDetails.delivery_time}</span>
+                            <span>{this.props.location.query.index==1?'未发货':orderFormdDetails.delivery_time?orderFormdDetails.delivery_time:'未发货'}</span>
                         </div>
                     </div>
                 </div>
                 {
                     this.props.location.query.isToPay?
                         <div className="fr font14 plAll">
-                            <Link to="/comfirmPayMoney" query={{orderId:this.props.location.query.orderNo}}>
-                                <button
-                                    className="bkg_ff border_ra color_white pl3"
-                                    onClick = {()=>this.confirmClick()}
-                                >支付</button>
-                            </Link>
+                            <button
+                                className="bkg_ff border_ra color_white"
+                                style={{padding:'5px 10px'}}
+                                onClick = {()=>this.toPay()}
+                            >支付</button>
                         </div>
                         :null
                 }

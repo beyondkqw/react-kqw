@@ -1,261 +1,894 @@
 import React from 'react';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import ReactDOM from 'react-dom';
 
+const App = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../App').default)
+  },'App')
+}
+
+/*const Home = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Home').default)
+  },'Home')
+}*/
 import Home from '../Component/Home';
-import App from '../App';
-import Search from '../Component/NewComponent/Search';
-import Carousel from '../Component/NewComponent/Carousel';
-import OtherApp from '../Component/NewComponent/OtherApp';
-import Footer from '../Component/NewComponent/Footer';
-import GoodsDescription from '../Component/GoodsDetails/GoodsDescription';
-import Store from '../Component/GoodsDetails/Store';
+
+const Search = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/NewComponent/Search').default)
+  },'Search')
+}
+
+const Carousel = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/NewComponent/Carousel').default)
+  },'Carousel')
+}
+
+const OtherApp = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/NewComponent/OtherApp').default)
+  },'OtherApp')
+}
+
+const Footer = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/NewComponent/Footer').default)
+  },'Footer')
+}
+
+const GoodsDescription = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/GoodsDescription').default)
+  },'GoodsDescription')
+}
+
+const Store = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/Store').default)
+  },'Store')
+}
+
+/*const ShoppingCart = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ShoppingCarts/ShoppingCart').default)
+  },'ShoppingCart')
+}*/
 import ShoppingCart from '../Component/ShoppingCarts/ShoppingCart';
-import ComfirmPayMoney from '../Component/ConfirmPayment/ComfirmPayMoney';
-import DeliveredInformation from '../Component/ConfirmPayment/DeliveredInformation';
-import ReceivingTime from '../Component/ConfirmPayment/ReceivingTime';
-import ChooseInfomation from '../Component/ConfirmPayment/ChooseInfomation';
-import ManageInformation from '../Component/ConfirmPayment/ManageInformation';
-import CloudCard from '../Component/CloudCard/CloudCard';
-import PendPaymentDetails from '../Component/CloudCard/PendPaymentDetails';
-import DiaryContainer from '../Component/CloudCard/DiaryContainer';
-import PendingPayment from '../Component/CloudCard/PendingPayment';
-import AlreadyUsed from '../Component/CloudCard/AlreadyUsed';
-import TotalDetails from '../Component/CloudCard/TotalDetails';
+
+const ComfirmPayMoney = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/ComfirmPayMoney').default)
+  },'ComfirmPayMoney')
+}
+
+const DeliveredInformation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/DeliveredInformation').default)
+  },'DeliveredInformation')
+}
+
+const ReceivingTime = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/ReceivingTime').default)
+  },'ReceivingTime')
+}
+
+const ChooseInfomation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/ChooseInfomation').default)
+  },'ChooseInfomation')
+}
+
+const ManageInformation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/ManageInformation').default)
+  },'ManageInformation')
+}
+
+const CloudCard = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/CloudCard/CloudCard').default)
+  },'CloudCard')
+}
+
+const PendPaymentDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/CloudCard/PendPaymentDetails').default)
+  },'PendPaymentDetails')
+}
+
+const DiaryContainer = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/CloudCard/DiaryContainer').default)
+  },'DiaryContainer')
+}
+
+const PendingPayment = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/CloudCard/PendingPayment').default)
+  },'PendingPayment')
+}
+
+const AlreadyUsed = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/CloudCard/AlreadyUsed').default)
+  },'AlreadyUsed')
+}
+
+const TotalDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/CloudCard/TotalDetails').default)
+  },'TotalDetails')
+}
+
+/*const PersonalCenter = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/PersonalCenter').default)
+  },'PersonalCenter')
+}*/
 import PersonalCenter from '../Component/PersonalCenter/PersonalCenter';
-import Partner from '../Component/PersonalCenter/Partner';
-import MyCustomer from '../Component/PersonalCenter/MyCustomer';
-import Collect from '../Component/PersonalCenter/Collect';
-import SearchPage from '../Component/GoodsDetails/SearchPage';
-import Login from '../Component/Login/Login';
-import Register from '../Component/Login/Register';
-import ForgetPwd from '../Component/Login/ForgetPwd';
-import BindPhone from '../Component/Login/BindPhone';
-import PwdModify from '../Component/Login/PwdModify'
-import Setting from '../Component/PersonalCenter/Setting';
-import Savety from '../Component/PersonalCenter/Savety';
-import Feedback from '../Component/PersonalCenter/Feedback';
-import AboutDemo from '../Component/PersonalCenter/AboutDemo';
-import CommisionGiving from '../Component/PersonalCenter/CommisionGiving';
-import OrderList from '../Component/Orders/OrderList';
-import ViewEvaluation from '../Component/Orders/ViewEvaluation';
-import PublishEvalute from '../Component/Orders/PublishEvalute';
-import ChaseRatings from '../Component/Orders/ChaseRatings';
-import ChoosePayment from '../Component/ConfirmPayment/ChoosePayment';
-import SurePayment from '../Component/ConfirmPayment/SurePayment';
-import PointGiving from '../Component/PersonalCenter/PointGiving';
-import BalanceGiving from '../Component/PersonalCenter/BalanceGiving';
-import GoodsCategory from '../Component/GoodsDetails/GoodsCategory';
-import BrowseRecord from '../Component/PersonalCenter/BrowseRecord';
-import OrderFormDetails from '../Component/Orders/OrderFormDetails';
-import ApplicationForAfterSales from '../Component/Orders/ApplicationForAfterSales';
-import UserInfo from '../Component/PersonalCenter/UserInfo';
-import MemberClub from '../Component/PersonalCenter/MemberClub';
-import MemberInfo from '../Component/PersonalCenter/MemberInfo';
-import MemberIntroduction from '../Component/PersonalCenter/MemberIntroduction';
-import CountryRank from '../Component/PersonalCenter/CountryRank'
-import LocationSearch from '../Component/NearbyShop/LocationSearch'
-import NearbyShop from '../Component/NearbyShop/NearbyShop'
-import MyCharges from '../Component/PersonalCenter/MyCharges'
-import AllIncome from '../Component/PersonalCenter/AllIncome'
-import Retailing from '../Component/PersonalCenter/Retailing'
-import RetailingDetails from '../Component/PersonalCenter/RetailingDetails'
-import TakenDetails from '../Component/PersonalCenter/TakenDetails'
-import ConfirmGivenPerson from '../Component/PersonalCenter/ConfirmGivenPerson'
-import MyBankCark from '../Component/PersonalCenter/MyBankCark'
-import BankInformation from '../Component/PersonalCenter/BankInformation'
-import ToWatchOtherInfo from '../Component/PersonalCenter/ToWatchOtherInfo'
-import WithdrawCash from '../Component/PersonalCenter/WithdrawCash'
-import JdyStock from '../Component/PersonalCenter/JdyStock'
-import StockDetail from '../Component/PersonalCenter/StockDetail'
-import Recharge from '../Component/PersonalCenter/Recharge'
-import RechargeNum from '../Component/PersonalCenter/RechargeNum'
-import MyAlipay from '../Component/PersonalCenter/MyAlipay'
-import CommissionCash from '../Component/PersonalCenter/CommissionCash'
-import BalanceCashRule from '../Component/PersonalCenter/BalanceCashRule'
-import ErweiCode from '../Component/PersonalCenter/ErweiCode'
-import TeamAmount from '../Component/PersonalCenter/TeamAmount'
-import ContactMe from '../Component/GoodsDetails/ContactMe'
-import RecommendPerson from '../Component/PersonalCenter/RecommendPerson'
-import EquityDetails from '../Component/PersonalCenter/EquityDetails'
-import SellerLogin from '../Component/SellerLogin/SellerLogin'
-import SellerForgetPwd from '../Component/SellerLogin/SellerForgetPwd'
-import SellerRegister from '../Component/SellerLogin/SellerRegister'
-import EntryStoreInformation from '../Component/SellerStore/EntryStoreInformation'
-import SellerSearchLocation from '../Component/SellerStore/SellerSearchLocation'
-import SellerStoreCenter from '../Component/SellerStore/SellerStoreCenter'
-import CustomerService from '../Component/SellerStore/CustomerService'
-import SellerOrderList from '../Component/SellerStore/SellerOrderList'
-import SellerErWeiCode from '../Component/SellerStore/SellerErWeiCode'
-import ToShip from '../Component/SellerStore/ToShip'
-import SearchOrder from '../Component/SellerStore/SearchOrder'
-import SellerSetting from '../Component/SellerStore/SellerSetting'
-import SellerMineCode from '../Component/SellerStore/SellerMineCode'
-import ToFund from '../Component/SellerStore/ToFund'
-import EvaluationDetails from '../Component/SellerStore/EvaluationDetails'
-import ProductManagement from '../Component/SellerStore/ProductManagement'
-import OnSale from '../Component/SellerStore/OnSale'
-import SearchGoods from '../Component/SellerStore/SearchGoods'
-import OffTheShelf from '../Component/SellerStore/OffTheShelf'
-import SearchOffTheShelf from '../Component/SellerStore/SearchOffTheShelf'
-import MineOffDown from '../Component/SellerStore/MineOffDown'
-import SellerStoreSetting from '../Component/SellerStore/SellerStoreSetting'
-import SellerBankCard from '../Component/SellerStore/SellerBankCard'
-import SellerSavety from '../Component/SellerStore/SellerSavety'
-import SellerAddCard from '../Component/SellerStore/SellerAddCard'
-import SellerMyAlipy from '../Component/SellerStore/SellerMyAlipy'
-import SalesStatistics from '../Component/SellerStore/SalesStatistics'
-import SellerBindPhone from '../Component/SellerLogin/SellerBindPhone'
-import SellerPwdModify from '../Component/SellerLogin/SellerPwdModify'
-import StoreSubCommission from '../Component/SellerStore/StoreSubCommission'
-import SellerOrderDetails from '../Component/SellerStore/SellerOrderDetails'
-import RemarkManage from '../Component/SellerStore/RemarkManage'
-import ShopHome from '../Component/SellerStore/ShopHome'
-import SellerContactMe from '../Component/SellerStore/SellerContactMe'
-import SellerGoodsDec from '../Component/SellerStore/SellerGoodsDec'
-import PaymentSuccess from '../Component/ConfirmPayment/PaymentSuccess'
-import StoreClassify from '../Component/GoodsDetails/StoreClassify'
+
+const Partner = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Partner').default)
+  },'Partner')
+}
+
+const MyCustomer = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MyCustomer').default)
+  },'MyCustomer')
+}
+
+const Collect = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Collect').default)
+  },'Collect')
+}
+
+const SearchPage = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/SearchPage').default)
+  },'SearchPage')
+}
+
+const Login = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Login/Login').default)
+  },'Login')
+}
+
+const Register = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Login/Register').default)
+  },'Register')
+}
+
+const ForgetPwd = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Login/ForgetPwd').default)
+  },'ForgetPwd')
+}
+
+const BindPhone = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Login/BindPhone').default)
+  },'BindPhone')
+}
+
+const PwdModify = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Login/PwdModify').default)
+  },'PwdModify')
+}
+
+const Setting = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Setting').default)
+  },'Setting')
+}
+
+const Savety = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Savety').default)
+  },'Savety')
+}
+
+const Feedback = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Feedback').default)
+  },'Feedback')
+}
+
+const AboutDemo = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/AboutDemo').default)
+  },'AboutDemo')
+}
+
+const CommisionGiving = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/CommisionGiving').default)
+  },'CommisionGiving')
+}
+
+const OrderList = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Orders/OrderList').default)
+  },'OrderList')
+}
+
+const ViewEvaluation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Orders/ViewEvaluation').default)
+  },'ViewEvaluation')
+}
+
+const PublishEvalute = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Orders/PublishEvalute').default)
+  },'PublishEvalute')
+}
+
+const ChaseRatings = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Orders/ChaseRatings').default)
+  },'ChaseRatings')
+}
+
+const ChoosePayment = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/ChoosePayment').default)
+  },'ChoosePayment')
+}
+
+const SurePayment = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/SurePayment').default)
+  },'SurePayment')
+}
+
+const PointGiving = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/PointGiving').default)
+  },'PointGiving')
+}
+
+const BalanceGiving = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/BalanceGiving').default)
+  },'BalanceGiving')
+}
+
+const GoodsCategory = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/GoodsCategory').default)
+  },'GoodsCategory')
+}
+
+const BrowseRecord = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/BrowseRecord').default)
+  },'BrowseRecord')
+}
+
+const OrderFormDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Orders/OrderFormDetails').default)
+  },'OrderFormDetails')
+}
+
+const ApplicationForAfterSales = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/Orders/ApplicationForAfterSales').default)
+  },'ApplicationForAfterSales')
+}
+
+const UserInfo = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/UserInfo').default)
+  },'UserInfo')
+}
+
+const MemberClub = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MemberClub').default)
+  },'MemberClub')
+}
+
+const MemberInfo = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MemberInfo').default)
+  },'MemberInfo')
+}
+
+const MemberIntroduction = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MemberIntroduction').default)
+  },'MemberIntroduction')
+}
+
+const CountryRank = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/CountryRank').default)
+  },'CountryRank')
+}
+
+const LocationSearch = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/NearbyShop/LocationSearch').default)
+  },'LocationSearch')
+}
+
+const NearShop = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/NearbyShop/NearShop').default)
+  },'NearShop')
+}
+
+const MyCharges = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MyCharges').default)
+  },'MyCharges')
+}
+
+const AllIncome = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/AllIncome').default)
+  },'AllIncome')
+}
+
+const Retailing = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Retailing').default)
+  },'Retailing')
+}
+
+const RetailingDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/RetailingDetails').default)
+  },'RetailingDetails')
+}
+
+const TakenDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/TakenDetails').default)
+  },'TakenDetails')
+}
+
+const ConfirmGivenPerson = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/ConfirmGivenPerson').default)
+  },'ConfirmGivenPerson')
+}
+
+const MyBankCark = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MyBankCark').default)
+  },'MyBankCark')
+}
+
+const BankInformation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/BankInformation').default)
+  },'BankInformation')
+}
+
+const ToWatchOtherInfo = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/ToWatchOtherInfo').default)
+  },'ToWatchOtherInfo')
+}
+
+const WithdrawCash = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/WithdrawCash').default)
+  },'WithdrawCash')
+}
+
+const JdyStock = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/JdyStock').default)
+  },'JdyStock')
+}
+
+const StockDetail = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/StockDetail').default)
+  },'StockDetail')
+}
+
+const Recharge = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/Recharge').default)
+  },'Recharge')
+}
+
+const RechargeNum = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/RechargeNum').default)
+  },'RechargeNum')
+}
+
+const MyAlipay = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/MyAlipay').default)
+  },'MyAlipay')
+}
+
+const CommissionCash = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/CommissionCash').default)
+  },'CommissionCash')
+}
+
+const BalanceCashRule = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/BalanceCashRule').default)
+  },'BalanceCashRule')
+}
+
+const ErweiCode = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/ErweiCode').default)
+  },'ErweiCode')
+}
+
+const TeamAmount = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/TeamAmount').default)
+  },'TeamAmount')
+}
+
+const ContactMe = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/ContactMe').default)
+  },'ContactMe')
+}
+
+const RecommendPerson = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/RecommendPerson').default)
+  },'RecommendPerson')
+}
+
+const EquityDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/EquityDetails').default)
+  },'EquityDetails')
+}
+
+const SellerLogin = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerLogin/SellerLogin').default)
+  },'SellerLogin')
+}
+
+const SellerForgetPwd = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerLogin/SellerForgetPwd').default)
+  },'SellerForgetPwd')
+}
+
+const SellerRegister = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerLogin/SellerRegister').default)
+  },'SellerRegister')
+}
+
+const EntryStoreInformation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/EntryStoreInformation').default)
+  },'EntryStoreInformation')
+}
+
+const SellerSearchLocation = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerSearchLocation').default)
+  },'SellerSearchLocation')
+}
+
+const SellerStoreCenter = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerStoreCenter').default)
+  },'SellerStoreCenter')
+}
+
+const CustomerService = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/CustomerService').default)
+  },'CustomerService')
+}
+
+const SellerOrderList = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerOrderList').default)
+  },'SellerOrderList')
+}
+
+const SellerErWeiCode = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerErWeiCode').default)
+  },'SellerErWeiCode')
+}
+
+const ToShip = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/ToShip').default)
+  },'ToShip')
+}
+
+const SearchOrder = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SearchOrder').default)
+  },'SearchOrder')
+}
+
+const SellerSetting = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerSetting').default)
+  },'SellerSetting')
+}
+
+const SellerMineCode = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerMineCode').default)
+  },'SellerMineCode')
+}
+
+const ToFund = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/ToFund').default)
+  },'ToFund')
+}
+
+const EvaluationDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/EvaluationDetails').default)
+  },'EvaluationDetails')
+}
+
+const ProductManagement = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/ProductManagement').default)
+  },'ProductManagement')
+}
+
+const OnSale = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/OnSale').default)
+  },'OnSale')
+}
+
+const SearchGoods = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SearchGoods').default)
+  },'SearchGoods')
+}
+
+const OffTheShelf = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/OffTheShelf').default)
+  },'OffTheShelf')
+}
+
+const SearchOffTheShelf = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SearchOffTheShelf').default)
+  },'SearchOffTheShelf')
+}
+
+const MineOffDown = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/MineOffDown').default)
+  },'MineOffDown')
+}
+
+const SellerStoreSetting = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerStoreSetting').default)
+  },'SellerStoreSetting')
+}
+
+const SellerBankCard = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerBankCard').default)
+  },'SellerBankCard')
+}
+
+const SellerSavety = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerSavety').default)
+  },'SellerSavety')
+}
+
+const SellerAddCard = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerAddCard').default)
+  },'SellerAddCard')
+}
+
+const SellerMyAlipy = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerMyAlipy').default)
+  },'SellerMyAlipy')
+}
+
+const SalesStatistics = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SalesStatistics').default)
+  },'SalesStatistics')
+}
+
+const SellerBindPhone = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerLogin/SellerBindPhone').default)
+  },'SellerBindPhone')
+}
+
+const SellerPwdModify = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerLogin/SellerPwdModify').default)
+  },'SellerPwdModify')
+}
+
+const StoreSubCommission = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/StoreSubCommission').default)
+  },'StoreSubCommission')
+}
+
+const SellerOrderDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerOrderDetails').default)
+  },'SellerOrderDetails')
+}
+
+const RemarkManage = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/RemarkManage').default)
+  },'RemarkManage')
+}
+
+const ShopHome = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/ShopHome').default)
+  },'ShopHome')
+}
+
+const SellerContactMe = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerContactMe').default)
+  },'SellerContactMe')
+}
+
+const SellerGoodsDec = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerGoodsDec').default)
+  },'SellerGoodsDec')
+}
+
+const PaymentSuccess = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/ConfirmPayment/PaymentSuccess').default)
+  },'PaymentSuccess')
+}
+
+const StoreClassify = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/StoreClassify').default)
+  },'StoreClassify')
+}
+
+/*const CloudComplex = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/CloudComplex').default)
+  },'CloudComplex')
+}*/
 import CloudComplex from '../Component/GoodsDetails/CloudComplex'
-import RechargeWay from '../Component/PersonalCenter/RechargeWay'
-import StoreClassifyDetail from '../Component/GoodsDetails/StoreClassifyDetail'
-import ShareQrCode from '../Component/PersonalCenter/ShareQrCode'
-import SellerModifyCard from '../Component/SellerStore/SellerModifyCard'
-import SellerBalanceMan from '../Component/SellerStore/SellerBalanceMan'
-import BalanceTake from '../Component/SellerStore/BalanceTake'
-import SellerChooseType from '../Component/SellerStore/SellerChooseType'
-import SellerTakenDetails from '../Component/SellerStore/SellerTakenDetails'
-import ToWebView from '../Component/GoodsDetails/ToWebView'
 
+const RechargeWay = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/RechargeWay').default)
+  },'RechargeWay')
+}
 
+const StoreClassifyDetail = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/StoreClassifyDetail').default)
+  },'StoreClassifyDetail')
+}
+
+const ShareQrCode = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/ShareQrCode').default)
+  },'ShareQrCode')
+}
+
+const SellerModifyCard = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerModifyCard').default)
+  },'SellerModifyCard')
+}
+
+const SellerBalanceMan = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerBalanceMan').default)
+  },'SellerBalanceMan')
+}
+
+const BalanceTake = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/BalanceTake').default)
+  },'BalanceTake')
+}
+
+const SellerChooseType = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerChooseType').default)
+  },'SellerChooseType')
+}
+
+const SellerTakenDetails = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/SellerTakenDetails').default)
+  },'SellerTakenDetails')
+}
+
+const ToWebView = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/ToWebView').default)
+  },'ToWebView')
+}
+
+const ChooseCity = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/SellerStore/ChooseCity').default)
+  },'ChooseCity')
+}
+
+const CommonSoon = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/CommonSoon').default)
+  },'CommonSoon')
+}
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
-    <Route path="/" component={App}>
+    <Route path="/" getComponent={App}>
       <IndexRoute component={Home} />
       <Route path="home" component={Home}/>
-      <Route path="search" component={Search}/>
-      <Route path="carousel" component={Carousel}/>
-      <Route path="otherApp" component={OtherApp}/>
-      <Route path="footer" component={Footer}/>
+      <Route path="search" getComponent={Search}/>
+      <Route path="carousel" getComponent={Carousel}/>
+      <Route path="otherApp" getComponent={OtherApp}/>
+      <Route path="footer" getComponent={Footer}/>
       <Route path="shoppingCart" component={ShoppingCart}/>
-      <Route path="store" component={Store}/>
-      <Route path="comfirmPayMoney" component={ComfirmPayMoney}/>
-      <Route path="deliveredInformation" component={DeliveredInformation}/>
-      <Route path="goodsDescription" component={GoodsDescription}/>
-      <Route path="receivingTime" component={ReceivingTime}/>
-      <Route path="chooseInfomation" component={ChooseInfomation}/>
-      <Route path="manageInformation" component={ManageInformation}/>
-      <Route path="/cloudCartoon" component={CloudCard}/>
-      <Route path="pendPaymentDetails" component={PendPaymentDetails}/>
-      <Route path="diaryContainer" component={DiaryContainer}/>
+      <Route path="store" getComponent={Store}/>
+      <Route path="comfirmPayMoney" getComponent={ComfirmPayMoney}/>
+      <Route path="deliveredInformation" getComponent={DeliveredInformation}/>
+      <Route path="goodsDescription" getComponent={GoodsDescription}/>
+      <Route path="receivingTime" getComponent={ReceivingTime}/>
+      <Route path="chooseInfomation" getComponent={ChooseInfomation}/>
+      <Route path="manageInformation" getComponent={ManageInformation}/>
+      <Route path="/cloudCartoon" getComponent={CloudCard}/>
+      <Route path="pendPaymentDetails" getComponent={PendPaymentDetails}/>
+      <Route path="diaryContainer" getComponent={DiaryContainer}/>
       <Route path="personalCenter" component={PersonalCenter}/>
-      <Route path="partner" component={Partner}/>
-      <Route path="GoodsDetail/SearchPage" component ={SearchPage} />
-      <Route path="Login/Login" component={Login} />
-      <Route path="Login/Register" component={Register} />
-      <Route path="Login/ForgetPwd" component={ForgetPwd} />
-      <Route path="Setting/BindPhone" component={BindPhone} />
-      <Route path="Setting/PwdModify" component={PwdModify} />
-      <Route path="personalCenter/collect" component={Collect} />
-      <Route path="personalCenter/setting" component={Setting} />
-      <Route path="personalCenter/savety" component={Savety} />
-      <Route path="personalCenter/feedback" component={Feedback} />
-      <Route path="personalCenter/aboutDemo" component={AboutDemo} />
-      <Route path="orderList" component={OrderList} />
-      <Route path="orderList/viewEvaluation" component={ViewEvaluation} />
-      <Route path="orderList/chaseRatings" component={ChaseRatings} />
-      <Route path="orderList/publishEvalute" component={PublishEvalute} />
-      <Route path="confirmPayment/choosePayment" component={ChoosePayment} />
-      <Route path="confirmPayment/surePayment" component={SurePayment} />
-      <Route path="personalCenter/nearbyShop" component={NearbyShop} />
-      <Route path="personalCenter/myCustomer" component={MyCustomer} />
-      <Route path="personalCenter/commisionGiving" component={CommisionGiving} />
-      <Route path="personalCenter/pointGiving" component={PointGiving} />
-      <Route path="personalCenter/balanceGiving" component={BalanceGiving} />
-      <Route path="personalCenter/BrowseRecord" component={BrowseRecord} />
-      <Route path="orders/orderFormDetails" component={OrderFormDetails} />
-      <Route path="goodsDetails/goodsCategory" component={GoodsCategory} />
-      <Route path="orders/applicationForAfterSales" component={ApplicationForAfterSales} />
-      <Route path="personalCenter/userInfo" component={UserInfo} />
-      <Route path="personalCenter/memberClub" component={MemberClub} />
-      <Route path="personalCenter/memberInfo" component={MemberInfo} />
-      <Route path="personalCenter/memberIntroduction" component={MemberIntroduction} />
-      <Route path="personalCenter/countryRank" component={CountryRank} />
-      <Route path="nearbyShop/locationSearch" component={LocationSearch} />
-      <Route path="nearbyShop/nearbyShop" component={NearbyShop} />
-      <Route path="personalCenter/myCharges" component={MyCharges} />
-      <Route path="personalCenter/allIncome" component={AllIncome} />
-      <Route path="personalCenter/retailing" component={Retailing} />
-      <Route path="personalCenter/retailingDetails" component={RetailingDetails} />
-      <Route path="personalCenter/takenDetails" component={TakenDetails} />
-      <Route path="personalCenter/confirmGivenPerson" component={ConfirmGivenPerson} />
-      <Route path="personalCenter/myBankCark" component={MyBankCark} />
-      <Route path="personalCenter/bankInformation" component={BankInformation} />
-      <Route path="personalCenter/toWatchOtherInfo" component={ToWatchOtherInfo} />
-      <Route path="personalCenter/withdrawCash" component={WithdrawCash} />
-      <Route path="personalCenter/jdyStock" component={JdyStock} />
-      <Route path="personalCenter/stockDetail" component={StockDetail} />
-      <Route path="personalCenter/recharge" component={Recharge} />
-      <Route path="personalCenter/rechargeNum" component={RechargeNum} />
-      <Route path="pendingPayment" component={PendingPayment} />
-      <Route path="alreadyUsed" component={AlreadyUsed} />
-      <Route path="totalDetails" component={TotalDetails} />
-      <Route path="personalCenter/myAlipay" component={MyAlipay} />
-      <Route path="personalCenter/commissionCash" component={CommissionCash} />
-      <Route path="personalCenter/balanceCashRule" component={BalanceCashRule} />
-      <Route path="personalCenter/erweiCode" component={ErweiCode} />
-      <Route path="personalCenter/teamAmount" component={TeamAmount} />
-      <Route path="contactMe" component={ContactMe} />
-      <Route path="personalCenter/recommendPerson" component={RecommendPerson} />
-      <Route path="sellerLogin" component={SellerLogin} />
-      <Route path="sellerForgetPwd" component={SellerForgetPwd} />
-      <Route path="sellerRegister" component={SellerRegister} />
-      <Route path="entryStoreInformation" component={EntryStoreInformation} />
-      <Route path="sellerSearchLocation" component={SellerSearchLocation} />
-      <Route path="remarkManage" component={RemarkManage} />
-      <Route path="sellerStoreCenter" component={SellerStoreCenter} />
-      <Route path="customerService" component={CustomerService} />
-      <Route path="sellerOrderList" component={SellerOrderList} />
-      <Route path="sellerErWeiCode" component={SellerErWeiCode} />
-      <Route path="toShip" component={ToShip} />
-      <Route path="sellerSetting" component={SellerSetting} />
-      <Route path="sellerMineCode" component={SellerMineCode} />
-      <Route path="toFund" component={ToFund} />
-      <Route path="evaluationDetails" component={EvaluationDetails} />
-      <Route path="productManagement" component={ProductManagement} />
-      <Route path="onSale" component={OnSale} />
-      <Route path="searchOrder" component={SearchOrder} />
-      <Route path="searchGoods" component={SearchGoods} />
-      <Route path="offTheShelf" component={OffTheShelf} />
-      <Route path="searchOffTheShelf" component={SearchOffTheShelf} />
-      <Route path="mineOffDown" component={MineOffDown} />
-      <Route path="sellerStoreSetting" component={SellerStoreSetting} />
-      <Route path="sellerBankCard" component={SellerBankCard} />
-      <Route path="sellerSavety" component={SellerSavety} />
-      <Route path="sellerAddCard" component={SellerAddCard} />
-      <Route path="sellerMyAlipy" component={SellerMyAlipy} />
-      <Route path="salesStatistics" component={SalesStatistics} />
-      <Route path="sellerBindPhone" component={SellerBindPhone} />
-      <Route path="sellerPwdModify" component={SellerPwdModify} />
-      <Route path="storeSubCommission" component={StoreSubCommission} />
-      <Route path="sellerOrderDetails" component={SellerOrderDetails} />
-      <Route path="shopHome" component={ShopHome} />
-      <Route path="sellerContactMe" component={SellerContactMe} />
-      <Route path="sellerGoodsDec" component={SellerGoodsDec} />
-      <Route path="equityDetails" component={EquityDetails} />
-      <Route path="paymentSuccess" component={PaymentSuccess} />
-      <Route path="storeClassify" component={StoreClassify} />
+      <Route path="partner" getComponent={Partner}/>
+      <Route path="GoodsDetail/SearchPage" getComponent ={SearchPage} />
+      <Route path="Login/Login" getComponent={Login} />
+      <Route path="Login/Register" getComponent={Register} />
+      <Route path="Login/ForgetPwd" getComponent={ForgetPwd} />
+      <Route path="Setting/BindPhone" getComponent={BindPhone} />
+      <Route path="Setting/PwdModify" getComponent={PwdModify} />
+      <Route path="personalCenter/collect" getComponent={Collect} />
+      <Route path="personalCenter/setting" getComponent={Setting} />
+      <Route path="personalCenter/savety" getComponent={Savety} />
+      <Route path="personalCenter/feedback" getComponent={Feedback} />
+      <Route path="personalCenter/aboutDemo" getComponent={AboutDemo} />
+      <Route path="orderList" getComponent={OrderList} />
+      <Route path="orderList/viewEvaluation" getComponent={ViewEvaluation} />
+      <Route path="orderList/chaseRatings" getComponent={ChaseRatings} />
+      <Route path="orderList/publishEvalute" getComponent={PublishEvalute} />
+      <Route path="confirmPayment/choosePayment" getComponent={ChoosePayment} />
+      <Route path="confirmPayment/surePayment" getComponent={SurePayment} />
+      <Route path="personalCenter/myCustomer" getComponent={MyCustomer} />
+      <Route path="personalCenter/commisionGiving" getComponent={CommisionGiving} />
+      <Route path="personalCenter/pointGiving" getComponent={PointGiving} />
+      <Route path="personalCenter/balanceGiving" getComponent={BalanceGiving} />
+      <Route path="personalCenter/BrowseRecord" getComponent={BrowseRecord} />
+      <Route path="orders/orderFormDetails" getComponent={OrderFormDetails} />
+      <Route path="goodsDetails/goodsCategory" getComponent={GoodsCategory} />
+      <Route path="orders/applicationForAfterSales" getComponent={ApplicationForAfterSales} />
+      <Route path="personalCenter/userInfo" getComponent={UserInfo} />
+      <Route path="personalCenter/memberClub" getComponent={MemberClub} />
+      <Route path="personalCenter/memberInfo" getComponent={MemberInfo} />
+      <Route path="personalCenter/memberIntroduction" getComponent={MemberIntroduction} />
+      <Route path="personalCenter/countryRank" getComponent={CountryRank} />
+      <Route path="nearbyShop/locationSearch" getComponent={LocationSearch} />
+      <Route path="goods/NearByShop" getComponent={NearShop} />
+      <Route path="personalCenter/myCharges" getComponent={MyCharges} />
+      <Route path="personalCenter/allIncome" getComponent={AllIncome} />
+      <Route path="personalCenter/retailing" getComponent={Retailing} />
+      <Route path="personalCenter/retailingDetails" getComponent={RetailingDetails} />
+      <Route path="personalCenter/takenDetails" getComponent={TakenDetails} />
+      <Route path="personalCenter/confirmGivenPerson" getComponent={ConfirmGivenPerson} />
+      <Route path="personalCenter/myBankCark" getComponent={MyBankCark} />
+      <Route path="personalCenter/bankInformation" getComponent={BankInformation} />
+      <Route path="personalCenter/toWatchOtherInfo" getComponent={ToWatchOtherInfo} />
+      <Route path="personalCenter/withdrawCash" getComponent={WithdrawCash} />
+      <Route path="personalCenter/jdyStock" getComponent={JdyStock} />
+      <Route path="personalCenter/stockDetail" getComponent={StockDetail} />
+      <Route path="personalCenter/recharge" getComponent={Recharge} />
+      <Route path="personalCenter/rechargeNum" getComponent={RechargeNum} />
+      <Route path="pendingPayment" getComponent={PendingPayment} />
+      <Route path="alreadyUsed" getComponent={AlreadyUsed} />
+      <Route path="totalDetails" getComponent={TotalDetails} />
+      <Route path="personalCenter/myAlipay" getComponent={MyAlipay} />
+      <Route path="personalCenter/commissionCash" getComponent={CommissionCash} />
+      <Route path="personalCenter/balanceCashRule" getComponent={BalanceCashRule} />
+      <Route path="personalCenter/erweiCode" getComponent={ErweiCode} />
+      <Route path="personalCenter/teamAmount" getComponent={TeamAmount} />
+      <Route path="contactMe" getComponent={ContactMe} />
+      <Route path="personalCenter/recommendPerson" getComponent={RecommendPerson} />
+      <Route path="sellerLogin" getComponent={SellerLogin} />
+      <Route path="sellerForgetPwd" getComponent={SellerForgetPwd} />
+      <Route path="sellerRegister" getComponent={SellerRegister} />
+      <Route path="entryStoreInformation" getComponent={EntryStoreInformation} />
+      <Route path="sellerSearchLocation" getComponent={SellerSearchLocation} />
+      <Route path="remarkManage" getComponent={RemarkManage} />
+      <Route path="sellerStoreCenter" getComponent={SellerStoreCenter} />
+      <Route path="customerService" getComponent={CustomerService} />
+      <Route path="sellerOrderList" getComponent={SellerOrderList} />
+      <Route path="sellerErWeiCode" getComponent={SellerErWeiCode} />
+      <Route path="toShip" getComponent={ToShip} />
+      <Route path="sellerSetting" getComponent={SellerSetting} />
+      <Route path="sellerMineCode" getComponent={SellerMineCode} />
+      <Route path="toFund" getComponent={ToFund} />
+      <Route path="evaluationDetails" getComponent={EvaluationDetails} />
+      <Route path="productManagement" getComponent={ProductManagement} />
+      <Route path="onSale" getComponent={OnSale} />
+      <Route path="searchOrder" getComponent={SearchOrder} />
+      <Route path="searchGoods" getComponent={SearchGoods} />
+      <Route path="offTheShelf" getComponent={OffTheShelf} />
+      <Route path="searchOffTheShelf" getComponent={SearchOffTheShelf} />
+      <Route path="mineOffDown" getComponent={MineOffDown} />
+      <Route path="sellerStoreSetting" getComponent={SellerStoreSetting} />
+      <Route path="sellerBankCard" getComponent={SellerBankCard} />
+      <Route path="sellerSavety" getComponent={SellerSavety} />
+      <Route path="sellerAddCard" getComponent={SellerAddCard} />
+      <Route path="sellerMyAlipy" getComponent={SellerMyAlipy} />
+      <Route path="salesStatistics" getComponent={SalesStatistics} />
+      <Route path="sellerBindPhone" getComponent={SellerBindPhone} />
+      <Route path="sellerPwdModify" getComponent={SellerPwdModify} />
+      <Route path="storeSubCommission" getComponent={StoreSubCommission} />
+      <Route path="sellerOrderDetails" getComponent={SellerOrderDetails} />
+      <Route path="shopHome" getComponent={ShopHome} />
+      <Route path="sellerContactMe" getComponent={SellerContactMe} />
+      <Route path="sellerGoodsDec" getComponent={SellerGoodsDec} />
+      <Route path="equityDetails" getComponent={EquityDetails} />
+      <Route path="paymentSuccess" getComponent={PaymentSuccess} />
+      <Route path="storeClassify" getComponent={StoreClassify} />
       <Route path="cloudComplex" component={CloudComplex} />
-      <Route path="rechargeWay" component={RechargeWay} />
-      <Route path="storeClassifyDetail" component={StoreClassifyDetail} />
-      <Route path="shareQrCode" component={ShareQrCode} />
-      <Route path="sellerModifyCard" component={SellerModifyCard} />
-      <Route path="sellerBalanceMan" component={SellerBalanceMan} />
-      <Route path="balanceTake" component={BalanceTake} />
-      <Route path="sellerChooseType" component={SellerChooseType} />
-      <Route path="sellerTakenDetails" component={SellerTakenDetails} />
-      <Route path="toWebView" component={ToWebView} />
+      <Route path="rechargeWay" getComponent={RechargeWay} />
+      <Route path="storeClassifyDetail" getComponent={StoreClassifyDetail} />
+      <Route path="shareQrCode" getComponent={ShareQrCode} />
+      <Route path="sellerModifyCard" getComponent={SellerModifyCard} />
+      <Route path="sellerBalanceMan" getComponent={SellerBalanceMan} />
+      <Route path="balanceTake" getComponent={BalanceTake} />
+      <Route path="sellerChooseType" getComponent={SellerChooseType} />
+      <Route path="sellerTakenDetails" getComponent={SellerTakenDetails} />
+      <Route path="toWebView" getComponent={ToWebView} />
+      <Route path="chooseCity" getComponent={ChooseCity} />
+      <Route path="commonSoon" getComponent={CommonSoon} />
     </Route>
   </Router>
 );
+
+
+
 
 export default RouteConfig;

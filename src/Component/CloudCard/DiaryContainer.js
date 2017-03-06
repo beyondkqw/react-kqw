@@ -23,7 +23,6 @@ export default class DiaryContainer extends Component {
         await GiveAwayRecord(3)
             .then(res=>{
                 this.setState({rechareList:res.resultList})
-                console.log('获取到的数据==========>',this.state.rechareList)
             })
             .catch(err=>{
                 console.warn('err',err)

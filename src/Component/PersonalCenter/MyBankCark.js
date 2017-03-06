@@ -27,9 +27,8 @@ export default class MyBankCark extends Component {
     }
     render() {
         const {bankList} = this.state
-        console.log('bankList=====>',bankList)
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 <div className="ChooseHeight">
                     {
                         bankList == ''|| bankList == null?

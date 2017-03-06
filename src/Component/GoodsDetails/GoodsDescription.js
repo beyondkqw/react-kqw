@@ -303,30 +303,6 @@ export default class GoodsDescription extends Component {
                 console.warn('err',err)
             })
     }
-    //
-    ////获取商品属性ids
-    //getAttrIds(type,id,isRadio){
-    //    //console.log('ids',type,id,isRadio)
-    //    //if(type==0){
-    //    //
-    //    //}
-    //    this.state.attributeList.map((el,index)=>{
-    //        if(index==type){
-    //            if(this.goodIds.indexOf(id)==-1){
-    //                this.goodIds.push(id)
-    //            }else{
-    //                this.goodIds = this.goodIds.filter(el=>{
-    //                    if(el==id){
-    //                        return false
-    //                    }
-    //                    return true
-    //                })
-    //            }
-    //        }
-    //    })
-    //
-    //    console.log('goodIds',this.goodIds)
-    //}
 
     //加入购物车 type = 1 加入购物车  2 立即购买
     async addShopCar(ids,count,typeParam){
@@ -338,7 +314,7 @@ export default class GoodsDescription extends Component {
             }else{
                 await AddShopCar(this.props.location.query.id,ids.join(','),count)
                     .then(res=>{
-                        console.log('添加购物车成功',res)
+                        alert('添加购物车成功')
                         this.setState({isShow:false})
                     })
                     .catch(err=>{
@@ -367,29 +343,14 @@ export default class GoodsDescription extends Component {
        await this.setState({isShow:true,type:type})
     }
 
-    changeFrameHeight(value){
-        console.log('进来了=========》')
-        const ifm= document.getElementById("myiframe");
-        var iframeHeight = ifr.document.body.scrollHeight+ 'px';
-        alert(iframeHeight);
-        document.getElementById("myiframe").style.height = iframeHeight;
-        /*const m = /\#(\d+)$/.exec(value)
-        console.warn('detail',value)
-        if (m && m[1]){
-            this.setState({height: (m[1] | 0) + 24});
-        }
-        console.log('-----------url',value)
-        console.log('--------------------',this.state.height)*/
-        //ifm.height=document.documentElement.clientHeight;
-    }
+
 
     //商品介绍
     commodityIntroduction(){
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
-
         return (
             <div className="pr">
-                <iframe src={detail}  id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:'300'}}></iframe>
+                <iframe src={detail}  id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:'320'}}></iframe>
             </div>
         )
     }
@@ -400,7 +361,7 @@ export default class GoodsDescription extends Component {
         return(
             <div className="goodsParams">
                 <div style={{height:10,backgroundColor:'#f5f5f5'}} />
-                <div className="tc">{params}</div>
+                <div className="tc"><img src={params} alt=""/></div>
             </div>
         )
     }
@@ -421,13 +382,13 @@ export default class GoodsDescription extends Component {
                         <ul id='ListInside'>*/}
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
                             {
-                                showEmptyImg?
+                                remarkList == ''?
                                     <IsShowEmptyImg
                                         styleSheet={{width:69,height:72}}
                                         title={'暂无评论哦~'}
                                     />
                                     :
-                                remarkList.map((el,index)=>{
+                                    remarkList&&remarkList.map((el,index)=>{
                                     return(
                                         <div
                                             className="remark-items f12 color9"
@@ -481,7 +442,7 @@ export default class GoodsDescription extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
+            <section>
                 <div className="bannerImg">
                     <AutoPlaySwipeableViews
                         style={{height:'9rem'}}
@@ -604,6 +565,7 @@ export default class GoodsDescription extends Component {
                 {this.state.isShow?
                     <GoodsPopup
                         //onClick = {(type,id,isRadio)=>this.getAttrIds(type,id,isRadio)}
+                        image = {goodsDetails.IMAGE}
                         attr = {this.state.attributeList}
                         closePopUp = {()=>this.setState({isShow:false})}
                         ensurePress = {(ids,count,typeParam)=>this.addShopCar(ids,count,typeParam)}

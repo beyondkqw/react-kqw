@@ -6,7 +6,7 @@ export default class OtherApp extends Component {
     render() {
         const {routerName,routerUrl,routerPath} = this.props
         return (
-                <Link to={routerPath}>
+                <Link to={routerPath?routerPath:'/commonSoon'}>
                     <li>
                         <div className="app_icon">
                             <img  src={routerUrl}/>

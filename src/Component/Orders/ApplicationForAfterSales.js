@@ -17,7 +17,8 @@ export default class ApplicationForAfterSales extends Component {
             type:'',
             recStatus:'',
             applyAmount:'',
-            refundDesc:''
+            refundDesc:'',
+            Reminder:''
         };
     }
 
@@ -51,10 +52,11 @@ export default class ApplicationForAfterSales extends Component {
         const {applyAmount,refundReason,type,recStatus,refundDesc} = this.state
         await Refund(orderDetailId,refundReason,refundDesc)
             .then(res=>{
+                alert('申请退款成功,请等待')
                 this.context.router.goBack()
             })
             .catch(err=>{
-                console.warn('err',err)
+                this.setState({Reminder:err.message})
             })
     }
 
@@ -199,6 +201,9 @@ export default class ApplicationForAfterSales extends Component {
                     </div>
                 </div>
                 <div className="footerHidden"></div>
+                <div className="tc f12 color_red width_100 plr mtb loginHeight pa" style={{lineHeight:'1.8rem',bottom:50}}>
+                    {this.state.Reminder}
+                </div>
                 <div className="width_100 commit bkg_ff color_white pf bottom0">
                     <button
                         className="width_100 height_all"

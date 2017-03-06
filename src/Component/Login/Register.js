@@ -34,7 +34,6 @@ export default class Register extends Component {
 
     componentWillMount() {
         //隐藏域
-        console.log('ahdiu=======>');
         let recommend = GetQueryString('recommendId');
         this.setState({recommendId:recommend})
     }
@@ -42,6 +41,10 @@ export default class Register extends Component {
     async getCode(){
         const {mobile} = this.state
         clearInterval(this._timer)
+        if (!ErrorNum(mobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
         await SMSCode(mobile,0)
         .then(res=>{
             console.log('获取手机验证码成功',res)
@@ -140,6 +143,7 @@ export default class Register extends Component {
                         <input
                             ref = 'code'
                             maxLength="6"
+                            style={{minWidth:100}}
                             className="editorInput"
                             placeholder="填写手机的验证码"
                             onChange = {()=>this.setState({code:this.refs.code.value})}

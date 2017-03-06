@@ -47,6 +47,10 @@ export default class SellerRegister extends Component {
     async getCode(){
         const {sellerMobile} = this.state
         clearInterval(this._timer)
+        if (!ErrorNum(sellerMobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
         await SMSCode(sellerMobile,1)
             .then(res=>{
                 console.log('获取手机验证码成功',res)
@@ -135,7 +139,8 @@ export default class SellerRegister extends Component {
         }
         await SellerToRegister(sellerMobile,sellerPwd,smsCode,code,storeName,role)
             .then(res=>{
-                this.context.router.push({pathname:'/sellerLogin'})
+                alert('注册成功')
+                this.context.router.push({pathname:'/entryStoreInformation'})
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
@@ -241,7 +246,7 @@ export default class SellerRegister extends Component {
                     onClick = {()=>this.toSubmit()}
                 >注 册</button>
 
-                <div className="backToLogin">
+                <div className="backToLogin" style={{marginBottom:10}}>
                     <Link to = '/sellerLogin' style={{fontSize:14,color:'#999'}}>已经有账号？<span style={{color:'#ff5500'}}>登录</span></Link>
                 </div>
             </div>

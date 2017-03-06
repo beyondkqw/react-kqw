@@ -14,6 +14,9 @@ export default class SellerSetting extends Component {
       constructor(props) {
         super(props);
         // 初始状态
+          this.address = '',
+          this.latitude = '',
+          this.longitude = '',
         this.state = {
             storeImg:'',
             storeName:'',
@@ -21,10 +24,8 @@ export default class SellerSetting extends Component {
             licenseImg:'',
             cardFace:'',
             cardBack:'',
-            gpsAddress:'',
             showMap:false,
             Reminder:'',
-            GPSaddress:'',
             uploadHeaderImg:'',
             uploadLicenseImg:'',
             uploadCardFaceImg:'',
@@ -49,12 +50,15 @@ export default class SellerSetting extends Component {
     }
 
     componentWillMount() {
-        this.setState({GPSaddress:sessionStorage.getItem('gpsAddress')})
-        this.setState({latitude:sessionStorage.getItem('latitude')})
-        this.setState({longitude:sessionStorage.getItem('longitude')})
         this.getStoreDetail(this.props.location.query.storeId)
     }
 
+    //获取定位的地址信息
+    componentDidMount() {
+        this.latitude = sessionStorage.getItem('latitude')
+        this.longitude = sessionStorage.getItem('longitude')
+        this.address = sessionStorage.getItem('address')
+    }
     async getStoreDetail(value){
         await StoreDetail(value)
             .then(res=>{
@@ -68,6 +72,7 @@ export default class SellerSetting extends Component {
                 this.setState({provId:res.store.province})
                 this.setState({cityId:res.store.city})
                 this.setState({countyId:res.store.area})
+                this.setState({detail:res.store.addressDetail})
             })
             .catch(err=>{
                 console.warn('err',err)
@@ -129,7 +134,7 @@ export default class SellerSetting extends Component {
                 await this.setState({locType:1})
             }
         }
-        let {storeName,detail,uploadHeaderImg,address,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,GPSaddress,latitude,longitude,type} = this.state
+        let {storeName,detail,uploadHeaderImg,address,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,type} = this.state
 
         uploadHeaderImg =this.state.isUploadHeader?(this.state.Mosaic + uploadHeaderImg):uploadHeaderImg;
         uploadLicenseImg = this.state.isUploadLicense?(this.state.Mosaic + uploadLicenseImg):uploadLicenseImg;
@@ -142,7 +147,7 @@ export default class SellerSetting extends Component {
             return
         }
 
-        await StoreEdit(storeName,uploadHeaderImg,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,GPSaddress,latitude,longitude,type)
+        await StoreEdit(storeName,uploadHeaderImg,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,this.address,this.latitude,this.longitude,type)
             .then(res=>{
                 // this.context.router.push({pathname:'/storeSubCommission',query:{storeId:this.props.location.query.storeId}})
                 this.context.router.goBack()
@@ -192,9 +197,9 @@ export default class SellerSetting extends Component {
     }
 
     render() {
-        const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap,GPSaddress} = this.state
+        const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap,detail} = this.state
         return (
-            <div className="containerNav">
+            <div style={{position:'absolute',top:0,bottom:0,overflowY: 'auto',overflowX: 'hidden',left:0,width:'100%'}}>
                 <NavBar
                     renderBack = {true}
                     title = {'店铺资料'}
@@ -258,17 +263,18 @@ export default class SellerSetting extends Component {
                                 className="borderno tr color9"
                                 type="\"
                                 placeholder="请填写详细信息"
+                                value={detail}
                                 onChange={()=>this.setState({detail:this.refs.address_Detais.value})}
                             />
                         </div>
                     </div>
                     <div
-                        style={{flexDirection:'row',height:50}}
+                        style={{flexDirection:'row',padding:'5px 10px'}}
                         className="df flex-pack-justify flex-align-center border_bottom plr font14"
                     >
-                        <span className="color6">当前店铺地址</span>
-                        <div>
-                            {GPSaddress}
+                        <span className="color6 di" style={{width:160}}>当前店铺地址</span>
+                        <div className="color9" style={{textAlign:'right'}}>
+                            {this.address?this.address:'暂未定位到当前位置'}
                         </div>
                     </div>
                     <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14  border_bottom">

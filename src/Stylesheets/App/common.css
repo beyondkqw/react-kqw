@@ -18,14 +18,22 @@ label{
     margin-bottom: 0;
     font-weight: normal;
 }
+p{
+    margin:0 !important;
+}
 .containerNav{
     position:absolute;
     top:0;
     left:0;
     width:100%;
+    bottom:0;
+    background-color: #fff;
     /*height:100%;*/
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+.overScroll{
     -webkit-overflow-scrolling: touch;
 }
 .oa{
@@ -99,7 +107,7 @@ p{
     display:none;
 }
 .plr{
-    padding:0 0.5rem;
+    padding:0 10px;
 }
 .ptb{
     padding:0.5rem 0;
@@ -132,7 +140,7 @@ p{
     padding:0 0.4rem;
 }
 .ChooseHeight{
-    padding:1rem 0.5rem;
+    padding:0.5rem;
 }
 .classify{
     padding-right:0.5rem;
@@ -147,7 +155,7 @@ p{
     margin: 0 0.5rem;
 }
 .m0{
-    margin:0;
+    margin:0 !important;
 }
 .mt{
     margin-top:0.2rem;
@@ -325,7 +333,7 @@ p{
     text-align:right;
 }
 .border_ra{
-    border-radius: 0.25rem;
+    border-radius: 5px;
 }
 .border_ra50{
     border-radius: 50%;
@@ -355,7 +363,7 @@ p{
     background-color: #e5e5e5;
 }
 .font14{
-    font-size:14px;
+    font-size:14px !important;
 }
 .font18{
     font-size:18px;

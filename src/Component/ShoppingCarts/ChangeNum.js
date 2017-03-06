@@ -27,15 +27,16 @@ export default class ChangeNum extends Component {
         const {value} = this.state
         if(type){
             await this.setState({value:++this.state.value});
+            minus&&minus(this.state.value,type)
         }else{
             if(value==1){
                 del&&del()
             }
             if(value>1){
                 await this.setState({value:--this.state.value});
+                minus&&minus(this.state.value,type)
             }
         }
-        minus&&minus(this.state.value,type)
     }
 
 

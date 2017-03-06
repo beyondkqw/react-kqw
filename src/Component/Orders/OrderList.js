@@ -199,10 +199,8 @@ export default class OrderList extends Component {
 
         // 滑动结束后，停在加载区域
         if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY) {
-            if (this.state.pullUpStatus == 1) { // 发起了加载，那么更新状态
-                this.setState({pullUpStatus: 2});
-                this.fetchItems(false);
-            }
+            this.setState({pullUpStatus: 2});
+            this.fetchItems(false);
         }
 
     }
@@ -298,6 +296,7 @@ export default class OrderList extends Component {
                                         orderDetails = {orderItems}
                                         toPay = {true}
                                         scrollTop = {scrollTop}
+                                        orderIndex = {this.state.index}
                                         />
                                 </div>
                             :null
@@ -309,6 +308,7 @@ export default class OrderList extends Component {
                                         orderDetails = {orderItems}
                                         scrollTop = {scrollTop}
                                         alreadyRated = {true}
+                                        orderIndex = {this.state.index}
                                         />
                                 </div>
                             :null
@@ -321,6 +321,7 @@ export default class OrderList extends Component {
                                         orderDetails = {orderItems}
                                         scrollTop = {scrollTop}
                                         makeSure={true}
+                                        orderIndex = {this.state.index}
                                     />
                                 </div>
                             :null
@@ -332,6 +333,7 @@ export default class OrderList extends Component {
                                         orderDetails = {orderItems}
                                         scrollTop = {scrollTop}
                                         toRated = {true}
+                                        orderIndex = {this.state.index}
                                         //query = {}
                                     />
                                 </div>
@@ -341,10 +343,11 @@ export default class OrderList extends Component {
                             { this.state.index == 4?
                                 <div>
                                     <OrderDetails
-                                        againSend = {()=>this.sure('5')}
+                                        againSend = {()=>this.sure('')}
                                         orderDetails = {orderItems}
                                         scrollTop = {scrollTop}
                                         allRated = {true}
+                                        orderIndex = {this.state.index}
                                     />
                                 </div>
                             :null

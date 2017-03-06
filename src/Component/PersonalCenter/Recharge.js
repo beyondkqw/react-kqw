@@ -7,6 +7,7 @@ import EnterPassword from '../../Component/CommonComponent/EnterPassword';
 import Location from '../../Component/SellerStore/Location'
 import '../../Stylesheets/App/personal.css';
 import {Generate,HomeBanner} from '../../Action/auth';
+import {CheckNum} from '../../Action/rpc';
 
 
 export default class Recharge extends Component {
@@ -97,8 +98,10 @@ export default class Recharge extends Component {
         }else{
             this.setState({Reminder:''})
         }
-
-
+        if(!CheckNum(this.refs.reChargeMoney.value)){
+            alert('请输入整数金额')
+            return
+        }
         this.getGenerate(this.state.provName+this.state.cityName+this.state.countysName,this.state.provId,this.state.cityId,this.state.countyId,this.refs.reChargeMoney.value,this.props.location.query.chargeType)
     }
 
@@ -228,7 +231,7 @@ export default class Recharge extends Component {
                         onClick={()=>this.confirmOrder()}
                     />
                 </div>
-                <p className="f12 color6 tc mt5 pr">
+                <div className="f12 color6 tc mt5 pr">
                     <span className="di checkedRead pa">
                         <input
                             type="checkbox" id="isRead"
@@ -242,7 +245,7 @@ export default class Recharge extends Component {
                             <img src={require('../../Images/toRead.png')} alt=""/>
                         </span>
                     </Link>
-                </p>
+                </div>
                 {
                     showModal?
                         <EnterPassword />

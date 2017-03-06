@@ -66,7 +66,7 @@ export default class ToShip extends Component {
         const {clickIndex} = this.state
         console.log('clickIndex=====>',clickIndex)
         return (
-            <div className="containerNav">
+            <div>
                 <NavBar
                     renderBack = {true}
                     title = {'发货物流'}

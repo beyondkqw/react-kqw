@@ -7,7 +7,6 @@ import NavBar from '../../Component/CommonComponent/NavBar'
 export default class SellerContactMe extends Component {
     render() {
         const {mobile,qq,wechat} = this.props.location.query
-        console.log(mobile+qq+wechat)
         return (
             <div>
                 <NavBar

@@ -4,6 +4,7 @@
 
 
 const KEY_TOKEN = 'accessToken';
+const KEY_SellerTOKEN = 'sellerToken';
 const KEY_USERINFO = 'accessUserInfo';
 
 import URI from 'urijs';
@@ -12,6 +13,7 @@ import { EventEmitter } from 'fbemitter';
 
 
 let token = '';
+let sellerToken = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
 
@@ -37,11 +39,10 @@ const emit = RPC.emit.bind(RPC);
 export default RPC;
 
 export function getUserInfo(){
-    console.log('getUserInfo===>',userInfo);
     return userInfo;
 };
+
 export function saveUserInfo(_userInfo) {
-    console.log('saveUserInfo====>',_userInfo);
     userInfo = _userInfo;
 }
 
@@ -50,8 +51,7 @@ export async function clearUserInfo() {
     userInfo = null;
 }
 
-
-
+//买家token
 export function saveToken(_token) {
     console.log('saveToken====>',_token);
     token = _token;
@@ -73,7 +73,30 @@ export function getToken() {
     return token;
 }
 
-async function request (urlKey,method,params = {},token = ''){
+//卖家token
+export function saveSellerToken(_token) {
+    console.log('saveToken====>',_token);
+    sellerToken = _token;
+    return localStorage.setItem(KEY_SellerTOKEN, sellerToken);
+}
+
+export async function loadSellerToken() {
+    sellerToken = await localStorage.getItem(KEY_SellerTOKEN);
+    return sellerToken;
+}
+
+export async function clearSellerToken() {
+    await localStorage.removeItem(KEY_SellerTOKEN);
+    sellerToken = null;
+}
+
+export function getSellerToken() {
+    console.log('getSellerToken====>',sellerToken);
+    return sellerToken;
+}
+
+
+async function request (urlKey,method,params = {},otherUrl){
     //console.log('params',params);
     let url = urlKey;
 
@@ -81,7 +104,13 @@ async function request (urlKey,method,params = {},token = ''){
         return null;
     }
     //拼接地址
-    url = ROOT_URL + url;
+    if(otherUrl){
+        url
+    }else{
+        url = ROOT_URL + url;
+    }
+    /*//拼接地址
+    url = ROOT_URL + url;*/
     //请求参数
 
     let headers = {}
@@ -96,7 +125,7 @@ async function request (urlKey,method,params = {},token = ''){
     let options = {
         method: method,
 
-        // mode:'no-cors',
+        //mode:'no-cors',
         headers,
         //headers: {
         //    //'Accept' :'application/json',
@@ -108,21 +137,42 @@ async function request (urlKey,method,params = {},token = ''){
         //}
     };
     console.log('获取到的token---',getToken());
-    if(await loadToken()){
-        params.token = getToken();
+    console.log('获取到的token---',getSellerToken());
+    console.log('获取到的角色---',localStorage.getItem('role'));
+    if(otherUrl){
+
+    }else{
+        if(localStorage.getItem('role') == 'seller'){
+            console.log('seller')
+            if(await loadSellerToken()){
+                params.token = getSellerToken();
+                //alert('卖家版的token',getSellerToken())
+            }
+        }else if(localStorage.getItem('role') == 'buyer'){
+            console.log('buyer')
+            if(await loadToken()){
+                console.log('buyer===========')
+                params.token = getToken();
+                //alert('买家版的token',getToken())
+            }
+        }
+        /* if(await loadToken()){
+         params.token = getToken();
+         }*/
+        if (imei)
+        {
+            params.imei =imei;
+        }
+        if (client)
+        {
+            params.client =client;
+        }
+        if (version)
+        {
+            params.version =version;
+        }
     }
-    if (imei)
-    {
-        params.imei =imei;
-    }
-    if (client)
-    {
-        params.client =client;
-    }
-    if (version)
-    {
-        params.version =version;
-    }
+
 
     //console.log('获取到的token后',params);
     //GET请求
@@ -200,11 +250,11 @@ async function request (urlKey,method,params = {},token = ''){
 
 }
 
-export async function apiGet(urlKey,params = {}){
-    return await request(urlKey,'GET',params,'');
+export async function apiGet(urlKey,params = {},otherUrl){
+    return await request(urlKey,'GET',params,otherUrl);
 }
-export async function apiPost(urlKey,params = {}){
-    return await request(urlKey,'POST',params,'');
+export async function apiPost(urlKey,params = {},otherUrl){
+    return await request(urlKey,'POST',params,otherUrl);
 }
 
 //验证是否是正整数
@@ -291,6 +341,14 @@ export function EnglishChar(value){
 
 export function specialChar(value){
     if ((new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#¥⋯⋯&*（）——|{}【】‘；：”“'。，、？]").test(value))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function specialCharPoint(value){
+    if (!(new RegExp("[`~!@#$^&*()=|{}':;',\\[\\]<>/?~！@#¥⋯⋯&*（）——|{}【】‘；：”“'。，、？]").test(value))) {
         return false;
     } else {
         return true;

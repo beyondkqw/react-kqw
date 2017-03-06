@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import '../../Stylesheets/App/personal.css';
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class Feedback extends Component {
     render() {
         return (
-            <div>
+            <div className="containerNav">
                 <NavBar
                     renderBack = {true}
                     title = {'帮助与反馈'}

@@ -261,7 +261,7 @@ export default class CountryRank extends Component {
                                 </Link>
                                 <Link to='/personalCenter/memberInfo'>
                                     <div className="rank-head-cell font14 mr10">
-                                        我的总分:{this.props.location.query.point}
+                                        我的消费:{this.props.location.query.point}
                                     </div>
                                 </Link>
                             </div>

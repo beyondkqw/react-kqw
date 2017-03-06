@@ -51,7 +51,7 @@ export default class SellerStoreCenter extends Component {
     render() {
         const {storeDetails,Now_Amount,frozen} = this.state
         return (
-            <div>
+            <div className="containerNav">
                 <section className="pr tc center_bkImg" style={{height:170,paddingTop:20}}>
                     <Link to="/sellerSetting" query={{storeId:storeDetails.id}}>
                         <div className="personLogo">
@@ -96,7 +96,7 @@ export default class SellerStoreCenter extends Component {
                                         <p>
                                             <span className="di separateRowImg"><img src={item.imgUrl} alt=""/></span>
                                         </p>
-                                        <p className="f12 m_top color6">{item.name}</p>
+                                        <div className="f12 m_top color6">{item.name}</div>
                                     </div>
                                 </Link>
                             )

@@ -59,22 +59,22 @@ export default class MemberIntroduction extends Component {
                                 <div className="di cellSize color_yellow color_pink tc  border_ra50 z_index">
                                     V<span>{perlv?perlv:0}</span>
                                 </div>
-                                <p className="mt3 color_white">{perGrade?perGrade:0}</p>
+                                {/*<p className="mt3 color_white">{perGrade?perGrade:0}</p>*/}
                             </div>
                             <div className="fl width_3333 tc" style={{marginTop:-16}}>
                                 <div className="di bigSize color_yellow bkg_ff tc border_ra50 z_index">
                                     V<span>{minelv?minelv:0}</span>
                                 </div>
-                                <div className="mt3 color_white">
+                                {/*<div className="mt3 color_white">
                                     <div>总分</div>
                                     <p>{vipPoint?vipPoint:0}</p>
-                                </div>
+                                </div>*/}
                             </div>
                             <div className="fl width_3333 tc">
                                 <div className="di cellSize color_yellow color_pink tc border_ra50 z_index">
                                     V<span>{nextlv?nextlv:0}</span>
                                 </div>
-                                <p className="mt3 color_white">{nextGrade?nextGrade:0}</p>
+                                {/*<p className="mt3 color_white">{nextGrade?nextGrade:0}</p>*/}
                             </div>
                         </div>
                     </div>

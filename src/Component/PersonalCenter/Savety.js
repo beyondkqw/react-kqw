@@ -34,20 +34,15 @@ export default class Savety extends Component {
                         </ul>
                     </div>
                     <div className="bkg_gray save_h2 pl8">账号</div>
-                    <div className="list-block m0 font14">
-                        <ul>
-                            <Link>
-                                <li className="item-content border_bottom isConfirmSet">
-                                    <div className="item-inner">
-                                        <div className="item-title height_all">
-                                            <span className="di listimg"><img src={require('../../Images/wx.png')} alt=""/></span>
-                                            <span className="di margin15 color6">微信号</span>
-                                        </div>
-                                        <div className="item-after color9 isSet">未绑定</div>
-                                    </div>
-                                </li>
-                            </Link>
-                            <Link>
+                    <div className="font14" >
+                        <div className="flex flex-pack-justify flex-align-center border_bottom" style={{padding:'8px 10px'}}>
+                            <div className="height_all">
+                                <span className="di listimg"><img src={require('../../Images/wx.png')} alt=""/></span>
+                                <span className="di margin15 color6">微信号</span>
+                            </div>
+                            <div className="color9 isSet">未绑定</div>
+                        </div>
+                            {/*<Link>
                                 <li className="item-content border_bottom">
                                     <div className="item-inner">
                                         <div className="item-title">
@@ -67,19 +62,16 @@ export default class Savety extends Component {
                                         <div className="item-after bandNum color9">已绑定</div>
                                     </div>
                                 </li>
-                            </Link>
-                            <Link to = '/Setting/BindPhone'>
-                                <li className="item-content border_bottom">
-                                    <div className="item-inner">
-                                        <div className="item-title">
-                                            <span className="di listimg"><img src={require('../../Images/phoneImg.png')} alt=""/></span>
-                                            <span className="di margin15 color6">手机号</span>
-                                        </div>
-                                        <div className="item-after bandNum color9">已绑定</div>
-                                    </div>
-                                </li>
-                            </Link>
-                        </ul>
+                            </Link>*/}
+                        <Link to = '/Setting/BindPhone'>
+                            <div className="flex flex-pack-justify flex-align-center border_bottom" style={{padding:'8px 10px'}}>
+                                <div>
+                                    <span className="di listimg"><img src={require('../../Images/phoneImg.png')} alt=""/></span>
+                                    <span className="di margin15 color6">手机号</span>
+                                </div>
+                                <div className="bandNum color9">已绑定</div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="bkg_gray save_h2 pl8">安全</div>

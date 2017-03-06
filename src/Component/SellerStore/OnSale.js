@@ -296,7 +296,7 @@ export default class OnSale extends Component {
                     <div name="销售总量"></div>
                 </Tabscontrol>
 
-                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden',marginTop:'-28'}}>
+                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden',marginTop:'-26'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-135}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                          onTouchMove={this.onTouchMove}>
@@ -318,6 +318,7 @@ export default class OnSale extends Component {
                                                     name = {el.NAME}
                                                     price = {el.CURRENT_PRICE}
                                                     no = {el.GB_CODE}
+                                                    sales = {el.SALES}
                                                 />
                                             </div>
                                         )

@@ -4,6 +4,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import LiComponent from '../../Component/CommonComponent/LiComponent'
 import '../../Stylesheets/App/personal.css';
 import {Logout} from '../../Action/auth';
+import {clearSellerToken} from '../../Action/rpc';
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 const Itemlist =[
@@ -13,7 +14,6 @@ const Itemlist =[
     {name:'关于聚朵云',link:'/personalCenter/aboutDemo',imgurl:require('../../Images/common/about.png')}
 ];
 export default class SellerStoreSetting extends Component {
-
     static contextTypes = {
         router:PropTypes.object
     }
@@ -21,6 +21,7 @@ export default class SellerStoreSetting extends Component {
     async LoginOut(){
         await Logout()
             .then(res=>{
+                clearSellerToken()
                 alert('退出成功')
                 this.context.router.push('/SellerLogin')
             })

@@ -111,7 +111,7 @@ export default class BindPhone extends Component {
 
     render(){
         return(
-            <div className="wrap">
+            <div>
                 <NavBar
                     renderBack = {true}
                     title = {'设置手机号'}

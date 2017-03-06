@@ -6,7 +6,7 @@ export default class Modal extends Component {
         const {onClick,toHideModal,title,scrollTop} = this.props
         return (
             <div className="modalNav pf width_100 height_all font14">
-                <div className="modal_body border_ra scale" style={{marginTop:scrollTop+(window.innerHeight-130)/2}}>
+                <div className="modal_body border_ra scale" style={{marginTop:scrollTop+(window.innerHeight-170)/2}}>
                     <p className="isCancel border_bottom tc">{title}</p>
                     <div className="chooseType">
                         <button className="w50 border_right color_yellow"

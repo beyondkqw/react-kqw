@@ -32,7 +32,9 @@ export default class LinkMe extends Component {
                     <div style={{width:34,height:30,lineHeight:0}}>
                         <img src={require('../../Images/phoneNum.png')} alt=""/>
                     </div>
-                    <div className="font16 color9">{mobile?mobile:''}</div>
+                    <a href={`tel:${mobile}`}>
+                        <div className="font16 color9">{mobile?mobile:''}</div>
+                    </a>
                 </div>
             </div>
         );

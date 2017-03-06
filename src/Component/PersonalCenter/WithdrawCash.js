@@ -86,13 +86,13 @@ export default class WithdrawCash extends Component {
                                     <li className="item-content item-link item-link pl  border_bottom">
                                         <div className="item-media">
                                             <span className="fl di headerImg">
-                                                <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
+                                                <img className="border_ra50" src={require('../../Images/common/bankImg.png')}
                                                      alt=""/>
                                             </span>
                                         </div>
                                         <div className="item-inner" style={{marginLeft:15}}>
                                             <div className="item-title-row">
-                                                <div className="item-title font14 color6">{bankname}</div>
+                                                <div className="item-title font14 color6">{bankname}银行</div>
                                                 <div className="f12 color9">尾号{bankcardNo}的卡</div>
                                             </div>
                                         </div>
@@ -184,13 +184,13 @@ export default class WithdrawCash extends Component {
                         确认提现
                     </button>
                 </div>
-                <p className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
+                <div className="f12 color6 tc mt5">余额提现时间为产品<span className="color_yellow">确认收货后30</span>天
                     <Link to="/personalCenter/balanceCashRule">
                         <span className="di pa" style={{width:15,height:15,lineHeight:0,marginLeft:5}}>
                             <img src={require('../../Images/toRead.png')} alt=""/>
                         </span>
                     </Link>
-                </p>
+                </div>
                 {/*模态层*/}
                 {
                     toShowModal?

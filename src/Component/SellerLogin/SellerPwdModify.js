@@ -90,7 +90,7 @@ export default class SellerPwdModify extends Component {
 
     render(){
         return(
-            <div className="wrap">
+            <div>
                 <NavBar
                     renderBack = {true}
                     title = {'修改密码'}

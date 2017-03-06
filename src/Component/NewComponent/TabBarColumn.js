@@ -35,12 +35,23 @@ export default class TabBarColumn extends Component {
                 {
                     contents&&contents.map((el,index)=>{
                         return(
-                            <div
-                                className={"items"+' '+className}
-                                onClick={()=>this.onClick(index,el.id,el.name)}
-                                style={this.state.index==index?styles.onfocus:styles.onblur}
-                            >
-                                {el.name}
+                            <div>
+                                {
+                                    (this.state.index==index)?
+                                        <div
+                                            className={"items"+' '+className+' '+'onfocus'}
+                                            onClick={()=>this.onClick(index,el.id,el.name)}
+                                        >
+                                            {el.name}
+                                        </div>
+                                        :
+                                        <div
+                                            className={"items"+' '+className+' '+'onblur'}
+                                            onClick={()=>this.onClick(index,el.id,el.name)}
+                                        >
+                                            {el.name}
+                                        </div>
+                                }
                             </div>
                         )
                     })

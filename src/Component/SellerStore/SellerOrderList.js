@@ -3,6 +3,7 @@ import TabBar from '../../Component/NewComponent/TabBar';
 import SellerGoodDetails from '../../Component/SellerStore/SellerGoodDetails'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
+import {Link} from 'react-router';
 import {GetSellerOrderList} from '../../Action/auth';
 import NavBar from '../../Component/CommonComponent/NavBar'
 import iScroll from 'iscroll/build/iscroll-probe';
@@ -68,7 +69,7 @@ export default class SellerOrderList extends Component {
             // 支持鼠标事件，因为我开发是PC鼠标模拟的
             mouseWheel: true,
             // 滚动事件的探测灵敏度，1-3，越高越灵敏，兼容性越好，性能越差
-            //probeType: 3,
+            // probeType: 3,
             // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
             bounce: true,
             // 展示滚动条
@@ -77,7 +78,7 @@ export default class SellerOrderList extends Component {
             fadeScrollbars:true
         };
         this.iScrollInstance = new iScroll('#ListOutsite', options);
-        this.iScrollInstance.on('scroll', this.onScroll);
+        this.iScrollInstance.on('scroll', ()=>this.onScroll());
         this.iScrollInstance.on('scrollEnd', this.onScrollEnd);
 
         this.fetchItems(true);
@@ -96,162 +97,6 @@ export default class SellerOrderList extends Component {
             this.iScrollInstance.refresh();
         }
         return true;
-    }
-
-
-    async fetchItems(isRefresh) {
-        if (isRefresh) {
-            this.page = 1;
-        }
-        if (this.state.pullUpStatus == 2) {
-            const index = this.state.index;
-            if(index == 3){
-                this.getOrderList('6',this.page)
-            }
-            await this.getOrderList(index,this.page)
-        }
-
-    }
-
-    /**
-     * 点击跳转详情页
-     */
-
-    onTouchStart=(ev)=>{
-        this.isTouching = true;
-    }
-
-    onTouchMove=(ev)=>{
-        ev.preventDefault();
-        this.setState({
-            scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
-        })
-    }
-
-    onTouchEnd(ev) {
-        this.isTouching = false;
-    }
-
-    onPullDown() {
-        // 手势
-        if (this.isTouching) {
-            if (this.iScrollInstance.y > 5) {
-                this.state.pullDownStatus != 2 && this.setState({pullDownStatus: 2});
-            } else {
-                this.state.pullDownStatus != 1 && this.setState({pullDownStatus: 1});
-            }
-        }
-    }
-
-    onPullUp() {
-        // 手势
-        if (this.isTouching) {
-            if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY - 5) {
-                this.state.pullUpStatus != 1 && this.setState({pullUpStatus: 1});
-            } else {
-                this.state.pullUpStatus != 0 && this.setState({pullUpStatus: 0});
-            }
-        }
-    }
-
-    onScroll() {
-        let pullDown = $(this.refs.PullDown);
-
-        // 上拉区域
-        if (this.iScrollInstance.y > -1 * pullDown.height()) {
-            this.onPullDown();
-        } else {
-            this.state.pullDownStatus != 0 && this.setState({pullDownStatus: 0});
-        }
-
-        // 下拉区域
-        if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY + 5) {
-            this.onPullUp();
-        }
-        this.setState({
-            scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
-        })
-    }
-
-    onScrollEnd() {
-        console.log("onScrollEnd" + this.state.pullDownStatus);
-
-        let pullDown = $(this.refs.PullDown);
-        this.setState({
-            display:(this.iScrollInstance.y==0)?'none':'block'
-        })
-        // 滑动结束后，停在刷新区域
-        if (this.iScrollInstance.y > -1 * pullDown.height()) {
-            if (this.state.pullDownStatus <= 1) {   // 没有发起刷新,那么弹回去
-                this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 200);
-            } else if (this.state.pullDownStatus == 2) { // 发起了刷新,那么更新状态
-                this.setState({pullDownStatus: 3});
-                // this.fetchItems(true);
-            }
-        }
-
-        // 滑动结束后，停在加载区域
-        if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY) {
-            if (this.state.pullUpStatus == 1) { // 发起了加载，那么更新状态
-                this.setState({pullUpStatus: 2});
-                this.fetchItems(false);
-            }
-        }
-    }
-
-    componentWillMount(){
-       /* let indexValue = this.props.location.query.index
-        console.log('indexValue========>',indexValue)
-        this.setState({index:indexValue?indexValue:0})*/
-    }
-
-    componentDidMount() {
-        const options = {
-            // 默认iscroll会拦截元素的默认事件处理函数，我们需要响应onClick，因此要配置
-            preventDefault: false,
-            // 禁止缩放
-            zoom: false,
-            // 支持鼠标事件，因为我开发是PC鼠标模拟的
-            mouseWheel: true,
-            // 拖拽超过上下界后出现弹射动画效果，用于实现下拉/上拉刷新
-            bounce: true,
-            // 展示滚动条
-            scrollbars: true,
-            vScrollbar: false,
-            fadeScrollbars:true
-        };
-        this.iScrollInstance = new iScroll('#ListOutsite', options);
-        this.iScrollInstance.on('scroll', this.onScroll);
-        this.iScrollInstance.on('scrollEnd', this.onScrollEnd);
-
-        this.fetchItems(true);
-
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        // 列表发生了变化, 那么应该在componentDidUpdate时调用iscroll进行refresh
-        this.itemsChanged = nextState.items !== this.state.items;
-        return true;
-    }
-
-    componentDidUpdate() {
-        // 仅当列表发生了变更，才调用iscroll的refresh重新计算滚动条信息
-        if (this.itemsChanged) {
-            this.iScrollInstance.refresh();
-        }
-        return true;
-    }
-
-
-    async fetchItems(isRefresh) {
-        if (isRefresh) {
-            this.page = 1;
-        }
-        if (this.state.pullUpStatus == 2) {
-            const index = this.state.index;
-            await this.getOrderList(index,this.page)
-        }
-
     }
 
     onTouchStart(ev) {
@@ -293,7 +138,7 @@ export default class SellerOrderList extends Component {
         }
     }
 
-    onScroll() {
+    onScroll=()=>{
         let pullDown = $(this.refs.PullDown);
 
         // 上拉区域
@@ -310,10 +155,15 @@ export default class SellerOrderList extends Component {
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })
+        console.log(this.state.scrollTop)
     }
 
-    onScrollEnd() {
+    onScrollEnd=()=> {
         console.log("onScrollEnd" + this.state.pullDownStatus);
+
+        this.setState({
+            scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
+        })
 
         let pullDown = $(this.refs.PullDown);
         // 滑动结束后，停在刷新区域
@@ -336,6 +186,26 @@ export default class SellerOrderList extends Component {
 
     }
 
+    async fetchItems(isRefresh) {
+        if (isRefresh) {
+            this.page = 1;
+        }
+        if (this.state.pullUpStatus == 2) {
+            const index = this.state.index;
+            if (index == 3) {
+                this.getOrderList('6', this.page)
+            }
+            await this.getOrderList(index, this.page)
+        }
+
+    }
+
+    componentWillMount(){
+        /* let indexValue = this.props.location.query.index
+         console.log('indexValue========>',indexValue)
+         this.setState({index:indexValue?indexValue:0})*/
+    }
+
     //点击切换状态
     async onChange(index){
         this.dataList=[];
@@ -349,29 +219,30 @@ export default class SellerOrderList extends Component {
         this.setState({index:index})
         await this.setState({isShow:index})
         if(this.state.index == 0){
-            this.getOrderList('0',0,1)
+            this.getOrderList('0','',1)
         }else if(this.state.index == 1){
-            this.getOrderList('1',0,1)
+            this.getOrderList('1','',1)
         }else if(this.state.index == 2){
-            this.getOrderList('2',0,1)
+            this.getOrderList('2','',1)
         }
         else if(this.state.index == 3){
-            this.getOrderList('6',1,1)
+            this.getOrderList('',1,1)
         }else if(this.state.index == 4){
             this.getOrderList('4','',1)
         }else{
-            this.getOrderList('0',0,1)
+            this.getOrderList('0','',1)
         }
     }
+
     //订单列表
-    async getOrderList(param,refund,page){
+    async getOrderList(status,refund,page){
         if(this.over){
             this.setState({
                 pullUpStatus: 4
             });
             return
         }
-        await GetSellerOrderList(param,refund,page)
+        await GetSellerOrderList(status,refund,page)
             .then(res=>{
                 if(this.page==Math.ceil(res.total/res.pageSize)){
                     this.over=true;
@@ -394,7 +265,7 @@ export default class SellerOrderList extends Component {
     }
 
     render() {
-        const {orderItems} = this.state
+        const {orderItems,scrollTop} = this.state
         return (
             <div className="containerNav">
                 <NavBar
@@ -424,6 +295,7 @@ export default class SellerOrderList extends Component {
                                         sellerOrderDetails = {orderItems}
                                         toPay = {true}
                                         isShowWhat = {true}
+                                        scrollTop = {scrollTop}
                                     />
                                 </div>
                                 :null
@@ -436,6 +308,7 @@ export default class SellerOrderList extends Component {
                                         sellerOrderDetails = {orderItems}
                                         deliverGoods={true}
                                         isShowWhat = {true}
+                                        scrollTop = {scrollTop}
                                     />
                                 </div>
                                 :null
@@ -448,6 +321,7 @@ export default class SellerOrderList extends Component {
                                         sellerOrderDetails = {orderItems}
                                         //deliverGoods={true}
                                         isShowWhat = {true}
+                                        scrollTop = {scrollTop}
                                     />
                                 </div>
                                 :null
@@ -459,6 +333,7 @@ export default class SellerOrderList extends Component {
                                         sellerOrderDetails = {orderItems}
                                         Refund = {true}
                                         isShowWhat = {true}
+                                        scrollTop = {scrollTop}
                                         //query = {}
                                     />
                                 </div>
@@ -471,16 +346,29 @@ export default class SellerOrderList extends Component {
                                         sellerOrderDetails = {orderItems}
                                         alreadyRated = {true}
                                         isShowWhat = {true}
+                                        scrollTop = {scrollTop}
                                     />
                                 </div>
                                 :null
                             }
+
                             <p ref="PullUp" id='PullUp'
                                style={{display:this.state.display}}
                             >{this.pullUpTips[this.state.pullUpStatus]}</p>
                         </ul>
+                        {
+                            this.state.index == 4?
+                                <Link to="/searchOrder">
+                                    <div style={{bottom:50,height:50}} className="pf width100"></div>
+                                    <div
+                                        className="pf bottom0 width100 flex color_white flex-pack-center flex-align-center"
+                                        style={{height:50,backgroundColor:'#ff5500'}}>
+                                        搜索订单
+                                    </div>
+                                </Link>
+                                :null
+                        }
                     </div>
-
                 </div>
             </div>
         );

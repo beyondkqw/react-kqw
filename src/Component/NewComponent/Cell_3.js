@@ -30,18 +30,18 @@ export default class Cell_3 extends Component {
                     className="width_50 fl height_all border_right tc pr flex flex-align-center"
                     onClick = {()=>this.onPress(imgUrl&&imgUrl[0])}
                 >
-                    <span className="di width_100" style={{height : SCREEN_WIDTH/4.6}}>
+                    <span className="di width_100" style={{height : SCREEN_WIDTH/2.3}}>
                         <img src={imgUrl[0]&&imgUrl[0].img} alt=""/>
                     </span>
                 </div>
                 <div className="width_50 fl height_all tc">
                     <div className="border_bottom" onClick = {()=>this.onPress(imgUrl&&imgUrl[1])}>
-                        <span className="di width50" style={{height : SCREEN_WIDTH/4.68}}>
+                        <span className="di" style={{height : SCREEN_WIDTH/4.68}}>
                             <img src={imgUrl[1]&&imgUrl[1].img} alt=""/>
                         </span>
                     </div>
                     <div onClick = {()=>this.onPress(imgUrl&&imgUrl[2])}>
-                        <span className="di width50" style={{height : SCREEN_WIDTH/4.68}}>
+                        <span className="di" style={{height : SCREEN_WIDTH/4.68}}>
                             <img src={imgUrl[2]&&imgUrl[2].img} alt=""/>
                         </span>
                     </div>

@@ -33,7 +33,6 @@ export default class DeliveredInformation extends Component {
 
     async componentDidMount() {
         //type false 为创建 true是编辑
-        console.log('******',this.props.location.query)
         if(this.props.location.query){
             console.log('----*-*-*-*-')
             const query = this.props.location.query
@@ -43,7 +42,10 @@ export default class DeliveredInformation extends Component {
                     name:query.name,
                     detail:query.detail,
                     type:query.id?true:false,
-                    id:query.id
+                    id:query.id,
+                    provId:query.province,
+                    cityId:query.city,
+                    countyId:query.area,
 
                 })
                 this.refs.name.value = query.name?query.name:''
@@ -113,7 +115,7 @@ export default class DeliveredInformation extends Component {
         }
 
         if(type){
-          await EditAddress(name,mobile,address,detail,id)
+          await EditAddress(name,mobile,address,detail,id,provId,cityId,countyId)
             .then(res=>{
                 this.context.router.goBack()
             })
@@ -134,70 +136,54 @@ export default class DeliveredInformation extends Component {
     render() {
         const {showMap,address} = this.state
         return (
-            <div>
-                <div className="list-block m0">
-                    <ul>
-                        <li className="item-content pl border_bottom">
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner font14">
-                                <div className="item-title color6">收货人</div>
-                                <div className="item-after color9">
-                                    <input
-                                        ref = 'name'
-                                        className="borderno tr "
-                                        type="\"
-                                        placeholder="收货人姓名"
-                                        onChange={()=>this.setState({name:this.refs.name.value})}
-                                    />
-                                </div>
-                            </div>
-                        </li>
-                        <li className="item-content pl border_bottom">
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner font14">
-                                <div className="item-title color6">联系电话</div>
-                                <div className="item-after color9">
-                                    <input
-                                        maxLength="11"
-                                        ref = 'mobile'
-                                        className="borderno tr"
-                                        type="\"
-                                        placeholder="电话号码"
-                                        onChange={()=>this.setState({mobile:this.refs.mobile.value})}
-                                    />
-                                </div>
-                            </div>
-                        </li>
-                        <li
-                            className="item-content item-link pl border_bottom"
-                            onClick = {()=>this.setState({showMap:true})}
-                        >
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner font14">
-                                <div className="item-title color6">所在地区</div>
-                                <div className="item-after color9">
-                                    {address}
-                                </div>
-                            </div>
-                        </li>
-                        <li className="item-content pl border_bottom">
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner font14">
-                                <div className="item-title color6">详细信息</div>
-                                <div className="item-after color9">
-                                    <input
-                                        ref = 'detail'
-                                        className="borderno tr"
-                                        type="\"
-                                        placeholder=""
-                                        onChange = {()=>this.setState({detail:this.refs.detail.value})}
-                                    />
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+            <div className="containerNav">
+                <div className="flex flex-pack-justify flex-align-center border_bottom font14" style={{height:50,padding:'0 10px'}}>
+                    <div className="color6">收货人</div>
+                    <div className="color9">
+                        <input
+                            ref = 'name'
+                            className="borderno tr "
+                            type="\"
+                            placeholder="收货人姓名"
+                            onChange={()=>this.setState({name:this.refs.name.value})}
+                        />
+                    </div>
                 </div>
-                <div className="tc f12 color_red width_100 plr mtb loginHeight" style={{lineHeight:'36px'}}>
+                <div className="flex flex-pack-justify flex-align-center border_bottom font14" style={{height:50,padding:'0 10px'}}>
+                    <div className="color6">联系电话</div>
+                    <div className="color9">
+                        <input
+                            maxLength="11"
+                            ref = 'mobile'
+                            className="borderno tr"
+                            type="\"
+                            placeholder="电话号码"
+                            onChange={()=>this.setState({mobile:this.refs.mobile.value})}
+                        />
+                    </div>
+                </div>
+                <div
+                    className="flex flex-pack-justify flex-align-center border_bottom font14" style={{height:50,padding:'0 10px'}}
+                    onClick = {()=>this.setState({showMap:true})}
+                >
+                    <div className="color6">所在地区</div>
+                    <div className="color9">
+                        {address}
+                    </div>
+                </div>
+                <div className="flex flex-pack-justify flex-align-center border_bottom font14" style={{height:50,padding:'0 10px'}}>
+                    <div className="color6 di" style={{width:110}}>详细信息</div>
+                    <div className="color9 flex1">
+                        <input
+                            ref = 'detail'
+                            className="borderno tr width100"
+                            type="\"
+                            placeholder=""
+                            onChange = {()=>this.setState({detail:this.refs.detail.value})}
+                        />
+                    </div>
+                </div>
+                <div className="tc f12 color_red width_100 plr mtb" style={{height:36,lineHeight:'36px'}}>
                     {this.state.Reminder}
                 </div>
                 <CommonBtn

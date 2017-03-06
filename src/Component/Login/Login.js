@@ -28,6 +28,13 @@ export default class Login extends Component {
             pwd:''
         };
       }
+
+    componentWillMount() {
+        if(sessionStorage.getItem('loginName') != '' && sessionStorage.getItem('loginPsd') != ''){
+            this.setState({accName:sessionStorage.getItem('userLoginName')})
+            this.setState({pwd:sessionStorage.getItem('userLoginPsd')})
+        }
+    }
     //判断登录名,密码是否正确
      isTrue(value,parameter){
         this.setState({Reminder:''})
@@ -53,8 +60,11 @@ export default class Login extends Component {
         }
         await ToLogin(accName,pwd)
             .then(res=>{
+                localStorage.setItem('role','buyer')
                 saveToken(res)
                 console.log('登录成功',res)
+                sessionStorage.setItem('userLoginName',accName)
+                sessionStorage.setItem('userLoginPsd',pwd)
                 window.location.href = '/home'
             })
             .catch(err=>{
@@ -82,20 +92,22 @@ export default class Login extends Component {
                         className="editorInput"
                         placeholder="请输入手机号"
                         ref = 'phoneNum'
+                        value={this.state.accName}
                         onChange={()=>this.setState({accName:this.refs.phoneNum.value})}
                         onBlur = {()=>this.isTrue(this.state.accName,'phoneNum')}
                     />
                 </div>
 
                 <div className='editorBox'>
-                            <span className="editorImg">
-                                <img src={icon[1]}/>
-                            </span>
+                    <span className="editorImg">
+                        <img src={icon[1]}/>
+                    </span>
                     <input
                         className="editorInput"
                         placeholder="请输入密码"
                         type="password"
                         ref = 'pwd'
+                        value = {this.state.pwd}
                         onChange={()=>this.setState({pwd:this.refs.pwd.value})}
                         onBlur = {()=>this.isTrue(this.state.pwd,'psword')}
                     />

@@ -65,22 +65,14 @@ export default class SellerOrderDetails extends Component {
                     renderBack = {true}
                     title = {'订单详情'}
                 />
-                {/* <div className="df plAll border_bottom">
-                    <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
-                    <div className="flex1 mtlr">
-                        <p className="font14 color6">[深圳市]快件已签收,感谢您使用中通快递!开始大幅而非哈斯U盾哈苏电话</p>
-                        <p className="f12 color9 mt3"><span>2016-11-21</span><span className="di ml">13:46:05</span></p>
-                    </div>
-                    <div className="rightPoint pr"><img className="pa" src={require("../../Images/rightPoint.png")} alt=""/></div>
-                </div>*/}
                 <div className="df plAll">
                     <div className="pr" style={{width:14,height:14,margin:'auto'}}><img className="pa" src={require("../../Images/time.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <div className="font14 color6">
-                            <span>收货人:</span><span>{sellerOrderDetails.name}</span>
+                            <span>收货人:</span><span>{sellerOrderDetails.name?sellerOrderDetails.name:'暂未填写'}</span>
                             <span className="di fr color6">{sellerOrderDetails.mobile}</span>
                         </div>
-                        <p className="f12 color9 mt3">收货地址:<span>{sellerOrderDetails.address+sellerOrderDetails.address_detail}</span></p>
+                        <p className="f12 color9 mt3">收货地址:<span>{(sellerOrderDetails.address?sellerOrderDetails.address:'暂未填写')+(sellerOrderDetails.address_detail?sellerOrderDetails.address_detail:'')}</span></p>
                     </div>
                 </div>
                 <SplitLine />

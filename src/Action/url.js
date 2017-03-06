@@ -206,6 +206,9 @@ export const accQrCode = 'captcha/accQrCode'
 //云卡通充值金额列表
 export const rechargeAmount = 'notices/rechargeAmount'
 
+//设置收货地址
+export const setAddress = 'order/auth/address'
+
 
 /*---------------卖家版---------------*/
 //注册
@@ -273,3 +276,6 @@ export const unBinding = 'bank/auth/unBinding'
 
 //卖家确认退款
 export const auditRefund = 'order/auth/auditRefund'
+
+//附近的店铺
+export const nearByShop = 'store/nearby'

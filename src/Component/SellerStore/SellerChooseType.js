@@ -3,6 +3,7 @@ import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/personal.css';
 import {BankList} from '../../Action/auth';
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
+import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class SellerChooseType extends Component {
     // 构造
@@ -37,6 +38,10 @@ export default class SellerChooseType extends Component {
         const {myBankList} = this.state
         return (
             <div className="bkg_color">
+                <NavBar
+                    renderBack = {true}
+                    title = {'银行卡列表'}
+                />
                 {
                     myBankList == ''?
                         <IsShowEmptyImg

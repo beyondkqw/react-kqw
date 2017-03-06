@@ -110,9 +110,7 @@ export default class Search extends Component {
                         </div>
                         :null
                 }
-
-
-                {
+                {/*{
                     this.state.display?
                         <div className="history pf" style={{zIndex:100,top:44}}>
                             <span>历史记录</span>
@@ -138,7 +136,7 @@ export default class Search extends Component {
                             </div>
                         </div>
                         :null
-                }
+                }*/}
 
             </div>
         );

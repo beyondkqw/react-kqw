@@ -103,8 +103,6 @@ export default class Collect extends Component {
         return true;
     }
 
-
-
     onTouchStart=(ev)=>{
         this.isTouching = true;
     }
@@ -236,31 +234,24 @@ export default class Collect extends Component {
         e.stopPropagation()
         this.setState({id:id,visible:true,isIndex:index});
     }
-    //隐藏模态层
-    isHidden(){
-        this.setState({visible:false});
-    }
+
     /*取消收藏*/
     async isDetete(){
         const productId = this.state.id;
-        //const index = this.state.isIndex;
-        await this.getCollect(productId)
-        .then(()=>{
-            //this.state.ItemList.splice(index,1);
-            this.getCollectList()
-            this.setState({visible:false});
-        })
-    }
-
-    async getCollect(productId){
         await Follow(productId,1)
             .then(res=>{
-                console.log(res);
+                this.setState({visible:false});
+                //重新请求数据
+                this.over = false;
+                this.dataList = [];
+                this.page = 1;
+                this.getCollectList(1)
             })
             .catch(err=>{
                 console.warn('err',err)
             })
     }
+
     //跳转到商品详情页
     jumpLink(productId){
         this.context.router.push({pathname:'/goodsDescription',
@@ -323,7 +314,7 @@ export default class Collect extends Component {
                                             onClick = {()=>this.isDetete()}
                                         >确定</button>
                                         <button className="w50"
-                                            onClick = {()=>this.isHidden()}
+                                            onClick = {()=>this.setState({visible:false})}
                                         >取消</button>
                                     </div>
                                 </div>

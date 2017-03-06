@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
 import '../../Stylesheets/App/personal.css';
 import {MyInfo,GiveAmount} from '../../Action/auth'
+import {CheckNum} from '../../Action/rpc';
 
 export default class CommisionGiving extends Component {
     // 构造
@@ -38,8 +39,8 @@ export default class CommisionGiving extends Component {
             alert('余额不足')
             return
         }
-        if(amountNum == ''){
-            this.setState({Reminder:'转赠的佣金不能为空'})
+        if(!CheckNum(amountNum)){
+            alert('请输入整数金额')
             return
         }
         if(this.state.accId == ''){
@@ -94,7 +95,7 @@ export default class CommisionGiving extends Component {
                     <div className="plAll">
                         <p className="color6 font14">转赠佣金</p>
                         <div className="mt5 mb1 f25 df">
-                            <span className="flex-1">￥</span>
+                            <span>￥</span>
                             <input
                                 className="borderno flex-1"
                                 type="text"
@@ -108,16 +109,16 @@ export default class CommisionGiving extends Component {
                         <span className="di ml">￥</span><span>{MyInfo.NOW_AMOUNT?MyInfo.NOW_AMOUNT:0}</span>
                     </div>
                     <SplitLine />
-                    <div className ="list-block m0 font14">
+                    <div className ="list-block m0">
                         <li className ={'item-content border_bottom isConfirmSet'}>
                             <div className="item-inner">
                                 <div className="item-title height_all">
                                     <span className="di listimg">
                                         <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
                                     </span>
-                                    <span className="di margin15 color6">累计转赠佣金</span>
+                                    <span className="di margin15 color6 font14">累计转赠佣金</span>
                                 </div>
-                                <div className="item-after color9 isSet">{MyInfo.GIVE_AMOUNT}</div>
+                                <div className="item-after color9 isSet font14">{MyInfo.GIVE_AMOUNT}</div>
                             </div>
                         </li>
                         <li className ={'item-content border_bottom isConfirmSet'}>
@@ -126,9 +127,9 @@ export default class CommisionGiving extends Component {
                                     <span className="di listimg">
                                         <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
                                     </span>
-                                    <span className="di margin15 color6">现有佣金</span>
+                                    <span className="di margin15 color6 font14">现有佣金</span>
                                 </div>
-                                <div className="item-after color9 isSet">{MyInfo.NOW_AMOUNT}</div>
+                                <div className="item-after color9 isSet font14">{MyInfo.NOW_AMOUNT}</div>
                             </div>
                         </li>
                         <li className ={'item-content border_bottom isConfirmSet'}>
@@ -137,9 +138,9 @@ export default class CommisionGiving extends Component {
                                     <span className="di listimg">
                                         <img className="border_ra50" src={require('../../Images/myPatrner.png')} alt=""/>
                                     </span>
-                                    <span className="di margin15 color6">可用佣金</span>
+                                    <span className="di margin15 color6 font14">可用佣金</span>
                                 </div>
-                                <div className="item-after color9 isSet">{MyInfo.USE_POINTS}</div>
+                                <div className="item-after color9 isSet font14">{MyInfo.USE_POINTS}</div>
                             </div>
                         </li>
                     </div>

@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import LiComponent from '../../Component/CommonComponent/LiComponent'
-import '../../Stylesheets/App/personal.css';
+import '../../Stylesheets/App/comfirmPayMoney.css';
+import {Logout} from '../../Action/auth'
+import {clearToken} from '../../Action/rpc';
 
 const Itemlist =[
     {name:'个人资料',link:'/personalCenter/userInfo',imgurl:require('../../Images/common/information.png')},
@@ -11,6 +13,20 @@ const Itemlist =[
     {name:'关于聚朵云',link:'/personalCenter/aboutDemo',imgurl:require('../../Images/common/about.png')}
 ];
 export default class Setting extends Component {
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+    quit(){
+        Logout()
+            .then(res=>{
+                clearToken();
+                this.context.router.push({pathname:'/Login/Login'}) //跳转
+            })
+            .catch(err=>{
+                console.warn('退出失败',err)
+            })
+    }
     render() {
         return (
         <div className="containerNav">
@@ -41,6 +57,7 @@ export default class Setting extends Component {
                 <div style={{marginTop:50}}>
                     <CommonBtn
                         title = {'退出登录'}
+                        onClick = {()=>this.quit()}
                     />
                 </div>
             </div>

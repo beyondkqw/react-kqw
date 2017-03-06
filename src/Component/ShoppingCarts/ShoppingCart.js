@@ -9,10 +9,6 @@ import {ShopCarList,EditShopNum,DelShopCar,SettlementShopCar} from '../../Action
 import iScroll from 'iscroll/build/iscroll-probe';
 import $ from 'jquery';
 
-const ItemDetail = [
-    {id:0,title:'拼接雪纺连衣裙小清收到回复奇偶is飞机哦添加',price:288,color:'红色',size:'36',imgUrl:require('../../Images/storeClothes.png')},
-    {id:1,title:'拼接驾驶的海外时间',price:289,color:'绿色',size:'38',imgUrl:require('../../Images/storeShoes.png')}]
-
 export default class ShoppingCart extends Component {
 
       // 构造
@@ -24,6 +20,7 @@ export default class ShoppingCart extends Component {
             this.amount = 0
             this.select = []
             this.selectNum = []
+            this.selectDel = []
             this.state = {
                 selectAll:false,
                 toRender:1,
@@ -209,7 +206,6 @@ export default class ShoppingCart extends Component {
 
     }
 
-
     componentWillMount() {
         this.getShopCarList(1)
     }
@@ -260,7 +256,6 @@ export default class ShoppingCart extends Component {
             this.state.shopCarList.map(el=>{
                 this.select.push(el.CAR_ID)
             })
-            console.log('this.select',this.select)
         }else{
             this.setState({selectAll:false})
             this.select = []
@@ -297,7 +292,6 @@ export default class ShoppingCart extends Component {
                     this.selectDel[id] = false
                     this.selectNum[id] = num + 1
                 }else{
-                    console.log('count',count)
                     if(count>0){
                         if(!this.selectDel[id]){
                             this.selectNum[id] = num -1
@@ -316,15 +310,11 @@ export default class ShoppingCart extends Component {
         this.state.shopCarList.map(el=>{
             let num = this.selectNum[el.CAR_ID]?this.selectNum[el.CAR_ID]:0
             this.select.map(item=>{
-                if(el.CAR_ID==item){
+                if(el.CAR_ID == item){
                     this.amount += el.PRICE*el.PRODUCT_NUM + el.PRICE*num
                 }
-                console.log('el.PRICE*el.PRODUCT_NUM===>',(el.PRICE)*(el.PRODUCT_NUM))
-                console.log('el.PRICE*num===>',el.PRICE*num)
-                console.log('this.amount===>',el.PRICE*el.PRODUCT_NUM + el.PRICE*num)
             })
         })
-        console.log('this.amount============>',this.amount)
         this.setState({amount:this.amount})
         this.amount = 0
     }
@@ -335,8 +325,11 @@ export default class ShoppingCart extends Component {
         if(confirm("确定删除商品？")){
             await DelShopCar([id])
                 .then(res=>{
-                    this.getShopCarList()
-                    this.countAmount()
+                    /*this.over = false;
+                    this.dataList = []
+                    this.getShopCarList(1)*/
+                    window.location.reload()
+                    //this.countAmount()
                 })
         }else{
             this.getShopCarList()
@@ -358,8 +351,8 @@ export default class ShoppingCart extends Component {
     render() {
         const {shopCarList,amount,scrollTop} = this.state
         return (
-            <div id='aa'  className="containerNav bkg_color">
-                <div className="wrap">
+            <div>
+                <div className="containerNav bkg_color">
                     <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                         <div id='ListOutsite' style={{height: window.innerHeight-103}}
                              onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
@@ -377,20 +370,20 @@ export default class ShoppingCart extends Component {
                                     shopCarList&&shopCarList.map((el,index)=>{
                                             return (
                                                 <div className="plAll proPlay border_bottom">
-                                                <CheckBox
-                                                    selectAll = {this.isUseSelectAll?this.state.selectAll:null}
-                                                    index={index}
-                                                    onSelect = {(state)=>this.getSelect(state,el.CAR_ID)}
-                                                />
-                                                <ItemDetails
-                                                    price={el.PRICE}
-                                                    title={el.NAME}
-                                                    attr={el.ATTR_DESC}
-                                                    imgurl={el.IMAGE}
-                                                    num={el.PRODUCT_NUM}
-                                                    changeNum ={(value,type)=>this.editShopNum(el.CAR_ID,value,type)}
-                                                    del={value=>this.Del(el.CAR_ID,value)}
-                                                />
+                                                    <CheckBox
+                                                        selectAll = {this.isUseSelectAll?this.state.selectAll:null}
+                                                        index={index}
+                                                        onSelect = {(state)=>this.getSelect(state,el.CAR_ID)}
+                                                    />
+                                                    <ItemDetails
+                                                        price={el.PRICE}
+                                                        title={el.NAME}
+                                                        attr={el.ATTR_DESC}
+                                                        imgurl={el.IMAGE}
+                                                        num={el.PRODUCT_NUM}
+                                                        changeNum ={(value,type)=>this.editShopNum(el.CAR_ID,value,type)}
+                                                        del={value=>this.Del(el.CAR_ID,value)}
+                                                    />
                                                 </div>
                                             )
                                     })
@@ -401,42 +394,41 @@ export default class ShoppingCart extends Component {
                             </ul>
                         </div>
                     </div>
-
                     <div className="height5 wrap"></div>
-                    <div className="pf bottomCount wrap plr">
-                        <span className="di check_radius pr fl">
-                            <input
-                                type="checkbox" id="checkAll"
-                                checked={this.select.length==this.state.shopCarList.length?true:false}
-                                onClick={()=>this.onChangeState()}
-                                className="di isCheck"
-                            />
-                            <label htmlFor="checkAll"></label>
-                        </span>
-                        <span className="di font14 color6 ml5 fl height_all lh25">全选</span>
-                        <div className="di ml5 pr">
-                            <div className="mt2">
-                                <label className="f12">合计</label>
-                                <span className="colorff f12">￥</span><span className="colorff font18">{amount}</span>
+                    <div className="pf bottomCount flex flex-align-center flex-pack-justify plr width100">
+                        <div className="flex flex-align-center">
+                            <span className="di check_radius pr fl">
+                                <input
+                                    type="checkbox" id="checkAll"
+                                    checked={this.select.length==this.state.shopCarList.length?true:false}
+                                    onClick={()=>this.onChangeState()}
+                                    className="di isCheck"
+                                />
+                                <label htmlFor="checkAll"></label>
+                            </span>
+                            <span className="di font14 color6 ml5 height_all lh25">全选</span>
+                            <div className="di ml5 flex flex-v">
+                                <div>
+                                    <label className="f12">合计</label>
+                                    <span className="colorff f12">￥</span><span className="colorff font18">{amount}</span>
+                                </div>
+                                <span className="di f10 color9">不含运费</span>
                             </div>
-                            <span className="di pa f10">不含运费</span>
                         </div>
                         <button
                             onClick={()=>this.toSubmit()}
-                            className="fr mt5 settleAccount border_ra color_white"
+                            className="settleAccount border_ra color_white"
                         >
                             结算
                         </button>
                     </div>
                 </div>
-                <div className="wrap">
-                    <div className="pf bottom0 wrap" style={{zIndex:100}}>
-                        <nav className="bar-tab bkg_color wrap">
-                            <Footer
-                                index = {2}
-                            />
-                        </nav>
-                    </div>
+                <div className="pf bottom0 wrap" style={{zIndex:100}}>
+                    <nav className="bar-tab bkg_color wrap">
+                        <Footer
+                            index = {2}
+                        />
+                    </nav>
                 </div>
             </div>
         );

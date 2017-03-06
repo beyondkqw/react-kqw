@@ -4,6 +4,8 @@ import PublishComment from '../../Component/CommonComponent/PublishComment'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/order.css';
 import {_OrderDetail,Remark} from '../../Action/auth'
+import DelayModal from '../../Component/CommonComponent/DelayModal'
+import UUID from 'uuid-js'
 
 export default class PublishEvalute extends Component {
 
@@ -12,7 +14,11 @@ export default class PublishEvalute extends Component {
         super(props);
         // 初始状态
         this.state = {
-            images:[]
+            modalDelay:false,
+            images:[],
+            imageUri:require('../../Images/camera.png'),
+            Mosaic:'http://jdy-images.oss-cn-shenzhen.aliyuncs.com/',
+            uploadImg:''
         };
       }
 
@@ -32,9 +38,39 @@ export default class PublishEvalute extends Component {
     //    })
     //}
 
+    //上传图片
+    fileChange (e){
+        var client = new OSS.Wrapper({
+            region: 'oss-cn-shenzhen',
+            accessKeyId: 'LTAIbrSAT1OgIEDo',
+            accessKeySecret: 'rOI5hYbqCTy3B2sb6Zbt77Is9h34XS',
+            bucket: "jdy-images"
+        });
+
+        var file = e.target.files[0];
+        var fileName = window.URL.createObjectURL(file)
+        var index1=file.name.lastIndexOf(".");
+        var index2=file.name.length;
+        var suffix=file.name.substring(index1,index2)
+
+        var uuid4 = UUID.create().toString();
+        console.log(uuid4.toString());
+        var storeAs = 'sq/'+uuid4+''+suffix;
+        this.setState({modalDelay:true})
+
+        client.multipartUpload(storeAs, file).then((result)=> {
+            this.setState({modalDelay:false})
+            this.setState({imageUri:fileName,uploadImg:storeAs})
+        }).catch(function (err) {
+            console.log(err);
+        })
+    }
+
     async toRemark(){
         const {orderNo,productId} = this.props.location.query
-        await Remark(orderNo,productId,this.refs.comment.value,this.state.images.join(','))
+        let {uploadImg,Mosaic} = this.state
+        uploadImg = Mosaic + uploadImg
+        await Remark(orderNo,productId,this.refs.comment.value,uploadImg)
         .then(res=>{
             alert('评论成功')
             this.context.router.goBack()
@@ -62,40 +98,17 @@ export default class PublishEvalute extends Component {
                 </div>
                 <div className=" border_bottom">
                     <div className="filediv tc mt5 plAll">
-                        <input ref="images" type="file" name="" multiple="multiple" />
-                        <img className="border_ra" src={require('../../Images/camera.png')}/>
+                        <input
+                            ref="images"
+                            type="file"
+                            name=""
+                            multiple="multiple"
+                            onChange={(e)=>this.fileChange(e)}
+                        />
+                        <img className="border_ra uploadImg" src={this.state.imageUri}/>
                     </div>
                 </div>
                 <SplitLine/>
-                {/*<div>
-                    <ul className="font14">
-                        <li className="plr evalute_h border_bottom">
-                            <div className="fl">
-                                店铺评分
-                            </div>
-                            <div className="fr">
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                            </div>
-                        </li>
-                        <li className="plr evalute_h border_bottom">
-                            <div className="fl">
-                                商家服务态
-                            </div>
-                            <div className="fr">
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                                <span className="di scoreImg ml"><img src={require('../../Images/collect.png')} alt=""/></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>*/}
-
                 {/*<Link to="/orderList/chaseRatings"> </Link>*/}
                 <PublishComment
                     onClick = {()=>this.toRemark()}

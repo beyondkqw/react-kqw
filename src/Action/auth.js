@@ -165,9 +165,9 @@ export async function AddAddress(name,mobile,address,detail,province,city,area){
 }
 
 //编辑地址
-export async function EditAddress(name,mobile,address,detail,addressId){
+export async function EditAddress(name,mobile,address,detail,addressId,province,city,area){
     try{
-        const res = await apiPost(URL.editAddress,{name,mobile,address,detail,addressId});
+        const res = await apiPost(URL.editAddress,{name,mobile,address,detail,addressId,province,city,area});
         return res;
     }catch (err){
         console.warn('EditAddress',err);
@@ -837,9 +837,9 @@ export async function StoreContact(qq,wechat,mobile){
 }
 
 //订单列表
-export async function GetSellerOrderList(status,is_refund=0,page){
+export async function GetSellerOrderList(status,isRefund = '',page){
     try{
-        const res = await apiGet(URL.sellerList,{status,is_refund,page});
+        const res = await apiGet(URL.sellerList,{status,isRefund,page});
         return res;
     }catch (err){
         console.warn(err);
@@ -1013,12 +1013,45 @@ export async function CashRecord(accId,page) {
 }
 
 //卖家同意退款
-export async function AuditRefund(refundAmount,orderDetailId) {
+export async function AuditRefund(refundAmount,orderDetailId,status = 1) {
     try {
-        const res = await apiGet(URL.auditRefund,{refundAmount,orderDetailId});
+        const res = await apiGet(URL.auditRefund,{refundAmount,orderDetailId,status});
         return res;
     } catch (err) {
         console.warn(err);
+        throw err
+    }
+}
+
+//附近的店铺
+export async function _NearByShop(latitude='',longitude='',address='') {
+    try {
+        const res = await apiPost(URL.nearByShop,{latitude,longitude,address});
+        return res;
+    } catch (err) {
+        console.warn(err);
+        throw err
+    }
+}
+
+//设置收货地址
+export async function SetAddress(orderNos,addressId){
+    try{
+        const res = await apiGet(URL.setAddress,{orderNos,addressId});
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
+//高德地图附近
+export async function AmapNearby(key,tableid,page,keywords,center,radius=5000,filter,limit=10) {
+    try {
+        const res = await apiGet('http://yuntuapi.amap.com/datasearch/around', {key,tableid,page,keywords,center,radius,limit},true);
+        return res;
+    } catch (err) {
+        console.warn('NoticeView', err);
         throw err
     }
 }

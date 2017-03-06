@@ -10,11 +10,6 @@ import {StoreDetailItem,StorectList} from '../../Action/auth'
 import iScroll from 'iscroll/build/iscroll-probe';
 import $ from 'jquery';
 
-const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',price:288,imgUrl:require('../../Images/clothesDetails.png')},
-    {title:'拼接驾驶的海外时间',price:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接安山东跑外地偶尔奥苏废物',price:290,imgUrl:require('../../Images/clothesDetails.png')},
-    {title:'拼接S佛我爱我如娃儿殴辱我耳机',price:291,imgUrl:require('../../Images/clothes1.png')}];
-
 export default class Store extends Component {
 
     // 构造
@@ -370,6 +365,7 @@ export default class Store extends Component {
                                                     title = {el.NAME}
                                                     price = {el.CURRENT_PRICE}
                                                     imgurl = {el.IMAGE}
+                                                    sales = {el.SALES}
                                                 />
                                             </Link>
                                         )

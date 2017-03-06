@@ -30,7 +30,8 @@ module.exports = {
     output: {
         publicPath, //编译好的文件，在服务器的路径
         path, //编译到当前目录
-        filename: '[name].js' //编译后的文件名字
+        filename: '[name].js',//编译后的文件名字
+        chunkFilename: '[name].[chunkhash:5].chunk.js',
     },
     module: {
         loaders: [
@@ -62,7 +63,7 @@ module.exports = {
 
         ]
     },
-    plugins,
+    plugins:new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
     resolve: {
         extensions: ['', '.js', '.jsx'], //后缀名自动补全
     }

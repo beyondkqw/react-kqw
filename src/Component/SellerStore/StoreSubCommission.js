@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import Search from '../../Component/NewComponent/Search';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import {UpdatePerc,StoreDetailItem} from '../../Action/auth'
+import {ChinaChar,EnglishChar,specialCharPoint} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
 export default class StoreSubCommission extends Component {
@@ -24,8 +25,10 @@ export default class StoreSubCommission extends Component {
     }
 
     async getPerc(){
-        console.log('this.state.perc<100===>',(this.state.perc>100))
-        if((this.state.perc>100) || !this.state.perc ){
+        console.log(ChinaChar(this.state.perc))
+        console.log(EnglishChar(this.state.perc))
+        console.log(specialCharPoint(this.state.perc))
+        if((this.state.perc>100) || !this.state.perc || ChinaChar(this.state.perc) || EnglishChar(this.state.perc) || specialCharPoint(this.state.perc) ){
             alert("请输入正确的分佣比例")
             return
         }
@@ -53,7 +56,7 @@ export default class StoreSubCommission extends Component {
     render(){
         console.log('this.state.perc',this.state.perc)
         return(
-            <div className="containerNav" style={{height:'100%'}}>
+            <div>
                 <NavBar
                     renderBack = {true}
                     title = {'设置分佣比例'}

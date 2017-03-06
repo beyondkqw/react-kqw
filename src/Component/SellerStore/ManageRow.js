@@ -8,7 +8,7 @@ import {Link} from 'react-router'
 
 export default class ManageRow extends Component {
     render(){
-        const {name,price,no,paymoneyNum,img} = this.props
+        const {name,price,no,paymoneyNum,img,sales} = this.props
         return(
             <div className="imgContainer width_100">
                 <Link>
@@ -30,7 +30,7 @@ export default class ManageRow extends Component {
                                 <div>
                                     <div className="rightBottom" style={{color:'#999'}}>
                                         {/*<p><span>货号 : </span><span>{no}</span></p>*/}
-                                        <p><span>{paymoneyNum?paymoneyNum:0}</span>人付款</p>
+                                        <p>销量<span>{sales?sales:0}</span>件</p>
                                     </div>
                                 </div>
                             </div>

@@ -33,7 +33,6 @@ export default class MyCharges extends Component {
     render() {
         const {accId,Now_Amount,frozen} = this.state
         const {name,img} = this.props.location.query
-        console.log('============',Now_Amount)
         return (
             <div className="containerNav">
                 <div className="wrap">
@@ -48,14 +47,14 @@ export default class MyCharges extends Component {
                     </div>
                 </div>
                 <div className="clearAll">
-                    <Link to="/personalCenter/allIncome">
+                    {/*<Link to="/personalCenter/allIncome">*/}
                         <CellComponent
                             className={'border_right'}
                             imgUrl={require('../../Images/total.png')}
                             title={'总佣金收入'}
                             describing={Now_Amount}
                         />
-                    </Link>
+                    {/*</Link>*/}
                     <CellComponent
                         imgUrl={require('../../Images/payment.png')}
                         title={'分销佣金'}

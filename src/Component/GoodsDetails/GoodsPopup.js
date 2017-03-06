@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/goodsDetails.css';
+import $ from 'jquery';
 
 export default class GoodsPopup extends Component {
     // 构造
@@ -7,9 +8,12 @@ export default class GoodsPopup extends Component {
         super(props);
         // 初始状态
         this.attrIds = []
+        this.risePrice=[];
         this.state = {
-            value:1
+            value:1,
+            total:this.props.price
         };
+        this.kind={}
     }
     //数量减
     minusNum(){
@@ -27,8 +31,19 @@ export default class GoodsPopup extends Component {
         this.setState({value:this.state.value});
     }
 
-    ensure(type,typeParam){
-        this.attrIds = []
+    ensure(type,typeParam,inx,rise){
+        if(type==2){
+            this.kind[inx]=rise;
+            let priceTotal = this.props.price
+            for(var j in this.kind){
+                priceTotal += this.kind[j];
+                this.setState({
+                    total:priceTotal
+                })
+            }
+        }
+
+        this.attrIds = [];
         const {ensurePress} = this.props
         //console.log('radio',document.getElementsByClassName('chooseColor'))
         let radios = document.getElementsByClassName('chooseColor')
@@ -38,21 +53,20 @@ export default class GoodsPopup extends Component {
             }
         }
 
-        console.log('选中的属性id',this.attrIds)
         if(type==1){
             ensurePress&&ensurePress(this.attrIds,this.state.value,typeParam)
         }
     }
 
     render() {
-        const {closePopUp,attr,onClick,isOnly,typeParam,price} = this.props
+        const {closePopUp,attr,onClick,isOnly,typeParam,price,image} = this.props
         return (
             <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
                 <div className="popupContainer pf bottom0 z_index bkg_color wrap border_top pr" style={{zIndex:1050}}>
                     <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
                     <div className="pm_img plAll">
-                        <span className="di productImg"><img src={require('../../Images/store.png')} alt=""/></span>
-                        <span className="colorff f12 margin15">￥</span><span className="colorff font18">{price}</span>
+                        <span className="di productImg"><img src={image} alt=""/></span>
+                        <span className="colorff f12 margin15">￥</span><span className="colorff font18">{this.state.total}</span>
                     </div>
                     {
                         attr&&attr.map((el,inx)=>{
@@ -64,7 +78,7 @@ export default class GoodsPopup extends Component {
                                             el.DETAILS&&el.DETAILS.map((detail,index)=>{
                                                 return(
                                                     <span
-                                                        onClick = {()=>this.ensure(2)}
+                                                        onClick = {()=>this.ensure(2,'',inx,detail.RISE_PRICE)}
                                                         className="di mr10"
                                                     >
                                                         <input

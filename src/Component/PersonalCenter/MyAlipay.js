@@ -25,9 +25,12 @@ export default class MyAlipay extends Component {
                             </div>
                         </li>
                     </ul>
-                    <CommonBtn
-                        title = {'确认'}
-                    />
+                    <div style={{marginTop:30}}>
+                        <CommonBtn
+                            title = {'确认'}
+                        />
+                    </div>
+
                 </div>
             </div>
         );

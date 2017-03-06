@@ -4,6 +4,7 @@ import '../../css/bootstrap.min.css';
 import ReactDOM from 'react-dom';
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
+import {Link} from 'react-router';
 
 //just for test 2
 
@@ -15,12 +16,7 @@ export default class Carousel extends Component {
         super(props);
         // 初始状态
           this.image = [{url:require('../../Images/bowel.png')},{url:require('../../Images/bowel.png')},{url:require('../../Images/bowel.png')}]
-        this.state = {
-
-        };
       }
-
-
 
     render() {
         const {images} = this.props
@@ -31,7 +27,9 @@ export default class Carousel extends Component {
                 {
                     images&&images.map((el,index)=>{
                         return(
-                            <img className="carouselImg" src = {el.picture_url}/>
+                            <Link to={el.URL?el.URL:null}>
+                                <img className="carouselImg" src = {el.picture_url}/>
+                            </Link>
                         )
                     })
                 }

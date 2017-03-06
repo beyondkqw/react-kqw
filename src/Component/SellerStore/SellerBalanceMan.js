@@ -35,26 +35,35 @@ export default class SellerBalanceMan extends Component {
                     <div className="fl color9 height_all">
                         <span className="f15">￥</span><span className="f25">{frozen}</span>
                     </div>
-                    <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
+                    <button className="fr f15 settleAccount border_ra color_white mt11" style={{backgroundColor:'#999'}}>冻结金额</button>
+                    {/*<Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
                         <button className="fr f15 settleAccount border_ra color_white mt11" style={{backgroundColor:'#999'}}>冻结金额</button>
-                    </Link>
+                    </Link>*/}
                 </div>
                 <div className="clearAll">
-                    <CellComponent
-                        className={'border_right'}
-                        imgUrl={require('../../Images/total.png')}
-                        title={'全部余额'}
-                        describing={Now_Amount}
-                    />
-                    <CellComponent
-                        className={'border_right'}
-                        imgUrl={require('../../Images/common/jilu.png')}
-                        title={'余额收支明细'}
-                        describing={'余额收支记录'}
-                        link={'/sellerTakenDetails'}
-                        accId = {accId}
-                        showRight = {true}
-                    />
+                    <Link to="/remarkManage" query={{storeId:this.props.location.query.storeId}}>
+                        <div className="df fl width50 flex-pack-center  border_bottom flex-align-center border_right" style={{height:'4rem'}}>
+                            <span className="di cloudImg" style={{marginRight:10,lineHeight:0}}><img src={require('../../Images/total.png')} alt="" /></span>
+                            <div className="font14 color6">
+                                <span>全部余额</span>
+                                <div>{Now_Amount}</div></div>
+                        </div>
+                    </Link>
+                    <Link to="/sellerTakenDetails" query={{storeId:this.props.location.query.storeId}}>
+                        <div className="df fl width50 flex-pack-center  border_bottom flex-align-center" style={{height:'4rem'}}>
+                            <span className="di cloudImg" style={{marginRight:10,lineHeight:0}}><img src={require('../../Images/common/jilu.png')} alt="" /></span>
+                            <div className="flex flex-align-center font14 color6">
+                                <div>
+                                    <span>余额收支明细</span>
+                                    <div className="f12 color9">余额收支记录</div>
+                                </div>
+                                <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
+                                    <img src={require('../../Images/common/rightArrow.png')} alt=""/>
+                                </span>
+
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         );

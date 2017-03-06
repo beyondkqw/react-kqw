@@ -3,7 +3,7 @@ import Search from '../../Component/NewComponent/Search'
 import TabBar from '../../Component/NewComponent/TabBar';
 import Tabscontrol from '../../Component/GoodsDetails/Tabscontrol'
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
-import '../../Stylesheets/App/goodsDetails.css';
+import '../../Stylesheets/App/comfirmPayMoney.css';
 import {Link} from 'react-router';
 import {StoreType,StoreList} from '../../Action/auth'
 import Footer from '../../Component/NewComponent/Footer';
@@ -281,95 +281,106 @@ export default class CloudComplex extends Component {
     render() {
         const {storeDetail} = this.state
         return (
-            <div style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
-                <div className="flex pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
-                    <div className="flex1">
-                        <Search
-                            style={{backgroundColor:'#ff5500'}}
-                            location = {true}
-                            onClick={(value)=>this.searchStore(value)}
-                        />
+            <div>
+                <div style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
+                    <div className="pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
+                        <div className="flex1">
+                            <Search
+                                style={{backgroundColor:'#ff5500'}}
+                                location = {true}
+                                onClick={(value)=>this.searchStore(value)}
+                            />
+                        </div>
+                        {/*<div
+                            className="flex tc bkg_ff flex-pack-center flex-align-center flex-v classify"
+                        >
+                            <Link to ='/chooseCity'>
+                                <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
+                                    <img src={require('../../Images/common/classification.png')} alt=""/>
+                                </span>
+                                <div className="f10 color_white">城市</div>
+                            </Link>
+                        </div>*/}
                     </div>
-                </div>
-                {/*<TabBar
-                    willdo = {true}
-                    index = {0}
-                    onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
-                    contents={this.StoreTypeItem}
-                />*/}
-                <div style={{marginTop:'2.2rem'}}>
-                    <Tabscontrol
+                    {/*<TabBar
+                        willdo = {true}
+                        index = {0}
                         onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
-                    >
-                        {
-                            this.StoreTypeItem&&this.StoreTypeItem.map(el=>{
-                                return (
-                                    <div name={el}></div>
-                                )
-                            })
-                        }
-                    </Tabscontrol>
-                </div>
-                {/*<div className="pr" style={{marginBottom:54}}>*/}
-                <div className="pr" style={{marginBottom:54,marginTop:'-25'}}>
-                    <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                        <div id='ListOutsite' style={{height: window.innerHeight-73}}
-                             onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
-                             onTouchMove={this.onTouchMove}>
+                        contents={this.StoreTypeItem}
+                    />*/}
+                    <div style={{marginTop:'2.2rem'}}>
+                        <Tabscontrol
+                            onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
+                        >
+                            {
+                                this.StoreTypeItem&&this.StoreTypeItem.map(el=>{
+                                    return (
+                                        <div name={el}></div>
+                                    )
+                                })
+                            }
+                        </Tabscontrol>
+                    </div>
+                    {/*<div className="pr" style={{marginBottom:54}}>*/}
+                    <div className="pr" style={{marginBottom:54,marginTop:'-25'}}>
+                        <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                            <div id='ListOutsite' style={{height: window.innerHeight-73}}
+                                 onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
+                                 onTouchMove={this.onTouchMove}>
 
-                            <ul id='ListInside'>
-                                {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-                                {/*<div style={{marginTop:'2.2rem'}}>
-                                    <TabBar
-                                        willdo = {true}
-                                        index = {0}
-                                        onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
-                                        contents={this.StoreTypeItem}
-                                    />
-                                </div>*/}
-
-
-                                {
-                                    storeDetail == ''?
-                                        <IsShowEmptyImg
-                                            styleSheet={{width:69,height:72,marginTop:120}}
-                                            title={'列表是空的哦~'}
+                                <ul id='ListInside'>
+                                    {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
+                                    {/*<div style={{marginTop:'2.2rem'}}>
+                                        <TabBar
+                                            willdo = {true}
+                                            index = {0}
+                                            onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
+                                            contents={this.StoreTypeItem}
                                         />
-                                        :
-                                    storeDetail&&storeDetail.map(el=>{
-                                        return(
-                                            <Link to="/store" query={{storeId:el.id}}>
-                                                <div className="_order_height border_bottom pr plAll df">
-                                                    <div className="_order_img height_all">
-                                                        <img src={el.img} alt=""/>
+                                    </div>*/}
+                                    {
+                                        storeDetail == ''?
+                                            <IsShowEmptyImg
+                                                styleSheet={{width:69,height:72,marginTop:120}}
+                                                title={'列表是空的哦~'}
+                                            />
+                                            :
+                                        storeDetail&&storeDetail.map(el=>{
+                                            return(
+                                                <Link to="/store" query={{storeId:el.id}}>
+                                                    <div className="_order_height border_bottom pr plAll df">
+                                                        <div className="_order_img height_all">
+                                                            <img src={el.img} alt=""/>
+                                                        </div>
+                                                        <div className="flex1 font14 _order_margin">
+                                                            <p className="color6 db">{el.name}</p>
+                                                            {/*<p className="color9 oh_height mt3">
+                                                                主营衣服
+                                                            </p>*/}
+                                                            {/*<p className="color9 distance_h mt3 pr">
+                                                                <span className="di positionImg mr"><img src={require('../../Images/location.png')} alt=""/></span>
+                                                                <span className="pa bottom0">据您{el.distance}千米</span>
+                                                            </p>*/}
+                                                        </div>
                                                     </div>
-                                                    <div className="flex1 font14 _order_margin">
-                                                        <p className="color6 db">{el.name}</p>
-                                                        {/*<p className="color9 oh_height mt3">
-                                                            主营衣服
-                                                        </p>*/}
-                                                        <p className="color9 distance_h mt3 pr">
-                                                            <span className="di positionImg mr"><img src={require('../../Images/location.png')} alt=""/></span>
-                                                            <span className="pa bottom0">据您{el.distance}千米</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        )
-                                    })
-                                }
-                                <p ref="PullUp" id='PullUp'
-                                   style={{display:this.state.display}}
-                                >{this.pullUpTips[this.state.pullUpStatus]}</p>
-                            </ul>
+                                                </Link>
+                                            )
+                                        })
+                                    }
+                                    <p ref="PullUp" id='PullUp'
+                                       style={{display:this.state.display}}
+                                    >{this.pullUpTips[this.state.pullUpStatus]}</p>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    {/*</div>*/}
+
+
                 </div>
-                {/*</div>*/}
                 <Footer
                     index = {1}
                 />
-
             </div>
         );
     }

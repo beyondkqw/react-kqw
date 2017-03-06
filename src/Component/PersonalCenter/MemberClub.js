@@ -38,16 +38,18 @@ export default class MemberClub extends Component {
         return (
             <div className="containerNav">
                 <div className="club_height member_bkImg">
-                    <div>
-                        <span className="di memberImg mr">
+                    <div className="flex flex-pack-justify flex-align-center">
+                        <div>
+                            <span className="di memberImg mr">
                             <img className="border_ra50" src={clubInfo.IMAGE_URI} alt=""/>
                         </span>
-                        <span className="f12 color_white">{clubInfo.MEMBER_NAME}</span>
+                            <span className="f12 color_white">{clubInfo.MEMBER_NAME}</span>
+                        </div>
                         <Link
                             to="/personalCenter/memberIntroduction"
                             query={{vipPoint:clubInfo.VIP_POINTS?clubInfo.VIP_POINTS:0}}
                         >
-                            <div className="left_radio fr f12 color_yellow tc ml">
+                            <div className="left_radio f12 color_yellow tc">
                                 <span>V{clubInfo.LV?clubInfo.LV:0}会员</span>
                             </div>
                         </Link>
@@ -56,14 +58,14 @@ export default class MemberClub extends Component {
                         <div className="score color_white tc">
                             <div>
                                 <span className="di vip_img"><img src={require('../../Images/iconfont-vip.png')} alt=""/></span>
-                                <span className="font14">总分</span>
+                                <span className="font14">等级</span>
                             </div>
-                            <p className="f25">{clubInfo.VIP_POINTS?clubInfo.VIP_POINTS:0}</p>
+                            <p className="f25">{clubInfo.LV?clubInfo.LV:0}</p>
                         </div>
                     </Link>
                 </div>
                 <SplitLine />
-                {/*<div className="clearAll personal_h8">
+                <div className="clearAll" style={{height:'8rem'}}>
                     <Link to="/personalCenter/teamAmount"
                           query={{
                           imgUrl:clubInfo.IMAGE_URI,
@@ -117,11 +119,11 @@ export default class MemberClub extends Component {
                                 //link={'/personalCenter/teamAmount'}
                             />
                     </Link>
-                </div>*/}
+                </div>
                 <SplitLine />
                 <div className="chooseType font14 plr border_bottom">
                     <span className="color6">全国等级排名</span>
-                    <Link to="/personalCenter/countryRank" query={{point:clubInfo.VIP_POINTS?clubInfo.VIP_POINTS:0}}>
+                    <Link to="/personalCenter/countryRank" query={{point:clubInfo.USE_AMOUNT?clubInfo.USE_AMOUNT:0}}>
                         <span className="fr color9">查看更多</span>
                     </Link>
                 </div>

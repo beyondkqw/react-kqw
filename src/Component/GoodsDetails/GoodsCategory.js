@@ -64,7 +64,7 @@ export default class GoodsCategory extends Component {
     render(){
         const {leftTags,rightTags,name} = this.state
         return(
-            <div className="font14 color6 height_all fl cateContainer pf width_100" style={{display:'flex'}}>
+            <div className="font14 color6 height_all cateContainer pa width_100" style={{display:'flex'}}>
                 <TabBarColumn
                     className = {'f12'}
                     contents = {leftTags}
