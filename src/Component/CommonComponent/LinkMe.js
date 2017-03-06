@@ -4,7 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 
 export default class LinkMe extends Component {
     render() {
-        const {mobile,qq,wechat} = this.props
+        const {mobile,qq,wechat,type} = this.props
         return (
             <div>
                 <div
@@ -32,9 +32,17 @@ export default class LinkMe extends Component {
                     <div style={{width:34,height:30,lineHeight:0}}>
                         <img src={require('../../Images/phoneNum.png')} alt=""/>
                     </div>
-                    <a href={`tel:${mobile}`}>
-                        <div className="font16 color9">{mobile?mobile:''}</div>
-                    </a>
+                    {
+                        (type==2)?
+                            <a href={`tel:${mobile}`}>
+                                <div className="font16 color9">{mobile?mobile:''}</div>
+                            </a>
+                            :
+                            <div
+                                className="font16 color9"
+                                onClick={(e)=>{e.preventDefault()}}
+                            >{mobile?mobile:''}</div>
+                    }
                 </div>
             </div>
         );

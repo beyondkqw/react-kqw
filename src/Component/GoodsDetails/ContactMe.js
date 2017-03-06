@@ -7,12 +7,14 @@ export default class ContactMe extends Component {
     render() {
         const {mobile,qq,wechat} = this.props.location.query
         console.log(mobile+qq+wechat)
+        const type = 2;
         return (
             <div>
                 <LinkMe
                     mobile = {mobile}
                     qq = {qq}
                     wechat = {wechat}
+                    type = {type}
                 />
             </div>
         );
