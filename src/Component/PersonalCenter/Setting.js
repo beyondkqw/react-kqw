@@ -7,10 +7,10 @@ import {Logout} from '../../Action/auth'
 import {clearToken} from '../../Action/rpc';
 
 const Itemlist =[
-    {name:'个人资料',link:'/personalCenter/userInfo',imgurl:require('../../Images/common/information.png')},
-    {name:'账户与安全',link:'/personalCenter/savety',imgurl:require('../../Images/common/account.png')},
-    {name:'帮助与反馈',link:'/personalCenter/feedback',imgurl:require('../../Images/common/helpReturn.png')},
-    {name:'关于聚朵云',link:'/personalCenter/aboutDemo',imgurl:require('../../Images/common/about.png')}
+    {name:'个人资料',link:'/personalCenter/userInfo',imgurl:require('../../Images/common/information.png'),type:''},
+    {name:'账户与安全',link:'/personalCenter/savety',imgurl:require('../../Images/common/account.png'),type:''},
+    {name:'帮助与反馈',link:'/cashRule',imgurl:require('../../Images/common/helpReturn.png'),type:5},
+    {name:'关于聚朵云',link:'/cashRule',imgurl:require('../../Images/common/about.png'),type:6}
 ];
 export default class Setting extends Component {
 
@@ -35,7 +35,10 @@ export default class Setting extends Component {
                     {
                         Itemlist.map((el,index)=>{
                             return(
-                                <Link to={el.link} query={{mobile:this.props.location.query.resetMobile}}>
+                                <Link
+                                    to={el.link}
+                                    query={{mobile:this.props.location.query.resetMobile,type:el.type}}
+                                >
                                     <li>
                                         <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
                                             <div>

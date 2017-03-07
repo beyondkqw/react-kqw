@@ -64,20 +64,14 @@ export default class TabBarColumn extends Component {
 
 const styles = {
     onblur:{
-        display:'flex',
-        alignItems:'center',
         color:'#666',
         height:40,
-        paddingLeft:5
+        padding:'5px 2px',
     },
     onfocus:{
-        display:'flex',
         backgroundColor:'#ffddcc',
-        alignItems:'center',
         color:'#ff5500',
-        height:40,
-        paddingRight:3,
-        paddingLeft:2,
+        padding:'5px 2px',
         borderLeftWidth:3,
         borderLeftStyle:'solid',
         borderLeftColor:'#ff5500'

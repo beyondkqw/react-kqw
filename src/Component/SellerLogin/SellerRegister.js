@@ -238,7 +238,7 @@ export default class SellerRegister extends Component {
 
                 <div className="agreement">
                     点击注册，代表您同意遵守聚朵云的
-                    <Link to="/cashRule" query={{type:3}}>
+                    <Link to="/cashRule" query={{type:7}}>
                         <span style={{color:'#ff5500'}}>《用户协议》</span>
                     </Link>
                 </div>

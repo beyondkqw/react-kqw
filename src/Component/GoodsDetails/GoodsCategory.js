@@ -81,24 +81,15 @@ export default class GoodsCategory extends Component {
 
 const styles = {
     onfocus:{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
         color:'#666',
-        mineight:40,
-        flexWrap:'wrap'
+        padding:'5px 2px'
     },
     onblur:{
-        display:'flex',
         backgroundColor:'#ffddcc',
-        justifyContent:'center',
-        alignItems:'center',
         color:'#ff5500',
-        height:40,
-        paddingRight:3,
+        padding:'5px 3px',
         borderLeftWidth:3,
         borderLeftStyle:'solid',
-        borderLeftColor:'#ff5500',
-        flexWrap:'wrap'
+        borderLeftColor:'#ff5500'
     }
 }

@@ -28,11 +28,13 @@ export default class RightCell extends Component {
                             rightValue.map(el=>{
                                 return(
                                     <Link to="/GoodsDetail/SearchPage" query={{type:el.id}}>
-                                        <div>
+                                        <div style={{margin:'15px 10px 10px 0'}}>
                                             <div className="right-img">
                                                 <img src={el.img}/>
                                             </div>
-                                            <div className="color9">{el.name}</div>
+                                            <div className="color9 tc right-img"
+                                                 style={{overflow:'hidden',textOverflow:"ellipsis",
+                                                 whiteSpace: 'nowrap',height:20}}>{el.name}</div>
                                         </div>
                                     </Link>
                                 )

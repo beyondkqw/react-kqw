@@ -23,7 +23,6 @@ export default class MemberInfo extends Component {
         };
       }
     async componentWillMount() {
-        console.log('this.props.location.query.accId',this.props.location.query.accId)
         await LvmemberInfo(this.props.location.query.accId)
             .then(res=>{
                 this.setState({memberInfo:res})
@@ -43,6 +42,7 @@ export default class MemberInfo extends Component {
                     imgUrl={memberInfo.IMAGE_URI}
                     _vipPoints = {memberInfo.VIP_POINTS}
                     memberName = {memberInfo.MEMBER_NAME}
+                    rightCursor = {true}
                 />
                 <SplitLine />
                 <div className="clearAll" style={{height:'160'}}>
