@@ -21,6 +21,8 @@ export default class SearchPage extends Component {
         // 初始状态
         this.compositor = ['默认排序','价格从低到高','价格从高到低']
         this.state = {
+            name : '',
+            type : '',
             isChoose : 0,
             display_0 : false,
             display_2 : false,
@@ -205,11 +207,11 @@ export default class SearchPage extends Component {
         if (this.state.pullUpStatus == 2) {
             const index = this.state.index;
             if(index==0){
-                this.getOrder('',this.state.order,this.state.orderName,'','',this.page);
+                this.getOrder(this.state.order,this.state.orderName,'','');
             }else if(index==1){
-                this.getOrder('','asc','p.SALES','','',this.page)
+                this.getOrder('asc','p.SALES','','')
             }else if(index==2){
-                this.getOrder('','','',this.state.minPrice,this.state.maxPrice,this.page)
+                this.getOrder('','',this.state.minPrice,this.state.maxPrice)
             }else if(index==3){
                 //this.upDownOrder()
                 this.iScrollInstance.refresh();
@@ -219,7 +221,11 @@ export default class SearchPage extends Component {
     }
 
     async componentWillMount(){
-        await this.getOrder((this.props.location.query.value?this.props.location.query.value:''),'','','','',1,(this.props.location.query.type?this.props.location.query.type:0));
+        await this.setState({
+            name:(this.props.location.query.value?this.props.location.query.value:''),
+            type:(this.props.location.query.type?this.props.location.query.type:0)
+        })
+        this.getOrder('','','','');
     }
 
     //搜索
@@ -228,7 +234,10 @@ export default class SearchPage extends Component {
         this.over = false;
         this.page = 1
         this.dataList = []
-        await this.getOrder(value,'','','','');
+        this.setState({
+            name:value
+        })
+        await this.getOrder('','','','');
     }
 
     //排序的列表
@@ -236,7 +245,7 @@ export default class SearchPage extends Component {
         this.page=1;
         this.setState({isChoose:index})
         await    this.ChooseOneorder(index)
-        this.getOrder('',this.state.order,this.state.orderName,'','');
+        this.getOrder(this.state.order,this.state.orderName,'','');
         this.setState({display_0:false})
     }
 
@@ -249,7 +258,7 @@ export default class SearchPage extends Component {
             goodsList:[],
             display:'none'
         });
-        await this.getOrder('','','',this.state.minPrice,this.state.maxPrice)
+        await this.getOrder('','',this.state.minPrice,this.state.maxPrice)
         this.setState({display_2:false})
     }
 
@@ -262,7 +271,7 @@ export default class SearchPage extends Component {
             goodsList:[],
             display:'none'
         });
-        await this.getOrder('','desc','p.SALES','','')
+        await this.getOrder('asc','p.SALES','','')
     }
 
     //上下排序
@@ -271,7 +280,7 @@ export default class SearchPage extends Component {
     //}
 
     //请求列表接口
-    async getOrder(name,order,orderName,minPrice,maxPrice,page,type){
+    async getOrder(order,orderName,minPrice,maxPrice){
         if(this.over){
             this.setState({
                 pullUpStatus: 4
@@ -279,21 +288,23 @@ export default class SearchPage extends Component {
             return
         }
 
-        await ProductList(name,order,orderName,minPrice,maxPrice,page,type,this.props.location.query.isTag,this.props.location.query.tagId)
+        await ProductList(this.state.name,order,orderName,minPrice,maxPrice,this.page,this.state.type,this.props.location.query.isTag,this.props.location.query.tagId)
         .then(res=>{
             if(this.page==Math.ceil(res.total/res.pageSize)){
                 this.over=true;
                 this.setState({
                     pullUpStatus: 4
                 });
+            }else{
+                this.setState({
+                    pullUpStatus: 3
+                });
             }
             this.dataList = this.dataList.concat(res.resultList);
             this.setState({goodsList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
             this.iScrollInstance.refresh();
             this.page++;
-            this.setState({
-                pullUpStatus: 3
-            });
+
         })
         .catch(err=>{
             console.warn('err',err)

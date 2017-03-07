@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 import {NoticeView} from '../../Action/auth'
+import NavBar from "../../Component/CommonComponent/NavBar"
 
 export default class AboutDemo extends Component {
     // 构造
@@ -27,16 +28,16 @@ export default class AboutDemo extends Component {
     render() {
         return (
             <div className="containerNav" style={{height:'100%'}}>
-                <NavBar
+               <NavBar
                     renderBack = {true}
-                    title = {'关于聚朵云'}
+                    title = {'snxdfkj'}
                 />
                 <iframe
                     src={this.state.URL}
                     id="myiframe" overflow='auto'
                     onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)"
                     scrolling="yes"
-                    style={{border:'none',width:'100%',height:'100%',position:'absolute',top:45,bottom:0}}>
+                    style={{border:'none',width:'100%',height:window.innerHeight-45,position:'absolute',top:45,bottom:0}}>
                 </iframe>
             </div>
         );

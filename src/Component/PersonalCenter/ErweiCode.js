@@ -43,7 +43,7 @@ export default class ErweiCode extends Component {
 
     render() {
         return (
-            <div className="containerNav allIncome_Img supplement">
+            <div className="containerNav allIncome_Img supplement" style={{height:'100%'}}>
                 <div className="tc" style={{marginTop:50}}>
                     <span className="di" style={{height:'7.7rem',width:'14.3rem'}}><img src={require('../../Images/common/erCodeText.png')} alt=""/></span>
                 </div>
