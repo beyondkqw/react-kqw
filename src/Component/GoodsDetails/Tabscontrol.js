@@ -39,7 +39,7 @@ export default class Tabscontrol extends Component {
                         </ul>
                     </div>
                     :
-                    <div style={this.props.style} className="border_bottom tabchange width_100 font14">
+                    <div style={this.props.style} className="border_bottom tabchange width_100 font14" className="flex">
                         { React.Children.map( this.props.children , (element,index) => {
                             return(
                                 /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
