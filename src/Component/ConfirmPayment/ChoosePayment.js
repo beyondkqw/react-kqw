@@ -81,7 +81,7 @@ export default class ChoosePayment extends Component {
                 </div>
                 <div className="list-block m0">
                     <ul>
-                        <Link
+                        {/*<Link
                             to="/confirmPayment/surePayment"
                             query={{
                             planReceiveTime:planReceiveTime,
@@ -100,7 +100,7 @@ export default class ChoosePayment extends Component {
                                     </div>
                                 </div>
                             </li>
-                        </Link>
+                        </Link>*/}
                         <Link
                             to="/confirmPayment/surePayment"
                             query={{

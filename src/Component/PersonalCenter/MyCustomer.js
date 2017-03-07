@@ -242,6 +242,7 @@ export default class MyCustomer extends Component {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-40}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
@@ -278,6 +279,30 @@ export default class MyCustomer extends Component {
                         </ul>
                     </div>
                 </div>
+=======
+                    <SplitLine />
+                    {
+                        memberList.length == 0?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:120}}
+                                title={'团队人数暂时为空哦~'}
+                            />
+                            :
+                            memberList&&memberList.map(el=>{
+                            return(
+                                <Link to="/personalCenter/toWatchOtherInfo" query={{memberId:el.accId}}>
+                                    <RankRow
+                                        rightCursor={true}
+                                        more={true}
+                                        memberName = {el.memberName}
+                                        imgUrl = {el.imageUri}
+                                        vipPoints = {el.vipPoints?el.vipPoints:0}
+                                    />
+                                </Link>
+                            )
+                        })
+                    }
+>>>>>>> b3ea8deccfa3ddc9c2144f3565372c398d27f756
             </div>
         );
     }

@@ -20,7 +20,7 @@ export default class AboutDemo extends Component {
                 await this.setState({URL:res&&res[0].URL})
             })
             .catch(err=>{
-                console.warn('errrrr',err)
+                console.warn('err',err)
             })
     }
 
