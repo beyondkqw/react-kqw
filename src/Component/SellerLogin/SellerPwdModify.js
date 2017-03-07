@@ -69,8 +69,8 @@ export default class SellerPwdModify extends Component {
         }
         await ResetLoginPwd(pwd,smsCode,this.refs.code.value)
             .then(res=>{
-                alert('找回密码成功,请重新登录')
-                this.context.router.goBack()
+                alert('修改密码成功,请重新登录')
+                this.context.router.push({pathname:'/sellerLogin'})
             })
             .catch(err=>{
                 console.warn('err',err)
