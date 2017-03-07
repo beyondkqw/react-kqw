@@ -221,7 +221,6 @@ export default class SearchPage extends Component {
     }
 
     async componentWillMount(){
-        alert(this.props.location.query.value)
         await this.setState({
             name:(this.props.location.query.value?this.props.location.query.value:''),
             type:(this.props.location.query.type?this.props.location.query.type:0)
