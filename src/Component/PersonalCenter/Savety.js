@@ -1,10 +1,31 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import '../../Stylesheets/App/personal.css';
+import {MyInfo} from '../../Action/auth'
 
 
 export default class Savety extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            mobile:''
+        };
+      }
+    componentWillMount() {
+        this.getMyInfo()
+    }
+    async getMyInfo(){
+        await MyInfo()
+            .then(res=>{
+                this.setState({
+                    mobile:res.ACC_NAME
+                })
+            })
+    }
     render() {
+        const {mobile} = this.state
         return (
             <div className="containerNav">
                 <div className="wrap">
@@ -75,7 +96,7 @@ export default class Savety extends Component {
                                             <span className="di listimg"><img src={require('../../Images/phoneImg.png')} alt=""/></span>
                                             <span className="di margin15 color6">手机号</span>
                                         </div>
-                                        <div className="item-after bandNum color9">已绑定</div>
+                                        <div className="item-after bandNum color9">{mobile?mobile:'未绑定'}</div>
                                     </div>
                                 </li>
                             </Link>

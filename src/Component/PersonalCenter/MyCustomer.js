@@ -13,8 +13,7 @@ export default class MyCustomer extends Component {
         super(props);
         // 初始状态
         this.state = {
-            memberList:[],
-            isEmptyMember:false
+            memberList:[]
         };
       }
     componentWillMount() {
@@ -24,10 +23,6 @@ export default class MyCustomer extends Component {
     async getMenbersList(){
         await TeamMembers()
             .then(res=>{
-                if(res.resultList == ''||res.resultList == null){
-                    this.setState({isEmptyMember:true})
-                    console.log('-----------+++++++++++++',this.state.isEmptyMember)
-                }
                 this.setState({memberList:res.resultList})
             })
             .catch(err=>{
@@ -35,13 +30,29 @@ export default class MyCustomer extends Component {
             })
     }
     render() {
-        const {memberList,isEmptyMember} = this.state
+        const {memberList} = this.state
+        const {teemCount,teemAmount} = this.props.location.query
         return (
             <div className="containerNav">
-                <div className="wrap">
+                <div className="rankHeader flex flex-align-center flex-pack-justify-end">
+                    <div>
+                        <div className="di rank-head-cell font14 mr10">
+                            团队人数:{teemCount?teemCount:0}名
+                        </div>
+                        <div className="di rank-head-cell font14 mr10">
+                            团队消费:{teemAmount?teemAmount:0}
+                        </div>
+                    </div>
+                </div>
                     <SplitLine />
                     {
-                        memberList.map(el=>{
+                        memberList.length == 0?
+                            <IsShowEmptyImg
+                                styleSheet={{width:69,height:72,marginTop:120}}
+                                title={'团队人数暂时为空哦~'}
+                            />
+                            :
+                            memberList&&memberList.map(el=>{
                             return(
                                 <Link to="/personalCenter/toWatchOtherInfo" query={{memberId:el.accId}}>
                                     <RankRow
@@ -56,7 +67,6 @@ export default class MyCustomer extends Component {
                             )
                         })
                     }
-                </div>
             </div>
         );
     }

@@ -63,6 +63,7 @@
 }
 /*tab切换*/
 .tabchange{
+    display: flex;
     height:1.5rem;
     line-height:1.5rem;
     background-color: #fff5f0;
