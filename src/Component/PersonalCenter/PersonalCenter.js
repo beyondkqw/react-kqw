@@ -8,10 +8,10 @@ import '../../Stylesheets/App/common.css';
 import {MyInfo} from '../../Action/auth'
 
 const personDetail = [
-    {name:'待付款',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
-    {name:'待发货',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
-    {name:'待收货',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'},
-    {name:'待评价',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}
+    {name:'待付款',imgUrl:require('../../Images/common/waitPay.png'),num:0,link:'/orderList'},
+    {name:'待发货',imgUrl:require('../../Images/common/daifahuo.png'),num:0,link:'/orderList'},
+    {name:'待收货',imgUrl:require('../../Images/common/waitRecive.png'),num:0,link:'/orderList'},
+    {name:'待评价',imgUrl:require('../../Images/common/waitRemark.png'),num:0,link:'/orderList'}
     /*{name:'全部订单',imgUrl:require('../../Images/modify.png'),num:0,link:'/orderList'}*/
 ]
 const ItemList = [

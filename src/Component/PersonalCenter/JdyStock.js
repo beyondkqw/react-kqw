@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import '../../Stylesheets/App/personal.css';
 import {EquityList} from '../../Action/auth'
+import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import iScroll from 'iscroll/build/iscroll-probe';
 import $ from 'jquery';
 
@@ -245,7 +246,7 @@ export default class JdyStock extends Component {
                 <div className="wrap">
                     <div className="stockBanner flex flex-align-center flex-pack-center flex-v">
                         <p className="font14 color_white">总共分红</p>
-                        <p className="font30 color_white">{this.TotalDividends}</p>
+                        <p className="font30 color_white">{this.TotalDividends?this.TotalDividends:0}</p>
                     </div>
                     {/*<SplitLine />
                     <div className="userHeight plr font14">
@@ -265,6 +266,12 @@ export default class JdyStock extends Component {
                                     <div className ="list-block m0 font14">
                                         <ul>
                                             {
+                                                itemList.length ==0?
+                                                    <IsShowEmptyImg
+                                                        styleSheet={{width:69,height:72,marginTop:60}}
+                                                        title={'查询数据暂时为空哦~'}
+                                                    />
+                                                    :
                                                 itemList&&itemList.map(el=>{
                                                     return(
                                                         <Link

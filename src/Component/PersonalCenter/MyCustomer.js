@@ -61,7 +61,6 @@ export default class MyCustomer extends Component {
                                         memberName = {el.memberName}
                                         imgUrl = {el.imageUri}
                                         vipPoints = {el.vipPoints?el.vipPoints:0}
-
                                     />
                                 </Link>
                             )

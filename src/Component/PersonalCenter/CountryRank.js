@@ -206,9 +206,7 @@ export default class CountryRank extends Component {
         if (isRefresh) {
             this.page = 1;
         }
-        console.log('分页'+this.page)
         this.getCountryRank(this.page)
-
     }
 
     async getCountryRank(page){
@@ -242,7 +240,7 @@ export default class CountryRank extends Component {
                 this.setState({rank:res})
             })
             .catch(err=>{
-                console.warn('errrrr',err)
+                console.warn('err',err)
             })
     }
 
@@ -253,16 +251,14 @@ export default class CountryRank extends Component {
             <div className="containerNav">
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
                     <div>
-                        <Link to='/personalCenter/memberInfo'>
                          <div className="di rank-head-cell font14 mr10">
                             我的排名:{rank?rank:0}名
                          </div>
-                        </Link>
-                        <Link to='/personalCenter/memberInfo'>
+                        {/*<Link to='/personalCenter/memberInfo'>*/}
                             <div className="di rank-head-cell font14 mr10">
                                 我的消费:{this.props.location.query.point?this.props.location.query.point:0}
                             </div>
-                        </Link>
+                        {/*</Link>*/}
                     </div>
                 </div>
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
@@ -288,6 +284,7 @@ export default class CountryRank extends Component {
                                     num={index+1}
                                     more={true}
                                     vipPoints={el.lv}
+                                    totalPay = {el.totalPay}
                                 />
                             )
                         })

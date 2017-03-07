@@ -12,7 +12,6 @@ const icon = [
 ]
 
 export default class RankRow extends Component {
-
     render(){
         const {num,more,vip,isShow,rightCursor,memberName,imgUrl,vipPoints,_vipPoints,totalPay} = this.props
         return(

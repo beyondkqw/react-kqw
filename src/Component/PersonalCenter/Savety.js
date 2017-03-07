@@ -57,7 +57,7 @@ export default class Savety extends Component {
                     <div className="bkg_gray save_h2 pl8">账号</div>
                     <div className="list-block m0 font14">
                         <ul>
-                            <Link>
+                            {/*<Link>
                                 <li className="item-content border_bottom isConfirmSet">
                                     <div className="item-inner">
                                         <div className="item-title height_all">
@@ -68,7 +68,7 @@ export default class Savety extends Component {
                                     </div>
                                 </li>
                             </Link>
-                            {/*<Link>
+                           <Link>
                                 <li className="item-content border_bottom">
                                     <div className="item-inner">
                                         <div className="item-title">
