@@ -26,7 +26,7 @@ export default class AboutDemo extends Component {
 
     render() {
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 {/*<NavBar
                     renderBack = {true}
                     title = {'关于聚朵云'}

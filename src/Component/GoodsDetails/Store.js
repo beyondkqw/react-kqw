@@ -284,101 +284,103 @@ export default class Store extends Component {
     render() {
         const {storeDetails,storeBanner,storeDetail} = this.state
         return (
-            <div className="containerNav bkg_gray">
-                <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                    <div id='ListOutsite' style={{height: window.innerHeight}}
-                         onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
-                         onTouchMove={this.onTouchMove}>
+            <div className=" bkg_gray">
+                <div className="flex">
+                    <div className="flex1">
+                        <Search
+                            style={{backgroundColor:'#ff5500'}}
+                            location = {true}
+                            onClick={(value)=>this.searchList(value)}
+                        />
+                    </div>
+                    <div
+                        className="flex tc bkg_ff flex-pack-center flex-align-center flex-v classify"
+                    >
+                        <Link to ='storeClassify' query={{storeId:this.props.location.query.storeId}}>
+                            <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
+                                <img src={require('../../Images/common/classification.png')} alt=""/>
+                            </span>
+                            <p className="f10 color_white">分类</p>
+                        </Link>
+                    </div>
+                </div>
+                <div  className="bkg_color overScroll" style={{position:'absolute',top:'2.2rem',bottom:0,overflow:'auto'}}>
+                    <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
+                        <div id='ListOutsite' style={{height: window.innerHeight-44}}
+                             onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
+                             onTouchMove={this.onTouchMove}>
+                            <ul id='ListInside'>
+                                {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
 
-                        <ul id='ListInside'>
-                            {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
-                            <div className="flex">
-                                <div className="flex1">
-                                    <Search
-                                        style={{backgroundColor:'#ff5500'}}
-                                        location = {true}
-                                        onClick={(value)=>this.searchList(value)}
-                                    />
-                                </div>
-                                <div
-                                    className="flex tc bkg_ff flex-pack-center flex-align-center flex-v classify"
-                                >
-                                    <Link to ='storeClassify' query={{storeId:this.props.location.query.storeId}}>
-                                        <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
-                                            <img src={require('../../Images/common/classification.png')} alt=""/>
-                                        </span>
-                                        <p className="f10 color_white">分类</p>
-                                    </Link>
-                                </div>
-                            </div>
 
-                            <div className="plr storeDetail df" >
-                                <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
-                                    <div className="df">
-                                        <div className="mr" style={{height:40,width:40}}>
-                                            <img src={storeDetails.img} alt=""/>
+                                <div className="plr storeDetail df" >
+                                    <div className="df width100 pb10" style={{justifyContent:'space-between',alignItems:'flex-end'}}>
+                                        <div className="df">
+                                            <div className="mr" style={{height:40,width:40}}>
+                                                <img src={storeDetails.img} alt=""/>
+                                            </div>
+                                            {/*<div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                                                <p>来自{storeDetails.wechat}的分享</p>
+                                            </div>*/}
+                                            <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
+                                                <p>{storeDetails.name}</p>
+                                            </div>
                                         </div>
-                                        {/*<div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
-                                            <p>来自{storeDetails.wechat}的分享</p>
-                                        </div>*/}
-                                        <div className="color_white f12" style={{width:100,height:36,overFlow:'hidden',marginTop:7}}>
-                                            <p>{storeDetails.name}</p>
-                                        </div>
+                                        <Link
+                                            to="/contactMe"
+                                            query={{wechat:storeDetails.wechat,mobile:storeDetails.mobile,qq:storeDetails.qq}}>
+                                            <div style={{height:20,width:63.5,lineHeight:0,marginTop:18}}>
+                                                <img src={require('../../Images/contactMe.png')} alt=""/>
+                                            </div>
+                                        </Link>
                                     </div>
-                                    <Link
-                                        to="/contactMe"
-                                        query={{wechat:storeDetails.wechat,mobile:storeDetails.mobile,qq:storeDetails.qq}}>
-                                        <div style={{height:20,width:63.5,lineHeight:0,marginTop:18}}>
-                                            <img src={require('../../Images/contactMe.png')} alt=""/>
-                                        </div>
-                                    </Link>
                                 </div>
-                            </div>
-                            <div>
-                                <img src={require('../../Images/split.png')} alt=""/>
-                            </div>
-                            {/*<div className="carouselHeight">
-                                <Carousel
-                                    images = {storeBanner}
-                                />
-                            </div>*/}
-                            <Tabscontrol
-                                onClick={(index)=>this.onChangeTab(index)}
-                            >
-                                <div name="最新上架"></div>
-                                <div name="人气排行"></div>
-                                <div name="最高价"></div>
-                                <div name="最低价"></div>
-                            </Tabscontrol>
-                            <div className="imgContainer width_100 pr" style={{marginTop:-25}}>
-                                {
-                                    storeDetail == ''?
-                                        <IsShowEmptyImg
-                                            styleSheet={{width:69,height:72,marginTop:120}}
-                                            title={'查询列表是空的哦~'}
-                                        />
-                                        :
-                                    storeDetail&&storeDetail.map((el,index)=>{
-                                        return (
-                                            <Link to="/goodsDescription" query={{id:el.ID}}>
-                                                <StoreDetails
-                                                    key = {index}
-                                                    float = {index%2==0?'left':'right'}
-                                                    title = {el.NAME}
-                                                    price = {el.CURRENT_PRICE}
-                                                    imgurl = {el.IMAGE}
-                                                    sales = {el.SALES}
-                                                />
-                                            </Link>
-                                        )
-                                    })
-                                }
-                                <div style={{clear:'both'}}></div>
-                            </div>
-                            <p ref="PullUp" id='PullUp'
-                               style={{display:this.state.display}}
-                            >{this.pullUpTips[this.state.pullUpStatus]}</p>
-                        </ul>
+                                <div>
+                                    <img src={require('../../Images/split.png')} alt=""/>
+                                </div>
+                                {/*<div className="carouselHeight">
+                                    <Carousel
+                                        images = {storeBanner}
+                                    />
+                                </div>*/}
+                                <Tabscontrol
+                                    onClick={(index)=>this.onChangeTab(index)}
+                                >
+                                    <div name="最新上架"></div>
+                                    <div name="人气排行"></div>
+                                    <div name="最高价"></div>
+                                    <div name="最低价"></div>
+                                </Tabscontrol>
+                                <div className="imgContainer width_100 pr" style={{marginTop:-25}}>
+                                    {
+                                        storeDetail == ''?
+                                            <IsShowEmptyImg
+                                                styleSheet={{width:69,height:72,marginTop:120}}
+                                                title={'查询列表是空的哦~'}
+                                            />
+                                            :
+                                        storeDetail&&storeDetail.map((el,index)=>{
+                                            return (
+                                                <Link to="/goodsDescription" query={{id:el.ID}}>
+                                                    <StoreDetails
+                                                        key = {index}
+                                                        float = {index%2==0?'left':'right'}
+                                                        title = {el.NAME}
+                                                        price = {el.CURRENT_PRICE}
+                                                        imgurl = {el.IMAGE}
+                                                        sales = {el.SALES}
+                                                    />
+                                                </Link>
+                                            )
+                                        })
+                                    }
+                                    <div style={{clear:'both'}}></div>
+                                </div>
+                                <p ref="PullUp" id='PullUp'
+                                   style={{display:this.state.display}}
+                                >{this.pullUpTips[this.state.pullUpStatus]}</p>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

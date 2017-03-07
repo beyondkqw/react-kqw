@@ -338,6 +338,7 @@ export default class ShoppingCart extends Component {
     }
 
     async toSubmit(){
+        console.log('选中======'+this.select)
         if(this.select.length>0){
             await SettlementShopCar(this.select)
                 .then(res=>{

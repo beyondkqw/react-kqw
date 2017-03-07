@@ -40,7 +40,7 @@ class Home extends Component {
         const getToken = await loadToken();
         console.log('首页得到的token',getToken)
         console.log('hahahahahhaa ',getToken == '' ||getToken == null ||getToken == 'null')
-        if(getToken == '' ||getToken == null ||getToken == 'null'){
+        /*if(getToken == '' ||getToken == null ||getToken == 'null'){
              await WechatAuth()
              const token = GetQueryString('token')
              saveToken(token)
@@ -48,7 +48,7 @@ class Home extends Component {
              //initWebsocket()
          }else{
             //initWebsocket()
-         }
+         }*/
         this.getHomeBanner()
         this.getHomeMoudle()
 

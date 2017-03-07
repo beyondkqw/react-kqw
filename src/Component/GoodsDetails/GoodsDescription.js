@@ -349,7 +349,7 @@ export default class GoodsDescription extends Component {
         const detail = this.state.goodsDetails.CONTENT_URL_WEB
         return (
             <div className="pr">
-                <iframe src={detail}  id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:'320'}}></iframe>
+                <iframe src={detail}  id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:window.innerHeight-94}}></iframe>
             </div>
         )
     }
@@ -358,7 +358,7 @@ export default class GoodsDescription extends Component {
     showGoodsParams(){
         const params = this.state.goodsDetails.PARAMS
         return(
-            <div className="goodsParams">
+            <div className="goodsParams" style={{border:'none',width:'100%',height:window.innerHeight-88}}>
                 <div style={{height:10,backgroundColor:'#f5f5f5'}} />
                 <div className="tc"><img src={params} alt=""/></div>
             </div>
@@ -371,7 +371,7 @@ export default class GoodsDescription extends Component {
         const {remarkList,showEmptyImg} = this.state
         const imgHeight = document.body.scrollWidth
         return(
-            <div className="remark pr" style={{backgroundColor:'#f5f5f5'}}>
+            <div className="remark pr" style={{backgroundColor:'#f5f5f5',width:'100%',height:window.innerHeight-94}}>
            {/*     <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-50}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
@@ -420,6 +420,7 @@ export default class GoodsDescription extends Component {
                                                         :null
                                                 }
                                             </div>
+                                            <div style={{height:60}}></div>
                                            {/* <div ref='img' className="remark-img mt5" style={{height:imgHeight*27/100}} >
                                                 <img />
                                             </div>*/}
@@ -440,7 +441,7 @@ export default class GoodsDescription extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section>
+            <section  className="bkg_color overScroll" style={{position:'absolute',top:0,bottom:0,overflowX:'hidden',overflowY:'auto',width:"100%"}}>
                 <div className="bannerImg">
                     <AutoPlaySwipeableViews
                         style={{height:'9rem'}}
@@ -536,7 +537,9 @@ export default class GoodsDescription extends Component {
                     <div name="评论">
                         {this.showGoodsRemark()}
                     </div>
+
                 </Tabscontrol>
+
 
                 <div className="height3 pf bottom0  plAll border_top bkg_color z_index wrap">
                         {/*购物车*/}
