@@ -35,7 +35,7 @@ export default class Setting extends Component {
                     {
                         Itemlist.map((el,index)=>{
                             return(
-                                <Link to={el.link} query={{mobile:this.props.location.query.resetMobile}}>
+                                <Link to={el.link} query={{mobile:this.props.location.query.resetMobile,name:el.name}}>
                                     <li>
                                         <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
                                             <div>
