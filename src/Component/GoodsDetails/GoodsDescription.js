@@ -369,7 +369,6 @@ export default class GoodsDescription extends Component {
     //评价列表
     showGoodsRemark(){
         const {remarkList,showEmptyImg} = this.state
-        console.log('showEmptyImg',showEmptyImg)
         const imgHeight = document.body.scrollWidth
         return(
             <div className="remark pr" style={{backgroundColor:'#f5f5f5',width:'100%',height:window.innerHeight-104}}>
@@ -381,7 +380,7 @@ export default class GoodsDescription extends Component {
                         <ul id='ListInside'>*/}
                             {/*<p ref="PullDown" id='PullDown'>{this.pullDownTips[this.state.pullDownStatus]}</p>*/}
                             {
-                                remarkList == ''?
+                                remarkList.length == 0?
                                     <IsShowEmptyImg
                                         styleSheet={{width:69,height:72}}
                                         title={'暂无评论哦~'}

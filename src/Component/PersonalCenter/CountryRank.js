@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
 import {Link} from 'react-router';
 import RankRow from './RankRow'
-import {CountryRankList} from '../../Action/auth'
+import {CountryRankList,MyRank} from '../../Action/auth'
 import IsShowEmptyImg from '../CommonComponent/IsShowEmptyImg'
 import iScroll from 'iscroll/build/iscroll-probe';
 import $ from 'jquery';
@@ -69,6 +69,10 @@ export default class CountryRank extends Component {
           this.onTouchStart = this.onTouchStart.bind(this);
           this.onTouchEnd = this.onTouchEnd.bind(this);
       }
+
+    componentWillMount() {
+        this.getMyRank()
+    }
 
     componentDidMount() {
         const options = {
@@ -232,40 +236,34 @@ export default class CountryRank extends Component {
         })
     }
 
+    getMyRank(){
+        MyRank()
+            .then(res=>{
+                this.setState({rank:res})
+            })
+            .catch(err=>{
+                console.warn('errrrr',err)
+            })
+    }
+
     render(){
-        const {countryRank} = this.state
+        const {countryRank,rank} = this.state
         const {toShowTeam,teemCount,teemAmount} = this.props.location.query
         return(
             <div className="containerNav">
-
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
-                    {
-                        toShowTeam?
-                            <div>
-                                <div className="di rank-head-cell font14 mr10">
-                                    团队人数:{teemCount?teemCount:0}名
-                                </div>
-                                <div className="di rank-head-cell font14 mr10">
-                                    团队消费:{teemAmount?teemAmount:0}
-                                </div>
+                    <div>
+                        <Link to='/personalCenter/memberInfo'>
+                         <div className="di rank-head-cell font14 mr10">
+                            我的排名:{rank?rank:0}名
+                         </div>
+                        </Link>
+                        <Link to='/personalCenter/memberInfo'>
+                            <div className="di rank-head-cell font14 mr10">
+                                我的消费:{this.props.location.query.point?this.props.location.query.point:0}
                             </div>
-                            :
-                            <div>
-                                <Link to='/personalCenter/memberInfo'>
-                                    {/*
-                                     <div className="rank-head-cell font14 mr10">
-                                     我的排名:54名
-                                     </div>
-                                     */}
-                                </Link>
-                                <Link to='/personalCenter/memberInfo'>
-                                    <div className="rank-head-cell font14 mr10">
-                                        我的消费:{this.props.location.query.point}
-                                    </div>
-                                </Link>
-                            </div>
-                    }
-
+                        </Link>
+                    </div>
                 </div>
                 <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-40}}

@@ -110,6 +110,9 @@ export const membersInfo = 'auth/account/teemList'
 //全国排名
 export const countryRank = 'accountInfo/accountList'
 
+//全国排名 我的排名
+export const myRank = 'auth/account/ranking'
+
 //成员(俱乐部)信息
 export const memberInfo = 'auth/account/memberInfo'
 

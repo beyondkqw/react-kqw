@@ -14,7 +14,7 @@ const icon = [
 export default class RankRow extends Component {
 
     render(){
-        const {num,more,vip,isShow,rightCursor,memberName,imgUrl,vipPoints,_vipPoints} = this.props
+        const {num,more,vip,isShow,rightCursor,memberName,imgUrl,vipPoints,_vipPoints,totalPay} = this.props
         return(
             <div className="rankRow flex flex-align-center flex-pack-justify">
                 <div className="flex flex-align-center">
@@ -49,11 +49,11 @@ export default class RankRow extends Component {
                     </div>
                     <span className="di ml f12 color9">{memberName}</span>
                 </div>
-                {/*{
+                {
                     rightCursor?
                         <span className="rightCursor"><img src={require("../../Images/rightArrow.png")} alt=""/></span>
-                        :<span className="font14 color9">{isShow?'总分 : ':null}{_vipPoints?_vipPoints:0}</span>
-                }*/}
+                        :<span className="font14 color9">{isShow?'总分 : ':null}{totalPay?totalPay:0}</span>
+                }
             </div>
 
         )

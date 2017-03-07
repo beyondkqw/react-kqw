@@ -45,14 +45,12 @@ export default class GoodsPopup extends Component {
 
         this.attrIds = [];
         const {ensurePress} = this.props
-        //console.log('radio',document.getElementsByClassName('chooseColor'))
         let radios = document.getElementsByClassName('chooseColor')
         for(let i =0;i<radios.length;i++){
             if(radios[i].checked){
                 this.attrIds.push(radios[i].value)
             }
         }
-
         if(type==1){
             ensurePress&&ensurePress(this.attrIds,this.state.value,typeParam)
         }
@@ -63,7 +61,7 @@ export default class GoodsPopup extends Component {
         return (
             <div className="modalNav pa width_100 height_all font14" style={{zIndex:100}}>
                 <div className="popupContainer pf bottom0 z_index bkg_color wrap border_top pr" style={{zIndex:1050}}>
-                    <div className="pa close" onClick={closePopUp}><img src={require('../../Images/delete.png')} alt=""/></div>
+                    <div className="pa close" onClick={closePopUp}><img src={require('../../Images/common/delModal.png')} alt=""/></div>
                     <div className="pm_img plAll">
                         <span className="di productImg"><img src={image} alt=""/></span>
                         <span className="colorff f12 margin15">￥</span><span className="colorff font18">{this.state.total}</span>

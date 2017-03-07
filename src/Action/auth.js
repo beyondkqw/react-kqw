@@ -418,6 +418,17 @@ export async function CountryRankList(memberName,page){
     }
 }
 
+//全国排名我的排名
+export async function MyRank(){
+    try{
+        const res = await apiPost(URL.myRank);
+        return res;
+    }catch (err){
+        console.warn(err);
+        throw err
+    }
+}
+
 //成员(俱乐部)信息
 export async function MemberInfo(){
     try{

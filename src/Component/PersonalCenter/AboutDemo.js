@@ -1,25 +1,43 @@
 import React, { Component } from 'react';
 import '../../Stylesheets/App/personal.css';
-import NavBar from '../../Component/CommonComponent/NavBar'
+import {NoticeView} from '../../Action/auth'
 
 export default class AboutDemo extends Component {
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            URL:''
+        };
+      }
+    componentWillMount() {
+        this._NoticeView()
+    }
+    _NoticeView(){
+        NoticeView('ABOUT')
+            .then(async res=>{
+                await this.setState({URL:res&&res[0].URL})
+            })
+            .catch(err=>{
+                console.warn('errrrr',err)
+            })
+    }
+
     render() {
         return (
             <div className="containerNav">
-                <NavBar
+                {/*<NavBar
                     renderBack = {true}
                     title = {'关于聚朵云'}
-                />
-                <div className="wrap">
-                    <div className="navbanner tc">
-                        <div className="imglogo border-ra"><img src={require('../../Images/wx.png')}/></div>
-                        <span className="di color_white">聚朵云 1.0.1</span>
-                    </div>
-                    <h4 className="tc aboutjdy">关于聚朵云</h4>
-                    <p className="pl1">
-                        聚朵云是.......
-                    </p>
-                </div>
+                />*/}
+                <iframe
+                    src={this.state.URL}
+                    id="myiframe" overflow='auto'
+                    onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)"
+                    scrolling="yes"
+                    style={{border:'none',width:'100%',height:'100%',position:'absolute',top:0,bottom:0}}>
+                </iframe>
             </div>
         );
     }

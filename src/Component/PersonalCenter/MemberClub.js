@@ -25,7 +25,6 @@ export default class MemberClub extends Component {
     async getMemberInfo(){
         await MemberInfo()
         .then(res=>{
-            console.log('俱乐部',res)
             this.setState({clubInfo:res,list:res.FIRST_THREE_ACCOUNT})
         })
         .catch(err=>{
@@ -94,8 +93,8 @@ export default class MemberClub extends Component {
                         />
                     </Link>
                     <Link
-                        to="/personalCenter/countryRank"
-                        query={{toShowTeam:true,teemCount:clubInfo.TEEM_MEMBER_COUNT,teemAmount:clubInfo.TEEM_MEMBER_COUNT}}>
+                        to="/personalCenter/myCustomer"
+                        query={{teemCount:clubInfo.TEEM_MEMBER_COUNT,teemAmount:clubInfo.TEEM_MEMBER_COUNT}}>
                         <CellComponent
                             className={'border_right'}
                             imgUrl={require('../../Images/used.png')}
@@ -112,12 +111,12 @@ export default class MemberClub extends Component {
                         toChange:true
                         }}
                     >
-                            <CellComponent
-                                imgUrl={require('../../Images/diary.png')}
-                                title={'团队消费金额'}
-                                describing={clubInfo.TEEM_MEMBER_AMOUNT?clubInfo.TEEM_MEMBER_AMOUNT:0}
-                                //link={'/personalCenter/teamAmount'}
-                            />
+                        <CellComponent
+                            imgUrl={require('../../Images/diary.png')}
+                            title={'团队消费金额'}
+                            describing={clubInfo.TEEM_MEMBER_AMOUNT?clubInfo.TEEM_MEMBER_AMOUNT:0}
+                            //link={'/personalCenter/teamAmount'}
+                        />
                     </Link>
                 </div>
                 <SplitLine />
@@ -136,7 +135,10 @@ export default class MemberClub extends Component {
                                 vipPoints={el.lv}
                                 more={true}
                                 vip={index+1}
+                                totalPay = {el.totalPay}
                                 _vipPoints={el.vipPoints}
+                                rightCursor = {false}
+                                isShow = {false}
                             />
                         )
                     })
