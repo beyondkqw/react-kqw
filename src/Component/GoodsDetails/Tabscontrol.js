@@ -39,15 +39,16 @@ export default class Tabscontrol extends Component {
                         </ul>
                     </div>
                     :
-                    <div style={this.props.style} className="border_bottom tabchange width_100 font14" className="flex">
+
+                    <div style={this.props.style} className="border_bottom tabchange width_100 font14">
                         { React.Children.map( this.props.children , (element,index) => {
                             return(
-                                /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
-                                <div onClick={ () => {
-                                this.props.onClick&&this.props.onClick(index)
-                                this.setState({currentIndex : index}) } }
-                                     className={this.check_tittle_index(index)}
-                                >{ element.props.name }</div>
+                            /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
+                            <div onClick={ () => {
+                            this.props.onClick&&this.props.onClick(index)
+                            this.setState({currentIndex : index}) } }
+                            className={this.check_tittle_index(index)}
+                            >{ element.props.name }</div>
                             );
                         }) }
                     </div>
