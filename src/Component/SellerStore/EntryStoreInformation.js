@@ -151,7 +151,7 @@ export default class EntryStoreInformation extends Component {
     }
 
     async getInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
-        await EnterStoreInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type)
+        await EnterStoreInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress?gpsAddress:'',latitude?latitude:'',longitude?longitude:'',type)
             .then(res=>{
                 alert('店铺申请成功,请耐心等待')
                 this.context.router.push({pathname:'/storeSubCommission'})
