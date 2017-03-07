@@ -397,9 +397,9 @@ export async function MyPartner(){
 }
 
 //成员列表
-export async function TeamMembers(){
+export async function TeamMembers(page){
     try{
-        const res = await apiGet(URL.membersInfo);
+        const res = await apiGet(URL.membersInfo,{page});
         return res;
     }catch (err){
         console.warn(err);

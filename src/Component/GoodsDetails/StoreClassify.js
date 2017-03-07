@@ -30,7 +30,7 @@ export default class StoreClassify extends Component {
     render() {
         const {storeClassify} = this.state
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 {
                     storeClassify ==''?
                         <IsShowEmptyImg

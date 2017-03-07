@@ -225,14 +225,16 @@ export default class CountryRank extends Component {
                 this.setState({
                     pullUpStatus: 4
                 });
+            }else{
+                this.setState({
+                    pullUpStatus: 3
+                });
             }
             this.dataList = this.dataList.concat(res.resultList);
             this.setState({countryRank:this.dataList,display:(this.dataList.length==0)?'none':'block'});
             this.iScrollInstance.refresh();
             this.page++;
-            this.setState({
-                pullUpStatus: 3
-            });
+
         })
     }
 

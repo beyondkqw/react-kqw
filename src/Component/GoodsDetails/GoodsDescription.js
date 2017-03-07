@@ -358,7 +358,7 @@ export default class GoodsDescription extends Component {
     showGoodsParams(){
         const params = this.state.goodsDetails.PARAMS
         return(
-            <div className="goodsParams" style={{border:'none',width:'100%',height:window.innerHeight-84}}>
+            <div className="goodsParams" style={{border:'none',width:'100%',height:window.innerHeight-88}}>
                 <div style={{height:10,backgroundColor:'#f5f5f5'}} />
                 <div className="tc"><img src={params} alt=""/></div>
             </div>
@@ -371,7 +371,7 @@ export default class GoodsDescription extends Component {
         const {remarkList,showEmptyImg} = this.state
         const imgHeight = document.body.scrollWidth
         return(
-            <div className="remark pr" style={{backgroundColor:'#f5f5f5',width:'100%',height:window.innerHeight-104}}>
+            <div className="remark pr" style={{backgroundColor:'#f5f5f5',width:'100%',height:window.innerHeight-94}}>
            {/*     <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
                     <div id='ListOutsite' style={{height: window.innerHeight-50}}
                          onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}

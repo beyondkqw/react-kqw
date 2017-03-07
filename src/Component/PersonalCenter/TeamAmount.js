@@ -32,7 +32,7 @@ export default class TeamAmount extends Component {
         const {Eecommend} = this.state
         return (
                 toChange?
-                    <div className="containerNav allIncome_Img supplement">
+                    <div className="containerNav allIncome_Img supplement" style={{height:'100%'}}>
                         <div className="pa_top1 tc">
                             <span className="di incomeImg">
                                 <img className="border_ra50" src={imgUrl} alt=""/>
