@@ -286,6 +286,7 @@ export default class PendingPayment extends Component {
                         </ul>
                     </div>
                 </div>
+
             </div>
         );
     }

@@ -41,7 +41,6 @@ export default class OrderDetails extends Component {
             .then(res=>{
                 this.setState({isDelete:false})
                 //重新请求列表接口
-
                 this.props.againSend()
             })
             .catch(err=>{
