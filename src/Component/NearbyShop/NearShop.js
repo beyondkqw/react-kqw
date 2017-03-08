@@ -245,6 +245,36 @@ export default class NearShop extends Component {
             })
     }
 
+    //搜索高德附近店铺
+    async getNearbyShop(value){
+        if(this.over){
+            return
+        }
+        const {latitude,longitude,address} = this.state
+        await _NearByShop(latitude,longitude,address,1,value)
+            .then(res=>{
+                this.setState({shopList:res.datas})
+                this.setState({status:res.status})
+                if(this.page==Math.ceil(res.total/res.pageSize)){
+                    this.over=true;
+                    this.setState({
+                        pullUpStatus: 4
+                    });
+                }else{
+                    this.setState({
+                        pullUpStatus: 3
+                    });
+                }
+                this.dataList = this.dataList.concat(res.resultList);
+                this.setState({shopList:this.dataList,display:(this.dataList.length==0)?'none':'block'});
+                this.iScrollInstance.refresh();
+                this.page++;
+            })
+            .catch(err=>{
+                console.warn('定位测试---',err)
+            })
+    }
+
     render(){
         const {shopList,status} = this.state
         return(

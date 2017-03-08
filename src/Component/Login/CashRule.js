@@ -30,11 +30,12 @@ export default class CashRule extends Component {
     }
 
     render() {
+        const {type} = this.state
         return (
             <div>
                 <NavBar
                     renderBack = {true}
-                    title = {'关于聚朵云'}
+                    title = {type==1?'充值协议':type==2?'分佣协议':type==3?'用户协议':type == 4?'提现协议':type == 5?'帮助与反馈':type == 6?'关于聚朵云':''}
                 />
                 <iframe
                     src={this.state.URl}

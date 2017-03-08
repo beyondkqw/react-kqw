@@ -115,7 +115,7 @@ export default class OrderFormDetails extends Component {
                             </span>
                             {
                                 address == null || address == ''?
-                                    <div style={{height:35}}>
+                                    <div style={{height:35,lineHeight:'35px'}}>
                                         <span className="color6 font14">完善收货地址</span>
                                     </div>
                                     :

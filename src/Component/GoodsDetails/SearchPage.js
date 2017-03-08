@@ -271,7 +271,7 @@ export default class SearchPage extends Component {
             goodsList:[],
             display:'none'
         });
-        await this.getOrder('asc','p.SALES','','')
+        await this.getOrder('desc','p.SALES','','')
     }
 
     //上下排序

@@ -17,7 +17,7 @@ import '../Stylesheets/App/common.css'
 import '../Stylesheets/App/homePage.css';
 import {HomeBanner,HomeMoudle,ProductList} from '../Action/auth'
 //import {initWebsocket} from '../Action/Websocket'
-import {getLocation} from '../Action/wxUtil'
+//import {getLocation} from '../Action/wxUtil'
 
 class Home extends Component {
 
@@ -38,9 +38,7 @@ class Home extends Component {
 
     async componentWillMount() {
         const getToken = await loadToken();
-        console.log('首页得到的token',getToken)
-        console.log('hahahahahhaa ',getToken == '' ||getToken == null ||getToken == 'null')
-        /*if(getToken == '' ||getToken == null ||getToken == 'null'){
+        if(getToken == '' ||getToken == null ||getToken == 'null'){
              await WechatAuth()
              const token = GetQueryString('token')
              saveToken(token)
@@ -48,7 +46,7 @@ class Home extends Component {
              //initWebsocket()
          }else{
             //initWebsocket()
-         }*/
+         }
         this.getHomeBanner()
         this.getHomeMoudle()
 
