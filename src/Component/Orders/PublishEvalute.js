@@ -92,9 +92,9 @@ export default class PublishEvalute extends Component {
 
     render() {
         const {image} = this.props.location.query;
-        const {remarkImgList} = this.state;
+        const {remarkImgList,modalDelay} = this.state;
         return (
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 <div className="df plAll">
                     <div className="logoHeight">
                         <img className="border_ra" src={image?image:require('../../Images/storeClothes.png')} alt=""/>
@@ -146,6 +146,12 @@ export default class PublishEvalute extends Component {
                 <PublishComment
                     onClick = {()=>this.toRemark()}
                 />
+                {
+                    this.state.modalDelay?
+                        <DelayModal />
+                        :null
+
+                }
             </div>
         );
     }
