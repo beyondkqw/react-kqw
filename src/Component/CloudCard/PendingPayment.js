@@ -20,7 +20,7 @@ export default class PendingPayment extends Component {
     }
     //订单列表
     async getOrderList(){
-        await GetOrderList(0,'')
+        await GetOrderList(0,'',1)
             .then(res=>{
                 this.setState({pendPayList:res.resultList})
             })
@@ -34,7 +34,7 @@ export default class PendingPayment extends Component {
         return (
             <div>
                 {
-                    pendPayList ==''?
+                    pendPayList.length == 0?
                        <IsShowEmptyImg
                            styleSheet={{width:69,height:72,marginTop:120}}
                            title={'列表是空的哦~'}

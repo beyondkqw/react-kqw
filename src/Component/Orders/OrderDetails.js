@@ -130,6 +130,27 @@ export default class OrderDetails extends Component {
                                                                 </div>
                                                                 :null
                                                         }
+                                                        {
+                                                            //评价
+                                                        allRated &&(el.status == 3)?
+                                                            <div
+                                                                style={{bottom:10,right:10}}
+                                                                className="pa mt55"
+                                                            >
+                                                                <Link
+                                                                    to="orderList/publishEvalute"
+                                                                    query={{
+                                                                    orderNo:item.orderNo,
+                                                                    image : item.productImage,
+                                                                    productId  :item.productId
+                                                                }}>
+                                                                    <button
+                                                                    className="btn font14 bkg_ff border_ra color_white"
+                                                                    >评价</button>
+                                                                </Link>
+                                                            </div>
+                                                            :null
+                                                        }
                                                         {/*{
                                                          alreadyRated?
                                                          <div className="pa mt55" style={{bottom:10,right:10}}>
@@ -183,7 +204,9 @@ export default class OrderDetails extends Component {
                                         {
                                             makeSure?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
-                                                    {/*<button className="border_ra mr5 color9 border_ccc">查看物流</button>*/}
+                                                    <Link to="/toWebView" query={{LogCompany:'申通',LogNo:3322896355960}}>
+                                                        <button className="border_ra mr5 color9 border_ccc">查看物流</button>
+                                                    </Link>
                                                     <button
                                                         className="bkg_ff border_ra color_white"
                                                         onClick={()=>this.confirmHarvest(el.order_no)}
@@ -191,7 +214,7 @@ export default class OrderDetails extends Component {
                                                 </div>
                                                 :null
                                         }
-                                        {
+                                        {   //全部订单显示的状态
                                             allRated && (el.status == 4 || el.status == 7)?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
                                                     <button
@@ -201,7 +224,65 @@ export default class OrderDetails extends Component {
                                                         }}
                                                     >删除订单</button>
                                                 </div>
-                                                :null
+                                                ://待支付
+                                                allRated && (el.status == 0)?
+                                                    <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                    <button
+                                                        className="border_ra color9 border_ccc"
+                                                        onClick = {()=>this.setState({isCancel:true, orderNo:el.order_no})}
+                                                    >{el.status == config.order_status_cancel?'已取消':'取消订单'}</button>
+                                                    {
+                                                        el.status == config.order_status_cancel?
+                                                            null:
+                                                            <Link to="/comfirmPayMoney" query={{orderId:el.order_no}}>
+                                                                <button className="bkg_ff ml5 border_ra color_white">付款</button>
+                                                            </Link>
+                                                    }
+                                                    </div>
+                                                    ://待发货
+                                                    allRated && (el.status == 1)?
+                                                    <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                        <button
+                                                            className="border_ra color9 border_ccc"
+                                                        >待发货</button>
+                                                    </div>
+                                                        ://待发货
+                                                        allRated && (el.status == 2)?
+                                                            <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                                <button
+                                                                    className="bkg_ff border_ra color_white"
+                                                                    onClick={()=>this.confirmHarvest(el.order_no)}
+                                                                >确认收货</button>
+                                                            </div>
+                                                            ://已完成
+                                                            allRated && (el.status == 4)?
+                                                                <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                                    <button
+                                                                        className="border_ra color9 border_ccc"
+                                                                    >已完成</button>
+                                                                </div>
+                                                                ://已取消
+                                                                allRated && (el.status == 5)?
+                                                                    <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                                        <button
+                                                                            className="border_ra color9 border_ccc"
+                                                                        >已取消</button>
+                                                                    </div>
+                                                                    ://已退款
+                                                                    allRated && (el.status == 7)?
+                                                                        <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                                            <button
+                                                                                className="border_ra color9 border_ccc"
+                                                                            >已退款</button>
+                                                                        </div>
+                                                                        ://退款失败
+                                                                        allRated && (el.status == 8)?
+                                                                            <div className="mt5" style={{height: 30,textAlign:'right'}}>
+                                                                                <button
+                                                                                    className="border_ra color9 border_ccc"
+                                                                                >退款失败</button>
+                                                                            </div>
+                                                                            :null
                                         }
                                     </div>
                                 </div>
