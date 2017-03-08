@@ -18,7 +18,8 @@ export default class PublishEvalute extends Component {
             images:[],
             imageUri:require('../../Images/camera.png'),
             Mosaic:'http://jdy-images.oss-cn-shenzhen.aliyuncs.com/',
-            uploadImg:''
+            uploadImg:'',
+            remarkImgList:[]
         };
       }
 
@@ -59,18 +60,30 @@ export default class PublishEvalute extends Component {
         this.setState({modalDelay:true})
 
         client.multipartUpload(storeAs, file).then((result)=> {
+            this.state.remarkImgList.push(fileName);
             this.setState({modalDelay:false})
-            this.setState({imageUri:fileName,uploadImg:storeAs})
+            this.setState({
+                uploadImg:storeAs
+            })
+
         }).catch(function (err) {
+            alert('shibai ')
             console.log(err);
+        })
+    }
+
+    del(index){
+        this.state.remarkImgList.splice(index,1);
+        this.setState({
+            remarkImgList:this.state.remarkImgList
         })
     }
 
     async toRemark(){
         const {orderNo,productId} = this.props.location.query
-        let {uploadImg,Mosaic} = this.state
+        let {uploadImg,Mosaic,remarkImgList} = this.state
         uploadImg = Mosaic + uploadImg
-        await Remark(orderNo,productId,this.refs.comment.value,uploadImg)
+        await Remark(orderNo,productId,this.refs.comment.value,remarkImgList)
         .then(res=>{
             alert('评论成功')
             this.context.router.goBack()
@@ -78,7 +91,8 @@ export default class PublishEvalute extends Component {
     }
 
     render() {
-        const {image} = this.props.location.query
+        const {image} = this.props.location.query;
+        const {remarkImgList} = this.state;
         return (
             <div className="containerNav">
                 <div className="df plAll">
@@ -96,17 +110,36 @@ export default class PublishEvalute extends Component {
                         />
                     </div>
                 </div>
-                <div className=" border_bottom">
-                    <div className="filediv tc mt5 plAll">
-                        <input
-                            ref="images"
-                            type="file"
-                            name=""
-                            multiple="multiple"
-                            onChange={(e)=>this.fileChange(e)}
-                        />
-                        <img className="border_ra uploadImg" src={this.state.imageUri}/>
-                    </div>
+                <div className="flex border_bottom">
+                    {
+                        remarkImgList&&remarkImgList.map((el,index)=>{
+                            return(
+                                <div className="filediv tc mt5 plAll" style={{position:'relative'}}>
+                                    <img className="border_ra uploadImg" src={el}/>
+                                    <img className="border_ra uploadImg preview"
+                                         src={require('../../Images/del.png')}
+                                         onClick={()=>{this.del(index)}}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+                    {
+                        (remarkImgList.length<3)?
+                            <div className="filediv tc mt5 plAll">
+                                <input
+                                    ref="images"
+                                    type="file"
+                                    name=""
+                                    multiple="multiple"
+                                    onChange={(e)=>this.fileChange(e)}
+                                />
+                                <img className="border_ra uploadImg" src={this.state.imageUri}/>
+                            </div>
+                            :
+                            null
+                    }
+
                 </div>
                 <SplitLine/>
                 {/*<Link to="/orderList/chaseRatings"> </Link>*/}

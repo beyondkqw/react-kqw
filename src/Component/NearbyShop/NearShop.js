@@ -308,8 +308,12 @@ export default class NearShop extends Component {
                                                 <div className="_order_img height_all">
                                                     <img src={el.img} alt=""/>
                                                 </div>
-                                                <div className="flex1 font14 _order_margin">
-                                                    <p className="color6 db">{el._name}</p>
+                                                <div className="flex1 font14 _order_margin"
+                                                     style={{overflow:'hidden'}}
+                                                >
+                                                    <p className="color6 db"
+                                                       style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace: 'nowrap'}}
+                                                    >{el._name}</p>
                                                     <div className="color9 distance_h mt3 pr">
                                                         <span className="di positionImg mr"><img src={require('../../Images/location.png')} alt=""/></span>
                                                         <span className="pa bottom0">据您{Math.round(el._distance?el._distance:0)}米</span>
