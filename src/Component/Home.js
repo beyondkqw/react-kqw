@@ -9,7 +9,6 @@ import Cell_4 from './NewComponent/Cell_4'
 import Cell_6 from './NewComponent/Cell_6'
 import Cell_7 from './NewComponent/Cell_7'
 import SplitLine from './NewComponent/SplitLine'
-import {Link} from 'react-router';
 import {loadToken,saveToken,clearToken,GetQueryString} from '../Action/rpc'
 import {WechatAuth} from '../Action/autoLogin'
 import '../Stylesheets/App/sm.min.css'

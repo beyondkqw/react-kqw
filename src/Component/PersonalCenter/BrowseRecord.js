@@ -11,16 +11,6 @@ import {BrowseHistory,DelBrowseRecord} from '../../Action/auth'
 import iScroll from 'iscroll/build/iscroll-probe';
 import $ from 'jquery';
 
-const storeDetail = [{title:'拼接雪纺连衣裙小清新卡死的奇偶爱好的手机',record:288,imgUrl:require('../../Images/clothesDetails.png')},
-    {title:'拼接驾驶的海外时间',record:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接安山东跑外地偶尔奥苏废物',record:290,imgUrl:require('../../Images/clothesDetails.png')},
-    {title:'拼接S佛我爱我如娃儿殴辱我耳机',record:291,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接驾驶的海外时间',record:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接驾驶的海外时间',record:289,imgUrl:require('../../Images/clothes1.png')},
-    {title:'拼接驾驶的海外时间',record:289,imgUrl:require('../../Images/clothes1.png')},
-]
-
-
 export default class BrowseRecord extends Component {
     // 构造
       constructor(props) {
@@ -289,8 +279,7 @@ export default class BrowseRecord extends Component {
     }
     //跳转链接
     jumpToLink(productId){
-        this.context.router.push({pathname:'/goodsDescription',
-            query:{id:productId}})
+        this.context.router.push({pathname:'/goodsDescription',query:{id:productId}})
     }
 
     render(){
@@ -330,31 +319,6 @@ export default class BrowseRecord extends Component {
                         </ul>
                     </div>
                 </div>
-
-            {/*<div style={{position: 'absolute',top: 0,bottom: 0,left: 0,height: '100%',width: '100%'}}>
-                <div className="touchMove" style={{position:'absolute',top:0,right:0,left:0,bottom:'2.5rem',overflow:'auto'}}>
-                    {
-                        historyImgShow?
-                            <IsShowEmptyImg
-                                styleSheet={{width:69,height:72,marginTop:120}}
-                                title={'浏览记录列表是空的哦~'}
-                            />
-                            :
-                        historyList&&historyList.map(el=>{
-                            return(
-                                <StoreRow
-                                    title = {el.NAME}
-                                    record = {el.CURRENT_PRICE}
-                                    imgurl = {el.IMAGE}
-                                    //browseId = {el.BROWSE_ID}
-                                    toDelete = {()=>this.setState({isDelete:true,browseId:el.BROWSE_ID})}
-                                    onClick={()=>this.jumpToLink(el.PRODUCT_ID)}
-                                />
-                            )
-                        })
-                    }
-                </div>*/}
-
                 {
                     historyImgShow?
                     null

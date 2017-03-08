@@ -121,7 +121,13 @@ export default class Recharge extends Component {
         await Generate(address,province,city,area,amount,chargeType)
             .then(res=>{
                 this.context.router.push({pathname:'/confirmPayment/surePayment',
-                    query:{wayOfPay:this.props.location.query.wayOfPay,orderNos:res,money:this.refs.reChargeMoney.value,type:1}})
+                    query:{
+                        wayOfPay:this.props.location.query.wayOfPay,
+                        orderNos:res,
+                        money:this.refs.reChargeMoney.value,
+                        type:1,
+                        rechargeStatus:true
+                    }})
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})
@@ -240,7 +246,7 @@ export default class Recharge extends Component {
                         <label htmlFor="isRead"></label>
                     </span>
                     <Link to="/cashRule" query={{type:1}}>
-                        <span style={{marginLeft:20,marginRight:5}} className="color9">同意并接受聚朵云商综合体招商资质标准</span>
+                        <span style={{marginLeft:20,marginRight:5}} className="color9">同意并接受聚朵云云卡通充值协议</span>
                         <span className="di pa" style={{width:15,height:15,lineHeight:0}}>
                             <img src={require('../../Images/toRead.png')} alt=""/>
                         </span>

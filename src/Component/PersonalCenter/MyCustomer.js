@@ -238,7 +238,7 @@ export default class MyCustomer extends Component {
                             团队人数:{teemCount?teemCount:0}名
                         </div>
                         <div className="di rank-head-cell font14 mr10">
-                            团队消费:{teemAmount?teemAmount:0}
+                            团队消费:{teemAmount?teemAmount:0}元
                         </div>
                     </div>
                 </div>

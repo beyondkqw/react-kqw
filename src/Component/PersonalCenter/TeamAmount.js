@@ -49,7 +49,7 @@ export default class TeamAmount extends Component {
                                     直推人数:{amount?amount:0}名
                                 </div>
                                 <div className="di rank-head-cell font14 mr10">
-                                    直推消费:{palyMoney?palyMoney:0}
+                                    直推消费:{palyMoney?palyMoney:0}元
                                 </div>
                             </div>
                         </div>

@@ -203,7 +203,7 @@ export default class OrderDetails extends Component {
                                         {
                                             makeSure?
                                                 <div className="mt5" style={{height: 30,textAlign:'right'}}>
-                                                    <Link to="/toWebView" query={{LogCompany:'申通',LogNo:3322896355960}}>
+                                                    <Link to="/toWebView" query={{LogCompany:'申通',LogNo:3322896355960,chooseLink:true}}>
                                                         <button className="border_ra mr5 color9 border_ccc">查看物流</button>
                                                     </Link>
                                                     <button

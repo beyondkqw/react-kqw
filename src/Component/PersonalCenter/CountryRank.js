@@ -254,11 +254,11 @@ export default class CountryRank extends Component {
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
                     <div>
                          <div className="di rank-head-cell font14 mr10">
-                            我的排名:{rank?rank:0}名
+                            我的排名:第{rank?rank:0}名
                          </div>
                         {/*<Link to='/personalCenter/memberInfo'>*/}
                             <div className="di rank-head-cell font14 mr10">
-                                我的消费:{this.props.location.query.point?this.props.location.query.point:0}
+                                我的消费:{this.props.location.query.point?this.props.location.query.point:0}元
                             </div>
                         {/*</Link>*/}
                     </div>

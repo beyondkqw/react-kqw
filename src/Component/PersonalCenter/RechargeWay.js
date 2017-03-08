@@ -61,7 +61,7 @@ export default class RechargeWay extends Component {
                 </div>
                 <div className="list-block m0">
                     <ul>
-                        <li
+                        {/* <li
                             className="item-content item-link pl  border_bottom"
                             onClick = {()=>this.ChargeType(0,'支付宝支付','',require('../../Images/common/zfb.png'))}
                         >
@@ -74,7 +74,7 @@ export default class RechargeWay extends Component {
                                     <span className="color6">支付宝支付</span>
                                 </div>
                             </div>
-                        </li>
+                        </li>*/}
                         <li
                             className="item-content item-link pl  border_bottom"
                             onClick = {()=>this.ChargeType(1,'微信支付','wxpay',require('../../Images/common/wxPay.png'))}

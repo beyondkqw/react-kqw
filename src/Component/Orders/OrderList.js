@@ -180,7 +180,6 @@ export default class OrderList extends Component {
         if (this.iScrollInstance.y <= this.iScrollInstance.maxScrollY + 5) {
             this.onPullUp();
         }
-        console.log('滚动中----------------')
         this.setState({
             scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
         })

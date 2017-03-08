@@ -77,11 +77,11 @@ export default class SurePayment extends Component {
             .then(res=>{
                 switch(this.payStatus) {
                     //余额支付
-                    case 'balance' :this.context.router.push('/paymentSuccess');break;
+                    case 'balance' :this.context.router.push({pathname:'/paymentSuccess',query:{goToLink:this.props.location.query.rechargeStatus}});break;
                     //微信支付
                     case 'wxpay' :this.setState({wxParam:res});break;
                     //云卡通支付
-                    case 'cloudCartoon' :this.context.router.push('/paymentSuccess');break;
+                    case 'cloudCartoon' :this.context.router.push({pathname:'/paymentSuccess',query:{goToLink:this.props.location.query.rechargeStatus}});break;
                     default:return '';break;
                 }
             })
@@ -95,7 +95,7 @@ export default class SurePayment extends Component {
         if(res.errMsg == "chooseWXPay:ok") {
             //支付成功处理
             this.setState({isRepeat:false})
-            this.context.router.push('/paymentSuccess')
+            this.context.router.push({pathname:'/paymentSuccess',query:{goToLink:this.props.location.query.rechargeStatus}})
         } else {
             //支付失败处理
             this.setState({isRepeat:false})

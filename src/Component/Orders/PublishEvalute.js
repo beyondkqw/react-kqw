@@ -67,7 +67,6 @@ export default class PublishEvalute extends Component {
             })
 
         }).catch(function (err) {
-            alert('shibai ')
             console.log(err);
         })
     }
@@ -142,7 +141,6 @@ export default class PublishEvalute extends Component {
 
                 </div>
                 <SplitLine/>
-                {/*<Link to="/orderList/chaseRatings"> </Link>*/}
                 <PublishComment
                     onClick = {()=>this.toRemark()}
                 />

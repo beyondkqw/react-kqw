@@ -20,8 +20,6 @@ export default class ComfirmPayMoney extends Component {
             timer:'',
             itemAmount:[],
             carriage:[],
-            summaryAmount:[],
-            summaryCarriage:[],
             getAll:0,
             address:'',
             name:'',
@@ -37,7 +35,7 @@ export default class ComfirmPayMoney extends Component {
     async componentWillMount() {
         await this.getOrderInfor()
         this.getPoints()
-        this.state.getAll = this.getSumAmount()
+        this.getSumAmount()
     }
 
    async getOrderInfor(){
@@ -86,14 +84,15 @@ export default class ComfirmPayMoney extends Component {
             })
     }
 
-    getSumAmount(){
+    async getSumAmount(){
+        let total = 0,post = 0;
         this.state.itemAmount.map(el=>{
-            this.state.summaryAmount += el
+            total = parseFloat(el) + total
         })
         this.state.carriage.map(el=>{
-            this.state.summaryCarriage += el
+            post = parseFloat(el) + post
         })
-        return parseFloat(this.state.summaryAmount)+parseFloat(this.state.summaryCarriage)
+        this.state.getAll = total + post
     }
 
    /* changeAddress =(value)=>{
@@ -123,59 +122,59 @@ export default class ComfirmPayMoney extends Component {
         const {PaymentDetails,now_point,touch_amount,timer,getAll,address,name,mobile} = this.state
         return (
             <div className="containerNav oa">
-                {/*<Subscribe target={RPC} eventName="choosePath" listener={()=>this.changeAddress()} />*/}
+                <div>
+                    <Link to='/chooseInfomation' query={{path:true,orderNo:this.props.location.query.orderId,orderArrays:this.orderNoArray.join(',')}}>
+                        <div className="flex flex-pack-justify flex-align-center border_bottom" style={{padding:'5px 10px'}}>
+                            <div className="flex flex-align-center">
+                                <span className="fl di positionImg" style={{lineHeight:0}}>
+                                    <img src={require('../../Images/location.png')} alt=""/>
+                                </span>
+                                <div style={{marginLeft:15}}>
+                                    {
+                                        (address==undefined||address==null||address=='' )?
+                                            <div>
+                                                <span className="color6 font14">完善收货信息</span>
+                                            </div>:
+                                            <div>
+                                                <div className="item-title font14 color6">{address}</div>
+                                                <div className="f12 color9">
+                                                    <span>{name}</span>
+                                                    <span className="di margin15">{mobile}</span>
+                                                </div>
+                                            </div>
+                                    }
+                                </div>
+                            </div>
+                            <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
+                                <img src={require('../../Images/rightArrow.png')} alt=""/>
+                            </span>
+                        </div>
+                    </Link>
+                    <Link
+                        to="/receivingTime"
+                        query={{orderId:this.props.location.query.orderId,redirectPay:true}}
+                    >
+                        <div className="flex flex-pack-justify flex-align-center border_bottom" style={{height:50,padding:'5px 10px'}}>
+                            <div className="flex flex-align-center">
+                                <span className="di mr6 timeImg" style={{lineHeight:0}}><img src={require('../../Images/time.png')} alt=""/></span>
+                                {
+                                    timer ==''||timer ==undefined ?
+                                        <span className="color6 font14">送货时间不限</span>
+                                        :
+                                        <span className="color6 font14">{this.state.timer}</span>
+                                }
+                            </div>
+                           <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
+                                <img src={require('../../Images/rightArrow.png')} alt=""/>
+                            </span>
+                        </div>
+                    </Link>
+                </div>
                 {
                     PaymentDetails&&PaymentDetails.map(item=>{
                         return(
                             <div>
-                                <div>
-                                    <Link to='/chooseInfomation' query={{path:true,orderNo:item.order_no,orderArrays:this.orderNoArray.join(',')}}>
-                                        <div className="flex flex-pack-justify flex-align-center border_bottom" style={{padding:'5px 10px'}}>
-                                            <div className="flex flex-align-center">
-                                                <span className="fl di positionImg" style={{lineHeight:0}}>
-                                                    <img src={require('../../Images/location.png')} alt=""/>
-                                                </span>
-                                                <div style={{marginLeft:15}}>
-                                                    {
-                                                        (address==undefined||address==null||address=='' )?
-                                                            <div>
-                                                                <span className="color6 font14">完善收货信息</span>
-                                                            </div>:
-                                                            <div>
-                                                                <div className="item-title font14 color6">{address}</div>
-                                                                <div className="f12 color9">
-                                                                    <span>{name}</span>
-                                                                    <span className="di margin15">{mobile}</span>
-                                                                </div>
-                                                            </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                            <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
-                                                <img src={require('../../Images/rightArrow.png')} alt=""/>
-                                            </span>
-                                        </div>
-                                    </Link>
-                                    <Link
-                                        to="/receivingTime"
-                                        query={{orderId:this.props.location.query.orderId,redirectPay:true}}
-                                    >
-                                        <div className="flex flex-pack-justify flex-align-center border_bottom" style={{height:50,padding:'5px 10px'}}>
-                                            <div className="flex flex-align-center">
-                                                <span className="di mr6 timeImg" style={{lineHeight:0}}><img src={require('../../Images/time.png')} alt=""/></span>
-                                                {
-                                                    timer ==''||timer ==undefined ?
-                                                        <span className="color6 font14">送货时间不限</span>
-                                                        :
-                                                        <span className="color6 font14">{this.state.timer}</span>
-                                                }
-                                            </div>
-                                           <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:10}}>
-                                                <img src={require('../../Images/rightArrow.png')} alt=""/>
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
+
                                 <div className="line"></div>
                                 <div>
                                     <Link to="/chooseInfomation">

@@ -77,7 +77,7 @@ export default class MemberClub extends Component {
                             className={'border_right'}
                             imgUrl={require('../../Images/total.png')}
                             title='直推消费金额'
-                            describing={clubInfo.USE_AMOUNT?clubInfo.USE_AMOUNT:0}
+                            describing={clubInfo.DIRECT_PUSH_AMOUNT?clubInfo.DIRECT_PUSH_AMOUNT:0}
                             //link={el.link}
                         />
                     </Link>
