@@ -441,105 +441,106 @@ export default class GoodsDescription extends Component {
     render() {
         const {goodsDetails} = this.state;
         return (
-            <section  className="bkg_color overScroll" style={{position:'absolute',top:0,bottom:0,overflowX:'hidden',overflowY:'auto',width:"100%"}}>
-                <div className="bannerImg">
-                    <AutoPlaySwipeableViews
-                        style={{height:'9rem'}}
-                        interval = {2000}
-                    >
-                        {
-                            goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
-                                return(
-                                    <div style={{width:'100%',height:'9rem',textAlign:'center'}}>
-                                        <img
-                                            style={{width:'70%'}}
-                                            src = {el.IMAGE}
-                                        />
-                                    </div>
-
-                                )
-                            })
-                        }
-                    </AutoPlaySwipeableViews>
-                </div>
-                <div className="width_100 goodDetails">
-                    <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
-                    <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
-                        <span className="di collect_img">
+            <section>
+                <div  className="bkg_color overScroll" style={{position:'absolute',top:0,bottom:'3rem',overflowX:'hidden',overflowY:'auto',width:"100%"}}>
+                    <div className="bannerImg">
+                        <AutoPlaySwipeableViews
+                            style={{height:'9rem'}}
+                            interval = {2000}
+                        >
                             {
-                                this.state.isChecked?
-                            <img src={require('../../Images/alreadyFollow.png')} alt=""/>
-                            :
-                            <img src={require('../../Images/collect.png')} alt=""/>
+                                goodsDetails.BANNER&&goodsDetails.BANNER.map((el,index)=>{
+                                    return(
+                                        <div style={{width:'100%',height:'9rem',textAlign:'center'}}>
+                                            <img
+                                                style={{width:'70%'}}
+                                                src = {el.IMAGE}
+                                            />
+                                        </div>
+
+                                    )
+                                })
                             }
-                        </span>
-                        <span className="f10 db color6">收藏</span>
+                        </AutoPlaySwipeableViews>
                     </div>
-                </div>
-                <div className="mtlr">
-                    <div>
-                        <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
-                        <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
-                    </div>
-                    <div className="f12">
-                        <span className="colorff ">卖家包邮</span>
-                        <div className="fr">
-                            <span>{goodsDetails.SALES}</span>人付款
+                    <div className="width_100 goodDetails">
+                        <div className="pl fl color6 pr_details border_dec width_80 font14 height_all">{goodsDetails.NAME}</div>
+                        <div className="width_20 fl tc height_all" onClick={()=>this.isFollow()}>
+                            <span className="di collect_img">
+                                {
+                                    this.state.isChecked?
+                                <img src={require('../../Images/alreadyFollow.png')} alt=""/>
+                                :
+                                <img src={require('../../Images/collect.png')} alt=""/>
+                                }
+                            </span>
+                            <span className="f10 db color6">收藏</span>
                         </div>
                     </div>
-                </div>
-                <div className="list-block margin_tb">
-                    <ul>
-                        {
-                            goodsDetails.STORE_ID == ''||goodsDetails.STORE_ID == null?
-                            null:
-                            <Link to="/store" query={{storeId:goodsDetails.STORE_ID}}>
-                                <li className="item-content item-link pl  border_bottom">
-                                    <div className="item-media"><i className="icon icon-f7"></i></div>
-                                    <div className="item-inner margin0">
-                                        <div className="item-title">
-                                            <span className="di store mr"><img src={goodsDetails.STORE_IMG} alt=""/></span>
-                                            <span className="color6 font14">{goodsDetails.STORE_NAME}</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </Link>
-                        }
-                        {/*属性*/}
-                        <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
-                            <div className="item-media"><i className="icon icon-f7"></i></div>
-                            <div className="item-inner margin0">
-                                <div className="item-title">
-                                    <span className="color6 font14">
-                                        {
-                                        this.state.attributeList.map((el,index)=>{
-                                        if(index<this.state.attributeList.length-1){
-                                            return `${el.NAME}`+ ','
-                                        }
-                                        return `${el.NAME}`
-                                    })}分类</span>
-                                </div>
+                    <div className="mtlr">
+                        <div>
+                            <span className="colorff f12">￥</span><span className="colorff font18">{goodsDetails.CURRENT_PRICE}</span>
+                            <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
+                        </div>
+                        <div className="f12">
+                            <span className="colorff ">卖家包邮</span>
+                            <div className="fr">
+                                <span>{goodsDetails.SALES}</span>人付款
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div className="list-block margin_tb">
+                        <ul>
+                            {
+                                goodsDetails.STORE_ID == ''||goodsDetails.STORE_ID == null?
+                                null:
+                                <Link to="/store" query={{storeId:goodsDetails.STORE_ID}}>
+                                    <li className="item-content item-link pl  border_bottom">
+                                        <div className="item-media"><i className="icon icon-f7"></i></div>
+                                        <div className="item-inner margin0">
+                                            <div className="item-title">
+                                                <span className="di store mr"><img src={goodsDetails.STORE_IMG} alt=""/></span>
+                                                <span className="color6 font14">{goodsDetails.STORE_NAME}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </Link>
+                            }
+                            {/*属性*/}
+                            <li className="item-content item-link pl" onClick={()=>this.popubAnimate()}>
+                                <div className="item-media"><i className="icon icon-f7"></i></div>
+                                <div className="item-inner margin0">
+                                    <div className="item-title">
+                                        <span className="color6 font14">
+                                            {
+                                            this.state.attributeList.map((el,index)=>{
+                                            if(index<this.state.attributeList.length-1){
+                                                return `${el.NAME}`+ ','
+                                            }
+                                            return `${el.NAME}`
+                                        })}分类</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <SplitLine />
+
+                    <Tabscontrol
+                        style={{backgroundColor:'#fff'}}
+                    >
+                        <div name="商品介绍">
+                            {this.commodityIntroduction()}
+                        </div>
+                        <div name="商品参数">
+                            {this.showGoodsParams()}
+                        </div>
+                        <div name="评论">
+                            {this.showGoodsRemark()}
+                        </div>
+
+                    </Tabscontrol>
                 </div>
-                <SplitLine />
-
-                <Tabscontrol
-                    style={{backgroundColor:'#fff'}}
-                >
-                    <div name="商品介绍">
-                        {this.commodityIntroduction()}
-                    </div>
-                    <div name="商品参数">
-                        {this.showGoodsParams()}
-                    </div>
-                    <div name="评论">
-                        {this.showGoodsRemark()}
-                    </div>
-
-                </Tabscontrol>
-
 
                 <div className="height3 pf bottom0  plAll border_top bkg_color z_index wrap">
                         {/*购物车*/}
