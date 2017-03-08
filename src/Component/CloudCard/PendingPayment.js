@@ -45,7 +45,7 @@ export default class PendingPayment extends Component {
                             el.orderDetails.map(item=>{
                                 return(
                                     <Link to="/pendPaymentDetails" query = {{showBar:true,amount:item.price,time:el.create_time,orderNo:item.orderNo}}>
-                                        <div className="df flex-pack-justify flex-align-center border_bottom plr">
+                                        <div className="df flex-pack-justify flex-align-center border_bottom" style={{padding:'5px 10px'}}>
                                             <div>
                                                 <div className="font14 color6">{item.productName}</div>
                                                 <div className="f12 color9">{item.price}</div>
