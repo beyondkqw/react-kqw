@@ -296,11 +296,21 @@
     padding:10px 10px 10px 0;
     flex-wrap: wrap;
     margin-left: 10px;
+    overflow: hidden;
 }
 
 .goodsTitle{
     font-size : 14px;
     color : #666;
+    width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: box;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
 }
 
 .rightBottom{

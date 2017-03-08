@@ -24,7 +24,7 @@ import './Stylesheets/App/personal.css'
 import './Stylesheets/App/sellerStore.css'
 import './Stylesheets/App/shoppingCarts.css'
 
-
+var wAlert = window.alert;
 const middleware = [ thunk ]
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())

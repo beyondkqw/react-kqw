@@ -94,6 +94,7 @@ export default class SurePayment extends Component {
     wXPaySuccess = (res)=>{
         if(res.errMsg == "chooseWXPay:ok") {
             //支付成功处理
+
             this.setState({isRepeat:false})
             this.context.router.push('/paymentSuccess')
         } else {
