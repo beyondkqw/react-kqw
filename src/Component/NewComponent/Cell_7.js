@@ -1,6 +1,7 @@
 import React, { Component,PropTypes } from 'react';
 import '../../Stylesheets/App/homePage.css';
 import {SCREEN_WIDTH} from '../../Action/rpc'
+import {Link} from 'react-router';
 
 export default class Cell_7 extends Component {
     static contextTypes = {

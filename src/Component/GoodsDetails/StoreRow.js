@@ -18,7 +18,7 @@ export default class StoreRow extends Component {
                     <img src={imgurl} />
                 </div>
                 <div className={showBorderBottom?"rightMoudle":"rightMoudle border_bottom"}>
-                    <div className="goodsTitle">{title}</div>
+                    <div className="goodsTitle flex flex-column">{title}</div>
                     <div>
                         <div style={{height:18,marginBottom:5}}>
                             {

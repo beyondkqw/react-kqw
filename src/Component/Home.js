@@ -50,6 +50,7 @@ class Home extends Component {
         this.getHomeMoudle()
 
         //getLocation()
+
     }
 
     //首页banner
