@@ -234,7 +234,7 @@ export default class SearchPage extends Component {
         this.over = false;
         this.page = 1
         this.dataList = []
-        this.setState({
+        await this.setState({
             name:value
         })
         await this.getOrder('','','','');
