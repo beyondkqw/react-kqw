@@ -18,15 +18,15 @@ let userInfo = {};
 import {imei,version,client} from './auth'
 
 
-/*export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
-export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";*/
+//export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
+//export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
 // export const wsPath = "ws://"+'jdapi.tunnel.qydev.com'+"/api/socketServer";
 // export const ROOT_URL = 'http://jdapi.tunnel.qydev.com/api/'
-//  export const ROOT_URL = 'http://juduotest.tunnel.qydev.com/api/'
+//export const ROOT_URL = 'http://juding.tunnel.qydev.com/api/'
 // export const wsPath = "ws://"+'juduotest.tunnel.qydev.com'+"/api/socketServer";
-export const wsPath = "ws://"+'jdy.juduoy.com'+"/api/socketServer";
+//export const wsPath = "ws://"+'jdy.juduoy.com'+"/api/socketServer";
 export const ROOT_URL = 'http://jdy.juduoy.com/api/'
-//export const wsPath = "ws://jdy.tunnel.qydev.com/";
+export const wsPath = "ws://jdy.tunnel.qydev.com/";
 // export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/'
 
 
@@ -268,7 +268,7 @@ export function CheckNum(value) {
 
 // 验证手机号是否正确
 export function ErrorNum(value) {
-    if (!(/^((13[0-9])|(15[^4,\D])|(17[0-9])|(18[0-1,3-9]))\d{8}$/.test(value))) {
+    if (!(/^((13[0-9])|(14[0-9])|(15[^4,\D])|(17[0-9])|(18[0-9]))\d{8}$/.test(value))) {
         return false;
     } else {
         return true;

@@ -55,7 +55,7 @@ export default class SellerStoreCenter extends Component {
                 <section className="pr tc center_bkImg" style={{height:170,paddingTop:20}}>
                     <Link to="/sellerSetting" query={{storeId:storeDetails.id}}>
                         <div className="personLogo">
-                            <img className="border_ra50" src={storeDetails.img} alt=""/>
+                            <img className="border_ra50" src={storeDetails.img?storeDetails.img:require('../../Images/common/default.png')} alt=""/>
                         </div>
                     </Link>
                     <div className="pa setUp">

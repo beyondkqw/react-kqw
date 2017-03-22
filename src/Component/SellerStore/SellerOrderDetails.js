@@ -66,7 +66,7 @@ export default class SellerOrderDetails extends Component {
                     title = {'订单详情'}
                 />
                 <div className="df plAll">
-                    <div className="pr" style={{width:14,height:14,margin:'auto'}}><img className="pa" src={require("../../Images/time.png")} alt=""/></div>
+                    <div className="pr" style={{width:13,height:18,margin:'auto'}}><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
                     <div className="flex1 mtlr">
                         <div className="font14 color6">
                             <span>收货人:</span><span>{sellerOrderDetails.name?sellerOrderDetails.name:'暂未填写'}</span>

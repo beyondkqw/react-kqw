@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
-import '../../Stylesheets/App/order.css';
+//import '../../Stylesheets/App/order.css';
 
 export default class PaymoneyComponent extends Component {
     render() {

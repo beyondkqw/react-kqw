@@ -5,8 +5,7 @@ import {BankUpdate,UnBinding} from '../../Action/auth';
 import {ErrorNum,BankNum,ChinaChar,EnglishChar,specialChar} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
-
-export default class SellerModifyCard extends Component {
+export default class ModifyBankCard extends Component {
     // 构造
     constructor(props) {
         super(props);
@@ -54,10 +53,10 @@ export default class SellerModifyCard extends Component {
             this.setState({Reminder:'手机号码有误,请重新填写'})
             return
         }
-        if (!BankNum(bankCardNo)) {
+        /*if (!BankNum(bankCardNo)) {
             this.setState({Reminder:'银行卡号码有误,请重新填写'})
             return
-        }
+        }*/
         await BankUpdate(bankId,bankName,name,bankCardNo,pro,city,area,branch,mobile)
             .then(res=>{
                 this.context.router.goBack()

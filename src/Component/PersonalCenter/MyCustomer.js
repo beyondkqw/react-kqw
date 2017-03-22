@@ -235,7 +235,7 @@ export default class MyCustomer extends Component {
                 <div className="rankHeader flex flex-align-center flex-pack-justify-end">
                     <div>
                         <div className="di rank-head-cell font14 mr10">
-                            团队人数:{teemCount?teemCount:0}名
+                            粉丝团:{teemCount?teemCount:0}名
                         </div>
                         <div className="di rank-head-cell font14 mr10">
                             团队消费:{teemAmount?teemAmount:0}元

@@ -41,14 +41,12 @@ export default class SellerBalanceMan extends Component {
                     </Link>*/}
                 </div>
                 <div className="clearAll">
-                    <Link to="/remarkManage" query={{storeId:this.props.location.query.storeId}}>
-                        <div className="df fl width50 flex-pack-center  border_bottom flex-align-center border_right" style={{height:'4rem'}}>
-                            <span className="di cloudImg" style={{marginRight:10,lineHeight:0}}><img src={require('../../Images/total.png')} alt="" /></span>
-                            <div className="font14 color6">
-                                <span>全部余额</span>
-                                <div>{Now_Amount}</div></div>
-                        </div>
-                    </Link>
+                    <div className="df fl width50 flex-pack-center  border_bottom flex-align-center border_right" style={{height:'4rem'}}>
+                        <span className="di cloudImg" style={{marginRight:10,lineHeight:0}}><img src={require('../../Images/total.png')} alt="" /></span>
+                        <div className="font14 color6">
+                            <span>全部余额</span>
+                            <div>{Now_Amount}</div></div>
+                    </div>
                     <Link to="/sellerTakenDetails" query={{storeId:this.props.location.query.storeId}}>
                         <div className="df fl width50 flex-pack-center  border_bottom flex-align-center" style={{height:'4rem'}}>
                             <span className="di cloudImg" style={{marginRight:10,lineHeight:0}}><img src={require('../../Images/common/jilu.png')} alt="" /></span>

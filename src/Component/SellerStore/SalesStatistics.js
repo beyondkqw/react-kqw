@@ -58,7 +58,7 @@ export default class SalesStatistics extends Component {
     render(){
         const {show,monthMoney,monthDay,chooseIndex} = this.state
         return(
-            <div className="containerNav">
+            <div className="containerNav" style={{height:'100%'}}>
                 <NavBar
                     renderBack = {true}
                     title = {'销售统计'}

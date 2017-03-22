@@ -8,7 +8,6 @@ import {apiGet,apiPost} from './rpc';
 
 //初始化微信Jssdk
 function initWx(){
-    console.log('地址===========>',location.href.split('#')[0])
     InitWxJsSDk(encodeURIComponent(location.href.split('#')[0]))
         .then(res=>{
             console.log("initWx =====>",res);

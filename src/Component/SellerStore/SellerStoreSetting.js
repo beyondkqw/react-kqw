@@ -47,14 +47,14 @@ export default class SellerStoreSetting extends Component {
                                         <li>
                                             <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
                                                 <div>
-                                                <span className="di" style={{width:20,height:20}}>
-                                                    <img src={el.imgurl} alt=""/>
-                                                </span>
+                                                    <span className="di" style={{width:20,height:20}}>
+                                                        <img src={el.imgurl} alt=""/>
+                                                    </span>
                                                     <span className="di color6 ml5">{el.name}</span>
                                                 </div>
-                                            <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:5}}>
-                                                <img src={require('../../Images/rightArrow.png')} alt=""/>
-                                            </span>
+                                                <span className="di" style={{width:9,height:16,lineHeight:0,marginLeft:5}}>
+                                                    <img src={require('../../Images/rightArrow.png')} alt=""/>
+                                                </span>
                                             </div>
                                         </li>
                                     </Link>

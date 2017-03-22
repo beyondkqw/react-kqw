@@ -239,13 +239,14 @@ export default class ConfirmGivenPerson extends Component {
     }
     //搜索转赠人列表
     async searchPerson(value){
-        console.log('vakue',value)
-        await this.getPointsList(value)
+        this.over = false;
+        this.page = 1
+        this.dataList = []
+        await this.getPointsList(value,this.page)
     }
 
     render() {
         const {pointList} = this.state
-        console.log('pointList')
         return (
             <div className="containerNav">
                 <Search

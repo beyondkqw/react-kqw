@@ -278,6 +278,9 @@ export default class Store extends Component {
     }
     //搜索
     searchList(value){
+        this.over = false;
+        this.page = 1
+        this.dataList = []
         this.getOrderList(value,this.storeId,'','')
     }
 

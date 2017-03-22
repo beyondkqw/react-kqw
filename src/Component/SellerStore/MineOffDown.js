@@ -350,8 +350,8 @@ export default class MineOffDown extends Component {
                                                         </div>
                                                         <div>
                                                             <div className="rightBottom" style={{color:'#999'}}>
-                                                                <p><span>货号 : </span><span>asere</span></p>
-                                                                <p><span>25</span>人付款</p>
+                                                                {/*<p><span>货号 : </span><span>asere</span></p>*/}
+                                                                <p>售出{el.SALES}份</p>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -1,6 +1,8 @@
 import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import '../../Stylesheets/App/comfirmPayMoney.css';
+import RPC from '../../Action/rpc'
+import Subscribe from '../../Component/NewComponent/Subscribe'
 
 export default class RechargeWay extends Component {
     // 构造
@@ -17,6 +19,7 @@ export default class RechargeWay extends Component {
     }
 
     ChargeType(value,chooseWay,payStatus,img){
+        //RPC.emit('rechargeWay')
         this.context.router.push({pathname:'/personalCenter/recharge',
             query:{chargeType:value,chargeWay:chooseWay,wayOfPay:payStatus,chooseImg:img}})
     }

@@ -7,7 +7,7 @@ export default class RetailingItem extends Component {
         return (
             <div className="height_charge plAll border_bottom">
                 <span className="fl di headerImg">
-                    <img className="border_ra50" src={imgUrl} alt=""/>
+                    <img className="border_ra50" src={imgUrl?imgUrl:require('../../Images/common/default.png')} alt=""/>
                 </span>
                 <div className="fl" style={{marginLeft:15}}>
                     <div className="font14 color6">

@@ -303,7 +303,7 @@ export default class NearShop extends Component {
                                     />:
                                 shopList&&shopList.map(el=>{
                                     return(
-                                        <Link to="/store" query={{storeId:el.id}}>
+                                        <Link to="/store" query={{storeId:el.storeId}}>
                                             <div className="_order_height border_bottom pr plAll df">
                                                 <div className="_order_img height_all">
                                                     <img src={el.img} alt=""/>

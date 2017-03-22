@@ -400,7 +400,7 @@ export default class ShoppingCart extends Component {
                             <span className="di check_radius pr fl">
                                 <input
                                     type="checkbox" id="checkAll"
-                                    checked={this.select.length==this.state.shopCarList.length?true:false}
+                                    checked={this.select.length&&(this.select.length==this.state.shopCarList.length)?true:false}
                                     onClick={()=>this.onChangeState()}
                                     className="di isCheck"
                                 />

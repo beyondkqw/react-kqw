@@ -50,9 +50,11 @@
       const address = data.formattedAddress;
       const latitude = data.position.getLat();
       const longitude = data.position.getLng()
+      const city = data.addressComponent.city
       sessionStorage.setItem('address',address)
       sessionStorage.setItem('latitude',latitude)
       sessionStorage.setItem('longitude',longitude)
+      sessionStorage.setItem('city',city)
     }
 
     //解析定位错误信息

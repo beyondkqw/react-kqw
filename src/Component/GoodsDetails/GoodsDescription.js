@@ -483,7 +483,7 @@ export default class GoodsDescription extends Component {
                             <a className="color_gray di f12 ml td_lt"><span>原价&nbsp;</span><span>{goodsDetails.PRICE}</span></a>
                         </div>
                         <div className="f12">
-                            <span className="colorff ">卖家包邮</span>
+                            <span className="colorff ">{goodsDetails.IS_POSTAGE == 0?'卖家包邮':'买家承担邮费'}</span>
                             <div className="fr">
                                 <span>{goodsDetails.SALES}</span>人付款
                             </div>

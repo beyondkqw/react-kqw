@@ -261,8 +261,8 @@ export default class Retailing extends Component {
                                                 changeAmount = {el.channel_amount}
                                                 extraMsg = {el.extra_msg2}
                                                 imgUrl = {el.image_uri}
-                                                ymd = {el.substr(0,10)}
-                                                time = {el.substr(11,5)}
+                                                ymd = {el.create_time&&el.create_time.substr(0,10)}
+                                                time = {el.create_time&&el.create_time.substr(11,5)}
                                                 isShowDate={true}
                                             />
                                         </Link>

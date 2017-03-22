@@ -69,14 +69,14 @@ export default class MemberClub extends Component {
                           query={{
                           imgUrl:clubInfo.IMAGE_URI,
                           memberName:clubInfo.MEMBER_NAME,
-                          amount:clubInfo.USE_AMOUNT,
+                          amount:clubInfo.DIRECT_PUSH_AMOUNT,
                           toChange:true
                           }}
                     >
                         <CellComponent
                             className={'border_right'}
                             imgUrl={require('../../Images/total.png')}
-                            title='直推消费金额'
+                            title='粉丝值'
                             describing={clubInfo.DIRECT_PUSH_AMOUNT?clubInfo.DIRECT_PUSH_AMOUNT:0}
                             //link={el.link}
                         />
@@ -87,18 +87,18 @@ export default class MemberClub extends Component {
                         >
                         <CellComponent
                             imgUrl={require('../../Images/payment.png')}
-                            title={'直推人数'}
+                            title={'粉丝'}
                             describing={clubInfo.DIRECT_PUSH_COUNT?clubInfo.DIRECT_PUSH_COUNT:0}
                             //link={'/paymentOther'}
                         />
                     </Link>
                     <Link
                         to="/personalCenter/myCustomer"
-                        query={{teemCount:clubInfo.TEEM_MEMBER_COUNT,teemAmount:clubInfo.TEEM_MEMBER_COUNT}}>
+                        query={{teemCount:clubInfo.TEEM_MEMBER_COUNT,teemAmount:clubInfo.TEEM_MEMBER_AMOUNT}}>
                         <CellComponent
                             className={'border_right'}
                             imgUrl={require('../../Images/used.png')}
-                            title={'团队人数'}
+                            title={'粉丝团'}
                             describing={clubInfo.TEEM_MEMBER_COUNT?clubInfo.TEEM_MEMBER_COUNT:0}
                         />
                     </Link>
@@ -113,7 +113,7 @@ export default class MemberClub extends Component {
                     >
                         <CellComponent
                             imgUrl={require('../../Images/diary.png')}
-                            title={'团队消费金额'}
+                            title={'粉丝团值'}
                             describing={clubInfo.TEEM_MEMBER_AMOUNT?clubInfo.TEEM_MEMBER_AMOUNT:0}
                             //link={'/personalCenter/teamAmount'}
                         />

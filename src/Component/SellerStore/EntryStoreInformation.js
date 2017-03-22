@@ -60,7 +60,6 @@ export default class EntryStoreInformation extends Component {
         this.latitude = sessionStorage.getItem('latitude')
         this.longitude = sessionStorage.getItem('longitude')
         this.address = sessionStorage.getItem('address')
-        console.log('当前位置信息=====>',this.address+this.latitude+this.longitude)
     }
 
     //得到地址信息
@@ -147,11 +146,11 @@ export default class EntryStoreInformation extends Component {
             this.setState({Reminder:''})
         }
 
-        this.getInformation(storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,this.address,this.latitude,this.longitude,this.state.id)
+        this.getInformation(this.props.location.query.registerMobile,storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,this.address,this.latitude,this.longitude,this.state.id)
     }
 
-    async getInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
-        await EnterStoreInformation(name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress?gpsAddress:'',latitude?latitude:'',longitude?longitude:'',type)
+    async getInformation(mobile,name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type){
+        await EnterStoreInformation(mobile,name,img,address,detail,locType,province,city,area,license,cardFace,cardBack,gpsAddress?gpsAddress:'',latitude?latitude:'',longitude?longitude:'',type)
             .then(res=>{
                 alert('店铺申请成功,请耐心等待')
                 this.context.router.push({pathname:'/storeSubCommission'})
