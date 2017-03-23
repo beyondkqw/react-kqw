@@ -44,12 +44,10 @@ export default class ChooseInfomation extends Component {
         if(this.props.location.query.path){
             //RPC.emit('choosePath',value,this.props.location.query.orderNo)
             await this.SetAddressOrder(this.props.location.query.orderArrays,value.id)
-
             sessionStorage.setItem('getAddress',value.address)
             sessionStorage.setItem('getDetail',value.detail)
             sessionStorage.setItem('getName',value.name)
             sessionStorage.setItem('getMobile',value.mobile)
-
             this.context.router.push({pathname:'/comfirmPayMoney',
                 query:{
                     orderId:this.props.location.query.orderNo,

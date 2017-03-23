@@ -50,9 +50,9 @@ export default class SellerErWeiCode extends Component {
                 />
                 <div className="pa_top1 tc">
                     <span className="di incomeImg">
-                        <img className="border_ra50" src={infoDetails.IMAGE_URI} alt=""/>
+                        <img className="border_ra50" src={infoDetails.IMAGE_URI?infoDetails.IMAGE_URI:require('../../Images/common/default.png')} alt=""/>
                     </span>
-                    <p className="f12 color6 mt5">{infoDetails.MEMBER_NAME}</p>
+                    <div className="f12 color6 mt5">{infoDetails.MEMBER_NAME}</div>
                 </div>
                 <div className="width100 tc mt25">
                     <span className="di erWeiCode">

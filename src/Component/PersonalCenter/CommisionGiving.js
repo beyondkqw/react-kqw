@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component,PropTypes} from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CommonBtn from '../../Component/CommonComponent/CommonBtn';
@@ -17,6 +17,11 @@ export default class CommisionGiving extends Component {
             Reminder:''
         };
       }
+
+    static contextTypes = {
+        router:PropTypes.object
+    }
+
     componentWillMount() {
         this.setState({accId:this.props.location.query.accId})
         this.getUserInfo()
@@ -43,13 +48,14 @@ export default class CommisionGiving extends Component {
             alert('请输入整数金额')
             return
         }
-        if(this.state.accId == ''){
+        if(this.state.accId == '' || this.state.accId == undefined || this.state.accId == null){
             this.setState({Reminder:'请选择转赠人'})
             return
         }
         await GiveAmount(this.state.accId,amountNum)
             .then(res=>{
                 alert('确认转赠成功')
+                this.context.router.push({pathname:'/personalCenter/myCharges'})
             })
             .catch(err=>{
                 console.warn('err',err)

@@ -39,19 +39,34 @@ export default class MyBankCark extends Component {
                             :
                         bankList&&bankList.map(el=>{
                             return(
-                                <div className="BankHeight df supplement border_ra pa_top pa_left1 mt5">
-                                    <span className="store_img"><img src={require('../../Images/bank.png')} alt=""/></span>
-                                    <div className="flex-1 color_white font14 ml5">
-                                        <span className="di" style={{marginTop:2}}>{el.bankName}</span>
-                                        <p>储蓄卡</p>
-                                        <div style={{marginTop:25}}>
-                                            <span>****</span>
-                                            <span className="di ml5">****</span>
-                                            <span className="di ml5">****</span>
-                                            <span className="di ml5">{el.bankcardNo.substr(el.bankcardNo.length-4)}</span>
+                                <Link
+                                    to="/modifyBankCard"
+                                    query={{
+                                            bankId:el.id,
+                                            bankName:el.bankName,
+                                            name:el.name,
+                                            bankCardNo:el.cardNo,
+                                            pro:el.pro,
+                                            city:el.city,
+                                            area:el.area,
+                                            branch:el.branch,
+                                            mobile:el.mobile
+                                        }}
+                                >
+                                    <div className="BankHeight df supplement border_ra pa_top pa_left1 mt5">
+                                        <span className="store_img"><img src={require('../../Images/bank.png')} alt=""/></span>
+                                        <div className="flex-1 color_white font14 ml5">
+                                            <span className="di" style={{marginTop:2}}>{el.bankName}</span>
+                                            <p>储蓄卡</p>
+                                            <div style={{marginTop:25}}>
+                                                <span>****</span>
+                                                <span className="di ml5">****</span>
+                                                <span className="di ml5">****</span>
+                                                <span className="di ml5">{el.bankcardNo.substr(el.bankcardNo.length-4)}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             )
                         })
                     }

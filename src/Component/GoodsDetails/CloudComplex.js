@@ -30,7 +30,8 @@ export default class CloudComplex extends Component {
             items: [],
             pullDownStatus: 3,
             pullUpStatus: 0,
-            scrollTop:0
+            scrollTop:0,
+            country:''
         };
         this.page = 1;
         this.over = false;
@@ -199,10 +200,16 @@ export default class CloudComplex extends Component {
     }
 
     async componentWillMount() {
-
         await this.getStoreType()
-        this.changTab(0,this.StoreTypeId[0])
-
+        console.log('this.props.location.query.value',this.props.location.query.value)
+        if(this.props.location.query.value){
+            this.dataList=[];
+            this.over = false;
+            this.page = 1;
+            this.getStoreList('',this.props.location.query.value,1)
+        }else{
+            this.changTab(0,this.StoreTypeId[0])
+        }
     }
 
     //获取店铺类型
@@ -284,7 +291,18 @@ export default class CloudComplex extends Component {
         return (
             <div>
                 <div style={{position:'absolute',top:0,right:0,left:0,bottom:0,overflow:'auto'}}>
-                    <div className="pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
+                    <div className="flex pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
+                        <div
+                            className="flex tc bkg_ff flex-pack-center flex-align-center flex-v"
+                            style={{paddingLeft:5}}
+                        >
+                            {/*<Link to ='/chooseCity'>
+                                <span className="di" style={{width:18,height:16,lineHeight:0,marginTop:5}}>
+                                    <img src={require('../../Images/common/classification.png')} alt=""/>
+                                </span>
+                                <p className="f10 color_white">{this.props.location.query.value?this.props.location.query.value:'城市列表'}</p>
+                            </Link>*/}
+                        </div>
                         <div className="flex1">
                             <Search
                                 style={{backgroundColor:'#ff5500'}}
@@ -337,7 +355,7 @@ export default class CloudComplex extends Component {
                                                 <Link to="/store" query={{storeId:el.id}}>
                                                     <div className="_order_height border_bottom pr plAll df">
                                                         <div className="_order_img height_all">
-                                                            <img src={el.img} alt=""/>
+                                                            <img src={el.img?el.img:require('../../Images/common/default.png')} alt=""/>
                                                         </div>
                                                         <div className="flex1 font14 _order_margin">
                                                             <p className="color6 db">{el.name}</p>

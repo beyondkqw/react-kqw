@@ -122,6 +122,7 @@ export default class ComfirmPayMoney extends Component {
         const {PaymentDetails,now_point,touch_amount,timer,getAll,address,name,mobile} = this.state
         return (
             <div className="containerNav oa">
+                {/*<Subscribe target={RPC} eventName="choosePath" listener={()=>this.changeAddress()} />*/}
                 <div>
                     <Link to='/chooseInfomation' query={{path:true,orderNo:this.props.location.query.orderId,orderArrays:this.orderNoArray.join(',')}}>
                         <div className="flex flex-pack-justify flex-align-center border_bottom" style={{padding:'5px 10px'}}>

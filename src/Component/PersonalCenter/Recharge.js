@@ -8,6 +8,8 @@ import Location from '../../Component/SellerStore/Location'
 import '../../Stylesheets/App/personal.css';
 import {Generate,HomeBanner} from '../../Action/auth';
 import {CheckNum} from '../../Action/rpc';
+import RPC from '../../Action/rpc'
+import Subscribe from '../../Component/NewComponent/Subscribe'
 
 
 export default class Recharge extends Component {
@@ -85,7 +87,7 @@ export default class Recharge extends Component {
             this.setState({Reminder:''})
         }
 
-        if(this.props.location.query.chargeType == ''){
+        if(this.props.location.query.chargeType == '' || this.props.location.query.chargeType == undefined || this.props.location.query.chargeType == null){
             this.setState({Reminder:'请选择充值方式'})
             return
         }else{
@@ -140,12 +142,18 @@ export default class Recharge extends Component {
         this.refs.reChargeMoney.value = value
     }
 
+    changeWay=()=>{
+        alert('asjdk')
+        console.log('哈哈哈哈哈，收到了')
+    }
+
 
     render() {
         const {toShowNav,indexNum,showModal,priceList,showMap,provName,cityName,countysName} = this.state
         const {chargeType,chargeWay,chooseImg} = this.props.location.query
         return (
             <div className="bkg_color containerNav">
+                {/*<Subscribe target={RPC} eventName="rechargeWay" listener={this.changeWay}/>*/}
                 <Link to="/rechargeWay">
                     <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
                         <div style={{height:50}}  className="df flex-align-center">
@@ -238,13 +246,13 @@ export default class Recharge extends Component {
                     />
                 </div>
                 <div className="f12 color6 tc mt5 pr">
-                    <span className="di checkedRead pa">
+                    {/*<span className="di checkedRead pa">
                         <input
                             type="checkbox" id="isRead"
                             className="di toRead"
                         />
                         <label htmlFor="isRead"></label>
-                    </span>
+                    </span>*/}
                     <Link to="/cashRule" query={{type:1}}>
                         <span style={{marginLeft:20,marginRight:5}} className="color9">同意并接受聚朵云云卡通充值协议</span>
                         <span className="di pa" style={{width:15,height:15,lineHeight:0}}>

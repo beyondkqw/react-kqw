@@ -90,7 +90,7 @@ export default class OrderFormDetails extends Component {
         this.context.router.push({pathname:'/confirmPayment/choosePayment',
             query:{
                 orderNos:this.props.location.query.orderId,
-                payMuchMoney:this.state.orderFormdDetails.amount,
+                payMuchMoney:this.state.orderFormdDetails.amount + this.state.orderFormdDetails.postage,
                 planReceiveTime:this.state.timer
             }});
     }
@@ -174,7 +174,6 @@ export default class OrderFormDetails extends Component {
                                 </div>
                                 <div className="pa order_price tr">
                                     <p className=""><span className="f12">￥</span><span className="f15">{el.price}</span></p>
-                                    <p className="td_lt color9"><span className="f12">￥</span><span className="f15">258</span></p>
                                     <p className="color9 font14"><span>X</span><span>{el.num}</span></p>
                                     <Link to="/orders/applicationForAfterSales" query={{orderNo:el.id}}>
                                         {

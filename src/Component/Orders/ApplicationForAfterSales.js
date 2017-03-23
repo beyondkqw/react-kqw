@@ -63,7 +63,7 @@ export default class ApplicationForAfterSales extends Component {
     render() {
         const {reason,receivedStatus,showReason,refundType,isChoose,refundReason} = this.state
         return (
-            <div className="containerNav bkg_gray">
+            <div className="bkg_gray pa overScroll" style={{top:0,bottom:0,left:0,right:0}}>
                 <div className="plr">
                     {/*<div className="df ml saleTitle">
                         <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
@@ -149,7 +149,7 @@ export default class ApplicationForAfterSales extends Component {
                     }*/}
 
                     <div className="df ml saleTitle">
-                        <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
+                        {/*<div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>*/}
                         <div className="flex1 ml">
                             <p className="font14 color6">退款原因</p>
                         </div>
@@ -182,7 +182,7 @@ export default class ApplicationForAfterSales extends Component {
                         />
                     </div>*/}
                     <div className="df ml saleTitle">
-                        <div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>
+                        {/*<div className="leftPoint pr"><img className="pa" src={require("../../Images/location.png")} alt=""/></div>*/}
                         <div className="flex1 ml">
                             <p>
                                 <span  className="font14 color6">退款说明</span>

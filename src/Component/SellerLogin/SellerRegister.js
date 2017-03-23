@@ -141,7 +141,7 @@ export default class SellerRegister extends Component {
             .then(res=>{
                 localStorage.setItem('role','seller')
                 saveSellerToken(res)
-                this.context.router.push({pathname:'/entryStoreInformation'})
+                this.context.router.push({pathname:'/entryStoreInformation',query:{registerMobile:sellerMobile}})
             })
             .catch(err=>{
                 this.setState({Reminder:err.message})

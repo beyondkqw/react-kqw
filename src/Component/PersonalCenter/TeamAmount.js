@@ -46,7 +46,7 @@ export default class TeamAmount extends Component {
                         <div className="rankHeader flex flex-align-center flex-pack-justify-end">
                             <div>
                                 <div className="di rank-head-cell font14 mr10">
-                                    直推人数:{amount?amount:0}名
+                                    粉丝:{amount?amount:0}名
                                 </div>
                                 <div className="di rank-head-cell font14 mr10">
                                     直推消费:{palyMoney?palyMoney:0}元

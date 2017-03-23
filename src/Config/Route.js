@@ -756,6 +756,12 @@ const CashRule = (nextState, cb) => {
   },'CashRule')
 }
 
+const ModifyBankCard = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/ModifyBankCard').default)
+  },'ModifyBankCard')
+}
+
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path="/" getComponent={App}>
@@ -884,6 +890,7 @@ const RouteConfig = (
       <Route path="chooseCity" getComponent={ChooseCity} />
       <Route path="commonSoon" getComponent={CommonSoon} />
       <Route path="cashRule" getComponent={CashRule} />
+      <Route path="modifyBankCard" getComponent={ModifyBankCard} />
     </Route>
   </Router>
 );

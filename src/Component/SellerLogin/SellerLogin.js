@@ -80,7 +80,7 @@ export default class SellerLogin extends Component {
                 //卖家登录
                 localStorage.setItem('role','seller')
                 await saveSellerToken(res)
-                this.getMyInfo()
+                this.getMyInfo(accName)
                 //存储信息
                 sessionStorage.setItem('loginName',accName)
                 sessionStorage.setItem('loginPsd',pwd)
@@ -90,11 +90,12 @@ export default class SellerLogin extends Component {
             })
     }
 
-    async getMyInfo(){
+    async getMyInfo(accName){
         await MyInfo()
             .then(res=>{
                 if(res.STORE_ID == ''|| res.STORE_ID == null){
-                    window.location.href = '/entryStoreInformation'
+                    console.log('denl====',accName)
+                    this.context.router.push({pathname:'/entryStoreInformation',query:{registerMobile:accName}})
                 }else{
                     if(res.STORE_STATUS = false){
                         this.setState({Reminder:'店铺正在审核中'})

@@ -31,7 +31,7 @@ export default class RankRow extends Component {
                     }
 
                     <div className="pr" style={{marginRight:10,height:40,width:40,borderRadius:20,backgroundColor:'#000'}}>
-                        <img className="border_ra50" src={imgUrl}/>
+                        <img className="border_ra50" src={imgUrl?imgUrl:require('../../Images/common/default.png')}/>
                         {
                             more?
                                 <div className="vipIcon pa"><span>V</span><span className="f10">{vipPoints?vipPoints:0}</span></div>

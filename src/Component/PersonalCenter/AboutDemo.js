@@ -30,7 +30,7 @@ export default class AboutDemo extends Component {
             <div className="containerNav" style={{height:'100%'}}>
                <NavBar
                     renderBack = {true}
-                    title = {'snxdfkj'}
+                    title = {'关于聚朵云商'}
                 />
                 <iframe
                     src={this.state.URL}

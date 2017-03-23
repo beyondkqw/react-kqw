@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine';
 import CellComponent from '../../Component/CommonComponent/CellComponent';
 import '../../Stylesheets/App/personal.css';
-import {GiveOnOff} from '../../Action/auth'
+import {GiveOnOff,MyInfo} from '../../Action/auth'
 
 export default class MyCharges extends Component {
     // 构造
@@ -14,14 +14,13 @@ export default class MyCharges extends Component {
             accId:'',
             Now_Amount:'',
             frozen:'',
-            GiveOnOff:''
+            GiveOnOff:'',
+            name:'',
+            img:''
         };
       }
     componentWillMount() {
-        const {memberId,now_amount,frozen} = this.props.location.query
-        this.setState({accId:memberId})
-        this.setState({Now_Amount:now_amount})
-        this.setState({frozen:frozen})
+        this.getMyInfo()
         //转赠开关
         this.judgeGiveOnOff()
     }
@@ -35,21 +34,31 @@ export default class MyCharges extends Component {
                 console.warn('GiveOnOff err',err)
             })
     }
+    async getMyInfo(){
+        await MyInfo()
+            .then(res=>{
+                console.log('个人资料',res)
+                this.setState({accId:res.ID,Now_Amount:res.NOW_AMOUNT,frozen:res.FROZEN,name:res.MEMBER_NAME,img:res.IMAGE_URI})
+            })
+    }
     render() {
-        const {accId,Now_Amount,frozen} = this.state
-        const {name,img} = this.props.location.query
+        const {accId,Now_Amount,frozen,name,img} = this.state
         return (
             <div className="containerNav">
-                <div className="wrap">
-                    <SplitLine />
-                    <div className="recharge border_bottom plr">
-                        <div className="color_yellow fl height_all">
-                            <span className="f15">￥</span><span className="f25">{Now_Amount}</span>
-                        </div>
-                        <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
-                            <button className="fr settleAccount border_ra color_white mt11">提取</button>
-                        </Link>
+                <SplitLine />
+                <div className="recharge border_bottom plr">
+                    <div className="color_yellow fl height_all">
+                        <span className="f15">￥</span><span className="f25">{Now_Amount?Now_Amount:0}</span>
                     </div>
+                    <Link to="/personalCenter/withdrawCash" query={{now_amount:Now_Amount,frozen:frozen}}>
+                        <button className="fr settleAccount border_ra color_white mt11">提取</button>
+                    </Link>
+                </div>
+                <div className="border_bottom plr flex flex-pack-justify flex-align-center" style={{height:40}}>
+                    <div className="color6 font14">
+                        冻结金额￥{frozen?frozen:0}
+                    </div>
+                    <button className="color9 font14">无法提取</button>
                 </div>
                 <div className="clearAll">
                     {/*<Link to="/personalCenter/allIncome">*/}

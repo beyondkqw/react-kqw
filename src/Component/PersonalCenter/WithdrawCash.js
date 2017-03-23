@@ -66,7 +66,7 @@ export default class WithdrawCash extends Component {
         await Cash(bankcardId,amount)
             .then(res=> {
                 alert('提现成功')
-                //this.context.router.goBack()
+                this.context.router.push({pathname:'/personalCenter/myCharges'})
             })
             .catch(err=> {
                 this.setState({Reminder:err.message})
@@ -101,12 +101,6 @@ export default class WithdrawCash extends Component {
                                 :
                                 <Link to='/personalCenter/commissionCash'>
                                     <li className="item-content item-link item-link pl  border_bottom">
-                                        {/*<div className="item-media">
-                                            <span className="fl di headerImg">
-                                                <img className="border_ra50" src={require('../../Images/headerImg.jpg')}
-                                                     alt=""/>
-                                            </span>
-                                        </div>*/}
                                         <div className="item-inner" style={{marginLeft:15}}>
                                             <div className="item-title-row">
                                                 <div className="f12 color9">请选择提现账号</div>
