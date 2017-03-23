@@ -17,6 +17,7 @@
     "history": "^4.2.0",
     "html5-websocket": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
+    "ly-react-mobile-refresh": "^0.2.0",
     "marked": "^0.3.6",
     "normalize.css": "^4.2.0",
     "react": "^15.3.2",
