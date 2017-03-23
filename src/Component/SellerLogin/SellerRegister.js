@@ -39,9 +39,6 @@ export default class SellerRegister extends Component {
     static contextTypes = {
         router:PropTypes.object
     }
-    componentWillMount() {
-
-    }
 
     //获取短信验证码
     async getCode(){
@@ -53,7 +50,6 @@ export default class SellerRegister extends Component {
         }
         await SMSCode(sellerMobile,1)
             .then(res=>{
-                console.log('获取手机验证码成功',res)
                 this.setState({smsCode:res,codeWord:60,disabled:true})
                 //倒计时
                 this._timer = self.setInterval(()=>this.timer(),1000)

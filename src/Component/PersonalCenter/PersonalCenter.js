@@ -75,13 +75,14 @@ export default class PersonalCenter extends Component {
                 mobile:res.MOBILE,
                 frozen:res.FROZEN,
                 yunCard:res.YUN_CARD_AMOUNT,
-                ID:res.ID
+                ID:res.ID,
+                recommend_name:res.RECOMMEND_NAME
             })
         })
     }
 
     render() {
-        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg,yunCard,ID} = this.state
+        const {name,amount,point,lv,vip_point,accId,now_amount,mobile,frozen,headImg,yunCard,ID,recommend_name} = this.state
         return (
             <div>
                 <div className="containerNav" style={{height:'100%'}}>
@@ -132,6 +133,11 @@ export default class PersonalCenter extends Component {
                                 } alt=""/>
                             </span>
                         </div>
+                        {
+                            recommend_name?
+                                <div className="font14 color_white" style={{marginTop:10,height:15}}>推荐人:{recommend_name}</div>
+                                :null
+                        }
                         {/*<div className="bak_img pr">
                             <Link to="/personalCenter/memberClub">
                                 <span className="di vipImg pa"><img src={require('../../Images/vip.png')} alt=""/></span>
