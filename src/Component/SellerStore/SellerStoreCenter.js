@@ -13,8 +13,10 @@ const ItemList = [
     {name:'产品管理',imgUrl:require('../../Images/common/productManagement.png'),link:'/productManagement'},
     {name:'客服设置',imgUrl:require('../../Images/common/CustomerService.png'),link:'/customerService'},
     {name:'分佣比例设置',imgUrl:require('../../Images/common/SubCommission.png'),link:'/storeSubCommission'},
-    {name:'资金管理',imgUrl:require('../../Images/common/balanceMan.png'),link:'/sellerBalanceMan'}
+    {name:'资金管理',imgUrl:require('../../Images/common/balanceMan.png'),link:'/sellerBalanceMan'},
+    {name:'佣金转赠',imgUrl:require('../../Images/diary.png'),link:'/personalCenter/commisionGiving'}
 ]
+
 export default class SellerStoreCenter extends Component {
 
     // 构造

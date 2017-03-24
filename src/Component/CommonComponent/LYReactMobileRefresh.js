@@ -45,8 +45,7 @@ var LYReactMobileRefresh = React.createClass({
 		if(window.pageYOffset == 0 && !this.state.isRefresh){
 			this.startY = touch.pageY;
 		}
-
-		e.preventDefault()
+		//e.preventDefault()
 	},
 
 	touchMove: function(e){

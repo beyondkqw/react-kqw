@@ -87,11 +87,11 @@ export default class PersonalCenter extends Component {
             <div>
                 <div className="containerNav" style={{height:'100%'}}>
                     <section className="pr tc center_bkImg" style={{paddingTop: 10}}>
-                        <Link to="personalCenter/userInfo">
-                            <div className="personLogo">
+                        <div className="personLogo">
+                            <Link to="personalCenter/userInfo" className="di" style={{width:'2.5rem',height: '2.5rem'}}>
                                 <img className="border_ra50" src={headImg?headImg:require('../../Images/common/default.png')} alt=""/>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
                         <div className="pa setUp">
                             <Link to="/personalCenter/setting" query={{resetMobile:mobile}}>
                                 <span className="di" style={{width:15,height:15,lineHeight:0,marginRight:5}}>

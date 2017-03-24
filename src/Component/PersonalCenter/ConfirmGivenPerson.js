@@ -276,7 +276,9 @@ export default class ConfirmGivenPerson extends Component {
                                                 title={el.memberName}
                                                 imgUrl={el.imageUri}
                                                 name={''}
+                                                ID = {el.accId}
                                                 isShow={false}
+                                                showID = {true}
                                                 onClick={()=>this.getInformation(el.accId,el.imageUri,el.memberName)}
                                             />
                                             )

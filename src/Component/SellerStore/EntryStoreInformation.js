@@ -116,10 +116,6 @@ export default class EntryStoreInformation extends Component {
             }
         }
         let {uploadStoreImg,detail,licenseImg,cardFace,cardBack,uploadHeaderImg,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg} = this.state
-        uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
-        uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
-        uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
-        uploadCardBackImg = this.state.Mosaic + uploadCardBackImg;
 
         const storeName = this.refs.storeName.value
         const {checkChoose,locType} = this.state
@@ -145,6 +141,11 @@ export default class EntryStoreInformation extends Component {
         }else{
             this.setState({Reminder:''})
         }
+        //拼接上传图片的地址
+        uploadHeaderImg = this.state.Mosaic + uploadHeaderImg;
+        uploadLicenseImg = this.state.Mosaic + uploadLicenseImg;
+        uploadCardFaceImg = this.state.Mosaic + uploadCardFaceImg;
+        uploadCardBackImg = this.state.Mosaic + uploadCardBackImg;
 
         this.getInformation(this.props.location.query.registerMobile,storeName,uploadHeaderImg,this.state.provName+this.state.cityName+this.state.countysName,detail,locType,this.state.provId,this.state.cityId,this.state.countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,this.address,this.latitude,this.longitude,this.state.id)
     }
