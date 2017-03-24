@@ -78,7 +78,7 @@ export default class SellerLogin extends Component {
         await SellerToLogin(accName,pwd)
             .then(async res=>{
                 //卖家登录
-                localStorage.setItem('role','seller')
+                sessionStorage.setItem('role','seller')
                 await saveSellerToken(res)
                 this.getMyInfo(accName)
                 //存储信息

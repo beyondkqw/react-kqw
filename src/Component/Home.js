@@ -36,21 +36,19 @@ class Home extends Component {
     }
 
     async componentWillMount() {
-        //const getToken = await loadToken();
-/*        if(getToken == '' ||getToken == null ||getToken == 'null'){
+        const getToken = await loadToken();
+        if(getToken == '' ||getToken == null ||getToken == 'null'){
              await WechatAuth()
              const token = GetQueryString('token')
              saveToken(token)
-            localStorage.setItem('role','buyer')
+            sessionStorage.setItem('role','buyer')
              //initWebsocket()
          }else{
             //initWebsocket()
-         }*/
+         }
         this.getHomeBanner()
         this.getHomeMoudle()
-
         //getLocation()
-
     }
 
     //首页banner

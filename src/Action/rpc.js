@@ -55,21 +55,20 @@ export async function clearUserInfo() {
 export function saveToken(_token) {
     console.log('saveToken====>',_token);
     token = _token;
-    return localStorage.setItem(KEY_TOKEN, token);
+    return sessionStorage.setItem(KEY_TOKEN, token);
 }
 
 export async function loadToken() {
-    token = await localStorage.getItem(KEY_TOKEN);
+    token = await sessionStorage.getItem(KEY_TOKEN);
     return token;
 }
 
 export async function clearToken() {
-    await localStorage.removeItem(KEY_TOKEN);
+    await sessionStorage.removeItem(KEY_TOKEN);
     token = null;
 }
 
 export function getToken() {
-    console.log('getToken====>',token);
     return token;
 }
 
@@ -77,21 +76,20 @@ export function getToken() {
 export function saveSellerToken(_token) {
     console.log('saveToken====>',_token);
     sellerToken = _token;
-    return localStorage.setItem(KEY_SellerTOKEN, sellerToken);
+    return sessionStorage.setItem(KEY_SellerTOKEN, sellerToken);
 }
 
 export async function loadSellerToken() {
-    sellerToken = await localStorage.getItem(KEY_SellerTOKEN);
+    sellerToken = await sessionStorage.getItem(KEY_SellerTOKEN);
     return sellerToken;
 }
 
 export async function clearSellerToken() {
-    await localStorage.removeItem(KEY_SellerTOKEN);
+    await sessionStorage.removeItem(KEY_SellerTOKEN);
     sellerToken = null;
 }
 
 export function getSellerToken() {
-    console.log('getSellerToken====>',sellerToken);
     return sellerToken;
 }
 
@@ -138,17 +136,17 @@ async function request (urlKey,method,params = {},otherUrl){
     };
     console.log('获取到的token---',getToken());
     console.log('获取到的token---',getSellerToken());
-    console.log('获取到的角色---',localStorage.getItem('role'));
+    console.log('获取到的角色---',sessionStorage.getItem('role'));
     if(otherUrl){
 
     }else{
-        if(localStorage.getItem('role') == 'seller'){
+        if(sessionStorage.getItem('role') == 'seller'){
             console.log('seller')
             if(await loadSellerToken()){
                 params.token = getSellerToken();
                 //alert('卖家版的token',getSellerToken())
             }
-        }else if(localStorage.getItem('role') == 'buyer'){
+        }else if(sessionStorage.getItem('role') == 'buyer'){
             console.log('buyer')
             if(await loadToken()){
                 console.log('buyer===========')

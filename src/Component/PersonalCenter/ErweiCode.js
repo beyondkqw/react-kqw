@@ -47,12 +47,12 @@ export default class ErweiCode extends Component {
                 <div className="tc" style={{marginTop:50}}>
                     <span className="di" style={{height:'7.7rem',width:'14.3rem'}}><img src={require('../../Images/common/erCodeText.png')} alt=""/></span>
                 </div>
-                <div className="width100 tc mt25">
+                <div className="width100 tc" style={{marginTop:20}}>
                     <span className="di erWeiCode">
                         <img src={this.state.path} alt=""/>
                     </span>
                 </div>
-                <p className="f15 color_white tc" style={{marginTop:15}}>扫一扫，加入我</p>
+                <div className="f15 color_white tc" style={{marginTop:15}}>扫一扫，加入我</div>
             </div>
         );
     }
