@@ -306,6 +306,7 @@ export default class ShopHome extends Component {
                     title = {'店铺'}
                 />*/}
                 <Search
+                    renderBack = {true}
                     style={{backgroundColor:'#ff5500'}}
                     location = {true}
                     onClick={(value)=>this.searchList(value)}

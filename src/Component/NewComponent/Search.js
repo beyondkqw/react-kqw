@@ -21,11 +21,26 @@ export default class Search extends Component {
     }
 
     render() {
-        const {onClick,onFocus,style,location,_style,_location,toChange} = this.props
+        const {onClick,onFocus,style,location,_style,_location,toChange,renderBack} = this.props
+        console.log('renderBack',renderBack)
         return (
-
             <div className="flex">
                 <div id="searchNav" style={style}>
+                    {
+                        renderBack?
+                            <span className="pa"
+                                  onClick={()=>window.history.go(-1)}
+                                  style={{
+                                    lineHeight:0,
+                                    width:9,
+                                    height:16,
+                                    left:5,
+                                    top:14}}
+                            >
+                                <img src={require("../../Images/common/renderBack.png")} alt=""/>
+                            </span>
+                            :null
+                    }
                     <div className="search pr">
                         <div style={_style} className="frc pr df">
                             <span className="searchicon">

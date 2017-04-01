@@ -235,7 +235,8 @@ export default class EntryStoreInformation extends Component {
                         <div className="lh60 border_bottom plr font14 df flex-pack-justify flex-align-center">
                             <span className="color6">店铺头像</span>
                             <div className="pr storeHeaderImg">
-                                <input type="file"
+                                <input
+                                   type="file"
                                    ref='imgUrl'
                                    onChange={(e)=>this.fileChange(1,e)}
                                 />

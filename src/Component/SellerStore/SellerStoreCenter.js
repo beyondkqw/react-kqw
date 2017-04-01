@@ -101,7 +101,7 @@ export default class SellerStoreCenter extends Component {
                                     <Link
                                         to={item.link}
                                         className="di width_third width_100"
-                                        query={{storeId:storeDetails.id,Now_Amount:Now_Amount,frozen:frozen}}
+                                        query={{storeId:storeDetails.id,Now_Amount:Now_Amount,frozen:frozen,showNavBar:true}}
                                     >
                                         <div className={index%3==0||index%3==1?
                                         "separateRow tc di border_bottom  border_right":
