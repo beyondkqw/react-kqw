@@ -2,7 +2,7 @@ import React, { Component,PropTypes } from 'react';
 import {Link} from 'react-router';
 import Search from '../../Component/NewComponent/Search';
 import SplitLine from '../../Component/NewComponent/SplitLine'
-import {UpdatePerc,StoreDetailItem} from '../../Action/auth'
+import {UpdatePerc,StoreDetailItem,NoticeView} from '../../Action/auth'
 import {ChinaChar,EnglishChar,specialCharPoint} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 
@@ -12,7 +12,8 @@ export default class StoreSubCommission extends Component {
         super(props);
         // 初始状态
         this.state = {
-            perc:''
+            perc:'',
+            URl:''
         };
     }
     static contextTypes = {
@@ -22,6 +23,17 @@ export default class StoreSubCommission extends Component {
     componentWillMount() {
         const storeId = this.props.location.query.storeId
         this.getStoreDetails(storeId)
+        this.getNoticeView()
+    }
+
+    getNoticeView(){
+        NoticeView('SHARERULE')
+            .then(async res=>{
+                await this.setState({URl:res&&res[0].URL})
+            })
+            .catch(err=>{
+                console.warn('NoticeView err',err)
+            })
     }
 
     async getPerc(){
@@ -54,7 +66,7 @@ export default class StoreSubCommission extends Component {
     }
 
     render(){
-        console.log('this.state.perc',this.state.perc)
+        const {URl} = this.state
         return(
             <div>
                 <NavBar
@@ -79,11 +91,7 @@ export default class StoreSubCommission extends Component {
                 <SplitLine />
                 <div className="pl1 color6 mb50">
                     <p className="font14 tc">分佣规则说明</p>
-                    <ul className="f12 mt55">
-                        <li style={{marginTop:10}}>1、公众平台暗红色的巨舒服是的收到回复蜀都赋都还在疯狂收到货开发有是</li>
-                        <li style={{marginTop:10}}>2、公众平台暗红色的巨舒服是的收到回复</li>
-                        <li style={{marginTop:10}}>3、公众平台暗红色的巨舒服是的收到回复</li>
-                    </ul>
+                    <iframe src={URl} id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:window.innerHeight-258}}></iframe>
                 </div>
                 <div
                     className="pf bottom0 width100 flex color_white flex-pack-center flex-align-center"

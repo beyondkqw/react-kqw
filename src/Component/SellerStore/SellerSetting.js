@@ -4,6 +4,7 @@ import SplitLine from '../../Component/NewComponent/SplitLine'
 import CommonBtn from '../../Component/CommonComponent/CommonBtn'
 import '../../Stylesheets/App/personal.css';
 import {StoreDetail,StoreEdit} from '../../Action/auth'
+import {ErrorNum} from '../../Action/rpc'
 import NavBar from '../../Component/CommonComponent/NavBar'
 import DelayModal from '../../Component/CommonComponent/DelayModal'
 import Location from '../../Component/SellerStore/Location'
@@ -42,6 +43,7 @@ export default class SellerSetting extends Component {
             isUploadLicense:false,
             isUploadFace:false,
             isUploadBack:false,
+            storeMobile:''
         };
       }
 
@@ -64,6 +66,7 @@ export default class SellerSetting extends Component {
             .then(res=>{
                 this.setState({storeImg:res.store.img,uploadHeaderImg:res.store.img})
                 this.setState({storeName:res.store.name})
+                this.setState({storeMobile:res.store.mobile})
                 this.setState({address:res.store.address})
                 this.setState({type:res.store.type})
                 this.setState({licenseImg:res.store.license,uploadLicenseImg:res.store.license})
@@ -134,7 +137,7 @@ export default class SellerSetting extends Component {
                 await this.setState({locType:1})
             }
         }
-        let {storeName,detail,uploadHeaderImg,address,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,type} = this.state
+        let {storeName,storeMobile,detail,uploadHeaderImg,address,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,type} = this.state
 
         uploadHeaderImg =this.state.isUploadHeader?(this.state.Mosaic + uploadHeaderImg):uploadHeaderImg;
         uploadLicenseImg = this.state.isUploadLicense?(this.state.Mosaic + uploadLicenseImg):uploadLicenseImg;
@@ -146,8 +149,14 @@ export default class SellerSetting extends Component {
             this.setState({Reminder:'修改数据不能为空'})
             return
         }
+        //判断手机号是否正确
+        if (!ErrorNum(storeMobile)) {
+            this.setState({Reminder:'手机号码有误,请重新填写'})
+            return
+        }
 
-        await StoreEdit(storeName,uploadHeaderImg,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,this.address,this.latitude,this.longitude,type)
+
+        await StoreEdit(storeName,uploadHeaderImg,storeMobile,address,detail,locType,provId,cityId,countyId,uploadLicenseImg,uploadCardFaceImg,uploadCardBackImg,this.address,this.latitude,this.longitude,type)
             .then(res=>{
                 // this.context.router.push({pathname:'/storeSubCommission',query:{storeId:this.props.location.query.storeId}})
                 this.context.router.goBack()
@@ -197,7 +206,7 @@ export default class SellerSetting extends Component {
     }
 
     render() {
-        const {storeImg,storeName,address,licenseImg,cardFace,cardBack,showMap,detail} = this.state
+        const {storeImg,storeName,storeMobile,address,licenseImg,cardFace,cardBack,showMap,detail} = this.state
         return (
             <div style={{position:'absolute',top:0,bottom:0,overflowY: 'auto',overflowX: 'hidden',left:0,width:'100%'}}>
                 <NavBar
@@ -227,6 +236,18 @@ export default class SellerSetting extends Component {
                                 value={storeName}
                                 ref='storeName'
                                 onChange={()=>this.setState({storeName:this.refs.storeName.value})}
+                            />
+                        </div>
+                    </div>
+                    <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center plr font14 border_bottom">
+                        <span className="color6">店铺联系方式</span>
+                        <div>
+                            <input
+                                type="text"
+                                className="borderno tr font14 color9"
+                                value={storeMobile}
+                                ref='storeMobile'
+                                onChange={()=>this.setState({storeMobile:this.refs.storeMobile.value})}
                             />
                         </div>
                     </div>

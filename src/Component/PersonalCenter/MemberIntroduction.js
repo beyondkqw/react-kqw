@@ -2,15 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import '../../Stylesheets/App/personal.css';
-import {VipList} from '../../Action/auth'
+import {VipList,NoticeView} from '../../Action/auth'
 
-const ruleList=[
-    {num:'1、',declaration:'推荐一人可得10分'},
-    {num:'2、',declaration:'购买物品,一元为一份,取证'},
-    {num:'3、',declaration:'分佣是低等级会员不能得到高级会员的分佣金额'},
-    {num:'4、',declaration:'分佣金额分为为止'},
-    {num:'5、',declaration:'结构连上为分完的分佣金额贵平台所有'}
-];
 export default class MemberIntroduction extends Component {
     // 构造
       constructor(props) {
@@ -21,12 +14,24 @@ export default class MemberIntroduction extends Component {
             minelv:'',
             nextlv:'',
             perGrade:'',
-            nextGrade:''
+            nextGrade:'',
+            URl:''
         };
       }
 
     componentWillMount() {
        this.getVipList()
+        this.getNoticeView()
+    }
+
+    getNoticeView(){
+        NoticeView('LVROLE')
+            .then(async res=>{
+                await this.setState({URl:res&&res[0].URL})
+            })
+            .catch(err=>{
+                console.warn('NoticeView err',err)
+            })
     }
 
     async getVipList(){
@@ -41,7 +46,7 @@ export default class MemberIntroduction extends Component {
     }
 
     render() {
-        const {perlv,minelv,nextlv,perGrade,mineGrade,nextGrade} = this.state
+        const {perlv,minelv,nextlv,perGrade,mineGrade,nextGrade,URl} = this.state
         const {vipPoint} = this.props.location.query
         return (
             <div className="containerNav">
@@ -81,16 +86,8 @@ export default class MemberIntroduction extends Component {
                 </div>
                 <SplitLine />
                 <div className="font14 rule">
-                    <p className="color6">规则说明</p>
-                    <ul className="color9">
-                        {
-                            ruleList.map(el=>{
-                                return(
-                                    <li><span>{el.num}</span><span>{el.declaration}</span></li>
-                                )
-                            })
-                        }
-                    </ul>
+                    <p className="color6 tc">规则说明</p>
+                    <iframe src={URl} id="myiframe" overflow='auto' onLoad="$(this).css('height',$(this).contents().find('body')[0].scrollHeight)" scrolling="yes" style={{border:'none',width:'100%',height:window.innerHeight-210}}></iframe>
                 </div>
             </div>
         );

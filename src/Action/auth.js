@@ -815,9 +815,9 @@ export async function StoreDetail(storeId) {
 }
 
 //修改店铺信息
-export async function StoreEdit(name,img,address,addressDetail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type) {
+export async function StoreEdit(name,img,mobile,address,addressDetail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type) {
     try {
-        const res = await apiPost(URL.storeEdit,{name,img,address,addressDetail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
+        const res = await apiPost(URL.storeEdit,{name,img,mobile,address,addressDetail,locType,province,city,area,license,cardFace,cardBack,gpsAddress,latitude,longitude,type});
         return res;
     } catch (err) {
         console.warn(err);

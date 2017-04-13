@@ -75,47 +75,6 @@ export default class ReceivingTime extends Component {
                         )
                     })
                 }
-                {/*<div className="list-block m0">
-                    <div className="pr lh25 plr border_bottom">
-                        <span className="di check_radius pr fl">
-                            <input
-                                type="radio"
-                                id="isCheck"
-                                name="chooseTime"
-                                className="di isConfirm"
-                                onClick={()=>this.setState({chooseTime:'送货时间不限'})}
-                            />
-                            <label htmlFor="isCheck"></label>
-                        </span>
-                        <span className="di font14 color6 ml5 fl">送货时间不限</span>
-                    </div>
-                    <div className="pr lh25 personStore plr border_bottom">
-                        <span className="di check_radius pr fl">
-                            <input
-                                type="radio"
-                                id="isCheckOne"
-                                name="chooseTime"
-                                className="di isConfirm"
-                                onClick={()=>this.setState({chooseTime:'只休息日/节假日送货(工作日不送)'})}
-                            />
-                            <label htmlFor="isCheckOne"></label>
-                        </span>
-                        <span className="di font14 color6 ml5 fl">只休息日/节假日送货(工作日不送)</span>
-                    </div>
-                    <div className="pr lh25 personStore plr border_bottom">
-                        <span className="di check_radius pr fl">
-                            <input
-                                type="radio"
-                                id="isCheckTwo"
-                                name="chooseTime"
-                                className="di isConfirm"
-                                onClick={()=>this.setState({chooseTime:'只工作日送货(节假日不送)'})}
-                            />
-                            <label htmlFor="isCheckTwo"></label>
-                        </span>
-                        <span className="di font14 color6 ml5 fl">只工作日送货(节假日不送)</span>
-                    </div>
-                </div>*/}
                 <div style={{marginTop:30}}>
                     <CommonBtn
                         title={'确定'}

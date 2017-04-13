@@ -11,7 +11,7 @@ const Itemlist =[
     {name:'店铺资料',link:'/sellerSetting',imgurl:require('../../Images/common/information.png')},
     {name:'账户与安全',link:'/sellerSavety',imgurl:require('../../Images/common/account.png')},
     {name:'帮助与反馈',link:'/personalCenter/feedback',imgurl:require('../../Images/common/helpReturn.png')},
-    {name:'关于聚朵云商',link:'/personalCenter/aboutDemo',imgurl:require('../../Images/common/about.png')}
+    {name:'关于聚朵云商',link:'/cashRule',imgurl:require('../../Images/common/about.png'),type:9}
 ];
 export default class SellerStoreSetting extends Component {
     static contextTypes = {
@@ -43,7 +43,7 @@ export default class SellerStoreSetting extends Component {
                                 return(
                                     <Link
                                         to={el.link}
-                                        query={{mobile:this.props.location.query.mobile,storeId:this.props.location.query.storeId,name:el.name}}>
+                                        query={{mobile:this.props.location.query.mobile,storeId:this.props.location.query.storeId,name:el.name,type:el.type}}>
                                         <li>
                                             <div style={{flexDirection:'row',height:50}} className="df flex-pack-justify flex-align-center border_bottom plr font14">
                                                 <div>

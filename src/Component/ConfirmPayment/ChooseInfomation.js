@@ -119,7 +119,18 @@ export default class ChooseInfomation extends Component {
                     {
                         addressList == ''?
                             null:
-                            <Link to="/manageInformation" query={{choosePath:this.props.location.query.path}} className="flex1">
+                            <Link
+                                to="/manageInformation"
+                                query={{
+                                    choosePath:this.props.location.query.path,
+                                    path:this.props.location.query.path,
+                                    orderPath:this.props.location.query.orderPath,
+                                    orderId:this.props.location.query.orderNo,
+                                    index:this.props.location.query.index,
+                                    isToPay:this.props.location.query.isToPay,
+                                    orderArrays:this.props.location.query.orderArrays
+                                }}
+                                className="flex1">
                                 <CommonBtn
                                     title={'管理'}
                                 />

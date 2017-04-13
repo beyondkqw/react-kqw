@@ -16,7 +16,7 @@ let token = '';
 let sellerToken = '';
 let userInfo = {};
 import {imei,version,client} from './auth'
-
+import $ from 'jquery'
 
 //export const ROOT_URL = 'http://jdy.tunnel.qydev.com/api/';
 //export const wsPath = "ws://"+'jdy.tunnel.qydev.com'+"/api/socketServer";
@@ -95,9 +95,7 @@ export function getSellerToken() {
 
 
 async function request (urlKey,method,params = {},otherUrl){
-    //console.log('params',params);
     let url = urlKey;
-
     if(!url){
         return null;
     }
@@ -149,7 +147,6 @@ async function request (urlKey,method,params = {},otherUrl){
         }else if(sessionStorage.getItem('role') == 'buyer'){
             console.log('buyer')
             if(await loadToken()){
-                console.log('buyer===========')
                 params.token = getToken();
                 //alert('买家版的token',getToken())
             }
@@ -174,7 +171,7 @@ async function request (urlKey,method,params = {},otherUrl){
 
     //console.log('获取到的token后',params);
     //GET请求
-    if (method === 'GET') {
+    /*if (method === 'GET') {
         url = URI(url).query(params).toString();
 
         console.log('params',params)
@@ -190,18 +187,28 @@ async function request (urlKey,method,params = {},otherUrl){
         options = {...options,body:bodyString.substring(0,bodyString.length-1)};
         //打印请求内容
         console.warn(`POST ${url}: ${bodyString}`);
-    }
-
-
+    }*/
     try {
-        let response = await fetch(url,options);
-        if(response.ok){
+        let response = await $.ajax({
+            type: method,
+            data: params,
+            url: url,
+            dataType: "json",
+            success: function (data) {
+                return data;
+
+            },
+            error: function(d){
+                return  d;
+            }
+        });
+        /*if(response.ok){
             console.log('收到了消息');
             // 转换为文本
             let json = await response.text();
             //打印返回值
-            console.warn(`RESP ${json}`);
-            let jsonObj = JSON.parse(json);
+            console.warn(`RESP ${json}`);*/
+            let jsonObj = response;
             //操作成功
             if(jsonObj.code == 0){
                 return jsonObj.obj;
@@ -238,10 +245,10 @@ async function request (urlKey,method,params = {},otherUrl){
             else{
                 return jsonObj;
             }
-        }
+        /*}*/
 
-        console.warn('[Request error]: URLKey: ' + urlKey, 'HTTP status: ' + response.status);
-        return 'err';
+        //console.warn('[Request error]: URLKey: ' + urlKey, 'HTTP status: ' + response.status);
+        //return 'err';
     }catch(error){
         throw error;
     }
