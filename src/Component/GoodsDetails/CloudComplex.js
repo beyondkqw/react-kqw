@@ -194,25 +194,25 @@ export default class CloudComplex extends Component {
         }
         if (this.state.pullUpStatus == 2) {
             const index = this.state.index;
-            await this.getStoreList(this.state.id,'',this.page)
+            await this.getStoreList('',this.page)
         }
 
     }
 
     async componentWillMount() {
-        await this.getStoreType()
-        console.log('this.props.location.query.value',this.props.location.query.value)
-        if(this.props.location.query.value){
-            this.dataList=[];
-            this.over = false;
-            this.page = 1;
-            this.getStoreList('',this.props.location.query.value,1)
+        //await this.getStoreType()
+        this.dataList=[];
+        this.over = false;
+        this.page = 1;
+        this.getStoreList('',1)
+        /*if(this.props.location.query.value){
+
         }else{
             this.changTab(0,this.StoreTypeId[0])
-        }
+        }*/
     }
 
-    //获取店铺类型
+    /*//获取店铺类型
     async getStoreType(){
         await  StoreType()
             .then(res=>{
@@ -226,17 +226,17 @@ export default class CloudComplex extends Component {
             .catch(err=>{
                 console.warn('获取商品属性失败',err)
             })
-    }
+    }*/
 
     //请求列表接口
-    async getStoreList(type,name,page){
+    async getStoreList(name,page){
         if(this.over){
             this.setState({
                 pullUpStatus: 4
             });
             return
         }
-        await StoreList(type,name,page)
+        await StoreList(this.props.location.query.type,name,this.props.location.query.city,page)
             .then(res=>{
                 if(this.page==Math.ceil(res.total/res.pageSize)){
                     this.over=true;
@@ -260,7 +260,7 @@ export default class CloudComplex extends Component {
 
     }
 
-    //交换
+    /*//交换
     changTab(index,id){
         this.dataList=[];
         this.over = false;
@@ -272,7 +272,7 @@ export default class CloudComplex extends Component {
         });
         this.setState({id:id})
         this.getStoreList(id,'',1)
-    }
+    }*/
 
     //搜索
     searchStore(value){
@@ -283,7 +283,7 @@ export default class CloudComplex extends Component {
             orderItems:[],
             display:'none'
         });
-        this.getStoreList(this.state.id,value,1)
+        this.getStoreList(value,1)
     }
 
     render() {
@@ -311,7 +311,7 @@ export default class CloudComplex extends Component {
                             />
                         </div>
                     </div>
-                    <div style={{marginTop:'2.2rem',width:'100%'}}>
+                    {/*<div style={{marginTop:'2.2rem',width:'100%'}}>
                         <Tabscontrol
                             onClick = {index=>this.changTab(index,this.StoreTypeId[index])}
                             isSlide = {true}
@@ -325,11 +325,11 @@ export default class CloudComplex extends Component {
                                 })
                             }
                         </Tabscontrol>
-                    </div>
+                    </div>*/}
                     {/*<div className="pr" style={{marginBottom:54}}>*/}
-                    <div className="pr" style={{marginBottom:54,marginTop:'-25'}}>
+                    <div className="pr" style={{marginBottom:54,marginTop:44}}>
                         <div id='ScrollContainer' style={{webkitTransform:'translate3d(0,0,0)',overflow:'hidden'}}>
-                            <div id='ListOutsite' style={{height: window.innerHeight-73}}
+                            <div id='ListOutsite' style={{height: window.innerHeight-98}}
                                  onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}
                                  onTouchMove={this.onTouchMove}>
 

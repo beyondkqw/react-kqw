@@ -96,7 +96,9 @@ class Home extends Component {
                             images = {this.state.banner}
                         />
                     </div>
-                    <OtherApp />
+                    <OtherApp
+                        type = {1}
+                    />
                     {
                         moudle&&moudle.map(el=>{
                             if(el.num == 3){

@@ -215,6 +215,12 @@ export const rechargeAmount = 'notices/rechargeAmount'
 //设置收货地址
 export const setAddress = 'order/auth/address'
 
+//交易记录
+export const changeRecord = 'auth/account/changeRecord'
+
+//云综合体楼层
+export const shopFloor = 'floor/shopFloor'
+
 
 /*---------------卖家版---------------*/
 //注册

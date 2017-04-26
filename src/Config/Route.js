@@ -677,12 +677,11 @@ const StoreClassify = (nextState, cb) => {
   },'StoreClassify')
 }
 
-/*const CloudComplex = (nextState, cb) => {
+const CloudComplex = (nextState, cb) => {
   require.ensure([], require => {
     cb(null, require('../Component/GoodsDetails/CloudComplex').default)
   },'CloudComplex')
-}*/
-import CloudComplex from '../Component/GoodsDetails/CloudComplex'
+}
 
 const RechargeWay = (nextState, cb) => {
   require.ensure([], require => {
@@ -761,6 +760,19 @@ const ModifyBankCard = (nextState, cb) => {
     cb(null, require('../Component/PersonalCenter/ModifyBankCard').default)
   },'ModifyBankCard')
 }
+
+const ChangeRecord = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/PersonalCenter/ChangeRecord').default)
+  },'ChangeRecord')
+}
+
+{/*const CloudComprehensive = (nextState, cb) => {
+  require.ensure([], require => {
+    cb(null, require('../Component/GoodsDetails/CloudComprehensive').default)
+  },'CloudComprehensive')
+}*/}
+import CloudComprehensive from '../Component/GoodsDetails/CloudComprehensive'
 
 const RouteConfig = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
@@ -877,7 +889,6 @@ const RouteConfig = (
       <Route path="equityDetails" getComponent={EquityDetails} />
       <Route path="paymentSuccess" getComponent={PaymentSuccess} />
       <Route path="storeClassify" getComponent={StoreClassify} />
-      <Route path="cloudComplex" component={CloudComplex} />
       <Route path="rechargeWay" getComponent={RechargeWay} />
       <Route path="storeClassifyDetail" getComponent={StoreClassifyDetail} />
       <Route path="shareQrCode" getComponent={ShareQrCode} />
@@ -891,6 +902,9 @@ const RouteConfig = (
       <Route path="commonSoon" getComponent={CommonSoon} />
       <Route path="cashRule" getComponent={CashRule} />
       <Route path="modifyBankCard" getComponent={ModifyBankCard} />
+      <Route path="changeRecord" getComponent={ChangeRecord} />
+      <Route path="cloudComplex" getComponent={CloudComplex} />
+      <Route path="cloudComprehensive" component={CloudComprehensive}/>
     </Route>
   </Router>
 );

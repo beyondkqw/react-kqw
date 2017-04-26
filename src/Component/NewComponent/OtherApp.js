@@ -17,7 +17,7 @@ export default class OtherApp extends Component {
     }
     //首页导航栏
     async getTagList(){
-        await TagList(1)
+        await TagList(this.props.type)
             .then(res=>{
                 this.setState({tagItem:res.resultList})
             })

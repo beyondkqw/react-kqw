@@ -11,6 +11,12 @@ export default class Cell_4 extends Component {
         if(cell===undefined){
             return
         }
+
+        if(this.props.city && this.props.isShop){
+            this.context.router.push({pathname: '/cloudComplex', query: {city:this.props.city,type:cell.tagId}})
+            return
+        }
+
         if(cell.linkType==0){
             this.context.router.push({pathname:'/GoodsDetail/SearchPage',query:{tagId:cell.tagId,isTag:true}})
         }else if(cell.linkType==1){

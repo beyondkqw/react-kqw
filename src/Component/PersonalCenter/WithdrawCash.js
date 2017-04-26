@@ -50,7 +50,7 @@ export default class WithdrawCash extends Component {
             alert('请选择所需银行卡')
             return
         }
-        if(!this.state.amount || !CheckNum(this.state.amount)){
+        if(!this.state.amount || !(/^(([1-9]+)|([0-9]+\.[0-9]{1,2}))$/.test(this.state.amount))){
             alert('请输入提现金额')
             return
         }

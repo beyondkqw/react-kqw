@@ -22,7 +22,7 @@ export default class ChooseCity extends Component {
     }
 
     chooseCity(value){
-        this.context.router.push({pathname:'/cloudComplex',query:{value:value}})
+        this.context.router.push({pathname:'/cloudComprehensive',query:{value:value}})
     }
     render() {
         return (
@@ -34,12 +34,16 @@ export default class ChooseCity extends Component {
                 <div className="containerNav overScroll" style={{top:45}}>
                     <div style={{padding:'0 10px'}}>
                         <div className="font14 color9 mt5">定位城市</div>
-                        <span className="di font14 color3 mt5 border_ye border_ra" style={{padding:'5px 10px'}}>{this.state.address?this.state.address:'暂未定位到当前位置'}</span>
+                        <span
+                            className="di font14 color3 mt5 border_ye border_ra"
+                            style={{padding:'5px 10px'}}
+                            onClick = {()=>this.chooseCity(this.state.address)}
+                        >{this.state.address?this.state.address:'暂未定位到当前位置'}</span>
                         <div className="font14 color9 mt5" style={{marginTop:20}}>热门城市</div>
                     </div>
                     <div style={{marginBottom:15}}>
                         {
-                            cityList.map(el=>{
+                            cityList&&cityList.map(el=>{
                                 return(
                                     <span
                                         className="di font14 color3 mt5 border_ye border_ra"

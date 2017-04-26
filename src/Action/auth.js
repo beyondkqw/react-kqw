@@ -738,9 +738,9 @@ export async function StoreType() {
 }
 
 //云综合体--店铺列表
-export async function StoreList(type,name,page) {
+export async function StoreList(type,name,cityName,page) {
     try {
-        const res = await apiGet(URL.storeList,{type,name,page});
+        const res = await apiGet(URL.storeList,{type,name,cityName,page});
         return res;
     } catch (err) {
         console.warn(err);
@@ -1082,6 +1082,28 @@ export async function NoticeView(type,count=10,page=0) {
 export async function GiveOnOff() {
     try {
         const res = await apiGet(URL.giveOnOff, {});
+        return res;
+    } catch (err) {
+        console.warn('NoticeView', err);
+        throw err
+    }
+}
+
+//交易记录
+export async function getChangeRecord(page=0) {
+    try {
+        const res = await apiGet(URL.changeRecord, {page});
+        return res;
+    } catch (err) {
+        console.warn('NoticeView', err);
+        throw err
+    }
+}
+
+//云综合体楼层
+export async function ShopFloor() {
+    try {
+        const res = await apiGet(URL.shopFloor);
         return res;
     } catch (err) {
         console.warn('NoticeView', err);

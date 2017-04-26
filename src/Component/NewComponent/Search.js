@@ -22,7 +22,7 @@ export default class Search extends Component {
 
     render() {
         const {onClick,onFocus,style,location,_style,_location,toChange,renderBack} = this.props
-        console.log('renderBack',renderBack)
+        //console.log('renderBack',renderBack)
         return (
             <div className="flex">
                 <div id="searchNav" style={style}>

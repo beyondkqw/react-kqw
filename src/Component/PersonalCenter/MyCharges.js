@@ -94,6 +94,12 @@ export default class MyCharges extends Component {
                             />
                             :null
                     }
+                    <CellComponent
+                        className={'border_right'}
+                        imgUrl={require('../../Images/record.png')}
+                        title={'交易记录'}
+                        link={'/changeRecord'}
+                    />
 
 
                 </div>

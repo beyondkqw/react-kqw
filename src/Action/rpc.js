@@ -148,6 +148,7 @@ async function request (urlKey,method,params = {},otherUrl){
             console.log('buyer')
             if(await loadToken()){
                 params.token = getToken();
+                //params.token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSJ9.2pEQPI9N_toAx4BFnh80EcMkr1retYMwRymW-gMzW2M';
                 //alert('买家版的token',getToken())
             }
         }
@@ -378,5 +379,8 @@ export function wechatTest(value){
     }
 }
 
+export function bodyScroll(event){
+    event.preventDefault();
+}
 
 

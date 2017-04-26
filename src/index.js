@@ -13,6 +13,7 @@ import './Stylesheets/Index.css';
 import './Stylesheets/Wrap.css'
 import './Stylesheets/App/sm.min.css'
 import './Stylesheets/App/common.css'
+import './Stylesheets/App/scroll.css'
 import './Stylesheets/App/cloudCard.css'
 import './Stylesheets/App/comfirmPayMoney.css'
 import './Stylesheets/App/goodsDetails.css'

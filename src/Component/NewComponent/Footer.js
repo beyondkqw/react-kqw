@@ -5,7 +5,7 @@ import '../../Stylesheets/App/homePage.css';
 
 const footerList = [
     {title:'首页',imgUrl:require("../../Images/common/navHome.png"),replaceImg:require("../../Images/common/homeReplace.png"),link:'/home'},
-    {title:'云综合体',imgUrl:require("../../Images/common/navYun.png"),replaceImg:require("../../Images/common/yunReplace.png"),link:'/cloudComplex'},
+    {title:'云综合体',imgUrl:require("../../Images/common/navYun.png"),replaceImg:require("../../Images/common/yunReplace.png"),link:'/cloudComprehensive'},
     {title:'购物车',imgUrl:require("../../Images/common/shoppingCartOne.png"),replaceImg:require("../../Images/common/ShoppingCart.png"),link:'/shoppingCart'},
     {title:'个人中心',imgUrl:require("../../Images/common/personCenter.png"),replaceImg:require("../../Images/common/centerReplace.png"),link:'/personalCenter'},
 ]
