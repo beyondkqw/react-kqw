@@ -10,7 +10,6 @@ import Cell_6 from '../../Component/NewComponent/Cell_6'
 import Cell_7 from '../../Component/NewComponent/Cell_7'
 import SplitLine from '../../Component/NewComponent/SplitLine'
 import {loadToken,saveToken,clearToken,GetQueryString,bodyScroll} from '../../Action/rpc'
-import {WechatAuth} from '../../Action/autoLogin'
 import {Link} from 'react-router';
 import iScroll from 'iscroll/build/iscroll-probe';
 import {ShopFloor,StoreList} from '../../Action/auth';
@@ -35,30 +34,22 @@ export default class CloudComprehensive extends Component {
             city:''
         };
         this.page = 1;
-        this.list=''
+        this.list='';
+        this.loadingStep = 0;
     }
 
     componentDidMount() {
         document.querySelector('body').addEventListener('touchmove',bodyScroll, false);
-        var that = this;
-        var myScroll;
-        var pullDownEl, pullDownL;
-        var pullUpEl, pullUpL;
-        var Downcount = 0 ,Upcount = 0;
-        var loadingStep = 0;//加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新
 
-
-        pullDownEl = $('#pullDown');
-        pullDownL = pullDownEl.find('.pullDownLabel');
+        var pullDownEl = $('#pullDown');
         pullDownEl['class'] = pullDownEl.attr('class');
         pullDownEl.attr('class','').hide();
 
-        pullUpEl = $('#pullUp');
-        pullUpL = pullUpEl.find('.pullUpLabel');
+        var pullUpEl = $('#pullUp');
         pullUpEl['class'] = pullUpEl.attr('class');
         pullUpEl.attr('class','').hide();
 
-        myScroll = new iScroll('#content', {
+        this.myScroll = new iScroll('#content', {
             preventDefault: false,
             probeType: 2,//probeType：1对性能没有影响。在滚动事件被触发时，滚动轴是不是忙着做它的东西。probeType：2总执行滚动，除了势头，反弹过程中的事件。这类似于原生的onscroll事件。probeType：3发出的滚动事件与到的像素精度。注意，滚动被迫requestAnimationFrame（即：useTransition：假）。
             scrollbars: true,//有滚动条
@@ -72,86 +63,98 @@ export default class CloudComprehensive extends Component {
             momentum:true// 允许有惯性滑动
         });
         //滚动时
-        myScroll.on('scroll', function(){
-            //document.querySelector('body').addEventListener('touchmove',bodyScroll, false);
-            console.log(this.y);
-            if(loadingStep == 0 && !pullDownEl.attr('class').match('flip|loading') && !pullUpEl.attr('class').match('flip|loading')){
-                if (this.y > 5) {
-                    //下拉刷新效果
-                    pullDownEl.attr('class',pullUpEl['class'])
-                    pullDownEl.show();
-                    myScroll.refresh();
-                    pullDownEl.addClass('flip');
-                    pullDownL.html('下拉刷新...');
-                    loadingStep = 1;
-                }else if (this.y < (this.maxScrollY - 5) && that.state.storeDetail.length>0) {
-                    if(that.state.listPage!=that.page){
-                        //上拉刷新效果
-                        pullUpEl.attr('class',pullUpEl['class'])
-                        pullUpEl.show();
-                        myScroll.refresh();
-                        pullUpEl.addClass('flip');
-                        pullUpL.html('上拉加载...');
-                        loadingStep = 1;
-                    }
-                }
-            }
-
-        });
-        myScroll.on('touchmove', function(e){
-            e.stopPropagation()
-            this.setState({
-                scrollTop:(this.iScrollInstance.y<0)?Math.abs(this.iScrollInstance.y):0
-            })
-        });
+        this.myScroll.on('scroll', this.scroll );
+        this.myScroll.on('touchmove', function(e){e.stopPropagation()});
         //滚动完毕
-        myScroll.on('scrollEnd',function(){
-            if(loadingStep == 1){
-                if (pullUpEl.attr('class').match('flip|loading')) {
-                    pullUpEl.removeClass('flip').addClass('loading');
-                    pullUpL.html('Loading...');
-                    loadingStep = 2;
-                    pullUpAction();
-                }else if(pullDownEl.attr('class').match('flip|loading')){
-                    pullDownEl.removeClass('flip').addClass('loading');
-                    pullDownL.html('Loading...');
-                    loadingStep = 2;
-                    pullDownAction();
+        this.myScroll.on('scrollEnd',this.scrollEnd );
+    }
+
+    scroll=()=>{
+        var pullDownEl = $('#pullDown');
+        var pullDownL = pullDownEl.find('.pullDownLabel');
+        var pullUpEl = $('#pullUp');
+        var pullUpL = pullUpEl.find('.pullUpLabel');
+
+        if(this.loadingStep == 0 && !pullDownEl.attr('class').match('flip|loading') && !pullUpEl.attr('class').match('flip|loading')){
+            if (this.myScroll.y > 5) {
+                //下拉刷新效果
+                pullDownEl.attr('class',pullUpEl['class'])
+                pullDownEl.show();
+                this.myScroll.refresh();
+                pullDownEl.addClass('flip');
+                pullDownL.html('下拉刷新...');
+                this.loadingStep = 1;
+            }else if (this.myScroll.y < (this.myScroll.maxScrollY - 5) && this.state.storeDetail.length>0) {
+                if(this.state.listPage!=this.page){
+                    //上拉刷新效果
+                    pullUpEl.attr('class',pullUpEl['class'])
+                    pullUpEl.show();
+                    this.myScroll.refresh();
+                    pullUpEl.addClass('flip');
+                    pullUpL.html('上拉加载...');
+                    this.loadingStep = 1;
                 }
             }
-        });
+        }
 
-        function pullDownAction() {//下拉事件
-            that.page=1;
-            if(that.props.location.query.value){
-                that.getStoreList('','',that.props.location.query.value,that.page)
+    }
+    scrollEnd=()=>{
+        var pullDownEl = $('#pullDown');
+        var pullDownL = pullDownEl.find('.pullDownLabel');
+        var pullUpEl = $('#pullUp');
+        var pullUpL = pullUpEl.find('.pullUpLabel');
+
+        if(this.loadingStep == 1){
+            if (pullUpEl.attr('class').match('flip|loading')) {
+                pullUpEl.removeClass('flip').addClass('loading');
+                pullUpL.html('Loading...');
+                this.loadingStep = 2;
+                this.pullUpAction();
+            }else if(pullDownEl.attr('class').match('flip|loading')){
+                pullDownEl.removeClass('flip').addClass('loading');
+                pullDownL.html('Loading...');
+                this.loadingStep = 2;
+                this.pullDownAction();
+            }
+        }
+    }
+
+    pullDownAction() {//下拉事件
+        var pullDownEl = $('#pullDown');
+        var pullDownL = pullDownEl.find('.pullDownLabel');
+
+        this.page=1;
+        if(this.props.location.query.value){
+            this.getStoreList('','',this.props.location.query.value,this.page)
+        }else{
+            this.getStoreList('','',sessionStorage.getItem('city'),this.page)
+        }
+
+        pullDownEl.removeClass('loading');
+        pullDownL.html('下拉刷新...');
+        pullDownEl['class'] = pullDownEl.attr('class');
+        pullDownEl.attr('class','').hide();
+        this.myScroll.refresh();
+        this.loadingStep = 0;
+    }
+    pullUpAction() {//上拉事件
+        var pullUpEl = $('#pullUp');
+        var pullUpL = pullUpEl.find('.pullUpLabel');
+
+        if(this.state.listPage>this.page){
+            this.page++;
+            if(this.props.location.query.value){
+                this.getStoreList('','',this.props.location.query.value,this.page)
             }else{
-                that.getStoreList('','',sessionStorage.getItem('city'),that.page)
+                this.getStoreList('','',sessionStorage.getItem('city'),this.page)
             }
-
-            pullDownEl.removeClass('loading');
-            pullDownL.html('下拉刷新...');
-            pullDownEl['class'] = pullDownEl.attr('class');
-            pullDownEl.attr('class','').hide();
-            myScroll.refresh();
-            loadingStep = 0;
         }
-        function pullUpAction() {//上拉事件
-            if(that.state.listPage>that.page){
-                that.page++;
-                if(that.props.location.query.value){
-                    that.getStoreList('','',that.props.location.query.value,that.page)
-                }else{
-                    that.getStoreList('','',sessionStorage.getItem('city'),that.page)
-                }
-            }
-            pullUpEl.removeClass('loading');
-            pullUpL.html('上拉显示更多...');
-            pullUpEl['class'] = pullUpEl.attr('class');
-            pullUpEl.attr('class','').hide();
-            myScroll.refresh();
-            loadingStep = 0;
-        }
+        pullUpEl.removeClass('loading');
+        pullUpL.html('上拉显示更多...');
+        pullUpEl['class'] = pullUpEl.attr('class');
+        pullUpEl.attr('class','').hide();
+        this.myScroll.refresh();
+        this.loadingStep = 0;
     }
 
     componentWillUnmount() {
@@ -168,10 +171,12 @@ export default class CloudComprehensive extends Component {
         if(this.props.location.query.value){
             this.page = 1;
             this.setState({city:this.props.location.query.value})
-            this.getStoreList('','',this.props.location.query.value,1)
+            await this.getStoreList('','',this.props.location.query.value,1)
+            this.myScroll.refresh();
         }else{
             this.setState({city:sessionStorage.getItem('city')})
-            this.getStoreList('','',sessionStorage.getItem('city'),1)
+            await this.getStoreList('','',sessionStorage.getItem('city'),1)
+            this.myScroll.refresh();
         }
     }
 
@@ -221,6 +226,7 @@ export default class CloudComprehensive extends Component {
 
     render() {
         const {moudle,storeDetail} = this.state
+        console.log('storeDetail---------',storeDetail)
         return (
             <div>
                 <div className="flex pf t0 width100" style={{zIndex:2,transform: 'translate3d(0,0,0)',left:0}}>
@@ -243,13 +249,13 @@ export default class CloudComprehensive extends Component {
                         />
                     </div>
                 </div>
-                <div id="content" className="bkg_color" style={{top:44,bottom:50}}>
+                <div id="content" className="bkg_color" style={{top:44,bottom:54}}>
                     <div id="scroller" style={{minHeight:window.innerHeight-93}}>
                         <div id="pullDown" className="ub ub-pc c-gra">
                             <div className="pullDownIcon"></div>
                             <div className="pullDownLabel">下拉刷新</div>
                         </div>
-                        <div id="add">
+                        <ul id="add">
                             <OtherApp
                                 type = {2}
                             />
@@ -336,7 +342,7 @@ export default class CloudComprehensive extends Component {
                                     )
                                 })
                             }
-                        </div>
+                        </ul>
                         <div id="pullUp" className="ub ub-pc c-gra">
                             <div className="pullUpIcon"></div>
                             <div className="pullUpLabel">上拉显示更多...</div>

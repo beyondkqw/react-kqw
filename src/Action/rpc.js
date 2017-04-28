@@ -142,13 +142,14 @@ async function request (urlKey,method,params = {},otherUrl){
             console.log('seller')
             if(await loadSellerToken()){
                 params.token = getSellerToken();
+                //params.token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMSJ9.Es9RQRPL3sgsMFZAB4Bt9775rvbaG4br429QUhlG6qI';
                 //alert('卖家版的token',getSellerToken())
             }
         }else if(sessionStorage.getItem('role') == 'buyer'){
             console.log('buyer')
             if(await loadToken()){
                 params.token = getToken();
-                //params.token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSJ9.2pEQPI9N_toAx4BFnh80EcMkr1retYMwRymW-gMzW2M';
+                //params.token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMSJ9.Es9RQRPL3sgsMFZAB4Bt9775rvbaG4br429QUhlG6qI';
                 //alert('买家版的token',getToken())
             }
         }

@@ -15,7 +15,7 @@ export default class Cell_6 extends Component {
         }
 
         if(this.props.city && this.props.isShop){
-            this.context.router.push({pathname: '/cloudComplex', query: {city:this.props.city,type:cell.tagId}})
+            this.context.router.push({pathname: '/cloudComplex', query: {city:this.props.city,type:cell.productId}})
             return
         }
 

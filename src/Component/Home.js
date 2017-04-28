@@ -90,7 +90,7 @@ class Home extends Component {
                         location = {true}
                     />
                 </div>
-                <div className="bkg_color overScroll" style={{position:'absolute',top:'2.2rem',bottom:'2.5rem',overflow:'auto'}}>
+                <div className="bkg_color overScroll width100" style={{position:'absolute',top:'2.2rem',bottom:'2.5rem',overflow:'auto'}}>
                     <div>
                         <Carousel
                             images = {this.state.banner}

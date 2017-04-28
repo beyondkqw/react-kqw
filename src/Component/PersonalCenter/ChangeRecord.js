@@ -264,6 +264,9 @@ export default class ChangeRecord extends Component {
                                                 <div className="f12 color9">
                                                     创建时间:{el.createTime}
                                                 </div>
+                                                <div className="f12 color9">
+                                                    订单编号:{el.orderNo}
+                                                </div>
                                             </div>
                                         </div>
                                     )
