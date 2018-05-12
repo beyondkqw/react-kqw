@@ -38,6 +38,8 @@ export default class SellerLogin extends Component {
       if(sessionStorage.getItem('loginName') != '' && sessionStorage.getItem('loginPsd') != ''){
           this.setState({accName:sessionStorage.getItem('loginName')})
           this.setState({pwd:sessionStorage.getItem('loginPsd')})
+          //判断佣金转赠是卖家还是买家
+          sessionStorage.setItem('commishGiving',true)
       }
     }
 

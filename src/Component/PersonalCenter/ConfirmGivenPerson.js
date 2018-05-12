@@ -205,7 +205,7 @@ export default class ConfirmGivenPerson extends Component {
     //获取转赠人
     getInformation(accId,imageUri,memberName){
         this.context.router.push({pathname:'/personalCenter/commisionGiving',
-            query:{toChange:true,accId:accId,imgUrl:imageUri,memberName:memberName}})
+            query:{toChange:true,accId:accId,imgUrl:imageUri,memberName:memberName,showNavBar:true}})
     }
 
     //转赠人列表

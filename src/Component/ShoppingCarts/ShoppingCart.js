@@ -339,7 +339,7 @@ export default class ShoppingCart extends Component {
 
     async toSubmit(){
         if(this.select.length>0){
-            await SettlementShopCar(this.select)
+            await SettlementShopCar(this.select.join(","))
                 .then(res=>{
                     this.context.router.push({pathname:'/comfirmPayMoney',query:{orderId:res}})
                 })

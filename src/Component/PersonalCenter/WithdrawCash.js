@@ -115,9 +115,9 @@ export default class WithdrawCash extends Component {
                 <div className="plAll">
                     <p className="color6 font14">提现金额</p>
                     <div className="mt5 mb1 f25 df">
-                        <span className="flex-1">￥</span>
+                        <span>￥</span>
                         <input
-                            className="borderno"
+                            className="borderno flex-1"
                             type="text"
                             placeholder="0.00"
                             ref='pointAmount'

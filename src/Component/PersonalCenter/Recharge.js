@@ -181,9 +181,9 @@ export default class Recharge extends Component {
                         <span className="color9"> ( 选择或自定义金额 ) </span>
                     </p>
                     <div className="mt5 mb1 f25 df">
-                        <span className="flex-1">￥</span>
+                        <span>￥</span>
                         <input
-                            className="borderno"
+                            className="borderno flex-1"
                             type="text"
                             placeholder="0.00"
                             ref = 'reChargeMoney'

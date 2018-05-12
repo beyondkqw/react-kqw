@@ -56,7 +56,13 @@ export default class CommisionGiving extends Component {
         await GiveAmount(this.state.accId,amountNum)
             .then(res=>{
                 alert('确认转赠成功')
-                this.context.router.push({pathname:'/personalCenter/myCharges'})
+                //判断是卖家还是买家转赠
+                if(sessionStorage.getItem('commishGiving')){
+                    this.context.router.push({pathname:'/sellerStoreCenter'})
+                }else{
+                    this.context.router.push({pathname:'/personalCenter/myCharges'})
+                }
+
             })
             .catch(err=>{
                 console.warn('err',err)
